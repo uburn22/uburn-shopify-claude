@@ -411,13 +411,13 @@
       if(label.textContent.indexOf('couverte') !== -1 && label.textContent.indexOf('90g') !== -1){
         var nameEl = label.querySelector('.variant-picker__option-value-label') || label;
         if(nameEl.textContent.indexOf('1 mois') === -1){
-          nameEl.innerHTML = '<span style="font-weight:700;">D\u00e9couverte \u2014 1 mois</span><br><span style="font-size:11px;color:#6B7280;font-weight:400;">Id\u00e9al pour tester \u2022 1 dose/jour</span>';
+          nameEl.innerHTML = '<span style="font-weight:700;">D\u00e9couverte</span><br><span style="font-size:11px;color:#6B7280;font-weight:400;">Id\u00e9al pour tester \u2022 1 dose/jour</span>';
         }
       }
       if(label.textContent.indexOf('Maximum') !== -1 && label.textContent.indexOf('270g') !== -1){
         var nameEl2 = label.querySelector('.variant-picker__option-value-label') || label;
         if(nameEl2.textContent.indexOf('3 mois') === -1){
-          nameEl2.innerHTML = '<span style="font-weight:700;">R\u00e9sultats Maximum \u2014 3 mois</span><br><span style="font-size:11px;color:#7C3AED;font-weight:600;">Le + populaire \u2014 3x plus de r\u00e9sultats</span>';
+          nameEl2.innerHTML = '<span style="font-weight:700;">R\u00e9sultats Maximum</span><br><span style="font-size:11px;color:#7C3AED;font-weight:600;">Le + populaire \u2014 3x plus de r\u00e9sultats</span>';
         }
       }
     });
