@@ -547,24 +547,7 @@
   });
 })();
 </script>
-  <script>
-// Script 1 — Masquer section Témoignages vide
-(function(){
-  function hideEmptyTestimonials(){
-    document.querySelectorAll('.shopify-section, section, [class*="section"]').forEach(function(sec){
-      var heading = sec.querySelector('h2, h3, .section-header__title');
-      if(!heading) return;
-      if(heading.textContent.indexOf('moignages') === -1) return;
-      var cards = sec.querySelectorAll('.testimonial, .review, .card, .swiper-slide, blockquote, [class*="testimonial"], [class*="review"]');
-      if(cards.length === 0) sec.style.display = 'none';
-    });
-  }
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideEmptyTestimonials, 800); });
-  } else { setTimeout(hideEmptyTestimonials, 800); }
-})();
-</script>
-  <script>
+<script>
 // Script 2 — Masquer badges en double (version grande below-fold)
 (function(){
   function hideDuplicateBadges(){
