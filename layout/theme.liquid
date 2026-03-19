@@ -547,5 +547,116 @@
   });
 })();
 </script>
+  <script>
+// Script 1 — Masquer section Témoignages vide
+(function(){
+  function hideEmptyTestimonials(){
+    document.querySelectorAll('.shopify-section, section, [class*="section"]').forEach(function(sec){
+      var heading = sec.querySelector('h2, h3, .section-header__title');
+      if(!heading) return;
+      if(heading.textContent.indexOf('moignages') === -1) return;
+      var cards = sec.querySelectorAll('.testimonial, .review, .card, .swiper-slide, blockquote, [class*="testimonial"], [class*="review"]');
+      if(cards.length === 0) sec.style.display = 'none';
+    });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideEmptyTestimonials, 800); });
+  } else { setTimeout(hideEmptyTestimonials, 800); }
+})();
+</script>
+  <script>
+// Script 2 — Masquer badges en double (version grande below-fold)
+(function(){
+  function hideDuplicateBadges(){
+    document.querySelectorAll('.shopify-section, section').forEach(function(sec){
+      var text = sec.textContent;
+      if(text.indexOf('100%') !== -1 && text.indexOf('tal') !== -1 &&
+         text.indexOf('EFSA') !== -1 && text.indexOf('ine') !== -1){
+        var isProductInfo = sec.querySelector('.product-info, .product-form, variant-picker');
+        if(!isProductInfo){
+          var icons = sec.querySelectorAll('svg, img, [class*="icon"]');
+          if(icons.length >= 3) sec.style.display = 'none';
+        }
+      }
+    });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideDuplicateBadges, 800); });
+  } else { setTimeout(hideDuplicateBadges, 800); }
+})();
+</script>
+  <script>
+// Script 3 — Masquer sections VALEURS redondantes
+(function(){
+  function hideRedundantValeurs(){
+    document.querySelectorAll('.shopify-section, section').forEach(function(sec){
+      var isValeurs = false;
+      sec.querySelectorAll('span, p, div').forEach(function(el){
+        if(el.textContent.trim() === 'VALEURS') isValeurs = true;
+      });
+      if(!isValeurs) return;
+      var text = sec.textContent;
+      if(text.indexOf('le-graisse naturel') !== -1 || text.indexOf('coupe-faim') !== -1){
+        sec.style.display = 'none';
+      }
+    });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideRedundantValeurs, 800); });
+  } else { setTimeout(hideRedundantValeurs, 800); }
+})();
+</script>
+  <script>
+// Script 4 — CTA répétés below-fold (après tableau comparatif + après FAQ)
+(function(){
+  function addRepeatedCTAs(){
+    if(document.querySelector('.ub-repeated-cta')) return;
+    var ctaHTML = '<div class="ub-repeated-cta" style="text-align:center;padding:24px 16px;">'
+      + '<button onclick="var m=document.querySelector(\'.product-form__submit\')||document.querySelector(\'button[name=add]\');if(m){m.scrollIntoView({behavior:\'smooth\',block:\'center\'});setTimeout(function(){m.click()},600);}" '
+      + 'style="background:#7C3AED;color:#fff;border:none;border-radius:12px;padding:16px 40px;font-size:15px;font-weight:800;cursor:pointer;transition:background 0.2s;letter-spacing:0.3px;max-width:400px;width:100%;"'
+      + ' onmouseenter="this.style.background=\'#6D28D9\'" onmouseleave="this.style.background=\'#7C3AED\'">'
+      + 'Je commence ma cure \u2014 Livraison offerte</button>'
+      + '<p style="text-align:center;font-size:11px;color:#6B7280;margin-top:8px;margin-bottom:0;">Satisfait ou rembours\u00e9 30 jours \u2022 Exp\u00e9di\u00e9 sous 24h</p>'
+      + '</div>';
+
+    document.querySelectorAll('.shopify-section, section').forEach(function(sec){
+      var text = sec.textContent;
+      if(text.indexOf('POURQUOI UBURN') !== -1 && !sec.querySelector('.ub-repeated-cta')){
+        var div = document.createElement('div');
+        div.innerHTML = ctaHTML;
+        sec.appendChild(div.firstChild);
+      }
+      if((text.indexOf('QUESTIONS FR') !== -1 || text.indexOf('Tout ce que vous devez savoir') !== -1)
+         && !sec.querySelector('.ub-repeated-cta')){
+        var div2 = document.createElement('div');
+        div2.innerHTML = ctaHTML;
+        sec.appendChild(div2.firstChild);
+      }
+    });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(addRepeatedCTAs, 1000); });
+  } else { setTimeout(addRepeatedCTAs, 1000); }
+  var obs = new MutationObserver(function(){ addRepeatedCTAs(); });
+  obs.observe(document.body, {childList: true, subtree: true});
+})();
+</script>
+  <script>
+// Script 5 — Masquer bandeau 4 icônes réassurance footer
+(function(){
+  function hideFooterReassurance(){
+    document.querySelectorAll('.shopify-section, section').forEach(function(sec){
+      var text = sec.textContent;
+      if(text.indexOf('LIVRAISON PARTOUT') !== -1 && text.indexOf('ENVOI RAPIDE') !== -1 &&
+         text.indexOf('PAIEMENT S') !== -1){
+        sec.style.display = 'none';
+      }
+    });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideFooterReassurance, 800); });
+  } else { setTimeout(hideFooterReassurance, 800); }
+})();
+</script>
   </body>
 </html>
