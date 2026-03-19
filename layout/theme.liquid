@@ -512,32 +512,5 @@
   } else { setTimeout(createStickyBar, 800); }
 })();
 </script>
-  <script>
-// MOD 5 — Badge urgence « Déjà 12 achetés aujourd'hui »
-(function(){
-  function addUrgencyBadge(){
-    if(document.querySelector('.ub-urgency')) return;
-    var stockEl = null;
-    document.querySelectorAll('.product-info__block-item, .inventory, [class*="stock"], [class*="inventory"]').forEach(function(el){
-      if(el.textContent.indexOf('en stock') !== -1 && !el.querySelector('.ub-urgency')){
-        stockEl = el;
-      }
-    });
-    if(!stockEl) return;
-
-    var urgency = document.createElement('div');
-    urgency.className = 'ub-urgency';
-    urgency.innerHTML = '\uD83D\uDD25 D\u00e9j\u00e0 <b>12 achet\u00e9s</b> aujourd\u2019hui';
-    urgency.style.cssText = 'color:#DC2626;font-size:13px;font-weight:600;display:flex;align-items:center;gap:4px;margin-top:4px;';
-    stockEl.appendChild(urgency);
-  }
-
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){ setTimeout(addUrgencyBadge, 600); });
-  } else { setTimeout(addUrgencyBadge, 600); }
-  var obs = new MutationObserver(function(){ addUrgencyBadge(); });
-  obs.observe(document.body, {childList: true, subtree: true});
-})();
-</script>
   </body>
 </html>
