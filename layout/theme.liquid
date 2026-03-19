@@ -303,76 +303,53 @@
   
 {%- endif -%}
   <script>
-// Bloc cadeau UBURN — V2 compact (placé APRÈS le variant picker, pas dedans)
+// Bloc cadeau UBURN — V3 (prix barrés + badge GRATUIT)
 (function(){
   function addGiftBlock(){
-    // Ne rien faire si pas sur une page produit avec le variant Maximum
-    var maxLabel = null;
+    var isMaxSelected = false;
     document.querySelectorAll('.variant-picker__option-values label').forEach(function(l){
-      if(l.textContent.indexOf('Maximum') !== -1) maxLabel = l;
-    });
-    if(!maxLabel) return;
-
-    // Vérifier si Maximum est sélectionné (input checked)
-    var isSelected = false;
-    var labels = document.querySelectorAll('.variant-picker__option-values label');
-    labels.forEach(function(l){
       var inp = l.previousElementSibling;
-      if(inp && inp.checked && l.textContent.indexOf('Maximum') !== -1) isSelected = true;
+      if(inp && inp.checked && l.textContent.indexOf('Maximum') !== -1) isMaxSelected = true;
     });
 
     var existing = document.querySelector('.ub-gift-wrapper');
+    if(!isMaxSelected){ if(existing) existing.style.display = 'none'; return; }
+    if(existing){ existing.style.display = ''; return; }
 
-    if(!isSelected){
-      if(existing) existing.style.display = 'none';
-      return;
-    }
-
-    if(existing){
-      existing.style.display = '';
-      return;
-    }
-
-    // Trouver le variant picker et le bloc prix
     var variantPicker = document.querySelector('variant-picker');
     if(!variantPicker) return;
     var variantBlock = variantPicker.closest('.product-info__block-item');
     if(!variantBlock) return;
     var priceBlock = variantBlock.nextElementSibling;
 
-    // Créer le bloc cadeau
     var giftDiv = document.createElement('div');
     giftDiv.className = 'product-info__block-item ub-gift-wrapper';
-    giftDiv.innerHTML = '<div style="background:linear-gradient(135deg,#f5f0ff,#ede4f7);border:2px solid #7c3aed;border-radius:12px;padding:14px 16px;text-align:left;">'
-      + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">'
-      +   '<span style="font-size:14px;font-weight:800;color:#7c3aed;">🎁 OFFERT AVEC VOTRE COMMANDE</span>'
-      +   '<span style="font-size:11px;background:#7c3aed;color:#fff;padding:2px 8px;border-radius:20px;font-weight:700;">+201€</span>'
+    giftDiv.innerHTML = ''
+      + '<div style="background:linear-gradient(135deg,#f5f0ff,#ede4f7);border:2px solid #7c3aed;border-radius:12px;padding:16px 18px;">'
+      + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">'
+      + '<span style="font-size:15px;font-weight:800;color:#7c3aed;">\ud83c\udf81 INCLUS GRATUITEMENT</span>'
+      + '<span style="font-size:11px;background:#7c3aed;color:#fff;padding:3px 10px;border-radius:20px;font-weight:700;">valeur 201\u20ac</span>'
       + '</div>'
-      + '<div class="ub-gift-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:11px;">'
-      +   '<div style="display:flex;align-items:start;gap:4px;"><span style="color:#7c3aed;font-weight:700;flex-shrink:0;">✓</span><span><b>E-book «30j pour reprendre le contrôle»</b> (47€)</span></div>'
-      +   '<div style="display:flex;align-items:start;gap:4px;"><span style="color:#7c3aed;font-weight:700;flex-shrink:0;">✓</span><span><b>Groupe privé «Les UBURN Girls»</b> (40€)</span></div>'
-      +   '<div style="display:flex;align-items:start;gap:4px;"><span style="color:#7c3aed;font-weight:700;flex-shrink:0;">✓</span><span><b>Événements UBURN en ligne</b> (50€)</span></div>'
-      +   '<div style="display:flex;align-items:start;gap:4px;"><span style="color:#7c3aed;font-weight:700;flex-shrink:0;">✓</span><span><b>Suivi nutrition WhatsApp 30j</b> (47€)</span></div>'
+      + '<div style="display:flex;flex-direction:column;gap:8px;">'
+      + '<div class="ub-gift-row"><div style="display:flex;align-items:center;gap:6px;flex:1;"><span style="color:#7c3aed;font-weight:700;">&#10003;</span><span style="font-size:12px;font-weight:600;">E-book \u00ab30j pour reprendre le contr\u00f4le\u00bb</span></div><div style="display:flex;align-items:center;gap:6px;white-space:nowrap;"><span style="font-size:12px;color:#9CA3AF;text-decoration:line-through;">47\u20ac</span><span style="font-size:11px;font-weight:700;color:#059669;background:#ECFDF5;padding:1px 6px;border-radius:4px;">GRATUIT</span></div></div>'
+      + '<div class="ub-gift-row"><div style="display:flex;align-items:center;gap:6px;flex:1;"><span style="color:#7c3aed;font-weight:700;">&#10003;</span><span style="font-size:12px;font-weight:600;">Groupe priv\u00e9 \u00abLes UBURN Girls\u00bb</span></div><div style="display:flex;align-items:center;gap:6px;white-space:nowrap;"><span style="font-size:12px;color:#9CA3AF;text-decoration:line-through;">40\u20ac</span><span style="font-size:11px;font-weight:700;color:#059669;background:#ECFDF5;padding:1px 6px;border-radius:4px;">GRATUIT</span></div></div>'
+      + '<div class="ub-gift-row"><div style="display:flex;align-items:center;gap:6px;flex:1;"><span style="color:#7c3aed;font-weight:700;">&#10003;</span><span style="font-size:12px;font-weight:600;">\u00c9v\u00e9nements UBURN en ligne</span></div><div style="display:flex;align-items:center;gap:6px;white-space:nowrap;"><span style="font-size:12px;color:#9CA3AF;text-decoration:line-through;">50\u20ac</span><span style="font-size:11px;font-weight:700;color:#059669;background:#ECFDF5;padding:1px 6px;border-radius:4px;">GRATUIT</span></div></div>'
+      + '<div class="ub-gift-row"><div style="display:flex;align-items:center;gap:6px;flex:1;"><span style="color:#7c3aed;font-weight:700;">&#10003;</span><span style="font-size:12px;font-weight:600;">Suivi nutrition WhatsApp 30j</span></div><div style="display:flex;align-items:center;gap:6px;white-space:nowrap;"><span style="font-size:12px;color:#9CA3AF;text-decoration:line-through;">47\u20ac</span><span style="font-size:11px;font-weight:700;color:#059669;background:#ECFDF5;padding:1px 6px;border-radius:4px;">GRATUIT</span></div></div>'
       + '</div>'
       + '</div>';
 
     variantBlock.parentElement.insertBefore(giftDiv, priceBlock);
   }
 
-  // CSS responsive mobile
   var style = document.createElement('style');
-  style.textContent = '@media(max-width:749px){.ub-gift-grid{grid-template-columns:1fr !important;}}.ub-gift-wrapper{animation:ub-fade-in 0.4s ease-out;}@keyframes ub-fade-in{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}';
+  style.textContent = '.ub-gift-row{display:flex;align-items:center;justify-content:space-between;gap:8px;}@media(max-width:749px){.ub-gift-row{flex-wrap:wrap;}}.ub-gift-wrapper{animation:ub-fade-in 0.4s ease-out;}@keyframes ub-fade-in{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}';
   document.head.appendChild(style);
 
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', function(){ setTimeout(addGiftBlock, 500); });
-  } else {
-    setTimeout(addGiftBlock, 500);
-  }
-
+  } else { setTimeout(addGiftBlock, 500); }
   var obs = new MutationObserver(function(){ addGiftBlock(); });
   obs.observe(document.body, {childList: true, subtree: true});
-
   document.addEventListener('click', function(e){
     if(e.target.closest && e.target.closest('.variant-picker__option-values')){
       setTimeout(addGiftBlock, 100);
