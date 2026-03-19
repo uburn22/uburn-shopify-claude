@@ -360,7 +360,7 @@
 
   // CSS responsive mobile
   var style = document.createElement('style');
-  style.textContent = '@media(max-width:749px){.ub-gift-grid{grid-template-columns:1fr !important;}}';
+  style.textContent = '@media(max-width:749px){.ub-gift-grid{grid-template-columns:1fr !important;}}.ub-gift-wrapper{animation:ub-fade-in 0.4s ease-out;}@keyframes ub-fade-in{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}';
   document.head.appendChild(style);
 
   if(document.readyState === 'loading'){
