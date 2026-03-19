@@ -302,22 +302,81 @@
   
 {%- endif -%}
   <script>
+// Bloc cadeau UBURN — V2 compact (placé APRÈS le variant picker, pas dedans)
 (function(){
   function addGiftBlock(){
+    // Ne rien faire si pas sur une page produit avec le variant Maximum
+    var maxLabel = null;
     document.querySelectorAll('.variant-picker__option-values label').forEach(function(l){
-      if(l.textContent.indexOf('Maximum')!==-1 && !l.querySelector('.ub-gift')){
-        var d=document.createElement('div');
-        d.className='ub-gift';
-        d.style.cssText='background:linear-gradient(135deg,#f3e8ff,#ede4f7);border:2px solid #7c3aed;border-radius:10px;padding:12px;margin-top:10px;text-align:left;';
-        d.innerHTML='<div style="text-align:center;margin-bottom:8px"><span style="font-size:15px;font-weight:800;color:#7c3aed">🎁 OFFERT AVEC VOTRE COMMANDE</span><br><span style="font-size:12px;color:#6b7280">(valeur : <b style="color:#7c3aed">+201€</b>)</span></div><div style="font-size:12px;line-height:1.6"><div style="color:#7c3aed">✓ <b style="color:#1a1a1a">E-book «30 jours pour reprendre le contrôle»</b> <span style="font-weight:700">(47€)</span><br><span style="color:#6b7280">→ Recettes, plan alimentaire, conseils anti-fringales</span></div><div style="margin-top:4px;color:#7c3aed">✓ <b style="color:#1a1a1a">Accès groupe privé «Les UBURN Girls»</b> <span style="font-weight:700">(40€)</span><br><span style="color:#6b7280">→ Communauté de soutien entre membres</span></div><div style="margin-top:4px;color:#7c3aed">✓ <b style="color:#1a1a1a">Accès événements UBURN en ligne</b> <span style="font-weight:700">(50€)</span><br><span style="color:#6b7280">→ Lives nutrition, Q&amp;A, défis mensuels</span></div><div style="margin-top:4px;color:#7c3aed">✓ <b style="color:#1a1a1a">Suivi nutrition WhatsApp 30j</b> <span style="font-weight:700">(47€)</span><br><span style="color:#6b7280">→ Un conseiller répond en 24h</span></div></div>';
-        l.appendChild(d);
-      }
+      if(l.textContent.indexOf('Maximum') !== -1) maxLabel = l;
     });
+    if(!maxLabel) return;
+
+    // Vérifier si Maximum est sélectionné (input checked)
+    var isSelected = false;
+    var labels = document.querySelectorAll('.variant-picker__option-values label');
+    labels.forEach(function(l){
+      var inp = l.previousElementSibling;
+      if(inp && inp.checked && l.textContent.indexOf('Maximum') !== -1) isSelected = true;
+    });
+
+    var existing = document.querySelector('.ub-gift-wrapper');
+
+    if(!isSelected){
+      if(existing) existing.style.display = 'none';
+      return;
+    }
+
+    if(existing){
+      existing.style.display = '';
+      return;
+    }
+
+    // Trouver le variant picker et le bloc prix
+    var variantPicker = document.querySelector('variant-picker');
+    if(!variantPicker) return;
+    var variantBlock = variantPicker.closest('.product-info__block-item');
+    if(!variantBlock) return;
+    var priceBlock = variantBlock.nextElementSibling;
+
+    // Créer le bloc cadeau
+    var giftDiv = document.createElement('div');
+    giftDiv.className = 'product-info__block-item ub-gift-wrapper';
+    giftDiv.innerHTML = '<div style="background:linear-gradient(135deg,#f5f0ff,#ede4f7);border:2px solid #7c3aed;border-radius:12px;padding:14px 16px;text-align:left;">'
+      + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">'
+      +   '<span style="font-size:14px;font-weight:800;color:#7c3aed;">🎁 OFFERT AVEC VOTRE COMMANDE</span>'
+      +   '<span style="font-size:11px;background:#7c3aed;color:#fff;padding:2px 8px;border-radius:20px;font-weight:700;">+201€</span>'
+      + '</div>'
+      + '<div class="ub-gift-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:11px;">'
+      +   '<div style="display:flex;align-items:start;gap:4px;"><span style="color:#7c3aed;font-weight:700;flex-shrink:0;">✓</span><span><b>E-book «30j pour reprendre le contrôle»</b> (47€)</span></div>'
+      +   '<div style="display:flex;align-items:start;gap:4px;"><span style="color:#7c3aed;font-weight:700;flex-shrink:0;">✓</span><span><b>Groupe privé «Les UBURN Girls»</b> (40€)</span></div>'
+      +   '<div style="display:flex;align-items:start;gap:4px;"><span style="color:#7c3aed;font-weight:700;flex-shrink:0;">✓</span><span><b>Événements UBURN en ligne</b> (50€)</span></div>'
+      +   '<div style="display:flex;align-items:start;gap:4px;"><span style="color:#7c3aed;font-weight:700;flex-shrink:0;">✓</span><span><b>Suivi nutrition WhatsApp 30j</b> (47€)</span></div>'
+      + '</div>'
+      + '</div>';
+
+    variantBlock.parentElement.insertBefore(giftDiv, priceBlock);
   }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){setTimeout(addGiftBlock,500);});}
-  else{setTimeout(addGiftBlock,500);}
-  var obs=new MutationObserver(function(){addGiftBlock();});
-  obs.observe(document.body,{childList:true,subtree:true});
+
+  // CSS responsive mobile
+  var style = document.createElement('style');
+  style.textContent = '@media(max-width:749px){.ub-gift-grid{grid-template-columns:1fr !important;}}';
+  document.head.appendChild(style);
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(addGiftBlock, 500); });
+  } else {
+    setTimeout(addGiftBlock, 500);
+  }
+
+  var obs = new MutationObserver(function(){ addGiftBlock(); });
+  obs.observe(document.body, {childList: true, subtree: true});
+
+  document.addEventListener('click', function(e){
+    if(e.target.closest && e.target.closest('.variant-picker__option-values')){
+      setTimeout(addGiftBlock, 100);
+    }
+  });
 })();
 </script>
   </body>
