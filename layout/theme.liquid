@@ -489,5 +489,63 @@
   } else { setTimeout(createStickyBar, 800); }
 })();
 </script>
+  <script>
+// Rappel cadeau dans le panier (cart drawer + page /cart)
+(function(){
+  var giftHTML = ''
+    + '<div class="ub-cart-gift" style="background:linear-gradient(135deg,#f5f0ff,#ede4f7);border:1.5px solid #7c3aed;border-radius:10px;padding:12px 14px;margin:12px 0;">'
+    + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">'
+    + '<span style="font-size:13px;font-weight:800;color:#7c3aed;">\ud83c\udf81 Vos cadeaux inclus</span>'
+    + '<span style="font-size:10px;background:#059669;color:#fff;padding:2px 8px;border-radius:10px;font-weight:700;">GRATUIT</span>'
+    + '</div>'
+    + '<div style="font-size:11px;color:#4B5563;line-height:1.6;">'
+    + '\u2713 E-book \u00ab30j pour reprendre le contr\u00f4le\u00bb <span style="color:#9CA3AF;text-decoration:line-through;">47\u20ac</span><br>'
+    + '\u2713 Groupe priv\u00e9 \u00abLes UBURN Girls\u00bb <span style="color:#9CA3AF;text-decoration:line-through;">40\u20ac</span><br>'
+    + '\u2713 \u00c9v\u00e9nements UBURN en ligne <span style="color:#9CA3AF;text-decoration:line-through;">50\u20ac</span><br>'
+    + '\u2713 Suivi nutrition WhatsApp 30j <span style="color:#9CA3AF;text-decoration:line-through;">47\u20ac</span>'
+    + '</div>'
+    + '<div style="text-align:right;font-size:11px;color:#7c3aed;font-weight:700;margin-top:6px;">Valeur totale : <span style="text-decoration:line-through;color:#9CA3AF;">201\u20ac</span> OFFERT</div>'
+    + '</div>';
+
+  function hasMaxInCart(){
+    var cartText = '';
+    var cartContainer = document.querySelector('cart-drawer, .cart-drawer, [id*="cart"], .cart, .mini-cart, #CartDrawer');
+    if(cartContainer) cartText = cartContainer.textContent;
+    if(window.location.pathname.indexOf('/cart') !== -1) cartText = document.body.textContent;
+    return cartText.indexOf('Maximum') !== -1;
+  }
+
+  function injectCartGift(){
+    document.querySelectorAll('.ub-cart-gift').forEach(function(el){ el.remove(); });
+    if(!hasMaxInCart()) return;
+
+    var checkoutBtn = document.querySelector('cart-drawer [name="checkout"], .cart-drawer [name="checkout"], #CartDrawer [name="checkout"], [data-action="checkout"], .cart__checkout-button, button[name="checkout"]');
+    if(checkoutBtn){
+      var wrapper = document.createElement('div');
+      wrapper.innerHTML = giftHTML;
+      checkoutBtn.closest('div, form').insertBefore(wrapper.firstChild, checkoutBtn);
+    }
+
+    if(window.location.pathname.indexOf('/cart') !== -1){
+      var pageCheckout = document.querySelector('[name="checkout"], .cart__checkout, [type="submit"][value*="Check"]');
+      if(pageCheckout && !document.querySelector('.ub-cart-gift')){
+        var wrapper2 = document.createElement('div');
+        wrapper2.innerHTML = giftHTML;
+        pageCheckout.closest('div, form').insertBefore(wrapper2.firstChild, pageCheckout);
+      }
+    }
+  }
+
+  var obs = new MutationObserver(function(){ setTimeout(injectCartGift, 300); });
+  obs.observe(document.body, {childList: true, subtree: true});
+
+  document.addEventListener('click', function(e){
+    if(e.target.closest && (e.target.closest('.product-form__submit') || e.target.closest('[name="add"]') || e.target.closest('.ub-sticky-bar'))){
+      setTimeout(injectCartGift, 1000);
+      setTimeout(injectCartGift, 2000);
+    }
+  });
+})();
+</script>
   </body>
 </html>
