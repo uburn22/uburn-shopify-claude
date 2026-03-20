@@ -407,36 +407,37 @@
 })();
 </script>
   <script>
-// CTA « Je commence ma cure — Livraison offerte » + micro-copy
+// CTA unique violet — masque le dynamic checkout en double
 (function(){
-  function improveCTA(){
-    var btn = document.querySelector('.product-form__submit') || document.querySelector('button[name="add"]');
-    if(!btn) return;
-    if(btn.getAttribute('data-ub-cta') === 'done') return;
-    btn.setAttribute('data-ub-cta', 'done');
+  function fixDualCTA(){
+    var addBtn = document.querySelector('.product-form__submit');
+    if(!addBtn) return;
+    if(addBtn.getAttribute('data-ub-singlecta') === 'done') return;
+    addBtn.setAttribute('data-ub-singlecta', 'done');
 
-    var textSpan = btn.querySelector('span') || btn;
-    textSpan.textContent = 'Je commence ma cure \u2014 Livraison offerte';
+    var textEl = addBtn.querySelector('span') || addBtn;
+    textEl.textContent = 'Je commence ma cure \u2014 Livraison offerte';
+    addBtn.style.cssText = 'background:#7C3AED !important;color:#fff !important;border:none !important;border-radius:12px !important;font-weight:800 !important;font-size:15px !important;width:100% !important;padding:16px !important;cursor:pointer !important;transition:background 0.2s !important;letter-spacing:0.3px !important;';
+    addBtn.addEventListener('mouseenter', function(){ addBtn.style.background = '#6D28D9'; });
+    addBtn.addEventListener('mouseleave', function(){ addBtn.style.background = '#7C3AED'; });
 
-    btn.style.cssText = 'background:#7C3AED !important;color:#fff !important;border:none !important;border-radius:12px !important;font-weight:800 !important;font-size:15px !important;width:100% !important;padding:16px !important;cursor:pointer !important;transition:background 0.2s !important;letter-spacing:0.3px !important;';
-
-    btn.addEventListener('mouseenter', function(){ btn.style.background = '#6D28D9'; });
-    btn.addEventListener('mouseleave', function(){ btn.style.background = '#7C3AED'; });
+    var dynamicCheckout = document.querySelector('.shopify-payment-button, [class*="dynamic-checkout"]');
+    if(dynamicCheckout) dynamicCheckout.style.display = 'none';
 
     if(!document.querySelector('.ub-microcopy')){
       var micro = document.createElement('p');
       micro.className = 'ub-microcopy';
       micro.textContent = 'Exp\u00e9di\u00e9 sous 24h \u2022 Satisfait ou rembours\u00e9 30j';
       micro.style.cssText = 'text-align:center;font-size:11px;color:#6B7280;margin-top:6px;margin-bottom:0;';
-      var parent = btn.closest('.product-form') || btn.parentElement;
+      var parent = addBtn.closest('.product-form') || addBtn.parentElement;
       parent.appendChild(micro);
     }
   }
 
   if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){ setTimeout(improveCTA, 500); });
-  } else { setTimeout(improveCTA, 500); }
-  var obs = new MutationObserver(function(){ improveCTA(); });
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(fixDualCTA, 500); });
+  } else { setTimeout(fixDualCTA, 500); }
+  var obs = new MutationObserver(function(){ fixDualCTA(); });
   obs.observe(document.body, {childList: true, subtree: true});
 })();
 </script>
@@ -590,37 +591,41 @@
 })();
 </script>
   <script>
-// Script 4 — CTA répétés below-fold (après tableau comparatif + après FAQ)
+// CTA répétés below-fold (après tableau comparatif + après témoignages + après FAQ)
 (function(){
   function addRepeatedCTAs(){
-    if(document.querySelector('.ub-repeated-cta')) return;
-    var ctaHTML = '<div class="ub-repeated-cta" style="text-align:center;padding:24px 16px;">'
-      + '<button onclick="var m=document.querySelector(\'.product-form__submit\')||document.querySelector(\'button[name=add]\');if(m){m.scrollIntoView({behavior:\'smooth\',block:\'center\'});setTimeout(function(){m.click()},600);}" '
-      + 'style="background:#7C3AED;color:#fff;border:none;border-radius:12px;padding:16px 40px;font-size:15px;font-weight:800;cursor:pointer;transition:background 0.2s;letter-spacing:0.3px;max-width:400px;width:100%;"'
-      + ' onmouseenter="this.style.background=\'#6D28D9\'" onmouseleave="this.style.background=\'#7C3AED\'">'
-      + 'Je commence ma cure \u2014 Livraison offerte</button>'
-      + '<p style="text-align:center;font-size:11px;color:#6B7280;margin-top:8px;margin-bottom:0;">Satisfait ou rembours\u00e9 30 jours \u2022 Exp\u00e9di\u00e9 sous 24h</p>'
-      + '</div>';
+    if(document.querySelectorAll('.ub-repeat-cta').length >= 3) return;
 
-    document.querySelectorAll('.shopify-section, section').forEach(function(sec){
-      var text = sec.textContent;
-      if(text.indexOf('POURQUOI UBURN') !== -1 && !sec.querySelector('.ub-repeated-cta')){
-        var div = document.createElement('div');
-        div.innerHTML = ctaHTML;
-        sec.appendChild(div.firstChild);
-      }
-      if((text.indexOf('QUESTIONS FR') !== -1 || text.indexOf('Tout ce que vous devez savoir') !== -1)
-         && !sec.querySelector('.ub-repeated-cta')){
-        var div2 = document.createElement('div');
-        div2.innerHTML = ctaHTML;
-        sec.appendChild(div2.firstChild);
-      }
+    var ctaBlock = function(){
+      var div = document.createElement('div');
+      div.className = 'ub-repeat-cta';
+      div.style.cssText = 'text-align:center;padding:32px 16px;';
+      div.innerHTML = '<button style="background:#7C3AED;color:#fff;border:none;border-radius:12px;padding:16px 40px;font-size:15px;font-weight:800;cursor:pointer;transition:background 0.2s;letter-spacing:0.3px;max-width:420px;width:100%;" onmouseenter="this.style.background=\'#6D28D9\'" onmouseleave="this.style.background=\'#7C3AED\'" onclick="var t=document.querySelector(\'.product-form__submit\');if(t){t.scrollIntoView({behavior:\'smooth\',block:\'center\'});setTimeout(function(){t.click()},600);}">Je commence ma cure \u2014 Livraison offerte</button>'
+        + '<p style="text-align:center;font-size:11px;color:#6B7280;margin-top:8px;margin-bottom:0;">Satisfait ou rembours\u00e9 30 jours \u2022 Exp\u00e9di\u00e9 sous 24h</p>';
+      return div;
+    };
+
+    document.querySelectorAll('.shopify-section').forEach(function(sec){
+      if(sec.querySelector('.ub-repeat-cta')) return;
+      var text = sec.textContent || '';
+
+      if(text.indexOf('POURQUOI UBURN') !== -1)
+        sec.appendChild(ctaBlock());
+
+      if(text.indexOf('moignages') !== -1 && (text.indexOf('Laura') !== -1 || text.indexOf('lodie') !== -1 || text.indexOf('lanie') !== -1 || text.indexOf('routine') !== -1))
+        sec.appendChild(ctaBlock());
+
+      if(text.indexOf('QUESTIONS FR') !== -1 || text.indexOf('Tout ce que vous devez savoir') !== -1)
+        sec.appendChild(ctaBlock());
     });
   }
+
   if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){ setTimeout(addRepeatedCTAs, 1000); });
-  } else { setTimeout(addRepeatedCTAs, 1000); }
-  var obs = new MutationObserver(function(){ addRepeatedCTAs(); });
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(addRepeatedCTAs, 1200); });
+  } else { setTimeout(addRepeatedCTAs, 1200); }
+  var obs = new MutationObserver(function(){
+    if(document.querySelectorAll('.ub-repeat-cta').length < 3) addRepeatedCTAs();
+  });
   obs.observe(document.body, {childList: true, subtree: true});
 })();
 </script>
@@ -639,6 +644,38 @@
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideFooterReassurance, 800); });
   } else { setTimeout(hideFooterReassurance, 800); }
+})();
+</script>
+  <script>
+// Masquer les 3 piliers redondants (Cure Minceur / Formule Clean / Scientifiquement Prouvée)
+(function(){
+  function hideRedundantPillars(){
+    document.querySelectorAll('.shopify-section').forEach(function(sec){
+      var text = sec.textContent || '';
+      if(text.indexOf('CURE MINCEUR') !== -1 && text.indexOf('FORMULE CLEAN') !== -1 && text.indexOf('SCIENTIFIQUEMENT PROUV') !== -1){
+        sec.style.display = 'none';
+      }
+    });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideRedundantPillars, 800); });
+  } else { setTimeout(hideRedundantPillars, 800); }
+})();
+</script>
+  <script>
+// Masquer bannière "ESSAYER MAINTENANT" inutile
+(function(){
+  function hideEssayerBanner(){
+    document.querySelectorAll('.shopify-section').forEach(function(sec){
+      var text = sec.textContent || '';
+      if(text.indexOf('La boisson UB') !== -1 && text.indexOf('pour de vrais r') !== -1 && text.indexOf('ESSAYER MAINTENANT') !== -1){
+        sec.style.display = 'none';
+      }
+    });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(hideEssayerBanner, 800); });
+  } else { setTimeout(hideEssayerBanner, 800); }
 })();
 </script>
   </body>
