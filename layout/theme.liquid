@@ -10,7 +10,8 @@
 
     {%- if page_description -%}
       <meta name="description" content="{{ page_description | escape }}">
-    
+    {%- endif -%}
+
     {%- if template.name == 'product' -%}
       <style>.badge-best{position:absolute !important;top:-14px !important;left:50% !important;transform:translateX(-50%) !important;background:#6c47d6 !important;color:#fff !important;font-size:10px !important;font-weight:700 !important;padding:3px 10px !important;border-radius:20px !important;white-space:nowrap !important;z-index:100 !important}.variant-picker__option-values label.block-swatch{overflow:visible !important;position:relative !important}.reassurance-bar{display:flex !important;justify-content:center !important;align-items:center !important;gap:14px !important;margin-top:10px !important;padding:8px 4px !important;flex-wrap:wrap !important}.reassurance-bar span{font-size:12px !important;color:#555 !important;display:inline-flex !important;align-items:center !important;white-space:nowrap !important}
       mportant;left:50% important;transform:translateX(-50%) !important;background:#6c47d6 !important;color:#fff !important;font-size:10px !important;font-weight:700 !important;padding:3px 10px !important;border-radius:20px !important;white-space:nowrap !important;z-index:100 !important;pointer-events:none !important}.variant-picker__option-values label.block-swatch{overflow:visible !important;position:relative !important}.reassurance-bar{display:flex !important;justify-content:center !important;align-items:center !important;gap:14px !important;margin-top:10px !important;padding:8px 4px !important;border-top:1px solid #ede8f8 !important;flex-wrap:wrap !important}.reassurance-bar span{font-size:12px !important;color:#555 !important;display:inline-flex !important;align-items:center !important;gap:4px !important;white-space:nowrap !important}<badge-best{position:absolute !important;top:-14px !i}</style>
@@ -122,7 +123,6 @@
 })();
 </script>
 {%- endif -%}
-      {%- endif -%}
 
     <link rel="canonical" href="{{ canonical_url }}">
 
@@ -159,16 +159,17 @@
       }
     </script>
 
+    {{- 'theme.css' | asset_url | stylesheet_tag -}}
+
     <script type="module" src="{{ 'vendor.min.js' | asset_url }}"></script>
     <script type="module" src="{{ 'theme.js' | asset_url }}"></script>
 
     {{ content_for_header }}
-
-      {{- 'theme.css' | asset_url | stylesheet_tag -}}
     <!-- UBurn Typography: Plus Jakarta Sans — AG1-inspired casing -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"></noscript>
           <style>
               /* ======================================================
                      UBURN — AG1-inspired typography rules
