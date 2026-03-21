@@ -30,7 +30,7 @@ Supported variables
     <div class="relative">
       <button type="button" class="h-stack gap-2" aria-controls="{{ localization_popover_id }}" aria-label="{{ 'general.localization.change_country_accessibility_text' | t | escape }}" aria-expanded="false">
         {%- if show_country_flag -%}
-          {{- localization.country | image_url: width: 60, format: 'jpg' | image_tag: loading: 'lazy', class: 'country-flag' -}}
+          {{- localization.country | image_url: width: 60, format: 'webp' | image_tag: loading: 'lazy', class: 'country-flag' -}}
         {%- endif -%}
 
         {%- if show_country_name -%}
@@ -54,7 +54,7 @@ Supported variables
             {%- for country in localization.available_countries -%}
               <button type="submit" name="country_code" class="popover__value-option subheading link-faded-reverse" role="option" value="{{ country.iso_code }}" aria-selected="{% if country.iso_code == localization.country.iso_code %}true{% else %}false{% endif %}">
                 {%- if show_country_flag -%}
-                  {{- country | image_url: width: 60, format: 'jpg' | image_tag: loading: 'lazy', class: 'country-flag' -}}
+                  {{- country | image_url: width: 60, format: 'webp' | image_tag: loading: 'lazy', class: 'country-flag' -}}
                 {%- endif -%}
 
                 <span>{{- country.name }} ({{ country.currency.iso_code }} {% if country.currency.symbol %}{{ country.currency.symbol }}{%- endif -%})</span>
