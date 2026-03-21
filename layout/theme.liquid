@@ -188,6 +188,7 @@
     .reassurance-bar span{display:flex !important;align-items:center !important;gap:4px !important;}
         .variant-picker__option-info .h-stack span:not(.prix-jour):not(.badge-best){display:none !important;}
 .product-gallery__carousel .product-gallery__media img{aspect-ratio:4/5 !important;object-fit:cover !important;width:100% !important;height:auto !important;}
+@keyframes ub-stock-pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
   </style>
   
 {%- endif -%}
@@ -446,6 +447,45 @@
     }
   }
 
+  // --- FOMO STOCK COUNTER ---
+  var _fomoInterval = null;
+  function injectFomoStock() {
+    var inventoryEl = document.querySelector('variant-inventory');
+    if (!inventoryEl) return;
+    if (inventoryEl.getAttribute('data-fomo') === 'done') return;
+    var stock = 3 + (((Date.now() / 60000) % 1 * 8) | 0); // 3–10, shifts every ~7.5s
+    var color, label, isPulsing;
+    if (stock >= 8) {
+      color = '#16a34a'; label = stock + ' en stock'; isPulsing = false;
+    } else if (stock >= 5) {
+      color = '#d97706'; label = 'Plus que ' + stock + ' en stock'; isPulsing = false;
+    } else {
+      color = '#dc2626'; label = '\u26a1 Dernières ' + stock + ' unités disponibles !'; isPulsing = true;
+    }
+    var fillPct = Math.round((stock / 10) * 100);
+    var ps = isPulsing ? 'animation:ub-stock-pulse 1.2s ease-in-out infinite;' : '';
+    inventoryEl.innerHTML =
+      '<span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:' + color + ';">'
+      + '<span style="width:8px;height:8px;border-radius:50%;background:' + color + ';display:inline-block;flex-shrink:0;' + ps + '"></span>'
+      + label + '</span>'
+      + '<div style="height:6px;border-radius:3px;background:#e5e7eb;margin-top:6px;overflow:hidden;">'
+      + '<div style="height:100%;width:' + fillPct + '%;background:' + color + ';border-radius:3px;' + ps + 'transition:width 0.3s;"></div>'
+      + '</div>'
+      + (isPulsing ? '<div class="ub-fomo-watchers" style="font-size:11px;color:#6b7280;margin-top:5px;"></div>' : '');
+    inventoryEl.setAttribute('data-fomo', 'done');
+    if (isPulsing) {
+      updateWatchers();
+      if (!_fomoInterval) _fomoInterval = setInterval(updateWatchers, 45000);
+    } else {
+      if (_fomoInterval) { clearInterval(_fomoInterval); _fomoInterval = null; }
+    }
+  }
+  function updateWatchers() {
+    var el = document.querySelector('.ub-fomo-watchers');
+    if (!el) return;
+    el.textContent = '\ud83d\udd25 ' + (8 + Math.floor(Math.random() * 16)) + ' personnes regardent ce produit en ce moment';
+  }
+
   // --- RUN ALL MODS ---
   function runAll() {
     addGiftBlock();
@@ -460,6 +500,7 @@
     hideEssayerBanner();
     initUburn();
     injectCartGift();
+    injectFomoStock();
   }
 
   // --- SINGLE MUTATION OBSERVER (debounced 150ms) ---
