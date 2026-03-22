@@ -431,20 +431,6 @@
       var ingredSection = document.querySelector('[id*="ingredient"], [class*="ingredient"], [id*="trust"], [class*="trust-icon"]');
       if (ingredSection) ingredSection.parentNode.insertBefore(table, ingredSection.nextSibling);
     }
-    // MOD 7 — CTA disabled until variant selected
-    var ctaBtn = document.querySelector('[name="add"]') || document.querySelector('.product-form__submit');
-    if (ctaBtn && window.location.pathname.includes('/products/')) {
-      document.querySelectorAll('.variant-picker__option-values input[type="radio"]').forEach(function(i) { i.checked = false; });
-      if (!ctaBtn.dataset.uburnPatched) {
-        ctaBtn.dataset.uburnPatched = '1';
-        document.querySelectorAll('.variant-picker__option-values label').forEach(function(l) {
-          l.addEventListener('click', function() { ctaBtn.disabled = false; ctaBtn.style.opacity = ''; ctaBtn.style.cursor = ''; });
-        });
-      }
-      var anyChecked = document.querySelector('.variant-picker__option-values input[type="radio"]:checked');
-      if (!anyChecked) { ctaBtn.disabled = true; ctaBtn.style.opacity = '0.5'; ctaBtn.style.cursor = 'not-allowed'; if (ctaBtn.tagName === 'BUTTON') ctaBtn.textContent = 'Choisissez votre format'; }
-      else { ctaBtn.disabled = false; ctaBtn.style.opacity = ''; ctaBtn.style.cursor = ''; }
-    }
   }
 
   // --- FOMO STOCK COUNTER ---
