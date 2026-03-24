@@ -51,3 +51,77 @@ Supported variables
     </product-rerender>
   </product-sticky-add-to-cart>
 {%- endif -%}
+
+{%- if product.available -%}
+  <!-- Mobile instant sticky ATC — visible from page load -->
+  <div class="uburn-sticky-atc">
+    <div class="uburn-sticky-atc__inner">
+      <div class="uburn-sticky-atc__info">
+        <span class="uburn-sticky-atc__title">{{ product.title | truncate: 20 }}</span>
+        <span class="uburn-sticky-atc__price">{{ product.selected_or_first_available_variant.price | money }}</span>
+      </div>
+      <button type="submit" form="{{ product_form_id }}" class="uburn-sticky-atc__btn">Ajouter au panier</button>
+    </div>
+  </div>
+
+  <style>
+    .uburn-sticky-atc {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background: #fff;
+      border-top: 1px solid #e0dce6;
+      padding: 8px 16px;
+      padding-bottom: max(8px, env(safe-area-inset-bottom));
+      max-height: 56px;
+      box-sizing: border-box;
+    }
+    .uburn-sticky-atc__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .uburn-sticky-atc__info {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      min-width: 0;
+    }
+    .uburn-sticky-atc__title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #333;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .uburn-sticky-atc__price {
+      font-size: 13px;
+      font-weight: 700;
+      color: #5b21b6;
+    }
+    .uburn-sticky-atc__btn {
+      flex-shrink: 0;
+      background: #7c3aed;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .uburn-sticky-atc__btn:active {
+      background: #6d28d9;
+    }
+    @media screen and (min-width: 700px) {
+      .uburn-sticky-atc { display: none; }
+    }
+  </style>
+{%- endif -%}
