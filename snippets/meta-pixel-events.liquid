@@ -5,7 +5,7 @@
       var eventID = 'VC-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
       fbq('track', 'ViewContent', {
         content_name: {{ product.title | json }},
-        content_ids: [{{ product.selected_or_first_available_variant.id | json }}],
+        content_ids: ['shopify_FR_{{ product.id }}_{{ product.selected_or_first_available_variant.id }}'],
         content_type: 'product',
         value: {{ product.price | money_without_currency | remove: ',' | remove: ' ' }},
         currency: 'EUR'
@@ -25,7 +25,7 @@
           var variantId = form.querySelector('[name="id"]');
           var quantity = form.querySelector('[name="quantity"]');
           fbq('track', 'AddToCart', {
-            content_ids: [variantId ? variantId.value : {{ product.selected_or_first_available_variant.id | json }}],
+            content_ids: [variantId ? 'shopify_FR_{{ product.id }}_' + variantId.value : 'shopify_FR_{{ product.id }}_{{ product.selected_or_first_available_variant.id }}'],
             content_type: 'product',
             value: {{ product.price | money_without_currency | remove: ',' | remove: ' ' }},
             currency: 'EUR',
