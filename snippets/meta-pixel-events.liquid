@@ -1,0 +1,64 @@
+{% if request.page_type == 'product' %}
+  <!-- ViewContent — Page produit -->
+  <script>
+    (function() {
+      var eventID = 'VC-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+      fbq('track', 'ViewContent', {
+        content_name: {{ product.title | json }},
+        content_ids: [{{ product.selected_or_first_available_variant.id | json }}],
+        content_type: 'product',
+        value: {{ product.price | money_without_currency | remove: ',' | remove: ' ' }},
+        currency: 'EUR'
+      }, { eventID: eventID });
+    })();
+  </script>
+{% endif %}
+
+{% if request.page_type == 'product' %}
+  <!-- AddToCart — Interception formulaire produit -->
+  <script>
+    (function() {
+      document.addEventListener('submit', function(e) {
+        var form = e.target;
+        if (form && form.action && form.action.indexOf('/cart/add') !== -1) {
+          var eventID = 'ATC-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+          var variantId = form.querySelector('[name="id"]');
+          var quantity = form.querySelector('[name="quantity"]');
+          fbq('track', 'AddToCart', {
+            content_ids: [variantId ? variantId.value : {{ product.selected_or_first_available_variant.id | json }}],
+            content_type: 'product',
+            value: {{ product.price | money_without_currency | remove: ',' | remove: ' ' }},
+            currency: 'EUR',
+            num_items: quantity ? parseInt(quantity.value) || 1 : 1
+          }, { eventID: eventID });
+        }
+      });
+    })();
+  </script>
+{% endif %}
+
+{% if request.page_type == 'cart' or request.path == '/cart' %}
+  <!-- InitiateCheckout — Page panier -->
+  <script>
+    (function() {
+      var eventID = 'IC-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+      fbq('track', 'InitiateCheckout', {
+        value: {{ cart.total_price | money_without_currency | remove: ',' | remove: ' ' }},
+        currency: 'EUR',
+        num_items: {{ cart.item_count }}
+      }, { eventID: eventID });
+
+      document.addEventListener('click', function(e) {
+        var btn = e.target.closest('[name="checkout"], a[href="/checkout"], button[type="submit"][form*="cart"]');
+        if (btn) {
+          var eid = 'IC-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+          fbq('track', 'InitiateCheckout', {
+            value: {{ cart.total_price | money_without_currency | remove: ',' | remove: ' ' }},
+            currency: 'EUR',
+            num_items: {{ cart.item_count }}
+          }, { eventID: eid });
+        }
+      });
+    })();
+  </script>
+{% endif %}
