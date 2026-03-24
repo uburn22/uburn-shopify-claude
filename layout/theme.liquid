@@ -456,7 +456,6 @@
   }
 
   // --- FOMO STOCK COUNTER ---
-  var _fomoInterval = null;
   function injectFomoStock() {
     var inventoryEl = document.querySelector('variant-inventory');
     if (!inventoryEl) return;
@@ -479,19 +478,8 @@
       + '<div style="height:6px;border-radius:3px;background:#e5e7eb;margin-top:6px;overflow:hidden;">'
       + '<div style="height:100%;width:' + fillPct + '%;background:' + color + ';border-radius:3px;' + ps + 'transition:width 0.3s;"></div>'
       + '</div>'
-      + (isPulsing ? '<div class="ub-fomo-watchers" style="font-size:11px;color:#6b7280;margin-top:5px;"></div>' : '');
+      ;
     inventoryEl.setAttribute('data-fomo', 'done');
-    if (isPulsing) {
-      updateWatchers();
-      if (!_fomoInterval) _fomoInterval = setInterval(updateWatchers, 45000);
-    } else {
-      if (_fomoInterval) { clearInterval(_fomoInterval); _fomoInterval = null; }
-    }
-  }
-  function updateWatchers() {
-    var el = document.querySelector('.ub-fomo-watchers');
-    if (!el) return;
-    el.textContent = '\ud83d\udd25 ' + (8 + Math.floor(Math.random() * 16)) + ' personnes regardent ce produit en ce moment';
   }
 
   // --- RUN ALL MODS ---
