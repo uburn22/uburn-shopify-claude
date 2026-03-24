@@ -211,6 +211,8 @@ Supported variables
                   {{- product_description -}}
                 </div>
               {%- endif -%}
+
+              <p class="uburn-antioxidant-note">L'ube violet contient des anthocyanes — parmi les antioxydants les plus puissants de la nature.</p>
             {%- endif -%}
 
           {%- when 'variant_picker' -%}
@@ -231,24 +233,31 @@ Supported variables
                 -%}
             {%- endif -%}
 
-            <!-- Science section accordion -->
+            <!-- Science section accordion — 6 actifs -->
             <details class="uburn-science-accordion">
-              <summary>Comment ça marche ?</summary>
+              <summary>La formule complète — 6 actifs en synergie</summary>
               <div class="uburn-science-steps">
                 <div class="uburn-science-step">
-                  <span class="uburn-step-icon">1</span>
-                  <div><strong>Vous buvez Uburn</strong><br>Le konjac commence à absorber l'eau dans votre estomac</div>
+                  <span class="uburn-step-icon uburn-step-icon--emoji">🌊</span>
+                  <div><strong>Dans les premières minutes</strong><br>Le konjac absorbe 100x son poids en eau et forme un gel dans votre estomac. Signal de satiété envoyé au cerveau.</div>
                 </div>
                 <div class="uburn-science-step">
-                  <span class="uburn-step-icon">2</span>
-                  <div><strong>Le gel se forme (2-5 min)</strong><br>Le glucomannane absorbe 100x son poids en eau et forme un gel naturel qui remplit l'estomac</div>
+                  <span class="uburn-step-icon uburn-step-icon--emoji">⚡</span>
+                  <div><strong>Dans l'heure qui suit</strong><br>Les MCT de coco fournissent une énergie rapide et stable. Zéro pic d'insuline. Zéro crash à 15h.</div>
                 </div>
                 <div class="uburn-science-step">
-                  <span class="uburn-step-icon">3</span>
-                  <div><strong>Signal de satiété (15-30 min)</strong><br>Votre cerveau reçoit le signal « je suis rassasié ». Résultat : 6h sans fringales. 30 kcal. 100% naturel.</div>
+                  <span class="uburn-step-icon uburn-step-icon--emoji">🔥</span>
+                  <div><strong>Pendant 6 heures</strong><br>La L-Carnitine et le café vert activent votre métabolisme. Les graisses stockées deviennent de l'énergie utilisable.</div>
+                </div>
+                <div class="uburn-science-step">
+                  <span class="uburn-step-icon uburn-step-icon--emoji">🌿</span>
+                  <div><strong>En continu</strong><br>L'ube violet et le gingembre protègent votre corps avec leurs antioxydants et facilitent la digestion.</div>
                 </div>
               </div>
             </details>
+
+            <!-- Caffeine info badge -->
+            <div class="uburn-caffeine-info">☕ Moins de caféine qu'un carré de chocolat — prenez-le aussi à 16h sans perturber votre sommeil</div>
 
           {%- when 'product_variations' -%}
             {%- liquid
@@ -465,6 +474,14 @@ Supported variables
                 endif
               endif
             -%}
+
+            <!-- FAQ Uburn soir -->
+            <details class="uburn-science-accordion uburn-faq-entry">
+              <summary>Peut-on prendre Uburn le soir ?</summary>
+              <div class="uburn-science-steps">
+                <p class="uburn-faq-answer">Oui. Le café vert dans Uburn est décaféiné — il contient moins de caféine qu'un carré de chocolat (&lt; 5mg par dose). Vous pouvez le prendre à 16h ou après le dîner sans risquer de perturber votre sommeil.</p>
+              </div>
+            </details>
 
           {%- when 'liquid' -%}
             {%- if block.settings.liquid != blank -%}
