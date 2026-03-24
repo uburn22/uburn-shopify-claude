@@ -16,6 +16,80 @@
     }
   {%- endif -%}
 
+  /* TASK 1 — Trust badges EFSA */
+  .uburn-trust-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    margin-top: 8px;
+  }
+  .uburn-trust-badge {
+    font-size: 11px;
+    color: #6b6b6b;
+    background: #f5f3f8;
+    padding: 3px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* TASK 2 — Accordion science */
+  .uburn-science-accordion {
+    margin-top: 12px;
+    border: 1px solid #e0dce6;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .uburn-science-accordion summary {
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #f9f7fc;
+    list-style: none;
+  }
+  .uburn-science-accordion summary::-webkit-details-marker { display: none; }
+  .uburn-science-accordion summary::after {
+    content: '+';
+    float: right;
+    font-size: 18px;
+    color: #7c3aed;
+  }
+  .uburn-science-accordion[open] summary::after { content: '−'; }
+  .uburn-science-steps {
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .uburn-science-step {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .uburn-step-icon {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #7c3aed;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* TASK 3 — Prix comparison */
+  .uburn-price-comparison {
+    font-size: 11px;
+    color: #888;
+    font-style: italic;
+    margin: 4px 0 0 0;
+  }
+
   @media screen and (min-width: 1000px) {
     #shopify-section-{{ section.id }} {
       --product-grid: auto / minmax(0, {{ section.settings.product_media_size | divided_by: 100.0 }}fr) minmax(0, {{ 100.0 | minus: section.settings.product_media_size | divided_by: 100.0 }}fr);

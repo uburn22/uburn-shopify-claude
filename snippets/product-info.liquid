@@ -137,6 +137,8 @@ Supported variables
               <div class="v-stack gap-2">
                 {%- render 'price-list', product: product, variant: product.selected_or_first_available_variant, alignment: alignment, context: 'product' -%}
 
+                <p class="uburn-price-comparison">Moins cher qu'un café · Sans abonnement imposé</p>
+
                 {%- if block.settings.show_taxes_notice -%}
                   <p class="subheading text-subdued">
                     {%- if cart.taxes_included -%}
@@ -150,6 +152,13 @@ Supported variables
                     {%- endif -%}
                   </p>
                 {%- endif -%}
+              </div>
+
+              <!-- Trust badges EFSA -->
+              <div class="uburn-trust-badges">
+                <span class="uburn-trust-badge">✓ Validé EFSA</span>
+                <span class="uburn-trust-badge">✓ 100% Végétal</span>
+                <span class="uburn-trust-badge">✓ Fabriqué en France</span>
               </div>
             {%- endif -%}
 
@@ -221,6 +230,25 @@ Supported variables
                   size_chart_page: block.settings.size_chart_page 
                 -%}
             {%- endif -%}
+
+            <!-- Science section accordion -->
+            <details class="uburn-science-accordion">
+              <summary>Comment ça marche ?</summary>
+              <div class="uburn-science-steps">
+                <div class="uburn-science-step">
+                  <span class="uburn-step-icon">1</span>
+                  <div><strong>Vous buvez Uburn</strong><br>Le konjac commence à absorber l'eau dans votre estomac</div>
+                </div>
+                <div class="uburn-science-step">
+                  <span class="uburn-step-icon">2</span>
+                  <div><strong>Le gel se forme (2-5 min)</strong><br>Le glucomannane absorbe 100x son poids en eau et forme un gel naturel qui remplit l'estomac</div>
+                </div>
+                <div class="uburn-science-step">
+                  <span class="uburn-step-icon">3</span>
+                  <div><strong>Signal de satiété (15-30 min)</strong><br>Votre cerveau reçoit le signal « je suis rassasié ». Résultat : 6h sans fringales. 30 kcal. 100% naturel.</div>
+                </div>
+              </div>
+            </details>
 
           {%- when 'product_variations' -%}
             {%- liquid
