@@ -53,16 +53,50 @@ Supported variables
 {%- endif -%}
 
 {%- if product.available -%}
-  <!-- Mobile instant sticky ATC — visible from page load -->
+  <!-- Mobile instant sticky ATC — visible from page load, reactive to variant -->
   <div class="uburn-sticky-atc">
     <div class="uburn-sticky-atc__inner">
       <div class="uburn-sticky-atc__info">
         <span class="uburn-sticky-atc__title">{{ product.title | truncate: 20 }}</span>
-        <span class="uburn-sticky-atc__price">{{ product.selected_or_first_available_variant.price | money }}</span>
+        <span class="uburn-sticky-atc__price" data-sticky-price>{{ product.selected_or_first_available_variant.price | money }}</span>
       </div>
       <button type="submit" form="{{ product_form_id }}" class="uburn-sticky-atc__btn">Ajouter au panier</button>
     </div>
   </div>
+
+  <script>
+    (function() {
+      var priceEl = document.querySelector('[data-sticky-price]');
+      if (!priceEl) return;
+      var form = document.getElementById('{{ product_form_id }}');
+      if (!form) return;
+
+      var variants = {{ product.variants | json }};
+      var moneyFormat = {{ shop.money_format | json }};
+
+      function formatMoney(cents) {
+        var amount = (cents / 100).toFixed(2).replace('.', ',');
+        return moneyFormat.replace(/\{\{\s*amount\s*\}\}/, amount)
+                          .replace(/\{\{\s*amount_with_comma_separator\s*\}\}/, amount)
+                          .replace(/\{\{\s*amount_no_decimals\s*\}\}/, Math.round(cents / 100));
+      }
+
+      function updateStickyPrice() {
+        var idInput = form.querySelector('[name="id"]');
+        if (!idInput) return;
+        var selectedId = parseInt(idInput.value);
+        for (var i = 0; i < variants.length; i++) {
+          if (variants[i].id === selectedId) {
+            priceEl.textContent = formatMoney(variants[i].price);
+            break;
+          }
+        }
+      }
+
+      form.addEventListener('change', updateStickyPrice);
+      new MutationObserver(updateStickyPrice).observe(form, { subtree: true, attributes: true, childList: true });
+    })();
+  </script>
 
   <style>
     .uburn-sticky-atc {
@@ -122,6 +156,21 @@ Supported variables
     }
     @media screen and (min-width: 700px) {
       .uburn-sticky-atc { display: none; }
+    }
+
+    /* FIX 4 — Push chat widget above sticky ATC on mobile */
+    @media screen and (max-width: 699px) {
+      #ShopifyChat,
+      .shopify-chat-button,
+      iframe[title*="chat"],
+      iframe[title*="Chat"],
+      iframe[title*="Shopify"],
+      #tidio-chat,
+      .gorgias-chat-container,
+      [class*="shopify-messaging"],
+      .shopify-block[data-app-block-type*="chat"] {
+        bottom: 70px !important;
+      }
     }
   </style>
 {%- endif -%}
