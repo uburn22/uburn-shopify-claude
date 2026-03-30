@@ -137,7 +137,7 @@ Supported variables
               <div class="v-stack gap-2">
                 {%- render 'price-list', product: product, variant: product.selected_or_first_available_variant, alignment: alignment, context: 'product' -%}
 
-                <p class="uburn-price-comparison">Moins cher qu'un café · Sans abonnement imposé</p>
+                <p class="uburn-price-comparison">€0,61/jour · Moins cher qu'un café</p>
 
                 {%- if block.settings.show_taxes_notice -%}
                   <p class="subheading text-subdued">
@@ -241,7 +241,7 @@ Supported variables
                 </div>
                 <div class="uburn-science-step">
                   <span class="uburn-step-icon uburn-step-icon--emoji">🔥</span>
-                  <div><strong>Pendant 6 heures</strong><br>La L-Carnitine soutient votre métabolisme. Les graisses stockées deviennent de l'énergie utilisable.</div>
+                  <div><strong>Pendant 6 heures</strong><br>La L-Carnitine soutient votre métabolisme énergétique et votre endurance au quotidien.</div>
                 </div>
                 <div class="uburn-science-step">
                   <span class="uburn-step-icon uburn-step-icon--emoji">🌿</span>
@@ -257,7 +257,7 @@ Supported variables
               <details class="uburn-science-accordion">
                 <summary>Est-ce que ça marche vraiment ?</summary>
                 <div class="uburn-science-steps">
-                  <p class="uburn-faq-answer">Le konjac est l'un des seuls ingrédients validés par l'EFSA pour contribuer à la perte de poids dans le cadre d'un régime hypocalorique. 1500+ femmes l'utilisent au quotidien. Satisfait(e) ou remboursé(e) 30 jours.</p>
+                  <p class="uburn-faq-answer">Le konjac est l'un des seuls ingrédients validés par l'EFSA pour contribuer à la satiété dans le cadre d'une alimentation équilibrée. 1500+ femmes l'utilisent au quotidien. Satisfait(e) ou remboursé(e) 30 jours.</p>
                 </div>
               </details>
 
@@ -435,6 +435,7 @@ Supported variables
                 payment_button_background: block.settings.payment_button_background,
                 payment_button_text_color: block.settings.payment_button_text_color
             -%}
+            <p class="uburn-no-subscription">🔒 Pas d'abonnement caché · Commandez quand vous voulez</p>
 
           {%- when 'volume_pricing' -%}
             {%- render 'volume-pricing-table', variant: product.selected_or_first_available_variant -%}
