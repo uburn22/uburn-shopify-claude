@@ -387,7 +387,7 @@
   function hideRedundantPillars() {
     document.querySelectorAll('.shopify-section').forEach(function(sec) {
       var text = sec.textContent || '';
-      if (text.indexOf('CURE MINCEUR') !== -1 && text.indexOf('FORMULE CLEAN') !== -1 && text.indexOf('SCIENTIFIQUEMENT PROUV') !== -1) sec.style.display = 'none';
+      if (text.indexOf('FORMULE CLEAN') !== -1 && text.indexOf('SCIENTIFIQUEMENT PROUV') !== -1 && (text.indexOf('CURE MINCEUR') !== -1 || text.indexOf('CURE SATI') !== -1)) sec.style.display = 'none';
     });
   }
   function hideEssayerBanner() {
