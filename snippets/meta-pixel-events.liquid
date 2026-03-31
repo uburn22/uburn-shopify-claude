@@ -1,8 +1,15 @@
+{%- comment -%}
+  Meta Pixel events — browser-side tracking
+  ViewContent: page produit (immediate)
+  AddToCart: hook into theme's cart:change custom event (AJAX-safe)
+  InitiateCheckout: intercept checkout button click + form submit
+{%- endcomment -%}
+
 {% if request.page_type == 'product' %}
   <!-- ViewContent — Page produit -->
   <script>
     (function() {
-      var eventID = 'VC-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+      var eventID = 'VC-' + Date.now() + '-' + Math.random().toString(36).substring(2, 11);
       fbq('track', 'ViewContent', {
         content_name: {{ product.title | json }},
         content_ids: ['shopify_FR_{{ product.id }}_{{ product.selected_or_first_available_variant.id }}'],
@@ -14,51 +21,73 @@
   </script>
 {% endif %}
 
-{% if request.page_type == 'product' %}
-  <!-- AddToCart — Interception formulaire produit -->
-  <script>
-    (function() {
-      document.addEventListener('submit', function(e) {
-        var form = e.target;
-        if (form && form.action && form.action.indexOf('/cart/add') !== -1) {
-          var eventID = 'ATC-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-          var variantId = form.querySelector('[name="id"]');
-          var quantity = form.querySelector('[name="quantity"]');
-          fbq('track', 'AddToCart', {
-            content_ids: [variantId ? 'shopify_FR_{{ product.id }}_' + variantId.value : 'shopify_FR_{{ product.id }}_{{ product.selected_or_first_available_variant.id }}'],
-            content_type: 'product',
-            value: {{ product.price | money_without_currency | remove: ',' | remove: ' ' }},
-            currency: 'EUR',
-            num_items: quantity ? parseInt(quantity.value) || 1 : 1
-          }, { eventID: eventID });
-        }
-      });
-    })();
-  </script>
-{% endif %}
+<!-- AddToCart — intercept theme AJAX cart:change event (works with all ATC methods) -->
+<script>
+  (function() {
+    document.documentElement.addEventListener('cart:change', function(e) {
+      if (!e.detail || e.detail.baseEvent !== 'variant:add') return;
 
-{% if request.page_type == 'cart' or request.path == '/cart' %}
-  <!-- InitiateCheckout — Page panier -->
-  <script>
-    (function() {
-      var eventID = 'IC-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-      fbq('track', 'InitiateCheckout', {
-        value: {{ cart.total_price | money_without_currency | remove: ',' | remove: ' ' }},
+      var cart = e.detail.cart;
+      if (!cart) return;
+
+      var eventID = 'ATC-' + Date.now() + '-' + Math.random().toString(36).substring(2, 11);
+      var items = cart.items || [];
+      var lastItem = items[0];
+
+      fbq('track', 'AddToCart', {
+        content_ids: lastItem ? ['shopify_FR_' + lastItem.product_id + '_' + lastItem.variant_id] : [],
+        content_type: 'product',
+        value: lastItem ? (lastItem.final_line_price / 100) : (cart.total_price / 100),
         currency: 'EUR',
-        num_items: {{ cart.item_count }}
+        num_items: lastItem ? lastItem.quantity : 1
       }, { eventID: eventID });
 
-      document.addEventListener('click', function(e) {
-        var btn = e.target.closest('[name="checkout"], a[href="/checkout"], button[type="submit"][form*="cart"]');
-        if (btn) {
-          var eid = 'IC-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-          fbq('track', 'InitiateCheckout', {
-            value: {{ cart.total_price | money_without_currency | remove: ',' | remove: ' ' }},
-            currency: 'EUR',
-            num_items: {{ cart.item_count }}
-          }, { eventID: eid });
-        }
-      });
-    })();
-  </script>
-{% endif %}
+      {% comment %} GA4 add_to_cart {% endcomment %}
+      if (typeof gtag === 'function' && lastItem) {
+        gtag('event', 'add_to_cart', {
+          currency: 'EUR',
+          value: lastItem.final_line_price / 100,
+          items: [{
+            item_id: '' + lastItem.product_id,
+            item_name: lastItem.title,
+            item_variant: '' + lastItem.variant_id,
+            price: lastItem.final_line_price / 100,
+            quantity: lastItem.quantity
+          }]
+        });
+      }
+    });
+  })();
+</script>
+
+<!-- InitiateCheckout — intercept checkout navigation -->
+<script>
+  (function() {
+    var icFired = false;
+
+    function fireIC() {
+      if (icFired) return;
+      icFired = true;
+
+      var eventID = 'IC-' + Date.now() + '-' + Math.random().toString(36).substring(2, 11);
+      fbq('track', 'InitiateCheckout', {
+        currency: 'EUR'
+      }, { eventID: eventID });
+
+      {% comment %} GA4 begin_checkout {% endcomment %}
+      if (typeof gtag === 'function') {
+        gtag('event', 'begin_checkout', { currency: 'EUR' });
+      }
+    }
+
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      if (form && form.querySelector('[name="checkout"]')) fireIC();
+    });
+
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('[name="checkout"], a[href*="/checkout"], a[href*="checkouts"]');
+      if (btn) fireIC();
+    });
+  })();
+</script>
