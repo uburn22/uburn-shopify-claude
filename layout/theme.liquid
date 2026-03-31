@@ -201,7 +201,22 @@
     <x-toast class="toast">
       {% comment %}Container for notification messages; DO NOT DELETE{% endcomment %}
     </x-toast>
-  {%- if template.name == 'product' -%}
+    {%- if template == 'cart' -%}
+  <style>
+    /* FIX checkout-1: hide chat widget on /cart — it covers the total price on mobile */
+    #ShopifyChat,
+    .shopify-chat-button,
+    iframe[title*="chat" i],
+    iframe[title*="Shopify" i],
+    #tidio-chat,
+    .gorgias-chat-container,
+    [class*="shopify-messaging"],
+    .shopify-block[data-app-block-type*="chat"],
+    #shopify-chat { display: none !important; visibility: hidden !important; }
+  </style>
+  {%- endif -%}
+
+{%- if template.name == 'product' -%}
   <style>
             .badge-best{position:absolute !important;top:0 !important;left:50% !important;transform:translate(-50%, -50%) !important;background:#ffffff!important;color:#2D1A5E !important;font-size:10px !important;font-weight:700 !important;padding:3px 10px !important;border-radius:20px !important;white-space:nowrap !important;z-index:10 !important;pointer-events:none !important;box-shadow:0 2px 6px rgba(108,71,214,0.35) !important;letter-spacing:0.5px !important;}
                 .variant-picker__option-values.h-stack{margin-top:18px !important;}
