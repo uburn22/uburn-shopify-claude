@@ -250,12 +250,11 @@
 {%- endif -%}
 {%- if template.name == 'product' -%}
 <script>
-requestIdleCallback(function() {
 (function() {
 
   // ===================================================================
   // UBURN — Consolidated product page scripts
-  // Deferred via requestIdleCallback to reduce TBT
+  // Single MutationObserver + single entry point = lower TBT
   // ===================================================================
 
   // --- GIFT BLOCK ---
@@ -603,7 +602,6 @@ requestIdleCallback(function() {
   document.head.appendChild(style);
 
 })();
-}, { timeout: 1500 });
 </script>
 {%- endif -%}
 
