@@ -212,7 +212,7 @@
 
   {%- if template == 'cart' -%}
   <style>
-    /* FIX checkout-1: hide chat widget on /cart — it covers the total price on mobile */
+    /* FIX checkout-1: hide chat widget on /cart */
     #ShopifyChat,
     .shopify-chat-button,
     iframe[title*="chat" i],
@@ -222,6 +222,12 @@
     [class*="shopify-messaging"],
     .shopify-block[data-app-block-type*="chat"],
     #shopify-chat { display: none !important; visibility: hidden !important; }
+
+    /* FIX checkout-3: hide sticky ATC bar on /cart — product already in cart */
+    .uburn-sticky-atc,
+    .ub-sticky-bar,
+    product-sticky-add-to-cart,
+    .product-sticky-add-to-cart { display: none !important; }
   </style>
   {%- endif -%}
 
