@@ -201,7 +201,16 @@
     <x-toast class="toast">
       {% comment %}Container for notification messages; DO NOT DELETE{% endcomment %}
     </x-toast>
-    {%- if template == 'cart' -%}
+    <!-- FIX checkout-5: hide chat notification badge "1" sitewide -->
+  <style>
+    .shopify-chat-badge,
+    [class*="shopify-chat"] [class*="badge"],
+    [class*="shopify-chat"] [class*="unread"],
+    [class*="shopify-messaging"] [class*="badge"],
+    #ShopifyChat [class*="badge"] { display: none !important; }
+  </style>
+
+  {%- if template == 'cart' -%}
   <style>
     /* FIX checkout-1: hide chat widget on /cart — it covers the total price on mobile */
     #ShopifyChat,
