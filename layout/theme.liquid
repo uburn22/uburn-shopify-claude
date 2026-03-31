@@ -138,6 +138,10 @@
                                                                                                                                                                                                                                                                                                                                         }
                                                                                                                                                                                                                                                                                                                                       </style>
 
+    {%- if request.page_type == 'product' and product.featured_media -%}
+      <link rel="preload" as="image" href="{{ product.featured_media | image_url: width: 800 }}" fetchpriority="high">
+    {%- endif -%}
+
     <!-- Meta Pixel Code — moved to end of head to unblock LCP -->
     <script>
       !function(f,b,e,v,n,t,s)
@@ -246,11 +250,12 @@
 {%- endif -%}
 {%- if template.name == 'product' -%}
 <script>
+requestIdleCallback(function() {
 (function() {
 
   // ===================================================================
   // UBURN — Consolidated product page scripts
-  // Single MutationObserver + single entry point = lower TBT
+  // Deferred via requestIdleCallback to reduce TBT
   // ===================================================================
 
   // --- GIFT BLOCK ---
@@ -581,7 +586,8 @@
         if (p) priceDiv.textContent = p.textContent.trim();
       }
       updatePrice();
-      setInterval(updatePrice, 2000);
+      document.addEventListener('variant:changed', updatePrice);
+      document.documentElement.addEventListener('cart:change', updatePrice);
       var mainBtn = document.querySelector('.product-form__submit') || document.querySelector('button[name="add"]');
       if (!mainBtn) return;
       new IntersectionObserver(function(entries) {
@@ -597,6 +603,7 @@
   document.head.appendChild(style);
 
 })();
+}, { timeout: 1500 });
 </script>
 {%- endif -%}
 

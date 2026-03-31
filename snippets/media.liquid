@@ -46,7 +46,7 @@ Supported variables
   if preload and section.index <= 3
     assign loading = 'eager'
 
-    if section.index == 1
+    if section.index <= 2
       assign fetchpriority = 'high'
     endif
   elsif preload == false
