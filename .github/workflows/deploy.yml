@@ -9,12 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Deploy to Shopify
-        uses: shopify/shopify-cli-action@v1
-        with:
-          store: uburn.co
-          theme-id: 181977973055
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli @shopify/theme
+
+      - name: Deploy theme to Shopify
+        run: shopify theme push --store 1t9ayp-tw.myshopify.com --theme 181977973055 --allow-live --force
         env:
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_THEME_TOKEN }}
