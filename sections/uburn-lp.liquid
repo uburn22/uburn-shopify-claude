@@ -1,0 +1,271 @@
+{{ 'uburn-lp.css' | asset_url | stylesheet_tag }}
+
+<div class="ulp">
+
+<!-- HEADER — Logo seul -->
+<header class="ulp-header">
+  <a href="/" aria-label="Uburn">
+    {%- if settings.logo -%}
+      {{ settings.logo | image_url: height: 56 | image_tag: loading: 'eager', height: 28 }}
+    {%- else -%}
+      <span style="font-size:20px;font-weight:900;color:#6B21A8;">UBURN</span>
+    {%- endif -%}
+  </a>
+</header>
+
+<!-- ============================================================ -->
+<!-- SECTION 1 — HERO · FIRST ORDER PAGE                          -->
+<!-- ============================================================ -->
+<section class="ulp-hero ulp-section">
+  <span class="ulp-hero__badge">🎁 OFFRE PREMIÈRE COMMANDE</span>
+  <h1>Tu craques encore le soir ?</h1>
+  <p class="ulp-hero__sub">Rejoins 500+ femmes qui ont repris le contrôle de leurs fringales avec Uburn</p>
+  <div class="ulp-hero__price">
+    <del>€49,50</del>
+    <strong>€34,50</strong>
+    <span class="ulp-badge-discount">-30%</span>
+  </div>
+  <a href="/products/ube-poudre" class="ulp-btn ulp-btn--white">Essayer maintenant →</a>
+  <p class="ulp-hero__micro">€0,61/jour · Livraison gratuite · Made in France · Pas d'abonnement caché</p>
+  <p class="ulp-hero__stock">⚠️ Plus que 14 unités disponibles</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 2 — SOCIAL PROOF                                     -->
+<!-- ============================================================ -->
+<section class="ulp-social ulp-section">
+  <div class="ulp-stars">★★★★★</div>
+  <p class="ulp-social__rating">4.8/5 · 127 avis vérifiés</p>
+
+  <div class="ulp-testimonials">
+    <div class="ulp-tcard">
+      <div class="ulp-tcard__stars">★★★★★</div>
+      <p class="ulp-tcard__text">"Je ne craque plus devant le frigo le soir. Ça fait 3 semaines et c'est la première fois que je tiens aussi longtemps."</p>
+      <p class="ulp-tcard__author">Marion L. · 38 ans · Lyon</p>
+    </div>
+    <div class="ulp-tcard">
+      <div class="ulp-tcard__stars">★★★★★</div>
+      <p class="ulp-tcard__text">"Le goût violet est vraiment agréable. Je le prends le matin et les fringales de l'après-midi ont disparu."</p>
+      <p class="ulp-tcard__author">Sophie M. · 44 ans · Paris</p>
+    </div>
+    <div class="ulp-tcard">
+      <div class="ulp-tcard__stars">★★★★★</div>
+      <p class="ulp-tcard__text">"J'étais sceptique mais après une semaine j'ai compris pourquoi les copines m'en avaient parlé."</p>
+      <p class="ulp-tcard__author">Nathalie R. · 51 ans · Bordeaux</p>
+    </div>
+  </div>
+
+  <div class="ulp-press">
+    <span>TF1</span>
+    <span>Femme Actuelle</span>
+    <span>Elle</span>
+    <span>Brut</span>
+    <span>Vogue</span>
+  </div>
+  <p style="text-align:center;font-size:11px;color:#9ca3af;margin-top:8px;">Ils parlent de nous</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3 — VIRAL UGC · BEFORE/AFTER                        -->
+<!-- ============================================================ -->
+<section class="ulp-viral ulp-section">
+  <h2 class="ulp-viral__title">Ce qu'elles disent vraiment 💜</h2>
+  <p class="ulp-viral__sub">Des vraies femmes · pas des actrices</p>
+
+  <div class="ulp-ba">
+    <div class="ulp-ba__before">
+      <h3>Avant Uburn</h3>
+      <ul>
+        <li>Fringales dès 16h · impossible à ignorer</li>
+        <li>Soir devant le frigo · perte de contrôle</li>
+        <li>Fatigue qui amplifie tout</li>
+      </ul>
+    </div>
+    <div class="ulp-ba__after">
+      <h3>Après Uburn</h3>
+      <ul>
+        <li>4h sans fringales · signal de faim calmé</li>
+        <li>Énergie stable · plus de coup de mou</li>
+        <li>Routine 30 secondes · reprise du contrôle</li>
+      </ul>
+    </div>
+  </div>
+  <div class="ulp-ba__badge">Glucomannane validé EFSA · 30 kcal</div>
+
+  <blockquote class="ulp-ugc-quote">"30 secondes le matin et les fringales du soir ont disparu."</blockquote>
+  <p class="ulp-ugc-sig">— Iness · @uburn.co</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4 — FEATURE BENEFITS · 6 CARDS                      -->
+<!-- ============================================================ -->
+<section class="ulp-section" style="background:#fff;">
+  <h2 class="ulp-features__title">Ce que contient chaque scoop</h2>
+  <p class="ulp-features__sub">6 actifs sélectionnés · 30 kcal · glucomannane validé EFSA</p>
+
+  <div class="ulp-cards">
+    <div class="ulp-card">
+      <div class="ulp-card__emoji">🟣</div>
+      <p class="ulp-card__name">Ube Violet</p>
+      <p class="ulp-card__desc">Riche en antioxydants · régule naturellement l'appétit</p>
+    </div>
+    <div class="ulp-card">
+      <div class="ulp-card__emoji">💧</div>
+      <p class="ulp-card__name">Glucomannane de Konjac</p>
+      <p class="ulp-card__desc">Forme un gel naturel · 4h de satiété · allégation EFSA</p>
+    </div>
+    <div class="ulp-card">
+      <div class="ulp-card__emoji">🌿</div>
+      <p class="ulp-card__name">Fibre d'Acacia</p>
+      <p class="ulp-card__desc">Prébiotique doux · nourrit le microbiote intestinal</p>
+    </div>
+    <div class="ulp-card">
+      <div class="ulp-card__emoji">🥥</div>
+      <p class="ulp-card__name">MCT de Coco</p>
+      <p class="ulp-card__desc">Énergie rapide · sans pic glycémique · anti coup de fatigue</p>
+    </div>
+    <div class="ulp-card">
+      <div class="ulp-card__emoji">🫚</div>
+      <p class="ulp-card__name">Gingembre Violet</p>
+      <p class="ulp-card__desc">Soutient la digestion · propriétés thermogéniques douces</p>
+    </div>
+    <div class="ulp-card">
+      <div class="ulp-card__emoji">⚡</div>
+      <p class="ulp-card__name">L-Carnitine Tartrate</p>
+      <p class="ulp-card__desc">Soutient l'endurance · métabolisme énergétique</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5 — EDUCATION · COMMENT ÇA MARCHE                   -->
+<!-- ============================================================ -->
+<section class="ulp-edu ulp-section">
+  <h2 class="ulp-edu__title">Comment ça marche ?</h2>
+  <p class="ulp-edu__sub">Le mécanisme expliqué simplement</p>
+
+  <div class="ulp-steps">
+    <div class="ulp-step">
+      <div class="ulp-step__icon">☀️</div>
+      <p class="ulp-step__title">Le matin · 30 secondes</p>
+      <p class="ulp-step__text">Un scoop dans 250ml d'eau ou de lait · secouez · c'est prêt.</p>
+    </div>
+    <div class="ulp-step">
+      <div class="ulp-step__icon">💧</div>
+      <p class="ulp-step__title">Dans l'estomac</p>
+      <p class="ulp-step__text">Le glucomannane absorbe l'eau et forme un gel naturel qui occupe l'espace et calme le signal de faim.</p>
+    </div>
+    <div class="ulp-step">
+      <div class="ulp-step__icon">✅</div>
+      <p class="ulp-step__title">Pendant 4 heures</p>
+      <p class="ulp-step__text">Ton corps reçoit le signal qu'il est rassasié. Les fringales de l'après-midi et du soir diminuent.</p>
+    </div>
+  </div>
+
+  <div class="ulp-science">
+    Le glucomannane est la seule fibre à bénéficier d'une allégation officielle de l'EFSA pour la satiété et le contrôle du poids dans le cadre d'un régime hypocalorique.
+    <small>Source : Règlement CE 432/2012 · EFSA 2010</small>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 6 — FAQ ACCORDÉON                                    -->
+<!-- ============================================================ -->
+<section class="ulp-section" style="background:#fff;">
+  <h2 class="ulp-faq__title">Questions fréquentes</h2>
+
+  <details class="ulp-faq-item">
+    <summary>Quel goût a Uburn ?</summary>
+    <div class="ulp-faq-item__body">Un goût doux de noisette vanillée, naturellement coloré en violet par l'ube. Ça se mélange dans de l'eau, du lait ou un smoothie.</div>
+  </details>
+
+  <details class="ulp-faq-item">
+    <summary>Est-ce que ça contient de la caféine ?</summary>
+    <div class="ulp-faq-item__body">Non, 0% caféine. Uburn peut se prendre à n'importe quelle heure de la journée, y compris le soir.</div>
+  </details>
+
+  <details class="ulp-faq-item">
+    <summary>Combien de temps dure un pot ?</summary>
+    <div class="ulp-faq-item__body">Le format Découverte (90g) dure 30 jours à raison d'un scoop par jour. Le format Résultats Maximum (270g) dure 30 jours à 3 scoops par jour.</div>
+  </details>
+
+  <details class="ulp-faq-item">
+    <summary>Y a-t-il un abonnement ?</summary>
+    <div class="ulp-faq-item__body">Non, jamais. Aucun abonnement caché. Vous commandez quand vous voulez, vous arrêtez quand vous voulez.</div>
+  </details>
+
+  <details class="ulp-faq-item">
+    <summary>Quand vais-je voir des résultats ?</summary>
+    <div class="ulp-faq-item__body">La plupart des utilisatrices ressentent une satiété durable dès la première prise. Les résultats sur les habitudes alimentaires s'installent généralement après 2 à 3 semaines d'utilisation régulière.</div>
+  </details>
+
+  <details class="ulp-faq-item">
+    <summary>C'est remboursable si ça ne me convient pas ?</summary>
+    <div class="ulp-faq-item__body">Oui, satisfait(e) ou remboursé(e) pendant 30 jours. Contactez-nous et on vous rembourse sans poser de question.</div>
+  </details>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 7 — CTA FINAL + MENTIONS LÉGALES                    -->
+<!-- ============================================================ -->
+<section class="ulp-cta ulp-section">
+  <span class="ulp-cta__badge">⏰ OFFRE LIMITÉE</span>
+  <h2>Commencez votre cure aujourd'hui</h2>
+  <p class="ulp-cta__sub">Petites séries · Souvent en rupture</p>
+
+  <div class="ulp-cta__price">
+    <del>€49,50</del>
+    <strong>€34,50</strong>
+    <span class="ulp-badge-discount">-30%</span>
+  </div>
+
+  <a href="/products/ube-poudre" class="ulp-btn ulp-btn--white">Essayer maintenant →</a>
+  <p class="ulp-cta__anchor">Soit €0,61/jour</p>
+
+  <div class="ulp-cta__badges">
+    <span>🇫🇷 Made in France</span>
+    <span>✅ Ingrédients conformes EFSA</span>
+    <span>0% Caféine</span>
+    <span>🌱 100% Végétal</span>
+  </div>
+
+  <p class="ulp-cta__legal">
+    Déconseillé durant la grossesse et l'allaitement · Ne se substitue pas à une alimentation variée et équilibrée · Ne pas dépasser la dose journalière recommandée
+  </p>
+</section>
+
+<!-- ============================================================ -->
+<!-- STICKY ATC MOBILE                                             -->
+<!-- ============================================================ -->
+<div class="ulp-sticky" id="ulp-sticky">
+  <div class="ulp-sticky__info">
+    Uburn · €34,50
+    <small>Livraison gratuite</small>
+  </div>
+  <a href="/products/ube-poudre" class="ulp-sticky__btn">Essayer →</a>
+</div>
+
+<script>
+(function(){
+  var sticky = document.getElementById('ulp-sticky');
+  if (!sticky) return;
+  var shown = false;
+  function check() {
+    var st = window.scrollY || window.pageYOffset;
+    if (st > 400 && !shown) { sticky.classList.add('ulp-sticky--visible'); shown = true; }
+    else if (st <= 400 && shown) { sticky.classList.remove('ulp-sticky--visible'); shown = false; }
+  }
+  window.addEventListener('scroll', check, { passive: true });
+  check();
+})();
+</script>
+
+</div>
+
+{% schema %}
+{
+  "name": "Uburn Landing Page",
+  "tag": "section",
+  "class": "uburn-lp-section"
+}
+{% endschema %}

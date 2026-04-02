@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "uburn-lp",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,119 @@
+/* UBURN Landing Page — Mobile first · LCP < 2s */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+.ulp{font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.ulp img{max-width:100%;height:auto;display:block;}
+.ulp a{text-decoration:none;color:inherit;}
+
+/* Logo header */
+.ulp-header{text-align:center;padding:16px 0;background:#fff;border-bottom:1px solid #f0f0f0;position:sticky;top:0;z-index:100;}
+.ulp-header img{height:28px;margin:0 auto;}
+.ulp-header svg{height:28px;margin:0 auto;}
+
+/* Buttons */
+.ulp-btn{display:inline-block;padding:18px 40px;border-radius:12px;font-size:17px;font-weight:800;cursor:pointer;border:none;text-align:center;transition:transform .15s,box-shadow .15s;width:100%;max-width:400px;}
+.ulp-btn:active{transform:scale(.97);}
+.ulp-btn--white{background:#fff;color:#6B21A8;}
+.ulp-btn--violet{background:#6B21A8;color:#fff;}
+
+/* Section spacing */
+.ulp-section{padding:48px 20px;}
+@media(min-width:700px){.ulp-section{padding:64px 40px;}}
+
+/* HERO */
+.ulp-hero{background:#3B0764;color:#fff;text-align:center;padding:56px 20px 48px;}
+.ulp-hero__badge{display:inline-block;background:#FBBF24;color:#1a1a1a;font-size:12px;font-weight:800;padding:6px 16px;border-radius:20px;margin-bottom:20px;letter-spacing:.5px;}
+.ulp-hero h1{font-size:32px;font-weight:900;line-height:1.15;margin-bottom:16px;}
+.ulp-hero__sub{font-size:16px;color:#d8b4fe;margin-bottom:28px;max-width:500px;margin-left:auto;margin-right:auto;}
+.ulp-hero__price{margin-bottom:20px;font-size:18px;}
+.ulp-hero__price del{color:#a78bfa;font-size:16px;margin-right:8px;}
+.ulp-hero__price strong{font-size:28px;}
+.ulp-hero__price .ulp-badge-discount{background:#16a34a;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:12px;margin-left:8px;}
+.ulp-hero__micro{font-size:12px;color:#c4b5fd;margin-top:16px;line-height:1.7;}
+.ulp-hero__stock{font-size:13px;color:#FBBF24;margin-top:12px;font-weight:600;}
+
+/* SOCIAL PROOF */
+.ulp-social{background:#fff;text-align:center;}
+.ulp-stars{color:#FBBF24;font-size:22px;letter-spacing:2px;}
+.ulp-social__rating{font-size:14px;color:#6b7280;margin-top:4px;margin-bottom:32px;}
+.ulp-testimonials{display:grid;grid-template-columns:1fr;gap:16px;max-width:900px;margin:0 auto;}
+@media(min-width:700px){.ulp-testimonials{grid-template-columns:repeat(3,1fr);}}
+.ulp-tcard{background:#f9fafb;border:1px solid #e5e7eb;border-radius:14px;padding:24px;text-align:left;}
+.ulp-tcard__stars{color:#FBBF24;font-size:14px;margin-bottom:8px;}
+.ulp-tcard__text{font-size:14px;color:#374151;margin-bottom:12px;font-style:italic;}
+.ulp-tcard__author{font-size:12px;color:#9ca3af;font-weight:600;}
+.ulp-press{display:flex;flex-wrap:wrap;justify-content:center;gap:24px;margin-top:36px;opacity:.4;font-size:15px;font-weight:700;color:#6b7280;}
+
+/* BEFORE/AFTER */
+.ulp-viral{background:#f9f9f9;}
+.ulp-viral__title{text-align:center;font-size:24px;font-weight:800;margin-bottom:6px;}
+.ulp-viral__sub{text-align:center;font-size:14px;color:#6b7280;margin-bottom:32px;}
+.ulp-ba{display:grid;grid-template-columns:1fr;gap:0;max-width:700px;margin:0 auto;border-radius:16px;overflow:hidden;}
+@media(min-width:500px){.ulp-ba{grid-template-columns:1fr 1fr;}}
+.ulp-ba__before{background:#1e1b4b;color:#e0e7ff;padding:32px 24px;}
+.ulp-ba__after{background:#ede9fe;color:#3b0764;padding:32px 24px;}
+.ulp-ba h3{font-size:18px;font-weight:800;margin-bottom:16px;}
+.ulp-ba ul{list-style:none;font-size:14px;line-height:2;}
+.ulp-ba ul li::before{content:"• ";font-weight:700;}
+.ulp-ba__badge{text-align:center;padding:12px;background:#f5f3ff;font-size:13px;color:#6B21A8;font-weight:700;}
+.ulp-ugc-quote{max-width:600px;margin:32px auto 0;text-align:center;font-size:18px;font-style:italic;color:#374151;line-height:1.5;}
+.ulp-ugc-sig{text-align:center;font-size:13px;color:#9ca3af;margin-top:8px;}
+
+/* FEATURES */
+.ulp-features__title{text-align:center;font-size:24px;font-weight:800;margin-bottom:6px;}
+.ulp-features__sub{text-align:center;font-size:14px;color:#6b7280;margin-bottom:32px;}
+.ulp-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:700px;margin:0 auto;}
+@media(min-width:700px){.ulp-cards{grid-template-columns:repeat(3,1fr);}}
+.ulp-card{background:#f9fafb;border:1px solid #e5e7eb;border-radius:14px;padding:20px;text-align:center;}
+.ulp-card__emoji{font-size:32px;margin-bottom:8px;}
+.ulp-card__name{font-size:14px;font-weight:800;color:#1a1a1a;margin-bottom:6px;}
+.ulp-card__desc{font-size:12px;color:#6b7280;line-height:1.5;}
+
+/* EDUCATION */
+.ulp-edu{background:#F5F0FF;}
+.ulp-edu__title{text-align:center;font-size:24px;font-weight:800;margin-bottom:6px;}
+.ulp-edu__sub{text-align:center;font-size:14px;color:#6b7280;margin-bottom:36px;}
+.ulp-steps{display:grid;grid-template-columns:1fr;gap:24px;max-width:700px;margin:0 auto;}
+@media(min-width:700px){.ulp-steps{grid-template-columns:repeat(3,1fr);}}
+.ulp-step{text-align:center;}
+.ulp-step__icon{font-size:36px;margin-bottom:8px;}
+.ulp-step__title{font-size:15px;font-weight:800;margin-bottom:6px;}
+.ulp-step__text{font-size:13px;color:#4b5563;line-height:1.5;}
+.ulp-science{max-width:600px;margin:36px auto 0;background:#fff;border:2px solid #6B21A8;border-radius:14px;padding:20px 24px;font-size:13px;color:#374151;line-height:1.6;text-align:center;}
+.ulp-science small{display:block;margin-top:8px;font-size:11px;color:#9ca3af;}
+
+/* CTA FINAL */
+.ulp-cta{background:#3B0764;color:#fff;text-align:center;}
+.ulp-cta__badge{display:inline-block;background:#FBBF24;color:#1a1a1a;font-size:12px;font-weight:800;padding:6px 16px;border-radius:20px;margin-bottom:20px;}
+.ulp-cta h2{font-size:28px;font-weight:900;margin-bottom:8px;}
+.ulp-cta__sub{font-size:14px;color:#c4b5fd;margin-bottom:28px;}
+.ulp-cta__price{margin-bottom:20px;font-size:18px;}
+.ulp-cta__price del{color:#a78bfa;margin-right:8px;}
+.ulp-cta__price strong{font-size:28px;}
+.ulp-cta__price .ulp-badge-discount{background:#16a34a;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:12px;margin-left:8px;}
+.ulp-cta__anchor{font-size:13px;color:#c4b5fd;margin-top:12px;}
+.ulp-cta__badges{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:20px;font-size:12px;color:#d8b4fe;}
+.ulp-cta__legal{font-size:10px;color:#a78bfa;margin-top:24px;line-height:1.7;max-width:500px;margin-left:auto;margin-right:auto;}
+
+/* FAQ */
+.ulp-faq__title{text-align:center;font-size:24px;font-weight:800;margin-bottom:32px;}
+.ulp-faq-item{max-width:700px;margin:0 auto 12px;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;}
+.ulp-faq-item summary{padding:16px 20px;font-size:14px;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;background:#fff;}
+.ulp-faq-item summary::after{content:"+";font-size:20px;font-weight:300;color:#6B21A8;transition:transform .2s;}
+.ulp-faq-item[open] summary::after{transform:rotate(45deg);}
+.ulp-faq-item__body{padding:0 20px 16px;font-size:13px;color:#4b5563;line-height:1.6;}
+
+/* STICKY ATC */
+.ulp-sticky{position:fixed;bottom:0;left:0;right:0;background:#6B21A8;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;z-index:9999;box-shadow:0 -4px 20px rgba(0,0,0,.15);transform:translateY(100%);transition:transform .3s;}
+.ulp-sticky--visible{transform:translateY(0);}
+.ulp-sticky__info{color:#fff;font-size:14px;font-weight:700;}
+.ulp-sticky__info small{display:block;font-size:11px;font-weight:400;color:#d8b4fe;}
+.ulp-sticky__btn{background:#fff;color:#6B21A8;border:none;padding:12px 24px;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;white-space:nowrap;}
+
+/* Bottom spacing for sticky */
+.ulp{padding-bottom:70px;}
+
+@media(min-width:700px){
+  .ulp-hero h1{font-size:44px;}
+  .ulp-sticky{display:none;}
+  .ulp{padding-bottom:0;}
+}
