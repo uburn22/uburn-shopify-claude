@@ -2,292 +2,304 @@
 
 <div class="ulp">
 
-<!-- HEADER — Logo seul -->
+<!-- ===== HEADER — Logo + Panier ===== -->
 <header class="ulp-header">
-  <a href="/" aria-label="Uburn">
+  <a href="/" aria-label="Uburn" class="ulp-header__logo">
     {%- if settings.logo -%}
       {{ settings.logo | image_url: height: 56 | image_tag: loading: 'eager', height: 28 }}
     {%- else -%}
       <span style="font-size:20px;font-weight:900;color:#6B21A8;">UBURN</span>
     {%- endif -%}
   </a>
+  <a href="/cart" class="ulp-header__cart" aria-label="Panier">🛒</a>
 </header>
 
-<!-- ============================================================ -->
-<!-- SECTION 1 — HERO · benefit-first · product visible           -->
-<!-- ============================================================ -->
+<!-- ===== SECTION 1 — HERO (Clarté) ===== -->
 <section class="ulp-hero">
   <div class="ulp-hero__bg">
-    <img src="{{ 'HOME_M.png' | file_img_url: '800x' }}" alt="Uburn" class="ulp-hero__bgimg" loading="eager" fetchpriority="high">
+    <img src="{{ 'HOME_M.png' | file_img_url: '800x' }}" alt="" class="ulp-hero__bgimg" loading="eager" fetchpriority="high">
     <div class="ulp-hero__overlay"></div>
   </div>
   <div class="ulp-hero__content">
-    <span class="ulp-hero__badge">🎁 -30% PREMIÈRE COMMANDE</span>
-    <h1>Tes fringales du soir ?<br>C'est terminé.</h1>
-    <p class="ulp-hero__sub">Le glucomannane calme la faim pendant 4 heures.<br>30 kcal · 0% caféine · résultats dès la 1ère semaine.</p>
+    <h1>Garde le contrôle entre les repas</h1>
+    <p class="ulp-hero__sub">La boisson naturelle qui favorise une satiété durable.<br>Sans caféine, sans sucre ajouté, 30 kcal.</p>
+    <div class="ulp-hero__proof">★★★★★ 2 400+ clientes satisfaites</div>
+    <a href="/products/ube-poudre" class="ulp-btn ulp-btn--white">Découvrir Uburn →</a>
+    <div class="ulp-hero__trust">
+      <span>🚚 Livraison offerte</span>
+      <span>💳 Paiement sécurisé</span>
+      <span>✅ Satisfaite ou remboursée</span>
+    </div>
     <div class="ulp-hero__product">
-      <img src="{{ 'POUDRE_UBE_90GR_M.jpg' | file_img_url: '400x' }}" alt="Uburn Poudre 90g" loading="eager" width="180" height="225">
+      <img src="{{ 'POUDRE_UBE_90GR_M.jpg' | file_img_url: '400x' }}" alt="Uburn Poudre" loading="eager" width="160" height="200">
     </div>
-    <div class="ulp-hero__price">
-      <del>€49,50</del>
-      <strong>€34,50</strong>
-      <span class="ulp-badge-discount">-30%</span>
-    </div>
-    <a href="/products/ube-poudre" class="ulp-btn ulp-btn--white">Commencer ma cure →</a>
-    <div class="ulp-hero__guarantee">✅ Satisfaite ou remboursée 30 jours</div>
-    <p class="ulp-hero__micro">€0,61/jour · Livraison offerte · Pas d'abonnement</p>
-    <p class="ulp-hero__stock">⚠️ Plus que <span id="ulp-stock">14</span> unités en stock</p>
   </div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SECTION 2 — PREUVE SOCIALE · témoignages + presse            -->
-<!-- ============================================================ -->
+<!-- ===== SECTION 2 — BARRE DE CONFIANCE ===== -->
+<div class="ulp-truststrip">
+  <span>🌿 100% naturel</span>
+  <span>🇫🇷 Marque française</span>
+  <span>☕ 0% caféine</span>
+  <span>🧪 Ingrédients conformes réglementation européenne</span>
+</div>
+
+<!-- ===== SECTION 3 — LE PROBLÈME (Connexion) ===== -->
+<section class="ulp-problem ulp-section">
+  <h2>Tu connais cette sensation ?</h2>
+  <div class="ulp-problem__items">
+    <div class="ulp-problem__item">
+      <span class="ulp-problem__time">15h</span>
+      <p>Tu as bien mangé à midi, mais le placard t'appelle déjà.</p>
+    </div>
+    <div class="ulp-problem__item">
+      <span class="ulp-problem__time">16h</span>
+      <p>Tu résistes... puis tu craques sur un snack que tu regrettes.</p>
+    </div>
+    <div class="ulp-problem__item">
+      <span class="ulp-problem__time">Le lendemain</span>
+      <p>Rebelote. Le même schéma. La même frustration.</p>
+    </div>
+  </div>
+  <p class="ulp-problem__punchline"><strong>Ce n'est pas un problème de volonté.</strong><br>C'est un problème de satiété.</p>
+</section>
+
+<!-- ===== SECTION 4 — LA SOLUTION (Clarté) ===== -->
+<section class="ulp-solution ulp-section">
+  <h2>Uburn. Ta pause intelligente.</h2>
+  <p class="ulp-solution__sub">Un complément alimentaire naturel qui favorise la satiété durablement — pour que tu gardes le contrôle sans effort.</p>
+
+  <div class="ulp-solution__product">
+    <img src="{{ 'Uburn_Scoop.png' | file_img_url: '300x' }}" alt="Scoop Uburn" loading="lazy" width="140">
+  </div>
+
+  <div class="ulp-solution__benefits">
+    <div class="ulp-benefit">
+      <span class="ulp-benefit__icon">🌿</span>
+      <div>
+        <strong>Satiété durable</strong>
+        <p>Favorise le contrôle de l'appétit naturellement</p>
+      </div>
+    </div>
+    <div class="ulp-benefit">
+      <span class="ulp-benefit__icon">⚡</span>
+      <div>
+        <strong>Énergie stable</strong>
+        <p>Soutient ton métabolisme sans caféine ni crash</p>
+      </div>
+    </div>
+    <div class="ulp-benefit">
+      <span class="ulp-benefit__icon">💜</span>
+      <div>
+        <strong>Gourmande & naturelle</strong>
+        <p>Saveur ube unique, 30 kcal seulement</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 5 — LES 6 ACTIFS (Crédibilité) ===== -->
+<section class="ulp-ingredients ulp-section">
+  <h2>6 actifs naturels, 1 formule unique</h2>
+
+  <div class="ulp-cards">
+    <div class="ulp-card">
+      <img src="{{ 'Ingredient_Glucomannane.jpg' | file_img_url: '200x200' }}" alt="Konjac" class="ulp-card__img" loading="lazy" width="72" height="72">
+      <p class="ulp-card__name">Konjac (glucomannane)</p>
+      <p class="ulp-card__desc">Contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique*</p>
+    </div>
+    <div class="ulp-card">
+      <img src="{{ 'Ingredient_Coco.jpg' | file_img_url: '200x200' }}" alt="MCT" class="ulp-card__img" loading="lazy" width="72" height="72">
+      <p class="ulp-card__name">MCT (huile de coco)</p>
+      <p class="ulp-card__desc">Source d'énergie rapidement assimilable</p>
+    </div>
+    <div class="ulp-card">
+      <img src="{{ 'Ingredient_L-carnitine_tartrate.jpg' | file_img_url: '200x200' }}" alt="L-Carnitine" class="ulp-card__img" loading="lazy" width="72" height="72">
+      <p class="ulp-card__name">L-Carnitine</p>
+      <p class="ulp-card__desc">Soutient le métabolisme énergétique</p>
+    </div>
+    <div class="ulp-card">
+      <img src="{{ 'Ingredient_Gingembre.jpg' | file_img_url: '200x200' }}" alt="Gingembre" class="ulp-card__img" loading="lazy" width="72" height="72">
+      <p class="ulp-card__name">Gingembre</p>
+      <p class="ulp-card__desc">Reconnu pour ses propriétés digestives</p>
+    </div>
+    <div class="ulp-card">
+      <img src="{{ 'Ingredient_Ube.jpg' | file_img_url: '200x200' }}" alt="Ube" class="ulp-card__img" loading="lazy" width="72" height="72">
+      <p class="ulp-card__name">Ube (patate douce violette)</p>
+      <p class="ulp-card__desc">Riche en anthocyanes, antioxydant naturel</p>
+    </div>
+    <div class="ulp-card">
+      <img src="{{ 'Ingredient_Acacia.jpg' | file_img_url: '200x200' }}" alt="Fibre d'acacia" class="ulp-card__img" loading="lazy" width="72" height="72">
+      <p class="ulp-card__name">Fibre d'acacia</p>
+      <p class="ulp-card__desc">Prébiotique doux, soutient le confort digestif</p>
+    </div>
+  </div>
+
+  <p class="ulp-ingredients__note">*Le glucomannane contribue à la perte de poids dans le cadre d'un régime hypocalorique — EFSA ID 3120</p>
+</section>
+
+<!-- ===== SECTION 6 — COMMENT ÇA MARCHE ===== -->
+<section class="ulp-how ulp-section">
+  <h2>Simple comme 1, 2, 3</h2>
+
+  <div class="ulp-steps">
+    <div class="ulp-step">
+      <img src="{{ 'etape_1.jpg' | file_img_url: '300x300' }}" alt="Dose" class="ulp-step__img" loading="lazy" width="120" height="120">
+      <p class="ulp-step__num">①</p>
+      <p class="ulp-step__title">Dose</p>
+      <p class="ulp-step__text">Une cuillère doseuse d'Uburn</p>
+    </div>
+    <div class="ulp-step">
+      <img src="{{ 'etape_2.jpg' | file_img_url: '300x300' }}" alt="Mélange" class="ulp-step__img" loading="lazy" width="120" height="120">
+      <p class="ulp-step__num">②</p>
+      <p class="ulp-step__title">Mélange</p>
+      <p class="ulp-step__text">250ml d'eau, lait ou boisson préférée</p>
+    </div>
+    <div class="ulp-step">
+      <img src="{{ 'etape_3.jpg' | file_img_url: '300x300' }}" alt="Savoure" class="ulp-step__img" loading="lazy" width="120" height="120">
+      <p class="ulp-step__num">③</p>
+      <p class="ulp-step__title">Savoure</p>
+      <p class="ulp-step__text">Profite d'une satiété durable et gourmande</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SECTION 7 — SOCIAL PROOF (Crédibilité) ===== -->
 <section class="ulp-social ulp-section">
-  <div class="ulp-stars">★★★★★</div>
-  <p class="ulp-social__rating">4.8/5 basé sur 127 avis clients</p>
+  <h2>2 400+ femmes l'ont adopté</h2>
 
   <div class="ulp-testimonials">
     <div class="ulp-tcard">
       <div class="ulp-tcard__stars">★★★★★</div>
-      <p class="ulp-tcard__text">"Je ne craque plus devant le frigo le soir. Ça fait 3 semaines et c'est la première fois que je tiens aussi longtemps."</p>
-      <p class="ulp-tcard__author">Marion L. · 38 ans · Lyon</p>
+      <p class="ulp-tcard__text">"Depuis que j'ai intégré Uburn dans ma routine, je ne grignote plus l'après-midi. Le goût est top !"</p>
+      <p class="ulp-tcard__author">Marie L.</p>
       <p class="ulp-tcard__verified">✓ Achat vérifié</p>
     </div>
     <div class="ulp-tcard">
       <div class="ulp-tcard__stars">★★★★★</div>
-      <p class="ulp-tcard__text">"Le goût noisette-vanille est top. Je le prends à 10h et je n'ai plus faim jusqu'à 14h. Mes collègues m'ont demandé mon secret."</p>
-      <p class="ulp-tcard__author">Sophie M. · 44 ans · Paris</p>
+      <p class="ulp-tcard__text">"J'étais sceptique mais après 2 semaines, la différence est réelle. Je me sens mieux, je grignote moins."</p>
+      <p class="ulp-tcard__author">Sophie D.</p>
       <p class="ulp-tcard__verified">✓ Achat vérifié</p>
     </div>
     <div class="ulp-tcard">
       <div class="ulp-tcard__stars">★★★★★</div>
-      <p class="ulp-tcard__text">"J'étais sceptique — encore un énième truc. Mais après 5 jours sans grignoter le soir, j'ai compris que c'était différent."</p>
-      <p class="ulp-tcard__author">Nathalie R. · 51 ans · Bordeaux</p>
+      <p class="ulp-tcard__text">"Le goût violet est unique et agréable. Mon moment préféré de la journée. Les copines veulent toutes essayer."</p>
+      <p class="ulp-tcard__author">Nathalie R.</p>
       <p class="ulp-tcard__verified">✓ Achat vérifié</p>
     </div>
   </div>
 
-  <div class="ulp-press">
-    <img src="{{ 'TF1_1989-1990.png' | file_img_url: '120x' }}" alt="TF1" height="28" loading="lazy">
-    <img src="{{ 'logo-femmeactuelle-copie_cb5c498d-5470-4a4d-83fc-7b16c264a030.png' | file_img_url: '120x' }}" alt="Femme Actuelle" height="22" loading="lazy">
-    <img src="{{ 'ELLE_Magazine_Logo.svg' | file_img_url: '120x' }}" alt="Elle" height="24" loading="lazy">
-    <img src="{{ 'Brut_logo_svg.png' | file_img_url: '120x' }}" alt="Brut" height="22" loading="lazy">
-    <img src="{{ 'VOGUE_revista_-_logo.png' | file_img_url: '120x' }}" alt="Vogue" height="20" loading="lazy">
+  <a href="/products/ube-poudre" class="ulp-btn ulp-btn--violet" style="margin-top:32px;">Commander maintenant →</a>
+</section>
+
+<!-- ===== SECTION 8 — L'OFFRE (CTA principal) ===== -->
+<section class="ulp-offer ulp-section">
+  <h2>Choisis ta cure</h2>
+
+  <div class="ulp-offer__grid">
+    <div class="ulp-offer__card">
+      <p class="ulp-offer__label">Cure Classique</p>
+      <p class="ulp-offer__format">90g · 30 jours · 1 prise/jour</p>
+      <p class="ulp-offer__price"><strong>€34,50</strong></p>
+      <p class="ulp-offer__daily">= €1,15/jour</p>
+      <a href="/products/ube-poudre" class="ulp-btn ulp-btn--violet ulp-offer__btn">Commander →</a>
+    </div>
+    <div class="ulp-offer__card ulp-offer__card--best">
+      <span class="ulp-offer__badge">⭐ BEST-SELLER</span>
+      <p class="ulp-offer__label">Cure Rapide</p>
+      <p class="ulp-offer__format">270g · 30 jours · 3 prises/jour</p>
+      <p class="ulp-offer__price"><del>€69,50</del> <strong>€54,50</strong></p>
+      <p class="ulp-offer__daily">= €0,61/jour</p>
+      <a href="/products/ube-poudre" class="ulp-btn ulp-btn--white ulp-offer__btn">Commander →</a>
+    </div>
+  </div>
+
+  <div class="ulp-offer__trust">
+    <span>💳 Paiement sécurisé</span>
+    <span>🚚 Livraison 48h</span>
+    <span>🔄 Satisfaite ou remboursée 30 jours</span>
   </div>
 </section>
 
-<!-- ============================================================ -->
-<!-- SECTION 3 — LE SECRET · hero ingredient + before/after       -->
-<!-- ============================================================ -->
-<section class="ulp-secret ulp-section">
-  <h2 class="ulp-secret__title">Le secret : le glucomannane de konjac</h2>
-  <p class="ulp-secret__sub">La seule fibre avec une allégation EFSA officielle pour la satiété</p>
-
-  <div class="ulp-secret__hero">
-    <img src="{{ 'Ingredient_Glucomannane.jpg' | file_img_url: '300x300' }}" alt="Glucomannane" class="ulp-secret__img" loading="lazy" width="120" height="120">
-    <div class="ulp-secret__text">
-      <p>Il absorbe 100x son poids en eau dans ton estomac et forme un <strong>gel naturel</strong> qui occupe l'espace.</p>
-      <p>Résultat : <strong>ton cerveau reçoit le signal que tu es rassasiée</strong>. Pendant 4 heures.</p>
-      <p class="ulp-secret__source">Source : Règlement CE 432/2012 · EFSA 2010</p>
-    </div>
-  </div>
-
-  <div class="ulp-ba">
-    <div class="ulp-ba__before">
-      <h3>Sans Uburn</h3>
-      <ul>
-        <li>Fringales dès 16h</li>
-        <li>Soir devant le frigo</li>
-        <li>Culpabilité le lendemain</li>
-      </ul>
-    </div>
-    <div class="ulp-ba__after">
-      <h3>Avec Uburn</h3>
-      <ul>
-        <li>Rassasiée 4 heures</li>
-        <li>Soir tranquille</li>
-        <li>Fierté le lendemain</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SECTION 4 — COMMENT ÇA MARCHE · 3 étapes simples            -->
-<!-- ============================================================ -->
-<section class="ulp-edu ulp-section">
-  <h2 class="ulp-edu__title">30 secondes le matin. C'est tout.</h2>
-
-  <div class="ulp-steps">
-    <div class="ulp-step">
-      <img src="{{ 'etape_1.jpg' | file_img_url: '300x300' }}" alt="Étape 1" class="ulp-step__img" loading="lazy" width="150" height="150">
-      <p class="ulp-step__num">1</p>
-      <p class="ulp-step__title">Un scoop + 250ml d'eau</p>
-      <p class="ulp-step__text">Avec ton petit-déjeuner ou à 10h. Goût noisette-vanille.</p>
-    </div>
-    <div class="ulp-step">
-      <img src="{{ 'etape_2.jpg' | file_img_url: '300x300' }}" alt="Étape 2" class="ulp-step__img" loading="lazy" width="150" height="150">
-      <p class="ulp-step__num">2</p>
-      <p class="ulp-step__title">Le gel se forme</p>
-      <p class="ulp-step__text">Le glucomannane gonfle dans ton estomac. Tu te sens rassasiée.</p>
-    </div>
-    <div class="ulp-step">
-      <img src="{{ 'etape_3.jpg' | file_img_url: '300x300' }}" alt="Étape 3" class="ulp-step__img" loading="lazy" width="150" height="150">
-      <p class="ulp-step__num">3</p>
-      <p class="ulp-step__title">16h arrive. Tu n'y penses pas.</p>
-      <p class="ulp-step__text">Pas de fringale. Pas de coup de mou. Tu passes ton après-midi tranquille.</p>
-    </div>
-  </div>
-
-  <div class="ulp-scoop-block">
-    <img src="{{ 'Uburn_Scoop.png' | file_img_url: '300x' }}" alt="Scoop Uburn" class="ulp-scoop-img" loading="lazy" width="120">
-    <p class="ulp-scoop-text">30 kcal · 0% caféine · 100% végétal</p>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SECTION 5 — INGRÉDIENTS (version compacte)                   -->
-<!-- ============================================================ -->
-<section class="ulp-section" style="background:#fff;">
-  <h2 class="ulp-features__title">6 actifs. 0 superflu.</h2>
-
-  <div class="ulp-cards">
-    <div class="ulp-card">
-      <img src="{{ 'Ingredient_Ube.jpg' | file_img_url: '200x200' }}" alt="Ube Violet" class="ulp-card__img" loading="lazy" width="80" height="80">
-      <p class="ulp-card__name">Ube Violet</p>
-      <p class="ulp-card__desc">Antioxydants puissants</p>
-    </div>
-    <div class="ulp-card">
-      <img src="{{ 'Ingredient_Glucomannane.jpg' | file_img_url: '200x200' }}" alt="Glucomannane" class="ulp-card__img" loading="lazy" width="80" height="80">
-      <p class="ulp-card__name">Glucomannane</p>
-      <p class="ulp-card__desc">4h de satiété (EFSA)</p>
-    </div>
-    <div class="ulp-card">
-      <img src="{{ 'Ingredient_Acacia.jpg' | file_img_url: '200x200' }}" alt="Fibre d'Acacia" class="ulp-card__img" loading="lazy" width="80" height="80">
-      <p class="ulp-card__name">Fibre d'Acacia</p>
-      <p class="ulp-card__desc">Confort digestif</p>
-    </div>
-    <div class="ulp-card">
-      <img src="{{ 'Ingredient_Coco.jpg' | file_img_url: '200x200' }}" alt="MCT Coco" class="ulp-card__img" loading="lazy" width="80" height="80">
-      <p class="ulp-card__name">MCT de Coco</p>
-      <p class="ulp-card__desc">Énergie sans crash</p>
-    </div>
-    <div class="ulp-card">
-      <img src="{{ 'Ingredient_Gingembre.jpg' | file_img_url: '200x200' }}" alt="Gingembre" class="ulp-card__img" loading="lazy" width="80" height="80">
-      <p class="ulp-card__name">Gingembre Violet</p>
-      <p class="ulp-card__desc">Digestion facile</p>
-    </div>
-    <div class="ulp-card">
-      <img src="{{ 'Ingredient_L-carnitine_tartrate.jpg' | file_img_url: '200x200' }}" alt="L-Carnitine" class="ulp-card__img" loading="lazy" width="80" height="80">
-      <p class="ulp-card__name">L-Carnitine</p>
-      <p class="ulp-card__desc">Énergie au quotidien</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SECTION 6 — UGC + RÉSULTAT RÉEL                              -->
-<!-- ============================================================ -->
-<section class="ulp-viral ulp-section">
-  <div class="ulp-ugc-block">
-    <img src="{{ 'WhatsApp_Image_2026-03-07_at_15.35.46.jpg' | file_img_url: '400x' }}" alt="Résultat Uburn" class="ulp-ugc-photo" loading="lazy" width="200" height="200">
-    <blockquote class="ulp-ugc-quote">"30 secondes le matin et les fringales du soir ont disparu. Mon copain n'en revient pas."</blockquote>
-    <p class="ulp-ugc-sig">— Iness · cliente depuis 3 semaines</p>
-  </div>
-</section>
-
-<!-- ============================================================ -->
-<!-- SECTION 7 — FAQ cold traffic                                  -->
-<!-- ============================================================ -->
-<section class="ulp-section" style="background:#fff;">
-  <h2 class="ulp-faq__title">Tes questions · nos réponses</h2>
+<!-- ===== SECTION 9 — FAQ ===== -->
+<section class="ulp-faq ulp-section" style="background:#fff;">
+  <h2 class="ulp-faq__title">Tes questions, nos réponses</h2>
 
   <details class="ulp-faq-item" open>
-    <summary>Et si ça ne marche pas pour moi ?</summary>
-    <div class="ulp-faq-item__body">Tu es remboursée. 30 jours pour tester, sans condition. Si tu n'es pas convaincue, on te rembourse intégralement. Aucun risque.</div>
+    <summary>Et si ça ne me convient pas ?</summary>
+    <div class="ulp-faq-item__body">Satisfaite ou remboursée pendant 30 jours. Pas de questions posées.</div>
   </details>
   <details class="ulp-faq-item">
-    <summary>C'est vraiment sans effets secondaires ?</summary>
-    <div class="ulp-faq-item__body">Oui. Le glucomannane est une fibre naturelle utilisée depuis des siècles en Asie. 0% caféine, 0% stimulant, pas de nervosité. Tu peux le prendre même le soir.</div>
+    <summary>Quel goût ça a ?</summary>
+    <div class="ulp-faq-item__body">Uburn a une saveur unique d'ube (patate douce violette), légèrement sucrée et gourmande. La plupart de nos clientes disent que c'est leur moment préféré de la journée.</div>
   </details>
   <details class="ulp-faq-item">
-    <summary>C'est quoi exactement le goût ?</summary>
-    <div class="ulp-faq-item__body">Noisette-vanille, naturellement violet grâce à l'ube. On le mélange dans de l'eau, du lait ou un smoothie. 90% des clientes disent que le goût les a surprises positivement.</div>
+    <summary>C'est vraiment naturel ?</summary>
+    <div class="ulp-faq-item__body">100% des ingrédients sont d'origine naturelle. Sans caféine, sans sucre ajouté, sans colorants artificiels. Marque française.</div>
   </details>
   <details class="ulp-faq-item">
-    <summary>Je vais voir des résultats quand ?</summary>
-    <div class="ulp-faq-item__body">La plupart des femmes sentent moins de fringales dès les 3-5 premiers jours. Les habitudes alimentaires changent vraiment après 2-3 semaines d'utilisation régulière.</div>
+    <summary>Combien de temps pour voir des résultats ?</summary>
+    <div class="ulp-faq-item__body">Chaque personne est différente. La plupart de nos clientes ressentent un effet sur la satiété dès les premières prises. Nous recommandons une cure de 30 jours minimum.</div>
   </details>
   <details class="ulp-faq-item">
-    <summary>Il y a un abonnement caché ?</summary>
-    <div class="ulp-faq-item__body">Non. Jamais. Tu commandes une fois, tu reçois ton pot, point. Pas de prélèvement automatique, pas de "rappel" pour renouveler. C'est toi qui décides.</div>
+    <summary>Y a-t-il des contre-indications ?</summary>
+    <div class="ulp-faq-item__body">Uburn est déconseillé aux femmes enceintes et allaitantes. Ce complément alimentaire ne doit pas se substituer à une alimentation variée et équilibrée ni à un mode de vie sain. En cas de doute, consultez votre médecin.</div>
   </details>
   <details class="ulp-faq-item">
-    <summary>En quoi c'est différent des autres ?</summary>
-    <div class="ulp-faq-item__body">Le glucomannane est le seul ingrédient avec une allégation EFSA officielle pour la satiété. Pas de caféine, pas de stimulant, pas de chimie. Juste une fibre qui gonfle dans l'estomac et calme la faim. Simple et prouvé.</div>
+    <summary>Y a-t-il un abonnement caché ?</summary>
+    <div class="ulp-faq-item__body">Non, jamais. Tu commandes une fois, tu reçois ton pot, point. Pas de prélèvement automatique. C'est toi qui décides.</div>
   </details>
 </section>
 
-<!-- ============================================================ -->
-<!-- SECTION 8 — CTA FINAL · urgence + garantie visible           -->
-<!-- ============================================================ -->
-<section class="ulp-cta ulp-section" style="background:linear-gradient(135deg,#3B0764 0%,#581c87 100%);">
-  <h2>Reprends le contrôle. Aujourd'hui.</h2>
+<!-- ===== SECTION 10 — CTA FINAL ===== -->
+<section class="ulp-final ulp-section">
+  <h2>Prête à reprendre le contrôle ?</h2>
+  <p class="ulp-final__sub">Rejoins les 2 400+ femmes qui ont choisi Uburn pour une satiété durable et naturelle.</p>
 
-  <div class="ulp-cta__product">
-    <img src="{{ 'POUDRE_UBE_270GR_M.jpg' | file_img_url: '300x' }}" alt="Uburn" loading="lazy" width="140">
+  <a href="/products/ube-poudre" class="ulp-btn ulp-btn--white">Commander maintenant →</a>
+
+  <div class="ulp-final__trust">
+    <span>🔒 Paiement 100% sécurisé</span>
+    <span>📦 Livraison offerte</span>
+    <span>↩️ Garantie satisfaite ou remboursée 30 jours</span>
   </div>
-
-  <div class="ulp-cta__price">
-    <del>€49,50</del>
-    <strong>€34,50</strong>
-    <span class="ulp-badge-discount">-30%</span>
-  </div>
-
-  <a href="/products/ube-poudre" class="ulp-btn ulp-btn--white">Commencer ma cure →</a>
-
-  <div class="ulp-cta__risk">
-    <p>✅ Satisfaite ou remboursée 30 jours</p>
-    <p>🚚 Livraison offerte en France</p>
-    <p>🔒 Pas d'abonnement · Pas de surprise</p>
-  </div>
-
-  <p class="ulp-cta__anchor">€0,61/jour · 30 kcal · Un pot = 30 jours</p>
-
-  <div class="ulp-cta__badges">
-    <span><img src="{{ 'Picto__Made_in_france.svg' | file_img_url: '40x' }}" alt="" width="18" height="18" loading="lazy"> Made in France</span>
-    <span><img src="{{ 'Picto__Valide_Efsa.svg' | file_img_url: '40x' }}" alt="" width="18" height="18" loading="lazy"> Conformes EFSA</span>
-    <span><img src="{{ 'Picto__Cafeine.svg' | file_img_url: '40x' }}" alt="" width="18" height="18" loading="lazy"> 0% Caféine</span>
-    <span><img src="{{ 'Picto__Vegetal.svg' | file_img_url: '40x' }}" alt="" width="18" height="18" loading="lazy"> 100% Végétal</span>
-  </div>
-
-  <p class="ulp-cta__legal">
-    Déconseillé durant la grossesse et l'allaitement · Ne se substitue pas à une alimentation variée et équilibrée · Ne pas dépasser la dose journalière recommandée
-  </p>
 </section>
 
-<!-- STICKY ATC MOBILE -->
+<!-- ===== SECTION 11 — FOOTER LÉGAL ===== -->
+<footer class="ulp-footer">
+  <div class="ulp-footer__legal">
+    <p>Déconseillé aux femmes enceintes et allaitantes.</p>
+    <p>UBurn est un complément alimentaire. Ne se substitue pas à une alimentation variée et équilibrée ni à un mode de vie sain.</p>
+    <p>Ne pas dépasser la dose journalière recommandée.</p>
+  </div>
+  <div class="ulp-footer__links">
+    <a href="/policies/terms-of-service">CGV</a>
+    <a href="/pages/mentions-legales">Mentions légales</a>
+    <a href="/policies/privacy-policy">Confidentialité</a>
+    <a href="/pages/contact">Contact</a>
+  </div>
+  <p class="ulp-footer__copy">© {{ 'now' | date: '%Y' }} Uburn · Marque française</p>
+</footer>
+
+<!-- ===== STICKY ATC MOBILE ===== -->
 <div class="ulp-sticky" id="ulp-sticky">
   <div class="ulp-sticky__info">
-    <strong>€34,50</strong> <del style="font-size:11px;color:#c4b5fd;">€49,50</del>
+    <strong>€34,50</strong>
     <small>Satisfaite ou remboursée</small>
   </div>
-  <a href="/products/ube-poudre" class="ulp-sticky__btn">Commencer →</a>
+  <a href="/products/ube-poudre" class="ulp-sticky__btn">Commander →</a>
 </div>
 
 <script>
 (function(){
-  var sticky = document.getElementById('ulp-sticky');
-  if (!sticky) return;
-  var shown = false;
-  function check() {
-    var st = window.scrollY || window.pageYOffset;
-    if (st > 400 && !shown) { sticky.classList.add('ulp-sticky--visible'); shown = true; }
-    else if (st <= 400 && shown) { sticky.classList.remove('ulp-sticky--visible'); shown = false; }
-  }
-  window.addEventListener('scroll', check, { passive: true });
-  check();
+  var s = document.getElementById('ulp-sticky');
+  if (!s) return;
+  var v = false;
+  window.addEventListener('scroll', function() {
+    var y = window.scrollY || window.pageYOffset;
+    if (y > 500 && !v) { s.classList.add('ulp-sticky--visible'); v = true; }
+    else if (y <= 500 && v) { s.classList.remove('ulp-sticky--visible'); v = false; }
+  }, { passive: true });
 })();
 </script>
 
