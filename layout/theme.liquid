@@ -196,18 +196,6 @@
     #ShopifyChat [class*="badge"] { display: none !important; }
   </style>
 
-  <!-- Hide chat widget on product pages (mobile) — distracts from CTA -->
-  {%- if template.name == 'product' -%}
-  <style>
-    @media screen and (max-width: 699px) {
-      #ShopifyChat, .shopify-chat-button, iframe[title*="chat" i],
-      iframe[title*="Shopify" i], [class*="shopify-messaging"],
-      .shopify-block[data-app-block-type*="chat"],
-      #shopify-chat { display: none !important; }
-    }
-  </style>
-  {%- endif -%}
-
   {%- if template == 'cart' -%}
   <style>
     /* FIX checkout-1: hide chat widget on /cart */

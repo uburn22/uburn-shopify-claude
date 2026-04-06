@@ -250,25 +250,6 @@ Supported variables
               </div>
             </details>
 
-            <!-- Comment ça marche — 3 étapes (from LP) -->
-            <div style="margin:20px 0 16px;padding:16px;background:#f5f0ff;border-radius:12px;">
-              <p style="font-size:14px;font-weight:800;color:#3b0764;margin:0 0 12px;text-align:center;">Simple comme 1, 2, 3</p>
-              <div style="display:flex;flex-direction:column;gap:10px;font-size:13px;color:#374151;">
-                <div style="display:flex;align-items:center;gap:10px;">
-                  <span style="flex-shrink:0;width:28px;height:28px;background:#6B21A8;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;">1</span>
-                  <span><strong>Dose</strong> — une cuillère doseuse d'Uburn</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px;">
-                  <span style="flex-shrink:0;width:28px;height:28px;background:#6B21A8;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;">2</span>
-                  <span><strong>Mélange</strong> — 250ml d'eau, lait ou smoothie</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px;">
-                  <span style="flex-shrink:0;width:28px;height:28px;background:#6B21A8;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;">3</span>
-                  <span><strong>Savoure</strong> — profite d'une satiété durable</span>
-                </div>
-              </div>
-            </div>
-
             <!-- FAQ anti-objections -->
             <div class="uburn-faq-section">
               <p class="uburn-faq-heading">Questions fréquentes</p>
@@ -441,11 +422,6 @@ Supported variables
             -%}
 
           {%- when 'buy_buttons' -%}
-            <!-- Social proof + guarantee above ATC button -->
-            <div class="uburn-atc-proof" style="text-align:center;margin-bottom:12px;">
-              <p style="font-size:13px;color:#FBBF24;font-weight:700;margin:0 0 4px;">★★★★★ 2 400+ clientes satisfaites</p>
-              <p style="font-size:12px;color:#16a34a;font-weight:600;margin:0;">✅ Satisfaite ou remboursée 30 jours</p>
-            </div>
             {%- render 'buy-buttons',
                 product: product,
                 form_id: product_form_id,
