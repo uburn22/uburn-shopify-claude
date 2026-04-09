@@ -321,8 +321,7 @@
     addBtn.style.cssText = 'background:#7C3AED !important;color:#fff !important;border:none !important;border-radius:12px !important;font-weight:800 !important;font-size:15px !important;width:100% !important;padding:16px !important;cursor:pointer !important;transition:background 0.2s !important;letter-spacing:0.3px !important;';
     addBtn.addEventListener('mouseenter', function() { addBtn.style.background = '#6D28D9'; });
     addBtn.addEventListener('mouseleave', function() { addBtn.style.background = '#7C3AED'; });
-    var dynamicCheckout = document.querySelector('.shopify-payment-button, [class*="dynamic-checkout"]');
-    if (dynamicCheckout) dynamicCheckout.style.display = 'none';
+    /* Apple Pay / Shop Pay / Google Pay — DO NOT HIDE (critical for mobile conversion) */
     if (!document.querySelector('.ub-microcopy')) {
       var micro = document.createElement('p');
       micro.className = 'ub-microcopy';
