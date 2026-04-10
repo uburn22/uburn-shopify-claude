@@ -31,7 +31,7 @@ Validate your Pinterest rich pins
 {%- endif -%}
 
 {%- if request.page_type == 'product' -%}
-  <meta property="og:description" content="Boisson naturelle anti-grignotage à base d'ube. 6 actifs naturels, 30 kcal, 0% caféine. Dès 0,61€/jour. Satisfaite ou remboursée 30 jours. Livraison offerte.">
+  <meta property="og:description" content="Boisson naturelle anti-grignotage à base d'ube. 6 actifs naturels, 30 kcal, 0% caféine. Dès 0,61€/jour. Livraison offerte.">
 {%- endif -%}
 
 {%- if page_image -%}
@@ -63,7 +63,7 @@ More information:
 
 {%- if request.page_type == 'product' -%}
   <meta name="twitter:title" content="Uburn — La boisson qui favorise la satiété durablement">
-  <meta name="twitter:description" content="Boisson naturelle anti-grignotage. 6 actifs naturels, 30 kcal, 0% caféine. Dès 0,61€/jour. Satisfaite ou remboursée 30 jours.">
+  <meta name="twitter:description" content="Boisson naturelle anti-grignotage. 6 actifs naturels, 30 kcal, 0% caféine. Dès 0,61€/jour. ">
 {%- elsif request.page_type == 'article' -%}
   <meta name="twitter:title" content="{{ article.title }}">
   <meta name="twitter:description" content="{{ article.excerpt_or_content | strip_html | truncatewords: 140, '' | escape }}">
