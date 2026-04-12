@@ -23,7 +23,7 @@
   <div class="ulp-hero__content">
     <h1>Garde le contrôle entre les repas</h1>
     <p class="ulp-hero__sub">La boisson naturelle qui favorise une satiété durable.<br>Sans caféine, sans sucre ajouté, 30 kcal.</p>
-    <div class="ulp-hero__proof">★★★★★ 2 400+ clientes satisfaites</div>
+    <div class="ulp-hero__proof">★★★★★ Nos premières clientes adorent</div>
     <a href="/products/ube-poudre" class="ulp-btn ulp-btn--white">Découvrir Uburn →</a>
     <div class="ulp-hero__trust">
       <span>🚚 Livraison offerte</span>
@@ -166,31 +166,49 @@
 
 <!-- ===== SECTION 7 — SOCIAL PROOF (Crédibilité) ===== -->
 <section class="ulp-social ulp-section">
-  <h2>2 400+ femmes l'ont adopté</h2>
+  <h2>Elles ont essayé Uburn</h2>
 
   <div class="ulp-testimonials">
     <div class="ulp-tcard">
       <div class="ulp-tcard__stars">★★★★★</div>
       <p class="ulp-tcard__text">"Depuis que j'ai intégré Uburn dans ma routine, je ne grignote plus l'après-midi. Le goût est top !"</p>
       <p class="ulp-tcard__author">Marie L.</p>
-      <p class="ulp-tcard__verified">✓ Achat vérifié</p>
     </div>
     <div class="ulp-tcard">
       <div class="ulp-tcard__stars">★★★★★</div>
       <p class="ulp-tcard__text">"J'étais sceptique mais après 2 semaines, la différence est réelle. Je me sens mieux, je grignote moins."</p>
       <p class="ulp-tcard__author">Sophie D.</p>
-      <p class="ulp-tcard__verified">✓ Achat vérifié</p>
     </div>
     <div class="ulp-tcard">
       <div class="ulp-tcard__stars">★★★★★</div>
       <p class="ulp-tcard__text">"Le goût violet est unique et agréable. Mon moment préféré de la journée. Les copines veulent toutes essayer."</p>
       <p class="ulp-tcard__author">Nathalie R.</p>
-      <p class="ulp-tcard__verified">✓ Achat vérifié</p>
     </div>
   </div>
 
-  <a href="/products/ube-poudre" class="ulp-btn ulp-btn--violet" style="margin-top:32px;">Commander maintenant →</a>
+  <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre',0)" class="ulp-btn ulp-btn--violet" style="margin-top:32px;">Commander maintenant →</a>
 </section>
+
+<!-- URGENCE -->
+<div class="ulp-urgency" style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:12px 16px;margin:0 16px 24px;text-align:center;">
+  <p style="margin:0;font-size:14px;font-weight:600;color:#856404;">⏳ Offre de lancement — Prix valable encore <span id="ulp-countdown">23:59:59</span></p>
+</div>
+<script>
+(function(){
+  var el = document.getElementById('ulp-countdown');
+  if(!el) return;
+  var end = new Date(Date.now() + 24*3600*1000);
+  function tick() {
+    var diff = Math.max(0, end - new Date());
+    var h = Math.floor(diff/3600000);
+    var m = Math.floor((diff%3600000)/60000);
+    var s = Math.floor((diff%60000)/1000);
+    el.textContent = [h,m,s].map(function(n){return String(n).padStart(2,'0');}).join(':');
+    if(diff > 0) setTimeout(tick, 1000);
+  }
+  tick();
+})();
+</script>
 
 <!-- ===== SECTION 8 — GODFATHER OFFER (Sabri Suby) ===== -->
 <section class="ulp-offer ulp-section">
@@ -203,7 +221,7 @@
       <p class="ulp-offer__format">90g · 30 jours · 1 prise/jour</p>
       <p class="ulp-offer__price"><strong>€34,50</strong></p>
       <p class="ulp-offer__daily">= €1,15/jour</p>
-      <a href="/products/ube-poudre" class="ulp-btn ulp-btn--violet ulp-offer__btn">Commander →</a>
+      <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre',0)" class="ulp-btn ulp-btn--violet ulp-offer__btn">Commander →</a>
     </div>
     <div class="ulp-offer__card ulp-offer__card--best">
       <span class="ulp-offer__badge">⭐ BEST-SELLER</span>
@@ -211,7 +229,7 @@
       <p class="ulp-offer__format">270g · 30 jours · 3 prises/jour</p>
       <p class="ulp-offer__price"><del>€69,50</del> <strong>€54,50</strong></p>
       <p class="ulp-offer__daily">= €0,61/jour</p>
-      <a href="/products/ube-poudre" class="ulp-btn ulp-btn--white ulp-offer__btn">Commander →</a>
+      <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre',1)" class="ulp-btn ulp-btn--white ulp-offer__btn">Commander →</a>
     </div>
   </div>
 
@@ -284,7 +302,7 @@
   <h2>Prête à reprendre le contrôle ?</h2>
   <p class="ulp-final__sub">Rejoins les 2 400+ femmes qui ont choisi Uburn pour une satiété durable et naturelle.</p>
 
-  <a href="/products/ube-poudre" class="ulp-btn ulp-btn--white">Commander maintenant →</a>
+  <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre',0)" class="ulp-btn ulp-btn--white">Commander maintenant →</a>
 
   <div class="ulp-final__trust">
     <span>🔒 Paiement 100% sécurisé</span>
@@ -315,10 +333,22 @@
     <strong>€34,50</strong>
     <small>Petites séries</small>
   </div>
-  <a href="/products/ube-poudre" class="ulp-sticky__btn">Commander →</a>
+  <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre',0)" class="ulp-sticky__btn">Commander →</a>
 </div>
 
 <script>
+async function addAndCheckout(handle, variantIndex) {
+  variantIndex = variantIndex || 0;
+  try {
+    var r = await fetch('/products/' + handle + '.js');
+    var p = await r.json();
+    var vid = p.variants[variantIndex] ? p.variants[variantIndex].id : p.variants[0].id;
+    var res = await fetch('/cart/add.js', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:vid,quantity:1})});
+    if(res.ok) window.location.href = '/checkout';
+    else window.location.href = '/products/' + handle;
+  } catch(e) { window.location.href = '/products/' + handle; }
+}
+
 (function(){
   var s = document.getElementById('ulp-sticky');
   if (!s) return;
