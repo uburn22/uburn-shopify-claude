@@ -1,12 +1,139 @@
 {{ 'uburn-lp.css' | asset_url | stylesheet_tag }}
 
+<style>
+/* ===== UBURN LP — Design Medvi-inspired, Mobile-first ===== */
+.ulp { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; color: #1a1a1a; }
+
+/* HEADER */
+.ulp-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: #fff; border-bottom: 1px solid #f0ebff; position: sticky; top: 0; z-index: 100; }
+.ulp-header__logo img { height: 28px; width: auto; }
+.ulp-header__cart { font-size: 22px; text-decoration: none; }
+
+/* HERO */
+.ulp-hero { background: linear-gradient(160deg, #f9f4ff 0%, #fff 60%); padding: 40px 20px 32px; }
+.ulp-hero__inner { max-width: 480px; margin: 0 auto; }
+.ulp-hero h1 { font-size: 2.1rem; font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; margin: 0 0 12px; color: #1a1a1a; }
+.ulp-hero h1 em { color: #6B21A8; font-style: normal; }
+.ulp-hero__sub { font-size: 1rem; color: #555; line-height: 1.5; margin: 0 0 20px; }
+.ulp-hero__stars { color: #6B21A8; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; }
+.ulp-hero__bullets { list-style: none; padding: 0; margin: 0 0 24px; }
+.ulp-hero__bullets li { font-size: 0.9rem; color: #444; padding: 4px 0; }
+.ulp-hero__bullets li::before { content: "✓ "; color: #6B21A8; font-weight: 700; }
+.ulp-hero__product { text-align: center; margin: 20px 0 0; }
+.ulp-hero__product img { max-width: 200px; height: auto; }
+
+/* TRUST BAR */
+.ulp-trust { display: flex; justify-content: center; gap: 0; background: #6B21A8; padding: 10px 20px; flex-wrap: wrap; }
+.ulp-trust span { color: #fff; font-size: 0.8rem; font-weight: 500; padding: 4px 14px; white-space: nowrap; }
+.ulp-trust span + span { border-left: 1px solid rgba(255,255,255,0.3); }
+
+/* BOUTONS */
+.ulp-btn { display: block; text-align: center; padding: 16px 28px; border-radius: 8px; font-size: 1rem; font-weight: 700; text-decoration: none; cursor: pointer; border: none; width: 100%; box-sizing: border-box; transition: opacity 0.2s; }
+.ulp-btn:hover { opacity: 0.88; }
+.ulp-btn--violet { background: #6B21A8; color: #fff; }
+.ulp-btn--white { background: #fff; color: #6B21A8; border: 2px solid #6B21A8; }
+.ulp-btn--large { padding: 18px 32px; font-size: 1.1rem; }
+
+/* SECTIONS */
+.ulp-section { padding: 48px 20px; max-width: 560px; margin: 0 auto; }
+.ulp-section h2 { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 24px; line-height: 1.2; }
+.ulp-section--alt { background: #f9f7fc; }
+.ulp-section--alt .ulp-section { background: transparent; }
+
+/* BÉNÉFICES */
+.ulp-benefits { display: flex; flex-direction: column; gap: 16px; margin: 0 0 32px; }
+.ulp-benefit { display: flex; align-items: flex-start; gap: 14px; }
+.ulp-benefit__icon { font-size: 1.6rem; flex-shrink: 0; }
+.ulp-benefit__text strong { display: block; font-size: 1rem; font-weight: 700; margin-bottom: 2px; }
+.ulp-benefit__text p { margin: 0; font-size: 0.9rem; color: #666; line-height: 1.4; }
+
+/* ÉTAPES */
+.ulp-steps { display: flex; flex-direction: column; gap: 20px; margin-bottom: 32px; }
+.ulp-step { display: flex; align-items: center; gap: 16px; }
+.ulp-step__num { background: #6B21A8; color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0; }
+.ulp-step__text strong { display: block; font-size: 0.95rem; font-weight: 700; }
+.ulp-step__text p { margin: 0; font-size: 0.85rem; color: #666; }
+
+/* TÉMOIGNAGES */
+.ulp-testimonials { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+.ulp-tcard { background: #fff; border: 1px solid #ede5ff; border-radius: 12px; padding: 20px; }
+.ulp-tcard__stars { color: #f59e0b; font-size: 1rem; margin-bottom: 8px; }
+.ulp-tcard__text { font-size: 0.9rem; line-height: 1.5; color: #333; font-style: italic; margin: 0 0 10px; }
+.ulp-tcard__author { font-size: 0.85rem; font-weight: 700; color: #6B21A8; margin: 0; }
+
+/* OFFRE */
+.ulp-offers { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+.ulp-offer-card { border: 2px solid #ede5ff; border-radius: 12px; padding: 24px; position: relative; background: #fff; }
+.ulp-offer-card--best { border-color: #6B21A8; background: #f9f4ff; }
+.ulp-offer-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #6B21A8; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 4px 16px; border-radius: 20px; white-space: nowrap; }
+.ulp-offer-label { font-size: 0.8rem; font-weight: 600; color: #6B21A8; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 4px; }
+.ulp-offer-name { font-size: 1.2rem; font-weight: 700; margin: 0 0 4px; }
+.ulp-offer-format { font-size: 0.85rem; color: #777; margin: 0 0 12px; }
+.ulp-offer-price { font-size: 1.6rem; font-weight: 700; color: #1a1a1a; margin: 0 0 2px; }
+.ulp-offer-price del { font-size: 1rem; color: #aaa; font-weight: 400; margin-right: 6px; }
+.ulp-offer-daily { font-size: 0.85rem; color: #6B21A8; font-weight: 600; margin: 0 0 16px; }
+
+/* URGENCE */
+.ulp-urgency { background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 12px 16px; text-align: center; margin-bottom: 24px; }
+.ulp-urgency p { margin: 0; font-size: 0.9rem; font-weight: 600; color: #856404; }
+
+/* TRUST FINAL */
+.ulp-trust-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 20px; margin-top: 16px; }
+.ulp-trust-row span { font-size: 0.8rem; color: #777; }
+
+/* FAQ */
+.ulp-faq-item { border-bottom: 1px solid #ede5ff; }
+.ulp-faq-item summary { padding: 16px 0; font-size: 0.95rem; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+.ulp-faq-item summary::-webkit-details-marker { display: none; }
+.ulp-faq-item summary::after { content: '+'; color: #6B21A8; font-size: 1.3rem; font-weight: 300; flex-shrink: 0; margin-left: 12px; }
+.ulp-faq-item[open] summary::after { content: '−'; }
+.ulp-faq-item__body { padding: 0 0 16px; font-size: 0.9rem; color: #555; line-height: 1.6; }
+
+/* FOOTER */
+.ulp-footer { background: #1a1a1a; color: #999; padding: 32px 20px; text-align: center; }
+.ulp-footer__links { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 16px; margin-bottom: 16px; }
+.ulp-footer__links a { color: #aaa; font-size: 0.8rem; text-decoration: none; }
+.ulp-footer__legal { font-size: 0.75rem; line-height: 1.6; margin-bottom: 16px; }
+.ulp-footer__copy { font-size: 0.75rem; }
+
+/* STICKY */
+.ulp-sticky { position: fixed; bottom: 0; left: 0; right: 0; background: #6B21A8; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; z-index: 200; transform: translateY(100%); transition: transform 0.3s ease; }
+.ulp-sticky--visible { transform: translateY(0); }
+.ulp-sticky__info { color: #fff; }
+.ulp-sticky__info strong { display: block; font-size: 1rem; font-weight: 700; }
+.ulp-sticky__info small { font-size: 0.75rem; opacity: 0.8; }
+.ulp-sticky__btn { background: #fff; color: #6B21A8; padding: 12px 24px; border-radius: 6px; font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap; cursor: pointer; border: none; }
+
+/* COMPARE */
+.ulp-compare { background: #f9f4ff; border-radius: 10px; padding: 16px; margin: 16px 0; }
+.ulp-compare__title { font-size: 0.85rem; color: #555; margin: 0 0 10px; font-weight: 600; }
+.ulp-compare__row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; font-size: 0.9rem; }
+.ulp-compare__row + .ulp-compare__row { border-top: 1px solid #ede5ff; }
+.ulp-compare__bad { color: #dc2626; }
+.ulp-compare__good { color: #16a34a; font-weight: 700; }
+
+/* DESKTOP */
+@media (min-width: 700px) {
+  .ulp-hero { padding: 60px 40px; }
+  .ulp-hero__inner { display: grid; grid-template-columns: 1fr 300px; align-items: center; gap: 40px; max-width: 900px; }
+  .ulp-hero__product { margin: 0; }
+  .ulp-hero__product img { max-width: 280px; }
+  .ulp-hero h1 { font-size: 2.8rem; }
+  .ulp-section { max-width: 700px; }
+  .ulp-offers { flex-direction: row; }
+  .ulp-offer-card { flex: 1; }
+  .ulp-testimonials { flex-direction: row; }
+  .ulp-tcard { flex: 1; }
+}
+</style>
+
 <div class="ulp">
 
-<!-- ===== HEADER — Logo + Panier ===== -->
+<!-- HEADER -->
 <header class="ulp-header">
   <a href="/" aria-label="Uburn" class="ulp-header__logo">
     {%- if settings.logo -%}
-      {{ settings.logo | image_url: width: 120 | image_tag: loading: 'eager', height: 28 }}
+      {{ settings.logo | image_url: width: 120 | image_tag: loading: 'eager', height: 28, width: 120 }}
     {%- else -%}
       <span style="font-size:20px;font-weight:900;color:#6B21A8;">UBURN</span>
     {%- endif -%}
@@ -14,160 +141,100 @@
   <a href="/cart" class="ulp-header__cart" aria-label="Panier">🛒</a>
 </header>
 
-<!-- ===== SECTION 1 — HERO (Clarté) ===== -->
+<!-- HERO -->
 <section class="ulp-hero">
-  <div class="ulp-hero__bg">
-    <img src="{{ 'HOME_M.png' | file_img_url: '600x' }}" alt="" class="ulp-hero__bgimg" loading="eager" fetchpriority="high">
-    <div class="ulp-hero__overlay"></div>
-  </div>
-  <div class="ulp-hero__content">
-    <h1>Garde le contrôle entre les repas</h1>
-    <p class="ulp-hero__sub">La boisson naturelle qui favorise une satiété durable.<br>Sans caféine, sans sucre ajouté, 30 kcal.</p>
-    <div class="ulp-hero__proof">★★★★★ Nos premières clientes adorent</div>
-    <a href="/products/ube-poudre" class="ulp-btn ulp-btn--white">Découvrir Uburn →</a>
-    <div class="ulp-hero__trust">
-      <span>🚚 Livraison offerte</span>
-      <span>💳 Paiement sécurisé</span>
-      <span>🇫🇷 Marque française</span>
+  <div class="ulp-hero__inner">
+    <div>
+      <p class="ulp-hero__stars">★★★★★ Nos premières clientes adorent</p>
+      <h1>Les fringales de 16h ? <em>Uburn les arrête.</em> Naturellement.</h1>
+      <p class="ulp-hero__sub">La boisson à base d'ube adoptée par nos premières clientes en France. 0% caféine. 4h de satiété durable.</p>
+      <ul class="ulp-hero__bullets">
+        <li>6 actifs naturels scientifiquement sélectionnés</li>
+        <li>0% caféine — se prend à toute heure</li>
+        <li>Livraison offerte en France</li>
+        <li>Marque française — R Glow F.Z.E</li>
+      </ul>
+      <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre', 0)" class="ulp-btn ulp-btn--violet ulp-btn--large">
+        Commander maintenant — €34,50 →
+      </a>
     </div>
     <div class="ulp-hero__product">
-      <img src="{{ 'POUDRE_UBE_90GR_M.jpg' | file_img_url: '200x' }}" alt="Uburn Poudre" loading="eager" width="160" height="200">
+      <img src="{{ 'POUDRE_UBE_90GR_M.jpg' | file_img_url: '300x' }}" alt="Uburn — Boisson ube satiété" loading="eager" width="240" height="300">
     </div>
   </div>
 </section>
 
-<!-- ===== SECTION 2 — BARRE DE CONFIANCE ===== -->
-<div class="ulp-truststrip">
+<!-- TRUST BAR -->
+<div class="ulp-trust">
   <span>🌿 100% naturel</span>
-  <span>🇫🇷 Marque française</span>
   <span>☕ 0% caféine</span>
-  <span>🧪 Ingrédients conformes réglementation européenne</span>
+  <span>🇫🇷 Marque française</span>
+  <span>🚚 Livraison offerte</span>
 </div>
 
-<!-- ===== SECTION 3 — LE PROBLÈME (Connexion) ===== -->
-<section class="ulp-problem ulp-section">
-  <h2>Tu connais cette sensation ?</h2>
-  <div class="ulp-problem__items">
-    <div class="ulp-problem__item">
-      <span class="ulp-problem__time">15h</span>
-      <p>Tu as bien mangé à midi, mais le placard t'appelle déjà.</p>
-    </div>
-    <div class="ulp-problem__item">
-      <span class="ulp-problem__time">16h</span>
-      <p>Tu résistes... puis tu craques sur un snack que tu regrettes.</p>
-    </div>
-    <div class="ulp-problem__item">
-      <span class="ulp-problem__time">Le lendemain</span>
-      <p>Rebelote. Le même schéma. La même frustration.</p>
-    </div>
-  </div>
-  <p class="ulp-problem__punchline"><strong>Ce n'est pas un problème de volonté.</strong><br>C'est un problème de satiété.</p>
-</section>
-
-<!-- ===== SECTION 4 — LA SOLUTION (Clarté) ===== -->
-<section class="ulp-solution ulp-section">
-  <h2>Uburn. Ta pause intelligente.</h2>
-  <p class="ulp-solution__sub">Un complément alimentaire naturel qui favorise la satiété durablement — pour que tu gardes le contrôle sans effort.</p>
-
-  <div class="ulp-solution__product">
-    <img src="{{ 'Uburn_Scoop.png' | file_img_url: '200x' }}" alt="Scoop Uburn" loading="lazy" width="140">
-  </div>
-
-  <div class="ulp-solution__benefits">
+<!-- BÉNÉFICES -->
+<div class="ulp-section--alt">
+<div class="ulp-section">
+  <h2>Pourquoi Uburn ?</h2>
+  <div class="ulp-benefits">
     <div class="ulp-benefit">
-      <span class="ulp-benefit__icon">🌿</span>
-      <div>
-        <strong>Satiété durable</strong>
-        <p>Favorise le contrôle de l'appétit naturellement</p>
+      <div class="ulp-benefit__icon">🌿</div>
+      <div class="ulp-benefit__text">
+        <strong>Satiété durable jusqu'à 4h</strong>
+        <p>Le konjac (glucomannane) contribue au contrôle de l'appétit — prouvé par l'EFSA.</p>
       </div>
     </div>
     <div class="ulp-benefit">
-      <span class="ulp-benefit__icon">⚡</span>
-      <div>
-        <strong>Énergie stable</strong>
-        <p>Soutient ton métabolisme sans caféine ni crash</p>
+      <div class="ulp-benefit__icon">⚡</div>
+      <div class="ulp-benefit__text">
+        <strong>Énergie stable, sans crash</strong>
+        <p>Les MCT de coco fournissent une énergie rapide et propre, sans pic d'insuline.</p>
       </div>
     </div>
     <div class="ulp-benefit">
-      <span class="ulp-benefit__icon">💜</span>
-      <div>
-        <strong>Gourmande & naturelle</strong>
-        <p>Saveur ube unique, 30 kcal seulement</p>
+      <div class="ulp-benefit__icon">💜</div>
+      <div class="ulp-benefit__text">
+        <strong>Gourmand & naturel — 30 kcal</strong>
+        <p>Saveur ube unique et délicate. Riche en anthocyanes antioxydants.</p>
       </div>
     </div>
   </div>
-</section>
+  <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre', 0)" class="ulp-btn ulp-btn--violet">Essayer Uburn →</a>
+</div>
+</div>
 
-<!-- ===== SECTION 5 — LES 6 ACTIFS (Crédibilité) ===== -->
-<section class="ulp-ingredients ulp-section">
-  <h2>6 actifs naturels, 1 formule unique</h2>
-
-  <div class="ulp-cards">
-    <div class="ulp-card">
-      <img src="{{ 'Ingredient_Glucomannane.jpg' | file_img_url: '100x100' }}" alt="Konjac" class="ulp-card__img" loading="lazy" width="72" height="72">
-      <p class="ulp-card__name">Konjac (glucomannane)</p>
-      <p class="ulp-card__desc">Contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique*</p>
-    </div>
-    <div class="ulp-card">
-      <img src="{{ 'Ingredient_Coco.jpg' | file_img_url: '100x100' }}" alt="MCT" class="ulp-card__img" loading="lazy" width="72" height="72">
-      <p class="ulp-card__name">MCT (huile de coco)</p>
-      <p class="ulp-card__desc">Source d'énergie rapidement assimilable</p>
-    </div>
-    <div class="ulp-card">
-      <img src="{{ 'Ingredient_L-carnitine_tartrate.jpg' | file_img_url: '100x100' }}" alt="L-Carnitine" class="ulp-card__img" loading="lazy" width="72" height="72">
-      <p class="ulp-card__name">L-Carnitine</p>
-      <p class="ulp-card__desc">Soutient le métabolisme énergétique</p>
-    </div>
-    <div class="ulp-card">
-      <img src="{{ 'Ingredient_Gingembre.jpg' | file_img_url: '100x100' }}" alt="Gingembre" class="ulp-card__img" loading="lazy" width="72" height="72">
-      <p class="ulp-card__name">Gingembre</p>
-      <p class="ulp-card__desc">Reconnu pour ses propriétés digestives</p>
-    </div>
-    <div class="ulp-card">
-      <img src="{{ 'Ingredient_Ube.jpg' | file_img_url: '100x100' }}" alt="Ube" class="ulp-card__img" loading="lazy" width="72" height="72">
-      <p class="ulp-card__name">Ube (patate douce violette)</p>
-      <p class="ulp-card__desc">Riche en anthocyanes, antioxydant naturel</p>
-    </div>
-    <div class="ulp-card">
-      <img src="{{ 'Ingredient_Acacia.jpg' | file_img_url: '100x100' }}" alt="Fibre d'acacia" class="ulp-card__img" loading="lazy" width="72" height="72">
-      <p class="ulp-card__name">Fibre d'acacia</p>
-      <p class="ulp-card__desc">Prébiotique doux, soutient le confort digestif</p>
-    </div>
-  </div>
-
-  <p class="ulp-ingredients__note">*Le glucomannane contribue à la perte de poids dans le cadre d'un régime hypocalorique — EFSA ID 3120</p>
-</section>
-
-<!-- ===== SECTION 6 — COMMENT ÇA MARCHE ===== -->
-<section class="ulp-how ulp-section">
+<!-- COMMENT ÇA MARCHE -->
+<div class="ulp-section">
   <h2>Simple comme 1, 2, 3</h2>
-
   <div class="ulp-steps">
     <div class="ulp-step">
-      <img src="{{ 'etape_1.jpg' | file_img_url: '160x160' }}" alt="Dose" class="ulp-step__img" loading="lazy" width="120" height="120">
-      <p class="ulp-step__num">①</p>
-      <p class="ulp-step__title">Dose</p>
-      <p class="ulp-step__text">Une cuillère doseuse d'Uburn</p>
+      <div class="ulp-step__num">1</div>
+      <div class="ulp-step__text">
+        <strong>Une cuillère d'Uburn</strong>
+        <p>Dans votre verre — eau, lait ou boisson préférée</p>
+      </div>
     </div>
     <div class="ulp-step">
-      <img src="{{ 'etape_2.jpg' | file_img_url: '160x160' }}" alt="Mélange" class="ulp-step__img" loading="lazy" width="120" height="120">
-      <p class="ulp-step__num">②</p>
-      <p class="ulp-step__title">Mélange</p>
-      <p class="ulp-step__text">250ml d'eau, lait ou boisson préférée</p>
+      <div class="ulp-step__num">2</div>
+      <div class="ulp-step__text">
+        <strong>Mélangez 10 secondes</strong>
+        <p>Se dissout parfaitement, sans grumeaux</p>
+      </div>
     </div>
     <div class="ulp-step">
-      <img src="{{ 'etape_3.jpg' | file_img_url: '160x160' }}" alt="Savoure" class="ulp-step__img" loading="lazy" width="120" height="120">
-      <p class="ulp-step__num">③</p>
-      <p class="ulp-step__title">Savoure</p>
-      <p class="ulp-step__text">Profite d'une satiété durable et gourmande</p>
+      <div class="ulp-step__num">3</div>
+      <div class="ulp-step__text">
+        <strong>4h sans fringales</strong>
+        <p>Savourez votre pause. Le reste, Uburn s'en charge.</p>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ===== SECTION 7 — SOCIAL PROOF (Crédibilité) ===== -->
-<section class="ulp-social ulp-section">
+<!-- TÉMOIGNAGES -->
+<div class="ulp-section--alt">
+<div class="ulp-section">
   <h2>Elles ont essayé Uburn</h2>
-
   <div class="ulp-testimonials">
     <div class="ulp-tcard">
       <div class="ulp-tcard__stars">★★★★★</div>
@@ -185,95 +252,64 @@
       <p class="ulp-tcard__author">Nathalie R.</p>
     </div>
   </div>
-
-  <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre',0)" class="ulp-btn ulp-btn--violet" style="margin-top:32px;">Commander maintenant →</a>
-</section>
-
-<!-- URGENCE -->
-<div class="ulp-urgency" style="background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:12px 16px;margin:0 16px 24px;text-align:center;">
-  <p style="margin:0;font-size:14px;font-weight:600;color:#856404;">⏳ Offre de lancement — Prix valable encore <span id="ulp-countdown">23:59:59</span></p>
+  <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre', 0)" class="ulp-btn ulp-btn--violet">Rejoindre les premières clientes →</a>
 </div>
-<script>
-(function(){
-  var el = document.getElementById('ulp-countdown');
-  if(!el) return;
-  var end = new Date(Date.now() + 24*3600*1000);
-  function tick() {
-    var diff = Math.max(0, end - new Date());
-    var h = Math.floor(diff/3600000);
-    var m = Math.floor((diff%3600000)/60000);
-    var s = Math.floor((diff%60000)/1000);
-    el.textContent = [h,m,s].map(function(n){return String(n).padStart(2,'0');}).join(':');
-    if(diff > 0) setTimeout(tick, 1000);
-  }
-  tick();
-})();
-</script>
+</div>
 
-<!-- ===== SECTION 8 — GODFATHER OFFER (Sabri Suby) ===== -->
-<section class="ulp-offer ulp-section">
-  <h2>Choisis ta cure</h2>
-  <p class="ulp-offer__rationale">On lance en France et on veut faire découvrir Uburn à 1 000 nouvelles clientes. C'est pour ça qu'on t'offre tout ça :</p>
+<!-- OFFRE -->
+<div class="ulp-section">
+  <h2>Choisir sa cure</h2>
 
-  <div class="ulp-offer__grid">
-    <div class="ulp-offer__card">
-      <p class="ulp-offer__label">Cure Classique</p>
-      <p class="ulp-offer__format">90g · 30 jours · 1 prise/jour</p>
-      <p class="ulp-offer__price"><strong>€34,50</strong></p>
-      <p class="ulp-offer__daily">= €1,15/jour</p>
-      <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre',0)" class="ulp-btn ulp-btn--violet ulp-offer__btn">Commander →</a>
+  <!-- URGENCE -->
+  <div class="ulp-urgency">
+    <p>⏳ Offre de lancement — Prix valable encore <span id="ulp-countdown">23:59:59</span></p>
+  </div>
+
+  <div class="ulp-offers">
+    <div class="ulp-offer-card">
+      <p class="ulp-offer-label">Cure Starter</p>
+      <p class="ulp-offer-name">1 pot — 30 jours</p>
+      <p class="ulp-offer-format">90g · 1 prise/jour</p>
+      <p class="ulp-offer-price">€34,50</p>
+      <p class="ulp-offer-daily">= €1,15/jour</p>
+      <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre', 0)" class="ulp-btn ulp-btn--white">Commander →</a>
     </div>
-    <div class="ulp-offer__card ulp-offer__card--best">
-      <span class="ulp-offer__badge">⭐ BEST-SELLER</span>
-      <p class="ulp-offer__label">Cure Rapide</p>
-      <p class="ulp-offer__format">270g · 30 jours · 3 prises/jour</p>
-      <p class="ulp-offer__price"><del>€69,50</del> <strong>€54,50</strong></p>
-      <p class="ulp-offer__daily">= €0,61/jour</p>
-      <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre',1)" class="ulp-btn ulp-btn--white ulp-offer__btn">Commander →</a>
+    <div class="ulp-offer-card ulp-offer-card--best">
+      <span class="ulp-offer-badge">⭐ BEST-SELLER — ÉCONOMISEZ 21%</span>
+      <p class="ulp-offer-label">Cure Rapide</p>
+      <p class="ulp-offer-name">2 pots — 30 jours</p>
+      <p class="ulp-offer-format">270g · 3 prises/jour · résultats optimaux</p>
+      <p class="ulp-offer-price"><del>€69,50</del> €54,50</p>
+      <p class="ulp-offer-daily">= €0,61/jour</p>
+      <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre', 1)" class="ulp-btn ulp-btn--violet">Commander →</a>
     </div>
   </div>
 
-  <!-- Value Stack -->
-  <div class="ulp-stack">
-    <p class="ulp-stack__title">📦 Ce que tu reçois :</p>
-    <ul class="ulp-stack__list">
-      <li>✅ Ta cure Uburn 30 jours</li>
-      <li>✅ Cuillère doseuse offerte</li>
-      <li>✅ Livraison offerte en France</li>
-      <li>✅ Guide "5 habitudes satiété" (PDF) — <strong>OFFERT</strong></li>
-    </ul>
-  </div>
-
-  <!-- Comparaison alternatives -->
+  <!-- COMPARAISON PRIX -->
   <div class="ulp-compare">
-    <p class="ulp-compare__title">Combien tu dépenses déjà sans t'en rendre compte :</p>
-    <div class="ulp-compare__items">
-      <div class="ulp-compare__item ulp-compare__item--bad">
-        <span>☕ Snack + boisson 16h</span>
-        <strong>3 à 5€/jour</strong>
-      </div>
-      <div class="ulp-compare__item ulp-compare__item--good">
-        <span>💜 Uburn</span>
-        <strong>0,61€/jour</strong>
-      </div>
+    <p class="ulp-compare__title">Compare ce que tu dépenses déjà :</p>
+    <div class="ulp-compare__row">
+      <span>☕ Snack + boisson à 16h</span>
+      <span class="ulp-compare__bad">3 à 5€/jour</span>
+    </div>
+    <div class="ulp-compare__row">
+      <span>💜 Uburn</span>
+      <span class="ulp-compare__good">0,61€/jour</span>
     </div>
   </div>
 
-  <!-- Promo code -->
-  <div class="ulp-promo">
-    <p>🏷️ Code <strong>UBE10</strong> : -10% sur ta première commande</p>
-  </div>
-
-  <div class="ulp-offer__trust">
+  <div class="ulp-trust-row">
     <span>💳 Paiement sécurisé</span>
-    <span>🚚 Livraison 48h</span>
+    <span>📦 Livraison offerte</span>
+    <span>🔄 Commande unique, pas d'abonnement</span>
     <span>🇫🇷 Marque française</span>
   </div>
-</section>
+</div>
 
-<!-- ===== SECTION 9 — FAQ ===== -->
-<section class="ulp-faq ulp-section" style="background:#fff;">
-  <h2 class="ulp-faq__title">Tes questions, nos réponses</h2>
+<!-- FAQ -->
+<div class="ulp-section--alt">
+<div class="ulp-section">
+  <h2>Tes questions, nos réponses</h2>
 
   <details class="ulp-faq-item">
     <summary>Quel goût ça a ?</summary>
@@ -285,55 +321,55 @@
   </details>
   <details class="ulp-faq-item">
     <summary>Combien de temps pour voir des résultats ?</summary>
-    <div class="ulp-faq-item__body">Chaque personne est différente. La plupart de nos clientes ressentent un effet sur la satiété dès les premières prises. Nous recommandons une cure de 30 jours minimum.</div>
+    <div class="ulp-faq-item__body">La plupart de nos clientes ressentent un effet sur la satiété dès les premières prises. Nous recommandons une cure de 30 jours minimum pour des résultats durables.</div>
   </details>
   <details class="ulp-faq-item">
     <summary>Y a-t-il des contre-indications ?</summary>
-    <div class="ulp-faq-item__body">Uburn est déconseillé aux femmes enceintes et allaitantes. Ce complément alimentaire ne doit pas se substituer à une alimentation variée et équilibrée ni à un mode de vie sain. En cas de doute, consultez votre médecin.</div>
+    <div class="ulp-faq-item__body">Uburn est déconseillé aux femmes enceintes et allaitantes. Ce complément alimentaire ne doit pas se substituer à une alimentation variée et équilibrée. En cas de doute, consultez votre médecin.</div>
   </details>
   <details class="ulp-faq-item">
     <summary>Y a-t-il un abonnement caché ?</summary>
-    <div class="ulp-faq-item__body">Non, jamais. Tu commandes une fois, tu reçois ton pot, point. Pas de prélèvement automatique. C'est toi qui décides.</div>
+    <div class="ulp-faq-item__body">Non, jamais. Tu commandes une fois, tu reçois ton pot. Pas de prélèvement automatique. Pas d'abonnement. C'est toi qui décides.</div>
   </details>
-</section>
+</div>
+</div>
 
-<!-- ===== SECTION 10 — CTA FINAL ===== -->
-<section class="ulp-final ulp-section">
+<!-- CTA FINAL -->
+<div class="ulp-section" style="text-align:center;">
   <h2>Prête à reprendre le contrôle ?</h2>
-  <p class="ulp-final__sub">Rejoins les 2 400+ femmes qui ont choisi Uburn pour une satiété durable et naturelle.</p>
-
-  <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre',0)" class="ulp-btn ulp-btn--white">Commander maintenant →</a>
-
-  <div class="ulp-final__trust">
+  <p style="color:#555;margin-bottom:28px;">Rejoins les premières clientes Uburn. Livraison offerte en France.</p>
+  <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre', 0)" class="ulp-btn ulp-btn--violet ulp-btn--large" style="max-width:360px;margin:0 auto;">
+    Commander maintenant — €34,50 →
+  </a>
+  <div class="ulp-trust-row" style="margin-top:20px;">
     <span>🔒 Paiement 100% sécurisé</span>
     <span>📦 Livraison offerte</span>
     <span>🇫🇷 Marque française</span>
   </div>
-</section>
+</div>
 
-<!-- ===== SECTION 11 — FOOTER LÉGAL ===== -->
+<!-- FOOTER -->
 <footer class="ulp-footer">
   <div class="ulp-footer__legal">
     <p>Déconseillé aux femmes enceintes et allaitantes.</p>
-    <p>UBurn est un complément alimentaire. Ne se substitue pas à une alimentation variée et équilibrée ni à un mode de vie sain.</p>
-    <p>Ne pas dépasser la dose journalière recommandée.</p>
+    <p>Uburn est un complément alimentaire. Ne se substitue pas à une alimentation variée et équilibrée ni à un mode de vie sain.</p>
+    <p>*Le glucomannane contribue à la perte de poids dans le cadre d'un régime hypocalorique — EFSA ID 3120</p>
   </div>
   <div class="ulp-footer__links">
     <a href="/policies/terms-of-service">CGV</a>
-    <a href="/pages/mentions-legales">Mentions légales</a>
     <a href="/policies/privacy-policy">Confidentialité</a>
     <a href="/pages/contact">Contact</a>
   </div>
   <p class="ulp-footer__copy">© {{ 'now' | date: '%Y' }} Uburn · Marque française</p>
 </footer>
 
-<!-- ===== STICKY ATC MOBILE ===== -->
+<!-- STICKY ATC MOBILE -->
 <div class="ulp-sticky" id="ulp-sticky">
   <div class="ulp-sticky__info">
-    <strong>€34,50</strong>
-    <small>Petites séries</small>
+    <strong>Uburn — €34,50</strong>
+    <small>Livraison offerte</small>
   </div>
-  <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre',0)" class="ulp-sticky__btn">Commander →</a>
+  <button onclick="addAndCheckout('ube-poudre', 0)" class="ulp-sticky__btn">Commander →</button>
 </div>
 
 <script>
@@ -349,15 +385,33 @@ async function addAndCheckout(handle, variantIndex) {
   } catch(e) { window.location.href = '/products/' + handle; }
 }
 
+// Sticky ATC
 (function(){
   var s = document.getElementById('ulp-sticky');
   if (!s) return;
-  var v = false;
   window.addEventListener('scroll', function() {
-    var y = window.scrollY || window.pageYOffset;
-    if (y > 500 && !v) { s.classList.add('ulp-sticky--visible'); v = true; }
-    else if (y <= 500 && v) { s.classList.remove('ulp-sticky--visible'); v = false; }
+    if ((window.scrollY || window.pageYOffset) > 300) {
+      s.classList.add('ulp-sticky--visible');
+    } else {
+      s.classList.remove('ulp-sticky--visible');
+    }
   }, { passive: true });
+})();
+
+// Countdown urgence
+(function(){
+  var el = document.getElementById('ulp-countdown');
+  if(!el) return;
+  var end = new Date(Date.now() + 24*3600*1000);
+  function tick() {
+    var diff = Math.max(0, end - new Date());
+    var h = Math.floor(diff/3600000);
+    var m = Math.floor((diff%3600000)/60000);
+    var s = Math.floor((diff%60000)/1000);
+    el.textContent = [h,m,s].map(function(n){return String(n).padStart(2,'0');}).join(':');
+    if(diff > 0) setTimeout(tick, 1000);
+  }
+  tick();
 })();
 </script>
 
