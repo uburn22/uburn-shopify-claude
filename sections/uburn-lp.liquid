@@ -6,7 +6,7 @@
 <header class="ulp-header">
   <a href="/" aria-label="Uburn" class="ulp-header__logo">
     {%- if settings.logo -%}
-      {{ settings.logo | image_url: height: 56 | image_tag: loading: 'eager', height: 28 }}
+      {{ settings.logo | image_url: width: 120 | image_tag: loading: 'eager', height: 28 }}
     {%- else -%}
       <span style="font-size:20px;font-weight:900;color:#6B21A8;">UBURN</span>
     {%- endif -%}
@@ -17,7 +17,7 @@
 <!-- ===== SECTION 1 — HERO (Clarté) ===== -->
 <section class="ulp-hero">
   <div class="ulp-hero__bg">
-    <img src="{{ 'HOME_M.png' | file_img_url: '800x' }}" alt="" class="ulp-hero__bgimg" loading="eager" fetchpriority="high">
+    <img src="{{ 'HOME_M.png' | file_img_url: '600x' }}" alt="" class="ulp-hero__bgimg" loading="eager" fetchpriority="high">
     <div class="ulp-hero__overlay"></div>
   </div>
   <div class="ulp-hero__content">
@@ -31,7 +31,7 @@
       <span>🇫🇷 Marque française</span>
     </div>
     <div class="ulp-hero__product">
-      <img src="{{ 'POUDRE_UBE_90GR_M.jpg' | file_img_url: '400x' }}" alt="Uburn Poudre" loading="eager" width="160" height="200">
+      <img src="{{ 'POUDRE_UBE_90GR_M.jpg' | file_img_url: '200x' }}" alt="Uburn Poudre" loading="eager" width="160" height="200">
     </div>
   </div>
 </section>
@@ -70,7 +70,7 @@
   <p class="ulp-solution__sub">Un complément alimentaire naturel qui favorise la satiété durablement — pour que tu gardes le contrôle sans effort.</p>
 
   <div class="ulp-solution__product">
-    <img src="{{ 'Uburn_Scoop.png' | file_img_url: '300x' }}" alt="Scoop Uburn" loading="lazy" width="140">
+    <img src="{{ 'Uburn_Scoop.png' | file_img_url: '200x' }}" alt="Scoop Uburn" loading="lazy" width="140">
   </div>
 
   <div class="ulp-solution__benefits">
@@ -104,32 +104,32 @@
 
   <div class="ulp-cards">
     <div class="ulp-card">
-      <img src="{{ 'Ingredient_Glucomannane.jpg' | file_img_url: '200x200' }}" alt="Konjac" class="ulp-card__img" loading="lazy" width="72" height="72">
+      <img src="{{ 'Ingredient_Glucomannane.jpg' | file_img_url: '100x100' }}" alt="Konjac" class="ulp-card__img" loading="lazy" width="72" height="72">
       <p class="ulp-card__name">Konjac (glucomannane)</p>
       <p class="ulp-card__desc">Contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique*</p>
     </div>
     <div class="ulp-card">
-      <img src="{{ 'Ingredient_Coco.jpg' | file_img_url: '200x200' }}" alt="MCT" class="ulp-card__img" loading="lazy" width="72" height="72">
+      <img src="{{ 'Ingredient_Coco.jpg' | file_img_url: '100x100' }}" alt="MCT" class="ulp-card__img" loading="lazy" width="72" height="72">
       <p class="ulp-card__name">MCT (huile de coco)</p>
       <p class="ulp-card__desc">Source d'énergie rapidement assimilable</p>
     </div>
     <div class="ulp-card">
-      <img src="{{ 'Ingredient_L-carnitine_tartrate.jpg' | file_img_url: '200x200' }}" alt="L-Carnitine" class="ulp-card__img" loading="lazy" width="72" height="72">
+      <img src="{{ 'Ingredient_L-carnitine_tartrate.jpg' | file_img_url: '100x100' }}" alt="L-Carnitine" class="ulp-card__img" loading="lazy" width="72" height="72">
       <p class="ulp-card__name">L-Carnitine</p>
       <p class="ulp-card__desc">Soutient le métabolisme énergétique</p>
     </div>
     <div class="ulp-card">
-      <img src="{{ 'Ingredient_Gingembre.jpg' | file_img_url: '200x200' }}" alt="Gingembre" class="ulp-card__img" loading="lazy" width="72" height="72">
+      <img src="{{ 'Ingredient_Gingembre.jpg' | file_img_url: '100x100' }}" alt="Gingembre" class="ulp-card__img" loading="lazy" width="72" height="72">
       <p class="ulp-card__name">Gingembre</p>
       <p class="ulp-card__desc">Reconnu pour ses propriétés digestives</p>
     </div>
     <div class="ulp-card">
-      <img src="{{ 'Ingredient_Ube.jpg' | file_img_url: '200x200' }}" alt="Ube" class="ulp-card__img" loading="lazy" width="72" height="72">
+      <img src="{{ 'Ingredient_Ube.jpg' | file_img_url: '100x100' }}" alt="Ube" class="ulp-card__img" loading="lazy" width="72" height="72">
       <p class="ulp-card__name">Ube (patate douce violette)</p>
       <p class="ulp-card__desc">Riche en anthocyanes, antioxydant naturel</p>
     </div>
     <div class="ulp-card">
-      <img src="{{ 'Ingredient_Acacia.jpg' | file_img_url: '200x200' }}" alt="Fibre d'acacia" class="ulp-card__img" loading="lazy" width="72" height="72">
+      <img src="{{ 'Ingredient_Acacia.jpg' | file_img_url: '100x100' }}" alt="Fibre d'acacia" class="ulp-card__img" loading="lazy" width="72" height="72">
       <p class="ulp-card__name">Fibre d'acacia</p>
       <p class="ulp-card__desc">Prébiotique doux, soutient le confort digestif</p>
     </div>
@@ -144,19 +144,19 @@
 
   <div class="ulp-steps">
     <div class="ulp-step">
-      <img src="{{ 'etape_1.jpg' | file_img_url: '300x300' }}" alt="Dose" class="ulp-step__img" loading="lazy" width="120" height="120">
+      <img src="{{ 'etape_1.jpg' | file_img_url: '160x160' }}" alt="Dose" class="ulp-step__img" loading="lazy" width="120" height="120">
       <p class="ulp-step__num">①</p>
       <p class="ulp-step__title">Dose</p>
       <p class="ulp-step__text">Une cuillère doseuse d'Uburn</p>
     </div>
     <div class="ulp-step">
-      <img src="{{ 'etape_2.jpg' | file_img_url: '300x300' }}" alt="Mélange" class="ulp-step__img" loading="lazy" width="120" height="120">
+      <img src="{{ 'etape_2.jpg' | file_img_url: '160x160' }}" alt="Mélange" class="ulp-step__img" loading="lazy" width="120" height="120">
       <p class="ulp-step__num">②</p>
       <p class="ulp-step__title">Mélange</p>
       <p class="ulp-step__text">250ml d'eau, lait ou boisson préférée</p>
     </div>
     <div class="ulp-step">
-      <img src="{{ 'etape_3.jpg' | file_img_url: '300x300' }}" alt="Savoure" class="ulp-step__img" loading="lazy" width="120" height="120">
+      <img src="{{ 'etape_3.jpg' | file_img_url: '160x160' }}" alt="Savoure" class="ulp-step__img" loading="lazy" width="120" height="120">
       <p class="ulp-step__num">③</p>
       <p class="ulp-step__title">Savoure</p>
       <p class="ulp-step__text">Profite d'une satiété durable et gourmande</p>
