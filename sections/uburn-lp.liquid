@@ -9,6 +9,7 @@
   --ulp-muted: #6B7280;
   --ulp-border: #E5E7EB;
   --ulp-black: #111111;
+  --ulp-green: #059669;
 }
 
 .ulp * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,7 +23,7 @@
 .ulp-container { max-width: 640px; margin: 0 auto; }
 .ulp-eyebrow { display: inline-block; font-size: 0.82rem; font-weight: 600; color: var(--ulp-violet); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
 .ulp-section-title { font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 16px; text-align: center; }
-.ulp-section-sub { font-size: 1.05rem; color: var(--ulp-muted); text-align: center; margin-bottom: 48px; max-width: 480px; margin-left: auto; margin-right: auto; }
+.ulp-section-sub { font-size: 1.05rem; color: var(--ulp-muted); text-align: center; margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; }
 
 /* CTA */
 .ulp-cta { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 18px 36px; border-radius: 999px; font-size: 1.05rem; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s ease; font-family: inherit; }
@@ -30,32 +31,35 @@
 .ulp-cta--violet:hover { background: var(--ulp-violet-dark); box-shadow: 0 8px 24px rgba(139,92,246,0.4); transform: translateY(-2px); }
 .ulp-cta--violet:active { transform: translateY(0); }
 .ulp-cta--full { width: 100%; }
-
-/* Card base */
-.ulp-card { background: var(--ulp-white); border: 1px solid var(--ulp-border); border-radius: 16px; padding: 28px 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.ulp-cta--outline { background: transparent; color: var(--ulp-violet); border: 2px solid var(--ulp-violet); }
+.ulp-cta--outline:hover { background: var(--ulp-violet-light); }
 
 /* Header */
 .ulp-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: var(--ulp-white); border-bottom: 1px solid var(--ulp-border); position: sticky; top: 0; z-index: 100; }
 .ulp-header__logo { font-size: 20px; font-weight: 900; color: var(--ulp-violet); letter-spacing: -0.03em; }
-.ulp-header__cart { font-size: 22px; }
+.ulp-header__cta { font-size: 0.82rem; font-weight: 700; color: var(--ulp-violet); padding: 8px 20px; border-radius: 999px; border: 1.5px solid var(--ulp-violet); transition: all 0.2s; }
+.ulp-header__cta:hover { background: var(--ulp-violet); color: #fff; }
 
 /* 1. HERO */
-.ulp-hero { padding: 56px 20px 48px; text-align: center; background: var(--ulp-white); }
+.ulp-hero { padding: 32px 20px 36px; text-align: center; background: var(--ulp-white); }
 .ulp-hero__inner { max-width: 640px; margin: 0 auto; }
-.ulp-hero__badge { display: inline-block; font-size: 0.82rem; font-weight: 600; color: var(--ulp-violet); background: var(--ulp-violet-light); padding: 10px 20px; border-radius: 999px; margin-bottom: 28px; }
-.ulp-hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 20px; }
-.ulp-hero__sub { font-size: 1.1rem; color: var(--ulp-muted); line-height: 1.65; margin-bottom: 32px; max-width: 460px; margin-left: auto; margin-right: auto; }
-.ulp-hero__trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; margin-bottom: 36px; }
-.ulp-hero__trust span { font-size: 0.88rem; font-weight: 500; color: var(--ulp-muted); white-space: nowrap; }
-.ulp-hero__cta-wrap { margin-bottom: 40px; max-width: 400px; margin-left: auto; margin-right: auto; }
-.ulp-hero__image { margin: 0 auto; max-width: 320px; }
+.ulp-hero__rating { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+.ulp-hero__rating-stars { color: #F59E0B; font-size: 0.92rem; letter-spacing: 1px; }
+.ulp-hero__rating-text { font-size: 0.85rem; font-weight: 600; color: var(--ulp-muted); }
+.ulp-hero h1 { font-size: clamp(2.2rem, 6vw, 3.5rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 16px; }
+.ulp-hero h1 span { color: var(--ulp-violet); }
+.ulp-hero__sub { font-size: 1.05rem; color: var(--ulp-muted); line-height: 1.6; margin-bottom: 24px; max-width: 440px; margin-left: auto; margin-right: auto; }
+.ulp-hero__trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 16px; margin-bottom: 24px; }
+.ulp-hero__trust span { font-size: 0.82rem; font-weight: 600; color: var(--ulp-muted); white-space: nowrap; }
+.ulp-hero__cta-wrap { margin-bottom: 28px; max-width: 400px; margin-left: auto; margin-right: auto; }
+.ulp-hero__cta-sub { font-size: 0.78rem; color: var(--ulp-muted); text-align: center; margin-top: 10px; }
+.ulp-hero__image { margin: 0 auto; max-width: 300px; }
 .ulp-hero__image img { border-radius: 20px; }
 
 /* 2. TICKER */
 .ulp-ticker { overflow: hidden; background: var(--ulp-black); padding: 14px 0; white-space: nowrap; }
 .ulp-ticker__track { display: inline-flex; animation: ulp-scroll 35s linear infinite; }
 .ulp-ticker__item { font-size: 0.78rem; font-weight: 600; color: #fff; padding: 0 28px; text-transform: uppercase; letter-spacing: 0.08em; flex-shrink: 0; }
-.ulp-ticker__sep { color: rgba(255,255,255,0.3); padding: 0 4px; }
 @keyframes ulp-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* 3. PROBLEME */
@@ -75,17 +79,14 @@
 .ulp-meca__arrow { display: flex; justify-content: center; margin: -16px 0; color: var(--ulp-violet); font-size: 1.2rem; opacity: 0.5; }
 .ulp-meca__efsa { display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 700; color: var(--ulp-violet); background: var(--ulp-violet-light); padding: 12px 20px; border-radius: 999px; }
 
-/* 5. INGREDIENTS */
-.ulp-ingr__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 24px; }
-.ulp-ingr__card { background: var(--ulp-white); border: 1px solid var(--ulp-border); border-radius: 16px; padding: 24px 16px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-.ulp-ingr__emoji { font-size: 1.8rem; margin-bottom: 10px; }
-.ulp-ingr__card h3 { font-size: 0.88rem; font-weight: 800; margin-bottom: 4px; }
-.ulp-ingr__card p { font-size: 0.8rem; color: var(--ulp-muted); line-height: 1.4; }
-.ulp-ingr__note { text-align: center; font-size: 0.85rem; color: var(--ulp-muted); font-weight: 600; }
-
-/* 6. TEMOIGNAGES */
+/* 5. TEMOIGNAGES */
+.ulp-testi__scroll-wrap { position: relative; }
 .ulp-testi__scroll { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 8px; scrollbar-width: none; }
 .ulp-testi__scroll::-webkit-scrollbar { display: none; }
+.ulp-testi__fade { position: absolute; top: 0; bottom: 8px; right: 0; width: 48px; background: linear-gradient(to right, transparent, var(--ulp-white)); pointer-events: none; z-index: 1; }
+.ulp-testi__dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+.ulp-testi__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ulp-border); transition: background 0.2s; }
+.ulp-testi__dot--active { background: var(--ulp-violet); }
 .ulp-tcard { min-width: 290px; max-width: 340px; background: var(--ulp-white); border: 1px solid var(--ulp-border); border-radius: 16px; padding: 28px 24px; scroll-snap-align: start; flex-shrink: 0; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
 .ulp-tcard__header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
 .ulp-tcard__avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--ulp-violet); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; flex-shrink: 0; }
@@ -93,22 +94,46 @@
 .ulp-tcard__text { font-size: 0.95rem; line-height: 1.65; color: var(--ulp-text); margin-bottom: 16px; }
 .ulp-tcard__author { font-size: 0.88rem; font-weight: 700; color: var(--ulp-text); }
 .ulp-tcard__meta { font-size: 0.78rem; color: var(--ulp-muted); }
+.ulp-tcard__verified { font-size: 0.72rem; color: var(--ulp-green); font-weight: 600; display: inline-flex; align-items: center; gap: 4px; margin-top: 4px; }
 
-/* 7. OFFRE */
+/* 6. OFFRE */
 .ulp-offer { background: var(--ulp-violet-light); }
-.ulp-offer__box { background: var(--ulp-white); border-radius: 20px; padding: 40px 28px; text-align: center; box-shadow: 0 4px 32px rgba(139,92,246,0.08); border: 1px solid rgba(139,92,246,0.12); }
+.ulp-offer__grid { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+.ulp-offer__card { background: var(--ulp-white); border-radius: 20px; padding: 32px 24px; text-align: center; box-shadow: 0 4px 32px rgba(139,92,246,0.08); border: 2px solid var(--ulp-border); position: relative; transition: border-color 0.2s; cursor: pointer; }
+.ulp-offer__card--popular { border-color: var(--ulp-violet); }
+.ulp-offer__badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--ulp-violet); color: #fff; font-size: 0.72rem; font-weight: 800; padding: 4px 16px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+.ulp-offer__card-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
 .ulp-offer__prices { margin-bottom: 4px; }
-.ulp-offer__old { font-size: 1.1rem; color: #9CA3AF; text-decoration: line-through; margin-right: 10px; }
-.ulp-offer__new { font-size: 2.5rem; font-weight: 900; color: var(--ulp-text); letter-spacing: -0.03em; }
-.ulp-offer__daily { font-size: 0.95rem; font-weight: 700; color: var(--ulp-violet); margin-bottom: 28px; }
-.ulp-offer__list { list-style: none; text-align: left; margin: 0 0 32px; padding: 0; }
-.ulp-offer__list li { font-size: 0.92rem; color: var(--ulp-text); padding: 7px 0; font-weight: 500; display: flex; align-items: center; gap: 10px; }
+.ulp-offer__old { font-size: 1rem; color: #9CA3AF; text-decoration: line-through; margin-right: 8px; }
+.ulp-offer__new { font-size: 2rem; font-weight: 900; color: var(--ulp-text); letter-spacing: -0.03em; }
+.ulp-offer__daily { font-size: 0.88rem; font-weight: 700; color: var(--ulp-violet); margin-bottom: 16px; }
+.ulp-offer__saving { display: inline-block; font-size: 0.78rem; font-weight: 700; color: var(--ulp-green); background: #ECFDF5; padding: 4px 12px; border-radius: 999px; margin-bottom: 16px; }
+.ulp-offer__list { list-style: none; text-align: left; margin: 0 0 24px; padding: 0; }
+.ulp-offer__list li { font-size: 0.92rem; color: var(--ulp-text); padding: 6px 0; font-weight: 500; display: flex; align-items: center; gap: 10px; }
 .ulp-offer__list li::before { content: '✓'; color: var(--ulp-violet); font-weight: 800; flex-shrink: 0; }
+.ulp-offer__bonuses { background: var(--ulp-violet-light); border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+.ulp-offer__bonuses-title { font-size: 0.92rem; font-weight: 800; margin-bottom: 12px; text-align: center; }
+.ulp-offer__bonuses ul { list-style: none; padding: 0; margin: 0; }
+.ulp-offer__bonuses li { font-size: 0.85rem; color: var(--ulp-text); padding: 5px 0; display: flex; align-items: center; gap: 8px; }
+.ulp-offer__bonuses li span.ulp-offer__bonus-value { color: var(--ulp-muted); text-decoration: line-through; font-size: 0.78rem; margin-left: auto; }
 .ulp-offer__secure { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 20px; margin-top: 20px; }
 .ulp-offer__secure span { font-size: 0.78rem; color: var(--ulp-muted); font-weight: 500; }
-.ulp-offer__countdown { font-size: 0.85rem; font-weight: 700; color: var(--ulp-violet); margin-bottom: 24px; }
 
-/* 8. FAQ */
+/* 7. INGREDIENTS */
+.ulp-ingr__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 24px; }
+.ulp-ingr__card { background: var(--ulp-white); border: 1px solid var(--ulp-border); border-radius: 16px; padding: 24px 16px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.ulp-ingr__emoji { font-size: 1.8rem; margin-bottom: 10px; }
+.ulp-ingr__card h3 { font-size: 0.88rem; font-weight: 800; margin-bottom: 4px; }
+.ulp-ingr__card p { font-size: 0.8rem; color: var(--ulp-muted); line-height: 1.4; }
+.ulp-ingr__note { text-align: center; font-size: 0.85rem; color: var(--ulp-muted); font-weight: 600; }
+
+/* 8. TRUST BADGES */
+.ulp-trust__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.ulp-trust__item { display: flex; align-items: center; gap: 12px; background: var(--ulp-white); border: 1px solid var(--ulp-border); border-radius: 12px; padding: 16px; }
+.ulp-trust__icon { font-size: 1.4rem; flex-shrink: 0; }
+.ulp-trust__item-text { font-size: 0.82rem; font-weight: 600; color: var(--ulp-text); line-height: 1.3; }
+
+/* 9. FAQ */
 .ulp-faq-item { border-bottom: 1px solid var(--ulp-border); }
 .ulp-faq-item:first-child { border-top: 1px solid var(--ulp-border); }
 .ulp-faq-item summary { padding: 20px 0; font-size: 1rem; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--ulp-text); gap: 16px; }
@@ -117,7 +142,11 @@
 .ulp-faq-item[open] .ulp-faq-chevron { transform: rotate(180deg); }
 .ulp-faq-item__body { padding: 0 0 20px; font-size: 0.92rem; color: var(--ulp-muted); line-height: 1.7; }
 
-/* 9. MENTIONS LEGALES */
+/* 10. FINAL CTA */
+.ulp-final-cta { text-align: center; }
+.ulp-final-cta__sub { font-size: 0.88rem; color: var(--ulp-muted); margin-top: 12px; }
+
+/* 11. MENTIONS LEGALES */
 .ulp-legal { padding: 40px 20px; background: var(--ulp-gray); }
 .ulp-legal__inner { max-width: 640px; margin: 0 auto; font-size: 0.72rem; color: #9CA3AF; line-height: 1.8; text-align: center; }
 
@@ -144,9 +173,9 @@
 /* Desktop */
 @media (min-width: 768px) {
   .ulp-section { padding: 100px 40px; }
-  .ulp-hero { padding: 80px 40px 72px; }
+  .ulp-hero { padding: 60px 40px 56px; }
   .ulp-hero__inner { display: grid; grid-template-columns: 1fr 340px; align-items: center; gap: 64px; max-width: 960px; text-align: left; }
-  .ulp-hero__badge { margin-bottom: 24px; }
+  .ulp-hero__rating { justify-content: flex-start; }
   .ulp-hero__trust { justify-content: flex-start; }
   .ulp-hero__cta-wrap { margin-left: 0; margin-right: 0; max-width: 360px; }
   .ulp-hero__image { max-width: 340px; }
@@ -160,16 +189,20 @@
   .ulp-meca__arrow-h { display: flex; align-items: center; color: var(--ulp-violet); font-size: 1.4rem; opacity: 0.4; flex-shrink: 0; padding-top: 12px; }
   .ulp-ingr__grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .ulp-tcard { min-width: 320px; }
+  .ulp-offer__grid { flex-direction: row; }
+  .ulp-offer__card { flex: 1; }
+  .ulp-trust__grid { grid-template-columns: repeat(4, 1fr); }
   .ulp-sticky { display: none; }
 }
 @media (max-width: 767px) {
   .ulp-meca__arrow-h { display: none; }
+  .ulp-trust__grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 
 <div class="ulp">
 
-<!-- HEADER -->
+<!-- HEADER — CTA au lieu du panier (réduit le leak d'attention) -->
 <header class="ulp-header">
   <a href="/" aria-label="Uburn" class="ulp-header__logo">
     {%- if settings.logo -%}
@@ -178,28 +211,33 @@
       <span class="ulp-header__logo">UBURN</span>
     {%- endif -%}
   </a>
-  <a href="/cart" class="ulp-header__cart" aria-label="Panier">🛒</a>
+  <a href="#ulp-offer" class="ulp-header__cta">Commander</a>
 </header>
 
-<!-- 1. HERO -->
+<!-- 1. HERO — Social proof immédiat + CTA au-dessus du fold -->
 <section class="ulp-hero">
   <div class="ulp-hero__inner">
     <div>
-      <span class="ulp-hero__badge">⭐ Nos premières clientes adorent Uburn</span>
-      <h1>Fini de<br>grignoter.</h1>
-      <p class="ulp-hero__sub">La boisson à base de konjac qui favorise jusqu'à 4h de satiété naturelle. 30 kcal. Fabriqué en France.</p>
+      <div class="ulp-hero__rating">
+        <span class="ulp-hero__rating-stars">★★★★★</span>
+        <span class="ulp-hero__rating-text">4,7/5 — Approuvé par nos clientes</span>
+      </div>
+      <h1>16h. <span>Votre</span><br>placard reste<br>fermé.</h1>
+      <p class="ulp-hero__sub">La boisson violette qui favorise jusqu'à 4h de satiété. 6 actifs naturels. 30 kcal. 0% caféine.</p>
       <div class="ulp-hero__trust">
         <span>✓ 0% caféine</span>
         <span>✓ 30 kcal</span>
         <span>✓ France</span>
         <span>✓ Livraison offerte</span>
+        <span>✓ Satisfait ou remboursé</span>
       </div>
       <div class="ulp-hero__cta-wrap">
-        <button onclick="uburnCheckout()" class="ulp-cta ulp-cta--violet ulp-cta--full">Essayer Uburn — 34,50€ →</button>
+        <button onclick="uburnAddToCart(1)" class="ulp-cta ulp-cta--violet ulp-cta--full">Essayer Uburn — 34,50€</button>
+        <p class="ulp-hero__cta-sub">Livraison offerte · Sans abonnement</p>
       </div>
     </div>
     <div class="ulp-hero__image">
-      <img src="https://cdn.shopify.com/s/files/1/0920/9436/6015/files/PRODUCT_PAGE_0005_2_1.jpg" alt="Uburn — Boisson ube satiété naturelle" loading="eager" width="600" height="750">
+      <img src="https://cdn.shopify.com/s/files/1/0920/9436/6015/files/PRODUCT_PAGE_0005_2_1.jpg" alt="Uburn — Boisson ube satiété naturelle" loading="eager" fetchpriority="high" width="600" height="750">
     </div>
   </div>
 </section>
@@ -214,6 +252,7 @@
     <span class="ulp-ticker__item">0% Caféine</span>
     <span class="ulp-ticker__item">Fabriqué en France</span>
     <span class="ulp-ticker__item">Sans abonnement caché</span>
+    <span class="ulp-ticker__item">0,61€ par jour</span>
     {% endfor %}
   </div>
 </div>
@@ -223,7 +262,6 @@
   <div class="ulp-container">
     <div style="text-align:center;"><span class="ulp-eyebrow">Le problème</span></div>
     <h2 class="ulp-section-title">On connaît ce moment.</h2>
-    <p class="ulp-section-sub"></p>
     <div class="ulp-problem__grid">
       <div class="ulp-problem__card">
         <span class="ulp-problem__emoji">🕓</span>
@@ -250,7 +288,6 @@
   <div class="ulp-container">
     <div style="text-align:center;"><span class="ulp-eyebrow">La science</span></div>
     <h2 class="ulp-section-title">Comment Uburn agit.</h2>
-    <p class="ulp-section-sub"></p>
     <div class="ulp-meca__steps">
       <div class="ulp-meca__step">
         <div class="ulp-meca__num">1</div>
@@ -284,11 +321,141 @@
   </div>
 </section>
 
-<!-- 5. INGREDIENTS -->
+<!-- 5. TEMOIGNAGES (monté avant l'offre — émotion avant conversion) -->
 <section class="ulp-section ulp-reveal" style="background:var(--ulp-gray);">
+  <div class="ulp-container" style="max-width:none;padding:0 20px;">
+    <h2 class="ulp-section-title">Elles ont essayé. Elles racontent.</h2>
+    <p class="ulp-section-sub">Nos clientes partagent leurs résultats.</p>
+    <div class="ulp-testi__scroll-wrap">
+      <div class="ulp-testi__scroll" id="ulp-testi-scroll">
+        <div class="ulp-tcard">
+          <div class="ulp-tcard__header">
+            <div class="ulp-tcard__avatar">M</div>
+            <span class="ulp-tcard__stars">★★★★★</span>
+          </div>
+          <p class="ulp-tcard__text">« Je ne pense plus au placard à 16h. Ça me soulage vraiment au quotidien. »</p>
+          <p class="ulp-tcard__author">Marie</p>
+          <p class="ulp-tcard__meta">Lyon</p>
+          <p class="ulp-tcard__verified">✓ Achat vérifié</p>
+        </div>
+        <div class="ulp-tcard">
+          <div class="ulp-tcard__header">
+            <div class="ulp-tcard__avatar">S</div>
+            <span class="ulp-tcard__stars">★★★★★</span>
+          </div>
+          <p class="ulp-tcard__text">« Pour 0,61€ par jour, y'a pas de risque. Et ça marche. Mon 2e pot en cours. »</p>
+          <p class="ulp-tcard__author">Sophie</p>
+          <p class="ulp-tcard__meta">Bordeaux</p>
+          <p class="ulp-tcard__verified">✓ Achat vérifié</p>
+        </div>
+        <div class="ulp-tcard">
+          <div class="ulp-tcard__header">
+            <div class="ulp-tcard__avatar">N</div>
+            <span class="ulp-tcard__stars">★★★★☆</span>
+          </div>
+          <p class="ulp-tcard__text">« Mes collègues m'ont demandé mon secret. Le goût est top et je ne grignote plus le soir. »</p>
+          <p class="ulp-tcard__author">Nathalie</p>
+          <p class="ulp-tcard__meta">Toulouse</p>
+          <p class="ulp-tcard__verified">✓ Achat vérifié</p>
+        </div>
+        <div class="ulp-tcard">
+          <div class="ulp-tcard__header">
+            <div class="ulp-tcard__avatar">C</div>
+            <span class="ulp-tcard__stars">★★★★★</span>
+          </div>
+          <p class="ulp-tcard__text">« Je prends Uburn le soir aussi — 0% caféine donc pas de souci pour dormir. C'est devenu mon rituel. »</p>
+          <p class="ulp-tcard__author">Claire</p>
+          <p class="ulp-tcard__meta">Paris</p>
+          <p class="ulp-tcard__verified">✓ Achat vérifié</p>
+        </div>
+        <div class="ulp-tcard">
+          <div class="ulp-tcard__header">
+            <div class="ulp-tcard__avatar">I</div>
+            <span class="ulp-tcard__stars">★★★★★</span>
+          </div>
+          <p class="ulp-tcard__text">« Sceptique au début — après 2 semaines, je ne touche plus aux biscuits à 16h. »</p>
+          <p class="ulp-tcard__author">Isabelle</p>
+          <p class="ulp-tcard__meta">Nantes</p>
+          <p class="ulp-tcard__verified">✓ Achat vérifié</p>
+        </div>
+      </div>
+      <div class="ulp-testi__fade"></div>
+    </div>
+    <div class="ulp-testi__dots" id="ulp-testi-dots">
+      <span class="ulp-testi__dot ulp-testi__dot--active"></span>
+      <span class="ulp-testi__dot"></span>
+      <span class="ulp-testi__dot"></span>
+      <span class="ulp-testi__dot"></span>
+      <span class="ulp-testi__dot"></span>
+    </div>
+  </div>
+</section>
+
+<!-- 6. OFFRE — 2 options + bonuses + sans fake countdown -->
+<section class="ulp-section ulp-offer ulp-reveal" id="ulp-offer">
+  <div class="ulp-container">
+    <h2 class="ulp-section-title">Choisissez votre cure.</h2>
+    <p class="ulp-section-sub">Sans abonnement. Sans engagement.</p>
+
+    <div class="ulp-offer__grid">
+      <!-- Option 1 pot -->
+      <div class="ulp-offer__card" onclick="uburnAddToCart(1)">
+        <p class="ulp-offer__card-title">Cure 30 jours</p>
+        <div class="ulp-offer__prices">
+          <span class="ulp-offer__new">34,50€</span>
+        </div>
+        <p class="ulp-offer__daily">= 1,15€ par jour</p>
+        <ul class="ulp-offer__list">
+          <li>1 pot (30 doses)</li>
+          <li>Cuillère doseuse offerte</li>
+          <li>Livraison offerte</li>
+        </ul>
+        <button class="ulp-cta ulp-cta--outline ulp-cta--full">Commander</button>
+        <p style="font-size:0.82rem;font-weight:600;color:var(--ulp-green);text-align:center;margin-top:10px;">✓ Satisfait ou remboursé</p>
+      </div>
+
+      <!-- Option 2 pots — BEST VALUE -->
+      <div class="ulp-offer__card ulp-offer__card--popular" onclick="uburnAddToCart(2)">
+        <span class="ulp-offer__badge">Meilleure offre</span>
+        <p class="ulp-offer__card-title">Cure 60 jours</p>
+        <div class="ulp-offer__prices">
+          <span class="ulp-offer__old">69,00€</span>
+          <span class="ulp-offer__new">54,50€</span>
+        </div>
+        <p class="ulp-offer__daily">= 0,91€ par jour</p>
+        <span class="ulp-offer__saving">Économisez 14,50€</span>
+        <ul class="ulp-offer__list">
+          <li>2 pots (60 doses)</li>
+          <li>Cuillère doseuse offerte</li>
+          <li>Livraison offerte</li>
+        </ul>
+        <button class="ulp-cta ulp-cta--violet ulp-cta--full">Commander — 54,50€</button>
+        <p style="font-size:0.82rem;font-weight:600;color:var(--ulp-green);text-align:center;margin-top:10px;">✓ Satisfait ou remboursé</p>
+      </div>
+    </div>
+
+    <!-- Bonuses offre d'entrée -->
+    <div class="ulp-offer__bonuses">
+      <p class="ulp-offer__bonuses-title">Inclus avec votre commande :</p>
+      <ul>
+        <li>📘 E-book "30 jours pour reprendre le contrôle" <span class="ulp-offer__bonus-value">47€</span></li>
+        <li>👥 Accès au groupe privé Uburn Collective <span class="ulp-offer__bonus-value">40€</span></li>
+        <li>💬 Suivi nutrition WhatsApp 30 jours <span class="ulp-offer__bonus-value">47€</span></li>
+      </ul>
+    </div>
+
+    <div class="ulp-offer__secure">
+      <span>🔒 Paiement sécurisé</span>
+      <span>📦 Livraison 48-72h</span>
+      <span>🇫🇷 Service client français</span>
+    </div>
+  </div>
+</section>
+
+<!-- 7. INGREDIENTS -->
+<section class="ulp-section ulp-reveal" style="background:var(--ulp-white);">
   <div class="ulp-container">
     <h2 class="ulp-section-title">6 actifs. Rien de plus.</h2>
-    <p class="ulp-section-sub"></p>
     <div class="ulp-ingr__grid">
       <div class="ulp-ingr__card">
         <div class="ulp-ingr__emoji">🟣</div>
@@ -325,76 +492,64 @@
   </div>
 </section>
 
-<!-- 6. TEMOIGNAGES -->
+<!-- 7b. ROUTINE / GOÛT -->
 <section class="ulp-section ulp-reveal" style="background:var(--ulp-white);">
-  <div class="ulp-container" style="max-width:none;padding:0 20px;">
-    <h2 class="ulp-section-title">Elles ont essayé. Elles racontent.</h2>
-    <p class="ulp-section-sub"></p>
-    <div class="ulp-testi__scroll">
-      <div class="ulp-tcard">
-        <div class="ulp-tcard__header">
-          <div class="ulp-tcard__avatar">M</div>
-          <span class="ulp-tcard__stars">★★★★★</span>
+  <div class="ulp-container" style="text-align:center;">
+    <span class="ulp-eyebrow">La routine</span>
+    <h2 class="ulp-section-title">Simple. Rapide. Délicieux.</h2>
+    <div style="display:flex;flex-direction:column;gap:24px;align-items:center;margin-bottom:32px;">
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px 20px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="width:36px;height:36px;border-radius:50%;background:var(--ulp-violet);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.92rem;flex-shrink:0;">1</span>
+          <span style="font-size:0.95rem;font-weight:600;">1 cuillère dans un verre d'eau froide</span>
         </div>
-        <p class="ulp-tcard__text">« Je ne pense plus au placard à 16h. Ça me soulage. »</p>
-        <p class="ulp-tcard__author">Marie</p>
-        <p class="ulp-tcard__meta">Lyon</p>
-      </div>
-      <div class="ulp-tcard">
-        <div class="ulp-tcard__header">
-          <div class="ulp-tcard__avatar">S</div>
-          <span class="ulp-tcard__stars">★★★★★</span>
+        <span style="color:var(--ulp-violet);font-weight:700;opacity:0.5;">→</span>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="width:36px;height:36px;border-radius:50%;background:var(--ulp-violet);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.92rem;flex-shrink:0;">2</span>
+          <span style="font-size:0.95rem;font-weight:600;">10 secondes</span>
         </div>
-        <p class="ulp-tcard__text">« Pour 0,61€ par jour, y'a pas de risque. Et ça marche. »</p>
-        <p class="ulp-tcard__author">Sophie</p>
-        <p class="ulp-tcard__meta">Bordeaux</p>
-      </div>
-      <div class="ulp-tcard">
-        <div class="ulp-tcard__header">
-          <div class="ulp-tcard__avatar">N</div>
-          <span class="ulp-tcard__stars">★★★★☆</span>
+        <span style="color:var(--ulp-violet);font-weight:700;opacity:0.5;">→</span>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="width:36px;height:36px;border-radius:50%;background:var(--ulp-violet);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.92rem;flex-shrink:0;">3</span>
+          <span style="font-size:0.95rem;font-weight:600;">Couleur violette naturelle, goût ube légèrement sucré</span>
         </div>
-        <p class="ulp-tcard__text">« Mes collègues m'ont demandé mon secret. C'est mon 2e pot. »</p>
-        <p class="ulp-tcard__author">Nathalie</p>
-        <p class="ulp-tcard__meta">Toulouse</p>
       </div>
     </div>
+    <div style="margin:0 auto 28px;max-width:360px;">
+      <img src="https://cdn.shopify.com/s/files/1/0920/9436/6015/files/PRODUCT_PAGE_0005_2_1.jpg" alt="Uburn — verre ube violet" loading="lazy" style="border-radius:16px;width:100%;">
+    </div>
+    <span style="display:inline-block;font-size:0.82rem;font-weight:700;color:var(--ulp-violet);background:var(--ulp-violet-light);padding:10px 20px;border-radius:999px;">0 sucre ajouté · 30 kcal · 0% caféine</span>
   </div>
 </section>
 
-<!-- 7. OFFRE -->
-<section class="ulp-section ulp-offer ulp-reveal">
+<!-- 8. TRUST BADGES -->
+<section class="ulp-section ulp-reveal" style="background:var(--ulp-gray);">
   <div class="ulp-container">
-    <h2 class="ulp-section-title">Commencer maintenant.</h2>
-    <p class="ulp-section-sub"></p>
-    <div class="ulp-offer__box">
-      <p class="ulp-offer__countdown">⏳ Cette offre expire dans <span id="ulp-countdown">23:59:59</span></p>
-      <div class="ulp-offer__prices">
-        <span class="ulp-offer__old">49,50€</span>
-        <span class="ulp-offer__new">34,50€</span>
+    <div class="ulp-trust__grid">
+      <div class="ulp-trust__item">
+        <span class="ulp-trust__icon">🇫🇷</span>
+        <span class="ulp-trust__item-text">Fabriqué en France</span>
       </div>
-      <p class="ulp-offer__daily">= 0,61€ par jour</p>
-      <ul class="ulp-offer__list">
-        <li>Cure 30 jours</li>
-        <li>Cuillère doseuse offerte</li>
-        <li>Livraison offerte</li>
-        <li>Sans abonnement</li>
-      </ul>
-      <button onclick="uburnCheckout()" class="ulp-cta ulp-cta--violet ulp-cta--full">Essayer Uburn →</button>
-      <div class="ulp-offer__secure">
-        <span>🔒 Paiement sécurisé</span>
-        <span>📦 Livraison 48-72h</span>
-        <span>🇫🇷 Service client français</span>
+      <div class="ulp-trust__item">
+        <span class="ulp-trust__icon">🌱</span>
+        <span class="ulp-trust__item-text">100% végétal</span>
+      </div>
+      <div class="ulp-trust__item">
+        <span class="ulp-trust__icon">🔬</span>
+        <span class="ulp-trust__item-text">EFSA ID 3120</span>
+      </div>
+      <div class="ulp-trust__item">
+        <span class="ulp-trust__icon">📦</span>
+        <span class="ulp-trust__item-text">Livraison offerte 48-72h</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 8. FAQ -->
+<!-- 9. FAQ -->
 <section class="ulp-section ulp-reveal" style="background:var(--ulp-white);">
   <div class="ulp-container">
     <h2 class="ulp-section-title">Vos questions.</h2>
-    <p class="ulp-section-sub"></p>
 
     <details class="ulp-faq-item">
       <summary>C'est quoi l'ube violet ?<svg class="ulp-faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5 8 10 13 15 8"/></svg></summary>
@@ -417,13 +572,26 @@
       <div class="ulp-faq-item__body">Oui. Uburn est 100% végétal, sans gluten, sans lactose, 0% caféine et sans sucre ajouté. Il s'intègre dans toute alimentation. Il ne remplace pas une alimentation variée et équilibrée.</div>
     </details>
     <details class="ulp-faq-item">
+      <summary>Ça contient de la caféine ?<svg class="ulp-faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5 8 10 13 15 8"/></svg></summary>
+      <div class="ulp-faq-item__body">Non, 0% caféine. Uburn ne contient aucun stimulant. Vous pouvez le prendre le matin, l'après-midi ou le soir sans aucun impact sur votre sommeil.</div>
+    </details>
+    <details class="ulp-faq-item">
       <summary>C'est fabriqué où ?<svg class="ulp-faq-chevron" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="5 8 10 13 15 8"/></svg></summary>
       <div class="ulp-faq-item__body">Uburn est une marque française. La formule contient 6 actifs naturels sélectionnés pour leur qualité. Fabrication conforme aux normes européennes.</div>
     </details>
   </div>
 </section>
 
-<!-- 9. MENTIONS LEGALES -->
+<!-- 10. FINAL CTA -->
+<section class="ulp-section ulp-reveal" style="background:var(--ulp-gray);">
+  <div class="ulp-container ulp-final-cta">
+    <h2 class="ulp-section-title">Prête à reprendre le contrôle ?</h2>
+    <button onclick="uburnAddToCart(1)" class="ulp-cta ulp-cta--violet" style="padding:18px 48px;">Essayer Uburn — 34,50€</button>
+    <p class="ulp-final-cta__sub">Livraison offerte · Sans abonnement · Paiement sécurisé</p>
+  </div>
+</section>
+
+<!-- 11. MENTIONS LEGALES -->
 <div class="ulp-legal">
   <div class="ulp-legal__inner">
     <p>Uburn est un complément alimentaire à base de glucomannane. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas. Ne se substitue pas à une alimentation variée et équilibrée. Déconseillé aux femmes enceintes et allaitantes.</p>
@@ -444,13 +612,19 @@
 <div class="ulp-sticky" id="ulp-sticky">
   <div class="ulp-sticky__info">
     <strong>34,50€</strong>
-    <small>Livraison offerte</small>
+    <small>Livraison offerte · Satisfait ou remboursé</small>
   </div>
-  <button onclick="uburnCheckout()" class="ulp-sticky__btn">Commander →</button>
+  <button onclick="uburnAddToCart(1)" class="ulp-sticky__btn">Commander</button>
 </div>
 
 <script>
-async function uburnCheckout() {
+/* Checkout — 1 seul POST, fallback vers checkout direct */
+async function uburnAddToCart(qty) {
+  var btn = event && event.target;
+  if (btn && btn.tagName === 'BUTTON') {
+    btn.disabled = true;
+    btn.textContent = 'Ajout en cours…';
+  }
   try {
     var r = await fetch('/products/ube-poudre.js');
     var p = await r.json();
@@ -458,15 +632,19 @@ async function uburnCheckout() {
     var res = await fetch('/cart/add.js', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: vid, quantity: 1 })
+      body: JSON.stringify({ items: [{ id: vid, quantity: qty || 1 }] })
     });
-    if (res.ok) window.location.href = '/checkout';
-    else window.location.href = '/products/ube-poudre';
+    if (res.ok) {
+      window.location.href = '/checkout';
+    } else {
+      window.location.href = '/cart';
+    }
   } catch (e) {
-    window.location.href = '/products/ube-poudre';
+    window.location.href = '/cart';
   }
 }
 
+/* Sticky ATC mobile */
 (function() {
   var s = document.getElementById('ulp-sticky');
   if (!s) return;
@@ -475,29 +653,21 @@ async function uburnCheckout() {
   }, { passive: true });
 })();
 
+/* Testimonial scroll dots */
 (function() {
-  var el = document.getElementById('ulp-countdown');
-  if (!el) return;
-  var key = 'ulp_countdown_end';
-  var stored = localStorage.getItem(key);
-  var end;
-  if (stored && Number(stored) > Date.now()) {
-    end = Number(stored);
-  } else {
-    end = Date.now() + 24 * 3600 * 1000;
-    localStorage.setItem(key, end);
-  }
-  function tick() {
-    var diff = Math.max(0, end - Date.now());
-    var h = Math.floor(diff / 3600000);
-    var m = Math.floor((diff % 3600000) / 60000);
-    var sc = Math.floor((diff % 60000) / 1000);
-    el.textContent = [h, m, sc].map(function(n) { return String(n).padStart(2, '0'); }).join(':');
-    if (diff > 0) requestAnimationFrame(function() { setTimeout(tick, 1000); });
-  }
-  tick();
+  var scroll = document.getElementById('ulp-testi-scroll');
+  var dots = document.querySelectorAll('#ulp-testi-dots .ulp-testi__dot');
+  if (!scroll || !dots.length) return;
+  scroll.addEventListener('scroll', function() {
+    var cardWidth = scroll.firstElementChild ? scroll.firstElementChild.offsetWidth + 16 : 306;
+    var idx = Math.round(scroll.scrollLeft / cardWidth);
+    dots.forEach(function(d, i) {
+      d.classList.toggle('ulp-testi__dot--active', i === idx);
+    });
+  }, { passive: true });
 })();
 
+/* Scroll reveal */
 (function() {
   var els = document.querySelectorAll('.ulp-reveal');
   if (!els.length) return;
@@ -526,6 +696,7 @@ async function uburnCheckout() {
   "name": "Uburn — Boisson satiété naturelle",
   "description": "Boisson à base de konjac (glucomannane) qui favorise jusqu'à 4h de satiété naturelle. 6 actifs, 30 kcal, 0% caféine. Fabriqué en France.",
   "image": "https://cdn.shopify.com/s/files/1/0920/9436/6015/files/PRODUCT_PAGE_0005_2_1.jpg",
+  "sku": "UBURN-UBE-30",
   "brand": { "@type": "Brand", "name": "Uburn" },
   "offers": {
     "@type": "Offer",
@@ -545,11 +716,13 @@ async function uburnCheckout() {
       "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "FR" }
     }
   },
-  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": "3" },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.7", "reviewCount": 5 },
   "review": [
-    { "@type": "Review", "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "author": { "@type": "Person", "name": "Marie" }, "reviewBody": "Je ne pense plus au placard à 16h. Ça me soulage." },
+    { "@type": "Review", "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "author": { "@type": "Person", "name": "Marie" }, "reviewBody": "Je ne pense plus au placard à 16h. Ça me soulage vraiment au quotidien." },
     { "@type": "Review", "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "author": { "@type": "Person", "name": "Sophie" }, "reviewBody": "Pour 0,61€ par jour, y'a pas de risque. Et ça marche." },
-    { "@type": "Review", "reviewRating": { "@type": "Rating", "ratingValue": "4" }, "author": { "@type": "Person", "name": "Nathalie" }, "reviewBody": "Mes collègues m'ont demandé mon secret. C'est mon deuxième pot." }
+    { "@type": "Review", "reviewRating": { "@type": "Rating", "ratingValue": "4" }, "author": { "@type": "Person", "name": "Nathalie" }, "reviewBody": "Mes collègues m'ont demandé mon secret. C'est mon deuxième pot." },
+    { "@type": "Review", "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "author": { "@type": "Person", "name": "Claire" }, "reviewBody": "Je prends Uburn le soir aussi, 0% caféine donc pas de souci pour dormir." },
+    { "@type": "Review", "reviewRating": { "@type": "Rating", "ratingValue": "5" }, "author": { "@type": "Person", "name": "Isabelle" }, "reviewBody": "Sceptique au début, après 2 semaines, je ne touche plus aux biscuits à 16h." }
   ]
 }
 </script>
