@@ -140,6 +140,29 @@
 .ulp-compare__bad { color: #dc2626; }
 .ulp-compare__good { color: var(--ub-aubergine); font-weight: 700; }
 
+/* ═══════ MICRO-INTERACTIONS (impeccable/animate) ═══════ */
+.ulp-btn:focus-visible { outline: 3px solid var(--ub-gold); outline-offset: 3px; }
+.ulp-offer-card { transition: var(--ub-ease); }
+.ulp-offer-card:hover { transform: translateY(-4px); box-shadow: var(--ub-shadow); }
+.ulp-faq-item summary { transition: color 0.2s ease; }
+.ulp-faq-item summary:hover { color: var(--ub-aubergine); }
+.ulp-step__num { transition: var(--ub-ease); }
+.ulp-step:hover .ulp-step__num { transform: scale(1.1); }
+
+/* ═══════ POLISH (impeccable/polish) ═══════ */
+::selection { background: var(--ub-aubergine-light); color: var(--ub-aubergine-deep); }
+.ulp img::selection { background: transparent; }
+.ulp-hero__product img { transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+.ulp-hero__product img:hover { transform: scale(1.03) rotate(1deg); }
+.ulp-footer a:focus-visible { outline: 2px solid var(--ub-gold); outline-offset: 2px; border-radius: 4px; }
+
+/* ═══════ TYPESET REFINEMENTS (impeccable/typeset) ═══════ */
+.ulp-section h2 + p { margin-top: -4px; }
+.ulp-benefit__text { line-height: 1.5; }
+.ulp-step__text p { line-height: 1.55; }
+.ulp-faq-item__body { line-height: 1.7; }
+.ulp-tcard__text { letter-spacing: 0.01em; }
+
 /* DESKTOP */
 @media (min-width: 700px) {
   .ulp-hero { padding: 72px 40px; }
