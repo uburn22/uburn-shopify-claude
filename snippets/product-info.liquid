@@ -137,7 +137,29 @@ Supported variables
               <div class="v-stack gap-2">
                 {%- render 'price-list', product: product, variant: product.selected_or_first_available_variant, alignment: alignment, context: 'product' -%}
 
-                <p class="uburn-price-comparison">€0,61/jour · Soit moins de 1€ par jour</p>
+                <!-- Variant cards Medvi-style -->
+                <div class="uburn-variant-cards" data-uburn-variant-cards>
+                  {%- for variant in product.variants -%}
+                    {%- unless variant.title contains '2' or variant.title contains 'Lot' or variant.title contains 'Pack' -%}
+                      <div class="uburn-variant-card{% if product.selected_or_first_available_variant.id == variant.id %} uburn-variant-card--selected{% endif %}" data-variant-id="{{ variant.id }}">
+                        <p class="uburn-variant-card__qty">1 pot &middot; 30 jours</p>
+                        <p class="uburn-variant-card__price">{{ variant.price | money }}</p>
+                        <p class="uburn-variant-card__daily">= &euro;1,15/jour</p>
+                      </div>
+                    {%- endunless -%}
+                  {%- endfor -%}
+                  {%- for variant in product.variants -%}
+                    {%- if variant.title contains '2' or variant.title contains 'Lot' or variant.title contains 'Pack' -%}
+                      <div class="uburn-variant-card{% if product.selected_or_first_available_variant.id == variant.id %} uburn-variant-card--selected{% endif %}" data-variant-id="{{ variant.id }}">
+                        <span class="uburn-variant-card__badge">&#11088; BEST VALUE</span>
+                        <p class="uburn-variant-card__qty">2 pots &middot; 60 jours</p>
+                        <p class="uburn-variant-card__price">{{ variant.price | money }}</p>
+                        <p class="uburn-variant-card__daily">= &euro;0,61/jour</p>
+                        <p class="uburn-variant-card__save">&Eacute;conomisez {{ variant.compare_at_price | minus: variant.price | money }}</p>
+                      </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
 
                 {%- if block.settings.show_taxes_notice -%}
                   <p class="subheading text-subdued">
@@ -206,7 +228,7 @@ Supported variables
                 </div>
               {%- endif -%}
 
-              <p class="uburn-antioxidant-note">L'ube violet contient des anthocyanes — parmi les antioxydants les plus puissants de la nature.</p>
+              <p class="uburn-antioxidant-note">L'ube violet contient des anthocyanes &mdash; parmi les antioxydants les plus puissants de la nature.</p>
             {%- endif -%}
 
           {%- when 'variant_picker' -%}
@@ -227,65 +249,150 @@ Supported variables
                 -%}
             {%- endif -%}
 
-            <!-- Science section accordion — 6 actifs -->
+            <!-- Comment ca marche — m&eacute;canisme -->
             <details class="uburn-science-accordion">
-              <summary>La formule complète — 5 actifs en synergie</summary>
+              <summary>Comment &ccedil;a marche ?</summary>
               <div class="uburn-science-steps">
                 <div class="uburn-science-step">
-                  <span class="uburn-step-icon uburn-step-icon--emoji">🌊</span>
-                  <div><strong>Dans les premières minutes</strong><br>Le konjac absorbe 100x son poids en eau et forme un gel dans votre estomac. Signal de satiété envoyé au cerveau.</div>
+                  <span class="uburn-step-icon">1</span>
+                  <div><strong>Dans les premi&egrave;res minutes</strong><br>Le glucomannane (konjac) absorbe jusqu'&agrave; 100x son poids en eau et forme un gel naturel dans l'estomac. Signal de sati&eacute;t&eacute; envoy&eacute; au cerveau.</div>
                 </div>
                 <div class="uburn-science-step">
-                  <span class="uburn-step-icon uburn-step-icon--emoji">⚡</span>
-                  <div><strong>Dans l'heure qui suit</strong><br>Les MCT de coco fournissent une énergie rapide et stable. Zéro pic d'insuline. Zéro crash à 15h.</div>
+                  <span class="uburn-step-icon">2</span>
+                  <div><strong>Dans l'heure qui suit</strong><br>Les MCT de coco fournissent une &eacute;nergie rapide et stable. Z&eacute;ro pic d'insuline, z&eacute;ro crash &agrave; 15h.</div>
                 </div>
                 <div class="uburn-science-step">
-                  <span class="uburn-step-icon uburn-step-icon--emoji">🔥</span>
-                  <div><strong>En continu</strong><br>La L-Carnitine soutient votre métabolisme énergétique et votre endurance au quotidien.</div>
-                </div>
-                <div class="uburn-science-step">
-                  <span class="uburn-step-icon uburn-step-icon--emoji">🌿</span>
-                  <div><strong>En continu</strong><br>L'ube violet et le gingembre protègent votre corps avec leurs antioxydants et facilitent la digestion.</div>
+                  <span class="uburn-step-icon">3</span>
+                  <div><strong>En continu</strong><br>L-Carnitine, gingembre et ube violet soutiennent votre m&eacute;tabolisme, votre digestion et prot&egrave;gent vos cellules avec leurs antioxydants.</div>
                 </div>
               </div>
+              <p style="padding:0 16px 12px;font-size:11px;color:#6b7280;margin:0;">All&eacute;gation EFSA ID 3120 : le glucomannane contribue &agrave; la perte de poids dans le cadre d'un r&eacute;gime hypocalorique, &agrave; raison de 3&nbsp;g/jour en 3 doses de 1&nbsp;g, avec 1-2 verres d'eau avant le repas.</p>
             </details>
 
-            <!-- FAQ anti-objections -->
+            <!-- Ingr&eacute;dients — grille 2x3 -->
+            <div class="uburn-ingredients">
+              <p class="uburn-ingredients__title">Nos 6 actifs</p>
+              <div class="uburn-ingredients__grid">
+                <div class="uburn-ingredient">
+                  <div class="uburn-ingredient__icon">&#127802;</div>
+                  <div class="uburn-ingredient__info">
+                    <strong>Konjac (glucomannane)</strong>
+                    <span>Sati&eacute;t&eacute; naturelle</span>
+                  </div>
+                </div>
+                <div class="uburn-ingredient">
+                  <div class="uburn-ingredient__icon">&#129381;</div>
+                  <div class="uburn-ingredient__info">
+                    <strong>MCT de coco</strong>
+                    <span>&Eacute;nergie rapide sans crash</span>
+                  </div>
+                </div>
+                <div class="uburn-ingredient">
+                  <div class="uburn-ingredient__icon">&#128293;</div>
+                  <div class="uburn-ingredient__info">
+                    <strong>L-Carnitine</strong>
+                    <span>M&eacute;tabolisme &eacute;nerg&eacute;tique</span>
+                  </div>
+                </div>
+                <div class="uburn-ingredient">
+                  <div class="uburn-ingredient__icon">&#128156;</div>
+                  <div class="uburn-ingredient__info">
+                    <strong>Ube violet</strong>
+                    <span>Anthocyanes antioxydantes</span>
+                  </div>
+                </div>
+                <div class="uburn-ingredient">
+                  <div class="uburn-ingredient__icon">&#127793;</div>
+                  <div class="uburn-ingredient__info">
+                    <strong>Gingembre</strong>
+                    <span>Digestion facilit&eacute;e</span>
+                  </div>
+                </div>
+                <div class="uburn-ingredient">
+                  <div class="uburn-ingredient__icon">&#127795;</div>
+                  <div class="uburn-ingredient__info">
+                    <strong>Fibre d'acacia</strong>
+                    <span>Pr&eacute;biotique naturel</span>
+                  </div>
+                </div>
+              </div>
+              <p class="uburn-ingredients__footer">100% v&eacute;g&eacute;tal &middot; Sans gluten &middot; 0% caf&eacute;ine</p>
+            </div>
+
+            <!-- T&eacute;moignages -->
+            <div class="uburn-testimonials">
+              <p class="uburn-testimonials__title">Ce que nos clientes en disent</p>
+              <div class="uburn-testimonials__list">
+                <div class="uburn-testimonial">
+                  <div class="uburn-testimonial__avatar">S</div>
+                  <div class="uburn-testimonial__content">
+                    <p class="uburn-testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                    <p class="uburn-testimonial__text">&laquo;&nbsp;Je ne grignote plus &agrave; 16h. Depuis 3 semaines, c'est devenu ma routine du matin.&nbsp;&raquo;</p>
+                    <p class="uburn-testimonial__name">Sophie, 42 ans</p>
+                  </div>
+                </div>
+                <div class="uburn-testimonial">
+                  <div class="uburn-testimonial__avatar">M</div>
+                  <div class="uburn-testimonial__content">
+                    <p class="uburn-testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                    <p class="uburn-testimonial__text">&laquo;&nbsp;Le go&ucirc;t est bon et &ccedil;a tient vraiment. Je prends le pack 2 pots maintenant.&nbsp;&raquo;</p>
+                    <p class="uburn-testimonial__name">Marie, 38 ans</p>
+                  </div>
+                </div>
+                <div class="uburn-testimonial">
+                  <div class="uburn-testimonial__avatar">L</div>
+                  <div class="uburn-testimonial__content">
+                    <p class="uburn-testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                    <p class="uburn-testimonial__text">&laquo;&nbsp;Pas de caf&eacute;ine, je peux le prendre le soir. C'est &ccedil;a qui m'a convaincue.&nbsp;&raquo;</p>
+                    <p class="uburn-testimonial__name">Laure, 51 ans</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ produit — 6 questions compliance DGCCRF -->
             <div class="uburn-faq-section">
-              <p class="uburn-faq-heading">Questions fréquentes</p>
+              <p class="uburn-faq-heading">Questions fr&eacute;quentes</p>
 
               <details class="uburn-science-accordion">
-                <summary>Est-ce que ça marche vraiment ?</summary>
+                <summary>Est-ce que &ccedil;a marche vraiment ?</summary>
                 <div class="uburn-science-steps">
-                  <p class="uburn-faq-answer">Le glucomannane (konjac) contribue à la satiété dans le cadre d'une alimentation équilibrée et d'un mode de vie sain (allégation EFSA autorisée). 1500+ femmes l'utilisent au quotidien.</p>
+                  <p class="uburn-faq-answer">Le glucomannane (konjac) contribue &agrave; la perte de poids dans le cadre d'un r&eacute;gime hypocalorique (all&eacute;gation EFSA ID 3120). &Agrave; raison de 3&nbsp;g/jour en 3 doses, avec 1-2 verres d'eau avant le repas.</p>
                 </div>
               </details>
 
               <details class="uburn-science-accordion">
                 <summary>C'est quoi exactement le konjac ?</summary>
                 <div class="uburn-science-steps">
-                  <p class="uburn-faq-answer">Le konjac est une plante naturelle d'Asie. Sa fibre (glucomannane) absorbe jusqu'à 100x son poids en eau et forme un gel dans l'estomac. Résultat : vous vous sentez rassasié(e) sans avoir mangé plus.</p>
+                  <p class="uburn-faq-answer">Le konjac est une plante naturelle d'Asie. Sa fibre (glucomannane) absorbe jusqu'&agrave; 100x son poids en eau et forme un gel dans l'estomac. R&eacute;sultat : vous vous sentez rassasi&eacute;(e) plus longtemps.</p>
                 </div>
               </details>
 
               <details class="uburn-science-accordion">
-                <summary>Quand vais-je voir des résultats ?</summary>
+                <summary>Quand vais-je ressentir les effets ?</summary>
                 <div class="uburn-science-steps">
-                  <p class="uburn-faq-answer">La plupart des clientes ressentent l'effet satiété dès la première prise. Pour des résultats visibles sur le contrôle des fringales : 7-14 jours en utilisation régulière le matin.</p>
+                  <p class="uburn-faq-answer">La plupart des clientes ressentent l'effet sati&eacute;t&eacute; d&egrave;s la premi&egrave;re prise. Pour des r&eacute;sultats sur le contrôle des fringales : 7-14 jours en utilisation r&eacute;guli&egrave;re.</p>
                 </div>
               </details>
 
               <details class="uburn-science-accordion">
-                <summary>Y a-t-il un abonnement ?</summary>
+                <summary>Y a-t-il un abonnement cach&eacute; ?</summary>
                 <div class="uburn-science-steps">
-                  <p class="uburn-faq-answer">Non. Aucun abonnement caché. Vous commandez quand vous voulez, vous arrêtez quand vous voulez. C'est notre engagement de transparence.</p>
+                  <p class="uburn-faq-answer">Non. Aucun abonnement. Vous commandez quand vous voulez, vous arr&ecirc;tez quand vous voulez. Pas de renouvellement automatique.</p>
                 </div>
               </details>
 
               <details class="uburn-science-accordion">
                 <summary>Puis-je le prendre le soir ?</summary>
                 <div class="uburn-science-steps">
-                  <p class="uburn-faq-answer">Oui. Uburn ne contient pas de caféine. Vous pouvez le prendre à n'importe quelle heure, même le soir, sans perturber votre sommeil.</p>
+                  <p class="uburn-faq-answer">Oui. Uburn ne contient aucune caf&eacute;ine. Vous pouvez le prendre &agrave; n'importe quelle heure sans perturber votre sommeil.</p>
+                </div>
+              </details>
+
+              <details class="uburn-science-accordion">
+                <summary>Uburn remplace-t-il un repas ?</summary>
+                <div class="uburn-science-steps">
+                  <p class="uburn-faq-answer">Non. Uburn est un compl&eacute;ment alimentaire, pas un substitut de repas. Il ne se substitue pas &agrave; une alimentation vari&eacute;e et &eacute;quilibr&eacute;e, ni &agrave; un mode de vie sain. D&eacute;conseill&eacute; durant la grossesse et l'allaitement.</p>
                 </div>
               </details>
             </div>
@@ -435,10 +542,37 @@ Supported variables
                 payment_button_background: block.settings.payment_button_background,
                 payment_button_text_color: block.settings.payment_button_text_color
             -%}
-            <p class="uburn-no-subscription">🔒 Pas d'abonnement caché · Commandez quand vous voulez</p>
-            <div class="uburn-legal-notices" style="margin-top:10px;font-size:10px;color:#9ca3af;line-height:1.4;">
-              <p style="margin:0;">Déconseillé durant la grossesse et l'allaitement.</p>
-              <p style="margin:2px 0 0 0;">Uburn ne se substitue pas à une alimentation variée et équilibrée.</p>
+
+            <!-- Reassurance sous ATC -->
+            <div class="uburn-reassurance">
+              <span>&#10003; Satisfait ou rembours&eacute;</span>
+              <span>&#128274; Paiement s&eacute;curis&eacute;</span>
+              <span>&#128230; Livraison offerte</span>
+            </div>
+
+            <!-- Benefits bullets -->
+            <div class="uburn-benefits">
+              <div class="uburn-benefit">
+                <span class="uburn-benefit__icon">&#127807;</span>
+                <span>Jusqu'&agrave; 4h de sati&eacute;t&eacute; naturelle</span>
+              </div>
+              <div class="uburn-benefit">
+                <span class="uburn-benefit__icon">&#9889;</span>
+                <span>0% caf&eacute;ine &mdash; &eacute;nergie sans crash</span>
+              </div>
+              <div class="uburn-benefit">
+                <span class="uburn-benefit__icon">&#128300;</span>
+                <span>All&eacute;gation EFSA valid&eacute;e (ID 3120)</span>
+              </div>
+              <div class="uburn-benefit">
+                <span class="uburn-benefit__icon">&#128156;</span>
+                <span>30 kcal par portion</span>
+              </div>
+            </div>
+
+            <div class="uburn-legal-notices">
+              <p style="margin:0;">D&eacute;conseill&eacute; durant la grossesse et l'allaitement.</p>
+              <p style="margin:2px 0 0 0;">Uburn ne se substitue pas &agrave; une alimentation vari&eacute;e et &eacute;quilibr&eacute;e.</p>
             </div>
 
           {%- when 'volume_pricing' -%}

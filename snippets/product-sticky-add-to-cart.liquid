@@ -60,7 +60,7 @@ Supported variables
         <span class="uburn-sticky-atc__title">{{ product.title | truncate: 20 }}</span>
         <span class="uburn-sticky-atc__price" data-sticky-price>{{ product.selected_or_first_available_variant.price | money }}</span>
       </div>
-      <button type="submit" form="{{ product_form_id }}" class="uburn-sticky-atc__btn">Ajouter au panier</button>
+      <button type="submit" form="{{ product_form_id }}" class="uburn-sticky-atc__btn">Ajouter au panier &rarr;</button>
     </div>
   </div>
 
@@ -106,11 +106,12 @@ Supported variables
       right: 0;
       z-index: 9999;
       background: #fff;
-      border-top: 1px solid #e0dce6;
-      padding: 8px 16px;
-      padding-bottom: max(8px, env(safe-area-inset-bottom));
-      max-height: 56px;
+      border-top: 1px solid #ede5ff;
+      padding: 10px 16px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
       box-sizing: border-box;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+      font-family: system-ui, -apple-system, sans-serif;
     }
     .uburn-sticky-atc__inner {
       display: flex;
@@ -129,30 +130,32 @@ Supported variables
     .uburn-sticky-atc__title {
       font-size: 12px;
       font-weight: 600;
-      color: #333;
+      color: #374151;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .uburn-sticky-atc__price {
-      font-size: 13px;
-      font-weight: 700;
-      color: #5b21b6;
+      font-size: 15px;
+      font-weight: 800;
+      color: #8b5cf6;
     }
     .uburn-sticky-atc__btn {
       flex-shrink: 0;
-      background: #7c3aed;
+      background: #8b5cf6;
       color: #fff;
       border: none;
-      border-radius: 8px;
-      padding: 10px 20px;
+      border-radius: 99px;
+      padding: 12px 24px;
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
+      letter-spacing: 0.01em;
+      transition: background 0.15s;
     }
     .uburn-sticky-atc__btn:active {
-      background: #6d28d9;
+      background: #7c3aed;
     }
     @media screen and (min-width: 700px) {
       .uburn-sticky-atc { display: none; }
