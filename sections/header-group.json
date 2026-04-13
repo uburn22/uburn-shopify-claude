@@ -1,1 +1,87 @@
-{"type":"header","name":"Header group","sections":{"announcement_bar_tt6Gxg":{"type":"announcement-bar","blocks":{"message_39Whqg":{"type":"message","settings":{"text":"🚚 Livraison offerte en France · Petites séries souvent en rupture"}}},"block_order":["message_39Whqg"],"name":"t:sections.announcement_bar.name","settings":{"color_scheme":"scheme-2","enable_sticky":true,"autoplay":false,"cycle_speed":4}},"header":{"type":"header","settings":{"color_scheme":"scheme-1","enable_sticky":true,"hide_on_scroll":true,"mobile_layout":"logo_center_navigation_split","desktop_layout":"drawer","logo":"shopify://shop_images/LOGO_Violet.png","logo_max_width":85,"logo_mobile_max_width":70,"menu":"main-menu","drawer_menu":"","secondary_menu":"","desktop_dropdown_menu_style":"sidebar","menu_open_trigger":"hover","desktop_icon_size":16,"drawer_show_nested_menu_indicator":true,"show_country_selector":true,"show_country_name":false,"show_country_flag":true,"show_locale_selector":true,"transparent_header_text_color":"#ffffff","transparent_logo":"shopify://shop_images/LOGO.png"}}},"order":["announcement_bar_tt6Gxg","header"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement_bar_tt6Gxg": {
+      "type": "announcement-bar",
+      "blocks": {
+        "message_39Whqg": {
+          "type": "message",
+          "settings": {
+            "text": "Livraison gratuite en France"
+          }
+        },
+        "message_kdUYfh": {
+          "type": "message",
+          "settings": {
+            "text": "-10% sur votre première commande"
+          }
+        },
+        "message_gpjAt9": {
+          "type": "message",
+          "settings": {
+            "text": ""
+          }
+        },
+        "message_NixbCq": {
+          "type": "message",
+          "settings": {
+            "text": "Dernière chance - Stock limité"
+          }
+        }
+      },
+      "block_order": [
+        "message_39Whqg",
+        "message_kdUYfh",
+        "message_gpjAt9",
+        "message_NixbCq"
+      ],
+      "name": "t:sections.announcement_bar.name",
+      "settings": {
+        "color_scheme": "scheme-2",
+        "enable_sticky": true,
+        "autoplay": true,
+        "cycle_speed": 4
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_sticky": true,
+        "hide_on_scroll": true,
+        "mobile_layout": "logo_center_navigation_split",
+        "desktop_layout": "drawer",
+        "logo": "shopify://shop_images/LOGO_Violet.png",
+        "logo_max_width": 85,
+        "logo_mobile_max_width": 70,
+        "menu": "main-menu",
+        "drawer_menu": "",
+        "secondary_menu": "",
+        "desktop_dropdown_menu_style": "sidebar",
+        "menu_open_trigger": "hover",
+        "desktop_icon_size": 16,
+        "drawer_show_nested_menu_indicator": true,
+        "show_country_selector": true,
+        "show_country_name": false,
+        "show_country_flag": true,
+        "show_locale_selector": true,
+        "transparent_header_text_color": "#ffffff",
+        "transparent_logo": "shopify://shop_images/LOGO.png"
+      }
+    }
+  },
+  "order": [
+    "announcement_bar_tt6Gxg",
+    "header"
+  ]
+}
