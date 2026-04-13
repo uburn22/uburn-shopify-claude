@@ -1,137 +1,155 @@
 <style>
-/* ===== UBURN LP — Premium Medvi/AG1 Redesign — Mobile-first ===== */
-.ulp { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; color: #1C1917; background: #FAF7F2; }
+/* ===== UBURN LP — Premium Wellness — Mobile-first ===== */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Inter:wght@400;500;600&display=swap');
 
-/* HEADER */
-.ulp-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: #fff; border-bottom: 1px solid rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 100; }
+:root {
+  --ulp-cream: #FDFAF5;
+  --ulp-violet: #8B5CF6;
+  --ulp-violet-dark: #7C3AED;
+  --ulp-violet-light: #F3EFFE;
+  --ulp-text: #1C1917;
+  --ulp-muted: #57534E;
+  --ulp-border: rgba(0,0,0,0.06);
+  --ulp-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  --ulp-radius: 16px;
+}
+
+.ulp * { box-sizing: border-box; margin: 0; padding: 0; }
+.ulp { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--ulp-text); background: var(--ulp-cream); -webkit-font-smoothing: antialiased; }
+.ulp h1, .ulp h2, .ulp h3 { font-family: 'Montserrat', sans-serif; font-weight: 800; }
+.ulp img { max-width: 100%; height: auto; }
+.ulp a { text-decoration: none; }
+
+/* ===== HEADER ===== */
+.ulp-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: #fff; border-bottom: 1px solid var(--ulp-border); position: sticky; top: 0; z-index: 100; }
 .ulp-header__logo img { height: 28px; width: auto; }
 .ulp-header__cart { font-size: 22px; text-decoration: none; }
 
-/* HERO */
-.ulp-hero { background: #FAF7F2; padding: 40px 20px 32px; }
-.ulp-hero__inner { max-width: 540px; margin: 0 auto; }
-.ulp-hero h1 { font-size: 2.2rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; margin: 0 0 14px; color: #1C1917; }
-.ulp-hero h1 em { color: #8B5CF6; font-style: normal; }
-.ulp-hero__sub { font-size: 1rem; color: #57534E; line-height: 1.6; margin: 0 0 20px; }
-.ulp-hero__stars { color: #8B5CF6; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; }
-.ulp-hero__bullets { list-style: none; padding: 0; margin: 0 0 28px; }
-.ulp-hero__bullets li { font-size: 0.9rem; color: #57534E; padding: 5px 0; }
-.ulp-hero__bullets li::before { content: "✓ "; color: #8B5CF6; font-weight: 700; }
-.ulp-hero__product { text-align: center; margin: 24px 0 0; }
-.ulp-hero__product img { max-width: 200px; height: auto; }
-
-/* TRUST BAR */
-.ulp-trust { display: flex; justify-content: center; gap: 0; background: #fff; padding: 12px 20px; flex-wrap: wrap; border-bottom: 1px solid rgba(0,0,0,0.06); }
-.ulp-trust span { color: #8B5CF6; font-size: 0.8rem; font-weight: 600; padding: 4px 14px; white-space: nowrap; }
-.ulp-trust span + span { border-left: 1px solid rgba(139,92,246,0.2); }
-
-/* BOUTONS */
-.ulp-btn { display: block; text-align: center; padding: 16px 28px; border-radius: 999px; font-size: 1rem; font-weight: 700; text-decoration: none; cursor: pointer; border: none; width: 100%; box-sizing: border-box; transition: background 0.2s, transform 0.1s; }
+/* ===== BOUTON CTA ===== */
+.ulp-btn { display: block; text-align: center; padding: 16px 28px; border-radius: 999px; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; border: none; width: 100%; transition: background 0.2s, transform 0.1s, box-shadow 0.2s; }
 .ulp-btn:hover { transform: translateY(-1px); }
 .ulp-btn:active { transform: translateY(0); }
-.ulp-btn--violet { background: #8B5CF6; color: #fff; }
-.ulp-btn--violet:hover { background: #7C3AED; }
-.ulp-btn--white { background: #fff; color: #8B5CF6; border: 2px solid #8B5CF6; }
-.ulp-btn--white:hover { background: #F5F0FF; }
+.ulp-btn--violet { background: var(--ulp-violet); color: #fff; box-shadow: 0 4px 14px rgba(139,92,246,0.3); }
+.ulp-btn--violet:hover { background: var(--ulp-violet-dark); box-shadow: 0 6px 20px rgba(139,92,246,0.4); }
+.ulp-btn--outline { background: #fff; color: var(--ulp-violet); border: 2px solid var(--ulp-violet); }
+.ulp-btn--outline:hover { background: var(--ulp-violet-light); }
 .ulp-btn--large { padding: 18px 32px; font-size: 1.1rem; }
 
-/* SECTIONS */
-.ulp-section { padding: 56px 20px; max-width: 540px; margin: 0 auto; }
-.ulp-section h2 { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 28px; line-height: 1.2; color: #1C1917; }
-.ulp-section--white { background: #fff; }
-.ulp-section--alt { background: #F5F0FF; }
-.ulp-section--cream { background: #FAF7F2; }
-.ulp-section--alt .ulp-section,
-.ulp-section--white .ulp-section,
-.ulp-section--cream .ulp-section { background: transparent; }
+/* ===== SECTION WRAPPER ===== */
+.ulp-wrap { padding: 56px 20px; }
+.ulp-inner { max-width: 540px; margin: 0 auto; }
+.ulp-bg-white { background: #fff; }
+.ulp-bg-cream { background: var(--ulp-cream); }
+.ulp-bg-violet { background: var(--ulp-violet-light); }
 
-/* BÉNÉFICES */
-.ulp-benefits { display: flex; flex-direction: column; gap: 16px; margin: 0 0 36px; }
-.ulp-benefit { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); display: flex; align-items: flex-start; gap: 14px; }
-.ulp-benefit__icon { font-size: 1.6rem; flex-shrink: 0; }
-.ulp-benefit__text strong { display: block; font-size: 1rem; font-weight: 700; margin-bottom: 4px; color: #1C1917; }
-.ulp-benefit__text p { margin: 0; font-size: 0.9rem; color: #57534E; line-height: 1.5; }
+/* ===== 1. HERO ===== */
+.ulp-hero { background: var(--ulp-cream); padding: 40px 20px 32px; }
+.ulp-hero__inner { max-width: 540px; margin: 0 auto; }
+.ulp-hero h1 { font-size: 2rem; line-height: 1.12; letter-spacing: -0.03em; margin: 0 0 14px; }
+.ulp-hero h1 em { color: var(--ulp-violet); font-style: normal; }
+.ulp-hero__sub { font-size: 1rem; color: var(--ulp-muted); line-height: 1.6; margin: 0 0 24px; font-weight: 500; }
+.ulp-hero__cta-wrap { margin-bottom: 24px; }
+.ulp-hero__trust { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.ulp-hero__trust span { font-size: 0.78rem; font-weight: 600; color: var(--ulp-muted); background: #fff; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--ulp-border); white-space: nowrap; }
+.ulp-hero__product { text-align: center; margin: 24px 0 0; }
+.ulp-hero__product img { max-width: 220px; border-radius: 12px; }
 
-/* ÉTAPES */
-.ulp-steps { display: flex; flex-direction: column; gap: 20px; margin-bottom: 36px; }
-.ulp-step { display: flex; align-items: center; gap: 16px; background: #fff; border-radius: 16px; padding: 18px 20px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
-.ulp-step__num { background: #8B5CF6; color: #fff; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0; }
-.ulp-step__text strong { display: block; font-size: 0.95rem; font-weight: 700; color: #1C1917; }
-.ulp-step__text p { margin: 0; font-size: 0.85rem; color: #57534E; }
+/* ===== 2. PROBLEME ===== */
+.ulp-problem__grid { display: flex; flex-direction: column; gap: 16px; }
+.ulp-problem__card { background: #fff; border-radius: var(--ulp-radius); padding: 24px; box-shadow: var(--ulp-shadow); display: flex; align-items: flex-start; gap: 14px; }
+.ulp-problem__icon { font-size: 1.5rem; flex-shrink: 0; width: 44px; height: 44px; background: var(--ulp-violet-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+.ulp-problem__text h3 { font-size: 1rem; font-weight: 800; margin-bottom: 4px; }
+.ulp-problem__text p { font-size: 0.9rem; color: var(--ulp-muted); line-height: 1.5; }
 
-/* TÉMOIGNAGES */
-.ulp-testimonials { display: flex; flex-direction: column; gap: 16px; margin-bottom: 36px; }
-.ulp-tcard { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
-.ulp-tcard__stars { color: #f59e0b; font-size: 1rem; margin-bottom: 10px; }
-.ulp-tcard__text { font-size: 0.9rem; line-height: 1.6; color: #1C1917; font-style: italic; margin: 0 0 12px; }
-.ulp-tcard__author { font-size: 0.85rem; font-weight: 700; color: #8B5CF6; margin: 0; }
+/* ===== 3. MECANISME ===== */
+.ulp-meca__visual { background: #fff; border-radius: var(--ulp-radius); padding: 24px; box-shadow: var(--ulp-shadow); margin-bottom: 24px; }
+.ulp-meca__visual h3 { font-size: 1.1rem; margin-bottom: 12px; }
+.ulp-meca__visual p { font-size: 0.9rem; color: var(--ulp-muted); line-height: 1.6; }
+.ulp-meca__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+.ulp-meca__stat { text-align: center; background: #fff; border-radius: var(--ulp-radius); padding: 20px 12px; box-shadow: var(--ulp-shadow); }
+.ulp-meca__stat strong { display: block; font-family: 'Montserrat', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--ulp-violet); }
+.ulp-meca__stat span { font-size: 0.78rem; color: var(--ulp-muted); font-weight: 500; }
+.ulp-meca__efsa { font-size: 0.78rem; color: var(--ulp-muted); text-align: center; margin-top: 12px; line-height: 1.5; }
 
-/* OFFRE */
-.ulp-offers { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
-.ulp-offer-card { border: 2px solid rgba(139,92,246,0.15); border-radius: 16px; padding: 24px; position: relative; background: #fff; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
-.ulp-offer-card--best { border-color: #8B5CF6; background: #F5F0FF; }
-.ulp-offer-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #8B5CF6; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 4px 16px; border-radius: 999px; white-space: nowrap; }
-.ulp-offer-label { font-size: 0.8rem; font-weight: 600; color: #8B5CF6; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 4px; }
-.ulp-offer-name { font-size: 1.2rem; font-weight: 700; margin: 0 0 4px; color: #1C1917; }
-.ulp-offer-format { font-size: 0.85rem; color: #57534E; margin: 0 0 12px; }
-.ulp-offer-price { font-size: 1.6rem; font-weight: 700; color: #1C1917; margin: 0 0 2px; }
-.ulp-offer-price del { font-size: 1rem; color: #aaa; font-weight: 400; margin-right: 6px; }
-.ulp-offer-daily { font-size: 0.85rem; color: #8B5CF6; font-weight: 600; margin: 0 0 16px; }
+/* ===== 4. INGREDIENTS ===== */
+.ulp-ingr__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.ulp-ingr__card { background: #fff; border-radius: var(--ulp-radius); padding: 20px 16px; box-shadow: var(--ulp-shadow); text-align: center; }
+.ulp-ingr__emoji { font-size: 1.8rem; margin-bottom: 8px; }
+.ulp-ingr__card h3 { font-size: 0.9rem; font-weight: 800; margin-bottom: 4px; }
+.ulp-ingr__card p { font-size: 0.78rem; color: var(--ulp-muted); line-height: 1.4; }
 
-/* URGENCE */
-.ulp-urgency { background: #fff; border: 1px solid rgba(139,92,246,0.2); border-radius: 12px; padding: 12px 16px; text-align: center; margin-bottom: 24px; }
-.ulp-urgency p { margin: 0; font-size: 0.9rem; font-weight: 600; color: #8B5CF6; }
+/* ===== 5. TEMOIGNAGES ===== */
+.ulp-testi__list { display: flex; flex-direction: column; gap: 16px; }
+.ulp-tcard { background: #fff; border-radius: var(--ulp-radius); padding: 24px; box-shadow: var(--ulp-shadow); }
+.ulp-tcard__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.ulp-tcard__stars { color: #F59E0B; font-size: 0.95rem; letter-spacing: 1px; }
+.ulp-tcard__text { font-size: 0.9rem; line-height: 1.6; color: var(--ulp-text); font-style: italic; margin-bottom: 14px; }
+.ulp-tcard__author { font-size: 0.85rem; font-weight: 600; color: var(--ulp-violet); }
+.ulp-tcard__meta { font-size: 0.78rem; color: var(--ulp-muted); }
 
-/* TRUST FINAL */
-.ulp-trust-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 20px; margin-top: 16px; }
-.ulp-trust-row span { font-size: 0.8rem; color: #57534E; }
-
-/* COMPARE */
-.ulp-compare { background: #fff; border-radius: 16px; padding: 18px; margin: 16px 0; box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
-.ulp-compare__title { font-size: 0.85rem; color: #57534E; margin: 0 0 10px; font-weight: 600; }
-.ulp-compare__row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; font-size: 0.9rem; }
-.ulp-compare__row + .ulp-compare__row { border-top: 1px solid rgba(0,0,0,0.06); }
-.ulp-compare__bad { color: #dc2626; }
-.ulp-compare__good { color: #16a34a; font-weight: 700; }
-
-/* FAQ */
+/* ===== 6. FAQ ===== */
 .ulp-faq-item { border-bottom: 1px solid rgba(0,0,0,0.08); }
-.ulp-faq-item summary { padding: 16px 0; font-size: 0.95rem; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; color: #1C1917; }
+.ulp-faq-item summary { padding: 16px 0; font-size: 0.95rem; font-weight: 600; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--ulp-text); font-family: 'Inter', sans-serif; }
 .ulp-faq-item summary::-webkit-details-marker { display: none; }
-.ulp-faq-item summary::after { content: '+'; color: #8B5CF6; font-size: 1.3rem; font-weight: 300; flex-shrink: 0; margin-left: 12px; }
-.ulp-faq-item[open] summary::after { content: '−'; }
-.ulp-faq-item__body { padding: 0 0 16px; font-size: 0.9rem; color: #57534E; line-height: 1.6; }
+.ulp-faq-item summary::after { content: '+'; color: var(--ulp-violet); font-size: 1.4rem; font-weight: 300; flex-shrink: 0; margin-left: 12px; transition: transform 0.2s; }
+.ulp-faq-item[open] summary::after { content: '\2212'; }
+.ulp-faq-item__body { padding: 0 0 16px; font-size: 0.9rem; color: var(--ulp-muted); line-height: 1.6; }
 
-/* FOOTER */
+/* ===== 7. OFFRE ===== */
+.ulp-offer__box { background: #fff; border: 2px solid var(--ulp-violet); border-radius: var(--ulp-radius); padding: 28px 24px; text-align: center; box-shadow: 0 4px 24px rgba(139,92,246,0.12); }
+.ulp-offer__countdown { font-size: 0.85rem; font-weight: 600; color: var(--ulp-violet); margin-bottom: 16px; }
+.ulp-offer__price-old { font-size: 1.1rem; color: #aaa; text-decoration: line-through; }
+.ulp-offer__price-new { font-size: 2.2rem; font-family: 'Montserrat', sans-serif; font-weight: 800; color: var(--ulp-text); margin: 4px 0 6px; }
+.ulp-offer__daily { font-size: 0.9rem; font-weight: 600; color: var(--ulp-violet); margin-bottom: 20px; }
+.ulp-offer__checklist { list-style: none; text-align: left; margin: 0 0 24px; padding: 0; }
+.ulp-offer__checklist li { font-size: 0.88rem; color: var(--ulp-text); padding: 5px 0; font-weight: 500; }
+.ulp-offer__checklist li::before { content: "\2713  "; color: var(--ulp-violet); font-weight: 700; }
+.ulp-offer__secure { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 16px; margin-top: 16px; }
+.ulp-offer__secure span { font-size: 0.78rem; color: var(--ulp-muted); font-weight: 500; }
+
+/* ===== 8. MENTIONS LEGALES ===== */
+.ulp-legal { padding: 32px 20px; background: #F7F5F0; }
+.ulp-legal__inner { max-width: 540px; margin: 0 auto; font-size: 0.75rem; color: #999; line-height: 1.7; text-align: center; }
+.ulp-legal__inner p + p { margin-top: 6px; }
+
+/* ===== FOOTER ===== */
 .ulp-footer { background: #111; color: #888; padding: 40px 20px; text-align: center; }
 .ulp-footer__links { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 16px; margin-bottom: 16px; }
-.ulp-footer__links a { color: #999; font-size: 0.8rem; text-decoration: none; transition: color 0.2s; }
+.ulp-footer__links a { color: #999; font-size: 0.8rem; transition: color 0.2s; }
 .ulp-footer__links a:hover { color: #fff; }
-.ulp-footer__legal { font-size: 0.75rem; line-height: 1.6; margin-bottom: 16px; color: #666; }
 .ulp-footer__copy { font-size: 0.75rem; color: #555; }
 
-/* STICKY */
-.ulp-sticky { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; z-index: 200; transform: translateY(100%); transition: transform 0.3s ease; box-shadow: 0 -4px 20px rgba(0,0,0,0.08); }
+/* ===== STICKY ATC MOBILE ===== */
+.ulp-sticky { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; z-index: 200; transform: translateY(100%); transition: transform 0.3s ease; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); }
 .ulp-sticky--visible { transform: translateY(0); }
-.ulp-sticky__info { color: #1C1917; }
-.ulp-sticky__info strong { display: block; font-size: 1rem; font-weight: 700; }
-.ulp-sticky__info small { font-size: 0.75rem; color: #57534E; }
-.ulp-sticky__btn { background: #8B5CF6; color: #fff; padding: 12px 24px; border-radius: 999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap; cursor: pointer; border: none; transition: background 0.2s; }
-.ulp-sticky__btn:hover { background: #7C3AED; }
+.ulp-sticky__info strong { display: block; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 800; }
+.ulp-sticky__info small { font-size: 0.75rem; color: var(--ulp-muted); }
+.ulp-sticky__btn { background: var(--ulp-violet); color: #fff; padding: 12px 24px; border-radius: 999px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9rem; white-space: nowrap; cursor: pointer; border: none; transition: background 0.2s; box-shadow: 0 4px 14px rgba(139,92,246,0.3); }
+.ulp-sticky__btn:hover { background: var(--ulp-violet-dark); }
 
-/* DESKTOP */
+/* ===== SECTION TITLE ===== */
+.ulp-title { font-size: 1.7rem; line-height: 1.15; letter-spacing: -0.03em; margin: 0 0 8px; }
+.ulp-subtitle { font-size: 0.95rem; color: var(--ulp-muted); line-height: 1.5; margin: 0 0 28px; }
+
+/* ===== SCROLL REVEAL ===== */
+.ulp-reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.ulp-reveal--visible { opacity: 1; transform: translateY(0); }
+
+/* ===== DESKTOP ===== */
 @media (min-width: 700px) {
   .ulp-hero { padding: 64px 40px; }
   .ulp-hero__inner { display: grid; grid-template-columns: 1fr 300px; align-items: center; gap: 48px; max-width: 900px; }
   .ulp-hero__product { margin: 0; }
   .ulp-hero__product img { max-width: 280px; }
-  .ulp-hero h1 { font-size: 3rem; }
-  .ulp-section h2 { font-size: 2.2rem; }
-  .ulp-section { max-width: 680px; }
-  .ulp-offers { flex-direction: row; }
-  .ulp-offer-card { flex: 1; }
-  .ulp-testimonials { flex-direction: row; }
+  .ulp-hero h1 { font-size: 2.8rem; }
+  .ulp-inner { max-width: 680px; }
+  .ulp-title { font-size: 2.2rem; }
+  .ulp-problem__grid { flex-direction: row; }
+  .ulp-problem__card { flex: 1; flex-direction: column; text-align: center; align-items: center; }
+  .ulp-ingr__grid { grid-template-columns: repeat(3, 1fr); }
+  .ulp-testi__list { flex-direction: row; }
   .ulp-tcard { flex: 1; }
+  .ulp-sticky { display: none; }
 }
 </style>
 
@@ -143,289 +161,325 @@
     {%- if settings.logo -%}
       {{ settings.logo | image_url: width: 120 | image_tag: loading: 'eager', height: 28, width: 120 }}
     {%- else -%}
-      <span style="font-size:20px;font-weight:900;color:#8B5CF6;">UBURN</span>
+      <span style="font-size:20px;font-weight:900;color:#8B5CF6;font-family:'Montserrat',sans-serif;">UBURN</span>
     {%- endif -%}
   </a>
-  <a href="/cart" class="ulp-header__cart" aria-label="Panier">🛒</a>
+  <a href="/cart" class="ulp-header__cart" aria-label="Panier">&#128722;</a>
 </header>
 
-<!-- HERO -->
+<!-- ===== 1. HERO ===== -->
 <section class="ulp-hero">
   <div class="ulp-hero__inner">
     <div>
-      <p class="ulp-hero__stars">★★★★★ Nos premières clientes adorent</p>
-      <h1>Les fringales de 16h ? <em>Uburn les arrête.</em> Naturellement.</h1>
-      <p class="ulp-hero__sub">La boisson à base d'ube adoptée par nos premières clientes en France. 0% caféine. 4h de satiété durable.</p>
-      <ul class="ulp-hero__bullets">
-        <li>6 actifs naturels scientifiquement sélectionnés</li>
-        <li>0% caféine — se prend à toute heure</li>
-        <li>Livraison offerte en France</li>
-        <li>Marque française — R Glow F.Z.E</li>
-      </ul>
-      <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre', 0)" class="ulp-btn ulp-btn--violet ulp-btn--large">
-        Commander maintenant — €34,50 →
-      </a>
+      <h1>Vous grignotez&nbsp;à&nbsp;16h. <em>Ce n'est pas un probl&egrave;me de volont&eacute;.</em></h1>
+      <p class="ulp-hero__sub">Uburn contribue au contr&ocirc;le de l'app&eacute;tit gr&acirc;ce au glucomannane. Jusqu'&agrave; 4h de sati&eacute;t&eacute;. 0% caf&eacute;ine.</p>
+      <div class="ulp-hero__cta-wrap">
+        <a href="javascript:void(0)" onclick="uburnCheckout()" class="ulp-btn ulp-btn--violet ulp-btn--large">Commander maintenant &mdash; 34,50&euro;</a>
+      </div>
+      <div class="ulp-hero__trust">
+        <span>0,61&euro;/jour</span>
+        <span>Livraison offerte</span>
+        <span>Fabriqu&eacute; en France</span>
+        <span>Sans abonnement</span>
+      </div>
     </div>
     <div class="ulp-hero__product">
-      <img src="{{ 'POUDRE_UBE_90GR_M.jpg' | file_img_url: '300x' }}" alt="Uburn — Boisson ube satiété" loading="eager" width="240" height="300">
+      <img src="{{ 'POUDRE_UBE_90GR_M.jpg' | file_img_url: '400x' }}" alt="Uburn — Boisson ube sati&eacute;t&eacute;" loading="eager" width="280" height="350">
     </div>
   </div>
 </section>
 
-<!-- TRUST BAR -->
-<div class="ulp-trust">
-  <span>🌿 100% naturel</span>
-  <span>☕ 0% caféine</span>
-  <span>🇫🇷 Marque française</span>
-  <span>🚚 Livraison offerte</span>
-</div>
-
-<!-- BÉNÉFICES -->
-<div class="ulp-section--white">
-<div class="ulp-section">
-  <h2>Pourquoi Uburn ?</h2>
-  <div class="ulp-benefits">
-    <div class="ulp-benefit">
-      <div class="ulp-benefit__icon">🌿</div>
-      <div class="ulp-benefit__text">
-        <strong>Satiété durable jusqu'à 4h</strong>
-        <p>Le konjac (glucomannane) contribue au contrôle de l'appétit — prouvé par l'EFSA.</p>
+<!-- ===== 2. PROBLEME ===== -->
+<div class="ulp-bg-white ulp-wrap">
+  <div class="ulp-inner ulp-reveal">
+    <h2 class="ulp-title">On conna&icirc;t ce sc&eacute;nario.</h2>
+    <p class="ulp-subtitle">Ce n'est pas vous. C'est votre glyc&eacute;mie.</p>
+    <div class="ulp-problem__grid">
+      <div class="ulp-problem__card">
+        <div class="ulp-problem__icon">&#9201;</div>
+        <div class="ulp-problem__text">
+          <h3>16h &mdash; le placard vous appelle</h3>
+          <p>La glyc&eacute;mie chute, le cerveau r&eacute;clame du sucre. Vous c&eacute;dez alors que vous n'avez m&ecirc;me pas faim.</p>
+        </div>
       </div>
-    </div>
-    <div class="ulp-benefit">
-      <div class="ulp-benefit__icon">⚡</div>
-      <div class="ulp-benefit__text">
-        <strong>Énergie stable, sans crash</strong>
-        <p>Les MCT de coco fournissent une énergie rapide et propre, sans pic d'insuline.</p>
+      <div class="ulp-problem__card">
+        <div class="ulp-problem__icon">&#127769;</div>
+        <div class="ulp-problem__text">
+          <h3>Le soir &mdash; le frigo gagne</h3>
+          <p>Apr&egrave;s le d&icirc;ner, la fatigue baisse la garde. Chocolat, fromage, biscuits&hellip; encore.</p>
+        </div>
       </div>
-    </div>
-    <div class="ulp-benefit">
-      <div class="ulp-benefit__icon">💜</div>
-      <div class="ulp-benefit__text">
-        <strong>Gourmand & naturel — 30 kcal</strong>
-        <p>Saveur ube unique et délicate. Riche en anthocyanes antioxydants.</p>
-      </div>
-    </div>
-  </div>
-  <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre', 0)" class="ulp-btn ulp-btn--violet">Essayer Uburn →</a>
-</div>
-</div>
-
-<!-- COMMENT ÇA MARCHE -->
-<div class="ulp-section--alt">
-<div class="ulp-section">
-  <h2>Simple comme 1, 2, 3</h2>
-  <div class="ulp-steps">
-    <div class="ulp-step">
-      <div class="ulp-step__num">1</div>
-      <div class="ulp-step__text">
-        <strong>Une cuillère d'Uburn</strong>
-        <p>Dans votre verre — eau, lait ou boisson préférée</p>
-      </div>
-    </div>
-    <div class="ulp-step">
-      <div class="ulp-step__num">2</div>
-      <div class="ulp-step__text">
-        <strong>Mélangez 10 secondes</strong>
-        <p>Se dissout parfaitement, sans grumeaux</p>
-      </div>
-    </div>
-    <div class="ulp-step">
-      <div class="ulp-step__num">3</div>
-      <div class="ulp-step__text">
-        <strong>4h sans fringales</strong>
-        <p>Savourez votre pause. Le reste, Uburn s'en charge.</p>
+      <div class="ulp-problem__card">
+        <div class="ulp-problem__icon">&#9889;</div>
+        <div class="ulp-problem__text">
+          <h3>Fatigue &amp; frustration</h3>
+          <p>Vous avez tout essay&eacute;. Rien ne tient. La volont&eacute; seule ne suffit pas.</p>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
 
-<!-- TÉMOIGNAGES -->
-<div class="ulp-section--white">
-<div class="ulp-section">
-  <h2>Elles ont essayé Uburn</h2>
-  <div class="ulp-testimonials">
-    <div class="ulp-tcard">
-      <div class="ulp-tcard__stars">★★★★★</div>
-      <p class="ulp-tcard__text">"Depuis que j'ai intégré Uburn dans ma routine, je ne grignote plus l'après-midi. Le goût est top !"</p>
-      <p class="ulp-tcard__author">Marie L.</p>
+<!-- ===== 3. MECANISME ===== -->
+<div class="ulp-bg-violet ulp-wrap">
+  <div class="ulp-inner ulp-reveal">
+    <h2 class="ulp-title">Comment Uburn agit</h2>
+    <p class="ulp-subtitle">Le glucomannane (konjac) forme un gel naturel dans l'estomac qui contribue au contr&ocirc;le de l'app&eacute;tit.</p>
+    <div class="ulp-meca__visual">
+      <h3>Le m&eacute;canisme</h3>
+      <p>Le glucomannane absorbe jusqu'&agrave; 100x son poids en eau et forme un gel volumineux. Ce gel occupe naturellement l'estomac, contribuant &agrave; la sensation de sati&eacute;t&eacute;. L'effet est progressif et dure jusqu'&agrave; 4 heures.</p>
     </div>
-    <div class="ulp-tcard">
-      <div class="ulp-tcard__stars">★★★★★</div>
-      <p class="ulp-tcard__text">"J'étais sceptique mais après 2 semaines, la différence est réelle. Je me sens mieux, je grignote moins."</p>
-      <p class="ulp-tcard__author">Sophie D.</p>
+    <div class="ulp-meca__stats">
+      <div class="ulp-meca__stat">
+        <strong>30</strong>
+        <span>kcal / dose</span>
+      </div>
+      <div class="ulp-meca__stat">
+        <strong>4h</strong>
+        <span>de sati&eacute;t&eacute;</span>
+      </div>
+      <div class="ulp-meca__stat">
+        <strong>6</strong>
+        <span>actifs naturels</span>
+      </div>
     </div>
-    <div class="ulp-tcard">
-      <div class="ulp-tcard__stars">★★★★★</div>
-      <p class="ulp-tcard__text">"Le goût violet est unique et agréable. Mon moment préféré de la journée. Les copines veulent toutes essayer."</p>
-      <p class="ulp-tcard__author">Nathalie R.</p>
-    </div>
-  </div>
-  <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre', 0)" class="ulp-btn ulp-btn--violet">Rejoindre les premières clientes →</a>
-</div>
-</div>
-
-<!-- OFFRE -->
-<div class="ulp-section--cream">
-<div class="ulp-section">
-  <h2>Choisir sa cure</h2>
-
-  <!-- URGENCE -->
-  <div class="ulp-urgency">
-    <p>⏳ Offre de lancement — Prix valable encore <span id="ulp-countdown">23:59:59</span></p>
-  </div>
-
-  <div class="ulp-offers">
-    <div class="ulp-offer-card">
-      <p class="ulp-offer-label">Cure Starter</p>
-      <p class="ulp-offer-name">1 pot — 30 jours</p>
-      <p class="ulp-offer-format">90g · 1 prise/jour</p>
-      <p class="ulp-offer-price">€34,50</p>
-      <p class="ulp-offer-daily">= €1,15/jour</p>
-      <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre', 0)" class="ulp-btn ulp-btn--white">Commander →</a>
-    </div>
-    <div class="ulp-offer-card ulp-offer-card--best">
-      <span class="ulp-offer-badge">⭐ BEST-SELLER — ÉCONOMISEZ 21%</span>
-      <p class="ulp-offer-label">Cure Rapide</p>
-      <p class="ulp-offer-name">2 pots — 30 jours</p>
-      <p class="ulp-offer-format">270g · 3 prises/jour · résultats optimaux</p>
-      <p class="ulp-offer-price"><del>€69,50</del> €54,50</p>
-      <p class="ulp-offer-daily">= €0,61/jour</p>
-      <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre', 1)" class="ulp-btn ulp-btn--violet">Commander →</a>
-    </div>
-  </div>
-
-  <!-- COMPARAISON PRIX -->
-  <div class="ulp-compare">
-    <p class="ulp-compare__title">Compare ce que tu dépenses déjà :</p>
-    <div class="ulp-compare__row">
-      <span>☕ Snack + boisson à 16h</span>
-      <span class="ulp-compare__bad">3 à 5€/jour</span>
-    </div>
-    <div class="ulp-compare__row">
-      <span>💜 Uburn</span>
-      <span class="ulp-compare__good">0,61€/jour</span>
-    </div>
-  </div>
-
-  <div class="ulp-trust-row">
-    <span>💳 Paiement sécurisé</span>
-    <span>📦 Livraison offerte</span>
-    <span>🔄 Commande unique, pas d'abonnement</span>
-    <span>🇫🇷 Marque française</span>
+    <p class="ulp-meca__efsa">All&eacute;gation autoris&eacute;e EFSA ID&nbsp;3120 : &laquo;&nbsp;Le glucomannane contribue &agrave; la perte de poids dans le cadre d'un r&eacute;gime hypocalorique.&nbsp;&raquo;</p>
   </div>
 </div>
-</div>
 
-<!-- FAQ -->
-<div class="ulp-section--alt">
-<div class="ulp-section">
-  <h2>Tes questions, nos réponses</h2>
-
-  <details class="ulp-faq-item">
-    <summary>Quel goût ça a ?</summary>
-    <div class="ulp-faq-item__body">Uburn a une saveur unique d'ube (patate douce violette), légèrement sucrée et gourmande. La plupart de nos clientes disent que c'est leur moment préféré de la journée.</div>
-  </details>
-  <details class="ulp-faq-item">
-    <summary>C'est vraiment naturel ?</summary>
-    <div class="ulp-faq-item__body">100% des ingrédients sont d'origine naturelle. Sans caféine, sans sucre ajouté, sans colorants artificiels. Marque française.</div>
-  </details>
-  <details class="ulp-faq-item">
-    <summary>Combien de temps pour voir des résultats ?</summary>
-    <div class="ulp-faq-item__body">La plupart de nos clientes ressentent un effet sur la satiété dès les premières prises. Nous recommandons une cure de 30 jours minimum pour des résultats durables.</div>
-  </details>
-  <details class="ulp-faq-item">
-    <summary>Y a-t-il des contre-indications ?</summary>
-    <div class="ulp-faq-item__body">Uburn est déconseillé aux femmes enceintes et allaitantes. Ce complément alimentaire ne doit pas se substituer à une alimentation variée et équilibrée. En cas de doute, consultez votre médecin.</div>
-  </details>
-  <details class="ulp-faq-item">
-    <summary>Y a-t-il un abonnement caché ?</summary>
-    <div class="ulp-faq-item__body">Non, jamais. Tu commandes une fois, tu reçois ton pot. Pas de prélèvement automatique. Pas d'abonnement. C'est toi qui décides.</div>
-  </details>
-</div>
-</div>
-
-<!-- CTA FINAL -->
-<div class="ulp-section--white">
-<div class="ulp-section" style="text-align:center;">
-  <h2>Prête à reprendre le contrôle ?</h2>
-  <p style="color:#57534E;margin-bottom:28px;">Rejoins les premières clientes Uburn. Livraison offerte en France.</p>
-  <a href="javascript:void(0)" onclick="addAndCheckout('ube-poudre', 0)" class="ulp-btn ulp-btn--violet ulp-btn--large" style="max-width:360px;margin:0 auto;">
-    Commander maintenant — €34,50 →
-  </a>
-  <div class="ulp-trust-row" style="margin-top:20px;">
-    <span>🔒 Paiement 100% sécurisé</span>
-    <span>📦 Livraison offerte</span>
-    <span>🇫🇷 Marque française</span>
+<!-- ===== 4. INGREDIENTS ===== -->
+<div class="ulp-bg-cream ulp-wrap">
+  <div class="ulp-inner ulp-reveal">
+    <h2 class="ulp-title">6 actifs. Z&eacute;ro superflu.</h2>
+    <p class="ulp-subtitle">Chaque ingr&eacute;dient a un r&ocirc;le pr&eacute;cis. Rien n'est l&agrave; pour d&eacute;corer.</p>
+    <div class="ulp-ingr__grid">
+      <div class="ulp-ingr__card">
+        <div class="ulp-ingr__emoji">&#x1F49C;</div>
+        <h3>Ube</h3>
+        <p>Patate douce violette riche en anthocyanes antioxydants</p>
+      </div>
+      <div class="ulp-ingr__card">
+        <div class="ulp-ingr__emoji">&#x1F331;</div>
+        <h3>Konjac</h3>
+        <p>Glucomannane &mdash; contribue au contr&ocirc;le de l'app&eacute;tit (EFSA)</p>
+      </div>
+      <div class="ulp-ingr__card">
+        <div class="ulp-ingr__emoji">&#x1F333;</div>
+        <h3>Fibre d'acacia</h3>
+        <p>Pr&eacute;biotique naturel pour le confort digestif</p>
+      </div>
+      <div class="ulp-ingr__card">
+        <div class="ulp-ingr__emoji">&#x1F965;</div>
+        <h3>MCT de coco</h3>
+        <p>&Eacute;nergie rapide et stable sans pic d'insuline</p>
+      </div>
+      <div class="ulp-ingr__card">
+        <div class="ulp-ingr__emoji">&#x1FAD0;</div>
+        <h3>Gingembre</h3>
+        <p>Soutient la digestion et le confort gastrique</p>
+      </div>
+      <div class="ulp-ingr__card">
+        <div class="ulp-ingr__emoji">&#x1F525;</div>
+        <h3>L-Carnitine</h3>
+        <p>Contribue au m&eacute;tabolisme &eacute;nerg&eacute;tique normal</p>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- ===== 5. TEMOIGNAGES ===== -->
+<div class="ulp-bg-white ulp-wrap">
+  <div class="ulp-inner ulp-reveal">
+    <h2 class="ulp-title">Elles ont essay&eacute; Uburn</h2>
+    <p class="ulp-subtitle">De vraies clientes, de vrais r&eacute;sultats.</p>
+    <div class="ulp-testi__list">
+      <div class="ulp-tcard">
+        <div class="ulp-tcard__header">
+          <span class="ulp-tcard__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </div>
+        <p class="ulp-tcard__text">&laquo;&nbsp;Depuis que j'ai int&eacute;gr&eacute; Uburn dans ma routine de 15h, je ne grignote plus l'apr&egrave;s-midi. Le go&ucirc;t violet est addictif&nbsp;!&nbsp;&raquo;</p>
+        <p class="ulp-tcard__author">Marie, 42 ans</p>
+        <p class="ulp-tcard__meta">Lyon</p>
+      </div>
+      <div class="ulp-tcard">
+        <div class="ulp-tcard__header">
+          <span class="ulp-tcard__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </div>
+        <p class="ulp-tcard__text">&laquo;&nbsp;J'&eacute;tais sceptique mais apr&egrave;s 2&nbsp;semaines, la diff&eacute;rence est r&eacute;elle. Je me sens mieux, je grignote beaucoup moins le soir.&nbsp;&raquo;</p>
+        <p class="ulp-tcard__author">Sophie, 38 ans</p>
+        <p class="ulp-tcard__meta">Bordeaux</p>
+      </div>
+      <div class="ulp-tcard">
+        <div class="ulp-tcard__header">
+          <span class="ulp-tcard__stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+        </div>
+        <p class="ulp-tcard__text">&laquo;&nbsp;Pratique, bon go&ucirc;t et &ccedil;a tient vraiment jusqu'au d&icirc;ner. Mon seul regret : ne pas avoir commenc&eacute; plus t&ocirc;t.&nbsp;&raquo;</p>
+        <p class="ulp-tcard__author">Nathalie, 47 ans</p>
+        <p class="ulp-tcard__meta">Toulouse</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 6. FAQ ===== -->
+<div class="ulp-bg-violet ulp-wrap">
+  <div class="ulp-inner ulp-reveal">
+    <h2 class="ulp-title">Vos questions</h2>
+
+    <details class="ulp-faq-item">
+      <summary>C'est quoi l'ube exactement ?</summary>
+      <div class="ulp-faq-item__body">L'ube est une patate douce violette originaire des Philippines, naturellement riche en anthocyanes (antioxydants). C'est elle qui donne &agrave; Uburn sa couleur violette unique et son go&ucirc;t l&eacute;g&egrave;rement sucr&eacute; &mdash; sans sucre ajout&eacute;.</div>
+    </details>
+    <details class="ulp-faq-item">
+      <summary>Comment Uburn contribue au contr&ocirc;le de l'app&eacute;tit ?</summary>
+      <div class="ulp-faq-item__body">Le glucomannane (konjac) contenu dans Uburn absorbe l'eau et forme un gel naturel dans l'estomac. Ce gel contribue &agrave; la sensation de sati&eacute;t&eacute; pendant jusqu'&agrave; 4 heures. All&eacute;gation autoris&eacute;e par l'EFSA (ID&nbsp;3120).</div>
+    </details>
+    <details class="ulp-faq-item">
+      <summary>C'est pour qui ?</summary>
+      <div class="ulp-faq-item__body">Uburn est con&ccedil;u pour les femmes qui souhaitent mieux contr&ocirc;ler leurs envies de grignotage, en particulier l'apr&egrave;s-midi et le soir. D&eacute;conseill&eacute; aux femmes enceintes et allaitantes.</div>
+    </details>
+    <details class="ulp-faq-item">
+      <summary>En combien de temps voit-on des r&eacute;sultats ?</summary>
+      <div class="ulp-faq-item__body">L'effet sur la sati&eacute;t&eacute; se ressent d&egrave;s les premi&egrave;res prises. Pour des r&eacute;sultats durables, nous recommandons une utilisation r&eacute;guli&egrave;re pendant au moins 30 jours, combin&eacute;e &agrave; une alimentation &eacute;quilibr&eacute;e.</div>
+    </details>
+    <details class="ulp-faq-item">
+      <summary>Faut-il changer son alimentation ?</summary>
+      <div class="ulp-faq-item__body">Uburn est un compl&eacute;ment alimentaire qui s'int&egrave;gre dans votre routine existante. Il ne remplace pas une alimentation vari&eacute;e et &eacute;quilibr&eacute;e. Pour des r&eacute;sultats optimaux, combinez Uburn avec de bonnes habitudes alimentaires.</div>
+    </details>
+    <details class="ulp-faq-item">
+      <summary>O&ugrave; est fabriqu&eacute; Uburn ?</summary>
+      <div class="ulp-faq-item__body">Uburn est une marque fran&ccedil;aise. La formule contient 6 actifs naturels s&eacute;lectionn&eacute;s pour leur qualit&eacute;. 0% caf&eacute;ine, sans colorants artificiels, sans sucre ajout&eacute;.</div>
+    </details>
+  </div>
+</div>
+
+<!-- ===== 7. OFFRE ===== -->
+<div class="ulp-bg-cream ulp-wrap">
+  <div class="ulp-inner ulp-reveal">
+    <h2 class="ulp-title" style="text-align:center;">Votre cure Uburn</h2>
+    <p class="ulp-subtitle" style="text-align:center;">Offre de lancement &mdash; prix limit&eacute; dans le temps.</p>
+
+    <div class="ulp-offer__box">
+      <p class="ulp-offer__countdown">&#9200; Cette offre expire dans <span id="ulp-countdown">23:59:59</span></p>
+      <p class="ulp-offer__price-old">49,50&euro;</p>
+      <p class="ulp-offer__price-new">34,50&euro;</p>
+      <p class="ulp-offer__daily">soit 0,61&euro;/jour</p>
+
+      <ul class="ulp-offer__checklist">
+        <li>1 pot Uburn &mdash; 30 jours de cure</li>
+        <li>6 actifs naturels (konjac, ube, MCT, acacia, gingembre, L-carnitine)</li>
+        <li>E-book &laquo;&nbsp;30j pour reprendre le contr&ocirc;le&nbsp;&raquo; offert</li>
+        <li>Acc&egrave;s groupe priv&eacute; Uburn Collective</li>
+        <li>Suivi nutrition WhatsApp 30 jours</li>
+        <li>0% caf&eacute;ine &mdash; se prend &agrave; toute heure</li>
+      </ul>
+
+      <a href="javascript:void(0)" onclick="uburnCheckout()" class="ulp-btn ulp-btn--violet ulp-btn--large">Commander maintenant &mdash; 34,50&euro;</a>
+
+      <div class="ulp-offer__secure">
+        <span>&#128274; Paiement s&eacute;curis&eacute;</span>
+        <span>&#128230; Livraison 48-72h</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 8. MENTIONS LEGALES ===== -->
+<div class="ulp-legal">
+  <div class="ulp-legal__inner">
+    <p>Le glucomannane contribue &agrave; la perte de poids dans le cadre d'un r&eacute;gime hypocalorique &mdash; All&eacute;gation autoris&eacute;e EFSA ID&nbsp;3120.</p>
+    <p>D&eacute;conseill&eacute; aux femmes enceintes et allaitantes. Ne se substitue pas &agrave; une alimentation vari&eacute;e et &eacute;quilibr&eacute;e ni &agrave; un mode de vie sain. Compl&eacute;ment alimentaire.</p>
+  </div>
 </div>
 
 <!-- FOOTER -->
 <footer class="ulp-footer">
-  <div class="ulp-footer__legal">
-    <p>Déconseillé aux femmes enceintes et allaitantes.</p>
-    <p>Uburn est un complément alimentaire. Ne se substitue pas à une alimentation variée et équilibrée ni à un mode de vie sain.</p>
-    <p>*Le glucomannane contribue à la perte de poids dans le cadre d'un régime hypocalorique — EFSA ID 3120</p>
-  </div>
   <div class="ulp-footer__links">
     <a href="/policies/terms-of-service">CGV</a>
-    <a href="/policies/privacy-policy">Confidentialité</a>
+    <a href="/policies/privacy-policy">Confidentialit&eacute;</a>
     <a href="/pages/contact">Contact</a>
   </div>
-  <p class="ulp-footer__copy">© {{ 'now' | date: '%Y' }} Uburn · Marque française</p>
+  <p class="ulp-footer__copy">&copy; {{ 'now' | date: '%Y' }} Uburn &middot; Marque fran&ccedil;aise</p>
 </footer>
 
 <!-- STICKY ATC MOBILE -->
 <div class="ulp-sticky" id="ulp-sticky">
   <div class="ulp-sticky__info">
-    <strong>Uburn — €34,50</strong>
+    <strong>34,50&euro;</strong>
     <small>Livraison offerte</small>
   </div>
-  <button onclick="addAndCheckout('ube-poudre', 0)" class="ulp-sticky__btn">Commander →</button>
+  <button onclick="uburnCheckout()" class="ulp-sticky__btn">Commander</button>
 </div>
 
 <script>
-async function addAndCheckout(handle, variantIndex) {
-  variantIndex = variantIndex || 0;
+/* Checkout direct */
+async function uburnCheckout() {
   try {
-    var r = await fetch('/products/' + handle + '.js');
+    var r = await fetch('/products/ube-poudre.js');
     var p = await r.json();
-    var vid = p.variants[variantIndex] ? p.variants[variantIndex].id : p.variants[0].id;
-    var res = await fetch('/cart/add.js', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:vid,quantity:1})});
-    if(res.ok) window.location.href = '/checkout';
-    else window.location.href = '/products/' + handle;
-  } catch(e) { window.location.href = '/products/' + handle; }
+    var vid = p.variants[0].id;
+    var res = await fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: vid, quantity: 1 })
+    });
+    if (res.ok) window.location.href = '/checkout';
+    else window.location.href = '/products/ube-poudre';
+  } catch (e) {
+    window.location.href = '/products/ube-poudre';
+  }
 }
 
-// Sticky ATC
-(function(){
+/* Sticky ATC — show after scrolling past hero */
+(function() {
   var s = document.getElementById('ulp-sticky');
   if (!s) return;
   window.addEventListener('scroll', function() {
-    if ((window.scrollY || window.pageYOffset) > 300) {
-      s.classList.add('ulp-sticky--visible');
-    } else {
-      s.classList.remove('ulp-sticky--visible');
-    }
+    s.classList.toggle('ulp-sticky--visible', (window.scrollY || window.pageYOffset) > 400);
   }, { passive: true });
 })();
 
-// Countdown urgence
-(function(){
+/* Countdown 24h */
+(function() {
   var el = document.getElementById('ulp-countdown');
-  if(!el) return;
-  var end = new Date(Date.now() + 24*3600*1000);
+  if (!el) return;
+  var key = 'ulp_countdown_end';
+  var stored = localStorage.getItem(key);
+  var end;
+  if (stored && Number(stored) > Date.now()) {
+    end = Number(stored);
+  } else {
+    end = Date.now() + 24 * 3600 * 1000;
+    localStorage.setItem(key, end);
+  }
   function tick() {
-    var diff = Math.max(0, end - new Date());
-    var h = Math.floor(diff/3600000);
-    var m = Math.floor((diff%3600000)/60000);
-    var s = Math.floor((diff%60000)/1000);
-    el.textContent = [h,m,s].map(function(n){return String(n).padStart(2,'0');}).join(':');
-    if(diff > 0) setTimeout(tick, 1000);
+    var diff = Math.max(0, end - Date.now());
+    var h = Math.floor(diff / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var sc = Math.floor((diff % 60000) / 1000);
+    el.textContent = [h, m, sc].map(function(n) { return String(n).padStart(2, '0'); }).join(':');
+    if (diff > 0) requestAnimationFrame(function() { setTimeout(tick, 1000); });
   }
   tick();
+})();
+
+/* Scroll reveal */
+(function() {
+  var els = document.querySelectorAll('.ulp-reveal');
+  if (!els.length) return;
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('ulp-reveal--visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(function(el) { obs.observe(el); });
+  } else {
+    els.forEach(function(el) { el.classList.add('ulp-reveal--visible'); });
+  }
 })();
 </script>
 
