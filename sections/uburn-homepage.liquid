@@ -1,0 +1,612 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800;900&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Red Hat Text',sans-serif;background:#fff;color:#242220;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    a{text-decoration:none;color:inherit}img{max-width:100%;display:block}ul{list-style:none}
+
+    :root{
+      --purple-deep:#3d1873;--purple-main:#6b2fa0;--purple-mid:#8b47c5;--purple-light:#b07de8;
+      --purple-pale:#e8dcf5;--purple-wash:#f5f0fa;--cream:#faf9f7;--warm:#f2f0ed;
+      --dark:#242220;--body:#5a5654;--muted:#8a8785;
+      --grad:linear-gradient(160deg,#3d1873 0%,#6b2fa0 40%,#8b47c5 100%);
+    }
+
+    /* ===== ANNOUNCE ===== */
+    .announce{background:var(--dark);color:#fff;text-align:center;padding:10px 20px;font-size:12.5px;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
+
+    /* ===== NAV ===== */
+    .nav{position:sticky;top:0;z-index:100;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid rgba(0,0,0,.05)}
+    .nav-logo{height:28px}
+    .nav-right{display:flex;align-items:center;gap:28px}
+    .nav-link{font-size:13.5px;font-weight:500;color:var(--body);transition:.2s}
+    .nav-link:hover{color:var(--purple-main)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;border-radius:100px;font-family:'Red Hat Text',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:.3s;border:none}
+    .btn-fill{background:var(--purple-main);color:#fff}
+    .btn-fill:hover{background:var(--purple-deep);transform:translateY(-1px);box-shadow:0 6px 20px rgba(107,47,160,.3)}
+    .btn-white{background:#fff;color:var(--purple-deep)}
+    .btn-white:hover{background:var(--purple-wash);transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,0,0,.15)}
+    .btn-outline{background:transparent;color:var(--purple-main);border:1.5px solid var(--purple-pale)}
+    .btn-outline:hover{background:var(--purple-wash)}
+
+    /* ===== TRUST RIBBON ===== */
+    .ribbon{background:var(--purple-wash);padding:10px 20px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--body);font-weight:500}
+
+    /* ===== MARQUEE ===== */
+    .marquee{padding:12px 0;overflow:hidden;border-bottom:1px solid rgba(0,0,0,.04)}
+    .marquee-track{display:flex;gap:40px;animation:slide 25s linear infinite;width:max-content}
+    .marquee-item{white-space:nowrap;font-size:12.5px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;display:flex;align-items:center;gap:10px}
+    .marquee-dot{width:5px;height:5px;border-radius:50%;background:var(--purple-light)}
+    @keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* ===== HERO ===== */
+    .hero{padding:80px 40px 60px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .hero-tag{display:inline-block;padding:8px 18px;border-radius:100px;background:var(--purple-wash);font-size:13px;font-weight:600;color:var(--purple-main);margin-bottom:24px}
+    .hero h1{font-family:'Red Hat Display',sans-serif;font-size:clamp(36px,5vw,60px);font-weight:800;line-height:1.06;margin-bottom:24px;color:var(--dark)}
+    .hero h1 .accent{color:var(--purple-mid)}
+    .hero-sub{font-size:17px;color:var(--body);line-height:1.65;margin-bottom:28px;max-width:460px}
+    .hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+    .hero-badge{padding:8px 16px;border-radius:100px;border:1px solid rgba(0,0,0,.08);font-size:13px;font-weight:500;color:var(--body);display:flex;align-items:center;gap:6px}
+    .hero-badge .ck{color:var(--purple-main);font-weight:700}
+    .hero-visual{position:relative;display:flex;justify-content:center}
+    .hero-visual img{max-height:520px;width:auto;filter:drop-shadow(0 20px 50px rgba(61,24,115,.12))}
+    .hero-float{position:absolute;background:#fff;border-radius:14px;padding:12px 18px;box-shadow:0 8px 30px rgba(0,0,0,.08);display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--dark)}
+    .hero-float.top{top:20px;right:-10px}
+    .hero-float.bottom{bottom:40px;left:-10px}
+    .float-badge{padding:4px 10px;border-radius:100px;background:var(--purple-wash);color:var(--purple-main);font-size:11px;font-weight:700}
+
+    /* ===== SECTIONS ===== */
+    .section{padding:100px 40px}
+    .section-inner{max-width:1100px;margin:0 auto}
+    .section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:2.5px;color:var(--purple-main);margin-bottom:14px}
+    .section-title{font-family:'Red Hat Display',sans-serif;font-size:clamp(26px,3.2vw,40px);font-weight:700;color:var(--dark);line-height:1.15;margin-bottom:16px}
+    .section-title .accent{color:var(--purple-mid)}
+
+    /* ===== PROBLEM SECTION ===== */
+    .problem-section{background:var(--cream)}
+    .problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+    .problem-card{background:#fff;border-radius:18px;padding:32px;border:1px solid rgba(0,0,0,.04)}
+    .problem-card h3{font-family:'Red Hat Display',sans-serif;font-size:17px;font-weight:700;color:var(--dark);margin-bottom:10px}
+    .problem-card p{font-size:14px;color:var(--body);line-height:1.6}
+    .problem-punchline{margin-top:40px;font-family:'Red Hat Display',sans-serif;font-size:clamp(20px,2.5vw,28px);font-weight:700;color:var(--dark);text-align:center;line-height:1.3}
+    .problem-punchline .accent{color:var(--purple-mid)}
+
+    /* ===== PRODUCT 2-COL ===== */
+    .prod-block{padding:100px 40px;overflow:hidden}
+    .prod-block.alt{background:var(--cream)}
+    .prod-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+    .prod-block.reverse .prod-inner{direction:rtl}
+    .prod-block.reverse .prod-text,.prod-block.reverse .prod-visual{direction:ltr}
+    .prod-text h2{font-family:'Red Hat Display',sans-serif;font-size:clamp(26px,3vw,38px);font-weight:700;color:var(--dark);line-height:1.12;margin-bottom:12px}
+    .prod-text h2 .accent{color:var(--purple-mid)}
+    .prod-text h3{font-family:'Red Hat Display',sans-serif;font-size:17px;font-weight:500;color:var(--body);margin-bottom:20px;line-height:1.45}
+    .prod-text>p{font-size:15px;color:var(--body);line-height:1.7;margin-bottom:28px}
+    .feats{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+    .feat{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--body)}
+    .feat-ck{width:20px;height:20px;border-radius:50%;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .feat-ck svg{width:12px;height:12px;stroke:var(--purple-main);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+    .prod-img{width:100%;border-radius:24px;overflow:hidden;background:linear-gradient(145deg,#e8dcf5,#f5f0fa);display:flex;align-items:center;justify-content:center;aspect-ratio:1/1}
+    .prod-img img{width:85%;height:auto;filter:drop-shadow(0 12px 30px rgba(61,24,115,.15))}
+    .prod-img-full img{width:100%;height:100%;object-fit:cover}
+
+    /* ===== HOW IT WORKS ===== */
+    .how-section{text-align:center}
+    .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px;text-align:center}
+    .how-step{}
+    .how-num{width:52px;height:52px;margin:0 auto 16px;border-radius:50%;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;font-family:'Red Hat Display',sans-serif;font-size:18px;font-weight:700;color:var(--purple-main)}
+    .how-step h4{font-family:'Red Hat Display',sans-serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:8px}
+    .how-step p{font-size:14px;color:var(--muted);line-height:1.55;max-width:260px;margin:0 auto}
+
+    /* ===== INGREDIENTS ===== */
+    .ingr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+    .ingr-card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:.3s}
+    .ingr-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.06);transform:translateY(-2px)}
+    .ingr-card-img{width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--cream)}
+    .ingr-card-img img{width:100%;height:100%;object-fit:cover}
+    .ingr-card-body{padding:20px}
+    .ingr-card h4{font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:700;color:var(--dark);margin-bottom:6px}
+    .ingr-card p{font-size:13px;color:var(--muted);line-height:1.55}
+
+    /* ===== PRESS BAR ===== */
+    .press-bar{padding:40px;text-align:center;border-top:1px solid rgba(0,0,0,.04);border-bottom:1px solid rgba(0,0,0,.04)}
+    .press-bar p{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-weight:600;margin-bottom:24px}
+    .press-logos{display:flex;gap:40px;justify-content:center;align-items:center;flex-wrap:wrap;opacity:.5}
+    .press-logos img{height:22px;width:auto}
+
+    /* ===== STATS BANNER ===== */
+    .stats-section{padding:100px 40px;background:var(--grad);text-align:center;color:#fff;position:relative;overflow:hidden}
+    .stats-section::before{content:'';position:absolute;inset:0;background:url('https://uburn.co/cdn/shop/files/FOND_FIN.jpg?v=1749644803&width=1600') center/cover no-repeat;opacity:.08;mix-blend-mode:luminosity}
+    .stats-section>*{position:relative;z-index:1}
+    .stats-section .section-inner{max-width:700px}
+    .stats-section h2{font-family:'Red Hat Display',sans-serif;font-size:clamp(26px,3.5vw,42px);font-weight:700;margin-bottom:16px;line-height:1.15}
+    .stats-section p{font-size:16px;color:rgba(255,255,255,.7);line-height:1.65;margin-bottom:36px}
+    .stats-row{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:48px}
+    .stat{text-align:center}
+    .stat-num{font-family:'Red Hat Display',sans-serif;font-size:42px;font-weight:800}
+    .stat-label{font-size:13px;color:rgba(255,255,255,.6);margin-top:4px}
+
+    /* ===== TESTIMONIALS ===== */
+    .testi-section{text-align:center}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;text-align:left}
+    .testi-card{background:var(--cream);border-radius:20px;padding:32px;border:1px solid rgba(0,0,0,.04);transition:.3s}
+    .testi-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.06)}
+    .testi-stars{color:var(--purple-main);font-size:14px;margin-bottom:14px;letter-spacing:2px}
+    .testi-text{font-size:14.5px;color:var(--body);line-height:1.65;margin-bottom:20px}
+    .testi-verified{font-size:11px;color:var(--purple-main);font-weight:600;margin-bottom:12px}
+    .testi-author{display:flex;align-items:center;gap:10px}
+    .testi-avatar{width:38px;height:38px;border-radius:50%;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;font-family:'Red Hat Display',sans-serif;font-size:13px;font-weight:700;color:var(--purple-main)}
+    .testi-name{font-weight:600;font-size:13px;color:var(--dark)}
+    .testi-role{font-size:12px;color:var(--muted)}
+
+    /* ===== BONUS ===== */
+    .bonus-section{background:var(--cream)}
+    .bonus-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:36px}
+    .bonus-card{background:#fff;border-radius:14px;padding:20px 24px;border:1px solid rgba(0,0,0,.04);display:flex;align-items:center;gap:14px}
+    .bonus-tag{padding:5px 12px;border-radius:100px;background:var(--purple-wash);color:var(--purple-main);font-size:11px;font-weight:700;white-space:nowrap}
+    .bonus-card span{font-size:14px;color:var(--dark);font-weight:500}
+
+    /* ===== PRICING ===== */
+    .pricing-section{text-align:center}
+    .pricing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:700px;margin:48px auto 0}
+    .pricing-card{background:var(--cream);border-radius:22px;padding:36px;border:2px solid transparent;transition:.3s;position:relative}
+    .pricing-card.pop{border-color:var(--purple-main);background:#fff}
+    .pricing-pop-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);padding:5px 18px;border-radius:100px;background:var(--purple-main);color:#fff;font-size:11px;font-weight:700;white-space:nowrap}
+    .pricing-card h3{font-family:'Red Hat Display',sans-serif;font-size:20px;font-weight:700;color:var(--dark);margin-bottom:4px}
+    .pricing-desc{font-size:13px;color:var(--muted);margin-bottom:20px}
+    .pricing-price{font-family:'Red Hat Display',sans-serif;font-size:38px;font-weight:800;color:var(--purple-deep)}
+    .pricing-price small{font-size:14px;font-weight:500;color:var(--muted)}
+    .pricing-per{font-size:13px;color:var(--muted);margin-bottom:24px}
+
+    /* ===== FAQ ===== */
+    .faq-section{background:var(--cream)}
+    .faq-list{max-width:700px;margin:48px auto 0}
+    .faq-item{border-bottom:1px solid rgba(0,0,0,.06);padding:20px 0;cursor:pointer}
+    .faq-q{display:flex;justify-content:space-between;align-items:center;font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:600;color:var(--dark)}
+    .faq-q::after{content:'+';font-size:20px;color:var(--purple-main);transition:.3s}
+    .faq-item.open .faq-q::after{content:'\2212'}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;font-size:14px;color:var(--body);line-height:1.65}
+    .faq-item.open .faq-a{max-height:200px;padding-top:12px}
+
+    /* ===== GUARANTEE ===== */
+    .guar-bar{padding:44px 40px;border-top:1px solid rgba(0,0,0,.05);border-bottom:1px solid rgba(0,0,0,.05)}
+    .guar-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+    .guar-icon{width:48px;height:48px;margin:0 auto 10px}
+    .guar-icon img{width:100%;height:100%}
+    .guar-item h4{font-family:'Red Hat Display',sans-serif;font-size:13px;font-weight:700;color:var(--dark);margin-bottom:2px}
+    .guar-item p{font-size:12px;color:var(--muted)}
+
+    /* ===== FOOTER ===== */
+    .footer{background:var(--cream);padding:56px 40px 28px}
+    .footer-inner{max-width:1100px;margin:0 auto}
+    .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+    .footer-brand-logo{height:24px;margin-bottom:14px}
+    .footer-brand p{font-size:13px;color:var(--muted);line-height:1.6;max-width:260px;margin-bottom:12px}
+    .footer-contact{font-size:13px;color:var(--body)}
+    .footer-col h4{font-family:'Red Hat Display',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--dark);margin-bottom:14px}
+    .footer-col a{display:block;font-size:13px;color:var(--muted);padding:4px 0;transition:.2s}
+    .footer-col a:hover{color:var(--purple-main)}
+    .footer-bottom{padding-top:20px;border-top:1px solid rgba(0,0,0,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+    .footer-bottom p{font-size:12px;color:var(--muted)}
+    .footer-legal{display:flex;gap:16px}
+    .footer-legal a{font-size:12px;color:var(--muted);transition:.2s}
+    .footer-legal a:hover{color:var(--purple-main)}
+    .footer-disc{margin-top:24px;padding:16px;background:var(--warm);border-radius:10px}
+    .footer-disc p{font-size:11px;color:var(--muted);line-height:1.6}
+
+    /* ===== ANIMATIONS ===== */
+    .reveal{opacity:0;transform:translateY(36px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    .reveal-d{transition-delay:.15s}
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;text-align:center;padding:60px 24px 40px}
+      .hero-sub{margin:0 auto 28px}
+      .hero-badges{justify-content:center}
+      .hero-visual img{max-height:360px}
+      .hero-float{display:none}
+      .prod-inner{grid-template-columns:1fr;gap:40px}
+      .prod-block.reverse .prod-inner{direction:ltr}
+      .problem-grid,.ingr-grid,.testi-grid{grid-template-columns:1fr}
+      .how-grid{grid-template-columns:1fr;gap:32px}
+      .footer-top{grid-template-columns:1fr 1fr}
+      .guar-grid{grid-template-columns:repeat(2,1fr)}
+      .pricing-grid{grid-template-columns:1fr;max-width:380px}
+      .bonus-grid{grid-template-columns:1fr}
+      .nav-link{display:none}
+    }
+    @media(max-width:600px){
+      .section,.prod-block{padding:72px 20px}
+      .nav{padding:12px 20px}
+      .guar-grid{grid-template-columns:1fr;gap:20px}
+      .footer-top{grid-template-columns:1fr;gap:28px}
+      .stats-row{gap:24px}
+      .press-logos{gap:24px}
+    }
+  </style>
+
+  <!-- ANNOUNCE -->
+  <div class="announce">LIVRAISON GRATUITE EN FRANCE</div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <img class="nav-logo" src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn">
+    <div class="nav-right">
+      <a href="#probleme" class="nav-link">Pourquoi UBurn</a>
+      <a href="#ingredients" class="nav-link">Ingrédients</a>
+      <a href="#avis" class="nav-link">Avis</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="#prix" class="btn btn-fill" style="padding:10px 22px;font-size:13px;">Commander</a>
+    </div>
+  </nav>
+
+  <!-- TRUST RIBBON -->
+  <div class="ribbon">
+    <span>✓ Ingrédients conformes EFSA</span>
+    <span>✓ 100% Végétal</span>
+    <span>✓ Sans abonnement</span>
+    <span>✓ Remboursé si insatisfait</span>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Nos premières clientes adorent Uburn</div>
+      <h1>16h. <span class="accent">Votre</span> placard reste fermé.</h1>
+      <p class="hero-sub">La boisson violette aux 6 actifs naturels qui favorise jusqu'à 4h de satiété. 30 kcal. 0% caféine.</p>
+      <div class="hero-badges">
+        <div class="hero-badge"><span class="ck">✓</span> 0% caféine</div>
+        <div class="hero-badge"><span class="ck">✓</span> 30 kcal</div>
+        <div class="hero-badge"><span class="ck">✓</span> France</div>
+        <div class="hero-badge"><span class="ck">✓</span> Livraison offerte</div>
+        <div class="hero-badge"><span class="ck">✓</span> Satisfait ou remboursé</div>
+      </div>
+      <a href="#prix" class="btn btn-fill">Essayer Uburn — 34,50€ →</a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=800" alt="Uburn — Boisson ube satiété naturelle">
+      <div class="hero-float top"><span class="float-badge">EFSA</span> Satiété validée</div>
+      <div class="hero-float bottom"><span class="float-badge">#1</span> Marque Française</div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="marquee-item"><span class="marquee-dot"></span>Livraison offerte</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>EFSA ID 3120</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>100% Naturel</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>0% Caféine</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Fabriqué en France</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Sans abonnement</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Livraison offerte</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>EFSA ID 3120</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>100% Naturel</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>0% Caféine</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Fabriqué en France</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Sans abonnement</div>
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section class="section problem-section" id="probleme">
+    <div class="section-inner reveal">
+      <div class="section-label">On connaît ce moment.</div>
+      <h2 class="section-title">Chaque jour, le même schéma <span class="accent">se répète.</span></h2>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <h3>16h — le placard vous appelle</h3>
+          <p>La glycémie chute, le cerveau réclame du sucre. Vous cédez alors que vous n'avez même pas faim.</p>
+        </div>
+        <div class="problem-card">
+          <h3>Le soir devant le frigo</h3>
+          <p>Après le dîner, la fatigue baisse la garde. Chocolat, fromage, biscuits… encore.</p>
+        </div>
+        <div class="problem-card">
+          <h3>La fatigue amplifie tout</h3>
+          <p>Vous avez tout essayé. Rien ne tient. La volonté seule ne suffit pas.</p>
+        </div>
+      </div>
+      <p class="problem-punchline">Ce n'est pas un manque de volonté.<br><span class="accent">C'est biologique.</span></p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section how-section">
+    <div class="section-inner reveal">
+      <div class="section-label">Comment Uburn agit</div>
+      <h2 class="section-title" style="text-align:center">Un mécanisme simple, <span class="accent">validé par l'EFSA.</span></h2>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-num">1</div>
+          <h4>Vous mélangez</h4>
+          <p>Mélangez une dose dans un grand verre d'eau, 30 minutes avant le repas.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">2</div>
+          <h4>Le konjac forme un gel</h4>
+          <p>Le glucomannane absorbe l'eau et crée un gel qui occupe naturellement l'estomac.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">3</div>
+          <h4>Jusqu'à 4h de satiété</h4>
+          <p>Votre cerveau reçoit le signal de satiété. Sans stimulant, sans caféine.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT: SATIETE -->
+  <div class="prod-block alt">
+    <div class="prod-inner">
+      <div class="prod-text reveal">
+        <div class="section-label">Simple. Rapide. Délicieux.</div>
+        <h2>3 gestes, 10 secondes, <span class="accent">c'est prêt.</span></h2>
+        <h3>Satiété longue durée, validée EFSA</h3>
+        <p>Le glucomannane (konjac) forme un gel naturel dans votre estomac. Résultat : vous vous sentez rassasiée sans avoir mangé plus. Les fringales de 16h, c'est fini.</p>
+        <div class="feats">
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Effet satiété dès la première prise</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Résultats visibles en 7 à 14 jours</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>30 kcal seulement par dose</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Saveur douce, noisette vanillée</div>
+        </div>
+        <a href="#prix" class="btn btn-fill">Essayer Uburn →</a>
+      </div>
+      <div class="prod-visual reveal reveal-d">
+        <div class="prod-img">
+          <img src="https://uburn.co/cdn/shop/files/Uburn_Scoop.png?v=1749644803&width=800" alt="UBurn Scoop">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT: FORMULE -->
+  <div class="prod-block reverse">
+    <div class="prod-inner">
+      <div class="prod-text reveal">
+        <div class="section-label">Formule naturelle</div>
+        <h2>6 actifs. <span class="accent">Rien de plus.</span></h2>
+        <h3>Chaque ingrédient a un rôle précis. Rien de superflu.</h3>
+        <p>100% végétal. Sans gluten. 0% caféine. Sans sucre ajouté. Une formule clean qui respecte votre corps.</p>
+        <div class="feats">
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>5g de fibres par dose</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>400mg de L-Carnitine</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>0 additifs, 0 colorants, 0 controverses</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>EFSA ID 3120</div>
+        </div>
+        <a href="#ingredients" class="btn btn-outline">Voir les ingrédients</a>
+      </div>
+      <div class="prod-visual reveal reveal-d">
+        <div class="prod-img prod-img-full" style="background:none">
+          <img src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0004_3.jpg?v=1749644803&width=800" alt="UBurn Powder">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INGREDIENTS -->
+  <section class="section" id="ingredients" style="background:var(--cream)">
+    <div class="section-inner reveal">
+      <div class="section-label">Ingrédients</div>
+      <h2 class="section-title">Des actifs naturels <span class="accent">hautement sélectionnés</span></h2>
+      <div class="ingr-grid">
+        <div class="ingr-card">
+          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1749644803&width=500" alt="Ubé violet"></div>
+          <div class="ingr-card-body"><h4>Ubé violet</h4><p>Antioxydants naturels (anthocyanes). Régule l'appétit en douceur.</p></div>
+        </div>
+        <div class="ingr-card">
+          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1749644803&width=500" alt="Konjac"></div>
+          <div class="ingr-card-body"><h4>Konjac (glucomannane)</h4><p>Satiété jusqu'à 4h — EFSA ID 3120.</p></div>
+        </div>
+        <div class="ingr-card">
+          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1749644803&width=500" alt="Fibre d'acacia"></div>
+          <div class="ingr-card-body"><h4>Fibre d'acacia</h4><p>Prébiotique doux, confort digestif.</p></div>
+        </div>
+        <div class="ingr-card">
+          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1749644803&width=500" alt="MCT de coco"></div>
+          <div class="ingr-card-body"><h4>MCT de coco</h4><p>Énergie rapide et stable. Fini le coup de barre.</p></div>
+        </div>
+        <div class="ingr-card">
+          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1749644803&width=500" alt="Gingembre"></div>
+          <div class="ingr-card-body"><h4>Gingembre</h4><p>Digestion naturelle et métabolisme soutenu.</p></div>
+        </div>
+        <div class="ingr-card">
+          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1749644803&width=500" alt="L-Carnitine"></div>
+          <div class="ingr-card-body"><h4>L-Carnitine tartrate</h4><p>Métabolisme des graisses comme source d'énergie.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRESS -->
+  <div class="press-bar">
+    <p>Ils parlent de nous</p>
+    <div class="press-logos">
+      <img src="https://uburn.co/cdn/shop/files/TF1_1989-1990.png?v=1749644803&width=150" alt="TF1">
+      <img src="https://uburn.co/cdn/shop/files/Brut_logo_svg.png?v=1749644803&width=150" alt="Brut">
+      <img src="https://uburn.co/cdn/shop/files/logo-femmeactuelle-copie_cb5c498d-5470-4a4d-83fc-7b16c264a030.png?v=1749644803&width=150" alt="Femme Actuelle">
+      <img src="https://uburn.co/cdn/shop/files/0x0.png?v=1749644803&width=150" alt="Forbes">
+      <img src="https://uburn.co/cdn/shop/files/VOGUE_revista_-_logo.png?v=1749644803&width=150" alt="Vogue">
+      <img src="https://uburn.co/cdn/shop/files/ELLE_Magazine_Logo.svg" alt="Elle">
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="section-inner reveal">
+      <h2>UBURN agit dès la première prise</h2>
+      <p>Grâce à 6 actifs naturels spécialement pensés pour les femmes qui veulent arrêter de grignoter et reprendre le contrôle.</p>
+      <a href="#prix" class="btn btn-white">Essayer Uburn — 34,50€ →</a>
+      <div class="stats-row">
+        <div class="stat"><div class="stat-num">30</div><div class="stat-label">kcal par dose</div></div>
+        <div class="stat"><div class="stat-num">4h</div><div class="stat-label">de satiété</div></div>
+        <div class="stat"><div class="stat-num">6</div><div class="stat-label">actifs naturels</div></div>
+        <div class="stat"><div class="stat-num">4.7</div><div class="stat-label">/ 5 (17 avis)</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testi-section" id="avis">
+    <div class="section-inner reveal">
+      <div class="section-label">Elles ont essayé. Elles racontent.</div>
+      <h2 class="section-title" style="text-align:center">Nos clientes partagent <span class="accent">leurs résultats.</span></h2>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Je ne pense plus au placard à 16h. Ça me soulage vraiment au quotidien."</p>
+          <div class="testi-verified">✓ Achat vérifié</div>
+          <div class="testi-author">
+            <div class="testi-avatar">M</div>
+            <div><div class="testi-name">Marion L.</div><div class="testi-role">28 ans, Lyon</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Pour 0,61€ par jour, y'a pas de risque. Et ça marche. Mon 2e pot en cours."</p>
+          <div class="testi-verified">✓ Achat vérifié</div>
+          <div class="testi-author">
+            <div class="testi-avatar">S</div>
+            <div><div class="testi-name">Sophie</div><div class="testi-role">Bordeaux</div></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Mes collègues m'ont demandé mon secret. Le goût est top et je ne grignote plus le soir."</p>
+          <div class="testi-verified">✓ Achat vérifié</div>
+          <div class="testi-author">
+            <div class="testi-avatar">N</div>
+            <div><div class="testi-name">Nathalie</div><div class="testi-role">Toulouse</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONUS -->
+  <section class="section bonus-section">
+    <div class="section-inner reveal">
+      <div class="section-label">Inclus gratuitement</div>
+      <h2 class="section-title">Avec votre commande, <span class="accent">recevez en bonus</span></h2>
+      <p style="font-size:14px;color:var(--body);margin-bottom:8px">Valeur totale : 201€ — offert avec votre cure.</p>
+      <div class="bonus-grid">
+        <div class="bonus-card"><div class="bonus-tag">GRATUIT</div><span>E-book « 30j pour reprendre le contrôle »</span></div>
+        <div class="bonus-card"><div class="bonus-tag">GRATUIT</div><span>Groupe privé « Uburn Collective »</span></div>
+        <div class="bonus-card"><div class="bonus-tag">GRATUIT</div><span>Événements UBURN en ligne</span></div>
+        <div class="bonus-card"><div class="bonus-tag">GRATUIT</div><span>Suivi nutrition WhatsApp 30j</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section pricing-section" id="prix">
+    <div class="section-inner reveal">
+      <div class="section-label">Votre offre de lancement</div>
+      <h2 class="section-title" style="text-align:center">Sans abonnement. <span class="accent">Sans engagement.</span></h2>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <h3>Découverte</h3>
+          <p class="pricing-desc">Idéal pour tester · 90g · 1 dose/jour</p>
+          <div class="pricing-price">34,50€</div>
+          <p class="pricing-per">soit 1,15€/jour</p>
+          <a href="https://uburn.co/products/ube-poudre" class="btn btn-fill" style="width:100%;justify-content:center">Commander →</a>
+        </div>
+        <div class="pricing-card pop">
+          <div class="pricing-pop-badge">Meilleure valeur</div>
+          <h3>Résultats Maximum</h3>
+          <p class="pricing-desc">Le + populaire — 3x plus de résultats</p>
+          <div class="pricing-price">54,50€ <small><s>69€</s></small></div>
+          <p class="pricing-per">= 0,61€/jour</p>
+          <a href="https://uburn.co/products/ube-poudre" class="btn btn-fill" style="width:100%;justify-content:center">Commander →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section" id="faq">
+    <div class="section-inner reveal">
+      <div class="section-label">Vos questions</div>
+      <h2 class="section-title">Les réponses les plus <span class="accent">fréquentes.</span></h2>
+      <div class="faq-list">
+        <div class="faq-item"><div class="faq-q">Comment fonctionne UBurn ?</div><div class="faq-a">Le glucomannane (konjac) contribue à la satiété dans le cadre d'une alimentation équilibrée (allégation EFSA autorisée). 1500+ femmes l'utilisent au quotidien. Satisfaite ou remboursée.</div></div>
+        <div class="faq-item"><div class="faq-q">Comment ça agit concrètement ?</div><div class="faq-a">Le konjac est une plante naturelle d'Asie. Sa fibre (glucomannane) absorbe jusqu'à 100x son poids en eau et forme un gel dans l'estomac. Vous vous sentez rassasiée sans avoir mangé plus.</div></div>
+        <div class="faq-item"><div class="faq-q">En combien de temps voit-on des résultats ?</div><div class="faq-a">La plupart des clientes ressentent l'effet satiété dès la première prise. Pour des résultats visibles sur le contrôle des fringales : 7 à 14 jours en utilisation régulière le matin.</div></div>
+        <div class="faq-item"><div class="faq-q">Y a-t-il un abonnement ?</div><div class="faq-a">Non. Aucun abonnement caché. Vous commandez quand vous voulez, vous arrêtez quand vous voulez.</div></div>
+        <div class="faq-item"><div class="faq-q">C'est compatible le soir ? Sans caféine ?</div><div class="faq-a">Oui. Uburn ne contient pas de caféine. Vous pouvez le prendre à n'importe quelle heure, même le soir, sans perturber votre sommeil.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUARANTEE -->
+  <div class="guar-bar">
+    <div class="guar-grid">
+      <div class="guar-item">
+        <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_World.svg" alt=""></div>
+        <h4>Satisfait ou remboursé</h4><p>Sans conditions</p>
+      </div>
+      <div class="guar-item">
+        <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_Fast_shipping.svg" alt=""></div>
+        <h4>Livraison gratuite</h4><p>En France</p>
+      </div>
+      <div class="guar-item">
+        <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_secure_payment.svg" alt=""></div>
+        <h4>Paiement sécurisé</h4><p>100% sécurisé</p>
+      </div>
+      <div class="guar-item">
+        <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_customer.svg" alt=""></div>
+        <h4>Sans abonnement</h4><p>Commandez quand vous voulez</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img class="footer-brand-logo" src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn">
+          <p>Reprenez le contrôle de votre alimentation avec une formule 100% naturelle, validée EFSA. Marque française.</p>
+          <div class="footer-contact">hello@uburn.co</div>
+        </div>
+        <div class="footer-col"><h4>Produit</h4><a href="#">Ube Poudre</a><a href="#">Ingrédients</a><a href="#">Résultats</a><a href="#">Avis clients</a></div>
+        <div class="footer-col"><h4>Support</h4><a href="#">FAQ</a><a href="#">Contact</a><a href="#">Livraison</a><a href="#">Retours</a></div>
+        <div class="footer-col"><h4>Entreprise</h4><a href="#">À propos</a><a href="#">Blog</a><a href="#">Presse</a><a href="#">CGV</a></div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 UBurn. Tous droits réservés.</p>
+        <div class="footer-legal"><a href="#">CGV</a><a href="#">Confidentialité</a><a href="#">Mentions légales</a><a href="#">Remboursement</a></div>
+      </div>
+      <div class="footer-disc">
+        <p>Complément alimentaire à base de glucomannane. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas. Ne se substitue pas à une alimentation variée et équilibrée. Déconseillé pendant la grossesse et l'allaitement.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    // FAQ
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      item.querySelector('.faq-q').addEventListener('click',()=>{
+        document.querySelectorAll('.faq-item').forEach(i=>{if(i!==item)i.classList.remove('open')});
+        item.classList.toggle('open');
+      });
+    });
+  </script>
+
+{% schema %}
+{
+  "name": "UBurn Homepage",
+  "tag": "section",
+  "class": "uburn-homepage-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "UBurn Homepage"
+    }
+  ]
+}
+{% endschema %}
