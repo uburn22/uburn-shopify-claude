@@ -106,6 +106,11 @@ Supported variables
               <h1 class="product-title {{ block.settings.heading_tag }}">
                 {{- product_title -}}
               </h1>
+              <!-- Social proof sous titre -->
+              <p class="uburn-social-proof">
+                <span class="uburn-social-proof__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                Adopt&eacute;e par des centaines de femmes en France
+              </p>
             {%- else -%}
               <h2 class="product-title {% if context == 'quick_buy' %}h4{% else %}{{ block.settings.heading_tag }}{% endif %}">
                 <a href="{{ product.url }}">{{ product_title }}</a>
@@ -160,6 +165,9 @@ Supported variables
                     {%- endif -%}
                   {%- endfor -%}
                 </div>
+
+                <!-- Ancrage prix -->
+                <p class="uburn-price-anchor">Moins de &euro;1/jour &middot; Moins cher qu'un jus press&eacute;</p>
 
                 {%- if block.settings.show_taxes_notice -%}
                   <p class="subheading text-subdued">
@@ -326,28 +334,33 @@ Supported variables
                 <div class="uburn-testimonial">
                   <div class="uburn-testimonial__avatar">S</div>
                   <div class="uburn-testimonial__content">
-                    <p class="uburn-testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-                    <p class="uburn-testimonial__text">&laquo;&nbsp;Je ne grignote plus &agrave; 16h. Depuis 3 semaines, c'est devenu ma routine du matin.&nbsp;&raquo;</p>
-                    <p class="uburn-testimonial__name">Sophie, 42 ans</p>
-                  </div>
-                </div>
-                <div class="uburn-testimonial">
-                  <div class="uburn-testimonial__avatar">M</div>
-                  <div class="uburn-testimonial__content">
-                    <p class="uburn-testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-                    <p class="uburn-testimonial__text">&laquo;&nbsp;Le go&ucirc;t est bon et &ccedil;a tient vraiment. Je prends le pack 2 pots maintenant.&nbsp;&raquo;</p>
-                    <p class="uburn-testimonial__name">Marie, 38 ans</p>
+                    <p class="uburn-testimonial__meta">Sophie L., 42 ans &middot; Toulouse <span class="uburn-testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></p>
+                    <p class="uburn-testimonial__text">&laquo;&nbsp;Je ne grignote plus entre les repas. D&egrave;s les premi&egrave;res prises, j'ai senti la diff&eacute;rence.&nbsp;&raquo;</p>
                   </div>
                 </div>
                 <div class="uburn-testimonial">
                   <div class="uburn-testimonial__avatar">L</div>
                   <div class="uburn-testimonial__content">
-                    <p class="uburn-testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-                    <p class="uburn-testimonial__text">&laquo;&nbsp;Pas de caf&eacute;ine, je peux le prendre le soir. C'est &ccedil;a qui m'a convaincue.&nbsp;&raquo;</p>
-                    <p class="uburn-testimonial__name">Laure, 51 ans</p>
+                    <p class="uburn-testimonial__meta">Laure M., 51 ans &middot; Lyon <span class="uburn-testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></p>
+                    <p class="uburn-testimonial__text">&laquo;&nbsp;Le go&ucirc;t est surprenant, j'adore. Je le prends m&ecirc;me le soir gr&acirc;ce au 0% caf&eacute;ine.&nbsp;&raquo;</p>
+                  </div>
+                </div>
+                <div class="uburn-testimonial">
+                  <div class="uburn-testimonial__avatar">M</div>
+                  <div class="uburn-testimonial__content">
+                    <p class="uburn-testimonial__meta">Marie D., 38 ans &middot; Paris <span class="uburn-testimonial__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></p>
+                    <p class="uburn-testimonial__text">&laquo;&nbsp;C'est la premi&egrave;re fois que &ccedil;a tient vraiment jusqu'au repas suivant.&nbsp;&raquo;</p>
                   </div>
                 </div>
               </div>
+            </div>
+
+            <!-- Bloc garantie -->
+            <div class="uburn-guarantee">
+              <div class="uburn-guarantee__icon">&#128737;</div>
+              <p class="uburn-guarantee__title">Notre engagement</p>
+              <p class="uburn-guarantee__text">La seule chose que vous perdrez, ce sont vos fringales.<br>Si vous n'&ecirc;tes pas satisfaite, nous vous remboursons. Sans conditions.</p>
+              <a href="#product-form-main-{{ product.id }}-{{ section.id }}" class="uburn-guarantee__cta">Essayer Uburn sans risque &mdash; Livraison offerte &#128666;</a>
             </div>
 
             <!-- FAQ produit — 6 questions compliance DGCCRF -->
@@ -550,23 +563,23 @@ Supported variables
               <span>&#128230; Livraison offerte</span>
             </div>
 
-            <!-- Benefits bullets -->
-            <div class="uburn-benefits">
-              <div class="uburn-benefit">
-                <span class="uburn-benefit__icon">&#127807;</span>
-                <span>Jusqu'&agrave; 4h de sati&eacute;t&eacute; naturelle</span>
+            <!-- Objection-killer bullets -->
+            <div class="uburn-objection-killers">
+              <div class="uburn-objection-killer">
+                <span class="uburn-objection-killer__check">&#10003;</span>
+                <span>Livraison offerte en France m&eacute;tropolitaine</span>
               </div>
-              <div class="uburn-benefit">
-                <span class="uburn-benefit__icon">&#9889;</span>
-                <span>0% caf&eacute;ine &mdash; &eacute;nergie sans crash</span>
+              <div class="uburn-objection-killer">
+                <span class="uburn-objection-killer__check">&#10003;</span>
+                <span>Sans engagement &middot; Sans abonnement cach&eacute;</span>
               </div>
-              <div class="uburn-benefit">
-                <span class="uburn-benefit__icon">&#128300;</span>
-                <span>All&eacute;gation EFSA valid&eacute;e (ID 3120)</span>
+              <div class="uburn-objection-killer">
+                <span class="uburn-objection-killer__check">&#10003;</span>
+                <span>Satisfait ou rembours&eacute;</span>
               </div>
-              <div class="uburn-benefit">
-                <span class="uburn-benefit__icon">&#128156;</span>
-                <span>30 kcal par portion</span>
+              <div class="uburn-objection-killer">
+                <span class="uburn-objection-killer__check">&#10003;</span>
+                <span>All&eacute;gation sant&eacute; valid&eacute;e EFSA (ID 3120)</span>
               </div>
             </div>
 

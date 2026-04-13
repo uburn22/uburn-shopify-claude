@@ -115,29 +115,109 @@
     margin: 4px 0 0;
   }
 
-  /* ── Benefits bullets ── */
-  .uburn-benefits {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  /* ── Social proof sous titre ── */
+  .uburn-social-proof {
+    text-align: center;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #374151;
+    margin: 4px 0 16px;
+  }
+  .uburn-social-proof__stars {
+    color: #f59e0b;
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  /* ── Objection-killer bullets ── */
+  .uburn-objection-killers {
+    display: flex;
+    flex-direction: column;
     gap: 8px;
     margin: 14px 0 0;
+    padding: 14px 16px;
+    background: #faf5ff;
+    border: 1px solid #ede5ff;
+    border-radius: 12px;
     font-family: system-ui, -apple-system, sans-serif;
   }
-  .uburn-benefit {
+  .uburn-objection-killer {
     display: flex;
-    align-items: flex-start;
-    gap: 8px;
+    align-items: center;
+    gap: 10px;
     font-size: 13px;
     line-height: 1.4;
     color: #374151;
   }
-  .uburn-benefit__icon {
+  .uburn-objection-killer__check {
     flex-shrink: 0;
-    font-size: 16px;
-    line-height: 1.2;
+    color: #7c3aed;
+    font-size: 15px;
+    font-weight: 700;
   }
-  @media screen and (max-width: 499px) {
-    .uburn-benefits { grid-template-columns: 1fr; }
+
+  /* ── Testimonial meta (pr&eacute;nom + ville + stars) ── */
+  .uburn-testimonial__meta {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 4px;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  .uburn-testimonial__meta .uburn-testimonial__stars {
+    margin: 0 0 0 4px;
+  }
+
+  /* ── Guarantee block ── */
+  .uburn-guarantee {
+    margin: 16px 0 0;
+    padding: 24px 20px;
+    background: #fff;
+    border: 1px solid #ede5ff;
+    border-radius: 16px;
+    text-align: center;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  .uburn-guarantee__icon {
+    font-size: 32px;
+    margin: 0 0 8px;
+  }
+  .uburn-guarantee__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 8px;
+  }
+  .uburn-guarantee__text {
+    font-size: 13px;
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0 0 16px;
+  }
+  .uburn-guarantee__cta {
+    display: inline-block;
+    background: #7c3aed;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .uburn-guarantee__cta:hover {
+    background: #6d28d9;
+    color: #fff;
+  }
+
+  /* ── Price anchor ── */
+  .uburn-price-anchor {
+    font-size: 13px;
+    color: #6b7280;
+    text-align: center;
+    margin: 6px 0 0;
+    font-family: system-ui, -apple-system, sans-serif;
   }
 
   /* ── Reassurance under ATC ── */
@@ -257,19 +337,14 @@
     color: #f59e0b;
     font-size: 12px;
     letter-spacing: 1px;
-    margin: 0 0 4px;
+    margin: 0;
   }
   .uburn-testimonial__text {
     font-size: 13px;
     color: #374151;
     line-height: 1.5;
-    margin: 0 0 4px;
-    font-style: italic;
-  }
-  .uburn-testimonial__name {
-    font-size: 11px;
-    color: #9ca3af;
     margin: 0;
+    font-style: italic;
   }
 
   /* Accordion science */
