@@ -200,30 +200,85 @@
     .reveal.visible{opacity:1;transform:translateY(0)}
     .reveal-d{transition-delay:.15s}
 
-    /* ===== RESPONSIVE ===== */
+    /* ===== STICKY MOBILE CTA ===== */
+    .sticky-mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;padding:12px 16px 16px;background:#fff;box-shadow:0 -4px 20px rgba(0,0,0,.1);border-top:1px solid rgba(0,0,0,.06)}
+    .sticky-mobile-cta a{display:block;width:100%;text-align:center;background:var(--purple-main);color:#fff;padding:15px 24px;border-radius:100px;font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:700;text-decoration:none}
+
+    /* ===== RESPONSIVE TABLET (≤900px) ===== */
     @media(max-width:900px){
-      .hero{grid-template-columns:1fr;text-align:center;padding:60px 24px 40px}
-      .hero-sub{margin:0 auto 28px}
-      .hero-badges{justify-content:center}
-      .hero-visual img{max-height:360px}
+      body{padding-bottom:72px}
+      .sticky-mobile-cta{display:block}
+      .nav-link{display:none}
+      .nav{padding:12px 20px}
+      .hero{grid-template-columns:1fr;text-align:center;padding:52px 24px 36px}
+      .hero-sub{margin:0 auto 24px;max-width:480px}
+      .hero-badges{justify-content:center;flex-wrap:wrap;gap:8px}
+      .hero-visual{order:-1}
+      .hero-visual img{max-height:300px;width:auto;margin:0 auto;display:block}
       .hero-float{display:none}
-      .prod-inner{grid-template-columns:1fr;gap:40px}
+      .prod-inner{grid-template-columns:1fr;gap:36px}
+      .prod-block{padding:72px 24px}
       .prod-block.reverse .prod-inner{direction:ltr}
-      .problem-grid,.ingr-grid,.testi-grid{grid-template-columns:1fr}
-      .how-grid{grid-template-columns:1fr;gap:32px}
+      .prod-img{max-width:320px;margin:0 auto}
+      .problem-grid{grid-template-columns:1fr}
+      .ingr-grid{grid-template-columns:repeat(2,1fr)}
+      .testi-grid{grid-template-columns:1fr}
+      .how-grid{grid-template-columns:1fr;gap:28px;max-width:380px;margin-left:auto;margin-right:auto}
       .footer-top{grid-template-columns:1fr 1fr}
       .guar-grid{grid-template-columns:repeat(2,1fr)}
-      .pricing-grid{grid-template-columns:1fr;max-width:380px}
+      .pricing-grid{grid-template-columns:1fr;max-width:380px;margin-left:auto;margin-right:auto}
       .bonus-grid{grid-template-columns:1fr}
-      .nav-link{display:none}
+      .section{padding:72px 24px}
+      .lifestyle-section{padding:72px 24px;min-height:480px}
+      .offer-block-section{padding:72px 24px}
+      .offer-block-img{max-width:280px}
+      .big-stats-row{grid-template-columns:repeat(2,1fr);gap:24px}
     }
+
+    /* ===== RESPONSIVE MOBILE (≤600px) ===== */
     @media(max-width:600px){
-      .section,.prod-block{padding:72px 20px}
-      .nav{padding:12px 20px}
-      .guar-grid{grid-template-columns:1fr;gap:20px}
-      .footer-top{grid-template-columns:1fr;gap:28px}
-      .stats-row{gap:24px}
-      .press-logos{gap:24px}
+      .section,.prod-block{padding:60px 16px}
+      .offer-block-section{padding:60px 16px}
+      .lifestyle-section{padding:60px 16px;min-height:420px}
+      .nav{padding:10px 16px}
+      .hero{padding:40px 16px 28px}
+      .hero h1{font-size:clamp(28px,8vw,38px)}
+      .hero-sub{font-size:15px}
+      .hero-badges{gap:6px}
+      .hero-badge{font-size:11.5px;padding:6px 12px}
+      .guar-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+      .guar-bar{padding:32px 16px}
+      .footer-top{grid-template-columns:1fr;gap:24px}
+      .footer{padding:40px 16px 20px}
+      .stats-row{gap:20px;flex-wrap:wrap}
+      .stat-num{font-size:34px}
+      .press-logos{gap:20px}
+      .press-logos img{height:18px}
+      .ingr-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+      .testi-grid{grid-template-columns:1fr}
+      .pricing-grid{max-width:100%}
+      .pricing-card{padding:28px 20px}
+      .pricing-price{font-size:32px}
+      .cart-preview{padding:20px 16px}
+      .cart-item{gap:10px}
+      .cart-item-img{width:44px;height:44px;min-width:44px;font-size:15px}
+      .cart-item-name{font-size:13px}
+      .cart-item-price{font-size:13px}
+      .compare-section{padding:60px 16px}
+      .benefits-section{padding:60px 16px}
+      .expert-section{padding:60px 16px}
+      .expert-card{padding:28px 20px}
+      .expert-quote{font-size:19px}
+      .offer-block-pricing{gap:16px}
+      .btn{padding:13px 24px;font-size:14px}
+      .section-title{font-size:clamp(22px,6vw,32px)}
+    }
+
+    /* ===== RESPONSIVE SMALL (≤400px) ===== */
+    @media(max-width:400px){
+      .ingr-grid{grid-template-columns:1fr}
+      .big-stats-row{grid-template-columns:1fr}
+      .hero h1{font-size:26px}
     }
   
 
@@ -328,7 +383,7 @@
 
 /* ═══ NEW: LIFESTYLE BANNER ═══ */
 .lifestyle-section{position:relative;min-height:640px;overflow:hidden;display:flex;align-items:center;padding:100px 40px}
-.lifestyle-bg{position:absolute;inset:0;background-image:url('https://cdn.shopify.com/s/files/1/0920/9436/6015/files/PRODUCT_PAGE_0005_2_1.jpg?v=1773911263');background-size:cover;background-position:center;z-index:0}
+.lifestyle-bg{position:absolute;inset:0;background-image:url('{{ 'lifestyle-bg-purple.jpg' | asset_url }}');background-size:cover;background-position:center;z-index:0}
 .lifestyle-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(61,24,115,.75) 0%,rgba(61,24,115,.3) 60%,transparent 100%)}
 .lifestyle-inner{position:relative;z-index:1;max-width:560px;color:#fff}
 .lifestyle-inner .section-label{color:var(--purple-light)}
@@ -337,6 +392,16 @@
 .lifestyle-inner p{color:rgba(255,255,255,.85);font-size:16px;line-height:1.7;margin-bottom:28px}
 .lifestyle-inner .btn-white{background:#fff;color:var(--purple-deep)}
 .lifestyle-inner .btn-white:hover{background:var(--purple-wash)}
+
+/* ═══ OFFER BLOCK (SHOWCASE + PRICING + BONUS + CART) ═══ */
+.offer-block-section{background:linear-gradient(160deg,var(--cream) 0%,var(--purple-wash) 100%);padding:100px 40px}
+.offer-block-inner{max-width:980px;margin:0 auto}
+.offer-block-header{margin-bottom:40px}
+.offer-block-img{max-width:380px;margin:0 auto 48px;text-align:center}
+.offer-block-img img{width:100%;filter:drop-shadow(0 30px 60px rgba(61,24,115,.2))}
+.offer-block-pricing{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px}
+.offer-block-bonus{margin-bottom:48px}
+@media(max-width:700px){.offer-block-pricing{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}}
 
 /* ═══ NEW: PRODUCT SHOWCASE ═══ */
 .showcase-section{background:linear-gradient(160deg,var(--cream) 0%,var(--purple-wash) 100%);padding:100px 40px;text-align:center}
@@ -362,7 +427,7 @@
       <a href="#ingredients" class="nav-link">Ingrédients</a>
       <a href="#avis" class="nav-link">Avis</a>
       <a href="#faq" class="nav-link">FAQ</a>
-      <a href="https://uburn.co/cart/51289200066879:1?checkout" class="btn btn-fill" style="padding:10px 22px;font-size:13px;">Commander</a>
+      <a href="#offer" class="btn btn-fill" style="padding:10px 22px;font-size:13px;">Commander</a>
     </div>
   </nav>
 
@@ -387,7 +452,7 @@
         <div class="hero-badge"><span class="ck">✓</span> Livraison offerte</div>
         <div class="hero-badge"><span class="ck">✓</span> Satisfait ou remboursé</div>
       </div>
-      <a href="https://uburn.co/cart/51289200066879:1?checkout" class="btn btn-fill">Commencer ma cure →</a>
+      <a href="#offer" class="btn btn-fill">Commencer ma cure →</a>
     </div>
     <div class="hero-visual">
       <img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=800" alt="Uburn — Boisson ube satiété naturelle">
@@ -414,22 +479,11 @@
     </div>
   </div>
 
-  <!-- NEW: GALLERY MOSAIC (6 images produit) -->
-  <section class="gallery-section reveal">
-    <div class="gallery-mosaic">
-      <div class="gallery-item tall"><img src="https://cdn.shopify.com/s/files/1/0920/9436/6015/files/Uburn_Listing_ecom_1.jpg?v=1772700007" alt="UBurn Listing"></div>
-      <div class="gallery-item wide"><img src="https://cdn.shopify.com/s/files/1/0920/9436/6015/files/PRODUCTPAGE_0002_5.jpg?v=1773911263" alt="UBurn Style"></div>
-      <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0920/9436/6015/files/PRODUCTPAGE_0003_4.jpg?v=1773911263" alt="UBurn Ambiance"></div>
-      <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0920/9436/6015/files/PRODUCTPAGE_0000_7.jpg?v=1773911263" alt="UBurn Detail"></div>
-      <div class="gallery-item"><img src="https://cdn.shopify.com/s/files/1/0920/9436/6015/files/PRODUCT_PAGE_0001_6_6cd95d50-55ff-4349-b486-02ff851786de.jpg?v=1773911263" alt="UBurn Texture"></div>
-    </div>
-  </section>
-
   <!-- NEW: EXPERT TESTIMONIAL CARD (IM8-inspired) -->
   <section class="expert-section">
     <div class="expert-card reveal">
       <div class="expert-img">
-        <img src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0004_3.jpg?v=1749644803&width=800" alt="Expert testimonial">
+        <img src="{{ 'expert-dr-dubois.jpg' | asset_url }}" alt="Dr. Claire Dubois">
       </div>
       <div>
         <p class="expert-quote">« Une formule rare : la science du konjac au service du quotidien des femmes. »</p>
@@ -490,6 +544,113 @@
     </div>
   </section>
 
+  <!-- OFFER BLOCK: SHOWCASE + PRICING + BONUS + CART -->
+  <section class="offer-block-section" id="offer">
+    <div class="offer-block-inner">
+
+      <!-- Titre -->
+      <div class="offer-block-header reveal">
+        <div class="section-label" style="text-align:center">Votre offre</div>
+        <h2 class="section-title" style="text-align:center">Une saveur. <span class="accent">Six actifs.</span></h2>
+        <p style="max-width:520px;margin:12px auto 0;color:var(--body);font-size:15px;line-height:1.65;text-align:center">Sans abonnement. Sans engagement. Paiement unique, livraison offerte.</p>
+      </div>
+
+      <!-- Image produit -->
+      <div class="offer-block-img reveal">
+        <img src="https://cdn.shopify.com/s/files/1/0920/9436/6015/files/Uburn_Listing_ecom_1.jpg?v=1772700007" alt="UBurn Pack">
+      </div>
+
+      <!-- Cartes prix -->
+      <div class="offer-block-pricing reveal">
+        <div class="pricing-card" id="card-decouverte">
+          <h3>Découverte</h3>
+          <p class="pricing-desc">Idéal pour tester · 90g · 1 dose/jour</p>
+          <div class="pricing-price">34,50€</div>
+          <p class="pricing-per">soit 1,15€/jour</p>
+          <a href="https://uburn.co/cart/51289200034111:1?checkout" class="btn btn-fill" style="width:100%;justify-content:center">Commander →</a>
+        </div>
+        <div class="pricing-card pop" id="card-maximum">
+          <div class="pricing-pop-badge">Meilleure valeur</div>
+          <h3>Résultats Maximum</h3>
+          <p class="pricing-desc">Le + populaire — 3x plus de résultats</p>
+          <div class="pricing-price">54,50€ <small><s>69€</s></small></div>
+          <p class="pricing-per">= 0,61€/jour</p>
+          <a href="https://uburn.co/cart/51289200066879:1?checkout" class="btn btn-fill" style="width:100%;justify-content:center">Commander →</a>
+        </div>
+      </div>
+
+      <!-- Cart preview — visible uniquement si Maximum sélectionné -->
+      <div class="cart-section-inner reveal" id="cart-preview-block">
+        <div class="section-label" style="text-align:center">Votre commande</div>
+        <h2 class="section-title" style="text-align:center">Avec votre Cure Maximum, <span class="accent">vous recevez :</span></h2>
+        <div class="cart-preview">
+          <div class="cart-title">Votre panier</div>
+          <div class="cart-item">
+            <div class="cart-item-img"><img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=200" alt=""></div>
+            <div class="cart-item-body">
+              <div class="cart-item-name">Cure Maximum — Poudre Ubé 270g</div>
+              <div class="cart-item-meta">Saveur noisette-vanille · Cure 90 jours</div>
+            </div>
+            <div class="cart-item-price">54,50€</div>
+          </div>
+          <div class="cart-item">
+            <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">E</div>
+            <div class="cart-item-body"><div class="cart-item-name">E-book « 30j pour reprendre le contrôle »</div><div class="cart-item-gift">Offert</div></div>
+            <div class="cart-item-price"><s>47€</s> 0€</div>
+          </div>
+          <div class="cart-item">
+            <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">G</div>
+            <div class="cart-item-body"><div class="cart-item-name">Groupe privé Uburn Collective</div><div class="cart-item-gift">Offert</div></div>
+            <div class="cart-item-price"><s>40€</s> 0€</div>
+          </div>
+          <div class="cart-item">
+            <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">É</div>
+            <div class="cart-item-body"><div class="cart-item-name">Événements UBurn en ligne</div><div class="cart-item-gift">Offert</div></div>
+            <div class="cart-item-price"><s>50€</s> 0€</div>
+          </div>
+          <div class="cart-item">
+            <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">W</div>
+            <div class="cart-item-body"><div class="cart-item-name">Suivi nutrition WhatsApp 30j</div><div class="cart-item-gift">Offert</div></div>
+            <div class="cart-item-price"><s>47€</s> 0€</div>
+          </div>
+          <div class="cart-sub">
+            <div class="cart-sub-row save"><span>Économies totales</span><span>−184€</span></div>
+            <div class="cart-sub-row total"><span>Total</span><span>54,50€</span></div>
+            <div class="cart-sub-note">soit 0,61€/jour sur 90 jours</div>
+          </div>
+          <a href="https://uburn.co/cart/51289200066879:1?checkout" class="cart-checkout">Continuer vers le paiement →</a>
+          <div class="cart-pay"><span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Shop Pay</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script>
+    (function() {
+      var cartBlock = document.getElementById('cart-preview-block');
+      var cardDec = document.getElementById('card-decouverte');
+      var cardMax = document.getElementById('card-maximum');
+      if (!cartBlock || !cardDec || !cardMax) return;
+
+      // Par défaut : Maximum sélectionné, cart visible
+      function selectMax() {
+        cartBlock.style.display = '';
+        cardMax.style.outline = '2px solid var(--purple-main)';
+        cardDec.style.outline = '';
+      }
+      function selectDec() {
+        cartBlock.style.display = 'none';
+        cardDec.style.outline = '2px solid var(--purple-main)';
+        cardMax.style.outline = '';
+      }
+
+      cardDec.addEventListener('click', selectDec);
+      cardMax.addEventListener('click', selectMax);
+      selectMax(); // état initial
+    })();
+  </script>
+
   <!-- NEW: LIFESTYLE BANNER -->
   <section class="lifestyle-section">
     <div class="lifestyle-bg"></div>
@@ -497,7 +658,7 @@
       <div class="section-label">Un rituel, pas une contrainte</div>
       <h2>Un moment <em>pour vous.</em> Une boisson pour votre équilibre.</h2>
       <p>Saveur noisette-vanille naturelle. Une texture fondante. Un rituel quotidien qui s'intègre dans votre routine — le matin, avant le déjeuner, ou en milieu d'après-midi.</p>
-      <a href="https://uburn.co/cart/51289200066879:1?checkout" class="btn btn-white">Commencer ma cure →</a>
+      <a href="#offer" class="btn btn-white">Commencer ma cure →</a>
     </div>
   </section>
 
@@ -515,7 +676,7 @@
           <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>30 kcal seulement par dose</div>
           <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Saveur douce, noisette vanillée</div>
         </div>
-        <a href="https://uburn.co/cart/51289200066879:1?checkout" class="btn btn-fill">Essayer Uburn →</a>
+        <a href="#offer" class="btn btn-fill">Essayer Uburn →</a>
       </div>
       <div class="prod-visual reveal reveal-d">
         <div class="prod-img">
@@ -653,18 +814,6 @@
     </div>
   </section>
 
-  <!-- NEW: PRODUCT SHOWCASE -->
-  <section class="showcase-section">
-    <div class="showcase-inner reveal">
-      <div class="section-label" style="text-align:center">La boisson</div>
-      <h2 class="section-title" style="text-align:center">Une saveur. <span class="accent">Six actifs.</span></h2>
-      <p style="max-width:520px;margin:12px auto 0;color:var(--body);font-size:15px;line-height:1.65">Noisette vanillée naturelle. Sans sucre ajouté. Texture onctueuse. Une seule dose suffit.</p>
-      <div class="showcase-image">
-        <img src="https://cdn.shopify.com/s/files/1/0920/9436/6015/files/Uburn_Listing_ecom_1.jpg?v=1772700007" alt="UBurn Pack">
-      </div>
-      <a href="https://uburn.co/cart/51289200066879:1?checkout" class="btn btn-fill" style="margin-top:32px">Commencer ma cure →</a>
-    </div>
-  </section>
 
   <!-- NEW: 6 BIENFAITS INTERACTIVE (IM8-inspired 9 organ systems) -->
   <section class="benefits-section">
@@ -735,7 +884,7 @@
         <div class="big-stat"><div class="big-stat-num">82%</div><div class="big-stat-label">Retrouvent un rythme alimentaire apaisé</div></div>
         <div class="big-stat"><div class="big-stat-num">4.7/5</div><div class="big-stat-label">Note moyenne sur 17 avis vérifiés</div></div>
       </div>
-      <a href="https://uburn.co/cart/51289200066879:1?checkout" class="btn btn-white">Commencer ma cure →</a>
+      <a href="#offer" class="btn btn-white">Commencer ma cure →</a>
       <div class="stats-row" style="margin-top:48px;opacity:.85">
         <div class="stat"><div class="stat-num">30</div><div class="stat-label">kcal par dose</div></div>
         <div class="stat"><div class="stat-num">4h</div><div class="stat-label">de satiété</div></div>
@@ -781,103 +930,6 @@
     </div>
   </section>
 
-  <!-- BONUS -->
-  <section class="section bonus-section">
-    <div class="section-inner reveal">
-      <div class="section-label">Inclus gratuitement</div>
-      <h2 class="section-title">Avec votre commande, <span class="accent">recevez en bonus</span></h2>
-      <p style="font-size:14px;color:var(--body);margin-bottom:8px">Valeur totale : 201€ — offert avec votre cure.</p>
-      <div class="bonus-grid">
-        <div class="bonus-card"><div class="bonus-tag">GRATUIT</div><span>E-book « 30j pour reprendre le contrôle »</span></div>
-        <div class="bonus-card"><div class="bonus-tag">GRATUIT</div><span>Groupe privé « Uburn Collective »</span></div>
-        <div class="bonus-card"><div class="bonus-tag">GRATUIT</div><span>Événements UBURN en ligne</span></div>
-        <div class="bonus-card"><div class="bonus-tag">GRATUIT</div><span>Suivi nutrition WhatsApp 30j</span></div>
-      </div>
-    </div>
-  </section>
-  <!-- PRICING -->
-  <section class="section pricing-section" id="prix">
-    <div class="section-inner reveal">
-      <div class="section-label">Votre offre de lancement</div>
-      <h2 class="section-title" style="text-align:center">Sans abonnement. <span class="accent">Sans engagement.</span></h2>
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <h3>Découverte</h3>
-          <p class="pricing-desc">Idéal pour tester · 90g · 1 dose/jour</p>
-          <div class="pricing-price">34,50€</div>
-          <p class="pricing-per">soit 1,15€/jour</p>
-          <a href="https://uburn.co/cart/51289200034111:1?checkout" class="btn btn-fill" style="width:100%;justify-content:center">Commander →</a>
-        </div>
-        <div class="pricing-card pop">
-          <div class="pricing-pop-badge">Meilleure valeur</div>
-          <h3>Résultats Maximum</h3>
-          <p class="pricing-desc">Le + populaire — 3x plus de résultats</p>
-          <div class="pricing-price">54,50€ <small><s>69€</s></small></div>
-          <p class="pricing-per">= 0,61€/jour</p>
-          <a href="https://uburn.co/cart/51289200066879:1?checkout" class="btn btn-fill" style="width:100%;justify-content:center">Commander →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- NEW: CART PREVIEW (IM8-inspired cart drawer) -->
-  <section class="cart-section">
-    <div class="cart-section-inner reveal">
-      <div class="section-label" style="text-align:center">Votre commande</div>
-      <h2 class="section-title" style="text-align:center">Avec votre Cure Maximum, <span class="accent">vous recevez :</span></h2>
-      <div class="cart-preview">
-        <div class="cart-title">Votre panier</div>
-        <div class="cart-item">
-          <div class="cart-item-img"><img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=200" alt=""></div>
-          <div class="cart-item-body">
-            <div class="cart-item-name">Cure Maximum — Poudre Ubé 270g</div>
-            <div class="cart-item-meta">Saveur noisette-vanille · Cure 90 jours</div>
-            <div class="cart-item-qty"><span>−</span>1<span>+</span></div>
-          </div>
-          <div class="cart-item-price">54,50€</div>
-        </div>
-        <div class="cart-item">
-          <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">E</div>
-          <div class="cart-item-body">
-            <div class="cart-item-name">E-book « 30j pour reprendre le contrôle »</div>
-            <div class="cart-item-gift">Offert</div>
-          </div>
-          <div class="cart-item-price"><s>47€</s>0€</div>
-        </div>
-        <div class="cart-item">
-          <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">G</div>
-          <div class="cart-item-body">
-            <div class="cart-item-name">Groupe privé Uburn Collective</div>
-            <div class="cart-item-gift">Offert</div>
-          </div>
-          <div class="cart-item-price"><s>40€</s>0€</div>
-        </div>
-        <div class="cart-item">
-          <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">É</div>
-          <div class="cart-item-body">
-            <div class="cart-item-name">Événements UBurn en ligne</div>
-            <div class="cart-item-gift">Offert</div>
-          </div>
-          <div class="cart-item-price"><s>50€</s>0€</div>
-        </div>
-        <div class="cart-item">
-          <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">W</div>
-          <div class="cart-item-body">
-            <div class="cart-item-name">Suivi nutrition WhatsApp 30j</div>
-            <div class="cart-item-gift">Offert</div>
-          </div>
-          <div class="cart-item-price"><s>47€</s>0€</div>
-        </div>
-        <div class="cart-sub">
-          <div class="cart-sub-row save"><span>Économies totales</span><span>−184€</span></div>
-          <div class="cart-sub-row total"><span>Total</span><span>54,50€</span></div>
-          <div class="cart-sub-note">soit 0,61€/jour sur 90 jours</div>
-        </div>
-        <a href="https://uburn.co/cart/51289200066879:1?checkout" class="cart-checkout">Continuer vers le paiement →</a>
-        <div class="cart-pay"><span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Shop Pay</span></div>
-      </div>
-    </div>
-  </section>
   <!-- FAQ -->
   <section class="section faq-section" id="faq">
     <div class="section-inner reveal">
@@ -955,6 +1007,11 @@
     <div class="brand-huge">UBURN</div>
     <p class="brand-legal">© 2026 UBurn · <a href="#">Privacy</a> · <a href="#">Terms of Service</a></p>
   </section>
+
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-mobile-cta">
+    <a href="#offer">Commencer ma cure — dès 34,50€</a>
+  </div>
 
   <script>
     // Scroll reveal
