@@ -625,6 +625,13 @@
   </section>
 
   <!-- OFFER BLOCK: SHOWCASE + PRICING + BONUS + CART -->
+  <style>
+    #offer-timer{text-align:center;font-size:13px;font-weight:600;color:var(--purple-main);margin-top:12px}
+    #offer-timer span{font-weight:800}
+    .pack-duration{font-size:12px;color:var(--muted);margin-bottom:16px;text-align:center}
+    .offer-rating{text-align:center;font-size:14px;color:var(--dark);font-weight:600;margin-bottom:12px;letter-spacing:.2px}
+    .social-proof{text-align:center;font-size:12.5px;color:var(--body);margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px}
+  </style>
   <section class="offer-block-section" id="offer">
     <div class="offer-block-inner">
 
@@ -633,6 +640,7 @@
         <div class="section-label" style="text-align:center">Votre offre</div>
         <h2 class="section-title" style="text-align:center">Une saveur. <span class="accent">Six actifs.</span></h2>
         <p style="max-width:400px;margin:10px auto 0;color:var(--body);font-size:14px;text-align:center">Paiement unique · Livraison offerte</p>
+        <p id="offer-timer">🕐 Livraison offerte encore <span id="countdown"></span></p>
       </div>
 
       <!-- Image produit -->
@@ -647,6 +655,7 @@
           <p class="pricing-desc">Idéal pour tester · 90g · 1 dose/jour</p>
           <div class="pricing-price">34,50€</div>
           <p class="pricing-per">soit 1,15€/jour</p>
+          <p class="pack-duration">30 jours · 1 dose/jour</p>
           <a href="https://uburn.co/cart/51289200034111:1?checkout" class="btn btn-fill" style="width:100%;justify-content:center">Commander →</a>
         </div>
         <div class="pricing-card pop" id="card-maximum">
@@ -655,6 +664,7 @@
           <p class="pricing-desc">Le + populaire — 3x plus de résultats</p>
           <div class="pricing-price">54,50€ <small><s>69€</s></small></div>
           <p class="pricing-per">= 0,61€/jour</p>
+          <p class="pack-duration">30 jours · 3 doses/jour</p>
           <a href="https://uburn.co/cart/51289200066879:1?checkout" class="btn btn-fill" style="width:100%;justify-content:center">Commander →</a>
         </div>
       </div>
@@ -698,7 +708,9 @@
             <div class="cart-sub-row total"><span>Total</span><span>54,50€</span></div>
             <div class="cart-sub-note">soit 0,61€/jour sur 90 jours</div>
           </div>
+          <p class="offer-rating">★★★★★ 4,7/5 · 1 500+ clientes satisfaites</p>
           <a href="https://uburn.co/cart/51289200066879:1?checkout" class="cart-checkout">Continuer vers le paiement →</a>
+          <p class="social-proof">🟢 23 personnes regardent cette offre en ce moment</p>
           <div class="cart-pay"><span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Shop Pay</span></div>
         </div>
       </div>
@@ -1072,6 +1084,23 @@
   </div>
 
   <script>
+    // Countdown timer (6h, sessionStorage)
+    (function(){
+      var el=document.getElementById('countdown');
+      if(!el)return;
+      var KEY='ub_timer_end';
+      var end=parseInt(sessionStorage.getItem(KEY)||'0');
+      if(!end||end<Date.now()){end=Date.now()+6*3600*1000;sessionStorage.setItem(KEY,end);}
+      function tick(){
+        var diff=Math.max(0,end-Date.now());
+        var h=Math.floor(diff/3600000);
+        var m=Math.floor((diff%3600000)/60000);
+        el.textContent=h+'h '+String(m).padStart(2,'0')+'min';
+        if(diff>0)setTimeout(tick,30000);
+      }
+      tick();
+    })();
+
     // Scroll reveal + stagger
     const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}})},{threshold:.12});
     document.querySelectorAll('.reveal,.stagger-children,.stagger-scale').forEach(el=>obs.observe(el));
