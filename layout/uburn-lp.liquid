@@ -23,7 +23,62 @@
     {{ content_for_header }}
   </head>
 
+  <!-- ===== CONSENT MODE V2 — CNIL ===== -->
+  <script>
+    // Meta Pixel : revoke par défaut jusqu'au consentement
+    window._ubConsent = (function(){
+      var KEY = 'ub_consent_v1';
+      var stored = localStorage.getItem(KEY);
+      return {
+        status: stored, // 'granted' | 'denied' | null
+        grant: function(){
+          localStorage.setItem(KEY,'granted');
+          this.status='granted';
+          if(typeof fbq!=='undefined') fbq('consent','grant');
+          document.getElementById('ub-consent-banner') && (document.getElementById('ub-consent-banner').style.display='none');
+        },
+        deny: function(){
+          localStorage.setItem(KEY,'denied');
+          this.status='denied';
+          if(typeof fbq!=='undefined') fbq('consent','revoke');
+          document.getElementById('ub-consent-banner') && (document.getElementById('ub-consent-banner').style.display='none');
+        }
+      };
+    })();
+    // Bloquer le Pixel si pas encore consenti
+    if(window._ubConsent.status !== 'granted'){
+      window.fbq = window.fbq || function(){
+        (window._fbq=window._fbq||[]).push(arguments);
+        // Queue les appels fbq — seront rejoués après grant
+      };
+    }
+  </script>
+
   <body style="margin:0;padding:0;">
+
+    <!-- CNIL Banner -->
+    <div id="ub-consent-banner" style="{% if request.locale.iso_code == 'fr' or true %}display:flex{% else %}display:none{% endif %};position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#fff;border-top:2px solid #e8dcf5;padding:14px 24px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:-apple-system,sans-serif;box-shadow:0 -4px 24px rgba(0,0,0,.08);">
+      <p style="margin:0;font-size:13px;color:#333;max-width:640px;line-height:1.5;">
+        🍪 Nous utilisons des cookies pour mesurer la performance de nos publicités et améliorer votre expérience. Vos données ne sont jamais revendues.
+        <a href="/pages/confidentialite" style="color:#6b2fa0;text-decoration:underline;margin-left:4px;">En savoir plus</a>
+      </p>
+      <div style="display:flex;gap:10px;flex-shrink:0;">
+        <button onclick="window._ubConsent.deny()" style="padding:9px 18px;border-radius:100px;border:1.5px solid #e8dcf5;background:#fff;font-size:13px;font-weight:600;color:#5a5654;cursor:pointer;">Refuser</button>
+        <button onclick="window._ubConsent.grant()" style="padding:9px 20px;border-radius:100px;border:none;background:#6b2fa0;color:#fff;font-size:13px;font-weight:600;cursor:pointer;">Accepter</button>
+      </div>
+    </div>
+    <script>
+      // Masquer la bannière si déjà décidé
+      (function(){
+        var b = document.getElementById('ub-consent-banner');
+        if(!b) return;
+        var s = localStorage.getItem('ub_consent_v1');
+        if(s === 'granted' || s === 'denied') b.style.display = 'none';
+        // Si granted : activer le vrai Pixel
+        if(s === 'granted' && typeof fbq !== 'undefined') fbq('consent','grant');
+      })();
+    </script>
+
     <main>
       {{ content_for_layout }}
     </main>

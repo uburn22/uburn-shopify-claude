@@ -58,6 +58,15 @@
     .hero-float.bottom{bottom:40px;left:0}
     .float-badge{padding:4px 10px;border-radius:100px;background:var(--purple-wash);color:var(--purple-main);font-size:11px;font-weight:700}
 
+    /* ===== HERO BONUS BLOCK ===== */
+    .hero-bonus{margin-top:20px;background:var(--purple-wash);border:1px solid var(--purple-pale);border-radius:14px;padding:14px 18px}
+    .hero-bonus-label{font-size:12px;font-weight:700;color:var(--purple-main);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+    .hero-bonus-items{display:flex;flex-direction:column;gap:5px}
+    .hero-bonus-items span{font-size:13px;color:var(--dark);font-weight:500;line-height:1.4}
+    .hero-bonus-items em{color:var(--muted);font-style:normal;font-size:12px}
+    .hero-bonus-total{margin-top:10px;padding-top:10px;border-top:1px solid var(--purple-pale);font-size:13px;color:var(--body)}
+    .hero-bonus-total strong{color:var(--purple-deep);font-weight:800}
+
     /* ===== SECTIONS ===== */
     .section{padding:100px 40px}
     .section-inner{max-width:1100px;margin:0 auto}
@@ -518,9 +527,18 @@
         <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Satisfait ou remboursé</div>
       </div>
       <a href="#offer" class="btn btn-fill">Commencer ma cure →</a>
+      <div class="hero-bonus">
+        <div class="hero-bonus-label">🎁 Offerts avec votre commande aujourd'hui</div>
+        <div class="hero-bonus-items">
+          <span>✓ E-book "30j pour reprendre le contrôle" <em>(47€)</em></span>
+          <span>✓ Accès groupe privé Uburn Collective <em>(40€)</em></span>
+          <span>✓ Suivi nutrition WhatsApp 30j <em>(47€)</em></span>
+        </div>
+        <div class="hero-bonus-total">Valeur totale : <strong>134€ OFFERTS</strong></div>
+      </div>
     </div>
     <div class="hero-visual">
-      <img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=800" alt="Uburn — Boisson ube satiété naturelle">
+      <img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=800&format=webp" alt="Uburn — Boisson ube satiété naturelle" fetchpriority="high" width="800" height="800">
       <div class="hero-float top"><span class="float-badge">EFSA</span> Satiété validée</div>
       <div class="hero-float bottom"><span class="float-badge">#1</span> Marque Française</div>
     </div>
@@ -638,7 +656,7 @@
 
       <!-- Image produit -->
       <div class="offer-block-img reveal">
-        <img src="https://cdn.shopify.com/s/files/1/0920/9436/6015/files/Uburn_Listing_ecom_1.jpg?v=1772700007" alt="UBurn Pack">
+        <img src="https://cdn.shopify.com/s/files/1/0920/9436/6015/files/Uburn_Listing_ecom_1.jpg?v=1772700007&format=webp&width=600" alt="UBurn Pack" loading="lazy" width="600" height="600">
       </div>
 
       <!-- Cartes prix -->
@@ -765,7 +783,7 @@
       </div>
       <div class="prod-visual reveal reveal-d">
         <div class="prod-img">
-          <img src="https://uburn.co/cdn/shop/files/Uburn_Scoop.png?v=1749644803&width=800" alt="UBurn Scoop" loading="lazy" width="800" height="800">
+          <img src="https://uburn.co/cdn/shop/files/Uburn_Scoop.png?v=1749644803&width=800&format=webp" alt="UBurn Scoop" loading="lazy" width="800" height="800">
         </div>
       </div>
     </div>
@@ -789,7 +807,7 @@
       </div>
       <div class="prod-visual reveal reveal-d">
         <div class="prod-img prod-img-full" style="background:none">
-          <img src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0004_3.jpg?v=1749644803&width=800" alt="UBurn Powder" loading="lazy" width="800" height="800">
+          <img src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0004_3.jpg?v=1749644803&width=800&format=webp" alt="UBurn Powder" loading="lazy" width="800" height="800">
         </div>
       </div>
     </div>
@@ -871,27 +889,27 @@
       <h2 class="section-title">Des actifs naturels <span class="accent">hautement sélectionnés</span></h2>
       <div class="ingr-grid stagger-scale">
         <div class="ingr-card">
-          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1749644803&width=500" alt="Ubé violet" loading="lazy" width="500" height="375"></div>
+          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1749644803&width=500&format=webp" alt="Ubé violet" loading="lazy" width="500" height="375"></div>
           <div class="ingr-card-body"><h4>Ubé violet</h4><p>Antioxydants naturels</p></div>
         </div>
         <div class="ingr-card">
-          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1749644803&width=500" alt="Konjac" loading="lazy" width="500" height="375"></div>
+          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1749644803&width=500&format=webp" alt="Konjac" loading="lazy" width="500" height="375"></div>
           <div class="ingr-card-body"><h4>Konjac</h4><p>Satiété 4h · EFSA</p></div>
         </div>
         <div class="ingr-card">
-          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1749644803&width=500" alt="Fibre d'acacia" loading="lazy" width="500" height="375"></div>
+          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1749644803&width=500&format=webp" alt="Fibre d'acacia" loading="lazy" width="500" height="375"></div>
           <div class="ingr-card-body"><h4>Acacia</h4><p>Prébiotique digestif</p></div>
         </div>
         <div class="ingr-card">
-          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1749644803&width=500" alt="MCT de coco" loading="lazy" width="500" height="375"></div>
+          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1749644803&width=500&format=webp" alt="MCT de coco" loading="lazy" width="500" height="375"></div>
           <div class="ingr-card-body"><h4>MCT coco</h4><p>Énergie stable</p></div>
         </div>
         <div class="ingr-card">
-          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1749644803&width=500" alt="Gingembre" loading="lazy" width="500" height="375"></div>
+          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1749644803&width=500&format=webp" alt="Gingembre" loading="lazy" width="500" height="375"></div>
           <div class="ingr-card-body"><h4>Gingembre</h4><p>Digestion + métabolisme</p></div>
         </div>
         <div class="ingr-card">
-          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1749644803&width=500" alt="L-Carnitine" loading="lazy" width="500" height="375"></div>
+          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1749644803&width=500&format=webp" alt="L-Carnitine" loading="lazy" width="500" height="375"></div>
           <div class="ingr-card-body"><h4>L-Carnitine</h4><p>Métabolisme des graisses</p></div>
         </div>
       </div>
@@ -948,11 +966,11 @@
   <div class="press-bar">
     <p>Ils parlent de nous</p>
     <div class="press-logos">
-      <img src="https://uburn.co/cdn/shop/files/TF1_1989-1990.png?v=1749644803&width=150" alt="TF1">
-      <img src="https://uburn.co/cdn/shop/files/Brut_logo_svg.png?v=1749644803&width=150" alt="Brut">
-      <img src="https://uburn.co/cdn/shop/files/logo-femmeactuelle-copie_cb5c498d-5470-4a4d-83fc-7b16c264a030.png?v=1749644803&width=150" alt="Femme Actuelle">
-      <img src="https://uburn.co/cdn/shop/files/0x0.png?v=1749644803&width=150" alt="Forbes">
-      <img src="https://uburn.co/cdn/shop/files/VOGUE_revista_-_logo.png?v=1749644803&width=150" alt="Vogue">
+      <img src="https://uburn.co/cdn/shop/files/TF1_1989-1990.png?v=1749644803&width=150&format=webp" alt="TF1" loading="lazy" width="150" height="50">
+      <img src="https://uburn.co/cdn/shop/files/Brut_logo_svg.png?v=1749644803&width=150&format=webp" alt="Brut" loading="lazy" width="150" height="50">
+      <img src="https://uburn.co/cdn/shop/files/logo-femmeactuelle-copie_cb5c498d-5470-4a4d-83fc-7b16c264a030.png?v=1749644803&width=150&format=webp" alt="Femme Actuelle" loading="lazy" width="150" height="50">
+      <img src="https://uburn.co/cdn/shop/files/0x0.png?v=1749644803&width=150&format=webp" alt="Forbes" loading="lazy" width="150" height="50">
+      <img src="https://uburn.co/cdn/shop/files/VOGUE_revista_-_logo.png?v=1749644803&width=150&format=webp" alt="Vogue" loading="lazy" width="150" height="50">
       <img src="https://uburn.co/cdn/shop/files/ELLE_Magazine_Logo.svg" alt="Elle">
     </div>
   </div>
@@ -1052,7 +1070,7 @@
     <div class="footer-inner">
       <div class="footer-top">
         <div class="footer-brand">
-          <img class="footer-brand-logo" src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn">
+          <img class="footer-brand-logo" src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn" loading="lazy">
           <p>Reprenez le contrôle de votre alimentation avec une formule 100% naturelle, validée EFSA. Marque française.</p>
           <div class="footer-contact">hello@uburn.co</div>
         </div>
@@ -1077,6 +1095,25 @@
   </div>
 
   <script>
+    // ---- UTM H1 DYNAMIQUE ----
+    (function(){
+      var params = new URLSearchParams(window.location.search);
+      var utmContent = params.get('utm_content') || '';
+      var map = {
+        'violet': {h1:'La boisson <span class="accent">violette</span> qui coupe les fringales 4h', sub:'30 kcal · 0% caféine · satisfaction durable.'},
+        'ube':    {h1:'Ube + Konjac = <span class="accent">4h</span> sans fringales', sub:'100% naturel · 30 kcal · Marque Française.'},
+        'soir':   {h1:'Votre nouvelle <span class="accent">routine</span> commence ici', sub:'0% caféine · se prend à toute heure · 30 kcal.'},
+        'energie':{h1:'Pourquoi vous avez un coup de pompe <span class="accent">à 15h</span>&nbsp;?', sub:'MCT de coco · énergie stable · sans excitants.'}
+      };
+      var v = map[utmContent.toLowerCase()];
+      if(v){
+        var h1 = document.querySelector('.hero h1');
+        var sub = document.querySelector('.hero-sub');
+        if(h1) h1.innerHTML = v.h1;
+        if(sub) sub.textContent = v.sub;
+      }
+    })();
+
     // Countdown timer (6h, sessionStorage)
     (function(){
       var el=document.getElementById('countdown');
@@ -1144,6 +1181,113 @@
       });
     });
   </script>
+
+<!-- ===== EXIT-INTENT POPUP ===== -->
+<style>
+  #ub-exit-overlay{display:none;position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:20px}
+  #ub-exit-overlay.open{display:flex}
+  #ub-exit-modal{background:#fff;border-radius:24px;padding:40px 36px;max-width:420px;width:100%;position:relative;text-align:center;box-shadow:0 32px 80px rgba(61,24,115,.2)}
+  #ub-exit-modal .exit-icon{font-size:36px;margin-bottom:12px}
+  #ub-exit-modal h2{font-family:'Red Hat Display',sans-serif;font-size:22px;font-weight:800;color:#242220;line-height:1.2;margin-bottom:10px}
+  #ub-exit-modal p{font-size:14px;color:#5a5654;line-height:1.55;margin-bottom:24px}
+  #ub-exit-modal .exit-value{display:inline-block;background:#f5f0fa;border-radius:100px;padding:6px 16px;font-size:12.5px;font-weight:700;color:#6b2fa0;margin-bottom:20px}
+  #ub-exit-form{display:flex;flex-direction:column;gap:10px}
+  #ub-exit-email{padding:13px 18px;border-radius:100px;border:1.5px solid #e8dcf5;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;text-align:center}
+  #ub-exit-email:focus{border-color:#6b2fa0}
+  #ub-exit-submit{padding:13px 24px;border-radius:100px;border:none;background:#6b2fa0;color:#fff;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;transition:.25s}
+  #ub-exit-submit:hover{background:#3d1873;transform:translateY(-1px)}
+  #ub-exit-form .exit-legal{font-size:11.5px;color:#8a8785;margin-top:4px}
+  #ub-exit-close{position:absolute;top:14px;right:18px;background:none;border:none;font-size:22px;cursor:pointer;color:#8a8785;line-height:1}
+  #ub-exit-success{display:none;padding:16px 0 4px}
+  #ub-exit-success p{color:#6b2fa0;font-weight:700;font-size:15px}
+  @media(max-width:480px){#ub-exit-modal{padding:32px 24px}#ub-exit-modal h2{font-size:19px}}
+</style>
+
+<div id="ub-exit-overlay" role="dialog" aria-modal="true" aria-labelledby="ub-exit-title">
+  <div id="ub-exit-modal">
+    <button id="ub-exit-close" onclick="ubExitClose()" aria-label="Fermer">×</button>
+    <div class="exit-icon">🎁</div>
+    <span class="exit-value">PDF offert — valeur 47€</span>
+    <h2 id="ub-exit-title">Avant de partir</h2>
+    <p>Recevez notre guide <strong>"30j pour reprendre le contrôle"</strong> — plan nutrition complet, gratuit.</p>
+    <div id="ub-exit-form-wrap">
+      <form id="ub-exit-form" onsubmit="ubExitSubmit(event)">
+        <input id="ub-exit-email" type="email" name="contact[email]" placeholder="Votre adresse email" required autocomplete="email">
+        <button id="ub-exit-submit" type="submit">Je veux mon guide →</button>
+        <p class="exit-legal">Pas de spam. Désabonnement en 1 clic.</p>
+      </form>
+      <div id="ub-exit-success"><p>✓ Guide envoyé — vérifiez vos emails !</p></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---- EXIT-INTENT ----
+  (function(){
+    var SEEN_KEY='ub_exit_seen', SUB_KEY='ub_exit_sub';
+    var ready=false, fired=false;
+
+    // Guards
+    function canShow(){
+      if(fired) return false;
+      if(localStorage.getItem(SUB_KEY)) return false;
+      var seen=parseInt(localStorage.getItem(SEEN_KEY)||'0');
+      if(seen && (Date.now()-seen) < 7*24*3600*1000) return false;
+      return true;
+    }
+
+    function show(){
+      if(!canShow()) return;
+      fired=true;
+      localStorage.setItem(SEEN_KEY, Date.now());
+      document.getElementById('ub-exit-overlay').classList.add('open');
+    }
+
+    // Activer après 5s
+    setTimeout(function(){ ready=true; }, 5000);
+
+    // Desktop : mouseleave (souris vers le haut)
+    document.addEventListener('mouseleave', function(e){
+      if(!ready || e.clientY > 50) return;
+      show();
+    });
+
+    // Mobile : scroll rapide vers le haut
+    var lastY=0, lastT=0;
+    window.addEventListener('scroll', function(){
+      var y=window.scrollY, t=Date.now(), dy=y-lastY, dt=t-lastT;
+      if(ready && dy < -80 && dt < 300 && y > 300) show();
+      lastY=y; lastT=t;
+    }, {passive:true});
+
+    // Fermer overlay click
+    document.getElementById('ub-exit-overlay').addEventListener('click', function(e){
+      if(e.target===this) ubExitClose();
+    });
+  })();
+
+  function ubExitClose(){
+    document.getElementById('ub-exit-overlay').classList.remove('open');
+  }
+
+  function ubExitSubmit(e){
+    e.preventDefault();
+    var email = document.getElementById('ub-exit-email').value.trim();
+    if(!email) return;
+    // Submit Shopify newsletter
+    var fd = new FormData();
+    fd.append('form_type','newsletter');
+    fd.append('utf8','✓');
+    fd.append('contact[email]', email);
+    fetch('/contact', {method:'POST', headers:{'X-Requested-With':'XMLHttpRequest'}, body:fd})
+      .catch(function(){});
+    // Show success
+    document.getElementById('ub-exit-form').style.display='none';
+    document.getElementById('ub-exit-success').style.display='block';
+    localStorage.setItem('ub_exit_sub','1');
+    setTimeout(ubExitClose, 3000);
+  }
+</script>
 
 {% schema %}
 {
