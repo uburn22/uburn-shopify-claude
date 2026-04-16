@@ -1,0 +1,10 @@
+{
+  "layout": "uburn-lp",
+  "sections": {
+    "main": {
+      "type": "uburn-lp-v2",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
