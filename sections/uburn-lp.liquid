@@ -234,16 +234,16 @@
     .stagger-scale.visible > *:nth-child(6){opacity:1;transform:none;transition-delay:.4s}
 
     /* ===== PROBLEM CARDS (editorial numbered) ===== */
-    .prob-cards{display:grid;grid-template-columns:repeat(3,1fr);margin-top:48px;border-radius:20px;overflow:hidden;border:1px solid rgba(0,0,0,.06)}
-    .prob-card{background:#fff;padding:40px 32px;border-right:1px solid rgba(0,0,0,.06);position:relative;transition:background .25s}
+    .prob-cards{display:grid;grid-template-columns:repeat(3,1fr);margin-top:48px;border-radius:20px;overflow:hidden;box-shadow:0 4px 32px rgba(61,24,115,.1)}
+    .prob-card{background:linear-gradient(145deg,#2e1060 0%,#5b2199 60%,#7c3abf 100%);padding:40px 32px;border-right:1px solid rgba(255,255,255,.08);position:relative;transition:filter .25s}
     .prob-card:last-child{border-right:none}
-    .prob-card:hover{background:var(--purple-wash)}
-    .prob-num{font-family:'Red Hat Display',sans-serif;font-size:68px;font-weight:900;color:rgba(107,47,160,.07);line-height:1;letter-spacing:-0.04em;margin-bottom:20px;user-select:none}
-    .prob-title{font-family:'Red Hat Display',sans-serif;font-size:18px;font-weight:700;color:var(--dark);line-height:1.2;margin-bottom:14px}
-    .prob-sub{font-size:14px;color:var(--body);line-height:1.6;padding-top:14px;border-top:2px solid var(--purple-pale)}
+    .prob-card:hover{filter:brightness(1.08)}
+    .prob-num{font-family:'Red Hat Display',sans-serif;font-size:68px;font-weight:900;color:rgba(255,255,255,.08);line-height:1;letter-spacing:-0.04em;margin-bottom:20px;user-select:none}
+    .prob-title{font-family:'Red Hat Display',sans-serif;font-size:18px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:14px}
+    .prob-sub{font-size:14px;color:rgba(255,255,255,.7);line-height:1.6;padding-top:14px;border-top:1px solid rgba(255,255,255,.15)}
     @media(max-width:700px){
       .prob-cards{grid-template-columns:1fr;border-radius:16px}
-      .prob-card{border-right:none;border-bottom:1px solid rgba(0,0,0,.06)}
+      .prob-card{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
       .prob-card:last-child{border-bottom:none}
     }
 
@@ -486,7 +486,7 @@
 
   <!-- NAV -->
   <nav class="nav">
-    <img class="nav-logo" src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn">
+    <a href="https://uburn.co/products/uburn-boisson-ube-satiete" aria-label="UBurn — page produit"><img class="nav-logo" src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn"></a>
     <div class="nav-right">
       <a href="#probleme" class="nav-link">Pourquoi UBurn</a>
       <a href="#ingredients" class="nav-link">Ingrédients</a>
