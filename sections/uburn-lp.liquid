@@ -233,20 +233,19 @@
     .stagger-scale.visible > *:nth-child(5){opacity:1;transform:none;transition-delay:.32s}
     .stagger-scale.visible > *:nth-child(6){opacity:1;transform:none;transition-delay:.4s}
 
-    /* Visual icon cards for problem/how */
-    .visual-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
-    @media(max-width:700px){.visual-cards{grid-template-columns:1fr;gap:14px}}
-    .visual-card{background:#fff;border-radius:20px;padding:36px 24px;text-align:center;border:1px solid rgba(0,0,0,.05);transition:.3s}
-    .visual-card:hover{box-shadow:0 10px 32px rgba(107,47,160,.1);transform:translateY(-4px)}
-    .visual-card__illus{width:72px;height:72px;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;border-radius:20px;background:var(--purple-wash)}
-    .visual-card__illus svg{width:36px;height:36px;stroke:var(--purple-main);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-    .visual-card__title{font-family:'Red Hat Display',sans-serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px}
-    .visual-card__sub{font-size:13px;color:var(--muted)}
-    .visual-card--before{background:#1e1b2e}
-    .visual-card--before .visual-card__illus{background:rgba(107,47,160,.2)}
-    .visual-card--before .visual-card__illus svg{stroke:#c4b5fd}
-    .visual-card--before .visual-card__title{color:#c4b5fd}
-    .visual-card--before .visual-card__sub{color:#a78bfa}
+    /* ===== PROBLEM CARDS (editorial numbered) ===== */
+    .prob-cards{display:grid;grid-template-columns:repeat(3,1fr);margin-top:48px;border-radius:20px;overflow:hidden;border:1px solid rgba(0,0,0,.06)}
+    .prob-card{background:#fff;padding:40px 32px;border-right:1px solid rgba(0,0,0,.06);position:relative;transition:background .25s}
+    .prob-card:last-child{border-right:none}
+    .prob-card:hover{background:var(--purple-wash)}
+    .prob-num{font-family:'Red Hat Display',sans-serif;font-size:68px;font-weight:900;color:rgba(107,47,160,.07);line-height:1;letter-spacing:-0.04em;margin-bottom:20px;user-select:none}
+    .prob-title{font-family:'Red Hat Display',sans-serif;font-size:18px;font-weight:700;color:var(--dark);line-height:1.2;margin-bottom:14px}
+    .prob-sub{font-size:14px;color:var(--body);line-height:1.6;padding-top:14px;border-top:2px solid var(--purple-pale)}
+    @media(max-width:700px){
+      .prob-cards{grid-template-columns:1fr;border-radius:16px}
+      .prob-card{border-right:none;border-bottom:1px solid rgba(0,0,0,.06)}
+      .prob-card:last-child{border-bottom:none}
+    }
 
     /* How step visual */
     .how-step__svg{width:80px;height:80px;margin:0 auto 18px;background:var(--purple-wash);border-radius:50%;display:flex;align-items:center;justify-content:center}
@@ -567,27 +566,21 @@
     <div class="section-inner reveal">
       <div class="section-label">On connaît ce moment.</div>
       <h2 class="section-title">Le même schéma, <span class="accent">chaque jour.</span></h2>
-      <div class="visual-cards stagger-scale">
-        <div class="visual-card visual-card--before">
-          <div class="visual-card__illus">
-            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <div class="visual-card__title">16h — le placard vous appelle</div>
-          <div class="visual-card__sub">Glycémie en chute libre</div>
+      <div class="prob-cards stagger-scale">
+        <div class="prob-card">
+          <div class="prob-num">01</div>
+          <div class="prob-title">16h — le placard vous appelle</div>
+          <div class="prob-sub">Glycémie en chute libre. C'est physiologique, pas un manque de volonté.</div>
         </div>
-        <div class="visual-card visual-card--before">
-          <div class="visual-card__illus">
-            <svg viewBox="0 0 24 24"><path d="M3 3h18v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3z"/><path d="M3 9h18"/><path d="M9 21v-6"/><path d="M15 21v-6"/></svg>
-          </div>
-          <div class="visual-card__title">Le soir devant le frigo</div>
-          <div class="visual-card__sub">La fatigue baisse la garde</div>
+        <div class="prob-card">
+          <div class="prob-num">02</div>
+          <div class="prob-title">Le soir devant le frigo</div>
+          <div class="prob-sub">La fatigue baisse la garde. Les bonnes intentions du matin s'effacent.</div>
         </div>
-        <div class="visual-card visual-card--before">
-          <div class="visual-card__illus">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          </div>
-          <div class="visual-card__title">La volonté ne suffit pas</div>
-          <div class="visual-card__sub">C'est biologique.</div>
+        <div class="prob-card">
+          <div class="prob-num">03</div>
+          <div class="prob-title">La volonté ne suffit pas</div>
+          <div class="prob-sub">Ce n'est pas vous. C'est biologique. Et ça se traite.</div>
         </div>
       </div>
     </div>
