@@ -1,0 +1,119 @@
+{% render 'ub-styles' %}
+{% render 'ub-nav' %}
+
+<!-- HERO -->
+<section style="background:var(--grad);padding:80px 40px 60px;text-align:center;color:#fff">
+  <p style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:2.5px;color:var(--purple-light);margin-bottom:14px">Boutique</p>
+  <h1 style="font-family:'Red Hat Display',sans-serif;font-size:clamp(32px,4vw,52px);font-weight:800;line-height:1.06;margin-bottom:16px">{{ collection.title | default: 'Nos Produits' }}</h1>
+  {% if collection.description != blank %}
+    <p style="font-size:17px;color:rgba(255,255,255,.8);max-width:540px;margin:0 auto">{{ collection.description }}</p>
+  {% else %}
+    <p style="font-size:17px;color:rgba(255,255,255,.8);max-width:540px;margin:0 auto">Formules naturelles, validées EFSA. Marque française.</p>
+  {% endif %}
+</section>
+
+<!-- PRODUCTS GRID -->
+<section class="section">
+  <div class="section-inner">
+    {% if collection.products.size > 0 %}
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px" class="stagger-scale">
+        {% for product in collection.products %}
+          <a href="{{ product.url }}" style="display:block;background:var(--cream);border-radius:20px;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:.3s;text-decoration:none;color:inherit" class="ingr-card">
+            <div style="aspect-ratio:1/1;overflow:hidden;background:var(--purple-wash);position:relative">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 600 }}&format=webp" alt="{{ product.title | escape }}" loading="lazy" width="600" height="600" style="width:100%;height:100%;object-fit:cover;transition:transform .5s ease">
+              {% else %}
+                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px">🌿</div>
+              {% endif %}
+              {% if product.compare_at_price > product.price %}
+                <div style="position:absolute;top:12px;right:12px;background:var(--purple-main);color:#fff;font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px">
+                  -{{ product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price }}%
+                </div>
+              {% endif %}
+            </div>
+            <div style="padding:20px 22px">
+              <h3 style="font-family:'Red Hat Display',sans-serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px">{{ product.title }}</h3>
+              {% if product.description != blank %}
+                <p style="font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:14px">{{ product.description | strip_html | truncate: 80 }}</p>
+              {% endif %}
+              <div style="display:flex;align-items:center;justify-content:space-between">
+                <div>
+                  <span style="font-family:'Red Hat Display',sans-serif;font-size:20px;font-weight:800;color:var(--purple-deep)">{{ product.price | money }}</span>
+                  {% if product.compare_at_price > product.price %}
+                    <span style="font-size:13px;color:var(--muted);text-decoration:line-through;margin-left:6px">{{ product.compare_at_price | money }}</span>
+                  {% endif %}
+                </div>
+                <span style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:100px;background:var(--purple-main);color:#fff;font-size:12px;font-weight:600">
+                  Commander →
+                </span>
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+
+      <!-- PAGINATION -->
+      {% if paginate.pages > 1 %}
+        <div style="text-align:center;margin-top:48px">
+          {{ paginate | default_pagination }}
+        </div>
+      {% endif %}
+
+    {% else %}
+      <div style="text-align:center;padding:80px 40px">
+        <p style="font-size:18px;color:var(--muted)">Aucun produit pour le moment. Revenez bientôt !</p>
+        <a href="/" class="btn btn-fill" style="margin-top:24px">Retour à l'accueil</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- REASSURANCE -->
+<section style="background:var(--cream);padding:40px">
+  <div class="guar-grid" style="max-width:1000px;margin:0 auto">
+    <div class="guar-item">
+      <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_World.svg" alt="" width="48" height="48" loading="lazy"></div>
+      <h4>Formule EFSA</h4><p>Glucomannane ID 3120</p>
+    </div>
+    <div class="guar-item">
+      <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_Fast_shipping.svg" alt="" width="48" height="48" loading="lazy"></div>
+      <h4>Livraison gratuite</h4><p>En France</p>
+    </div>
+    <div class="guar-item">
+      <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_secure_payment.svg" alt="" width="48" height="48" loading="lazy"></div>
+      <h4>Paiement sécurisé</h4><p>100% sécurisé</p>
+    </div>
+    <div class="guar-item">
+      <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_customer.svg" alt="" width="48" height="48" loading="lazy"></div>
+      <h4>Sans abonnement</h4><p>Commandez librement</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ingr-card:hover { box-shadow: 0 8px 28px rgba(0,0,0,.08); transform: translateY(-3px); }
+  .ingr-card:hover img { transform: scale(1.04); }
+  @media(max-width:760px) {
+    div[style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: repeat(2,1fr) !important; }
+  }
+  @media(max-width:480px) {
+    div[style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+  }
+</style>
+
+<script>
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+  }, { threshold: .08 });
+  document.querySelectorAll('.stagger-scale').forEach(el => obs.observe(el));
+</script>
+
+{% render 'ub-footer' %}
+
+{% schema %}
+{
+  "name": "UBurn Collections",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

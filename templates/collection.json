@@ -1,1 +1,10 @@
-{"sections":{"banner":{"type":"collection-banner","settings":{}},"main":{"type":"main-collection","settings":{}}},"order":["banner","main"]}
+{
+  "layout": "uburn-lp",
+  "sections": {
+    "main": {
+      "type": "ub-collections",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
