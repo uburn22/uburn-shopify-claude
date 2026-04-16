@@ -200,6 +200,69 @@
     .reveal.visible{opacity:1;transform:translateY(0)}
     .reveal-d{transition-delay:.15s}
 
+    /* ===== NEW ANIMATIONS ===== */
+    @keyframes ub-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    @keyframes ub-pulse-glow{0%,100%{box-shadow:0 4px 20px rgba(107,47,160,.25)}50%{box-shadow:0 8px 40px rgba(107,47,160,.5)}}
+    @keyframes ub-scale-in{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+    @keyframes ub-slide-up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes ub-shimmer-badge{0%,100%{box-shadow:0 0 0 0 rgba(107,47,160,0)}50%{box-shadow:0 0 0 8px rgba(107,47,160,.1)}}
+
+    /* Float hero product */
+    .hero-visual img{animation:ub-float 5s ease-in-out infinite}
+    .hero-visual img:hover{animation-play-state:paused}
+
+    /* Pulse CTA */
+    .btn-fill{animation:ub-pulse-glow 2.5s ease-in-out infinite}
+    .btn-fill:hover{animation-play-state:paused}
+
+    /* Stagger children */
+    .stagger-children > *{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+    .stagger-children.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+    .stagger-children.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:.1s}
+    .stagger-children.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:.2s}
+    .stagger-children.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:.3s}
+    .stagger-children.visible > *:nth-child(5){opacity:1;transform:none;transition-delay:.4s}
+    .stagger-children.visible > *:nth-child(6){opacity:1;transform:none;transition-delay:.5s}
+
+    /* Stagger scale-in (for cards) */
+    .stagger-scale > *{opacity:0;transform:scale(.88) translateY(16px);transition:opacity .5s ease,transform .5s ease}
+    .stagger-scale.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+    .stagger-scale.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:.08s}
+    .stagger-scale.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:.16s}
+    .stagger-scale.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:.24s}
+    .stagger-scale.visible > *:nth-child(5){opacity:1;transform:none;transition-delay:.32s}
+    .stagger-scale.visible > *:nth-child(6){opacity:1;transform:none;transition-delay:.4s}
+
+    /* Visual icon cards for problem/how */
+    .visual-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+    @media(max-width:700px){.visual-cards{grid-template-columns:1fr;gap:14px}}
+    .visual-card{background:#fff;border-radius:20px;padding:36px 24px;text-align:center;border:1px solid rgba(0,0,0,.05);transition:.3s}
+    .visual-card:hover{box-shadow:0 10px 32px rgba(107,47,160,.1);transform:translateY(-4px)}
+    .visual-card__illus{width:72px;height:72px;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;border-radius:20px;background:var(--purple-wash)}
+    .visual-card__illus svg{width:36px;height:36px;stroke:var(--purple-main);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .visual-card__title{font-family:'Red Hat Display',sans-serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:6px}
+    .visual-card__sub{font-size:13px;color:var(--muted)}
+    .visual-card--before{background:#1e1b2e}
+    .visual-card--before .visual-card__illus{background:rgba(107,47,160,.2)}
+    .visual-card--before .visual-card__illus svg{stroke:#c4b5fd}
+    .visual-card--before .visual-card__title{color:#c4b5fd}
+    .visual-card--before .visual-card__sub{color:#a78bfa}
+
+    /* How step visual */
+    .how-step__svg{width:80px;height:80px;margin:0 auto 18px;background:var(--purple-wash);border-radius:50%;display:flex;align-items:center;justify-content:center}
+    .how-step__svg svg{width:36px;height:36px;stroke:var(--purple-main);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+    .how-step p{display:none}
+
+    /* FAQ slide open */
+    .faq-item.open .faq-a{animation:ub-slide-up .3s ease}
+
+    /* Count-up numbers */
+    .big-stat-num[data-count]{cursor:default}
+
+    @media(prefers-reduced-motion:reduce){
+      .hero-visual img,.btn-fill{animation:none !important}
+    }
+
     /* ===== STICKY MOBILE CTA ===== */
     .sticky-mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;padding:12px 16px 16px;background:#fff;box-shadow:0 -4px 20px rgba(0,0,0,.1);border-top:1px solid rgba(0,0,0,.06)}
     .sticky-mobile-cta a{display:block;width:100%;text-align:center;background:var(--purple-main);color:#fff;padding:15px 24px;border-radius:100px;font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:700;text-decoration:none}
@@ -444,7 +507,7 @@
     <div class="hero-content">
       <div class="hero-tag">Nos premières clientes adorent Uburn</div>
       <h1>16h. <span class="accent">Votre</span> placard reste fermé.</h1>
-      <p class="hero-sub">La boisson violette aux 6 actifs naturels qui favorise jusqu'à 4h de satiété. 30 kcal. 0% caféine.</p>
+      <p class="hero-sub">30 kcal · 0% caféine · 4h de satiété.</p>
       <div class="hero-badges">
         <div class="hero-badge"><span class="ck">✓</span> 0% caféine</div>
         <div class="hero-badge"><span class="ck">✓</span> 30 kcal</div>
@@ -500,22 +563,30 @@
   <section class="section problem-section" id="probleme">
     <div class="section-inner reveal">
       <div class="section-label">On connaît ce moment.</div>
-      <h2 class="section-title">Chaque jour, le même schéma <span class="accent">se répète.</span></h2>
-      <div class="problem-grid">
-        <div class="problem-card">
-          <h3>16h — le placard vous appelle</h3>
-          <p>La glycémie chute, le cerveau réclame du sucre. Vous cédez alors que vous n'avez même pas faim.</p>
+      <h2 class="section-title">Le même schéma, <span class="accent">chaque jour.</span></h2>
+      <div class="visual-cards stagger-scale">
+        <div class="visual-card visual-card--before">
+          <div class="visual-card__illus">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div class="visual-card__title">16h — le placard vous appelle</div>
+          <div class="visual-card__sub">Glycémie en chute libre</div>
         </div>
-        <div class="problem-card">
-          <h3>Le soir devant le frigo</h3>
-          <p>Après le dîner, la fatigue baisse la garde. Chocolat, fromage, biscuits… encore.</p>
+        <div class="visual-card visual-card--before">
+          <div class="visual-card__illus">
+            <svg viewBox="0 0 24 24"><path d="M3 3h18v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3z"/><path d="M3 9h18"/><path d="M9 21v-6"/><path d="M15 21v-6"/></svg>
+          </div>
+          <div class="visual-card__title">Le soir devant le frigo</div>
+          <div class="visual-card__sub">La fatigue baisse la garde</div>
         </div>
-        <div class="problem-card">
-          <h3>La fatigue amplifie tout</h3>
-          <p>Vous avez tout essayé. Rien ne tient. La volonté seule ne suffit pas.</p>
+        <div class="visual-card visual-card--before">
+          <div class="visual-card__illus">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="visual-card__title">La volonté ne suffit pas</div>
+          <div class="visual-card__sub">C'est biologique.</div>
         </div>
       </div>
-      <p class="problem-punchline">Ce n'est pas un manque de volonté.<br><span class="accent">C'est biologique.</span></p>
     </div>
   </section>
 
@@ -523,22 +594,28 @@
   <section class="section how-section">
     <div class="section-inner reveal">
       <div class="section-label">Comment Uburn agit</div>
-      <h2 class="section-title" style="text-align:center">Un mécanisme simple, <span class="accent">validé par l'EFSA.</span></h2>
-      <div class="how-grid">
+      <h2 class="section-title" style="text-align:center">3 gestes. <span class="accent">4h de résultat.</span></h2>
+      <div class="how-grid stagger-children">
         <div class="how-step">
+          <div class="how-step__svg">
+            <svg viewBox="0 0 24 24"><path d="M12 2v6M6 6l1.5 1.5M18 6l-1.5 1.5M4 12h3M17 12h3M6 18l1.5-1.5M18 18l-1.5-1.5"/><circle cx="12" cy="12" r="4"/></svg>
+          </div>
           <div class="how-num">1</div>
-          <h4>Vous mélangez</h4>
-          <p>Mélangez une dose dans un grand verre d'eau, 30 minutes avant le repas.</p>
+          <h4>Mélangez</h4>
         </div>
         <div class="how-step">
+          <div class="how-step__svg">
+            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="8" ry="5"/><path d="M4 12c0 4 3.6 7 8 7s8-3 8-7"/><path d="M12 7v10"/></svg>
+          </div>
           <div class="how-num">2</div>
-          <h4>Le konjac forme un gel</h4>
-          <p>Le glucomannane absorbe l'eau et crée un gel qui occupe naturellement l'estomac.</p>
+          <h4>Le gel se forme</h4>
         </div>
         <div class="how-step">
+          <div class="how-step__svg">
+            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          </div>
           <div class="how-num">3</div>
-          <h4>Jusqu'à 4h de satiété</h4>
-          <p>Votre cerveau reçoit le signal de satiété. Sans stimulant, sans caféine.</p>
+          <h4>4h sans fringales</h4>
         </div>
       </div>
     </div>
@@ -552,7 +629,7 @@
       <div class="offer-block-header reveal">
         <div class="section-label" style="text-align:center">Votre offre</div>
         <h2 class="section-title" style="text-align:center">Une saveur. <span class="accent">Six actifs.</span></h2>
-        <p style="max-width:520px;margin:12px auto 0;color:var(--body);font-size:15px;line-height:1.65;text-align:center">Sans abonnement. Sans engagement. Paiement unique, livraison offerte.</p>
+        <p style="max-width:400px;margin:10px auto 0;color:var(--body);font-size:14px;text-align:center">Paiement unique · Livraison offerte</p>
       </div>
 
       <!-- Image produit -->
@@ -657,7 +734,7 @@
     <div class="lifestyle-inner reveal">
       <div class="section-label">Un rituel, pas une contrainte</div>
       <h2>Un moment <em>pour vous.</em> Une boisson pour votre équilibre.</h2>
-      <p>Saveur noisette-vanille naturelle. Une texture fondante. Un rituel quotidien qui s'intègre dans votre routine — le matin, avant le déjeuner, ou en milieu d'après-midi.</p>
+      <p>Un rituel, <em>pas une contrainte.</em></p>
       <a href="#offer" class="btn btn-white">Commencer ma cure →</a>
     </div>
   </section>
@@ -669,7 +746,7 @@
         <div class="section-label">Simple. Rapide. Délicieux.</div>
         <h2>3 gestes, 10 secondes, <span class="accent">c'est prêt.</span></h2>
         <h3>Satiété longue durée, validée EFSA</h3>
-        <p>Le glucomannane (konjac) forme un gel naturel dans votre estomac. Résultat : vous vous sentez rassasiée sans avoir mangé plus. Les fringales de 16h, c'est fini.</p>
+        <p>Le konjac forme un gel, vous vous sentez rassasiée. Sans plus manger.</p>
         <div class="feats">
           <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Effet satiété dès la première prise</div>
           <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Résultats visibles en 7 à 14 jours</div>
@@ -693,7 +770,7 @@
         <div class="section-label">Formule naturelle</div>
         <h2>6 actifs. <span class="accent">Rien de plus.</span></h2>
         <h3>Chaque ingrédient a un rôle précis. Rien de superflu.</h3>
-        <p>100% végétal. Sans gluten. 0% caféine. Sans sucre ajouté. Une formule clean qui respecte votre corps.</p>
+        <p>100% végétal · 0% caféine · 0 additifs.</p>
         <div class="feats">
           <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>5g de fibres par dose</div>
           <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>400mg de L-Carnitine</div>
@@ -715,7 +792,7 @@
     <div class="compare-inner reveal">
       <div class="section-label">Le spectre complet</div>
       <h2>Chaque milligramme compte. <span class="accent">Chaque bienfait amplifié.</span></h2>
-      <p class="compare-sub">Chez UBurn, nous ne croyons pas au statu quo. Voici comment notre formule se distingue sur le marché.</p>
+      <p class="compare-sub" style="display:none"></p>
       <div class="compare-table">
         <div class="compare-head">
           <div>Actif</div>
@@ -785,30 +862,30 @@
     <div class="section-inner reveal">
       <div class="section-label">Ingrédients</div>
       <h2 class="section-title">Des actifs naturels <span class="accent">hautement sélectionnés</span></h2>
-      <div class="ingr-grid">
+      <div class="ingr-grid stagger-scale">
         <div class="ingr-card">
           <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1749644803&width=500" alt="Ubé violet"></div>
-          <div class="ingr-card-body"><h4>Ubé violet</h4><p>Antioxydants naturels (anthocyanes). Régule l'appétit en douceur.</p></div>
+          <div class="ingr-card-body"><h4>Ubé violet</h4><p>Antioxydants naturels</p></div>
         </div>
         <div class="ingr-card">
           <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1749644803&width=500" alt="Konjac"></div>
-          <div class="ingr-card-body"><h4>Konjac (glucomannane)</h4><p>Satiété jusqu'à 4h — EFSA ID 3120.</p></div>
+          <div class="ingr-card-body"><h4>Konjac</h4><p>Satiété 4h · EFSA</p></div>
         </div>
         <div class="ingr-card">
           <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1749644803&width=500" alt="Fibre d'acacia"></div>
-          <div class="ingr-card-body"><h4>Fibre d'acacia</h4><p>Prébiotique doux, confort digestif.</p></div>
+          <div class="ingr-card-body"><h4>Acacia</h4><p>Prébiotique digestif</p></div>
         </div>
         <div class="ingr-card">
           <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1749644803&width=500" alt="MCT de coco"></div>
-          <div class="ingr-card-body"><h4>MCT de coco</h4><p>Énergie rapide et stable. Fini le coup de barre.</p></div>
+          <div class="ingr-card-body"><h4>MCT coco</h4><p>Énergie stable</p></div>
         </div>
         <div class="ingr-card">
           <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1749644803&width=500" alt="Gingembre"></div>
-          <div class="ingr-card-body"><h4>Gingembre</h4><p>Digestion naturelle et métabolisme soutenu.</p></div>
+          <div class="ingr-card-body"><h4>Gingembre</h4><p>Digestion + métabolisme</p></div>
         </div>
         <div class="ingr-card">
           <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1749644803&width=500" alt="L-Carnitine"></div>
-          <div class="ingr-card-body"><h4>L-Carnitine tartrate</h4><p>Métabolisme des graisses comme source d'énergie.</p></div>
+          <div class="ingr-card-body"><h4>L-Carnitine</h4><p>Métabolisme des graisses</p></div>
         </div>
       </div>
     </div>
@@ -821,7 +898,7 @@
       <div class="benefits-head">
         <div class="section-label">Soutien complet</div>
         <h2 class="section-title" style="text-align:center">6 bienfaits, <span class="accent">une seule boisson.</span></h2>
-        <p style="max-width:560px;margin:16px auto 0;color:var(--body);font-size:15px;line-height:1.65">Une dose délivre un soutien complet pour votre corps, en remplaçant plusieurs compléments par une seule formule puissante.</p>
+        <p style="max-width:400px;margin:12px auto 0;color:var(--body);font-size:14px">Une dose. Six bénéfices.</p>
       </div>
       <div class="benefits-grid-layout">
         <div class="benefit-cards">
@@ -877,12 +954,11 @@
   <section class="stats-section">
     <div class="section-inner reveal">
       <h2>UBurn agit dès la première prise</h2>
-      <p style="max-width:520px;margin:0 auto 36px">Grâce à 6 actifs naturels spécialement pensés pour les femmes qui veulent arrêter de grignoter et reprendre le contrôle.</p>
-      <div class="big-stats-row">
-        <div class="big-stat"><div class="big-stat-num">95%</div><div class="big-stat-label">Ressentent la satiété dès la première prise</div></div>
-        <div class="big-stat"><div class="big-stat-num">87%</div><div class="big-stat-label">Disent moins grignoter le soir</div></div>
-        <div class="big-stat"><div class="big-stat-num">82%</div><div class="big-stat-label">Retrouvent un rythme alimentaire apaisé</div></div>
-        <div class="big-stat"><div class="big-stat-num">4.7/5</div><div class="big-stat-label">Note moyenne sur 17 avis vérifiés</div></div>
+      <div class="big-stats-row stagger-children">
+        <div class="big-stat"><div class="big-stat-num" data-count="95" data-suffix="%">95%</div><div class="big-stat-label">Satiété dès la 1ère prise</div></div>
+        <div class="big-stat"><div class="big-stat-num" data-count="87" data-suffix="%">87%</div><div class="big-stat-label">Moins de grignotage le soir</div></div>
+        <div class="big-stat"><div class="big-stat-num" data-count="82" data-suffix="%">82%</div><div class="big-stat-label">Rythme alimentaire apaisé</div></div>
+        <div class="big-stat"><div class="big-stat-num">4.7/5</div><div class="big-stat-label">Note vérifiée</div></div>
       </div>
       <a href="#offer" class="btn btn-white">Commencer ma cure →</a>
       <div class="stats-row" style="margin-top:48px;opacity:.85">
@@ -896,9 +972,8 @@
   </section>
   <section class="section testi-section" id="avis">
     <div class="section-inner reveal">
-      <div class="section-label">Elles ont essayé. Elles racontent.</div>
-      <h2 class="section-title" style="text-align:center">Nos clientes partagent <span class="accent">leurs résultats.</span></h2>
-      <div class="testi-grid">
+      <h2 class="section-title" style="text-align:center">Elles racontent <span class="accent">leurs résultats.</span></h2>
+      <div class="testi-grid stagger-scale">
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
           <p class="testi-text">"Je ne pense plus au placard à 16h. Ça me soulage vraiment au quotidien."</p>
@@ -933,8 +1008,7 @@
   <!-- FAQ -->
   <section class="section faq-section" id="faq">
     <div class="section-inner reveal">
-      <div class="section-label">Vos questions</div>
-      <h2 class="section-title">Les réponses les plus <span class="accent">fréquentes.</span></h2>
+      <h2 class="section-title">Questions <span class="accent">fréquentes.</span></h2>
       <div class="faq-list">
         <div class="faq-item"><div class="faq-q">Comment fonctionne UBurn ?</div><div class="faq-a">Le glucomannane (konjac) contribue à la satiété dans le cadre d'une alimentation équilibrée (allégation EFSA autorisée). 1500+ femmes l'utilisent au quotidien. Satisfaite ou remboursée.</div></div>
         <div class="faq-item"><div class="faq-q">Comment ça agit concrètement ?</div><div class="faq-a">Le konjac est une plante naturelle d'Asie. Sa fibre (glucomannane) absorbe jusqu'à 100x son poids en eau et forme un gel dans l'estomac. Vous vous sentez rassasiée sans avoir mangé plus.</div></div>
@@ -989,18 +1063,6 @@
     </div>
   </footer>
 
-  <script>
-    // Scroll reveal
-    const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.12});
-    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-    // FAQ
-    document.querySelectorAll('.faq-item').forEach(item=>{
-      item.querySelector('.faq-q').addEventListener('click',()=>{
-        document.querySelectorAll('.faq-item').forEach(i=>{if(i!==item)i.classList.remove('open')});
-        item.classList.toggle('open');
-      });
-    });
-  </script>
 
   <!-- NEW: BRAND BANNER (IM8-style huge text) -->
   <section class="brand-banner">
@@ -1014,9 +1076,24 @@
   </div>
 
   <script>
-    // Scroll reveal
+    // Scroll reveal + stagger
     const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}})},{threshold:.12});
-    document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    document.querySelectorAll('.reveal,.stagger-children,.stagger-scale').forEach(el=>obs.observe(el));
+
+    // Count-up animation
+    const countObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
+      const el=e.target,target=+el.dataset.count,suffix=el.dataset.suffix||'',dur=1400;
+      let start=null;
+      function step(ts){
+        if(!start)start=ts;
+        const p=Math.min((ts-start)/dur,1);
+        el.textContent=Math.round(p*target)+suffix;
+        if(p<1)requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      countObs.unobserve(el);
+    }})},{threshold:.3});
+    document.querySelectorAll('[data-count]').forEach(el=>countObs.observe(el));
 
     // FAQ accordion
     document.querySelectorAll('.faq-item').forEach(item=>{
