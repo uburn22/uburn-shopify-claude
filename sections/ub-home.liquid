@@ -1,0 +1,598 @@
+{% render 'ub-styles' %}
+
+<style>
+  /* Hide theme header/footer when this section is active */
+  #shopify-section-header-group,
+  .shopify-section-group--header-group,
+  #shopify-section-footer,
+  .shopify-section--footer,
+  footer.footer--template,
+  .site-footer {
+    display: none !important;
+  }
+  /* Ensure body doesn't get extra padding from theme */
+  .main-content,
+  main#MainContent {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+</style>
+
+{% render 'ub-nav' %}
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <div class="hero-tag">Nos premières clientes adorent UBurn</div>
+    <h1>16h. <span class="accent">Votre</span> placard reste fermé.</h1>
+    <p class="hero-sub">30 kcal · 0% caféine · jusqu'à 4h de satiété.</p>
+    <div class="hero-badges">
+      <div class="hero-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        0% caféine
+      </div>
+      <div class="hero-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        30 kcal
+      </div>
+      <div class="hero-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Marque française
+      </div>
+      <div class="hero-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Livraison offerte
+      </div>
+    </div>
+    <a href="/products/ube-poudre?variant=51289200066879" class="btn btn-fill">Commencer ma cure →</a>
+    <div class="hero-bonus">
+      <div class="hero-bonus-label">🎁 Offerts avec votre commande aujourd'hui</div>
+      <div class="hero-bonus-items">
+        <span>✓ E-book "30j pour reprendre le contrôle" <em>(47€)</em></span>
+        <span>✓ Accès groupe privé Uburn Collective <em>(40€)</em></span>
+        <span>✓ Suivi nutrition WhatsApp 30j <em>(47€)</em></span>
+      </div>
+      <div class="hero-bonus-total">Valeur totale : <strong>134€ OFFERTS</strong></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <img
+      src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=800&format=webp"
+      alt="UBurn — Boisson ube satiété naturelle"
+      fetchpriority="high"
+      width="800"
+      height="800"
+    >
+    <div class="hero-float top"><span class="float-badge">EFSA</span> Satiété validée</div>
+    <div class="hero-float bottom"><span class="float-badge">#1</span> Marque Française</div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee">
+  <div class="marquee-track">
+    <div class="marquee-item"><span class="marquee-dot"></span>Livraison offerte</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>EFSA ID 3120</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>100% Naturel</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>0% Caféine</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Marque française</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Sans abonnement</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Livraison offerte</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>EFSA ID 3120</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>100% Naturel</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>0% Caféine</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Marque française</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Sans abonnement</div>
+  </div>
+</div>
+
+<!-- ===== PROBLEM ===== -->
+<section class="section problem-section" id="probleme">
+  <div class="section-inner">
+    <p class="section-label">Pourquoi ça ne marche pas</p>
+    <h2 class="section-title">Vous connaissez ce schéma.</h2>
+    <div class="prob-cards stagger-scale">
+      <div class="prob-card">
+        <div class="prob-num">01</div>
+        <div class="prob-title">Le coup de pompe à 15h</div>
+        <div class="prob-sub">Après le déjeuner, l'énergie chute. Votre corps réclame du sucre pour compenser. Ce n'est pas un manque de volonté — c'est physiologique.</div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-num">02</div>
+        <div class="prob-title">La fringale du soir</div>
+        <div class="prob-sub">16h, 17h, 19h. Le placard s'ouvre tout seul. Pas parce que vous avez faim — parce que votre glycémie oscille et que rien n'est là pour l'équilibrer.</div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-num">03</div>
+        <div class="prob-title">Les solutions qui ne tiennent pas</div>
+        <div class="prob-sub">Le café dope mais ne satiété pas. Les snacks "sains" font monter l'insuline. Les coupe-faim chimiques créent une dépendance. Il manque quelque chose de naturel et efficace.</div>
+      </div>
+    </div>
+    <p class="problem-punchline reveal reveal-d">UBurn change ça. <span class="accent">Naturellement.</span></p>
+  </div>
+</section>
+
+<!-- ===== EXPERT ===== -->
+<section class="expert-section">
+  <div class="expert-card reveal">
+    <div class="expert-img">
+      <img src="{{ 'expert-dr-dubois.jpg' | asset_url }}" alt="Dr. Claire Dubois" loading="lazy" width="400" height="400">
+    </div>
+    <div>
+      <p class="expert-quote">« Une formule rare : la science du konjac au service du quotidien des femmes. »</p>
+      <div class="expert-body">
+        La formule UBurn combine glucomannane validé EFSA et 5 actifs synergiques, chacun dosé cliniquement pour un niveau de soutien rarement atteint dans une seule boisson. Pensée pour la vraie vie.
+      </div>
+      <div class="expert-name">Dr. Claire Dubois</div>
+      <div class="expert-credentials">Nutritionniste · Spécialiste comportement alimentaire</div>
+      <a href="/pages/ingredients" class="expert-link">Voir les ingrédients →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="stats-section">
+  <div class="section-inner">
+    <p class="section-label" style="color:var(--purple-light)">Chiffres clés</p>
+    <h2>La science derrière UBurn</h2>
+    <p>Le glucomannane de konjac est l'un des seuls actifs reconnu par l'EFSA pour contribuer au contrôle de l'appétit. UBurn en contient 3g par dose — la dose cliniquement étudiée.</p>
+    <div class="big-stats-row stagger-children">
+      <div class="big-stat">
+        <div class="big-stat-num" data-count="3" data-suffix="g">0g</div>
+        <div class="big-stat-label">de glucomannane par dose — dose EFSA</div>
+      </div>
+      <div class="big-stat">
+        <div class="big-stat-num" data-count="30" data-suffix=" kcal">0 kcal</div>
+        <div class="big-stat-label">par portion, sans sucres ajoutés</div>
+      </div>
+      <div class="big-stat">
+        <div class="big-stat-num" data-count="6" data-suffix=" actifs">0 actifs</div>
+        <div class="big-stat-label">synergiques pour un effet complet</div>
+      </div>
+      <div class="big-stat">
+        <div class="big-stat-num" data-count="4" data-suffix="h">0h</div>
+        <div class="big-stat-label">de satiété durable jusqu'à</div>
+      </div>
+    </div>
+    <p class="stats-note">Complément alimentaire. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120).</p>
+    <a href="/products/ube-poudre?variant=51289200066879" class="btn btn-white" style="margin-top:36px;">Essayer UBurn</a>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="section how-section">
+  <div class="section-inner">
+    <p class="section-label">Mode d'emploi</p>
+    <h2 class="section-title">Simple comme une <span class="accent">routine</span></h2>
+    <div class="how-grid stagger-children">
+      <div class="how-step">
+        <div class="how-step__svg">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8 2 5 5 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        </div>
+        <h4>1. Mélangez</h4>
+        <p>1 dose (7g) dans 200ml d'eau fraîche ou chaude, 15 min avant le repas.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step__svg">
+          <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <h4>2. Buvez</h4>
+        <p>Le gel de konjac se forme dans l'estomac et occupe l'espace naturellement.</p>
+      </div>
+      <div class="how-step">
+        <div class="how-step__svg">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h4>3. Profitez</h4>
+        <p>Jusqu'à 4h de satiété. Énergie stable. Aucun pic d'insuline, aucun crash.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INGREDIENTS ===== -->
+<section class="section" id="ingredients" style="background:var(--cream)">
+  <div class="section-inner">
+    <p class="section-label">Formule</p>
+    <h2 class="section-title">6 actifs qui travaillent <span class="accent">ensemble</span></h2>
+    <div class="ingr-grid stagger-scale">
+      <div class="ingr-card">
+        <div class="ingr-card-img">
+          <img src="https://uburn.co/cdn/shop/files/Konjac.jpg?width=400&format=webp" alt="Konjac" loading="lazy" width="400" height="300">
+        </div>
+        <div class="ingr-card-body">
+          <h4>Glucomannane de Konjac</h4>
+          <p>3g par dose · EFSA ID 3120 · Contribue au contrôle de l'appétit</p>
+        </div>
+      </div>
+      <div class="ingr-card">
+        <div class="ingr-card-img">
+          <img src="https://uburn.co/cdn/shop/files/Ube.jpg?width=400&format=webp" alt="Ubé violet" loading="lazy" width="400" height="300">
+        </div>
+        <div class="ingr-card-body">
+          <h4>Ubé Violet</h4>
+          <p>Anthocyanes naturelles · Antioxydants puissants · Couleur 100% naturelle</p>
+        </div>
+      </div>
+      <div class="ingr-card">
+        <div class="ingr-card-img">
+          <img src="https://uburn.co/cdn/shop/files/MCT.jpg?width=400&format=webp" alt="MCT Coco" loading="lazy" width="400" height="300">
+        </div>
+        <div class="ingr-card-body">
+          <h4>MCT de Coco</h4>
+          <p>Énergie rapide et stable · Sans pic d'insuline · Sans crash</p>
+        </div>
+      </div>
+      <div class="ingr-card">
+        <div class="ingr-card-img">
+          <img src="https://uburn.co/cdn/shop/files/LCarnitine.jpg?width=400&format=webp" alt="L-Carnitine" loading="lazy" width="400" height="300">
+        </div>
+        <div class="ingr-card-body">
+          <h4>L-Carnitine</h4>
+          <p>400mg par dose · Support du métabolisme · Énergie cellulaire</p>
+        </div>
+      </div>
+      <div class="ingr-card">
+        <div class="ingr-card-img">
+          <img src="https://uburn.co/cdn/shop/files/Gingembre.jpg?width=400&format=webp" alt="Gingembre bio" loading="lazy" width="400" height="300">
+        </div>
+        <div class="ingr-card-body">
+          <h4>Gingembre Bio</h4>
+          <p>Confort digestif · Anti-inflammatoire naturel · Tonus</p>
+        </div>
+      </div>
+      <div class="ingr-card">
+        <div class="ingr-card-img">
+          <img src="https://uburn.co/cdn/shop/files/Acacia.jpg?width=400&format=webp" alt="Fibre d'acacia" loading="lazy" width="400" height="300">
+        </div>
+        <div class="ingr-card-body">
+          <h4>Fibre d'Acacia</h4>
+          <p>Prébiotique · Microbiote intestinal · Fibres solubles</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="/pages/ingredients" class="btn btn-outline">Voir la formule complète →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON TABLE ===== -->
+<section class="compare-section">
+  <div class="compare-inner">
+    <span class="section-label">Pourquoi UBurn</span>
+    <h2>UBurn vs <span class="accent">le reste du marché</span></h2>
+    <p class="compare-sub">Nous avons conçu UBurn pour combler exactement ce qui manque dans toutes les autres solutions.</p>
+    <div class="compare-table">
+      <div class="compare-head">
+        <span>Actif</span>
+        <span>Marché</span>
+        <span>UBurn</span>
+        <span>Votre bénéfice</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-actif" data-label="Actif">Glucomannane</span>
+        <span class="compare-market" data-label="Marché">Absent ou sous-dosé</span>
+        <span class="compare-uburn" data-label="UBurn">3g · EFSA <span class="compare-pill">VALIDÉ</span></span>
+        <span class="compare-benefit" data-label="Bénéfice">Contrôle de l'appétit reconnu</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-actif" data-label="Actif">Caféine</span>
+        <span class="compare-market" data-label="Marché">Présente dans 90% des produits</span>
+        <span class="compare-uburn" data-label="UBurn">0% <span class="compare-pill new">NATUREL</span></span>
+        <span class="compare-benefit" data-label="Bénéfice">Se prend à toute heure, même le soir</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-actif" data-label="Actif">Calories</span>
+        <span class="compare-market" data-label="Marché">80–200 kcal par dose</span>
+        <span class="compare-uburn" data-label="UBurn">30 kcal <span class="compare-pill">LÉGER</span></span>
+        <span class="compare-benefit" data-label="Bénéfice">Compatible avec tous les régimes</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-actif" data-label="Actif">Couleur</span>
+        <span class="compare-market" data-label="Marché">Colorants artificiels</span>
+        <span class="compare-uburn" data-label="UBurn">Ubé violet naturel <span class="compare-pill new">NATUREL</span></span>
+        <span class="compare-benefit" data-label="Bénéfice">Antioxydants + belle couleur</span>
+      </div>
+      <div class="compare-row">
+        <span class="compare-actif" data-label="Actif">Abonnement</span>
+        <span class="compare-market" data-label="Marché">Souvent obligatoire</span>
+        <span class="compare-uburn" data-label="UBurn">Jamais requis <span class="compare-pill">LIBRE</span></span>
+        <span class="compare-benefit" data-label="Bénéfice">Commandez quand vous voulez</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6 BIENFAITS INTERACTIVE ===== -->
+<section class="benefits-section">
+  <div class="benefits-inner">
+    <div class="benefits-head">
+      <p class="section-label">Les bienfaits</p>
+      <h2 class="section-title">Une formule, <span class="accent">6 effets</span></h2>
+    </div>
+    <div class="benefits-grid-layout">
+      <div class="benefit-cards">
+        <div class="benefit-card active" data-benefit="satiete">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+          <div class="benefit-name">Satiété</div>
+        </div>
+        <div class="benefit-card" data-benefit="energie">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="benefit-name">Énergie</div>
+        </div>
+        <div class="benefit-card" data-benefit="digestion">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24"><path d="M4.5 9.5V5a2 2 0 0 1 4 0v4.5"/><path d="M4.5 9.5a2 2 0 0 0 0 4h.17M8.5 9.5a2 2 0 0 1 0 4h-.17"/><circle cx="12" cy="17" r="3"/></svg>
+          </div>
+          <div class="benefit-name">Digestion</div>
+        </div>
+        <div class="benefit-card" data-benefit="antioxydants">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="benefit-name">Antioxydants</div>
+        </div>
+        <div class="benefit-card" data-benefit="metabolisme">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="benefit-name">Métabolisme</div>
+        </div>
+        <div class="benefit-card" data-benefit="bien_etre">
+          <div class="benefit-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div class="benefit-name">Bien-être</div>
+        </div>
+      </div>
+      <div class="benefit-detail">
+        <div class="benefit-detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <div class="benefit-label">Glucomannane · EFSA · Fibres</div>
+        <div class="benefit-title">Satiété durable</div>
+        <div class="benefit-desc">Système complet basé sur le glucomannane (EFSA ID 3120) et 5g de fibres par dose. Le konjac absorbe jusqu'à 100x son poids en eau pour former un gel qui occupe naturellement l'estomac.</div>
+        <span class="benefit-badge">EFSA ID 3120 · Validé</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="section testi-section" id="avis">
+  <div class="section-inner">
+    <p class="section-label">Avis clients</p>
+    <h2 class="section-title">Ce qu'elles en <span class="accent">disent</span></h2>
+    <div class="testi-grid stagger-scale">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-verified">✓ Achat vérifié</p>
+        <p class="testi-text">« Je prenais UBurn vers 16h et honnêtement j'ai arrêté de grignoter entre les repas. Ça m'a surprise parce que je suis très sceptique d'habitude. La texture est agréable, goût doux. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar">ML</div>
+          <div>
+            <div class="testi-name">Marie-Laure D.</div>
+            <div class="testi-role">Lyon · Cliente depuis 2 mois</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-verified">✓ Achat vérifié</p>
+        <p class="testi-text">« Ce que j'aime c'est que je peux le prendre le soir sans que ça perturbe mon sommeil. 0% caféine c'est un vrai plus. Et le violet c'est joli dans mon verre. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SC</div>
+          <div>
+            <div class="testi-name">Sophie C.</div>
+            <div class="testi-role">Paris · Cliente depuis 6 semaines</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-verified">✓ Achat vérifié</p>
+        <p class="testi-text">« J'ai essayé plein de choses avant, des suppléments bourrés de café qui me donnaient des palpitations. UBurn c'est léger, naturel, et ça tient vraiment entre les repas. »</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AM</div>
+          <div>
+            <div class="testi-name">Amira M.</div>
+            <div class="testi-role">Bordeaux · Cliente depuis 3 mois</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BONUS ===== -->
+<section class="section bonus-section">
+  <div class="section-inner">
+    <p class="section-label">Ce que vous recevez</p>
+    <h2 class="section-title reveal">134€ de <span class="accent">valeur offerts</span></h2>
+    <div class="bonus-grid stagger-children">
+      <div class="bonus-card">
+        <span class="bonus-tag">47€</span>
+        <span>E-book "30 jours pour reprendre le contrôle" — guide nutrition complet</span>
+      </div>
+      <div class="bonus-card">
+        <span class="bonus-tag">40€</span>
+        <span>Accès au groupe privé Uburn Collective — communauté et suivi</span>
+      </div>
+      <div class="bonus-card">
+        <span class="bonus-tag">47€</span>
+        <span>Suivi nutrition personnalisé WhatsApp 30 jours</span>
+      </div>
+      <div class="bonus-card">
+        <span class="bonus-tag">OFFERT</span>
+        <span>Livraison express gratuite en France métropolitaine</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="offer-block-section" id="offer">
+  <div class="offer-block-inner">
+    <div class="offer-block-header" style="text-align:center">
+      <p class="section-label">Nos formules</p>
+      <h2 class="section-title">Commencez votre <span class="accent">cure</span></h2>
+      <p style="font-size:16px;color:var(--body);max-width:520px;margin:0 auto">Moins de 1€/jour pour retrouver de l'énergie et contrôler votre appétit naturellement.</p>
+    </div>
+    <div class="offer-block-img">
+      <img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=500&format=webp" alt="UBurn Ube Poudre" loading="lazy" width="500" height="500">
+    </div>
+    <div class="offer-block-pricing">
+      <div class="pricing-card">
+        <h3>Découverte</h3>
+        <p class="pricing-desc">1 sachet · 30 doses</p>
+        <div class="pricing-price">34,50€ <small>/sachet</small></div>
+        <p class="pricing-per">soit 1,15€/jour</p>
+        <a href="/products/ube-poudre?variant=51289200066879" class="btn btn-outline" style="width:100%;justify-content:center;">Choisir →</a>
+      </div>
+      <div class="pricing-card pop">
+        <div class="pricing-pop-badge">Le plus choisi</div>
+        <h3>Cure 3 mois</h3>
+        <p class="pricing-desc">3 sachets · 90 doses</p>
+        <div class="pricing-price">89,90€ <small>/commande</small></div>
+        <p class="pricing-per">soit 0,99€/jour — économisez 13€</p>
+        <a href="/products/ube-poudre?variant=51289200066879" class="btn btn-fill" style="width:100%;justify-content:center;">Commander →</a>
+      </div>
+    </div>
+    <div class="offer-block-bonus">
+      <p style="text-align:center;font-size:13px;color:var(--muted);margin-bottom:20px;text-transform:uppercase;letter-spacing:1px;font-weight:600">Inclus avec chaque commande</p>
+      <div class="bonus-grid">
+        <div class="bonus-card">
+          <span class="bonus-tag">47€</span>
+          <span>E-book "30j pour reprendre le contrôle"</span>
+        </div>
+        <div class="bonus-card">
+          <span class="bonus-tag">40€</span>
+          <span>Groupe privé Uburn Collective</span>
+        </div>
+        <div class="bonus-card">
+          <span class="bonus-tag">47€</span>
+          <span>Suivi nutrition WhatsApp 30j</span>
+        </div>
+        <div class="bonus-card">
+          <span class="bonus-tag">OFFERT</span>
+          <span>Livraison gratuite en France</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section faq-section" id="faq">
+  <div class="section-inner">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title">Questions <span class="accent">fréquentes</span></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Comment ça marche concrètement ?</div>
+        <div class="faq-a">Le glucomannane de konjac absorbe jusqu'à 100x son poids en eau dans l'estomac, formant un gel visqueux. Ce gel ralentit la vidange gastrique et prolonge la sensation de satiété. À utiliser 15 minutes avant les repas ou les moments de fringales.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Y a-t-il de la caféine dans UBurn ?</div>
+        <div class="faq-a">Non, zéro caféine. UBurn peut être pris à n'importe quelle heure de la journée, y compris le soir, sans perturber le sommeil. C'est l'une de nos différences fondamentales avec les solutions stimulantes du marché.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Combien de temps dure l'effet ?</div>
+        <div class="faq-a">Jusqu'à 4h de satiété selon les conditions d'utilisation. L'effet dépend de la dose, de l'hydratation (il est important de boire suffisamment d'eau) et de votre alimentation globale. Complément alimentaire — résultats individuels variables.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Est-ce que je dois prendre un abonnement ?</div>
+        <div class="faq-a">Non, jamais. Vous achetez à l'unité, quand vous le souhaitez. Aucun engagement, aucun abonnement caché.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">C'est quoi l'ubé violet ?</div>
+        <div class="faq-a">L'ubé est une variété de tubercule violet originaire des Philippines, naturellement riche en anthocyanes — des antioxydants puissants qui donnent sa couleur violette à UBurn. C'est 100% naturel, sans colorants artificiels.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">UBurn est-il adapté aux végans ?</div>
+        <div class="faq-a">Oui, UBurn est 100% végétal. Aucun ingrédient d'origine animale.</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="/pages/faq" class="btn btn-outline">Toutes les questions →</a>
+    </div>
+  </div>
+</section>
+
+{% render 'ub-footer' %}
+
+<script>
+  // Scroll reveal + stagger
+  const obs = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal, .stagger-children, .stagger-scale').forEach(el => obs.observe(el));
+
+  // Count-up animation
+  const countObs = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target, target = +el.dataset.count, suffix = el.dataset.suffix || '', dur = 1400;
+        let start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          const p = Math.min((ts - start) / dur, 1);
+          el.textContent = Math.round(p * target) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+        countObs.unobserve(el);
+      }
+    });
+  }, { threshold: .3 });
+  document.querySelectorAll('[data-count]').forEach(el => countObs.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => {
+      document.querySelectorAll('.faq-item').forEach(i => { if (i !== item) i.classList.remove('open'); });
+      item.classList.toggle('open');
+    });
+  });
+
+  // Benefit cards interactive
+  const benefits = {
+    satiete: { label: 'Glucomannane · EFSA · Fibres', title: 'Satiété durable', desc: 'Système complet basé sur le glucomannane (EFSA ID 3120) et 5g de fibres par dose. Le konjac absorbe jusqu\'à 100x son poids en eau pour former un gel qui occupe naturellement l\'estomac.' },
+    energie: { label: 'MCT · L-Carnitine', title: 'Énergie stable', desc: 'MCT coco et L-Carnitine 400mg pour une énergie sans pic ni crash. Parfait pour les après-midis longs sans excitants.' },
+    digestion: { label: 'Gingembre · Acacia', title: 'Digestion apaisée', desc: 'Gingembre bio et fibre d\'acacia prébiotique pour un confort digestif au quotidien et un microbiote équilibré.' },
+    antioxydants: { label: 'Ubé · Anthocyanes', title: 'Antioxydants puissants', desc: 'Ubé violet riche en anthocyanes naturelles pour la protection cellulaire et l\'éclat de la peau.' },
+    metabolisme: { label: 'L-Carnitine · Gingembre', title: 'Métabolisme soutenu', desc: 'L-Carnitine 400mg et gingembre pour un support métabolique naturel et durable.' },
+    bien_etre: { label: 'Formule complète', title: 'Équilibre global', desc: 'Une formule synergique de 6 actifs pour un bien-être quotidien apaisé et durable.' }
+  };
+  document.querySelectorAll('[data-benefit]').forEach(card => {
+    card.addEventListener('click', () => {
+      const key = card.getAttribute('data-benefit');
+      document.querySelectorAll('[data-benefit]').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      const detail = document.querySelector('.benefit-detail');
+      if (detail && benefits[key]) {
+        detail.querySelector('.benefit-label').textContent = benefits[key].label;
+        detail.querySelector('.benefit-title').textContent = benefits[key].title;
+        detail.querySelector('.benefit-desc').textContent = benefits[key].desc;
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "UBurn Homepage",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

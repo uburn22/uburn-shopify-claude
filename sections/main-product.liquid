@@ -1,4 +1,78 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700;800&family=Red+Hat+Text:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
 <style>
+  :root{
+    --ub-purple-deep:#3d1873;--ub-purple-main:#6b2fa0;--ub-purple-mid:#8b47c5;
+    --ub-purple-pale:#e8dcf5;--ub-purple-wash:#f5f0fa;
+  }
+
+  /* Apply brand fonts to product info */
+  .product-info .product-title,
+  .product-info h1,
+  .product-info h2,
+  .product-info .h1,
+  .product-info .h2 {
+    font-family: 'Red Hat Display', sans-serif !important;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #242220;
+  }
+  .product-info,
+  .product-info p,
+  .product-info span,
+  .product-info label {
+    font-family: 'Red Hat Text', sans-serif;
+  }
+
+  /* Bonus block */
+  .uburn-bonus-block {
+    margin-top: 16px;
+    background: var(--ub-purple-wash);
+    border: 1px solid var(--ub-purple-pale);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .uburn-bonus-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ub-purple-main);
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    margin-bottom: 8px;
+    font-family: 'Red Hat Text', sans-serif;
+  }
+  .uburn-bonus-items {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .uburn-bonus-items span {
+    font-size: 12.5px;
+    color: #242220;
+    font-weight: 500;
+    line-height: 1.4;
+    font-family: 'Red Hat Text', sans-serif;
+  }
+  .uburn-bonus-items em {
+    color: #8a8785;
+    font-style: normal;
+    font-size: 11px;
+  }
+  .uburn-bonus-total {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--ub-purple-pale);
+    font-size: 12.5px;
+    color: #5a5654;
+    font-family: 'Red Hat Text', sans-serif;
+  }
+  .uburn-bonus-total strong {
+    color: var(--ub-purple-deep);
+    font-weight: 800;
+  }
+
   {%- if section.settings.allow_transparent_header and section.settings.transparent_header_use_primary_colors -%}
     {%- comment -%}
     When this setting is enabled, we use the transparent header, but we force the header to use the primary colors and primary logo.
@@ -210,7 +284,7 @@
           <span><b>✓</b> Ingrédients conformes EFSA</span>
           <span><b>✓</b> 100% Végétal</span>
           <span><b>✓</b> Sans abonnement</span>
-          <span><b>✓</b> Remboursé si insatisfait</span>
+          <span><b>✓</b> Livraison offerte</span>
         </div>
 
         {%- if product.media.size > 0 -%}
