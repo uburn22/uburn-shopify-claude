@@ -510,7 +510,7 @@
     <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> Ingrédients conformes EFSA</span>
     <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> 100% Végétal</span>
     <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> Sans abonnement</span>
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> Remboursé si insatisfait</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> 0% caféine</span>
   </div>
 
   <!-- HERO -->
@@ -524,7 +524,7 @@
         <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 30 kcal</div>
         <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> France</div>
         <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Livraison offerte</div>
-        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Satisfait ou remboursé</div>
+        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 0% sucre ajouté</div>
       </div>
       <a href="#offer" class="btn btn-fill">Commencer ma cure →</a>
       <div class="hero-bonus">
@@ -532,15 +532,15 @@
         <div class="hero-bonus-items">
           <span>✓ E-book "30j pour reprendre le contrôle" <em>(47€)</em></span>
           <span>✓ Accès groupe privé Uburn Collective <em>(40€)</em></span>
+          <span>✓ Accès aux événements UBurn en ligne <em>(50€)</em></span>
           <span>✓ Suivi nutrition WhatsApp 30j <em>(47€)</em></span>
         </div>
-        <div class="hero-bonus-total">Valeur totale : <strong>134€ OFFERTS</strong></div>
+        <div class="hero-bonus-total">Valeur totale : <strong>184€ OFFERTS</strong></div>
       </div>
     </div>
     <div class="hero-visual">
-      <img src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg?v=1776421390&width=900&format=webp" alt="Uburn — Boisson ube satiété naturelle" fetchpriority="high" width="900" height="900" style="width:100%;max-width:520px;height:auto;object-fit:cover">
-      <div class="hero-float top"><span class="float-badge">EFSA</span> Satiété validée</div>
-      <div class="hero-float bottom"><span class="float-badge">#1</span> Marque Française</div>
+      <img src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg?v=1776421390&width=900&format=webp" alt="UBurn — poudre ubé violette versée avec du lait ou de l'eau pour une boisson rassasiante" fetchpriority="high" loading="eager" width="900" height="900" style="width:100%;max-width:520px;height:auto;object-fit:cover">
+      <div class="hero-float top"><span class="float-badge">EFSA</span> Glucomannane · Allégation ID 3120</div>
     </div>
   </section>
 
@@ -565,8 +565,9 @@
   <!-- NEW: EXPERT TESTIMONIAL CARD (IM8-inspired) -->
   <section class="expert-section">
     <div class="expert-card reveal">
-      <div class="expert-img">
-        <img src="{{ 'expert-dr-dubois.jpg' | asset_url }}" alt="Dr. Claire Dubois" loading="lazy" width="400" height="400">
+      <!-- TODO: remplacer par photo réelle du nutritionniste partenaire -->
+      <div class="expert-img" style="background:var(--grad);display:flex;align-items:center;justify-content:center;border-radius:50%;width:120px;height:120px;flex-shrink:0">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </div>
       <div>
         <p class="expert-quote">« Une formule rare : la science du konjac au service du quotidien des femmes. »</p>
@@ -609,31 +610,41 @@
     <div class="section-inner reveal">
       <div class="section-label">Comment Uburn agit</div>
       <h2 class="section-title" style="text-align:center">3 gestes. <span class="accent">4h de résultat.</span></h2>
-      <div class="how-grid stagger-children">
+      <div class="how-grid stagger-children" style="align-items:start">
         <div class="how-step">
-          <div class="how-step__svg">
-            <svg viewBox="0 0 24 24"><path d="M12 2v6M6 6l1.5 1.5M18 6l-1.5 1.5M4 12h3M17 12h3M6 18l1.5-1.5M18 18l-1.5-1.5"/><circle cx="12" cy="12" r="4"/></svg>
+          <div class="how-step-photo">
+            <!-- TODO: remplacer par assets/step-01-melangez.jpg — cuillère doseuse versant la poudre ubé violette -->
+            <img src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg?v=1776421390&width=400&format=webp" alt="Mélangez UBurn dans un verre d'eau ou de lait végétal" loading="lazy" width="400" height="400">
           </div>
-          <div class="how-num">1</div>
+          <div class="how-num">01</div>
           <h4>Mélangez</h4>
+          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Une dose dans un grand verre d'eau <strong>OU</strong> de lait végétal</p>
         </div>
         <div class="how-step">
-          <div class="how-step__svg">
-            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="8" ry="5"/><path d="M4 12c0 4 3.6 7 8 7s8-3 8-7"/><path d="M12 7v10"/></svg>
+          <div class="how-step-photo">
+            <!-- TODO: remplacer par assets/step-02-gel.jpg — macro texture gel konjac dans le verre -->
+            <img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=400&format=webp" alt="Le glucomannane forme un gel naturel dans votre estomac" loading="lazy" width="400" height="400">
           </div>
-          <div class="how-num">2</div>
+          <div class="how-num">02</div>
           <h4>Le gel se forme</h4>
+          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Le konjac gonfle dans votre estomac et coupe la faim naturellement</p>
         </div>
         <div class="how-step">
-          <div class="how-step__svg">
-            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          <div class="how-step-photo">
+            <!-- TODO: remplacer par assets/step-03-buvez.jpg — femme qui boit UBurn à son bureau/canapé -->
+            <img src="https://uburn.co/cdn/shop/files/Uburn_Scoop.png?v=1749644803&width=400&format=webp" alt="4h sans fringales — votre estomac est calmé naturellement" loading="lazy" width="400" height="400">
           </div>
-          <div class="how-num">3</div>
+          <div class="how-num">03</div>
           <h4>4h sans fringales</h4>
+          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Votre estomac est calmé, naturellement</p>
         </div>
       </div>
     </div>
   </section>
+  <style>
+    .how-step-photo{width:100%;aspect-ratio:1/1;border-radius:20px;overflow:hidden;margin-bottom:16px;background:var(--purple-wash)}
+    .how-step-photo img{width:100%;height:100%;object-fit:cover}
+  </style>
 
   <!-- OFFER BLOCK: SHOWCASE + PRICING + BONUS + CART -->
   <style>
@@ -651,7 +662,7 @@
         <div class="section-label" style="text-align:center">Votre offre</div>
         <h2 class="section-title" style="text-align:center">Une saveur. <span class="accent">Six actifs.</span></h2>
         <p style="max-width:400px;margin:10px auto 0;color:var(--body);font-size:14px;text-align:center">Paiement unique · Livraison offerte</p>
-        <p id="offer-timer">🕐 Livraison offerte encore <span id="countdown"></span></p>
+        <p id="offer-timer">✓ Livraison offerte en France</p>
       </div>
 
       <!-- Image produit -->
@@ -721,7 +732,7 @@
           </div>
           <p class="offer-rating">★★★★★ 4,7/5 · 1 500+ clientes satisfaites</p>
           <a href="https://uburn.co/cart/51289200066879:1?checkout" class="cart-checkout">Continuer vers le paiement →</a>
-          <p class="social-proof">🟢 23 personnes regardent cette offre en ce moment</p>
+          <p class="social-proof">✓ Allégation glucomannane validée EFSA (ID 3120)</p>
           <div class="cart-pay"><span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Shop Pay</span></div>
         </div>
       </div>
@@ -754,25 +765,26 @@
     })();
   </script>
 
-  <!-- NEW: LIFESTYLE BANNER -->
-  <section class="lifestyle-section">
+  <!-- LIFESTYLE BANNER -->
+  <section class="lifestyle-section" style="position:relative;overflow:hidden">
+    <!-- TODO: remplacer le fond par assets/lifestyle-rituel.jpg — femme qui boit UBurn sur canapé/bureau/soleil -->
     <div class="lifestyle-bg"></div>
     <div class="lifestyle-inner reveal">
       <div class="section-label">Un rituel, pas une contrainte</div>
       <h2>Un moment <em>pour vous.</em> Une boisson pour votre équilibre.</h2>
-      <p>Un rituel, <em>pas une contrainte.</em></p>
+      <p>Eau fraîche ou lait végétal, glaçons ou non — UBurn s'adapte à vos envies. Un rituel de 10 secondes, pensé pour vous.</p>
       <a href="#offer" class="btn btn-white">Commencer ma cure →</a>
     </div>
   </section>
 
-  <!-- PRODUCT: SATIETE -->
+  <!-- PRODUCT: SATIETE — RÉSULTATS 30J -->
   <div class="prod-block alt">
     <div class="prod-inner">
       <div class="prod-text reveal">
-        <div class="section-label">Simple. Rapide. Délicieux.</div>
-        <h2>3 gestes, 10 secondes, <span class="accent">c'est prêt.</span></h2>
-        <h3>Satiété longue durée, validée EFSA</h3>
-        <p>Le konjac forme un gel, vous vous sentez rassasiée. Sans plus manger.</p>
+        <div class="section-label">Ce que vivent nos clientes</div>
+        <h2>Leurs résultats <span class="accent">en 30 jours.</span></h2>
+        <h3>Formulé autour du glucomannane, allégation santé validée EFSA (ID 3120)</h3>
+        <p>Mélangez UBurn avec un grand verre d'eau ou votre lait végétal préféré. Le konjac forme un gel qui occupe naturellement votre estomac — vous vous sentez rassasiée pendant jusqu'à 4h, sans frustration.</p>
         <div class="feats">
           <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Effet satiété dès la première prise</div>
           <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Résultats visibles en 7 à 14 jours</div>
@@ -783,7 +795,8 @@
       </div>
       <div class="prod-visual reveal reveal-d">
         <div class="prod-img">
-          <img src="https://uburn.co/cdn/shop/files/Uburn_Scoop.png?v=1749644803&width=800&format=webp" alt="UBurn Scoop" loading="lazy" width="800" height="800">
+          <!-- TODO: remplacer par photo lifestyle cliente (Iness ou UGC) -->
+          <img src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg?v=1776421390&width=800&format=webp" alt="UBurn — boisson ubé préparée avec de l'eau ou du lait végétal" loading="lazy" width="800" height="800">
         </div>
       </div>
     </div>
@@ -1035,11 +1048,13 @@
     <div class="section-inner reveal">
       <h2 class="section-title">Questions <span class="accent">fréquentes.</span></h2>
       <div class="faq-list">
-        <div class="faq-item"><div class="faq-q">Comment fonctionne UBurn ?</div><div class="faq-a">Le glucomannane (konjac) contribue à la satiété dans le cadre d'une alimentation équilibrée (allégation EFSA autorisée). 1500+ femmes l'utilisent au quotidien. Satisfaite ou remboursée.</div></div>
+        <div class="faq-item"><div class="faq-q">Comment fonctionne UBurn ?</div><div class="faq-a">UBurn est formulé autour du glucomannane de konjac, dont l'allégation de satiété est officiellement validée par l'EFSA (ID 3120). Mélangez une dose dans un grand verre d'eau fraîche ou de votre lait végétal préféré (amande, avoine, coco...). Le konjac absorbe l'eau et forme un gel naturel dans l'estomac — vous vous sentez rassasiée naturellement. 1500+ femmes l'utilisent au quotidien.</div></div>
         <div class="faq-item"><div class="faq-q">Comment ça agit concrètement ?</div><div class="faq-a">Le konjac est une plante naturelle d'Asie. Sa fibre (glucomannane) absorbe jusqu'à 100x son poids en eau et forme un gel dans l'estomac. Vous vous sentez rassasiée sans avoir mangé plus.</div></div>
         <div class="faq-item"><div class="faq-q">En combien de temps voit-on des résultats ?</div><div class="faq-a">La plupart des clientes ressentent l'effet satiété dès la première prise. Pour des résultats visibles sur le contrôle des fringales : 7 à 14 jours en utilisation régulière le matin.</div></div>
         <div class="faq-item"><div class="faq-q">Y a-t-il un abonnement ?</div><div class="faq-a">Non. Aucun abonnement caché. Vous commandez quand vous voulez, vous arrêtez quand vous voulez.</div></div>
         <div class="faq-item"><div class="faq-q">C'est compatible le soir ? Sans caféine ?</div><div class="faq-a">Oui. Uburn ne contient pas de caféine. Vous pouvez le prendre à n'importe quelle heure, même le soir, sans perturber votre sommeil.</div></div>
+        <div class="faq-item"><div class="faq-q">Avec de l'eau ou avec du lait — quelle différence ?</div><div class="faq-a">Les deux fonctionnent parfaitement. Avec de l'eau froide, la boisson est légère et rafraîchissante — idéal en journée ou avant un repas. Avec un lait végétal (amande, avoine, coco...), la texture est plus crémeuse et la saveur noisette-vanille est encore plus prononcée. À vous de choisir selon votre humeur !</div></div>
+        <div class="faq-item"><div class="faq-q">Y a-t-il des contre-indications ?</div><div class="faq-a">UBurn est déconseillé pendant la grossesse et l'allaitement. En cas de traitement médical, consultez votre médecin avant utilisation. Le glucomannane peut interagir avec certains médicaments en ralentissant leur absorption — prendre UBurn 2h avant ou après votre traitement si nécessaire. Complément alimentaire — ne se substitue pas à une alimentation variée et équilibrée.</div></div>
       </div>
     </div>
   </section>
@@ -1049,7 +1064,7 @@
     <div class="guar-grid">
       <div class="guar-item">
         <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_World.svg" alt=""></div>
-        <h4>Satisfait ou remboursé</h4><p>Sans conditions</p>
+        <h4>Formule EFSA</h4><p>Glucomannane ID 3120</p>
       </div>
       <div class="guar-item">
         <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_Fast_shipping.svg" alt=""></div>
@@ -1080,7 +1095,7 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; 2026 UBurn. Tous droits réservés.</p>
-        <div class="footer-legal"><a href="#">CGV</a><a href="#">Confidentialité</a><a href="#">Mentions légales</a><a href="#">Remboursement</a></div>
+        <div class="footer-legal"><a href="/policies/terms-of-service">CGV</a><a href="/policies/privacy-policy">Confidentialité</a><a href="/policies/legal-notice">Mentions légales</a></div>
       </div>
       <div class="footer-disc">
         <p>Complément alimentaire à base de glucomannane. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas. Ne se substitue pas à une alimentation variée et équilibrée. Déconseillé pendant la grossesse et l'allaitement.</p>
