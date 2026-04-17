@@ -1,21 +1,14 @@
 {% render 'ub-styles' %}
 
 <style>
-  /* Hide theme header/footer when this section is active */
-  #shopify-section-header-group,
+  /* Hide theme header/footer — section renders its own via ub-nav/ub-footer */
+  #shopify-section-group-header-group,
   .shopify-section-group--header-group,
-  #shopify-section-footer,
-  .shopify-section--footer,
-  footer.footer--template,
-  .site-footer {
+  #shopify-section-group-footer-group,
+  .shopify-section-group--footer-group {
     display: none !important;
   }
-  /* Ensure body doesn't get extra padding from theme */
-  .main-content,
-  main#MainContent {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
+  main#main { padding: 0 !important; }
 </style>
 
 {% render 'ub-nav' %}
@@ -115,8 +108,8 @@
 <!-- ===== EXPERT ===== -->
 <section class="expert-section">
   <div class="expert-card reveal">
-    <div class="expert-img">
-      <img src="{{ 'expert-dr-dubois.jpg' | asset_url }}" alt="Dr. Claire Dubois" loading="lazy" width="400" height="400">
+    <div class="expert-img" style="background:var(--grad)">
+      <img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=400&format=webp" alt="UBurn — Formule scientifique" loading="lazy" width="400" height="400" style="object-fit:contain;padding:20px">
     </div>
     <div>
       <p class="expert-quote">« Une formule rare : la science du konjac au service du quotidien des femmes. »</p>

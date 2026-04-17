@@ -155,18 +155,42 @@
       <div style="background:var(--purple-deep);color:#fff;padding:16px 24px;font-family:'Red Hat Display',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;display:grid;grid-template-columns:1fr auto">
         <span>Ingrédient</span><span>Par dose</span>
       </div>
-      {% assign rows = "Glucomannane de Konjac|1g (dose × 3/jour = 3g)|Ubé Violet (Dioscorea alata)|800mg|MCT de Coco|600mg|L-Carnitine|400mg|Gingembre Bio|200mg|Fibre d'Acacia|500mg|Énergie|30 kcal|Fibres totales|5g|Sucres|0g" | split: "|" %}
-      {% for i in (0..8) %}
-        {% assign idx = i | times: 2 %}
-        {% assign name = rows[idx] %}
-        {% assign val = rows[idx | plus: 1] %}
-        {% if name %}
-        <div style="display:grid;grid-template-columns:1fr auto;padding:14px 24px;border-bottom:1px solid rgba(0,0,0,.05);font-size:14px{% if forloop.last %};border-bottom:none{% endif %}">
-          <span style="color:var(--dark);font-weight:500">{{ name }}</span>
-          <span style="color:var(--purple-main);font-weight:700">{{ val }}</span>
-        </div>
-        {% endif %}
-      {% endfor %}
+      <div style="display:grid;grid-template-columns:1fr auto;padding:14px 24px;border-bottom:1px solid rgba(0,0,0,.05);font-size:14px">
+        <span style="color:var(--dark);font-weight:500">Glucomannane de Konjac</span>
+        <span style="color:var(--purple-main);font-weight:700">1g (dose × 3/jour = 3g)</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;padding:14px 24px;border-bottom:1px solid rgba(0,0,0,.05);font-size:14px">
+        <span style="color:var(--dark);font-weight:500">Ubé Violet (Dioscorea alata)</span>
+        <span style="color:var(--purple-main);font-weight:700">800mg</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;padding:14px 24px;border-bottom:1px solid rgba(0,0,0,.05);font-size:14px">
+        <span style="color:var(--dark);font-weight:500">MCT de Coco</span>
+        <span style="color:var(--purple-main);font-weight:700">600mg</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;padding:14px 24px;border-bottom:1px solid rgba(0,0,0,.05);font-size:14px">
+        <span style="color:var(--dark);font-weight:500">L-Carnitine</span>
+        <span style="color:var(--purple-main);font-weight:700">400mg</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;padding:14px 24px;border-bottom:1px solid rgba(0,0,0,.05);font-size:14px">
+        <span style="color:var(--dark);font-weight:500">Gingembre Bio</span>
+        <span style="color:var(--purple-main);font-weight:700">200mg</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;padding:14px 24px;border-bottom:1px solid rgba(0,0,0,.05);font-size:14px">
+        <span style="color:var(--dark);font-weight:500">Fibre d'Acacia</span>
+        <span style="color:var(--purple-main);font-weight:700">500mg</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;padding:14px 24px;border-bottom:1px solid rgba(0,0,0,.05);font-size:14px">
+        <span style="color:var(--dark);font-weight:500">Énergie</span>
+        <span style="color:var(--purple-main);font-weight:700">30 kcal</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;padding:14px 24px;border-bottom:1px solid rgba(0,0,0,.05);font-size:14px">
+        <span style="color:var(--dark);font-weight:500">Fibres totales</span>
+        <span style="color:var(--purple-main);font-weight:700">5g</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr auto;padding:14px 24px;font-size:14px">
+        <span style="color:var(--dark);font-weight:500">Sucres</span>
+        <span style="color:var(--purple-main);font-weight:700">0g</span>
+      </div>
     </div>
     <p style="font-size:11px;color:var(--muted);margin-top:16px;line-height:1.6">*VNR = Valeurs Nutritionnelles de Référence. Complément alimentaire — ne se substitue pas à une alimentation variée et équilibrée.</p>
   </div>
