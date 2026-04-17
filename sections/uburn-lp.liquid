@@ -609,31 +609,41 @@
     <div class="section-inner reveal">
       <div class="section-label">Comment Uburn agit</div>
       <h2 class="section-title" style="text-align:center">3 gestes. <span class="accent">4h de résultat.</span></h2>
-      <div class="how-grid stagger-children">
+      <div class="how-grid stagger-children" style="align-items:start">
         <div class="how-step">
-          <div class="how-step__svg">
-            <svg viewBox="0 0 24 24"><path d="M12 2v6M6 6l1.5 1.5M18 6l-1.5 1.5M4 12h3M17 12h3M6 18l1.5-1.5M18 18l-1.5-1.5"/><circle cx="12" cy="12" r="4"/></svg>
+          <div class="how-step-photo">
+            <!-- TODO: remplacer par assets/step-01-melangez.jpg — cuillère doseuse versant la poudre ubé violette -->
+            <img src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg?v=1776421390&width=400&format=webp" alt="Mélangez UBurn dans un verre d'eau ou de lait végétal" loading="lazy" width="400" height="400">
           </div>
-          <div class="how-num">1</div>
+          <div class="how-num">01</div>
           <h4>Mélangez</h4>
+          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Une dose dans un grand verre d'eau <strong>OU</strong> de lait végétal</p>
         </div>
         <div class="how-step">
-          <div class="how-step__svg">
-            <svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="8" ry="5"/><path d="M4 12c0 4 3.6 7 8 7s8-3 8-7"/><path d="M12 7v10"/></svg>
+          <div class="how-step-photo">
+            <!-- TODO: remplacer par assets/step-02-gel.jpg — macro texture gel konjac dans le verre -->
+            <img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=400&format=webp" alt="Le glucomannane forme un gel naturel dans votre estomac" loading="lazy" width="400" height="400">
           </div>
-          <div class="how-num">2</div>
+          <div class="how-num">02</div>
           <h4>Le gel se forme</h4>
+          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Le konjac gonfle dans votre estomac et coupe la faim naturellement</p>
         </div>
         <div class="how-step">
-          <div class="how-step__svg">
-            <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+          <div class="how-step-photo">
+            <!-- TODO: remplacer par assets/step-03-buvez.jpg — femme qui boit UBurn à son bureau/canapé -->
+            <img src="https://uburn.co/cdn/shop/files/Uburn_Scoop.png?v=1749644803&width=400&format=webp" alt="4h sans fringales — votre estomac est calmé naturellement" loading="lazy" width="400" height="400">
           </div>
-          <div class="how-num">3</div>
+          <div class="how-num">03</div>
           <h4>4h sans fringales</h4>
+          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Votre estomac est calmé, naturellement</p>
         </div>
       </div>
     </div>
   </section>
+  <style>
+    .how-step-photo{width:100%;aspect-ratio:1/1;border-radius:20px;overflow:hidden;margin-bottom:16px;background:var(--purple-wash)}
+    .how-step-photo img{width:100%;height:100%;object-fit:cover}
+  </style>
 
   <!-- OFFER BLOCK: SHOWCASE + PRICING + BONUS + CART -->
   <style>
@@ -765,14 +775,14 @@
     </div>
   </section>
 
-  <!-- PRODUCT: SATIETE -->
+  <!-- PRODUCT: SATIETE — RÉSULTATS 30J -->
   <div class="prod-block alt">
     <div class="prod-inner">
       <div class="prod-text reveal">
-        <div class="section-label">Simple. Rapide. Délicieux.</div>
-        <h2>3 gestes, 10 secondes, <span class="accent">c'est prêt.</span></h2>
-        <h3>Satiété longue durée, validée EFSA</h3>
-        <p>Le konjac forme un gel, vous vous sentez rassasiée. Sans plus manger.</p>
+        <div class="section-label">Ce que vivent nos clientes</div>
+        <h2>Leurs résultats <span class="accent">en 30 jours.</span></h2>
+        <h3>Formulé autour du glucomannane, allégation santé validée EFSA (ID 3120)</h3>
+        <p>Mélangez UBurn avec un grand verre d'eau ou votre lait végétal préféré. Le konjac forme un gel qui occupe naturellement votre estomac — vous vous sentez rassasiée pendant jusqu'à 4h, sans frustration.</p>
         <div class="feats">
           <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Effet satiété dès la première prise</div>
           <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Résultats visibles en 7 à 14 jours</div>
@@ -783,7 +793,8 @@
       </div>
       <div class="prod-visual reveal reveal-d">
         <div class="prod-img">
-          <img src="https://uburn.co/cdn/shop/files/Uburn_Scoop.png?v=1749644803&width=800&format=webp" alt="UBurn Scoop" loading="lazy" width="800" height="800">
+          <!-- TODO: remplacer par photo lifestyle cliente (Iness ou UGC) -->
+          <img src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg?v=1776421390&width=800&format=webp" alt="UBurn — boisson ubé préparée avec de l'eau ou du lait végétal" loading="lazy" width="800" height="800">
         </div>
       </div>
     </div>
