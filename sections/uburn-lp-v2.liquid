@@ -51,8 +51,8 @@
     .hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
     .hero-badge{padding:8px 16px;border-radius:100px;border:1px solid rgba(0,0,0,.08);font-size:13px;font-weight:500;color:var(--body);display:flex;align-items:center;gap:6px}
     .hero-badge .ck{color:var(--purple-main);font-weight:700}
-    .hero-visual{position:relative;display:flex;justify-content:center}
-    .hero-visual img{max-height:520px;width:auto;filter:drop-shadow(0 20px 50px rgba(61,24,115,.12))}
+    .hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+    .hero-visual img{max-height:520px;width:auto;height:auto;filter:drop-shadow(0 20px 50px rgba(61,24,115,.12))}
     .hero-float{position:absolute;background:#fff;border-radius:14px;padding:12px 18px;box-shadow:0 8px 30px rgba(0,0,0,.08);display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--dark)}
     .hero-float.top{top:20px;right:-10px}
     .hero-float.bottom{bottom:40px;left:-10px}
@@ -285,7 +285,7 @@
       .hero-sub{margin:0 auto 24px;max-width:480px}
       .hero-badges{justify-content:center;flex-wrap:wrap;gap:8px}
       .hero-visual{order:-1}
-      .hero-visual img{max-height:300px;width:auto;margin:0 auto;display:block}
+      .hero-visual img{width:100%;max-width:320px;height:auto;margin:0 auto;display:block}
       .hero-float{display:none}
       .prod-inner{grid-template-columns:1fr;gap:36px}
       .prod-block{padding:72px 24px}
@@ -513,7 +513,7 @@
       <a href="#offer" class="btn btn-fill">Commencer ma cure →</a>
     </div>
     <div class="hero-visual">
-      <img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=800" alt="Uburn — Boisson ube satiété naturelle">
+      <img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=800" alt="Uburn — Boisson ube satiété naturelle" width="800" height="800" loading="eager" fetchpriority="high">
       <div class="hero-float top"><span class="float-badge">EFSA</span> Satiété validée</div>
       <div class="hero-float bottom"><span class="float-badge">#1</span> Marque Française</div>
     </div>
