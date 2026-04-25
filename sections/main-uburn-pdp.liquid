@@ -779,13 +779,40 @@
     },{threshold:0,rootMargin:'-100px 0px 0px 0px'});
     io.observe(hero);
   }
+
+  /* === FORCE VISIBILITY (theme JS hides our section by default) === */
+  function forceVisible(){
+    document.querySelectorAll('.shopify-section').forEach(function(s){
+      if(s.querySelector('.upd2')){
+        s.style.setProperty('display','block','important');
+        s.style.setProperty('visibility','visible','important');
+      }
+    });
+    document.querySelectorAll('.upd2-section[style*="display: none"], .upd2 section[style*="display: none"]').forEach(function(s){
+      s.style.setProperty('display','block','important');
+    });
+  }
+  forceVisible();
+  // Re-apply periodically in case theme JS hides again
+  var visibilityChecks = 0;
+  var visibilityInterval = setInterval(function(){
+    forceVisible();
+    if(++visibilityChecks > 20) clearInterval(visibilityInterval);
+  }, 200);
 })();
 </script>
+
+<style>
+  /* CSS belt + suspenders: override theme's display:none on our wrapper */
+  .shopify-section:has(> .upd2),
+  .shopify-section:has(.upd2-hero){display:block!important;visibility:visible!important}
+  section.upd2-section{display:block!important}
+</style>
 
 {% schema %}
 {
   "name": "UBurn PDP",
-  "tag": "section",
+  "class": "shopify-section--main-uburn-pdp",
   "settings": []
 }
 {% endschema %}
