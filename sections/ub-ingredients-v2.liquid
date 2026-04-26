@@ -1,0 +1,259 @@
+{% comment %}Section: UB Ingrédients · Uburn 2026{% endcomment %}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700;1,800&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap');
+
+:root{--purple-deep:#3d1873;--purple-main:#6b2fa0;--purple-mid:#8b47c5;--purple-light:#b07de8;--purple-pale:#e8dcf5;--purple-wash:#f5f0fa;--cream:#faf9f7;--warm:#f2f0ed;--dark:#1a1118;--body:#5a5654;--muted:#8a8785;--grad:linear-gradient(160deg,#3d1873 0%,#6b2fa0 40%,#8b47c5 100%)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Red Hat Text',sans-serif;background:var(--cream);color:var(--dark);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Red Hat Display',sans-serif;letter-spacing:-0.02em}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+/* Hide Shopify default sections */
+[id^="shopify-section-sections--"]{display:none !important}
+main#main{padding:0 !important}
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;transition:background 0.4s,padding 0.4s,box-shadow 0.4s;background:rgba(250,249,247,0.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--purple-pale)}
+.nav-logo{font-family:'Red Hat Display',sans-serif;font-weight:900;font-size:22px;color:var(--purple-main);letter-spacing:-0.03em}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-size:14px;font-weight:500;color:var(--body);transition:color 0.2s}
+.nav-links a:hover,.nav-links a.active{color:var(--purple-main)}
+.nav-cta{background:var(--grad);color:#fff;padding:9px 22px;border-radius:50px;font-family:'Red Hat Display',sans-serif;font-weight:700;font-size:13.5px;transition:opacity 0.2s}
+.nav-cta:hover{opacity:0.9}
+@media(max-width:768px){.nav{padding:14px 20px}.nav-links{display:none}}
+/* Section commons */
+.section-label{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple-mid);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-label::before{content:'';width:20px;height:1px;background:currentColor}
+.section-title{font-size:clamp(32px,4vw,54px);font-weight:900;line-height:1.08;letter-spacing:-0.03em}
+.section-title em{font-style:italic;font-weight:800;color:var(--purple-main)}
+/* Before/After */
+.ba-section{background:var(--warm);padding:100px 80px}
+.ba-inner{max-width:1000px;margin:0 auto}
+.ba-card{display:grid;grid-template-columns:1fr 56px 1fr;background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 4px 60px rgba(61,24,115,0.1);margin-top:48px}
+.ba-col{padding:40px 36px}
+.ba-before{background:#f9f7f5}
+.ba-divider{background:var(--purple-wash);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ba-divider-arrow{width:36px;height:36px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;box-shadow:0 4px 16px rgba(107,47,160,0.4)}
+.ba-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.ba-week{font-family:'Red Hat Display',sans-serif;font-size:26px;font-weight:900;color:var(--dark);letter-spacing:-0.03em;margin-bottom:14px}
+.ba-items{display:flex;flex-direction:column;gap:11px}
+.ba-item{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.5;color:var(--body)}
+.ba-item::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--purple-pale);flex-shrink:0;margin-top:6px}
+.ba-after .ba-item::before{background:var(--purple-main)}
+.ba-after .ba-item{color:var(--dark)}
+.ba-profile{display:flex;align-items:center;gap:12px;margin-top:28px;padding-top:20px;border-top:1px solid var(--purple-pale)}
+.ba-avatar{width:40px;height:40px;border-radius:50%;flex-shrink:0;background:var(--purple-pale);display:flex;align-items:center;justify-content:center;font-family:'Red Hat Display',sans-serif;font-weight:800;font-size:15px;color:var(--purple-main)}
+.ba-name{font-weight:700;font-size:14px;color:var(--dark)}
+.ba-meta{font-size:12px;color:var(--muted);margin-top:1px}
+.ba-stars{color:#f4b942;font-size:13px;margin-top:3px}
+@media(max-width:720px){.ba-section{padding:72px 24px}.ba-card{grid-template-columns:1fr;grid-template-rows:auto 48px auto}.ba-divider{height:48px;flex-direction:row}.ba-col{padding:28px 24px}}
+/* Reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.rd1{transition-delay:0.1s}.rd2{transition-delay:0.2s}.rd3{transition-delay:0.3s}
+/* Footer */
+.footer{background:var(--dark);padding:64px 80px 36px;color:rgba(255,255,255,0.55)}
+.footer-inner{max-width:1140px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:36px}
+.footer-brand{font-family:'Red Hat Display',sans-serif;font-weight:900;font-size:20px;color:#fff;margin-bottom:14px;letter-spacing:-0.02em}
+.footer-desc{font-size:13.5px;line-height:1.7;max-width:34ch;color:rgba(255,255,255,0.5);margin-bottom:20px}
+.footer-legal{font-size:11px;line-height:1.7;color:rgba(255,255,255,0.28)}
+.footer-col-title{font-family:'Red Hat Display',sans-serif;font-weight:700;font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:14px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.4);transition:color 0.2s}
+.footer-links a:hover{color:rgba(255,255,255,0.85)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:rgba(255,255,255,0.22)}
+@media(max-width:900px){.footer{padding:48px 24px 28px}.footer-top{grid-template-columns:1fr 1fr;gap:28px}}
+@media(max-width:600px){.footer-top{grid-template-columns:1fr}}
+/* Btn */
+.btn-main{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#fff;padding:16px 32px;border-radius:50px;font-family:'Red Hat Display',sans-serif;font-weight:800;font-size:15px;transition:transform 0.2s,opacity 0.2s;border:none;cursor:pointer}
+.btn-main:hover{transform:translateY(-2px);opacity:0.92}
+
+
+.ing-hero{padding:140px 80px 80px;background:var(--dark);position:relative;overflow:hidden}
+.ing-hero::before{content:'';position:absolute;top:-200px;right:-100px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(107,47,160,0.25) 0%,transparent 70%);pointer-events:none}
+.ing-hero .section-label{color:var(--purple-light)}
+.ing-hero .section-label::before{background:var(--purple-light)}
+.ing-hero h1{color:#fff;font-size:clamp(40px,5.5vw,68px);font-weight:900;letter-spacing:-0.04em;line-height:1.04;margin-bottom:20px}
+.ing-hero h1 em{font-style:italic;color:var(--purple-light)}
+.ing-hero p{font-size:17px;color:rgba(255,255,255,0.6);max-width:50ch;line-height:1.7}
+.ing-grid-section{padding:100px 80px;background:var(--cream)}
+.ing-grid-inner{max-width:1140px;margin:0 auto}
+.ing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.ing-card{padding:48px 40px;position:relative}
+.ing-card:not(:nth-child(3n))::after{content:'';position:absolute;top:40px;bottom:40px;right:0;width:1px;background:var(--purple-pale)}
+.ing-card:nth-child(n+4){border-top:1px solid var(--purple-pale)}
+.ing-icon{font-size:40px;margin-bottom:20px}
+.ing-name{font-family:'Red Hat Display',sans-serif;font-size:20px;font-weight:800;color:var(--dark);letter-spacing:-0.02em;margin-bottom:6px}
+.ing-latin{font-size:12px;color:var(--purple-mid);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px}
+.ing-desc{font-size:14.5px;color:var(--body);line-height:1.65}
+.ing-tag{display:inline-block;margin-top:16px;padding:5px 12px;border-radius:20px;background:var(--purple-wash);font-size:11.5px;font-weight:600;color:var(--purple-main);letter-spacing:0.08em}
+.ing-card.featured{background:var(--purple-deep)}
+.ing-card.featured .ing-name,.ing-card.featured .ing-desc{color:#fff}
+.ing-card.featured .ing-desc{color:rgba(255,255,255,0.7)}
+.ing-card.featured .ing-latin{color:var(--purple-light)}
+.ing-card.featured .ing-tag{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9)}
+.ing-card.featured::after{background:rgba(255,255,255,0.1) !important}
+.efsa-banner{background:var(--purple-wash);padding:60px 80px;text-align:center}
+.efsa-inner{max-width:700px;margin:0 auto}
+.efsa-badge{display:inline-flex;align-items:center;gap:14px;background:#fff;border-radius:20px;padding:20px 28px;box-shadow:0 4px 24px rgba(107,47,160,0.12);margin-bottom:24px}
+.efsa-badge-icon{font-size:32px}
+.efsa-badge-text{font-family:'Red Hat Display',sans-serif;font-size:18px;font-weight:800;color:var(--dark);letter-spacing:-0.02em}
+.efsa-badge-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.efsa-desc{font-size:16px;color:var(--body);line-height:1.7;max-width:52ch;margin:0 auto}
+@media(max-width:900px){.ing-hero{padding:110px 24px 60px}.ing-grid-section{padding:72px 24px}.ing-grid{grid-template-columns:1fr 1fr}.efsa-banner{padding:56px 24px}}
+@media(max-width:600px){.ing-grid{grid-template-columns:1fr}.ing-card::after{display:none !important}}
+
+</style>
+<nav class="nav">
+  <a href="/" class="nav-logo">Uburn</a>
+  <ul class="nav-links">
+    <li><a href="/products/ube-poudre">Produit</a></li>
+    <li><a href="/pages/ingredients"class='active'>Ingrédients</a></li>
+    <li><a href="/pages/about">Notre histoire</a></li>
+    <li><a href="/pages/resultats">Résultats</a></li>
+  </ul>
+  <a href="/products/ube-poudre" class="nav-cta">Commander →</a>
+</nav>
+
+<section class="ing-hero">
+  <div style="position:relative;z-index:1;max-width:700px">
+    <div class="section-label reveal">La formule</div>
+    <h1 class="reveal rd1">6 actifs.<br><em>Un seul objectif.</em></h1>
+    <p class="reveal rd2">Chaque ingrédient est sélectionné pour sa complémentarité. Ensemble, ils agissent sur la faim, l'énergie et la digestion — simultanément.</p>
+  </div>
+</section>
+
+<section class="ing-grid-section">
+  <div class="ing-grid-inner">
+    <div class="ing-grid">
+
+      <div class="ing-card featured reveal">
+        <div class="ing-icon">🟣</div>
+        <div class="ing-name">Konjac · Glucomannane</div>
+        <div class="ing-latin">Amorphophallus konjac</div>
+        <div class="ing-desc">L'actif principal. 3g par dose — la dose exacte validée par l'EFSA pour contribuer au contrôle de l'appétit dans le cadre d'un régime hypocalorique. Le seul ingrédient de cette catégorie officiellement reconnu en Europe.</div>
+        <span class="ing-tag">EFSA ID 3120 · Dose validée 3g</span>
+      </div>
+
+      <div class="ing-card reveal rd1">
+        <div class="ing-icon">🌿</div>
+        <div class="ing-name">Ubé · Igname violet</div>
+        <div class="ing-latin">Dioscorea alata · Asie du Sud-Est</div>
+        <div class="ing-desc">L'ingrédient signature. Riche en anthocyanes, des antioxydants puissants qui protègent les cellules. Responsable de la couleur violette naturelle — aucun colorant artificiel.</div>
+        <span class="ing-tag">Antioxydants naturels</span>
+      </div>
+
+      <div class="ing-card reveal rd2">
+        <div class="ing-icon">🥥</div>
+        <div class="ing-name">MCT · Coco</div>
+        <div class="ing-latin">Acides gras à chaîne moyenne</div>
+        <div class="ing-desc">Énergie rapide et stable dès 15 minutes après la prise. Les MCT sont métabolisés directement par le foie — sans pic d'insuline, sans crash de l'après-midi.</div>
+        <span class="ing-tag">Énergie stable</span>
+      </div>
+
+      <div class="ing-card reveal">
+        <div class="ing-icon">⚡</div>
+        <div class="ing-name">L-Carnitine</div>
+        <div class="ing-latin">Acide aminé · Naturel</div>
+        <div class="ing-desc">Contribue à l'utilisation des acides gras comme source d'énergie. Favorise le métabolisme lipidique — complémentaire au glucomannane pour une action complète.</div>
+        <span class="ing-tag">Métabolisme actif</span>
+      </div>
+
+      <div class="ing-card reveal rd1">
+        <div class="ing-icon">🫚</div>
+        <div class="ing-name">Gingembre violet</div>
+        <div class="ing-latin">Zingiber zerumbet</div>
+        <div class="ing-desc">Soutient la digestion et réduit l'inconfort digestif. Propriétés anti-inflammatoires naturelles. Renforce l'action du glucomannane sur le transit.</div>
+        <span class="ing-tag">Confort digestif</span>
+      </div>
+
+      <div class="ing-card reveal rd2">
+        <div class="ing-icon">🌾</div>
+        <div class="ing-name">Fibre d'acacia</div>
+        <div class="ing-latin">Acacia senegal · Prébiotiique</div>
+        <div class="ing-desc">Prébiotique naturel qui nourrit les bonnes bactéries du microbiote intestinal. Contribue à une digestion équilibrée et à la santé intestinale sur le long terme.</div>
+        <span class="ing-tag">Microbiote équilibré</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="efsa-banner">
+  <div class="efsa-inner">
+    <div class="efsa-badge reveal">
+      <div class="efsa-badge-icon">🏛️</div>
+      <div>
+        <div class="efsa-badge-text">Allégation officielle EFSA</div>
+        <div class="efsa-badge-sub">Règlement CE 432/2012 · ID 3120</div>
+      </div>
+    </div>
+    <p class="efsa-desc reveal rd1">Le glucomannane est l'unique ingrédient dont l'allégation "contrôle de l'appétit" est officiellement validée par l'Autorité Européenne de Sécurité des Aliments. Conditions : 3g en 3 doses avec 1-2 verres d'eau avant les repas, dans le cadre d'un régime hypocalorique.</p>
+  </div>
+</div>
+
+<section class="ba-section">
+  <div class="ba-inner">
+    <div class="section-label reveal">Résultat réel</div>
+    <h2 class="section-title reveal rd1">Ce qui change.<br><em>Pas les nôtres.</em></h2>
+    <div class="ba-card reveal rd2">
+      <div class="ba-col ba-before">
+        <div class="ba-label">Avant Uburn</div>
+        <div class="ba-week">Semaine 1</div>
+        <div class="ba-items">
+          <div class="ba-item">Fringales incontrôlables à 16h — placard ouvert quotidiennement</div>
+          <div class="ba-item">Culpabilité après chaque craquage, frustration chronique</div>
+          <div class="ba-item">Dîner trop copieux pour compenser la faim accumulée</div>
+          <div class="ba-item">Fatigue l'après-midi, digestion difficile</div>
+        </div>
+        <div class="ba-profile">
+          <div class="ba-avatar">M</div>
+          <div><div class="ba-name">Marie D.</div><div class="ba-meta">42 ans · Paris 11e</div></div>
+        </div>
+      </div>
+      <div class="ba-divider"><div class="ba-divider-arrow">→</div></div>
+      <div class="ba-col ba-after">
+        <div class="ba-label">Après 4 semaines</div>
+        <div class="ba-week">Semaine 4</div>
+        <div class="ba-items">
+          <div class="ba-item">Plus de fringale à 16h — elle oublie même d'ouvrir le placard</div>
+          <div class="ba-item">Dîner naturellement plus léger, sans effort de volonté</div>
+          <div class="ba-item">Digestion fluide, ventre moins gonflé dès la 2e semaine</div>
+          <div class="ba-item">Perte de 2,8 kg sur 4 semaines sans régime particulier</div>
+        </div>
+        <div class="ba-profile">
+          <div class="ba-avatar" style="background:var(--purple-wash)">M</div>
+          <div><div class="ba-name">Marie D. — Cliente vérifiée</div><div class="ba-meta">Après 28 jours · Résultats individuels</div><div class="ba-stars">★★★★★</div></div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6">Les résultats varient selon les individus. Glucomannane — EFSA ID 3120. Conditions : 3g/jour avec eau avant les repas.</p>
+  </div>
+</section>
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Uburn</div>
+        <p class="footer-desc">Complément alimentaire à base de glucomannane. Marque française — R Glow F.Z.E.</p>
+        <p class="footer-legal">Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g/jour en 3 doses avec 1-2 verres d'eau avant les repas.</p>
+      </div>
+      <div><div class="footer-col-title">Produit</div><ul class="footer-links"><li><a href="/products/ube-poudre">Ube Poudre</a></li><li><a href="/pages/ingredients">Ingrédients</a></li><li><a href="/pages/resultats">Résultats</a></li><li><a href="/pages/faq">FAQ</a></li></ul></div>
+      <div><div class="footer-col-title">Support</div><ul class="footer-links"><li><a href="/pages/faq">FAQ</a></li><li><a href="/pages/contact">Contact</a></li><li><a href="#">Livraison</a></li><li><a href="#">Retours</a></li></ul></div>
+      <div><div class="footer-col-title">Entreprise</div><ul class="footer-links"><li><a href="/pages/about">Notre histoire</a></li><li><a href="/pages/resultats">Résultats</a></li><li><a href="#">Presse</a></li><li><a href="#">CGV</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 UBurn. Tous droits réservés.</span>
+      <span>hello@uburn.co</span>
+      <div style="display:flex;gap:16px"><a href="#" style="color:rgba(255,255,255,0.22)">Confidentialité</a><a href="#" style="color:rgba(255,255,255,0.22)">Mentions légales</a></div>
+    </div>
+  </div>
+</footer>
+<script>
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+{% schema %}
+{"name":"UB Ingrédients","settings":[]}
+{% endschema %}
