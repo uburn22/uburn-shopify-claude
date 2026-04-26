@@ -1,0 +1,4 @@
+interface:
+  display_name: "UBURN Conversion"
+  short_description: "Shopify PDP and CRO workflow for UBURN"
+  default_prompt: "Use $uburn-conversion to improve the UBURN Shopify site for conversion."
