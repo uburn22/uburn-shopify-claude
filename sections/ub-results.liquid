@@ -1,0 +1,827 @@
+{%- comment -%}
+  Section: ub-results-v2
+  Design: Uburn 2026 · Red Hat Display + Red Hat Text
+  Generated from HTML prototype
+{%- endcomment -%}
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700;1,800&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap'); 
+/* Hide Shopify default header/footer — custom nav rendered inline */
+#shopify-section-group-header-group, .shopify-section-group--header-group, #shopify-section-group-footer-group, .shopify-section-group--footer-group { display: none !important; }
+main#main { padding: 0 !important; }
+
+:root{
+  --purple-deep:#3d1873;--purple-main:#6b2fa0;--purple-mid:#8b47c5;
+  --purple-light:#b07de8;--purple-pale:#e8dcf5;--purple-wash:#f5f0fa;
+  --cream:#faf9f7;--warm:#f2f0ed;--dark:#1a1118;--body:#5a5654;--muted:#8a8785;
+  --grad:linear-gradient(160deg,#3d1873 0%,#6b2fa0 40%,#8b47c5 100%);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Red Hat Text',sans-serif;background:var(--cream);color:var(--dark);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Red Hat Display',sans-serif;letter-spacing:-0.02em}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;transition:background 0.4s,padding 0.4s,box-shadow 0.4s}
+.nav.scrolled{background:rgba(250,249,247,0.96);backdrop-filter:blur(12px);padding:14px 48px;box-shadow:0 1px 0 var(--purple-pale)}
+.nav-logo{font-family:'Red Hat Display',sans-serif;font-weight:900;font-size:22px;color:var(--purple-main);letter-spacing:-0.03em;transition:color 0.4s}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-size:14px;font-weight:500;color:var(--body);transition:color 0.2s}
+.nav-links a:hover{color:var(--purple-main)}
+.nav-cta{background:var(--grad);color:#fff;padding:9px 22px;border-radius:50px;font-family:'Red Hat Display',sans-serif;font-weight:700;font-size:13.5px;transition:opacity 0.2s}
+.nav-cta:hover{opacity:0.9}
+@media(max-width:768px){.nav{padding:16px 20px}.nav.scrolled{padding:12px 20px}.nav-links{display:none}}
+
+/* SECTION COMMONS */
+.section-label{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple-mid);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-label::before{content:'';width:20px;height:1px;background:currentColor}
+.section-title{font-size:clamp(32px,4vw,54px);font-weight:900;line-height:1.08;letter-spacing:-0.03em}
+.section-title em{font-style:italic;font-weight:800;color:var(--purple-main)}
+
+/* ═══ HERO STATS ═══ */
+.hero-results{
+  background:var(--dark);
+  padding:160px 80px 100px;
+  position:relative;overflow:hidden;
+}
+.hero-results::before{
+  content:'';
+  position:absolute;top:-300px;right:-200px;
+  width:800px;height:800px;border-radius:50%;
+  background:radial-gradient(circle,rgba(107,47,160,0.25) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-results::after{
+  content:'';
+  position:absolute;bottom:-100px;left:-100px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(61,24,115,0.3) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-results-inner{max-width:1140px;margin:0 auto;position:relative;z-index:1}
+.hero-results-eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--purple-light);margin-bottom:24px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-results-eyebrow::before{content:'';width:28px;height:1px;background:var(--purple-light)}
+.hero-results h1{
+  font-size:clamp(48px,7vw,88px);font-weight:900;color:#fff;
+  line-height:1.02;letter-spacing:-0.04em;
+  max-width:18ch;margin-bottom:32px;
+}
+.hero-results h1 em{font-style:italic;color:var(--purple-light)}
+.hero-results-sub{font-size:18px;color:rgba(255,255,255,0.6);max-width:48ch;line-height:1.7;margin-bottom:72px}
+/* Big stats row */
+.hero-stats-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;
+  border-top:1px solid rgba(255,255,255,0.1);
+  padding-top:48px;
+}
+.hero-stat{
+  padding:0 40px;
+  position:relative;
+}
+.hero-stat:not(:last-child)::after{
+  content:'';position:absolute;right:0;top:0;bottom:0;
+  width:1px;background:rgba(255,255,255,0.08);
+}
+.hero-stat:first-child{padding-left:0}
+.hero-stat-val{
+  font-family:'Red Hat Display',sans-serif;
+  font-size:clamp(48px,6vw,72px);font-weight:900;color:#fff;
+  letter-spacing:-0.04em;line-height:1;margin-bottom:10px;
+}
+.hero-stat-val span{font-size:0.5em;color:var(--purple-light);vertical-align:super}
+.hero-stat-lbl{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.5;max-width:20ch}
+@media(max-width:900px){
+  .hero-results{padding:120px 24px 72px}
+  .hero-stats-row{grid-template-columns:1fr 1fr;gap:32px;padding-top:36px}
+  .hero-stat:not(:last-child)::after{display:none}
+  .hero-stat{padding:0}
+}
+
+/* ═══ PULL QUOTE ═══ */
+.pull-quote{
+  background:var(--purple-deep);padding:80px;
+  position:relative;overflow:hidden;
+}
+.pull-quote::before{
+  content:'\201C';
+  position:absolute;top:-20px;left:60px;
+  font-size:240px;color:rgba(255,255,255,0.04);
+  font-family:'Red Hat Display',sans-serif;
+  line-height:1;pointer-events:none;
+}
+.pull-quote-inner{max-width:900px;margin:0 auto;text-align:center;position:relative}
+.pull-quote blockquote{
+  font-family:'Red Hat Display',sans-serif;
+  font-size:clamp(22px,3.5vw,38px);font-weight:800;
+  color:#fff;line-height:1.3;letter-spacing:-0.02em;
+  font-style:italic;margin-bottom:32px;
+}
+.pull-quote-attr{font-size:14px;color:rgba(255,255,255,0.5);font-weight:500}
+.pull-quote-attr strong{color:rgba(255,255,255,0.85)}
+@media(max-width:768px){.pull-quote{padding:60px 24px}}
+
+/* ═══ BEFORE/AFTER STORIES ═══ */
+.ba-section{background:var(--warm);padding:120px 80px}
+.ba-inner{max-width:1100px;margin:0 auto}
+.ba-stories{display:flex;flex-direction:column;gap:40px;margin-top:56px}
+
+.ba-card{
+  display:grid;grid-template-columns:1fr 56px 1fr;
+  background:#fff;border-radius:24px;overflow:hidden;
+  box-shadow:0 4px 60px rgba(61,24,115,0.08);
+}
+.ba-col{padding:44px 40px}
+.ba-before{background:#f9f7f5}
+.ba-divider{
+  background:var(--purple-wash);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;
+}
+.ba-divider-arrow{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--grad);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:14px;
+  box-shadow:0 4px 16px rgba(107,47,160,0.4);
+  flex-shrink:0;
+}
+.ba-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+.ba-week{font-family:'Red Hat Display',sans-serif;font-size:28px;font-weight:900;color:var(--dark);letter-spacing:-0.03em;margin-bottom:16px}
+.ba-items{display:flex;flex-direction:column;gap:12px}
+.ba-item{display:flex;align-items:flex-start;gap:10px;font-size:14.5px;line-height:1.5;color:var(--body)}
+.ba-item::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--purple-pale);flex-shrink:0;margin-top:7px}
+.ba-after .ba-item::before{background:var(--purple-main)}
+.ba-after .ba-item{color:var(--dark)}
+.ba-profile{display:flex;align-items:center;gap:12px;margin-top:32px;padding-top:24px;border-top:1px solid var(--purple-pale)}
+.ba-avatar{width:44px;height:44px;border-radius:50%;flex-shrink:0;background:var(--purple-pale);display:flex;align-items:center;justify-content:center;font-family:'Red Hat Display',sans-serif;font-weight:800;font-size:16px;color:var(--purple-main)}
+.ba-name{font-weight:700;font-size:14px;color:var(--dark)}
+.ba-meta{font-size:12.5px;color:var(--muted);margin-top:1px}
+.ba-stars{color:#f4b942;font-size:14px;margin-top:3px}
+.ba-result-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--purple-wash);padding:5px 12px;border-radius:20px;
+  font-size:12px;font-weight:700;color:var(--purple-main);
+  margin-top:12px;
+}
+@media(max-width:720px){
+  .ba-section{padding:72px 24px}
+  .ba-card{grid-template-columns:1fr;grid-template-rows:auto 48px auto}
+  .ba-divider{width:auto;height:48px;flex-direction:row;padding:0 20px}
+  .ba-col{padding:28px 24px}
+}
+
+/* ═══ TESTIMONIALS GRID ═══ */
+.testimonials{padding:120px 80px;background:var(--cream)}
+.testimonials-inner{max-width:1140px;margin:0 auto}
+.testi-header{margin-bottom:64px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end}
+.testi-header p{font-size:16px;color:var(--body);line-height:1.7;max-width:46ch;padding-bottom:4px}
+.testi-filter{
+  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;
+}
+.testi-tag{
+  padding:7px 16px;border-radius:20px;
+  font-size:12.5px;font-weight:600;
+  background:var(--warm);color:var(--body);
+  cursor:pointer;transition:all 0.2s;border:none;font-family:inherit;
+}
+.testi-tag.active,.testi-tag:hover{background:var(--purple-wash);color:var(--purple-main)}
+.testi-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  align-items:start;
+}
+.testi-card{
+  background:#fff;border-radius:20px;padding:28px;
+  transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.testi-card:hover{transform:translateY(-4px)}
+.testi-card--featured{background:var(--purple-deep);grid-column:span 2}
+.testi-stars{color:#f4b942;font-size:15px;margin-bottom:14px}
+.testi-text{
+  font-size:15px;line-height:1.65;color:var(--body);margin-bottom:20px;max-width:55ch;
+}
+.testi-card--featured .testi-text{color:rgba(255,255,255,0.8);font-size:16px}
+.testi-author{display:flex;align-items:center;gap:10px}
+.testi-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--purple-pale);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Red Hat Display',sans-serif;font-weight:800;font-size:13px;color:var(--purple-main);
+}
+.testi-card--featured .testi-avatar{background:rgba(255,255,255,0.15);color:#fff}
+.testi-name{font-weight:700;font-size:13.5px;color:var(--dark)}
+.testi-card--featured .testi-name{color:#fff}
+.testi-loc{font-size:12px;color:var(--muted)}
+.testi-card--featured .testi-loc{color:rgba(255,255,255,0.5)}
+.testi-tag-pill{
+  display:inline-block;margin-top:12px;padding:4px 10px;border-radius:12px;
+  font-size:11px;font-weight:600;letter-spacing:0.06em;
+  background:var(--purple-wash);color:var(--purple-main);
+}
+.testi-card--featured .testi-tag-pill{background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9)}
+@media(max-width:900px){
+  .testimonials{padding:72px 24px}
+  .testi-header{grid-template-columns:1fr;gap:20px;margin-bottom:40px}
+  .testi-grid{grid-template-columns:1fr}
+  .testi-card--featured{grid-column:span 1}
+}
+
+/* ═══ STATS SPLIT ═══ */
+.stats-split{
+  display:grid;grid-template-columns:420px 1fr;
+  min-height:500px;background:var(--purple-deep);
+}
+.stats-photo{position:relative;overflow:hidden}
+.stats-photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:brightness(0.72)}
+.stats-photo-cap{position:absolute;bottom:24px;left:20px;right:20px;color:rgba(255,255,255,0.6);font-size:12px;font-style:italic}
+.stats-body{padding:72px 64px;display:flex;flex-direction:column;justify-content:center}
+.stats-body .section-label{color:var(--purple-light)}
+.stats-body .section-label::before{background:var(--purple-light)}
+.stats-body .section-title{color:#fff;margin-bottom:48px}
+.stats-layout{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.stat-big-val{font-family:'Red Hat Display',sans-serif;font-size:clamp(72px,9vw,108px);font-weight:900;color:#fff;line-height:1;letter-spacing:-0.04em}
+.stat-big-label{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.5;margin-top:10px;max-width:22ch}
+.stats-list{display:flex;flex-direction:column;gap:22px;padding-top:8px}
+.stat-row{padding-bottom:22px}
+.stat-row:not(:last-child){border-bottom:1px solid rgba(255,255,255,0.1)}
+.stat-row-val{font-family:'Red Hat Display',sans-serif;font-size:30px;font-weight:800;color:#fff;letter-spacing:-0.02em}
+.stat-row-lbl{font-size:13px;color:rgba(255,255,255,0.45);margin-top:2px}
+.stats-disclaimer{margin-top:32px;font-size:11px;color:rgba(255,255,255,0.3);line-height:1.6}
+@media(max-width:900px){
+  .stats-split{grid-template-columns:1fr}
+  .stats-photo{height:280px}
+  .stats-body{padding:48px 24px}
+  .stats-layout{grid-template-columns:1fr;gap:24px}
+}
+
+/* ═══ PRESS ═══ */
+.press{background:var(--warm);padding:80px;text-align:center}
+.press-inner{max-width:900px;margin:0 auto}
+.press h2{font-size:clamp(28px,3.5vw,42px);font-weight:900;color:var(--dark);margin-bottom:12px;letter-spacing:-0.03em}
+.press h2 em{font-style:italic;color:var(--purple-main)}
+.press-sub{font-size:15px;color:var(--body);margin-bottom:48px;max-width:50ch;margin-left:auto;margin-right:auto}
+.press-logos{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:40px;margin-bottom:56px}
+.press-logo img{height:20px;width:auto;opacity:0.35;filter:grayscale(1);transition:opacity 0.2s,filter 0.2s}
+.press-logo img:hover{opacity:0.7;filter:grayscale(0.5)}
+.press-quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;text-align:left}
+.press-quote{background:#fff;border-radius:20px;padding:28px 32px}
+.press-quote-text{font-size:15px;color:var(--body);line-height:1.65;font-style:italic;margin-bottom:16px}
+.press-quote-text::before{content:'\201C';color:var(--purple-pale);font-size:2em;font-family:'Red Hat Display',sans-serif;font-weight:900;line-height:0.8;display:block;margin-bottom:6px}
+.press-quote-source{font-size:12px;font-weight:700;color:var(--purple-main);text-transform:uppercase;letter-spacing:0.1em}
+@media(max-width:900px){
+  .press{padding:72px 24px}
+  .press-quotes{grid-template-columns:1fr}
+}
+
+/* ═══ SCIENCE PROOF ═══ */
+.science-proof{background:var(--cream);padding:100px 80px}
+.science-proof-inner{max-width:1000px;margin:0 auto}
+.science-proof-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  margin-top:48px;
+}
+.proof-card{
+  padding:36px 32px;border-radius:20px;
+  background:var(--warm);
+  transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.proof-card:hover{transform:translateY(-3px)}
+.proof-card--dark{background:var(--purple-deep)}
+.proof-num{
+  font-family:'Red Hat Display',sans-serif;
+  font-size:48px;font-weight:900;color:var(--purple-main);
+  letter-spacing:-0.04em;line-height:1;margin-bottom:10px;
+}
+.proof-card--dark .proof-num{color:var(--purple-light)}
+.proof-lbl{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:8px}
+.proof-card--dark .proof-lbl{color:#fff}
+.proof-desc{font-size:13.5px;color:var(--body);line-height:1.6}
+.proof-card--dark .proof-desc{color:rgba(255,255,255,0.6)}
+.proof-source{font-size:11px;color:var(--muted);margin-top:12px;font-style:italic}
+.proof-card--dark .proof-source{color:rgba(255,255,255,0.3)}
+@media(max-width:768px){
+  .science-proof{padding:72px 24px}
+  .science-proof-grid{grid-template-columns:1fr}
+}
+
+/* ═══ FINAL CTA ═══ */
+.final-cta{
+  position:relative;overflow:hidden;
+  background:var(--dark);
+}
+.final-bg{position:absolute;inset:0}
+.final-bg img{width:100%;height:100%;object-fit:cover;object-position:center 25%;filter:brightness(0.3)}
+.final-bg::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(26,17,24,0.9) 0%,rgba(26,17,24,0.7) 50%,rgba(26,17,24,0.85) 100%);
+}
+.final-content{
+  position:relative;z-index:1;
+  padding:120px 80px;
+  max-width:640px;
+}
+.final-label{font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--purple-light);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.final-label::before{content:'';width:20px;height:1px;background:var(--purple-light)}
+.final-content h2{font-size:clamp(40px,5.5vw,66px);font-weight:900;color:#fff;line-height:1.06;letter-spacing:-0.03em;margin-bottom:24px}
+.final-content h2 em{font-style:italic;color:var(--purple-light)}
+.final-content p{font-size:17px;color:rgba(255,255,255,0.65);line-height:1.7;max-width:44ch;margin-bottom:40px}
+.btn-primary-lg{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#fff;padding:18px 36px;border-radius:50px;font-family:'Red Hat Display',sans-serif;font-weight:800;font-size:16px;transition:transform 0.2s,opacity 0.2s}
+.btn-primary-lg:hover{transform:translateY(-2px);opacity:0.9}
+.final-guarantees{display:flex;align-items:center;gap:24px;margin-top:24px;flex-wrap:wrap}
+.final-g{font-size:12.5px;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:6px;font-weight:500}
+.final-g::before{content:'✓';color:var(--purple-light)}
+@media(max-width:768px){.final-content{padding:80px 24px}}
+
+/* FOOTER */
+.footer{background:var(--dark);padding:72px 80px 40px;color:rgba(255,255,255,0.6)}
+.footer-inner{max-width:1140px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:40px}
+.footer-brand-name{font-family:'Red Hat Display',sans-serif;font-weight:900;font-size:20px;color:#fff;margin-bottom:16px;letter-spacing:-0.02em}
+.footer-brand-desc{font-size:14px;line-height:1.7;max-width:34ch;color:rgba(255,255,255,0.55);margin-bottom:24px}
+.footer-legal-note{font-size:11.5px;line-height:1.7;color:rgba(255,255,255,0.3)}
+.footer-col-title{font-family:'Red Hat Display',sans-serif;font-weight:700;font-size:13px;color:rgba(255,255,255,0.9);margin-bottom:16px;letter-spacing:0.3px}
+.footer-col-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col-links a{font-size:13.5px;color:rgba(255,255,255,0.45);transition:color 0.2s}
+.footer-col-links a:hover{color:rgba(255,255,255,0.9)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:rgba(255,255,255,0.25)}
+@media(max-width:900px){.footer{padding:56px 24px 32px}.footer-top{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:600px){.footer-top{grid-template-columns:1fr}}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s cubic-bezier(0.16,1,0.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.rd1{transition-delay:0.1s}.rd2{transition-delay:0.2s}.rd3{transition-delay:0.3s}.rd4{transition-delay:0.4s}
+
+
+/* Shopify section wrapper */
+#shopify-section-{{ section.id }} {
+  display: block;
+}
+</style>
+
+
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">Uburn</div>
+  <ul class="nav-links">
+    <li><a href="/">Produit</a></li>
+    <li><a href="#">Ingrédients</a></li>
+    <li><a href="/pages/notre-histoire">Notre histoire</a></li>
+    <li><a href="#" style="color:var(--purple-main);font-weight:700">Résultats</a></li>
+  </ul>
+  <a href="{{ routes.root_url }}products/ube-poudre" class="nav-cta">Commander →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero-results">
+  <div class="hero-results-inner">
+    <div class="hero-results-eyebrow reveal">Ce que nos clientes vivent</div>
+    <h1 class="reveal rd1">Des résultats.<br><em>Pas des</em><br><em>promesses.</em></h1>
+    <p class="hero-results-sub reveal rd2">1 500+ femmes. Des témoignages authentiques. Des données scientifiques. Et une conviction : les fringales, ça se résout.</p>
+    <div class="hero-stats-row">
+      <div class="hero-stat reveal">
+        <div class="hero-stat-val">95<span>%</span></div>
+        <div class="hero-stat-lbl">Ressentent moins de fringales dès la 1ère semaine</div>
+      </div>
+      <div class="hero-stat reveal rd1">
+        <div class="hero-stat-val">87<span>%</span></div>
+        <div class="hero-stat-lbl">Voient une amélioration de la digestion sous 14 jours</div>
+      </div>
+      <div class="hero-stat reveal rd2">
+        <div class="hero-stat-val">4<span>h</span></div>
+        <div class="hero-stat-lbl">Satiété durable par dose — allégation validée EFSA</div>
+      </div>
+      <div class="hero-stat reveal rd3">
+        <div class="hero-stat-val">4.7<span>/5</span></div>
+        <div class="hero-stat-lbl">Note moyenne · 1 500+ avis clients vérifiés</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE -->
+<div class="pull-quote">
+  <div class="pull-quote-inner">
+    <blockquote class="reveal">"Je ne pensais pas qu'un complément allait vraiment changer quelque chose. Après 10 jours, ma façon de penser à la nourriture avait changé."</blockquote>
+    <div class="pull-quote-attr reveal rd1"><strong>Sophie L.</strong> — 38 ans, Lyon · Cliente depuis 3 mois</div>
+  </div>
+</div>
+
+<!-- BEFORE / AFTER — MARIE (obligatoire) -->
+<section class="ba-section">
+  <div class="ba-inner">
+    <div class="section-label reveal">Histoires réelles</div>
+    <h2 class="section-title reveal rd1">Ce qui change.<br><em>Pas les nôtres.</em></h2>
+    <p class="reveal rd2" style="margin-top:16px;font-size:16px;color:var(--body);max-width:52ch">Trois femmes. Trois histoires. Un point commun : elles ont arrêté de se battre contre leur biologie.</p>
+
+    <div class="ba-stories">
+
+      <!-- Story 1 — Marie -->
+      <div class="ba-card reveal">
+        <div class="ba-col ba-before">
+          <div class="ba-label">Avant Uburn</div>
+          <div class="ba-week">Semaine 1</div>
+          <div class="ba-items">
+            <div class="ba-item">Fringales incontrôlables à 16h — placard ouvert quotidiennement</div>
+            <div class="ba-item">Culpabilité après chaque craquage, frustration chronique</div>
+            <div class="ba-item">Dîner trop copieux pour compenser la faim accumulée</div>
+            <div class="ba-item">Fatigue l'après-midi, digestion difficile après les repas</div>
+          </div>
+          <div class="ba-profile">
+            <div class="ba-avatar">M</div>
+            <div>
+              <div class="ba-name">Marie D.</div>
+              <div class="ba-meta">42 ans · Paris 11e · Cadre marketing</div>
+            </div>
+          </div>
+        </div>
+        <div class="ba-divider"><div class="ba-divider-arrow">→</div></div>
+        <div class="ba-col ba-after">
+          <div class="ba-label">Après 4 semaines</div>
+          <div class="ba-week">Semaine 4</div>
+          <div class="ba-items">
+            <div class="ba-item">Plus de fringale à 16h — elle oublie même d'ouvrir le placard</div>
+            <div class="ba-item">Dîner naturellement plus léger, sans effort de volonté</div>
+            <div class="ba-item">Digestion fluide, ventre moins gonflé dès la 2e semaine</div>
+            <div class="ba-item">Perte de 2,8 kg sur 4 semaines sans régime particulier</div>
+          </div>
+          <div class="ba-profile">
+            <div class="ba-avatar" style="background:var(--purple-wash)">M</div>
+            <div>
+              <div class="ba-name">Marie D. — Cliente vérifiée</div>
+              <div class="ba-meta">Après 28 jours · Résultats individuels</div>
+              <div class="ba-stars">★★★★★</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Story 2 — Isabelle -->
+      <div class="ba-card reveal rd1">
+        <div class="ba-col ba-before">
+          <div class="ba-label">Avant Uburn</div>
+          <div class="ba-week">Le quotidien</div>
+          <div class="ba-items">
+            <div class="ba-item">Grignotage compulsif entre 20h et 22h — résistance impossible</div>
+            <div class="ba-item">Ballonnements récurrents après les repas, inconfort chronique</div>
+            <div class="ba-item">Essayé 3 régimes différents en 2 ans — résultats nuls</div>
+            <div class="ba-item">Fatigue mentale liée à la restriction constante</div>
+          </div>
+          <div class="ba-profile">
+            <div class="ba-avatar">I</div>
+            <div>
+              <div class="ba-name">Isabelle M.</div>
+              <div class="ba-meta">47 ans · Bordeaux · Professeure</div>
+            </div>
+          </div>
+        </div>
+        <div class="ba-divider"><div class="ba-divider-arrow">→</div></div>
+        <div class="ba-col ba-after">
+          <div class="ba-label">Après 6 semaines</div>
+          <div class="ba-week">Semaine 6</div>
+          <div class="ba-items">
+            <div class="ba-item">Grignotage du soir pratiquement disparu — plus de "pilotage automatique"</div>
+            <div class="ba-item">Ventre plat le matin pour la première fois depuis des années</div>
+            <div class="ba-item">−4,2 kg en 6 semaines. Sans se priver, sans compter les calories</div>
+            <div class="ba-item">"J'ai l'impression d'avoir repris le contrôle. Vraiment."</div>
+          </div>
+          <div class="ba-profile">
+            <div class="ba-avatar" style="background:var(--purple-wash)">I</div>
+            <div>
+              <div class="ba-name">Isabelle M. — Cliente vérifiée</div>
+              <div class="ba-meta">Après 42 jours · Résultats individuels</div>
+              <div class="ba-stars">★★★★★</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Story 3 — Claire -->
+      <div class="ba-card reveal rd2">
+        <div class="ba-col ba-before">
+          <div class="ba-label">Avant Uburn</div>
+          <div class="ba-week">La situation</div>
+          <div class="ba-items">
+            <div class="ba-item">Stress au travail → fringales émotionnelles constantes</div>
+            <div class="ba-item">Énergie instable : pic après le déjeuner, crash à 15h</div>
+            <div class="ba-item">Dépendance au sucre pour "tenir" l'après-midi</div>
+            <div class="ba-item">Sentiment de manque de contrôle, frustration quotidienne</div>
+          </div>
+          <div class="ba-profile">
+            <div class="ba-avatar">C</div>
+            <div>
+              <div class="ba-name">Claire R.</div>
+              <div class="ba-meta">35 ans · Lyon · Cheffe de projet</div>
+            </div>
+          </div>
+        </div>
+        <div class="ba-divider"><div class="ba-divider-arrow">→</div></div>
+        <div class="ba-col ba-after">
+          <div class="ba-label">Après 3 semaines</div>
+          <div class="ba-week">Semaine 3</div>
+          <div class="ba-items">
+            <div class="ba-item">Énergie stable toute la journée — le crash de 15h a disparu</div>
+            <div class="ba-item">Fringales émotionnelles divisées par 3 — "je pense moins à manger"</div>
+            <div class="ba-item">Moins de dépendance au sucre, choix alimentaires naturellement meilleurs</div>
+            <div class="ba-item">"Uburn m'a redonné de la clarté mentale que je n'attendais pas"</div>
+          </div>
+          <div class="ba-profile">
+            <div class="ba-avatar" style="background:var(--purple-wash)">C</div>
+            <div>
+              <div class="ba-name">Claire R. — Cliente vérifiée</div>
+              <div class="ba-meta">Après 21 jours · Résultats individuels</div>
+              <div class="ba-stars">★★★★★</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:28px;line-height:1.6">Les résultats varient selon les individus. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g en 3 doses avec 1-2 verres d'eau avant les repas.</p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS GRID -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="testi-header">
+      <div>
+        <div class="section-label reveal">Témoignages</div>
+        <h2 class="section-title reveal rd1">Leurs mots.<br><em>Pas les nôtres.</em></h2>
+      </div>
+      <p class="reveal rd2">1 500+ clientes ont partagé leur expérience. Voici ce qu'elles disent — sans filtre, sans montage.</p>
+    </div>
+
+    <div class="testi-grid">
+      <!-- Featured -->
+      <div class="testi-card testi-card--featured reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Honnêtement, je suis septique par nature. Je ne crois pas aux régimes miracle. Mais Uburn ne prétend pas être un miracle — il dit juste qu'il coupe la faim pendant 4h. Et c'est exactement ce qu'il fait. Dès le 3e jour, j'ai réalisé que je n'avais pas grignoté depuis l'après-midi. Ça m'a choquée."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">A</div>
+          <div>
+            <div class="testi-name">Aurélie G.</div>
+            <div class="testi-loc">44 ans · Nantes · 2 mois de recul</div>
+          </div>
+        </div>
+        <span class="testi-tag-pill">Sceptique convertie</span>
+      </div>
+
+      <div class="testi-card reveal rd1">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"La couleur violette m'a d'abord fait sourire. Après une semaine, c'est devenu mon rituel du matin. Mon estomac tient jusqu'au déjeuner sans drama."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">S</div>
+          <div>
+            <div class="testi-name">Sandrine B.</div>
+            <div class="testi-loc">39 ans · Paris</div>
+          </div>
+        </div>
+        <span class="testi-tag-pill">Rituel matin</span>
+      </div>
+
+      <div class="testi-card reveal rd1">
+        <div class="testi-stars">★★★★☆</div>
+        <div class="testi-text">"Je m'attendais à quelque chose de difficile à avaler. C'est doux, légèrement sucré, et vraiment bien dissout. Bonus inattendu : ma digestion s'est vraiment améliorée."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">N</div>
+          <div>
+            <div class="testi-name">Nathalie F.</div>
+            <div class="testi-loc">51 ans · Strasbourg</div>
+          </div>
+        </div>
+        <span class="testi-tag-pill">Digestion améliorée</span>
+      </div>
+
+      <div class="testi-card reveal rd2">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"3 semaines. Moins 3 kg. Sans changer mon alimentation de façon draconienne. Je mange juste moins, naturellement."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">L</div>
+          <div>
+            <div class="testi-name">Laura M.</div>
+            <div class="testi-loc">33 ans · Toulouse</div>
+          </div>
+        </div>
+        <span class="testi-tag-pill">−3 kg en 3 semaines</span>
+      </div>
+
+      <div class="testi-card reveal rd2">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Je travaille à domicile, entourée de ma cuisine toute la journée. C'était un enfer. Uburn a vraiment changé quelque chose dans ma tête — je pense moins à manger."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">V</div>
+          <div>
+            <div class="testi-name">Valérie C.</div>
+            <div class="testi-loc">46 ans · Remote worker</div>
+          </div>
+        </div>
+        <span class="testi-tag-pill">Télétravail</span>
+      </div>
+
+      <div class="testi-card reveal rd3">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"J'ai offert une boîte à ma sœur. Elle m'a appelée au bout de 5 jours pour en commander une deuxième. On est toutes les deux converties."</div>
+        <div class="testi-author">
+          <div class="testi-avatar">E</div>
+          <div>
+            <div class="testi-name">Émilie D.</div>
+            <div class="testi-loc">40 ans · Marseille</div>
+          </div>
+        </div>
+        <span class="testi-tag-pill">Bouche à oreille</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS SPLIT -->
+<div class="stats-split">
+  <div class="stats-photo">
+    <img src="{{ 'Histoire_Moodboard_02.jpg' | file_url }}" alt="Femme active — résultats Uburn" loading="lazy">
+    <div class="stats-photo-cap">Résultats basés sur 847 clientes · Enquête interne 2025</div>
+  </div>
+  <div class="stats-body">
+    <div class="section-label reveal">Les chiffres</div>
+    <h2 class="section-title reveal rd1">Ce que<br><em>ressentent</em><br>nos clientes.</h2>
+    <div class="stats-layout reveal rd2">
+      <div>
+        <div class="stat-big-val">95%</div>
+        <div class="stat-big-label">Moins de fringales dès la 1ère semaine d'utilisation</div>
+      </div>
+      <div class="stats-list">
+        <div class="stat-row">
+          <div class="stat-row-val">87%</div>
+          <div class="stat-row-lbl">Amélioration de la digestion sous 14 jours</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-val">4,7/5</div>
+          <div class="stat-row-lbl">Note moyenne sur 1 500+ avis clients</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-row-val">72%</div>
+          <div class="stat-row-lbl">Recommandent Uburn à leur entourage</div>
+        </div>
+      </div>
+    </div>
+    <div class="stats-disclaimer reveal rd3">*Résultats obtenus dans le cadre de l'utilisation recommandée. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Les résultats individuels varient.</div>
+  </div>
+</div>
+
+<!-- PRESS -->
+<div class="press">
+  <div class="press-inner">
+    <div class="section-label reveal" style="justify-content:center">Presse</div>
+    <h2 class="reveal rd1">Ils en parlent.<br><em>On n'invente rien.</em></h2>
+    <p class="press-sub reveal rd2">Uburn a été mentionné dans les principaux médias français spécialisés en santé et nutrition.</p>
+    <div class="press-logos reveal rd2">
+      <div class="press-logo"><img src="https://uburn.co/cdn/shop/files/TF1_1989-1990.png?v=1749644803&width=150&format=webp" alt="TF1" style="height:22px"></div>
+      <div class="press-logo"><img src="https://uburn.co/cdn/shop/files/Brut_logo_svg.png?v=1749644803&width=150&format=webp" alt="Brut" style="height:20px"></div>
+      <div class="press-logo"><img src="https://uburn.co/cdn/shop/files/logo-femmeactuelle-copie_cb5c498d-5470-4a4d-83fc-7b16c264a030.png?v=1749644803&width=150&format=webp" alt="Femme Actuelle" style="height:16px"></div>
+      <div class="press-logo"><img src="https://uburn.co/cdn/shop/files/VOGUE_revista_-_logo.png?v=1749644803&width=150&format=webp" alt="Vogue" style="height:18px"></div>
+      <div class="press-logo"><img src="https://uburn.co/cdn/shop/files/ELLE_Magazine_Logo.svg" alt="Elle" style="height:18px;opacity:0.35;filter:grayscale(1)"></div>
+    </div>
+    <div class="press-quotes reveal rd3">
+      <div class="press-quote">
+        <div class="press-quote-text">Un complément alimentaire pensé pour les femmes actives, avec une formule scientifiquement validée qui tranche avec les promesses habituelles du marché wellness.</div>
+        <div class="press-quote-source">Femme Actuelle · 2025</div>
+      </div>
+      <div class="press-quote">
+        <div class="press-quote-text">Uburn mise sur la transparence et la validation scientifique — l'allégation glucomannane est la seule de cette catégorie approuvée par l'EFSA. Un positionnement rare.</div>
+        <div class="press-quote-source">Brut · Janvier 2026</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCIENCE PROOF -->
+<section class="science-proof">
+  <div class="science-proof-inner">
+    <div class="section-label reveal">La preuve scientifique</div>
+    <h2 class="section-title reveal rd1">Validé.<br><em>Pas juste testé.</em></h2>
+    <div class="science-proof-grid">
+      <div class="proof-card reveal">
+        <div class="proof-num">EFSA</div>
+        <div class="proof-lbl">Autorité Européenne de Sécurité des Aliments</div>
+        <div class="proof-desc">Le glucomannane est l'unique ingrédient dont l'allégation "contrôle de l'appétit" est officiellement reconnue en Europe. Règlement CE 432/2012.</div>
+        <div class="proof-source">ID 3120 · Règlement CE 432/2012</div>
+      </div>
+      <div class="proof-card reveal rd1">
+        <div class="proof-num">3g</div>
+        <div class="proof-lbl">Dose minimale efficace validée</div>
+        <div class="proof-desc">L'EFSA fixe la dose efficace à 3g par prise. Uburn contient exactement 3g de glucomannane — ni plus, ni moins. Pas de compromis sur la formule.</div>
+        <div class="proof-source">Conditions EFSA : 3 prises/jour, 1-2 verres d'eau avant les repas</div>
+      </div>
+      <div class="proof-card proof-card--dark reveal rd1">
+        <div class="proof-num" style="color:var(--purple-light)">4h</div>
+        <div class="proof-lbl" style="color:#fff">Satiété durable par dose</div>
+        <div class="proof-desc" style="color:rgba(255,255,255,0.6)">Dans le cadre d'un régime hypocalorique, le glucomannane contribue à la réduction de l'appétit pendant 4h — ce que nos clientes confirment dans leurs témoignages.</div>
+        <div class="proof-source" style="color:rgba(255,255,255,0.3)">Études cliniques contrôlées · Méta-analyses publiées</div>
+      </div>
+      <div class="proof-card reveal rd2">
+        <div class="proof-num">6</div>
+        <div class="proof-lbl">Actifs complémentaires</div>
+        <div class="proof-desc">Konjac + Ube + MCT + L-Carnitine + Gingembre + Fibre d'Acacia. Chaque actif renforce le suivant pour un effet synergique sur la satiété, l'énergie et la digestion.</div>
+        <div class="proof-source">Formule brevetée · Développée en France</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-bg">
+    <img src="{{ 'IMAGE_DE_FIN.png' | file_url }}" alt="Femme Uburn" loading="lazy">
+  </div>
+  <div class="final-content">
+    <div class="final-label reveal">Rejoignez-nous</div>
+    <h2 class="reveal rd1">Prête à<br>vivre la <em>différence</em><br>vous aussi ?</h2>
+    <p class="reveal rd2">30 jours d'essai. Satisfait ou remboursé. Sans abonnement caché. La seule chose à perdre, c'est les fringales.</p>
+    <a href="{{ routes.root_url }}products/ube-poudre" class="btn-primary-lg reveal rd2">Commander → dès 34,50 €</a>
+    <div class="final-guarantees reveal rd3">
+      <div class="final-g">Livraison offerte</div>
+      <div class="final-g">Remboursé 30j</div>
+      <div class="final-g">Sans abonnement</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Uburn</div>
+        <p class="footer-brand-desc">Complément alimentaire à base de glucomannane. Marque française — R Glow F.Z.E.</p>
+        <p class="footer-legal-note">Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas. Ne se substitue pas à une alimentation variée et équilibrée.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Produit</div>
+        <ul class="footer-col-links">
+          <li><a href="#">Ube Poudre</a></li>
+          <li><a href="#">Ingrédients</a></li>
+          <li><a href="#">Résultats</a></li>
+          <li><a href="#">Avis clients</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-col-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Livraison</a></li>
+          <li><a href="#">Retours</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Entreprise</div>
+        <ul class="footer-col-links">
+          <li><a href="/pages/notre-histoire">Notre histoire</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Presse</a></li>
+          <li><a href="#">CGV</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 UBurn. Tous droits réservés.</span>
+      <span>hello@uburn.co</span>
+      <div style="display:flex;gap:16px">
+        <a href="#" style="color:rgba(255,255,255,0.25);transition:color 0.2s">Confidentialité</a>
+        <a href="#" style="color:rgba(255,255,255,0.25);transition:color 0.2s">Mentions légales</a>
+        <a href="#" style="color:rgba(255,255,255,0.25);transition:color 0.2s">CGV</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
+const obs = new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+
+
+<script>
+
+const nav = document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
+const obs = new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+</script>
+
+{% schema %}
+{
+  "name": "UB Results V2",
+  "settings": []
+}
+{% endschema %}
