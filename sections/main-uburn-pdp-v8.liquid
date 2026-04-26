@@ -85,25 +85,27 @@
    2. HERO PDP — mobile-first photo + ATC
 ═══════════════════════════════════════════════════════════════════ */
 .upd8-hero{
-  padding:24px 16px 32px;max-width:1180px;margin:0 auto
+  padding:20px 16px 32px;max-width:1180px;margin:0 auto;
+  background:radial-gradient(ellipse at center top,var(--u-cream) 0%,#fff 60%)
 }
 .upd8-hero__inner{
-  display:grid;grid-template-columns:1fr;gap:24px;align-items:start
+  display:grid;grid-template-columns:1fr;gap:20px;align-items:center
 }
 @media(min-width:900px){
-  .upd8-hero{padding:48px 32px}
-  .upd8-hero__inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px}
+  .upd8-hero{padding:56px 32px}
+  .upd8-hero__inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:64px}
 }
 
 /* Hero photo */
 .upd8-hero__photo{
-  aspect-ratio:1/1;background:var(--u-cream);
-  border-radius:var(--u-radius);overflow:hidden;
+  aspect-ratio:1/1;
+  background:radial-gradient(circle at center,var(--u-cream) 0%,#fff 100%);
+  border-radius:18px;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
-  position:relative;max-width:380px;margin:0 auto
+  position:relative;max-width:340px;margin:0 auto;width:100%
 }
-@media(min-width:900px){.upd8-hero__photo{max-width:none}}
-.upd8-hero__photo img{width:88%;height:88%;object-fit:contain}
+@media(min-width:900px){.upd8-hero__photo{max-width:520px;border-radius:24px}}
+.upd8-hero__photo img{width:90%;height:90%;object-fit:contain;display:block}
 .upd8-hero__badge{
   position:absolute;top:12px;left:12px;
   background:#fff;color:var(--u-deep);
@@ -125,10 +127,11 @@
 
 .upd8-buy h1{
   font-family:'Poppins',sans-serif;
-  font-size:clamp(28px,7vw,44px);font-weight:800;line-height:1.05;
-  letter-spacing:-.02em;color:var(--u-deep)
+  font-size:clamp(22px,5.8vw,40px);font-weight:800;line-height:1.08;
+  letter-spacing:-.025em;color:var(--u-deep);
+  overflow-wrap:break-word;hyphens:auto;max-width:100%;text-wrap:balance
 }
-.upd8-buy h1 em{font-style:normal;color:var(--u-primary)}
+.upd8-buy h1 em{font-style:normal;color:var(--u-primary);display:inline}
 .upd8-buy__sub{
   font-size:15px;color:var(--u-text-soft);line-height:1.5
 }
@@ -310,28 +313,33 @@
 /* ════════════════════════════════════════════════════════════════
    6. HOW IT WORKS — 3 steps stacked
 ═══════════════════════════════════════════════════════════════════ */
-.upd8-how{display:flex;flex-direction:column;gap:24px;margin-top:8px}
-@media(min-width:768px){.upd8-how{flex-direction:row;gap:24px}}
+.upd8-how{display:grid;grid-template-columns:1fr;gap:20px;margin-top:8px;max-width:520px;margin-left:auto;margin-right:auto}
+@media(min-width:768px){.upd8-how{grid-template-columns:repeat(3,1fr);gap:32px;max-width:none}}
 .upd8-step{
-  display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center
+  display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center;
+  background:#fff;padding:14px;border-radius:14px;
+  border:1px solid var(--u-line);
+  transition:transform .25s ease,box-shadow .25s ease
 }
+.upd8-step:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(45,24,115,.10)}
 @media(min-width:768px){
-  .upd8-step{flex:1;grid-template-columns:1fr;gap:14px;text-align:center}
+  .upd8-step{grid-template-columns:1fr;gap:14px;text-align:center;padding:24px 18px;background:transparent;border:none}
+  .upd8-step:hover{transform:translateY(-3px)}
   .upd8-step__img{margin:0 auto}
 }
 .upd8-step__img{
-  width:96px;height:96px;border-radius:14px;object-fit:cover;
-  background:var(--u-cream);box-shadow:0 4px 14px rgba(0,0,0,.06)
+  width:96px;height:96px;border-radius:12px;object-fit:cover;
+  background:var(--u-cream);box-shadow:0 4px 14px rgba(45,24,115,.08)
 }
-@media(min-width:768px){.upd8-step__img{width:140px;height:140px}}
+@media(min-width:768px){.upd8-step__img{width:140px;height:140px;border-radius:14px}}
 .upd8-step__num{
-  font-size:11px;font-weight:700;color:var(--u-primary);
-  text-transform:uppercase;letter-spacing:2px;margin-bottom:4px
+  font-size:10.5px;font-weight:700;color:var(--u-primary);
+  text-transform:uppercase;letter-spacing:2px;margin-bottom:5px
 }
 .upd8-step h4{
-  font-size:15px;font-weight:700;color:var(--u-deep);margin-bottom:4px
+  font-size:15px;font-weight:700;color:var(--u-deep);margin-bottom:4px;letter-spacing:-.005em
 }
-.upd8-step p{font-size:13.5px;color:var(--u-text-soft);line-height:1.55}
+.upd8-step p{font-size:13px;color:var(--u-text-soft);line-height:1.55}
 
 /* ════════════════════════════════════════════════════════════════
    7. EXPERT — Dr. Claire Dubois
@@ -384,32 +392,38 @@
 /* ════════════════════════════════════════════════════════════════
    9. COMPARISON — desktop table, mobile cards
 ═══════════════════════════════════════════════════════════════════ */
-.upd8-comp-cards{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.upd8-comp-cards{display:flex;flex-direction:column;gap:14px;margin-top:8px;max-width:520px;margin-left:auto;margin-right:auto}
 .upd8-comp-card{
   background:#fff;border:1px solid var(--u-line);
-  border-radius:14px;padding:18px 20px
+  border-radius:14px;padding:20px 18px;
+  transition:transform .25s ease,box-shadow .25s ease
 }
+.upd8-comp-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,24,115,.08)}
 .upd8-comp-card__name{
-  font-size:14px;font-weight:800;color:var(--u-deep);
-  letter-spacing:-.005em;margin-bottom:12px
+  font-size:15px;font-weight:800;color:var(--u-deep);
+  letter-spacing:-.005em;margin-bottom:14px;text-align:center;
+  padding-bottom:12px;border-bottom:2px solid var(--u-line)
 }
 .upd8-comp-card__row{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:9px 0;border-bottom:1px solid var(--u-line);font-size:13px;gap:14px
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:11px 0;border-bottom:1px solid var(--u-line);font-size:13px;line-height:1.45
 }
 .upd8-comp-card__row:last-child{border-bottom:none}
-.upd8-comp-card__row span:first-child{color:var(--u-text-soft);min-width:0}
-.upd8-comp-card__row span:last-child{font-weight:700;color:var(--u-deep);text-align:right;flex-shrink:0}
+.upd8-comp-card__row > span{display:block}
+.upd8-comp-card__row > span:first-child{color:var(--u-text-soft);font-weight:500;flex:0 1 auto;min-width:0;max-width:55%}
+.upd8-comp-card__row > span:last-child{font-weight:700;color:var(--u-deep);text-align:right;flex:1 1 auto;max-width:50%}
 .upd8-comp-card__row .upd8-good{color:var(--u-success)}
 .upd8-comp-card__row .upd8-bad{color:#dc2626}
 .upd8-comp-card--hero{
   background:linear-gradient(160deg,#fff 0%,var(--u-cream) 100%);
-  border:2px solid var(--u-primary);box-shadow:0 8px 24px rgba(125,63,255,.12);position:relative
+  border:2px solid var(--u-primary);box-shadow:0 12px 32px rgba(125,63,255,.18);position:relative
 }
+.upd8-comp-card--hero .upd8-comp-card__name{color:var(--u-primary);border-bottom-color:var(--u-primary);font-size:18px;font-weight:800;letter-spacing:-.01em}
 .upd8-comp-card--hero::before{
-  content:'Notre choix';position:absolute;top:-10px;right:18px;
-  background:var(--u-primary);color:#fff;font-size:10px;font-weight:800;
-  padding:4px 10px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase
+  content:'★ Notre choix';position:absolute;top:-12px;right:18px;
+  background:var(--u-primary);color:#fff;font-size:10.5px;font-weight:800;
+  padding:5px 12px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase;
+  box-shadow:0 4px 12px rgba(125,63,255,.3)
 }
 @media(min-width:769px){.upd8-comp-cards{display:none}}
 .upd8-comp-table{display:none;width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.04)}
@@ -540,10 +554,46 @@
 .upd8-legal p{margin:5px auto;max-width:680px;letter-spacing:.2px}
 .upd8-legal strong{color:var(--u-text);font-weight:600}
 
-/* === Reveal animations === */
-[data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+/* === Animations === */
+[data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
 [data-reveal].in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){[data-reveal]{opacity:1;transform:none;transition:none}}
+[data-reveal-delay="1"]{transition-delay:.1s}
+[data-reveal-delay="2"]{transition-delay:.2s}
+[data-reveal-delay="3"]{transition-delay:.3s}
+
+/* Pulse on Best badge */
+@keyframes upd8-pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(212,165,116,.4)}50%{transform:scale(1.05);box-shadow:0 0 0 8px rgba(212,165,116,0)}}
+.upd8-variant__pop{animation:upd8-pulse 2.4s ease-in-out infinite}
+
+/* CTA pulse glow */
+@keyframes upd8-glow{0%,100%{box-shadow:0 6px 16px rgba(125,63,255,.25)}50%{box-shadow:0 8px 28px rgba(125,63,255,.45)}}
+.upd8-cta{animation:upd8-glow 2.6s ease-in-out infinite}
+
+/* Hover transitions */
+.upd8-prob-card,.upd8-ingr,.upd8-testi,.upd8-faq-item,.upd8-comp-card,.upd8-step{transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s ease,border-color .3s ease}
+.upd8-prob-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(45,24,115,.18)}
+
+/* Image float on hero photo */
+@keyframes upd8-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.upd8-hero__photo img{animation:upd8-float 5s ease-in-out infinite}
+
+/* Counter spin for stat numbers (subtle) */
+.upd8-stat__num{transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.upd8-stat:hover .upd8-stat__num{transform:scale(1.06)}
+
+/* Bonus item slide-in */
+@keyframes upd8-slide-in{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:none}}
+[data-reveal].in .upd8-bonus__item{animation:upd8-slide-in .5s ease both}
+[data-reveal].in .upd8-bonus__item:nth-child(1){animation-delay:.1s}
+[data-reveal].in .upd8-bonus__item:nth-child(2){animation-delay:.2s}
+[data-reveal].in .upd8-bonus__item:nth-child(3){animation-delay:.3s}
+[data-reveal].in .upd8-bonus__item:nth-child(4){animation-delay:.4s}
+
+@media(prefers-reduced-motion:reduce){
+  [data-reveal]{opacity:1;transform:none;transition:none}
+  .upd8-cta,.upd8-variant__pop,.upd8-hero__photo img{animation:none!important}
+  *{transition:none!important}
+}
 </style>
 
 <div class="upd8">
