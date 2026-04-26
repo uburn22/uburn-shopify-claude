@@ -1,5 +1,24 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
+  comment
+    Filter product images: skip those with marketing/DGCCRF non-compliant text baked in.
+    Banned: Uburn_Listing_ecom_1, PRODUCTPAGE_0004_3, PRODUCT_PAGE_0005_2_1, PRODUCTPAGE_0003_4
+    Kept: PRODUCTPAGE_0000_7 (box packaging), PRODUCT_PAGE_0001 (ingredients), PRODUCTPAGE_0002_5 (3 steps)
+  endcomment
+  assign first_clean = null
+  for img in product.images
+    assign s = img.src | downcase
+    assign banned = false
+    if s contains 'listing_ecom' or s contains 'productpage_0004_3' or s contains 'product_page_0005' or s contains 'productpage_0003_4'
+      assign banned = true
+    endif
+    if banned == false and first_clean == null
+      assign first_clean = img
+    endif
+  endfor
+  if first_clean == null
+    assign first_clean = product.featured_image
+  endif
 -%}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -659,19 +678,31 @@
     <div class="upd-gallery" data-reveal>
       <div class="upd-gallery__main" id="updMain">
         <span class="upd-gallery__badge">Marque française</span>
-        <img id="updMainImg" src="{{ product.featured_image | image_url: width: 900 }}&format=webp" alt="{{ product.title | escape }}" width="900" height="1125" fetchpriority="high">
-        {%- if product.images.size > 1 -%}
+        <img id="updMainImg" src="{{ first_clean | image_url: width: 900 }}&format=webp" alt="{{ product.title | escape }}" width="900" height="1125" fetchpriority="high">
+        {%- assign clean_count = 0 -%}
+        {%- for img in product.images -%}
+          {%- assign s = img.src | downcase -%}
+          {%- unless s contains 'listing_ecom' or s contains 'productpage_0004_3' or s contains 'product_page_0005' or s contains 'productpage_0003_4' -%}
+            {%- assign clean_count = clean_count | plus: 1 -%}
+          {%- endunless -%}
+        {%- endfor -%}
+        {%- if clean_count > 1 -%}
         <button type="button" class="upd-gallery__nav upd-gallery__nav--prev" id="updPrev" aria-label="Image précédente">‹</button>
         <button type="button" class="upd-gallery__nav upd-gallery__nav--next" id="updNext" aria-label="Image suivante">›</button>
-        <span class="upd-gallery__counter"><span id="updIdx">1</span> / {{ product.images.size }}</span>
+        <span class="upd-gallery__counter"><span id="updIdx">1</span> / {{ clean_count }}</span>
         {%- endif -%}
       </div>
-      {%- if product.images.size > 1 -%}
+      {%- if clean_count > 1 -%}
       <div class="upd-gallery__thumbs" id="updThumbs">
-        {%- for img in product.images limit: 8 -%}
-          <button type="button" class="upd-thumb{% if forloop.first %} active{% endif %}" data-src="{{ img | image_url: width: 900 }}&format=webp" data-idx="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}">
-            <img src="{{ img | image_url: width: 160 }}&format=webp" alt="" width="160" height="200" loading="lazy">
-          </button>
+        {%- assign thumb_idx = 0 -%}
+        {%- for img in product.images limit: 12 -%}
+          {%- assign s = img.src | downcase -%}
+          {%- unless s contains 'listing_ecom' or s contains 'productpage_0004_3' or s contains 'product_page_0005' or s contains 'productpage_0003_4' -%}
+            <button type="button" class="upd-thumb{% if thumb_idx == 0 %} active{% endif %}" data-src="{{ img | image_url: width: 900 }}&format=webp" data-idx="{{ thumb_idx }}" aria-label="Image {{ thumb_idx | plus: 1 }}">
+              <img src="{{ img | image_url: width: 160 }}&format=webp" alt="" width="160" height="200" loading="lazy">
+            </button>
+            {%- assign thumb_idx = thumb_idx | plus: 1 -%}
+          {%- endunless -%}
         {%- endfor -%}
       </div>
       {%- endif -%}
@@ -903,7 +934,7 @@
     </div>
     <div class="upd-how-step">
       <div class="upd-how-step__count">Étape iv</div>
-      <img class="upd-how-step__img" src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1773911263&width=400&format=webp" alt="Profite" width="400" height="400" loading="lazy">
+      <img class="upd-how-step__img" src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0000_7.jpg?v=1773911263&width=400&format=webp" alt="Profite" width="400" height="400" loading="lazy">
       <h4>Profite</h4>
       <p>4h sans fringale. Tu reprends le contrôle.</p>
     </div>
@@ -926,7 +957,7 @@
 
     <div class="upd-reviews" data-reveal>
       <article class="upd-rev">
-        <img class="upd-rev__photo" src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0004_3.jpg?v=1773911263&width=500&format=webp" alt="" loading="lazy" width="500" height="500">
+        <img class="upd-rev__photo" src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0000_7.jpg?v=1773911263&width=500&format=webp" alt="" loading="lazy" width="500" height="500">
         <div class="upd-rev__body">
           <div class="upd-rev__stars">★★★★★</div>
           <h4 class="upd-rev__title">Plus de craquage à 16h</h4>
@@ -974,7 +1005,7 @@
       </article>
 
       <article class="upd-rev">
-        <img class="upd-rev__photo" src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0003_4.jpg?v=1773911263&width=500&format=webp" alt="" loading="lazy" width="500" height="500">
+        <img class="upd-rev__photo" src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0001_6_6cd95d50-55ff-4349-b486-02ff851786de.jpg?v=1773911263&width=500&format=webp" alt="" loading="lazy" width="500" height="500">
         <div class="upd-rev__body">
           <div class="upd-rev__stars">★★★★★</div>
           <h4 class="upd-rev__title">Mon ritual matinal préféré</h4>
