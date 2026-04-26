@@ -1,0 +1,1098 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign featured = product.featured_image
+  for img in product.images
+    assign s = img.src | downcase
+    if s contains 'productpage_0000' or s contains 'product_page_0001'
+      assign featured = img
+      break
+    endif
+  endfor
+-%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://uburn.co" crossorigin>
+<link rel="preload" as="image" fetchpriority="high" href="{{ featured | image_url: width: 720 }}&format=webp">
+
+<style>
+/* ════════════════════════════════════════════════════════════════
+   UBURN PDP V8 — Mobile-first · Cloned from LP structure
+   ADN: Poppins + #7d3fff + cream #f8f5ff + deep #2b1e4d
+═══════════════════════════════════════════════════════════════════ */
+
+/* === HIDE THEME PARASITES ON THIS PAGE === */
+.shopify-section--announcement-bar{display:none!important}
+.shopify-section ~ .shopify-section--multi-column,
+.shopify-section ~ .shopify-section--text-with-media,
+.shopify-section ~ .shopify-section--trust-icons,
+.shopify-section ~ .shopify-section--ss-scrolling-logo-cloud,
+.shopify-section ~ .shopify-section--separator-adjustable,
+.shopify-section ~ .shopify-section--apps,
+.shopify-section ~ .shopify-section--collection-list,
+.shopify-section ~ .shopify-section--scrolling-content,
+.shopify-section ~ .shopify-section--faq{display:none!important}
+.shopify-section:has(.upd8){display:block!important;visibility:visible!important}
+
+/* === Reset scoped to .upd8 === */
+.upd8,.upd8 *{box-sizing:border-box}
+.upd8{
+  font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif;
+  color:#1a1a1a;background:#fff;
+  -webkit-font-smoothing:antialiased;line-height:1.55
+}
+.upd8 a{color:inherit;text-decoration:none}
+.upd8 img{max-width:100%;display:block;height:auto}
+.upd8 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.upd8 ul,.upd8 ol{list-style:none;padding:0;margin:0}
+.upd8 p,.upd8 h1,.upd8 h2,.upd8 h3,.upd8 h4{margin:0}
+
+:root{
+  --u-primary:#7d3fff;
+  --u-primary-dark:#6328d6;
+  --u-deep:#2b1e4d;
+  --u-text:#1a1a1a;
+  --u-text-soft:#6b6b6b;
+  --u-cream:#f8f5ff;
+  --u-cream-warm:#fff9f0;
+  --u-gold:#d4a574;
+  --u-gold-bg:#fff4e6;
+  --u-line:#ebe6f5;
+  --u-success:#16a34a;
+  --u-rating:#fbbf24;
+  --u-radius:14px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   1. STICKY TOP BAR — carousel 3 messages
+═══════════════════════════════════════════════════════════════════ */
+.upd8-top{
+  position:sticky;top:0;z-index:99;
+  background:var(--u-deep);color:#fff;
+  padding:10px 14px;font-size:12px;font-weight:500;letter-spacing:.3px;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden
+}
+.upd8-top__track{
+  display:flex;gap:36px;align-items:center;white-space:nowrap;
+  animation:upd8-marquee 24s linear infinite
+}
+.upd8-top__item{display:inline-flex;align-items:center;gap:6px}
+.upd8-top__dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.4)}
+@keyframes upd8-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ════════════════════════════════════════════════════════════════
+   2. HERO PDP — mobile-first photo + ATC
+═══════════════════════════════════════════════════════════════════ */
+.upd8-hero{
+  padding:24px 16px 32px;max-width:1180px;margin:0 auto
+}
+.upd8-hero__inner{
+  display:grid;grid-template-columns:1fr;gap:24px;align-items:start
+}
+@media(min-width:900px){
+  .upd8-hero{padding:48px 32px}
+  .upd8-hero__inner{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px}
+}
+
+/* Hero photo */
+.upd8-hero__photo{
+  aspect-ratio:1/1;background:var(--u-cream);
+  border-radius:var(--u-radius);overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;max-width:380px;margin:0 auto
+}
+@media(min-width:900px){.upd8-hero__photo{max-width:none}}
+.upd8-hero__photo img{width:88%;height:88%;object-fit:contain}
+.upd8-hero__badge{
+  position:absolute;top:12px;left:12px;
+  background:#fff;color:var(--u-deep);
+  padding:6px 12px;border-radius:100px;
+  font-size:10.5px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;
+  box-shadow:0 4px 12px rgba(0,0,0,.08)
+}
+
+/* Buy block */
+.upd8-buy{display:flex;flex-direction:column;gap:18px}
+.upd8-buy__rating{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--u-text)
+}
+.upd8-buy__stars{color:var(--u-rating);letter-spacing:1.5px;font-size:14px}
+.upd8-buy__rating strong{color:var(--u-deep)}
+.upd8-buy__rating a{color:var(--u-text-soft);text-decoration:underline;text-underline-offset:2px}
+
+.upd8-buy h1{
+  font-family:'Poppins',sans-serif;
+  font-size:clamp(28px,7vw,44px);font-weight:800;line-height:1.05;
+  letter-spacing:-.02em;color:var(--u-deep)
+}
+.upd8-buy h1 em{font-style:normal;color:var(--u-primary)}
+.upd8-buy__sub{
+  font-size:15px;color:var(--u-text-soft);line-height:1.5
+}
+.upd8-buy__sub strong{color:var(--u-deep);font-weight:600}
+
+/* Variant cards (vertical stack on mobile) */
+.upd8-variants{display:flex;flex-direction:column;gap:10px}
+.upd8-variant{
+  position:relative;background:#fff;
+  border:2px solid var(--u-line);border-radius:var(--u-radius);
+  padding:14px 16px;cursor:pointer;transition:.2s;
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px
+}
+.upd8-variant:hover{border-color:var(--u-primary)}
+.upd8-variant input{position:absolute;opacity:0;pointer-events:none}
+.upd8-variant.selected{border-color:var(--u-primary);background:var(--u-cream)}
+.upd8-variant.selected .upd8-variant__check{
+  background:var(--u-primary);border-color:var(--u-primary)
+}
+.upd8-variant.selected .upd8-variant__check::after{
+  content:'';width:8px;height:4px;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;
+  transform:rotate(-45deg);margin-top:-2px
+}
+.upd8-variant__check{
+  width:20px;height:20px;border-radius:50%;border:2px solid var(--u-line);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s
+}
+.upd8-variant__txt{min-width:0}
+.upd8-variant__name{
+  font-size:14.5px;font-weight:700;color:var(--u-deep);line-height:1.2;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap
+}
+.upd8-variant__pop{
+  display:inline-block;background:var(--u-gold);color:#fff;
+  font-size:10px;font-weight:800;padding:2px 8px;border-radius:100px;
+  letter-spacing:.5px;text-transform:uppercase
+}
+.upd8-variant__meta{font-size:12px;color:var(--u-text-soft);margin-top:3px}
+.upd8-variant__price{text-align:right;line-height:1.1}
+.upd8-variant__num{
+  font-size:17px;font-weight:800;color:var(--u-deep);letter-spacing:-.01em
+}
+.upd8-variant__day{
+  font-size:11px;color:var(--u-success);font-weight:700;margin-top:3px;white-space:nowrap
+}
+
+/* CTA */
+.upd8-cta{
+  width:100%;background:var(--u-primary);color:#fff;
+  padding:17px 24px;border-radius:100px;
+  font-size:15px;font-weight:700;letter-spacing:.3px;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:.2s;box-shadow:0 6px 16px rgba(125,63,255,.25)
+}
+.upd8-cta:hover{background:var(--u-primary-dark);transform:translateY(-1px);box-shadow:0 8px 22px rgba(125,63,255,.35)}
+.upd8-cta[disabled]{opacity:.6;cursor:not-allowed}
+.upd8-cta__loading{display:none;width:18px;height:18px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:upd8-spin .6s linear infinite}
+.upd8-cta.loading .upd8-cta__loading{display:inline-block}
+.upd8-cta.loading .upd8-cta__txt{display:none}
+@keyframes upd8-spin{to{transform:rotate(360deg)}}
+
+/* Payments line */
+.upd8-pays{
+  display:flex;justify-content:center;gap:8px;flex-wrap:wrap;
+  font-size:11.5px;color:var(--u-text-soft);font-weight:500;
+  align-items:center
+}
+.upd8-pays span{display:inline-flex;align-items:center;gap:5px}
+
+/* Trust ticks */
+.upd8-ticks{display:flex;flex-direction:column;gap:6px;font-size:13px}
+.upd8-tick{display:flex;align-items:center;gap:8px;color:var(--u-text)}
+.upd8-tick svg{flex-shrink:0;color:var(--u-primary)}
+
+/* ════════════════════════════════════════════════════════════════
+   3. BANDEAU BONUS 184€
+═══════════════════════════════════════════════════════════════════ */
+.upd8-bonus{
+  background:var(--u-gold-bg);
+  border-top:1px solid #f0e3cd;border-bottom:1px solid #f0e3cd;
+  padding:24px 16px;margin:8px 0
+}
+.upd8-bonus__inner{max-width:560px;margin:0 auto}
+.upd8-bonus__head{
+  display:flex;align-items:center;gap:8px;
+  font-size:12.5px;font-weight:700;color:var(--u-deep);
+  text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px
+}
+.upd8-bonus__list{display:flex;flex-direction:column;gap:9px}
+.upd8-bonus__item{
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  font-size:13.5px;color:var(--u-text);font-weight:500
+}
+.upd8-bonus__item::before{
+  content:'✓';color:var(--u-primary);font-weight:800;flex-shrink:0
+}
+.upd8-bonus__item span{flex:1;line-height:1.3}
+.upd8-bonus__item em{font-style:normal;color:var(--u-text-soft);font-size:12px;font-weight:600}
+.upd8-bonus__total{
+  margin-top:14px;padding-top:14px;border-top:1px dashed #d9c294;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;color:var(--u-deep)
+}
+.upd8-bonus__total strong{font-size:17px;font-weight:800;color:var(--u-primary);letter-spacing:-.01em}
+
+/* ════════════════════════════════════════════════════════════════
+   4. PRESS LOGOS
+═══════════════════════════════════════════════════════════════════ */
+.upd8-press{
+  padding:28px 16px;text-align:center;
+  border-bottom:1px solid var(--u-line)
+}
+.upd8-press__lead{
+  font-size:11px;text-transform:uppercase;letter-spacing:2px;
+  color:var(--u-text-soft);font-weight:600;margin-bottom:18px
+}
+.upd8-press__logos{
+  display:flex;gap:24px;justify-content:center;align-items:center;
+  flex-wrap:wrap;opacity:.55;max-width:720px;margin:0 auto
+}
+.upd8-press__logos img{height:18px;width:auto;filter:grayscale(1)}
+@media(min-width:600px){.upd8-press__logos img{height:22px}.upd8-press__logos{gap:36px}}
+
+/* ════════════════════════════════════════════════════════════════
+   GENERIC SECTION
+═══════════════════════════════════════════════════════════════════ */
+.upd8-sec{padding:56px 16px;max-width:1100px;margin:0 auto}
+@media(min-width:768px){.upd8-sec{padding:80px 32px}}
+.upd8-sec--cream{background:var(--u-cream);max-width:none;padding-left:0;padding-right:0}
+.upd8-sec--cream .upd8-inner{max-width:1100px;margin:0 auto;padding:0 16px}
+@media(min-width:768px){.upd8-sec--cream .upd8-inner{padding:0 32px}}
+.upd8-sec--purple{
+  background:linear-gradient(160deg,#3d1873 0%,#7d3fff 100%);
+  color:#fff;max-width:none
+}
+.upd8-eyebrow{
+  display:block;font-size:11px;font-weight:700;
+  text-transform:uppercase;letter-spacing:2.5px;
+  color:var(--u-primary);text-align:center;margin-bottom:12px
+}
+.upd8-sec--purple .upd8-eyebrow{color:#d8b4fe}
+.upd8-h2{
+  font-family:'Poppins',sans-serif;
+  font-size:clamp(24px,5.5vw,36px);font-weight:800;line-height:1.1;
+  letter-spacing:-.02em;color:var(--u-deep);text-align:center;margin-bottom:14px
+}
+.upd8-h2 em{font-style:normal;color:var(--u-primary)}
+.upd8-sec--purple .upd8-h2{color:#fff}
+.upd8-sec--purple .upd8-h2 em{color:#d8b4fe}
+.upd8-lead{
+  font-size:15px;color:var(--u-text-soft);text-align:center;
+  line-height:1.6;max-width:560px;margin:0 auto 36px
+}
+.upd8-sec--purple .upd8-lead{color:rgba(255,255,255,.8)}
+
+/* ════════════════════════════════════════════════════════════════
+   5. PROBLEM — 3 cards (11h / 16h / 21h)
+═══════════════════════════════════════════════════════════════════ */
+.upd8-problem{display:flex;flex-direction:column;gap:12px}
+@media(min-width:700px){.upd8-problem{flex-direction:row;gap:1px;background:rgba(255,255,255,.1);border-radius:18px;overflow:hidden;box-shadow:0 8px 32px rgba(45,24,115,.12)}}
+.upd8-prob-card{
+  background:linear-gradient(150deg,#3d1873 0%,#6b2fa0 60%,#8b47c5 100%);
+  color:#fff;padding:28px 24px;border-radius:14px;
+  position:relative;overflow:hidden
+}
+@media(min-width:700px){.upd8-prob-card{flex:1;border-radius:0}}
+.upd8-prob-card__time{
+  display:inline-block;background:rgba(255,255,255,.15);
+  padding:5px 12px;border-radius:100px;
+  font-size:12px;font-weight:700;color:#d8b4fe;
+  letter-spacing:1px;margin-bottom:14px
+}
+.upd8-prob-card h3{
+  font-size:16px;font-weight:700;margin-bottom:10px;line-height:1.25
+}
+.upd8-prob-card p{font-size:13.5px;color:rgba(255,255,255,.8);line-height:1.6}
+
+/* ════════════════════════════════════════════════════════════════
+   6. HOW IT WORKS — 3 steps stacked
+═══════════════════════════════════════════════════════════════════ */
+.upd8-how{display:flex;flex-direction:column;gap:24px;margin-top:8px}
+@media(min-width:768px){.upd8-how{flex-direction:row;gap:24px}}
+.upd8-step{
+  display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:center
+}
+@media(min-width:768px){
+  .upd8-step{flex:1;grid-template-columns:1fr;gap:14px;text-align:center}
+  .upd8-step__img{margin:0 auto}
+}
+.upd8-step__img{
+  width:96px;height:96px;border-radius:14px;object-fit:cover;
+  background:var(--u-cream);box-shadow:0 4px 14px rgba(0,0,0,.06)
+}
+@media(min-width:768px){.upd8-step__img{width:140px;height:140px}}
+.upd8-step__num{
+  font-size:11px;font-weight:700;color:var(--u-primary);
+  text-transform:uppercase;letter-spacing:2px;margin-bottom:4px
+}
+.upd8-step h4{
+  font-size:15px;font-weight:700;color:var(--u-deep);margin-bottom:4px
+}
+.upd8-step p{font-size:13.5px;color:var(--u-text-soft);line-height:1.55}
+
+/* ════════════════════════════════════════════════════════════════
+   7. EXPERT — Dr. Claire Dubois
+═══════════════════════════════════════════════════════════════════ */
+.upd8-expert{
+  max-width:880px;margin:0 auto;background:#fff;
+  border-radius:18px;padding:28px 24px;
+  box-shadow:0 8px 30px rgba(45,24,115,.08);
+  display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center
+}
+@media(min-width:700px){.upd8-expert{flex-direction:row;text-align:left;padding:36px 44px;gap:36px}}
+.upd8-expert__img{
+  width:96px;height:96px;border-radius:50%;object-fit:cover;
+  background:var(--u-cream);flex-shrink:0
+}
+.upd8-expert__quote{
+  font-size:18px;font-weight:600;color:var(--u-deep);
+  line-height:1.4;letter-spacing:-.005em;font-style:italic
+}
+.upd8-expert__name{
+  margin-top:14px;font-size:13px;font-weight:700;color:var(--u-deep)
+}
+.upd8-expert__role{
+  font-size:11.5px;color:var(--u-text-soft);
+  text-transform:uppercase;letter-spacing:1.5px;margin-top:2px
+}
+
+/* ════════════════════════════════════════════════════════════════
+   8. STATS — grid 2x2 mobile, 4x1 desktop
+═══════════════════════════════════════════════════════════════════ */
+.upd8-stats__grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:32px 16px;
+  max-width:900px;margin:0 auto
+}
+@media(min-width:768px){.upd8-stats__grid{grid-template-columns:repeat(4,1fr);gap:32px}}
+.upd8-stat{text-align:center;padding:0 4px;min-width:0}
+.upd8-stat__num{
+  font-family:'Poppins',sans-serif;
+  font-size:clamp(38px,9vw,56px);font-weight:800;line-height:1;
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums
+}
+.upd8-stat__num small{
+  font-size:.5em;font-weight:600;color:rgba(255,255,255,.6);margin-left:2px
+}
+.upd8-stat__label{
+  margin-top:10px;font-size:11.5px;font-weight:500;color:rgba(255,255,255,.78);
+  text-transform:uppercase;letter-spacing:1.2px;line-height:1.4
+}
+
+/* ════════════════════════════════════════════════════════════════
+   9. COMPARISON — desktop table, mobile cards
+═══════════════════════════════════════════════════════════════════ */
+.upd8-comp-cards{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.upd8-comp-card{
+  background:#fff;border:1px solid var(--u-line);
+  border-radius:14px;padding:18px 20px
+}
+.upd8-comp-card__name{
+  font-size:14px;font-weight:800;color:var(--u-deep);
+  letter-spacing:-.005em;margin-bottom:12px
+}
+.upd8-comp-card__row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:9px 0;border-bottom:1px solid var(--u-line);font-size:13px;gap:14px
+}
+.upd8-comp-card__row:last-child{border-bottom:none}
+.upd8-comp-card__row span:first-child{color:var(--u-text-soft);min-width:0}
+.upd8-comp-card__row span:last-child{font-weight:700;color:var(--u-deep);text-align:right;flex-shrink:0}
+.upd8-comp-card__row .upd8-good{color:var(--u-success)}
+.upd8-comp-card__row .upd8-bad{color:#dc2626}
+.upd8-comp-card--hero{
+  background:linear-gradient(160deg,#fff 0%,var(--u-cream) 100%);
+  border:2px solid var(--u-primary);box-shadow:0 8px 24px rgba(125,63,255,.12);position:relative
+}
+.upd8-comp-card--hero::before{
+  content:'Notre choix';position:absolute;top:-10px;right:18px;
+  background:var(--u-primary);color:#fff;font-size:10px;font-weight:800;
+  padding:4px 10px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase
+}
+@media(min-width:769px){.upd8-comp-cards{display:none}}
+.upd8-comp-table{display:none;width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+@media(min-width:769px){.upd8-comp-table{display:table}}
+.upd8-comp-table th,.upd8-comp-table td{padding:14px 16px;text-align:center;border-bottom:1px solid var(--u-line);font-size:14px}
+.upd8-comp-table thead th{background:var(--u-deep);color:#fff;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:1.5px}
+.upd8-comp-table tbody td:first-child{text-align:left;font-weight:600;color:var(--u-deep)}
+.upd8-comp-table .upd8-comp-uburn{background:var(--u-cream);font-weight:700;color:var(--u-primary)}
+
+/* ════════════════════════════════════════════════════════════════
+   10. INGREDIENTS DETAIL — 1 col mobile, 3 col desktop
+═══════════════════════════════════════════════════════════════════ */
+.upd8-ingrs{display:grid;grid-template-columns:1fr;gap:14px;margin-top:8px}
+@media(min-width:600px){.upd8-ingrs{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:900px){.upd8-ingrs{grid-template-columns:repeat(3,1fr)}}
+.upd8-ingr{
+  background:#fff;border:1px solid var(--u-line);border-radius:14px;
+  overflow:hidden;transition:.25s
+}
+.upd8-ingr:hover{box-shadow:0 8px 24px rgba(0,0,0,.06);transform:translateY(-2px)}
+.upd8-ingr__img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--u-cream)}
+.upd8-ingr__body{padding:16px 18px}
+.upd8-ingr__name{font-size:14px;font-weight:700;color:var(--u-deep);margin-bottom:4px}
+.upd8-ingr__dose{font-size:12px;color:var(--u-primary);font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.upd8-ingr__desc{font-size:13px;color:var(--u-text-soft);line-height:1.55}
+.upd8-ingr__pill{display:inline-block;margin-top:10px;background:var(--u-cream);color:var(--u-primary);font-size:10px;font-weight:800;padding:4px 9px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase}
+
+/* ════════════════════════════════════════════════════════════════
+   11. TESTIMONIALS — stack mobile, 3 cols desktop
+═══════════════════════════════════════════════════════════════════ */
+.upd8-testis{display:grid;grid-template-columns:1fr;gap:16px;margin-top:8px}
+@media(min-width:768px){.upd8-testis{grid-template-columns:repeat(3,1fr)}}
+.upd8-testi{
+  background:#fff;border:1px solid var(--u-line);
+  border-radius:14px;padding:22px;display:flex;flex-direction:column
+}
+.upd8-testi__stars{color:var(--u-rating);font-size:14px;letter-spacing:2px;margin-bottom:10px}
+.upd8-testi__title{font-size:14px;font-weight:700;color:var(--u-deep);margin-bottom:8px;line-height:1.3}
+.upd8-testi__text{font-size:13.5px;color:var(--u-text);line-height:1.6;margin-bottom:14px;flex:1}
+.upd8-testi__author{
+  display:flex;align-items:center;gap:10px;
+  padding-top:12px;border-top:1px solid var(--u-line)
+}
+.upd8-testi__avatar{
+  width:36px;height:36px;border-radius:50%;background:var(--u-cream);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--u-primary);font-weight:800;font-size:12px;flex-shrink:0
+}
+.upd8-testi__name{font-size:12.5px;font-weight:700;color:var(--u-deep);line-height:1.2}
+.upd8-testi__check{font-size:10px;color:var(--u-success);font-weight:700;margin-top:2px;letter-spacing:.3px}
+
+/* ════════════════════════════════════════════════════════════════
+   12. FAQ
+═══════════════════════════════════════════════════════════════════ */
+.upd8-faq{max-width:760px;margin:0 auto}
+.upd8-faq-item{
+  background:#fff;border:1px solid var(--u-line);border-radius:12px;
+  margin-bottom:10px;overflow:hidden
+}
+.upd8-faq-item summary{
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  font-size:14.5px;font-weight:600;color:var(--u-deep);
+  padding:18px 20px;cursor:pointer;list-style:none;line-height:1.35
+}
+.upd8-faq-item summary::-webkit-details-marker{display:none}
+.upd8-faq-item summary::after{
+  content:'+';font-size:22px;color:var(--u-primary);
+  transition:transform .25s;flex-shrink:0;line-height:1;font-weight:300
+}
+.upd8-faq-item[open] summary::after{transform:rotate(45deg)}
+.upd8-faq-item__a{
+  padding:0 20px 18px;font-size:14px;color:var(--u-text-soft);line-height:1.65
+}
+
+/* ════════════════════════════════════════════════════════════════
+   13. FINAL OFFER RECAP
+═══════════════════════════════════════════════════════════════════ */
+.upd8-offer{
+  max-width:560px;margin:0 auto;
+  background:#fff;border:2px solid var(--u-primary);border-radius:18px;
+  padding:28px 24px;box-shadow:0 12px 40px rgba(125,63,255,.12)
+}
+.upd8-offer .upd8-variants{margin-bottom:14px}
+.upd8-offer__total{
+  background:var(--u-gold-bg);border-radius:12px;
+  padding:14px 18px;margin:14px 0;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;color:var(--u-deep)
+}
+.upd8-offer__total strong{font-size:16px;color:var(--u-primary);font-weight:800}
+.upd8-offer__trust{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  margin-top:18px;font-size:12px;color:var(--u-text-soft)
+}
+.upd8-offer__trust div{display:flex;align-items:center;gap:6px}
+.upd8-offer__trust svg{color:var(--u-primary);flex-shrink:0}
+
+/* ════════════════════════════════════════════════════════════════
+   14. STICKY ATC MOBILE
+═══════════════════════════════════════════════════════════════════ */
+.upd8-sticky{
+  display:none;position:fixed;bottom:0;left:0;right:0;
+  background:#fff;border-top:1px solid var(--u-line);
+  padding:10px 14px calc(14px + env(safe-area-inset-bottom));
+  z-index:200;box-shadow:0 -8px 24px rgba(0,0,0,.08);
+  align-items:center;gap:10px;
+  transform:translateY(110%);transition:transform .3s cubic-bezier(.22,1,.36,1)
+}
+.upd8-sticky.visible{transform:translateY(0)}
+.upd8-sticky__price{flex-shrink:0;line-height:1}
+.upd8-sticky__num{font-size:17px;font-weight:800;color:var(--u-deep);letter-spacing:-.01em}
+.upd8-sticky__day{font-size:10.5px;color:var(--u-success);font-weight:700;margin-top:2px}
+.upd8-sticky__btn{
+  flex:1;background:var(--u-primary);color:#fff;border-radius:100px;
+  padding:14px;font-size:14px;font-weight:700;letter-spacing:.3px;
+  display:flex;align-items:center;justify-content:center;gap:8px
+}
+.upd8-sticky__btn:active{background:var(--u-primary-dark)}
+@media(max-width:767px){.upd8-sticky{display:flex}body{padding-bottom:84px}}
+
+/* ════════════════════════════════════════════════════════════════
+   LEGAL DGCCRF
+═══════════════════════════════════════════════════════════════════ */
+.upd8-legal{
+  padding:24px 16px 32px;background:var(--u-cream);
+  text-align:center;font-size:11px;color:var(--u-text-soft);line-height:1.7
+}
+.upd8-legal p{margin:5px auto;max-width:680px;letter-spacing:.2px}
+.upd8-legal strong{color:var(--u-text);font-weight:600}
+
+/* === Reveal animations === */
+[data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+[data-reveal].in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){[data-reveal]{opacity:1;transform:none;transition:none}}
+</style>
+
+<div class="upd8">
+
+<!-- ═══ 1. STICKY TOP BAR ═══ -->
+<div class="upd8-top">
+  <div class="upd8-top__track">
+    <span class="upd8-top__item">→ Livraison offerte en France</span>
+    <span class="upd8-top__dot"></span>
+    <span class="upd8-top__item">Allégation EFSA validée (ID 3120)</span>
+    <span class="upd8-top__dot"></span>
+    <span class="upd8-top__item">Marque française</span>
+    <span class="upd8-top__dot"></span>
+    <span class="upd8-top__item">→ Livraison offerte en France</span>
+    <span class="upd8-top__dot"></span>
+    <span class="upd8-top__item">Allégation EFSA validée (ID 3120)</span>
+    <span class="upd8-top__dot"></span>
+    <span class="upd8-top__item">Marque française</span>
+  </div>
+</div>
+
+<!-- ═══ 2. HERO PDP ═══ -->
+<section class="upd8-hero">
+  <div class="upd8-hero__inner">
+
+    <!-- Photo principale (1 image, pas de carrousel) -->
+    <div class="upd8-hero__photo">
+      <span class="upd8-hero__badge">Marque française</span>
+      <img src="{{ featured | image_url: width: 720 }}&format=webp" alt="{{ product.title | escape }}" width="720" height="720" fetchpriority="high">
+    </div>
+
+    <!-- Buy block -->
+    <div class="upd8-buy">
+      <div class="upd8-buy__rating">
+        <span class="upd8-buy__stars">★★★★★</span>
+        <strong>4,7/5</strong>
+        <a href="#avis">· 1 500+ avis vérifiés</a>
+      </div>
+
+      <h1>16h. <em>Votre placard</em> reste fermé.</h1>
+      <p class="upd8-buy__sub"><strong>30 kcal</strong> · 0% caféine · 4h de satiété <em>(allégation EFSA glucomannane)</em>.</p>
+
+      <form id="upd8Form" action="/cart/add" method="post">
+        <div class="upd8-variants" role="radiogroup" aria-label="Choisis ta cure">
+          {%- for v in product.variants -%}
+            {%- assign v_days = 30 -%}
+            {%- assign v_pop = false -%}
+            {%- assign v_label = 'Découverte' -%}
+            {%- assign v_size = '90g · 1 dose / jour' -%}
+            {%- if v.id == 51289200066879 -%}
+              {%- assign v_days = 90 -%}
+              {%- assign v_pop = true -%}
+              {%- assign v_label = 'Résultats Maximum' -%}
+              {%- assign v_size = '270g · 1 dose / jour' -%}
+            {%- endif -%}
+            {%- assign p_jour = v.price | divided_by: v_days | money_without_trailing_zeros -%}
+            <label class="upd8-variant{% if v.id == current_variant.id %} selected{% endif %}" data-vid="{{ v.id }}" data-pday="{{ p_jour }}">
+              <span class="upd8-variant__check"></span>
+              <input type="radio" name="id" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}>
+              <div class="upd8-variant__txt">
+                <div class="upd8-variant__name">
+                  {{ v_label }}
+                  {%- if v_pop %}<span class="upd8-variant__pop">Best</span>{%- endif -%}
+                </div>
+                <div class="upd8-variant__meta">{{ v_size }}</div>
+              </div>
+              <div class="upd8-variant__price">
+                <div class="upd8-variant__num">{{ v.price | money_without_trailing_zeros }}</div>
+                <div class="upd8-variant__day">{{ p_jour }} / jour</div>
+              </div>
+            </label>
+          {%- endfor -%}
+        </div>
+
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="upd8-cta" id="upd8Cta">
+          <span class="upd8-cta__loading"></span>
+          <span class="upd8-cta__txt">Commander →</span>
+        </button>
+      </form>
+
+      <div class="upd8-pays">
+        <span>🍎 Apple Pay</span>
+        <span>·</span>
+        <span>G Pay</span>
+        <span>·</span>
+        <span>CB sécurisée</span>
+      </div>
+
+      <ul class="upd8-ticks">
+        <li class="upd8-tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Livraison offerte en France</li>
+        <li class="upd8-tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Marque française · Fabriqué en France</li>
+        <li class="upd8-tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Validé EFSA (allégation ID 3120)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 3. BANDEAU BONUS 184€ ═══ -->
+<div class="upd8-bonus">
+  <div class="upd8-bonus__inner">
+    <div class="upd8-bonus__head">🎁 Offerts avec ta commande aujourd'hui</div>
+    <ul class="upd8-bonus__list">
+      <li class="upd8-bonus__item"><span>E-book « 30 jours pour reprendre le contrôle »</span><em>47€</em></li>
+      <li class="upd8-bonus__item"><span>Accès groupe privé Uburn Collective</span><em>40€</em></li>
+      <li class="upd8-bonus__item"><span>Suivi nutrition WhatsApp 30 jours</span><em>47€</em></li>
+      <li class="upd8-bonus__item"><span>Accès aux événements Uburn en ligne</span><em>50€</em></li>
+    </ul>
+    <div class="upd8-bonus__total">
+      <span>Valeur totale offerte</span>
+      <strong>184€</strong>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 4. PRESS LOGOS ═══ -->
+<div class="upd8-press">
+  <p class="upd8-press__lead">Ils parlent de nous</p>
+  <div class="upd8-press__logos">
+    <img src="https://uburn.co/cdn/shop/files/TF1_1989-1990.png?v=1749644803&width=150&format=webp" alt="TF1" loading="lazy" width="150" height="50">
+    <img src="https://uburn.co/cdn/shop/files/Brut_logo_svg.png?v=1749644803&width=150&format=webp" alt="Brut" loading="lazy" width="150" height="50">
+    <img src="https://uburn.co/cdn/shop/files/logo-femmeactuelle-copie_cb5c498d-5470-4a4d-83fc-7b16c264a030.png?v=1749644803&width=150&format=webp" alt="Femme Actuelle" loading="lazy" width="150" height="50">
+    <img src="https://uburn.co/cdn/shop/files/VOGUE_revista_-_logo.png?v=1749644803&width=150&format=webp" alt="Vogue" loading="lazy" width="150" height="50">
+    <img src="https://uburn.co/cdn/shop/files/ELLE_Magazine_Logo.svg" alt="Elle" loading="lazy">
+  </div>
+</div>
+
+<!-- ═══ 5. PROBLEM ═══ -->
+<section class="upd8-sec upd8-sec--cream">
+  <div class="upd8-inner" data-reveal>
+    <span class="upd8-eyebrow">On connaît ce moment</span>
+    <h2 class="upd8-h2">Le même schéma, <em>chaque jour.</em></h2>
+    <p class="upd8-lead">Ce n'est pas un manque de volonté. C'est biologique. La glycémie chute, le cerveau réclame du sucre, et les bonnes intentions du matin s'effacent. UBurn interrompt ce cycle naturellement.</p>
+    <div class="upd8-problem">
+      <div class="upd8-prob-card">
+        <span class="upd8-prob-card__time">11h</span>
+        <h3>Le placard t'appelle</h3>
+        <p>Petit creux entre 2 réunions. La main glisse vers le tiroir à biscuits sans même réfléchir.</p>
+      </div>
+      <div class="upd8-prob-card">
+        <span class="upd8-prob-card__time">16h</span>
+        <h3>Devant le frigo</h3>
+        <p>Glycémie en chute libre. La fatigue baisse la garde. Les bonnes intentions s'effacent.</p>
+      </div>
+      <div class="upd8-prob-card">
+        <span class="upd8-prob-card__time">21h</span>
+        <h3>La volonté ne suffit pas</h3>
+        <p>Soirée canapé. Le grignotage s'invite. Demain matin, encore la culpabilité.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 6. HOW IT WORKS ═══ -->
+<section class="upd8-sec">
+  <div data-reveal>
+    <span class="upd8-eyebrow">Comment ça marche</span>
+    <h2 class="upd8-h2">3 gestes. <em>4h de résultat.</em></h2>
+    <p class="upd8-lead">Une boisson onctueuse au goût ube vanille, à intégrer dans ton ritual matinal.</p>
+    <div class="upd8-how">
+      <div class="upd8-step">
+        <img class="upd8-step__img" src="https://uburn.co/cdn/shop/files/etape_1.jpg?v=1763147054&width=300&format=webp" alt="Mélange" width="300" height="300" loading="lazy">
+        <div>
+          <div class="upd8-step__num">Étape 1</div>
+          <h4>Mélange</h4>
+          <p>1 dose dans 200 ml d'eau ou de lait végétal. 30 secondes au shaker.</p>
+        </div>
+      </div>
+      <div class="upd8-step">
+        <img class="upd8-step__img" src="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=300&format=webp" alt="Le gel se forme" width="300" height="300" loading="lazy">
+        <div>
+          <div class="upd8-step__num">Étape 2</div>
+          <h4>Le gel se forme</h4>
+          <p>Le glucomannane (konjac) s'hydrate naturellement dans ton estomac.</p>
+        </div>
+      </div>
+      <div class="upd8-step">
+        <img class="upd8-step__img" src="https://uburn.co/cdn/shop/files/etape_3.jpg?v=1763147054&width=300&format=webp" alt="4h sans fringales" width="300" height="300" loading="lazy">
+        <div>
+          <div class="upd8-step__num">Étape 3</div>
+          <h4>4h sans fringales</h4>
+          <p>Estomac apaisé naturellement. Tu reprends le contrôle, sereinement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 7. EXPERT ═══ -->
+<section class="upd8-sec upd8-sec--cream">
+  <div class="upd8-inner" data-reveal>
+    <span class="upd8-eyebrow">Validé par notre nutritionniste</span>
+    <h2 class="upd8-h2">Une formule <em>pensée pour la vraie vie.</em></h2>
+    <div class="upd8-expert">
+      <img class="upd8-expert__img" src="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_gjm16fgjm16fgjm1.png?v=1776424158&width=400&format=webp" alt="Dr. Claire Dubois" width="400" height="400" loading="lazy">
+      <div>
+        <p class="upd8-expert__quote">« Une formule rare : la science du konjac au service du quotidien des femmes. »</p>
+        <div class="upd8-expert__name">Dr. Claire Dubois</div>
+        <div class="upd8-expert__role">Nutritionniste · Comportement alimentaire</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 8. STATS ═══ -->
+<section class="upd8-sec upd8-sec--purple">
+  <div data-reveal>
+    <span class="upd8-eyebrow">UBurn agit dès la première prise</span>
+    <h2 class="upd8-h2">Les premiers effets, <em>en chiffres.</em></h2>
+    <div class="upd8-stats__grid">
+      <div class="upd8-stat"><div class="upd8-stat__num">95<small>%</small></div><div class="upd8-stat__label">Ressentent la satiété<br>dès la 1ère prise</div></div>
+      <div class="upd8-stat"><div class="upd8-stat__num">87<small>%</small></div><div class="upd8-stat__label">Moins de grignotage<br>le soir</div></div>
+      <div class="upd8-stat"><div class="upd8-stat__num">82<small>%</small></div><div class="upd8-stat__label">Rythme alimentaire<br>apaisé</div></div>
+      <div class="upd8-stat"><div class="upd8-stat__num">4,7<small>/5</small></div><div class="upd8-stat__label">Note vérifiée<br>1 500+ clientes</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 9. COMPARISON ═══ -->
+<section class="upd8-sec">
+  <div data-reveal>
+    <span class="upd8-eyebrow">Pourquoi UBurn</span>
+    <h2 class="upd8-h2">Une seule boisson. <em>Compare par toi-même.</em></h2>
+
+    <!-- Mobile cards -->
+    <div class="upd8-comp-cards">
+      <div class="upd8-comp-card upd8-comp-card--hero">
+        <div class="upd8-comp-card__name">UBurn</div>
+        <div class="upd8-comp-card__row"><span>Glucomannane (EFSA)</span><span class="upd8-good">3 g · ID 3120 ✓</span></div>
+        <div class="upd8-comp-card__row"><span>Caféine</span><span class="upd8-good">0%</span></div>
+        <div class="upd8-comp-card__row"><span>Sucres ajoutés</span><span class="upd8-good">0 g</span></div>
+        <div class="upd8-comp-card__row"><span>Goût</span><span>Ube vanille</span></div>
+        <div class="upd8-comp-card__row"><span>Fabrication</span><span>France</span></div>
+      </div>
+      <div class="upd8-comp-card">
+        <div class="upd8-comp-card__name">Compléments classiques</div>
+        <div class="upd8-comp-card__row"><span>Glucomannane (EFSA)</span><span class="upd8-bad">Rarement</span></div>
+        <div class="upd8-comp-card__row"><span>Caféine</span><span class="upd8-bad">200-400 mg</span></div>
+        <div class="upd8-comp-card__row"><span>Sucres ajoutés</span><span>Variable</span></div>
+        <div class="upd8-comp-card__row"><span>Goût</span><span>Gélules</span></div>
+        <div class="upd8-comp-card__row"><span>Fabrication</span><span>Variable</span></div>
+      </div>
+      <div class="upd8-comp-card">
+        <div class="upd8-comp-card__name">Shakes protéinés</div>
+        <div class="upd8-comp-card__row"><span>Glucomannane (EFSA)</span><span class="upd8-bad">Non</span></div>
+        <div class="upd8-comp-card__row"><span>Caféine</span><span class="upd8-good">0 mg</span></div>
+        <div class="upd8-comp-card__row"><span>Sucres ajoutés</span><span class="upd8-bad">Souvent</span></div>
+        <div class="upd8-comp-card__row"><span>Goût</span><span>Artificiel</span></div>
+        <div class="upd8-comp-card__row"><span>Fabrication</span><span>Industrielle</span></div>
+      </div>
+    </div>
+
+    <!-- Desktop table -->
+    <table class="upd8-comp-table">
+      <thead>
+        <tr><th></th><th>UBurn</th><th>Compléments classiques</th><th>Shakes protéinés</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Glucomannane (EFSA)</td><td class="upd8-comp-uburn">3 g · ID 3120 ✓</td><td>Rarement</td><td>Non</td></tr>
+        <tr><td>Caféine</td><td class="upd8-comp-uburn">0%</td><td>200-400 mg</td><td>0 mg</td></tr>
+        <tr><td>Sucres ajoutés</td><td class="upd8-comp-uburn">0 g</td><td>Variable</td><td>Souvent</td></tr>
+        <tr><td>Goût</td><td class="upd8-comp-uburn">Ube vanille</td><td>Gélules</td><td>Artificiel</td></tr>
+        <tr><td>Fabrication</td><td class="upd8-comp-uburn">France</td><td>Variable</td><td>Industrielle</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ 10. INGREDIENTS DETAIL ═══ -->
+<section class="upd8-sec upd8-sec--cream">
+  <div class="upd8-inner" data-reveal>
+    <span class="upd8-eyebrow">6 actifs. Une seule boisson</span>
+    <h2 class="upd8-h2">Chaque <em>milligramme compte.</em></h2>
+    <p class="upd8-lead">Six actifs naturels dosés cliniquement. Aucun additif controversé. Mélange et conditionnement en France.</p>
+    <div class="upd8-ingrs">
+      <div class="upd8-ingr">
+        <img class="upd8-ingr__img" src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1749644803&width=400&format=webp" alt="Konjac" width="400" height="300" loading="lazy">
+        <div class="upd8-ingr__body">
+          <div class="upd8-ingr__name">Konjac (glucomannane)</div>
+          <div class="upd8-ingr__dose">3 g · par dose</div>
+          <p class="upd8-ingr__desc">Forme un gel naturel dans l'estomac, contribue à la sensation de satiété.</p>
+          <span class="upd8-ingr__pill">EFSA ID 3120</span>
+        </div>
+      </div>
+      <div class="upd8-ingr">
+        <img class="upd8-ingr__img" src="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1749644803&width=400&format=webp" alt="Ube violet" width="400" height="300" loading="lazy">
+        <div class="upd8-ingr__body">
+          <div class="upd8-ingr__name">Ube violet</div>
+          <div class="upd8-ingr__dose">8 g · par dose</div>
+          <p class="upd8-ingr__desc">Igname violet d'Asie. Anthocyanes naturelles. Saveur signature douce.</p>
+        </div>
+      </div>
+      <div class="upd8-ingr">
+        <img class="upd8-ingr__img" src="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1749644803&width=400&format=webp" alt="Fibre d'acacia" width="400" height="300" loading="lazy">
+        <div class="upd8-ingr__body">
+          <div class="upd8-ingr__name">Fibre d'acacia</div>
+          <div class="upd8-ingr__dose">2 g · par dose</div>
+          <p class="upd8-ingr__desc">Prébiotique végétal qui soutient le confort digestif.</p>
+        </div>
+      </div>
+      <div class="upd8-ingr">
+        <img class="upd8-ingr__img" src="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1749644803&width=400&format=webp" alt="MCT de coco" width="400" height="300" loading="lazy">
+        <div class="upd8-ingr__body">
+          <div class="upd8-ingr__name">MCT de coco</div>
+          <div class="upd8-ingr__dose">1,5 g · par dose</div>
+          <p class="upd8-ingr__desc">Acides gras à chaîne moyenne. Source d'énergie rapide.</p>
+        </div>
+      </div>
+      <div class="upd8-ingr">
+        <img class="upd8-ingr__img" src="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1749644803&width=400&format=webp" alt="Gingembre bio" width="400" height="300" loading="lazy">
+        <div class="upd8-ingr__body">
+          <div class="upd8-ingr__name">Gingembre bio</div>
+          <div class="upd8-ingr__dose">200 mg · par dose</div>
+          <p class="upd8-ingr__desc">Soutient la digestion. Note épicée chaleureuse.</p>
+        </div>
+      </div>
+      <div class="upd8-ingr">
+        <img class="upd8-ingr__img" src="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1749644803&width=400&format=webp" alt="L-Carnitine" width="400" height="300" loading="lazy">
+        <div class="upd8-ingr__body">
+          <div class="upd8-ingr__name">L-Carnitine tartrate</div>
+          <div class="upd8-ingr__dose">500 mg · par dose</div>
+          <p class="upd8-ingr__desc">Acide aminé qui soutient le métabolisme énergétique.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 11. TESTIMONIALS ═══ -->
+<section class="upd8-sec" id="avis">
+  <div data-reveal>
+    <span class="upd8-eyebrow">Elles racontent leurs résultats</span>
+    <h2 class="upd8-h2">1 500+ femmes ont retrouvé <em>leur 16h.</em></h2>
+
+    <div class="upd8-testis">
+      <article class="upd8-testi">
+        <div class="upd8-testi__stars">★★★★★</div>
+        <h4 class="upd8-testi__title">Plus de craquage à 16h</h4>
+        <p class="upd8-testi__text">« Première semaine et je n'ouvre plus le placard à 16h. Le goût ube est génial, pas du tout chimique. Je recommande vraiment. »</p>
+        <div class="upd8-testi__author">
+          <div class="upd8-testi__avatar">ML</div>
+          <div><div class="upd8-testi__name">Marion L. · 28 ans · Lyon</div><div class="upd8-testi__check">✓ Achat vérifié</div></div>
+        </div>
+      </article>
+      <article class="upd8-testi">
+        <div class="upd8-testi__stars">★★★★★</div>
+        <h4 class="upd8-testi__title">Effet net dès la 2ème semaine</h4>
+        <p class="upd8-testi__text">« Achetée pour calmer mes envies de sucre l'après-midi. Effet net dès la 2e semaine. Je l'intègre à mon café matinal. »</p>
+        <div class="upd8-testi__author">
+          <div class="upd8-testi__avatar">SO</div>
+          <div><div class="upd8-testi__name">Sophie O. · Bordeaux</div><div class="upd8-testi__check">✓ Achat vérifié</div></div>
+        </div>
+      </article>
+      <article class="upd8-testi">
+        <div class="upd8-testi__stars">★★★★★</div>
+        <h4 class="upd8-testi__title">Mon ritual matinal</h4>
+        <p class="upd8-testi__text">« Je le bois chaque matin avec mon lait d'amande. Goût doux, vraiment satisfaisant. Le 270g vaut largement le coup. »</p>
+        <div class="upd8-testi__author">
+          <div class="upd8-testi__avatar">NM</div>
+          <div><div class="upd8-testi__name">Nathalie M. · Toulouse</div><div class="upd8-testi__check">✓ Achat vérifié</div></div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Marie, témoignage long -->
+    <article class="upd8-testi" style="max-width:760px;margin:24px auto 0;background:linear-gradient(160deg,#fff 0%,var(--u-cream) 100%);border:2px solid var(--u-primary)">
+      <div class="upd8-testi__stars">★★★★★</div>
+      <h4 class="upd8-testi__title">Avant UBurn / Après UBurn</h4>
+      <p class="upd8-testi__text" style="font-size:14.5px;line-height:1.65">« Avant, mes journées finissaient devant le frigo, vidée et culpabilisée. Aujourd'hui je ne me bats plus contre moi-même. Mon ritual matinal UBurn me tient jusqu'à 16h, et le soir je dîne sereine. C'est pas magique, c'est juste enfin un outil qui marche. »</p>
+      <div class="upd8-testi__author">
+        <div class="upd8-testi__avatar">MR</div>
+        <div><div class="upd8-testi__name">Marie R. · 42 ans · Paris</div><div class="upd8-testi__check">✓ Cliente depuis 4 mois</div></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ═══ 12. FAQ ═══ -->
+<section class="upd8-sec upd8-sec--cream" id="faq">
+  <div class="upd8-inner" data-reveal>
+    <span class="upd8-eyebrow">Questions fréquentes</span>
+    <h2 class="upd8-h2">On répond à <em>tout.</em></h2>
+    <div class="upd8-faq">
+      <details class="upd8-faq-item"><summary>En combien de temps voit-on des résultats ?</summary><div class="upd8-faq-item__a">La sensation de satiété arrive dès la 1ère dose, dans les 30 minutes. Pour un effet stable sur tes habitudes, on recommande 30 jours minimum d'usage régulier.</div></details>
+      <details class="upd8-faq-item"><summary>C'est compatible le soir ? Sans caféine ?</summary><div class="upd8-faq-item__a">Oui. UBurn est 100% sans caféine. Tu peux le boire à n'importe quelle heure, même le soir.</div></details>
+      <details class="upd8-faq-item"><summary>Y a-t-il un abonnement ?</summary><div class="upd8-faq-item__a">Aucun. Aucun engagement, aucun prélèvement automatique. Tu commandes quand tu en as besoin.</div></details>
+      <details class="upd8-faq-item"><summary>Avec de l'eau ou du lait — quelle différence ?</summary><div class="upd8-faq-item__a">Eau : version légère, plus fraîche. Lait végétal (amande, avoine, soja) : texture onctueuse, goût plus rond. Choix de pure préférence.</div></details>
+      <details class="upd8-faq-item"><summary>90 g ou 270 g, je choisis quoi ?</summary><div class="upd8-faq-item__a">Le 90 g (Découverte) = 30 jours à 1,15 €/jour, idéal pour tester. Le 270 g (Maximum) = 90 jours à 0,61 €/jour, recommandé pour des résultats stables. La majorité de nos clientes choisissent le 270 g.</div></details>
+      <details class="upd8-faq-item"><summary>Y a-t-il des contre-indications ?</summary><div class="upd8-faq-item__a">Déconseillé aux femmes enceintes et allaitantes. En cas de doute médical, consulte ton professionnel de santé avant utilisation.</div></details>
+      <details class="upd8-faq-item"><summary>Est-ce vegan / sans gluten ?</summary><div class="upd8-faq-item__a">Oui aux deux. UBurn est 100% végétal et garanti sans gluten.</div></details>
+      <details class="upd8-faq-item"><summary>Combien de temps pour la livraison ?</summary><div class="upd8-faq-item__a">Livraison Colissimo 24-48h en France métropolitaine. Offerte sans minimum. Suivi par email + SMS.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 13. FINAL OFFER RECAP ═══ -->
+<section class="upd8-sec" id="commander">
+  <div data-reveal>
+    <span class="upd8-eyebrow">Ton offre</span>
+    <h2 class="upd8-h2">Reprends le contrôle. <em>Aujourd'hui.</em></h2>
+
+    <div class="upd8-offer">
+      <form id="upd8FormFinal" action="/cart/add" method="post">
+        <div class="upd8-variants" role="radiogroup" aria-label="Choisis ta cure">
+          {%- for v in product.variants -%}
+            {%- assign v_days = 30 -%}
+            {%- assign v_pop = false -%}
+            {%- assign v_label = 'Découverte' -%}
+            {%- assign v_size = '90g · 1 dose / jour' -%}
+            {%- if v.id == 51289200066879 -%}
+              {%- assign v_days = 90 -%}
+              {%- assign v_pop = true -%}
+              {%- assign v_label = 'Résultats Maximum' -%}
+              {%- assign v_size = '270g · 1 dose / jour' -%}
+            {%- endif -%}
+            {%- assign p_jour = v.price | divided_by: v_days | money_without_trailing_zeros -%}
+            <label class="upd8-variant{% if v.id == current_variant.id %} selected{% endif %}" data-vid="{{ v.id }}" data-pday="{{ p_jour }}">
+              <span class="upd8-variant__check"></span>
+              <input type="radio" name="id" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}>
+              <div class="upd8-variant__txt">
+                <div class="upd8-variant__name">
+                  {{ v_label }}
+                  {%- if v_pop %}<span class="upd8-variant__pop">Best</span>{%- endif -%}
+                </div>
+                <div class="upd8-variant__meta">{{ v_size }}</div>
+              </div>
+              <div class="upd8-variant__price">
+                <div class="upd8-variant__num">{{ v.price | money_without_trailing_zeros }}</div>
+                <div class="upd8-variant__day">{{ p_jour }} / jour</div>
+              </div>
+            </label>
+          {%- endfor -%}
+        </div>
+
+        <div class="upd8-offer__total">
+          <span>+ <strong>184€ OFFERTS</strong> avec ta commande</span>
+        </div>
+
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="upd8-cta">
+          <span class="upd8-cta__txt">Commander →</span>
+        </button>
+
+        <div class="upd8-offer__trust">
+          <div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Livraison gratuite</div>
+          <div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Paiement sécurisé</div>
+          <div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Sans abonnement</div>
+          <div><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/></svg>Marque française</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 14. STICKY ATC MOBILE ═══ -->
+<div class="upd8-sticky" id="upd8Sticky">
+  <div class="upd8-sticky__price">
+    <div class="upd8-sticky__num" id="upd8StickyNum">{{ current_variant.price | money_without_trailing_zeros }}</div>
+    <div class="upd8-sticky__day" id="upd8StickyDay"></div>
+  </div>
+  <button type="button" class="upd8-sticky__btn" id="upd8StickyBtn">Commander →</button>
+</div>
+
+<!-- ═══ LEGAL DGCCRF ═══ -->
+<div class="upd8-legal">
+  <p><strong>Complément alimentaire.</strong> Ne se substitue pas à une alimentation variée et équilibrée et à un mode de vie sain.</p>
+  <p>Déconseillé aux femmes enceintes et allaitantes. Tenir hors de portée des enfants.</p>
+  <p>Allégation glucomannane EFSA ID 3120 — l'effet bénéfique sur la satiété est obtenu par la consommation journalière de 4 g de glucomannane en 3 doses, avec 1 ou 2 verres d'eau, avant les repas.</p>
+</div>
+
+</div>
+
+<script>
+(function(){
+  /* Force visibility */
+  function fv(){document.querySelectorAll('.shopify-section').forEach(function(s){if(s.querySelector('.upd8')){s.style.setProperty('display','block','important');s.style.setProperty('visibility','visible','important')}})}
+  fv();var c=0;var ci=setInterval(function(){fv();if(++c>15)clearInterval(ci)},250);
+
+  /* Reveal on scroll */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('[data-reveal]').forEach(function(el){io.observe(el)});
+  }else{document.querySelectorAll('[data-reveal]').forEach(function(el){el.classList.add('in')})}
+
+  /* Variant picker — sync between hero and offer block + sticky */
+  var stickyNum=document.getElementById('upd8StickyNum');
+  var stickyDay=document.getElementById('upd8StickyDay');
+  function syncSticky(label){
+    if(!label)return;
+    if(stickyNum)stickyNum.textContent=label.querySelector('.upd8-variant__num').textContent;
+    if(stickyDay)stickyDay.textContent=label.dataset.pday+' / jour';
+  }
+  function selectVariant(vid){
+    document.querySelectorAll('.upd8-variant').forEach(function(label){
+      var match=label.dataset.vid===vid;
+      label.classList.toggle('selected',match);
+      label.querySelector('input').checked=match;
+      if(match)syncSticky(label);
+    });
+  }
+  document.querySelectorAll('.upd8-variant').forEach(function(label){
+    label.addEventListener('click',function(){selectVariant(label.dataset.vid)});
+  });
+  syncSticky(document.querySelector('.upd8-variant.selected'));
+
+  /* ATC AJAX */
+  function ajaxAdd(form){
+    var cta=form.querySelector('.upd8-cta');
+    if(cta){cta.classList.add('loading');cta.disabled=true}
+    var fd=new FormData(form);
+    fetch('/cart/add.js',{method:'POST',body:fd,headers:{'Accept':'application/json'}})
+      .then(function(r){return r.json()})
+      .then(function(){
+        if(typeof fbq!=='undefined')fbq('track','AddToCart');
+        if(typeof gtag!=='undefined')gtag('event','add_to_cart');
+        var trigger=document.querySelector('[data-cart-drawer-trigger],.cart-drawer-trigger,.cart-icon-bubble,.header__cart');
+        if(trigger){trigger.click()}else{location.href='/cart'}
+      })
+      .catch(function(){location.href='/cart'})
+      .finally(function(){if(cta){cta.classList.remove('loading');cta.disabled=false}});
+  }
+  ['upd8Form','upd8FormFinal'].forEach(function(id){
+    var f=document.getElementById(id);
+    if(f)f.addEventListener('submit',function(e){e.preventDefault();ajaxAdd(f)});
+  });
+  var sb=document.getElementById('upd8StickyBtn');
+  if(sb)sb.addEventListener('click',function(){
+    var f=document.getElementById('upd8Form');if(f)ajaxAdd(f);
+  });
+
+  /* Sticky visibility */
+  var sticky=document.getElementById('upd8Sticky');
+  var hero=document.querySelector('.upd8-hero');
+  if(sticky&&hero&&'IntersectionObserver' in window){
+    var sio=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting||e.boundingClientRect.top>=0)sticky.classList.remove('visible');
+        else sticky.classList.add('visible');
+      });
+    },{threshold:0,rootMargin:'-100px 0px 0px 0px'});
+    sio.observe(hero);
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "UBurn PDP V8",
+  "class": "shopify-section--main-uburn-pdp-v8",
+  "settings": []
+}
+{% endschema %}
