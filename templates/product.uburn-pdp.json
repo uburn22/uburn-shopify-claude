@@ -1,9 +1,9 @@
 {
   "sections": {
-    "main": {
+    "uburn-pdp": {
       "type": "uburn-pdp",
       "settings": {}
     }
   },
-  "order": ["main"]
+  "order": ["uburn-pdp"]
 }
