@@ -212,6 +212,27 @@ a { color: inherit; text-decoration: none; }
 .press-logos { display: flex; align-items: center; gap: 36px; flex-wrap: wrap; justify-content: center; }
 .press-logo img { height: 20px; width: auto; opacity: 0.4; filter: grayscale(1); transition: opacity 0.2s; }
 .press-logo img:hover { opacity: 0.7; }
+/* ═══ LE RITUEL ═══ */
+.rituel { background: #fdf8f5; padding: 96px 48px; }
+.rituel-inner { max-width: 1080px; margin: 0 auto; }
+.rituel-headline { text-align: center; margin-bottom: 56px; }
+.rituel-headline .section-label { color: var(--purple-main); }
+.rituel-headline .section-title { color: var(--dark); }
+.rituel-headline .section-body { margin: 0 auto; text-align: center; font-size: 18px; line-height: 1.7; font-style: italic; color: var(--body); }
+.rituel-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.rituel-step { text-align: center; }
+.rituel-step-img { position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 3/4; margin-bottom: 20px; }
+.rituel-step-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.rituel-step:hover .rituel-step-img img { transform: scale(1.04); }
+.rituel-step-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--purple-main); color: #fff; font-family: 'Red Hat Display', sans-serif; font-weight: 800; font-size: 14px; margin-bottom: 10px; }
+.rituel-step-title { font-family: 'Red Hat Display', sans-serif; font-weight: 700; font-size: 17px; color: var(--dark); margin-bottom: 6px; }
+.rituel-step-desc { font-size: 14px; color: var(--body); line-height: 1.6; }
+@media(max-width:768px){
+  .rituel { padding: 64px 24px; }
+  .rituel-steps { grid-template-columns: 1fr; gap: 24px; }
+  .rituel-step-img { aspect-ratio: 4/3; }
+}
+
 @media(max-width:600px){ .press { padding: 20px 20px; gap: 20px; } }
 
 /* ═══ SECTIONS ═══ */
@@ -677,6 +698,28 @@ a { color: inherit; text-decoration: none; }
 #shopify-section-{{ section.id }} {
   display: block;
 }
+
+/* ═══ iPhone-first mobile optimizations ═══ */
+@media(max-width:430px){
+  /* Safe area for notch/home-bar */
+  .ub-sticky-cta { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+  body { padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+
+  /* 44px touch targets */
+  .btn-hero, .btn-main, .btn-outline, .ub-sticky-cta a { min-height: 48px; display: flex; align-items: center; justify-content: center; }
+
+  /* 16px minimum body text (prevents iOS zoom on inputs) */
+  body { font-size: 16px; }
+  .hero-sub { font-size: 16px; }
+  .hero-title { font-size: 36px; line-height: 1.05; }
+  .hero-note { font-size: 13px; }
+
+  /* Rituel: 4:3 on mobile */
+  .rituel { padding: 56px 20px; }
+  .rituel-steps { gap: 20px; }
+  .rituel-step-img { aspect-ratio: 4/3; border-radius: 14px; }
+  .rituel-headline .section-body { font-size: 16px; }
+}
 </style>
 
 
@@ -742,6 +785,44 @@ a { color: inherit; text-decoration: none; }
     <div class="press-logo"><img src="https://uburn.co/cdn/shop/files/ELLE_Magazine_Logo.svg" alt="Elle" style="height:18px;width:auto;opacity:0.4;filter:grayscale(1)"></div>
   </div>
 </div>
+
+
+<!-- LE RITUEL -->
+<section class="rituel">
+  <div class="rituel-inner">
+    <div class="rituel-headline">
+      <div class="section-label reveal">2 minutes le matin</div>
+      <h2 class="section-title reveal rd1">Le rituel Uburn.</h2>
+      <p class="section-body reveal rd2">"Le matin, tu prends 2 minutes pour toi.<br>Tu mesures, tu mélanges, tu profites. C'est tout."</p>
+    </div>
+    <div class="rituel-steps">
+      <div class="rituel-step reveal rd1">
+        <div class="rituel-step-img">
+          <img src="{{ 'etape_1.jpg' | file_url }}" alt="Mesurer la dose Uburn" loading="lazy" width="400" height="533">
+        </div>
+        <div class="rituel-step-num">1</div>
+        <div class="rituel-step-title">Mesure</div>
+        <div class="rituel-step-desc">1 cuillère (5 g) dans ton shaker. Simple, précis, sans calculs.</div>
+      </div>
+      <div class="rituel-step reveal rd2">
+        <div class="rituel-step-img">
+          <img src="{{ 'etape_2.jpg' | file_url }}" alt="Mélanger avec de l'eau" loading="lazy" width="400" height="533">
+        </div>
+        <div class="rituel-step-num">2</div>
+        <div class="rituel-step-title">Mélange</div>
+        <div class="rituel-step-desc">Eau froide, lait végétal ou lait de coco. Secoue 15 secondes.</div>
+      </div>
+      <div class="rituel-step reveal rd3">
+        <div class="rituel-step-img">
+          <img src="{{ 'etape_3.jpg' | file_url }}" alt="Déguster le latte violet Uburn" loading="lazy" width="400" height="533">
+        </div>
+        <div class="rituel-step-num">3</div>
+        <div class="rituel-step-title">Dégustation</div>
+        <div class="rituel-step-desc">Saveur douce de l'ubé. Les fringales s'effacent pour 4 heures.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- PROBLEM -->
 <section class="problem">

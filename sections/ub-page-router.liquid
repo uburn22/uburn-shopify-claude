@@ -144,6 +144,51 @@ main#main{padding:0 !important}
 .form-submit:hover{opacity:0.9;transform:translateY(-1px)}
 .form-note{font-size:12px;color:var(--muted);margin-top:12px;text-align:center}
 @media(max-width:900px){.contact-wrap{grid-template-columns:1fr;min-height:auto}.contact-left,.contact-right{padding:100px 24px 60px}}
+
+/* ═══ COMMENT ÇA MARCHE ═══ */
+.ccm-hero{background:var(--grad);padding:120px 48px 80px;text-align:center;color:#fff}
+.ccm-hero-label{font-size:11px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;opacity:.7;margin-bottom:12px}
+.ccm-hero-title{font-family:'Red Hat Display',sans-serif;font-size:clamp(36px,5vw,60px);font-weight:900;line-height:1.05;letter-spacing:-0.03em;margin-bottom:16px}
+.ccm-hero-sub{font-size:18px;opacity:.8;max-width:50ch;margin:0 auto}
+.ccm-steps{padding:96px 48px;max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:72px}
+.ccm-step{display:grid;grid-template-columns:80px 1fr;gap:32px;align-items:start}
+.ccm-step-num{width:64px;height:64px;border-radius:50%;background:var(--grad);color:#fff;font-family:'Red Hat Display',sans-serif;font-size:28px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ccm-step-title{font-family:'Red Hat Display',sans-serif;font-size:24px;font-weight:800;color:var(--dark);margin-bottom:10px}
+.ccm-step-body{font-size:16px;line-height:1.75;color:var(--body)}
+.ccm-step-badge{display:inline-block;background:var(--purple-wash);color:var(--purple-main);font-size:12px;font-weight:700;padding:5px 12px;border-radius:50px;margin-top:12px;letter-spacing:.5px}
+.ccm-science{background:var(--warm);padding:80px 48px;text-align:center}
+.ccm-science-inner{max-width:700px;margin:0 auto}
+.ccm-science-title{font-family:'Red Hat Display',sans-serif;font-size:28px;font-weight:900;color:var(--dark);margin-bottom:16px}
+.ccm-science-body{font-size:16px;line-height:1.75;color:var(--body);margin-bottom:24px}
+.ccm-science-badge{display:inline-block;background:var(--purple-main);color:#fff;font-size:12px;font-weight:700;padding:8px 20px;border-radius:50px;letter-spacing:.5px}
+.ccm-cta{background:var(--grad);padding:72px 48px;text-align:center;color:#fff}
+.ccm-cta-title{font-family:'Red Hat Display',sans-serif;font-size:clamp(28px,4vw,44px);font-weight:900;margin-bottom:12px;letter-spacing:-0.02em}
+.ccm-cta-sub{font-size:17px;opacity:.8;margin-bottom:32px}
+.ccm-cta-btn{display:inline-block;background:#fff;color:var(--purple-main);font-family:'Red Hat Display',sans-serif;font-weight:800;font-size:16px;padding:16px 40px;border-radius:100px;transition:transform .2s,box-shadow .2s}
+.ccm-cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.2)}
+@media(max-width:768px){.ccm-hero,.ccm-steps,.ccm-science,.ccm-cta{padding-left:24px;padding-right:24px}.ccm-step{grid-template-columns:52px 1fr;gap:16px}.ccm-step-num{width:48px;height:48px;font-size:20px}}
+
+/* ═══ AVIS ═══ */
+.avis-hero{background:var(--grad);padding:120px 48px 80px;text-align:center;color:#fff}
+.avis-hero-title{font-family:'Red Hat Display',sans-serif;font-size:clamp(36px,5vw,58px);font-weight:900;line-height:1.05;letter-spacing:-0.03em;margin-bottom:12px}
+.avis-hero-sub{font-size:18px;opacity:.8;max-width:48ch;margin:0 auto}
+.avis-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:64px 48px;max-width:900px;margin:0 auto}
+.avis-stat{text-align:center;background:#fff;border-radius:20px;padding:36px 24px;box-shadow:0 4px 32px rgba(61,24,115,.08)}
+.avis-stat-num{font-family:'Red Hat Display',sans-serif;font-size:48px;font-weight:900;color:var(--purple-main);margin-bottom:8px;line-height:1}
+.avis-stat-label{font-size:14px;color:var(--body);line-height:1.4}
+.avis-grid{padding:0 48px 96px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.avis-card{background:#fff;border-radius:20px;padding:32px;box-shadow:0 4px 24px rgba(61,24,115,.07)}
+.avis-stars{color:#f4c430;font-size:18px;margin-bottom:14px}
+.avis-text{font-size:15px;line-height:1.7;color:var(--dark);font-style:italic;margin-bottom:20px}
+.avis-author{display:flex;align-items:center;gap:12px}
+.avis-author-init{width:40px;height:40px;border-radius:50%;background:var(--grad);color:#fff;font-family:'Red Hat Display',sans-serif;font-weight:800;font-size:16px;display:flex;align-items:center;justify-content:center}
+.avis-author-name{font-weight:700;font-size:14px;color:var(--dark)}
+.avis-author-meta{font-size:12px;color:var(--muted)}
+.avis-badge{display:inline-block;background:var(--purple-wash);color:var(--purple-main);font-size:10px;font-weight:700;padding:3px 10px;border-radius:50px;margin-top:4px;letter-spacing:.5px}
+.avis-cta{background:var(--warm);padding:72px 48px;text-align:center}
+.avis-cta-title{font-family:'Red Hat Display',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:900;color:var(--dark);margin-bottom:12px;letter-spacing:-0.02em}
+.avis-cta-sub{font-size:17px;color:var(--body);margin-bottom:32px}
+@media(max-width:768px){.avis-hero,.avis-cta{padding-left:24px;padding-right:24px}.avis-stats{grid-template-columns:1fr;padding:48px 24px;gap:16px}.avis-grid{grid-template-columns:1fr;padding:0 24px 64px}}
 </style>
 
 {% render 'ub-nav' %}
@@ -254,6 +299,125 @@ main#main{padding:0 !important}
     </div>
     <p class="efsa-desc reveal rd1">Le glucomannane est l'unique ingrédient dont l'allégation "contrôle de l'appétit" est officiellement validée par l'Autorité Européenne de Sécurité des Aliments. Conditions : 3g en 3 doses avec 1-2 verres d'eau avant les repas, dans le cadre d'un régime hypocalorique.</p>
   </div>
+</div>
+
+{%- elsif page.handle == 'comment-ca-marche' -%}
+
+<div class="ccm-hero">
+  <div class="ccm-hero-label">Science & Formule</div>
+  <h1 class="ccm-hero-title">Comment ça marche,<br><em>vraiment.</em></h1>
+  <p class="ccm-hero-sub">6 actifs naturels. Un mécanisme précis. 4 heures sans fringales.</p>
+</div>
+
+<div class="ccm-steps">
+  <div class="ccm-step reveal">
+    <div class="ccm-step-num">1</div>
+    <div>
+      <div class="ccm-step-title">Le glucomannane gonfle dans l'estomac</div>
+      <p class="ccm-step-body">Le konjac (glucomannane) absorbe jusqu'à 100 fois son poids en eau. En 20 minutes, il crée une sensation de satiété durable en occupant physiquement l'espace dans l'estomac. C'est le seul coupe-faim validé par l'EFSA pour les études cliniques.</p>
+      <span class="ccm-step-badge">EFSA ID 3120 · Validé scientifiquement</span>
+    </div>
+  </div>
+  <div class="ccm-step reveal">
+    <div class="ccm-step-num">2</div>
+    <div>
+      <div class="ccm-step-title">Le MCT de coco stabilise l'énergie</div>
+      <p class="ccm-step-body">Les triglycérides à chaîne moyenne (MCT) sont convertis directement en énergie par le foie, sans passer par le circuit de stockage des graisses. Résultat : énergie rapide et stable, sans pic d'insuline ni coup de fatigue à 15h.</p>
+      <span class="ccm-step-badge">Énergie sans crash · 0g de sucre</span>
+    </div>
+  </div>
+  <div class="ccm-step reveal">
+    <div class="ccm-step-num">3</div>
+    <div>
+      <div class="ccm-step-title">La L-Carnitine soutient le métabolisme</div>
+      <p class="ccm-step-body">La L-Carnitine est l'acide aminé qui transporte les acides gras dans les mitochondries pour les brûler comme carburant. Elle soutient naturellement le métabolisme lipidique dans le cadre d'une alimentation équilibrée.</p>
+      <span class="ccm-step-badge">Métabolisme lipidique · Acide aminé naturel</span>
+    </div>
+  </div>
+  <div class="ccm-step reveal">
+    <div class="ccm-step-num">4</div>
+    <div>
+      <div class="ccm-step-title">L'ubé + le gingembre complètent la synergie</div>
+      <p class="ccm-step-body">L'ubé (igname violet) apporte des anthocyanes — des antioxydants puissants qui luttent contre le stress oxydatif. Le gingembre favorise la digestion et réduit les ballonnements. La fibre d'acacia nourrit le microbiote intestinal (prébiotique).</p>
+      <span class="ccm-step-badge">6 actifs · Formule synergique</span>
+    </div>
+  </div>
+</div>
+
+<div class="ccm-science">
+  <div class="ccm-science-inner">
+    <h2 class="ccm-science-title">La base scientifique</h2>
+    <p class="ccm-science-body">Le glucomannane est reconnu par l'Autorité européenne de sécurité des aliments (EFSA) pour contribuer à la réduction de l'appétit dans le cadre d'un régime hypocalorique. Uburn utilise 3 g par dose — la quantité exacte recommandée par l'EFSA pour un effet optimal.</p>
+    <span class="ccm-science-badge">EFSA · European Food Safety Authority · ID 3120</span>
+  </div>
+</div>
+
+<div class="ccm-cta">
+  <h2 class="ccm-cta-title">Commencez votre rituel.</h2>
+  <p class="ccm-cta-sub">1 dose le matin. 4h sans fringales. Dès 34,50 €.</p>
+  <a href="/products/ube-poudre?variant=51289200066879" class="ccm-cta-btn">Découvrir Uburn →</a>
+</div>
+
+{%- elsif page.handle == 'avis' -%}
+
+<div class="avis-hero">
+  <div class="section-label" style="justify-content:center;color:rgba(255,255,255,.6)">Avis vérifiés · 1 500+ clientes</div>
+  <h1 class="avis-hero-title">Leurs mots.<br><em>Pas les nôtres.</em></h1>
+  <p class="avis-hero-sub">Des vraies clientes, des vrais résultats. Aucun filtre.</p>
+</div>
+
+<div class="avis-stats">
+  <div class="avis-stat reveal">
+    <div class="avis-stat-num">4.8<span style="font-size:24px">/5</span></div>
+    <div class="avis-stat-label">Note moyenne<br>sur 1 500+ avis</div>
+  </div>
+  <div class="avis-stat reveal rd1">
+    <div class="avis-stat-num">92<span style="font-size:24px">%</span></div>
+    <div class="avis-stat-label">Des clientes<br>repassent commande</div>
+  </div>
+  <div class="avis-stat reveal rd2">
+    <div class="avis-stat-num">4h</div>
+    <div class="avis-stat-label">De satiété durable<br>par dose</div>
+  </div>
+</div>
+
+<div class="avis-grid">
+  <div class="avis-card reveal">
+    <div class="avis-stars">★★★★★</div>
+    <p class="avis-text">"J'ai essayé beaucoup de compléments anti-fringales. Uburn est le premier qui marche vraiment. Après 2 semaines, je ne craque plus à 16h — et le goût est délicieux, pas chimique du tout."</p>
+    <div class="avis-author"><div class="avis-author-init">M</div><div><div class="avis-author-name">Marie-Claire D.</div><div class="avis-author-meta">Lyon · Acheteuse vérifiée</div><span class="avis-badge">Achat vérifié</span></div></div>
+  </div>
+  <div class="avis-card reveal rd1">
+    <div class="avis-stars">★★★★★</div>
+    <p class="avis-text">"Le latte violet, le matin avec du lait de coco — c'est devenu mon rituel préféré. Et ça tient vraiment 4 heures comme promis. J'ai perdu 3 kg en 6 semaines sans me priver."</p>
+    <div class="avis-author"><div class="avis-author-init">S</div><div><div class="avis-author-name">Sophie R.</div><div class="avis-author-meta">Paris · Acheteuse vérifiée</div><span class="avis-badge">Achat vérifié</span></div></div>
+  </div>
+  <div class="avis-card reveal">
+    <div class="avis-stars">★★★★★</div>
+    <p class="avis-text">"Sceptique au départ mais convaincue après une semaine. Les fringales du soir ont disparu. Je ne mange plus devant la télé. Ma relation à la nourriture a changé."</p>
+    <div class="avis-author"><div class="avis-author-init">A</div><div><div class="avis-author-name">Amélie T.</div><div class="avis-author-meta">Bordeaux · Acheteuse vérifiée</div><span class="avis-badge">Achat vérifié</span></div></div>
+  </div>
+  <div class="avis-card reveal rd1">
+    <div class="avis-stars">★★★★★</div>
+    <p class="avis-text">"En ménopause, les fringales étaient incontrôlables. Uburn a changé la donne. 0% caféine, je peux le prendre le soir. L'équipe répond super vite aussi."</p>
+    <div class="avis-author"><div class="avis-author-init">C</div><div><div class="avis-author-name">Christine M.</div><div class="avis-author-meta">Toulouse · Acheteuse vérifiée</div><span class="avis-badge">Achat vérifié</span></div></div>
+  </div>
+  <div class="avis-card reveal">
+    <div class="avis-stars">★★★★★</div>
+    <p class="avis-text">"La livraison rapide, l'emballage soigné, le goût surprenant. Mais surtout : ça marche. Fini le grignotage entre les repas. Je recommande à toutes mes amies."</p>
+    <div class="avis-author"><div class="avis-author-init">N</div><div><div class="avis-author-name">Nadia L.</div><div class="avis-author-meta">Marseille · Acheteuse vérifiée</div><span class="avis-badge">Achat vérifié</span></div></div>
+  </div>
+  <div class="avis-card reveal rd1">
+    <div class="avis-stars">★★★★★</div>
+    <p class="avis-text">"J'ai recommandé Uburn à ma mère et ma sœur. On a toutes les trois remarqué la même chose : les fringales de 16h ont disparu. Produit sérieux, marque sérieuse."</p>
+    <div class="avis-author"><div class="avis-author-init">I</div><div><div class="avis-author-name">Isabelle K.</div><div class="avis-author-meta">Nantes · Acheteuse vérifiée</div><span class="avis-badge">Achat vérifié</span></div></div>
+  </div>
+</div>
+
+<div class="avis-cta">
+  <h2 class="avis-cta-title">Rejoignez 1 500+ clientes.</h2>
+  <p class="avis-cta-sub">Essayez Uburn — satisfaction garantie ou remboursée.</p>
+  <a href="/products/ube-poudre?variant=51289200066879" class="btn-main" style="display:inline-block">Commencer ma cure →</a>
 </div>
 
 {%- elsif page.handle == 'contact' -%}

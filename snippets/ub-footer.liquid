@@ -50,6 +50,11 @@
   .ub-newsletter-headline{font-size:19px}
   .ub-footer-bottom{flex-direction:column;align-items:flex-start;gap:8px}
 }
+@media(max-width:430px){
+  .ub-sticky-cta{padding-bottom:max(16px,env(safe-area-inset-bottom))}
+  body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+  .ub-sticky-cta a{min-height:48px;display:flex;align-items:center;justify-content:center;font-size:16px}
+}
 </style>
 
 <!-- NEWSLETTER / PROMO BAR -->
@@ -93,8 +98,8 @@
         <ul class="ub-footer-links">
           <li><a href="/pages/faq">FAQ</a></li>
           <li><a href="/pages/contact">Contact</a></li>
-          <li><a href="/pages/livraison">Livraison</a></li>
-          <li><a href="/pages/retour">Retours</a></li>
+          <li><a href="/policies/shipping-policy">Livraison</a></li>
+          <li><a href="/policies/refund-policy">Retours</a></li>
         </ul>
       </div>
       <!-- Col 4 : Légal -->
@@ -102,9 +107,9 @@
         <div class="ub-footer-col-title">Légal</div>
         <ul class="ub-footer-links">
           <li><a href="/pages/about">Notre histoire</a></li>
-          <li><a href="/pages/mentions-legales">Mentions légales</a></li>
-          <li><a href="/pages/cgv">CGV</a></li>
-          <li><a href="/pages/confidentialite">Confidentialité</a></li>
+          <li><a href="/policies/legal-notice">Mentions légales</a></li>
+          <li><a href="/policies/terms-of-service">CGV</a></li>
+          <li><a href="/policies/privacy-policy">Confidentialité</a></li>
         </ul>
       </div>
     </div>
@@ -125,9 +130,9 @@
     <div class="ub-footer-bottom">
       <span>&copy; {{ 'now' | date: '%Y' }} UBurn — R Glow F.Z.E. Tous droits réservés.</span>
       <div class="ub-footer-legal-links">
-        <a href="/pages/mentions-legales">Mentions légales</a>
-        <a href="/pages/cgv">CGV</a>
-        <a href="/pages/confidentialite">Confidentialité</a>
+        <a href="/policies/legal-notice">Mentions légales</a>
+        <a href="/policies/terms-of-service">CGV</a>
+        <a href="/policies/privacy-policy">Confidentialité</a>
       </div>
     </div>
 
