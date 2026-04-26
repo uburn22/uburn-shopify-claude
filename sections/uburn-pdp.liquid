@@ -6,7 +6,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Red+Hat+Text:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&family=Red+Hat+Text:wght@400;500;600&display=swap" rel="stylesheet"></noscript>
 
 <style>
 
@@ -24,8 +25,8 @@
   --body: #5a5654;
   --muted: #8a8785;
   --grad: linear-gradient(160deg, #3d1873 0%, #6b2fa0 40%, #8b47c5 100%);
-  --shadow-soft: 0 4px 24px oklch(0.35 0.12 300 / 0.12);
-  --shadow-card: 0 2px 12px oklch(0.35 0.12 300 / 0.08);
+  --shadow-soft: 0 4px 24px rgba(61, 24, 115, 0.12);
+  --shadow-card: 0 2px 12px rgba(61, 24, 115, 0.08);
   --radius: 16px;
   --radius-sm: 10px;
   --space-xs: 4px;
@@ -39,7 +40,7 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: 'Red Hat Text', sans-serif;
@@ -86,7 +87,7 @@ a { color: inherit; text-decoration: none; }
   flex-shrink: 0;
 }
 @media (max-width: 640px) {
-  .trust-bar { gap: 20px; font-size: 11.5px; overflow-x: auto; justify-content: flex-start; padding: 10px 16px; }
+  .trust-bar { gap: 12px 20px; font-size: 11.5px; flex-wrap: wrap; justify-content: center; padding: 10px 16px; }
 }
 
 /* ═══ STICKY ATC BAR ═══ */
@@ -104,7 +105,7 @@ a { color: inherit; text-decoration: none; }
   z-index: 100;
   transform: translateY(100%);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 -8px 32px oklch(0.35 0.12 300 / 0.12);
+  box-shadow: 0 -8px 32px rgba(61, 24, 115, 0.12);
 }
 .sticky-atc.visible { transform: translateY(0); }
 .sticky-atc-title {
@@ -134,6 +135,10 @@ a { color: inherit; text-decoration: none; }
   transition: opacity 0.2s;
 }
 .sticky-atc-btn:hover { opacity: 0.9; }
+@media (max-width: 900px) {
+  body { padding-bottom: 80px; }
+  .sticky-atc { padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+}
 @media (max-width: 500px) {
   .sticky-atc-title { display: none; }
   .sticky-atc { justify-content: space-between; }
@@ -578,10 +583,9 @@ a { color: inherit; text-decoration: none; }
   margin-top: 56px;
 }
 .problem-card {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.14);
   border-radius: var(--radius);
   padding: 28px 24px;
-  backdrop-filter: blur(10px);
 }
 .problem-time {
   font-family: 'Red Hat Display', sans-serif;
@@ -982,7 +986,7 @@ a { color: inherit; text-decoration: none; }
 }
 .offer-img img {
   width: 100%;
-  filter: drop-shadow(0 40px 80px oklch(0.35 0.12 300 / 0.25));
+  filter: drop-shadow(0 40px 80px rgba(61, 24, 115, 0.25));
 }
 
 .offer-pricing {
@@ -1143,6 +1147,15 @@ a { color: inherit; text-decoration: none; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
 .reveal-delay-5 { transition-delay: 0.5s; }
+/* Mobile: cap delays so fast-scrolling doesn't leave content invisible */
+@media (max-width: 700px) {
+  .reveal-delay-3 { transition-delay: 0.15s; }
+  .reveal-delay-4 { transition-delay: 0.2s; }
+  .reveal-delay-5 { transition-delay: 0.2s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
 
 /* ═══ ORIGINE SECTION ═══ */
 .origine-section {
@@ -1412,7 +1425,6 @@ a { color: inherit; text-decoration: none; }
   padding: 5px 14px;
   border-radius: 50px;
   margin-bottom: 20px;
-  backdrop-filter: blur(6px);
 }
 .lifestyle-title {
   font-family: 'Red Hat Display', sans-serif;
@@ -1508,7 +1520,6 @@ a { color: inherit; text-decoration: none; }
   padding: 8px 14px;
   border-radius: 10px;
   text-align: center;
-  backdrop-filter: blur(6px);
 }
 
 @media (max-width: 600px) {
@@ -1703,7 +1714,7 @@ a { color: inherit; text-decoration: none; }
 <div class="sticky-atc" id="stickyAtc">
   <div class="sticky-atc-title">Uburn — Poudre Ubé<br><span style="font-weight:500;font-size:12px;color:var(--body)">Satiété durable · 0% caféine · 6 actifs naturels</span></div>
   <div class="sticky-atc-price" id="stickyPrice">34,50 €</div>
-  <button class="sticky-atc-btn" onclick="document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'center'})">Je reprends le contrôle →</button>
+  <button class="sticky-atc-btn" onclick="document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'start'})">Je reprends le contrôle →</button>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -2434,7 +2445,7 @@ a { color: inherit; text-decoration: none; }
         <div class="offer-card-sub">90g · 1 dose/jour · Idéal pour tester</div>
         <div class="offer-card-price">34,50 €</div>
         <div class="offer-card-daily">soit 1,15€/jour · 30 jours</div>
-        <button class="offer-card-btn" onclick="selectVariant(document.querySelector('[data-variant=\'0\']'));document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'center'})">Je reprends le contrôle — 34,50€ →</button>
+        <button class="offer-card-btn" onclick="selectVariant(document.querySelector('[data-variant=\'0\']'));document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'start'})">Je reprends le contrôle — 34,50€ →</button>
       </div>
       <div class="offer-card featured">
         <div class="offer-card-badge">Le plus populaire</div>
@@ -2442,7 +2453,7 @@ a { color: inherit; text-decoration: none; }
         <div class="offer-card-sub">270g · 3 doses/jour · 3× plus de résultats</div>
         <div class="offer-card-price">54,50 €</div>
         <div class="offer-card-daily">= 0,61€/jour · 90 jours</div>
-        <button class="offer-card-btn" onclick="selectVariant(document.querySelector('[data-variant=\'1\']'));document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'center'})">Je reprends le contrôle — 54,50€ →</button>
+        <button class="offer-card-btn" onclick="selectVariant(document.querySelector('[data-variant=\'1\']'));document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'start'})">Je reprends le contrôle — 54,50€ →</button>
       </div>
     </div>
 
@@ -2599,14 +2610,15 @@ const observer = new IntersectionObserver((entries) => {
 
 observer.observe(atcBtn);
 
-/* Scroll reveals */
+/* Scroll reveals — LP pattern: unobserve after trigger, no negative margin */
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.12 });
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
