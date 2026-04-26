@@ -172,6 +172,7 @@ main#main{padding:0 !important}
 <script>
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0,rootMargin:'0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+requestAnimationFrame(()=>document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('visible')}));
 </script>
 {% schema %}
 {"name":"UB Contact","settings":[]}
