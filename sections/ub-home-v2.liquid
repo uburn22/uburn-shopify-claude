@@ -458,6 +458,11 @@ a { color: inherit; text-decoration: none; }
   .origine-inner { grid-template-columns: 1fr; gap: 40px; }
   .origine-photos { height: 340px; }
 }
+@media(max-width:600px){
+  .origine { padding: 56px 20px; }
+  .origine-photos { grid-template-columns: 1fr; height: 260px; }
+  .origine-ph-sec { display: none; }
+}
 
 /* ═══ BEFORE / AFTER ═══ */
 .ba-section { background: var(--cream); padding: 120px 80px; }
