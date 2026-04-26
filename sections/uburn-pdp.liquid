@@ -421,6 +421,167 @@ a { color: inherit; text-decoration: none; }
   .variants { grid-template-columns: 1fr; }
 }
 
+/* Conversion-first hero inspired by the live landing page */
+.hero {
+  padding: 38px 40px 72px;
+  max-width: 1240px;
+  grid-template-columns: minmax(0,.92fr) minmax(420px,1fr);
+  gap: 38px;
+  align-items: stretch;
+}
+.gallery-wrap { display: grid; gap: 12px; }
+.gallery-main {
+  aspect-ratio: 1/1.08;
+  margin-bottom: 0;
+  box-shadow: 0 24px 80px rgba(43,30,77,.16);
+}
+.gallery-main::after { content: '30 kcal · 0% caféine'; }
+.product-info { padding-top: 0; }
+.product-info-panel {
+  padding: 30px;
+  box-shadow: 0 24px 80px rgba(43,30,77,.10);
+}
+.product-title {
+  font-size: clamp(34px,5vw,58px);
+  line-height: 1.02;
+  margin-bottom: 14px;
+}
+.product-title .accent { color: var(--purple-main); }
+.product-subtitle {
+  font-size: 17px;
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+.hero-proof-card {
+  background: #fff;
+  border: 1px solid var(--purple-pale);
+  border-radius: 8px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 14px;
+  align-items: center;
+}
+.hero-proof-card img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.hero-proof-eyebrow {
+  color: var(--purple-main);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.hero-proof-text {
+  color: var(--dark);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+.hero-proof-meta {
+  color: var(--body);
+  font-size: 12px;
+  line-height: 1.45;
+  margin-top: 4px;
+}
+.value-strip {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  border: 1px solid var(--purple-pale);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.value-strip div {
+  padding: 12px 8px;
+  text-align: center;
+  background: #fff;
+  border-right: 1px solid var(--purple-pale);
+}
+.value-strip div:last-child { border-right: 0; }
+.value-strip strong {
+  display: block;
+  color: var(--purple-main);
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.value-strip span {
+  color: var(--body);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.hero-bonus {
+  background: var(--purple-wash);
+  border: 1px solid var(--purple-pale);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 18px 0 20px;
+}
+.hero-bonus-label {
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--purple-main);
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  margin-bottom: 10px;
+}
+.hero-bonus-items { display: grid; gap: 6px; }
+.hero-bonus-items span {
+  font-size: 13px;
+  color: var(--dark);
+  font-weight: 650;
+  line-height: 1.35;
+}
+.hero-bonus-items em {
+  color: var(--muted);
+  font-style: normal;
+  font-weight: 600;
+}
+.hero-bonus-total {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--purple-pale);
+  font-size: 13px;
+  color: var(--body);
+}
+.hero-bonus-total strong {
+  color: var(--purple-deep);
+  font-weight: 900;
+}
+.variant-card {
+  border-width: 1px;
+  border-radius: 8px;
+  padding: 16px;
+}
+.variant-card.active {
+  border: 2px solid var(--purple-main);
+  box-shadow: 0 12px 32px rgba(125,63,255,.12);
+}
+.variant-badge-pop { border-radius: 0; }
+.variants { gap: 12px; margin-bottom: 18px; }
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 24px 20px 48px;
+  }
+  .product-info-panel { padding: 22px; }
+}
+@media (max-width: 500px) {
+  .product-title { font-size: 36px; }
+  .value-strip { grid-template-columns: repeat(3,1fr); }
+  .hero-proof-card { grid-template-columns: 64px 1fr; padding: 12px; }
+  .hero-proof-card img { width: 64px; height: 64px; }
+}
+
 /* ═══ PRESS BAR ═══ */
 .press-bar {
   background: var(--warm);
@@ -1672,19 +1833,33 @@ a { color: inherit; text-decoration: none; }
     <div class="gallery-thumbs" id="galleryThumbs">
       <!-- Filled by JS -->
     </div>
+    <div class="hero-proof-card">
+      <img src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0000_7.jpg?v=1773911263&width=200&format=webp" alt="Commande Uburn livrée à domicile" loading="lazy">
+      <div>
+        <div class="hero-proof-eyebrow">Ce qui arrive chez toi</div>
+        <div class="hero-proof-text">Un rituel violet, crémeux, prêt en 30 secondes.</div>
+        <div class="hero-proof-meta">Poudre ubé noisette-vanille · Livraison offerte · Sans abonnement.</div>
+      </div>
+    </div>
   </div>
 
   <!-- PRODUCT INFO -->
   <div class="product-info product-info-panel">
-    <div class="product-badge">Rituel latte · 6 actifs naturels</div>
+    <div class="product-badge">Nos premières clientes adorent Uburn</div>
 
-    <h1 class="product-title">Le latte ubé qui calme les fringales.</h1>
-    <p class="product-subtitle">Une boisson violette, crémeuse et légère. 30 kcal par dose, 0% caféine, formulée autour du glucomannane validé EFSA.</p>
+    <h1 class="product-title">16h. <span class="accent">Le placard reste fermé.</span></h1>
+    <p class="product-subtitle">Le latte ubé violet qui aide à calmer les fringales : 30 kcal, 0% caféine, satiété durable avec glucomannane validé EFSA.</p>
 
     <div class="product-rating">
       <div class="stars">★★★★★</div>
       <span class="rating-text">4,7/5</span>
       <span class="rating-count">· 1 500+ avis vérifiés</span>
+    </div>
+
+    <div class="value-strip">
+      <div><strong>4h</strong><span>de satiété durable</span></div>
+      <div><strong>30</strong><span>kcal par dose</span></div>
+      <div><strong>0%</strong><span>caféine</span></div>
     </div>
 
     <div class="quick-benefits">
@@ -1706,8 +1881,18 @@ a { color: inherit; text-decoration: none; }
       </div>
     </div>
 
+    <div class="hero-bonus">
+      <div class="hero-bonus-label">Offerts avec ta commande aujourd'hui</div>
+      <div class="hero-bonus-items">
+        <span>✓ E-book "30j pour reprendre le contrôle" <em>(47€)</em></span>
+        <span>✓ Accès groupe privé Uburn Collective <em>(40€)</em></span>
+        <span>✓ Suivi nutrition WhatsApp 30j <em>(47€)</em></span>
+      </div>
+      <div class="hero-bonus-total">Valeur totale : <strong>134€ offerts</strong></div>
+    </div>
+
     <!-- VARIANTS -->
-    <div class="variant-label">Choisissez votre objectif</div>
+    <div class="variant-label">Choisissez votre cure</div>
     <div class="variants" id="variantSelector">
       <div class="variant-card active" data-variant="0" data-variant-id="{{ variant_decouverte.id }}" data-price="34.50" data-daily="1,15€" onclick="selectVariant(this)">
         <div class="variant-name">Découverte</div>
@@ -1716,9 +1901,9 @@ a { color: inherit; text-decoration: none; }
         <div class="variant-per-day">soit 1,15€/jour</div>
       </div>
       <div class="variant-card" data-variant="1" data-variant-id="{{ variant_max.id }}" data-price="54.50" data-daily="0,61€" onclick="selectVariant(this)">
-        <div class="variant-badge-pop">Le plus populaire</div>
+        <div class="variant-badge-pop">Meilleure valeur</div>
         <div class="variant-name">Résultats Maximum</div>
-        <div class="variant-desc">270g · 3 doses/jour</div>
+        <div class="variant-desc">270g · cure complète</div>
         <div class="variant-price">54,50 €</div>
         <div class="variant-per-day">= 0,61€/jour</div>
       </div>
@@ -2249,7 +2434,7 @@ a { color: inherit; text-decoration: none; }
     <div class="faq-list reveal reveal-delay-2">
 
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">
           Comment fonctionne UBurn ?
           <span class="faq-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
         </button>
@@ -2259,7 +2444,7 @@ a { color: inherit; text-decoration: none; }
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">
           En combien de temps voit-on des résultats ?
           <span class="faq-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
         </button>
@@ -2269,7 +2454,7 @@ a { color: inherit; text-decoration: none; }
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">
           C'est compatible le soir ? Sans caféine ?
           <span class="faq-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
         </button>
@@ -2279,7 +2464,7 @@ a { color: inherit; text-decoration: none; }
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">
           Y a-t-il un abonnement ?
           <span class="faq-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
         </button>
@@ -2289,7 +2474,7 @@ a { color: inherit; text-decoration: none; }
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">
           Avec de l'eau ou avec du lait — quelle différence ?
           <span class="faq-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
         </button>
@@ -2299,7 +2484,7 @@ a { color: inherit; text-decoration: none; }
       </div>
 
       <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">
+        <button type="button" class="faq-q" onclick="toggleFaq(this)">
           Y a-t-il des contre-indications ?
           <span class="faq-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg></span>
         </button>
@@ -2411,6 +2596,8 @@ a { color: inherit; text-decoration: none; }
 /* Gallery */
 const galleryImages = [
   { src: "{{ 'latte_hero_01.jpg' | asset_url }}", alt: "Uburn — latte ubé crémeux servi le matin" },
+  { src: "{{ 'latte_hero_02.jpg' | asset_url }}", alt: "Uburn — boisson ubé servie en rituel gourmand" },
+  { src: "{{ 'uburn_hero_drink.jpg' | asset_url }}", alt: "Uburn — verre violet prêt à boire" },
   { src: "https://uburn.co/cdn/shop/files/PRODUCTPAGE_0004_3.jpg?v=1773911263&width=800", alt: "Uburn — photo produit 2" },
   { src: "https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1773911263&width=800", alt: "Uburn — photo produit 3" },
   { src: "https://uburn.co/cdn/shop/files/PRODUCTPAGE_0002_5.jpg?v=1773911263&width=800", alt: "Uburn — photo produit 4" },
