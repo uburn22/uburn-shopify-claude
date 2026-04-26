@@ -288,6 +288,11 @@ a { color: inherit; text-decoration: none; }
   border-color: var(--purple-main);
   background: var(--purple-wash);
 }
+.variant-pack { grid-column: 1 / -1; }
+.variant-badge-gold { background: linear-gradient(90deg, #C8860A, #E8A820) !important; }
+.variant-price-row { display: flex; align-items: baseline; gap: 8px; }
+.variant-price-old { font-size: 13px; color: var(--muted); text-decoration: line-through; }
+.variant-economy { font-size: 12px; font-weight: 700; color: #2D8A3E; margin-top: 2px; }
 .variant-badge-pop {
   position: absolute;
   top: -10px;
@@ -322,8 +327,26 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: baseline;
   gap: 10px;
+  margin-bottom: 16px;
+}
+.product-pictos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: #f8f5ff;
+  border-radius: 8px;
+  padding: 12px 14px;
   margin-bottom: 20px;
 }
+.picto-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1 1 calc(33% - 8px);
+  min-width: 120px;
+}
+.picto-item svg { color: #6b2fa0; flex-shrink: 0; }
+.picto-item span { font-size: 12px; font-weight: 600; color: #3d1873; line-height: 1.2; }
 .price-main {
   font-family: 'Red Hat Display', sans-serif;
   font-size: 32px;
@@ -376,6 +399,74 @@ a { color: inherit; text-decoration: none; }
   padding: 12px 8px;
 }
 .guarantee-icon { font-size: 20px; margin-bottom: 4px; }
+.delivery-countdown {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #F0FAF3;
+  border: 1.5px solid #8FD4A2;
+  border-radius: 8px;
+  padding: 9px 13px;
+  margin: 10px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1A6B2E;
+}
+.delivery-countdown svg { color: #2D8A3E; flex-shrink: 0; }
+.mini-bonus {
+  background: #FFF4E6;
+  border: 1.5px solid #F5C47A;
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-top: 16px;
+}
+.mini-bonus-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #8B5E00;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 10px;
+}
+.mini-bonus-header svg { color: #D4900A; flex-shrink: 0; }
+.mini-bonus-value {
+  margin-left: auto;
+  background: #D4900A;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+.mini-bonus-list {
+  list-style: none;
+  margin: 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.mini-bonus-list li {
+  font-size: 13px;
+  color: #6B4600;
+  padding-left: 18px;
+  position: relative;
+}
+.mini-bonus-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  color: #D4900A;
+}
+.mini-bonus-link {
+  font-size: 12px;
+  font-weight: 700;
+  color: #D4900A;
+  text-decoration: underline;
+}
 .guarantee-text {
   font-size: 11px;
   font-weight: 600;
@@ -659,6 +750,12 @@ a { color: inherit; text-decoration: none; }
   .compare-table th, .compare-table td { padding: 9px 10px; }
   .compare-table th:nth-child(2),
   .compare-table td:nth-child(2) { display: none; }
+}
+/* 4-column variant: hide CDS col on mobile, keep Bulk + Uburn */
+@media (max-width: 660px) {
+  .compare-table-v2 th:nth-child(2), .compare-table-v2 td:nth-child(2) { display: table-cell; }
+  .compare-table-v2 th:nth-child(3), .compare-table-v2 td:nth-child(3) { display: none; }
+  .compare-table-v2 th:first-child { width: 30%; }
 }
 
 /* ═══ EXPERT SECTION ═══ */
@@ -1606,7 +1703,7 @@ a { color: inherit; text-decoration: none; }
 <div class="sticky-atc" id="stickyAtc">
   <div class="sticky-atc-title">Uburn — Poudre Ubé<br><span style="font-weight:500;font-size:12px;color:var(--body)">Satiété durable · 0% caféine · 6 actifs naturels</span></div>
   <div class="sticky-atc-price" id="stickyPrice">34,50 €</div>
-  <button class="sticky-atc-btn" onclick="document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'center'})">Commander →</button>
+  <button class="sticky-atc-btn" onclick="document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'center'})">Je reprends le contrôle →</button>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -1676,6 +1773,17 @@ a { color: inherit; text-decoration: none; }
         <div class="variant-price">54,50 €</div>
         <div class="variant-per-day">= 0,61€/jour</div>
       </div>
+      <div class="variant-card variant-pack" data-variant="2" data-variant-id="{{ variant_max.id }}" data-price="119.90" data-daily="0,44€" data-qty="3" onclick="selectVariant(this)">
+        <div class="variant-badge-pop variant-badge-gold">🏆 Le plus économique</div>
+        <div class="variant-name">Pack Famille</div>
+        <div class="variant-desc">3× Résultats Maximum 270g · 6 mois</div>
+        <div class="variant-price-row">
+          <span class="variant-price-old">163,50 €</span>
+          <span class="variant-price">119,90 €</span>
+        </div>
+        <div class="variant-economy">Économise 43,60 € (-27%)</div>
+        <div class="variant-per-day">+ 184€ de bonus inclus</div>
+      </div>
     </div>
 
     <div class="price-block">
@@ -1683,11 +1791,35 @@ a { color: inherit; text-decoration: none; }
       <div class="price-sub" id="priceSub">Paiement unique · <span id="pricePerDay">1,15€/jour</span></div>
     </div>
 
+    <!-- ═══ PICTOS PRODUIT ═══ -->
+    <div class="product-pictos">
+      <div class="picto-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg>
+        <span>1 dose / jour</span>
+      </div>
+      <div class="picto-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+        <span>30 jours / sachet</span>
+      </div>
+      <div class="picto-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C8 2 5 5 5 8c0 5 7 14 7 14s7-9 7-14c0-3-2.7-6-7-6z"/><circle cx="12" cy="8" r="2.5"/></svg>
+        <span>Eau ou lait végétal</span>
+      </div>
+      <div class="picto-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h10l2 5H5L7 3z"/><path d="M5 8v11a2 2 0 002 2h10a2 2 0 002-2V8"/><path d="M12 12v4M10 14h4"/></svg>
+        <span>Vanille-noisette</span>
+      </div>
+      <div class="picto-item">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span>Effet 4h</span>
+      </div>
+    </div>
+
     <form action="/cart/add" method="post" id="pdp-form">
       <input type="hidden" name="id" id="variant-id" value="{{ variant_decouverte.id }}">
       <input type="hidden" name="quantity" value="1">
       <button type="submit" class="btn-atc" id="atc-btn">
-        Commander — Livraison offerte →
+        Je reprends le contrôle — 34,50€ →
       </button>
     </form>
     <div class="atc-sub">
@@ -1705,6 +1837,12 @@ a { color: inherit; text-decoration: none; }
       </span>
     </div>
 
+    <!-- ═══ COUNTDOWN LIVRAISON ═══ -->
+    <div class="delivery-countdown" id="deliveryCountdown">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3m-4 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+      <span id="deliveryText">Chargement...</span>
+    </div>
+
     <div class="guarantees">
       <div class="guarantee-item">
         <div class="guarantee-icon">🔄</div>
@@ -1719,6 +1857,22 @@ a { color: inherit; text-decoration: none; }
         <div class="guarantee-text">Sans<br>abonnement</div>
       </div>
     </div>
+
+    <!-- ═══ MINI BONUS BLOCK ═══ -->
+    <div class="mini-bonus" id="mini-bonus">
+      <div class="mini-bonus-header">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v10H4V12M22 7H2v5h20V7zM12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+        <strong>OFFERTS AVEC TA COMMANDE</strong>
+        <span class="mini-bonus-value">184€</span>
+      </div>
+      <ul class="mini-bonus-list">
+        <li>E-book "30j pour reprendre le contrôle"</li>
+        <li>Accès groupe privé Uburn Collective</li>
+        <li>Suivi nutrition WhatsApp 30j</li>
+      </ul>
+      <a href="#bonus-block" class="mini-bonus-link">Voir tous les bonus →</a>
+    </div>
+
   </div>
 
 </section>
@@ -1880,6 +2034,71 @@ a { color: inherit; text-decoration: none; }
   </div>
 </div>
 
+<!-- ═══ COMPARE TABLE ═══ -->
+<section class="section compare-section">
+  <div class="section-inner">
+    <div class="section-label reveal">Comparatif concurrents</div>
+    <h2 class="section-title reveal reveal-delay-1">Pourquoi Uburn ?<br><em>La réponse en un tableau.</em></h2>
+
+    <div class="reveal reveal-delay-2" style="overflow-x:auto">
+      <table class="compare-table compare-table-v2">
+        <thead>
+          <tr>
+            <th>Critère</th>
+            <th>Konjac gélules<br><small>(Bulk)</small></th>
+            <th>Konjac poudre<br><small>(CDS)</small></th>
+            <th class="col-uburn">Uburn</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Format</td>
+            <td>Gélules à avaler</td>
+            <td>Poudre neutre</td>
+            <td class="col-uburn">Boisson plaisir <span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Goût</td>
+            <td><span class="cross">✗</span> Aucun</td>
+            <td><span class="cross">✗</span> Difficile</td>
+            <td class="col-uburn">Vanille-noisette <span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Caféine</td>
+            <td><span class="cross">✗</span> Souvent</td>
+            <td>Variable</td>
+            <td class="col-uburn">0% <span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Sucre ajouté</td>
+            <td>Variable</td>
+            <td>Variable</td>
+            <td class="col-uburn">Aucun <span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Actifs additionnels</td>
+            <td><span class="cross">✗</span> Glucomannane seul</td>
+            <td><span class="cross">✗</span> Glucomannane seul</td>
+            <td class="col-uburn">+5 actifs <span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>EFSA validé</td>
+            <td>Parfois</td>
+            <td>Parfois</td>
+            <td class="col-uburn">Oui (ID 3120) <span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Expérience</td>
+            <td><span class="cross">✗</span> "Faut le faire"</td>
+            <td><span class="cross">✗</span> "Faut le faire"</td>
+            <td class="col-uburn">"On a envie" <span class="check">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ INGREDIENTS ═══ -->
 <section class="section ingr-section">
   <div class="section-inner">
@@ -1961,83 +2180,6 @@ a { color: inherit; text-decoration: none; }
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- ═══ COMPARE TABLE ═══ -->
-<section class="section compare-section">
-  <div class="section-inner">
-    <div class="section-label reveal">Le spectre complet</div>
-    <h2 class="section-title reveal reveal-delay-1">Chaque milligramme compte.<br><em>Chaque bienfait amplifié.</em></h2>
-
-    <div class="reveal reveal-delay-2" style="overflow-x:auto">
-      <table class="compare-table">
-        <thead>
-          <tr>
-            <th>Ingrédient</th>
-            <th>Marché classique</th>
-            <th class="col-uburn">Uburn</th>
-            <th>Votre bénéfice</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Glucomannane</td>
-            <td>Rarement dosé EFSA</td>
-            <td class="col-uburn">3g · EFSA ID 3120 <span class="check">✓</span></td>
-            <td>Satiété durable clinique</td>
-          </tr>
-          <tr>
-            <td>L-Carnitine</td>
-            <td>≤ 100mg souvent</td>
-            <td class="col-uburn">400mg · +300% <span class="check">✓</span></td>
-            <td>Métabolisme soutenu</td>
-          </tr>
-          <tr>
-            <td>Fibre d'acacia</td>
-            <td>Absente ou trace</td>
-            <td class="col-uburn">1,5g · Nouveau <span class="check">✓</span></td>
-            <td>Digestion améliorée</td>
-          </tr>
-          <tr>
-            <td>MCT de coco</td>
-            <td>Souvent absent</td>
-            <td class="col-uburn"><span class="check">✓</span> Présent</td>
-            <td>Énergie stable</td>
-          </tr>
-          <tr>
-            <td>Ubé / Antioxydants</td>
-            <td>Non</td>
-            <td class="col-uburn"><span class="check">✓</span> Anthocyanes</td>
-            <td>Antioxydants puissants</td>
-          </tr>
-          <tr>
-            <td>Gingembre</td>
-            <td>200mg+ souvent</td>
-            <td class="col-uburn">200mg <span class="check">✓</span></td>
-            <td>Digestion + confort</td>
-          </tr>
-          <tr>
-            <td>Caféine</td>
-            <td>Fréquente</td>
-            <td class="col-uburn">0% caféine <span class="check">✓</span></td>
-            <td>À prendre à toute heure</td>
-          </tr>
-          <tr>
-            <td>Sucre ajouté</td>
-            <td>Parfois</td>
-            <td class="col-uburn">Zéro <span class="check">✓</span></td>
-            <td>Sans pic glycémique</td>
-          </tr>
-          <tr>
-            <td>Certification</td>
-            <td>Souvent absente</td>
-            <td class="col-uburn">EFSA ID 3120 <span class="check">✓</span></td>
-            <td>Garantie officielle</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </section>
@@ -2292,7 +2434,7 @@ a { color: inherit; text-decoration: none; }
         <div class="offer-card-sub">90g · 1 dose/jour · Idéal pour tester</div>
         <div class="offer-card-price">34,50 €</div>
         <div class="offer-card-daily">soit 1,15€/jour · 30 jours</div>
-        <button class="offer-card-btn">Commander →</button>
+        <button class="offer-card-btn" onclick="selectVariant(document.querySelector('[data-variant=\'0\']'));document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'center'})">Je reprends le contrôle — 34,50€ →</button>
       </div>
       <div class="offer-card featured">
         <div class="offer-card-badge">Le plus populaire</div>
@@ -2300,7 +2442,7 @@ a { color: inherit; text-decoration: none; }
         <div class="offer-card-sub">270g · 3 doses/jour · 3× plus de résultats</div>
         <div class="offer-card-price">54,50 €</div>
         <div class="offer-card-daily">= 0,61€/jour · 90 jours</div>
-        <button class="offer-card-btn">Commander →</button>
+        <button class="offer-card-btn" onclick="selectVariant(document.querySelector('[data-variant=\'1\']'));document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'center'})">Je reprends le contrôle — 54,50€ →</button>
       </div>
     </div>
 
@@ -2420,6 +2562,9 @@ function selectVariant(el) {
   document.getElementById('stickyPrice').textContent = formatted;
   const variantId = el.dataset.variantId;
   if (variantId) document.getElementById('variant-id').value = variantId;
+  const atcBtn = document.getElementById('atc-btn');
+  const priceShort = parseFloat(price).toFixed(2).replace('.', ',');
+  if (atcBtn) atcBtn.textContent = `Je reprends le contrôle — ${priceShort}€ →`;
 }
 
 /* FAQ */
@@ -2464,5 +2609,59 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* Delivery countdown */
+function updateDelivery() {
+  const el = document.getElementById('deliveryText');
+  if (!el) return;
+  const now = new Date();
+  const day = now.getDay(); // 0=Sun,1=Mon,...,6=Sat
+  const h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
+  const cutoff = 14; // 14h cutoff
+  let targetDate = new Date(now);
+  let deliveryLabel = '';
+  // Determine next shipping day and delivery day
+  if (day === 6) { // Saturday
+    targetDate.setDate(targetDate.getDate() + 2); // Monday shipping
+    targetDate.setHours(cutoff, 0, 0, 0);
+    deliveryLabel = 'lundi';
+  } else if (day === 0) { // Sunday
+    targetDate.setDate(targetDate.getDate() + 1); // Monday shipping
+    targetDate.setHours(cutoff, 0, 0, 0);
+    deliveryLabel = 'lundi';
+  } else if (h < cutoff) {
+    targetDate.setHours(cutoff, 0, 0, 0);
+    deliveryLabel = 'demain';
+  } else {
+    targetDate.setDate(targetDate.getDate() + 1);
+    targetDate.setHours(cutoff, 0, 0, 0);
+    if (targetDate.getDay() === 6) { targetDate.setDate(targetDate.getDate() + 2); deliveryLabel = 'lundi'; }
+    else if (targetDate.getDay() === 0) { targetDate.setDate(targetDate.getDate() + 1); deliveryLabel = 'lundi'; }
+    else deliveryLabel = 'après-demain';
+  }
+  const diff = targetDate - now;
+  const rh = Math.floor(diff / 3600000);
+  const rm = Math.floor((diff % 3600000) / 60000);
+  const rs = Math.floor((diff % 60000) / 1000);
+  el.textContent = `Commande dans les ${rh}h ${rm}min ${rs}s → livraison ${deliveryLabel}`;
+}
+updateDelivery();
+setInterval(updateDelivery, 1000);
+
+/* Pack Famille cart handler */
+document.getElementById('pdp-form').addEventListener('submit', function(e) {
+  const activeCard = document.querySelector('.variant-card.active');
+  if (!activeCard) return;
+  const qty = parseInt(activeCard.dataset.qty || '1');
+  if (qty > 1) {
+    e.preventDefault();
+    const variantId = activeCard.dataset.variantId;
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({items: [{id: variantId, quantity: qty}]})
+    }).then(() => { window.location.href = '/checkout'; });
+  }
+});
 </script>
 
