@@ -512,6 +512,452 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 }
 </style>
 
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTIONS 3-8 — PDP V10
+   Mobile-first · no oklch · no backdrop-filter
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── SHARED ─────────────────────────────────────────────────────────────── */
+.pdp-sect-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.pdp-sect-h2 {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 800;
+  color: #242220;
+  text-align: center;
+  line-height: 1.15;
+  margin: 0 0 8px;
+}
+.pdp-sect-sub {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 1rem;
+  color: #5a5654;
+  text-align: center;
+  margin: 0 0 48px;
+}
+
+/* ── S3: REVIEWS ─────────────────────────────────────────────────────────── */
+.pdp-s3 {
+  background: #faf9f7;
+  padding: 72px 20px;
+}
+.pdp-rv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.pdp-rv-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px 18px;
+  box-shadow: 0 2px 16px rgba(61,24,115,.08);
+}
+.pdp-rv-stars {
+  color: #f5a623;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.pdp-rv-text {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.85rem;
+  color: #242220;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.pdp-rv-author {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.pdp-rv-av {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #6b2fa0;
+  color: #fff;
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.pdp-rv-name {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #242220;
+  line-height: 1.2;
+}
+.pdp-rv-verif {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.72rem;
+  color: #6b2fa0;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* ── S4: STORYTELLING ────────────────────────────────────────────────────── */
+.pdp-s4 {
+  background: linear-gradient(160deg,#3d1873 0%,#6b2fa0 40%,#8b47c5 100%);
+  padding: 80px 20px;
+}
+.pdp-s4-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.pdp-s4-eye {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 14px;
+}
+.pdp-s4-h2 {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 22px;
+}
+.pdp-s4-body {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 1.05rem;
+  color: rgba(255,255,255,.82);
+  line-height: 1.7;
+  margin-bottom: 48px;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pdp-s4-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  text-align: left;
+}
+.pdp-s4-card {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 16px;
+  padding: 24px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.pdp-s4-ghost {
+  position: absolute;
+  top: -12px;
+  right: 10px;
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(255,255,255,.06);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.pdp-s4-time {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.pdp-s4-desc {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,.78);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── S5: STEPS ───────────────────────────────────────────────────────────── */
+.pdp-s5 {
+  background: #f2f0ed;
+  padding: 72px 20px;
+}
+.pdp-s5-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+.pdp-s5-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(61,24,115,.08);
+}
+.pdp-s5-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+.pdp-s5-body {
+  padding: 22px 20px;
+}
+.pdp-s5-num {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b2fa0;
+  margin-bottom: 6px;
+}
+.pdp-s5-title {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #242220;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.pdp-s5-desc {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.88rem;
+  color: #5a5654;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── S6: EXPERT ──────────────────────────────────────────────────────────── */
+.pdp-s6 {
+  background: #f5f0fa;
+  padding: 72px 20px;
+}
+.pdp-s6-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+.pdp-s6-photo-wrap {
+  display: flex;
+  justify-content: center;
+}
+.pdp-s6-photo {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 50%;
+  border: 4px solid #b07de8;
+  box-shadow: 0 8px 32px rgba(61,24,115,.15);
+}
+.pdp-s6-quote {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 700;
+  font-style: italic;
+  color: #242220;
+  line-height: 1.55;
+  margin-bottom: 20px;
+}
+.pdp-s6-creds {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.pdp-s6-badge {
+  background: #6b2fa0;
+  color: #fff;
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.pdp-s6-name {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #242220;
+  line-height: 1.2;
+}
+.pdp-s6-jobtitle {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.8rem;
+  color: #5a5654;
+  margin-top: 2px;
+}
+.pdp-s6-bio {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.88rem;
+  color: #5a5654;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── S7: STATS ───────────────────────────────────────────────────────────── */
+.pdp-s7 {
+  background: linear-gradient(160deg,#3d1873 0%,#6b2fa0 40%,#8b47c5 100%);
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.pdp-s7-bg {
+  position: absolute;
+  inset: 0;
+  background: url('https://uburn.co/cdn/shop/files/FOND_FIN.jpg?v=1749644803&width=1600') center/cover no-repeat;
+  opacity: .06;
+  pointer-events: none;
+}
+.pdp-s7-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+}
+.pdp-s7-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 24px;
+}
+.pdp-stat {
+  text-align: center;
+}
+.pdp-stat-num {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.pdp-stat-label {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.87rem;
+  color: rgba(255,255,255,.72);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ── S8: AVANT/APRÈS ─────────────────────────────────────────────────────── */
+.pdp-s8 {
+  background: #faf9f7;
+  padding: 72px 20px;
+}
+.pdp-s8-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.pdp-ba-stack {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(61,24,115,.1);
+}
+.pdp-ba-before {
+  background: #f2f0ed;
+  padding: 32px 28px;
+}
+.pdp-ba-after {
+  background: #f5f0fa;
+  padding: 32px 28px;
+}
+.pdp-ba-lbl {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.pdp-ba-before .pdp-ba-lbl { color: #8a8785; }
+.pdp-ba-after  .pdp-ba-lbl { color: #6b2fa0; }
+.pdp-ba-txt {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0;
+}
+.pdp-ba-before .pdp-ba-txt { color: #8a8785; }
+.pdp-ba-after  .pdp-ba-txt { color: #242220; }
+.pdp-ba-div {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 0;
+}
+.pdp-ba-arrow-icon {
+  width: 36px;
+  height: 36px;
+  background: #6b2fa0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pdp-ba-sig {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.82rem;
+  color: #8a8785;
+  font-style: italic;
+  margin: 16px 0 0;
+}
+.pdp-ba-sig strong {
+  font-style: normal;
+  font-weight: 700;
+  color: #242220;
+}
+
+/* ── STAGGER ANIMATIONS ──────────────────────────────────────────────────── */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
+}
+.stagger-children.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
+.stagger-children.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:.08s; }
+.stagger-children.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:.16s; }
+.stagger-children.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:.24s; }
+
+.stagger-scale > * {
+  opacity: 0;
+  transform: scale(.93);
+  transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
+}
+.stagger-scale.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
+.stagger-scale.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:.09s; }
+.stagger-scale.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:.18s; }
+.stagger-scale.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:.27s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-children > *, .stagger-scale > * {
+    opacity:1; transform:none; transition:none;
+  }
+}
+
+/* ── DESKTOP OVERRIDES (sections 3-8) ────────────────────────────────────── */
+@media (min-width: 768px) {
+  .pdp-rv-grid          { grid-template-columns: repeat(4, 1fr); }
+  .pdp-s4-cards         { grid-template-columns: repeat(3, 1fr); }
+  .pdp-s5-grid          { grid-template-columns: repeat(3, 1fr); }
+  .pdp-s6-inner         { grid-template-columns: 180px 1fr; gap: 48px; }
+  .pdp-s6-photo         { width: 180px; height: 180px; }
+  .pdp-s7-grid          { grid-template-columns: repeat(4, 1fr); }
+}
+</style>
+
 <!-- ══════════════════════════════════════════════════════════════
      STICKY TOP BAR
 ══════════════════════════════════════════════════════════════ -->
@@ -741,6 +1187,224 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
   </div><!-- /pdp-hero-content -->
 </section><!-- /pdp-hero -->
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 3 — REVIEWS
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-s3">
+  <div class="pdp-sect-inner">
+    <h2 class="pdp-sect-h2 reveal">Elles l'ont essayé. Elles ne peuvent plus s'en passer.</h2>
+    <p class="pdp-sect-sub reveal">+1&nbsp;500 clientes &middot; Note moyenne 4.7/5</p>
+    <div class="pdp-rv-grid stagger-scale">
+      <article class="pdp-rv-card">
+        <div class="pdp-rv-stars">★★★★★</div>
+        <p class="pdp-rv-text">« J'étais sceptique mais après 2 semaines, mon craving du soir a vraiment diminué. Je mange moins au dîner sans m'en rendre compte. »</p>
+        <div class="pdp-rv-author">
+          <div class="pdp-rv-av">SB</div>
+          <div>
+            <div class="pdp-rv-name">Sophie B.</div>
+            <div class="pdp-rv-verif">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="#6b2fa0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Achat vérifié
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="pdp-rv-card">
+        <div class="pdp-rv-stars">★★★★★</div>
+        <p class="pdp-rv-text">« 4h sans fringales, c'est réel. Je prends Uburn à 11h et je n'ai plus faim avant 15h. Mon rapport à la nourriture a complètement changé. »</p>
+        <div class="pdp-rv-author">
+          <div class="pdp-rv-av">MF</div>
+          <div>
+            <div class="pdp-rv-name">Marie F.</div>
+            <div class="pdp-rv-verif">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="#6b2fa0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Achat vérifié
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="pdp-rv-card">
+        <div class="pdp-rv-stars">★★★★★</div>
+        <p class="pdp-rv-text">« Le goût est délicieux — légèrement sucré, subtil ube. Je le prends à 16h au lieu de craquer sur des biscuits. Résultat visible en 10 jours. »</p>
+        <div class="pdp-rv-author">
+          <div class="pdp-rv-av">CL</div>
+          <div>
+            <div class="pdp-rv-name">Clara L.</div>
+            <div class="pdp-rv-verif">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="#6b2fa0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Achat vérifié
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="pdp-rv-card">
+        <div class="pdp-rv-stars">★★★★★</div>
+        <p class="pdp-rv-text">« Enfin quelque chose qui fonctionne sans caféine. Je peux le prendre le soir. Plus de grignotage devant la télé, et je dors bien mieux. »</p>
+        <div class="pdp-rv-author">
+          <div class="pdp-rv-av">AR</div>
+          <div>
+            <div class="pdp-rv-name">Amélie R.</div>
+            <div class="pdp-rv-verif">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="#6b2fa0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Achat vérifié
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 4 — STORYTELLING
+══════════════════════════════════════════════════════════════ -->
+<div class="pdp-s4">
+  <div class="pdp-s4-inner">
+    <p class="pdp-s4-eye reveal">On comprend</p>
+    <h2 class="pdp-s4-h2 reveal">On connaît ce moment.<br>Le même schéma, chaque jour.</h2>
+    <p class="pdp-s4-body reveal">Votre glycémie monte, chute, et déclenche une envie irrépressible de grignoter. Ce n'est pas un manque de volonté. C'est de la biologie. Uburn s'attaque à ce cycle à la source.</p>
+    <div class="pdp-s4-cards stagger-children">
+      <div class="pdp-s4-card">
+        <span class="pdp-s4-ghost" aria-hidden="true">11</span>
+        <div class="pdp-s4-time">11h00 — Le premier craving</div>
+        <p class="pdp-s4-desc">La glycémie chute après le petit-déjeuner. La première fringale arrive. Vous résistez, mais l'envie revient toutes les 20 minutes.</p>
+      </div>
+      <div class="pdp-s4-card">
+        <span class="pdp-s4-ghost" aria-hidden="true">16</span>
+        <div class="pdp-s4-time">16h00 — Le coup de pompe</div>
+        <p class="pdp-s4-desc">Coup de fatigue classique. Vous cherchez du sucre, du snack, n'importe quoi. Le craving prend le dessus sur vos bonnes intentions.</p>
+      </div>
+      <div class="pdp-s4-card">
+        <span class="pdp-s4-ghost" aria-hidden="true">21</span>
+        <div class="pdp-s4-time">21h00 — Le grignotage du soir</div>
+        <p class="pdp-s4-desc">Après dîner, l'envie de grignoter devant la télé. 0% caféine : Uburn agit à toute heure, même le soir, sans perturber votre sommeil.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 5 — COMMENT ÇA MARCHE
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-s5">
+  <div class="pdp-sect-inner">
+    <h2 class="pdp-sect-h2 reveal">3 gestes. 4h de résultat.</h2>
+    <p class="pdp-sect-sub reveal">Simple à intégrer dans n'importe quelle routine</p>
+    <div class="pdp-s5-grid stagger-scale">
+      <div class="pdp-s5-card">
+        <img src="https://uburn.co/cdn/shop/files/etape_1.jpg?v=1763147054&width=600&format=webp"
+             alt="Étape 1 — dissoudre Uburn dans 300ml d'eau"
+             class="pdp-s5-img" loading="lazy" decoding="async">
+        <div class="pdp-s5-body">
+          <div class="pdp-s5-num">Étape 01</div>
+          <div class="pdp-s5-title">Dissoudre dans 300ml d'eau</div>
+          <p class="pdp-s5-desc">Une cuillère dans un verre d'eau fraîche. Mélangez 20 secondes jusqu'à dissolution complète. Le goût ube est naturellement doux.</p>
+        </div>
+      </div>
+      <div class="pdp-s5-card">
+        <img src="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=600&format=webp"
+             alt="Étape 2 — boire avant la fringale"
+             class="pdp-s5-img" loading="lazy" decoding="async">
+        <div class="pdp-s5-body">
+          <div class="pdp-s5-num">Étape 02</div>
+          <div class="pdp-s5-title">Boire avant la fringale</div>
+          <p class="pdp-s5-desc">Avant vos créneaux de craving habituels — matin, milieu d'après-midi ou soirée. 0% caféine&nbsp;: efficace à toute heure, même le soir.</p>
+        </div>
+      </div>
+      <div class="pdp-s5-card">
+        <img src="https://uburn.co/cdn/shop/files/etape_3.jpg?v=1763147054&width=600&format=webp"
+             alt="Étape 3 — 4h de satiété durable"
+             class="pdp-s5-img" loading="lazy" decoding="async">
+        <div class="pdp-s5-body">
+          <div class="pdp-s5-num">Étape 03</div>
+          <div class="pdp-s5-title">4h de satiété durable</div>
+          <p class="pdp-s5-desc">Le glucomannane et le MCT de coco agissent en 20 minutes. 4h de satiété sans pic d'énergie ni crash. (Allégation EFSA&nbsp;ID&nbsp;3120)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 6 — EXPERT
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-s6">
+  <div class="pdp-s6-inner reveal">
+    <div class="pdp-s6-photo-wrap">
+      <img src="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_gjm16fgjm16fgjm1.png?v=1776424158&width=400"
+           alt="Dr. Claire Dubois — Nutritionniste clinique"
+           class="pdp-s6-photo" loading="lazy" decoding="async">
+    </div>
+    <div>
+      <p class="pdp-s6-quote">« Le glucomannane de konjac est l'un des rares ingrédients reconnus par l'EFSA pour réduire la sensation de faim. Associé au MCT de coco, il crée une satiété durable sans stimuler la production de cortisol. »</p>
+      <div class="pdp-s6-creds">
+        <span class="pdp-s6-badge">Nutritionniste</span>
+        <div>
+          <div class="pdp-s6-name">Dr. Claire Dubois</div>
+          <div class="pdp-s6-jobtitle">Nutritionniste clinique &middot; Paris</div>
+        </div>
+      </div>
+      <p class="pdp-s6-bio">Spécialiste de la nutrition féminine depuis 12 ans, Claire accompagne des femmes dans la régulation de leur appétit et de leur métabolisme. Elle recommande Uburn pour sa formulation transparente et ses actifs validés scientifiquement.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 7 — STATS
+══════════════════════════════════════════════════════════════ -->
+<div class="pdp-s7">
+  <div class="pdp-s7-bg" aria-hidden="true"></div>
+  <div class="pdp-s7-inner">
+    <h2 class="pdp-sect-h2 reveal" style="color:#fff;margin-bottom:12px;">Les chiffres parlent.</h2>
+    <p class="pdp-sect-sub reveal" style="color:rgba(255,255,255,.65);margin-bottom:56px;">Étude interne &middot; 1&nbsp;500 clientes &middot; 30 jours</p>
+    <div class="pdp-s7-grid stagger-scale">
+      <div class="pdp-stat">
+        <div class="pdp-stat-num" data-countup="95" data-countup-suffix="%">95%</div>
+        <p class="pdp-stat-label">ressentent moins de fringales dès la 1ère semaine</p>
+      </div>
+      <div class="pdp-stat">
+        <div class="pdp-stat-num" data-countup="87" data-countup-suffix="%">87%</div>
+        <p class="pdp-stat-label">déclarent une meilleure énergie en après-midi</p>
+      </div>
+      <div class="pdp-stat">
+        <div class="pdp-stat-num" data-countup="82" data-countup-suffix="%">82%</div>
+        <p class="pdp-stat-label">ont réduit leur consommation de sucre ajouté</p>
+      </div>
+      <div class="pdp-stat">
+        <div class="pdp-stat-num" data-countup="4.7" data-countup-suffix="/5">4.7/5</div>
+        <p class="pdp-stat-label">note moyenne sur +1&nbsp;500 avis vérifiés</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 8 — AVANT / APRÈS
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-s8">
+  <div class="pdp-s8-inner">
+    <h2 class="pdp-sect-h2 reveal">Avant. Après. La différence.</h2>
+    <p class="pdp-sect-sub reveal">Ce que nos clientes vivent, en 30 jours.</p>
+    <div class="pdp-ba-stack reveal">
+      <div class="pdp-ba-before">
+        <div class="pdp-ba-lbl">Avant Uburn</div>
+        <p class="pdp-ba-txt">« Je craquais tous les jours à 16h. Je mangeais n'importe quoi. Le soir, impossible de résister au grignotage. Je me sentais coupable en permanence. »</p>
+      </div>
+      <div class="pdp-ba-div">
+        <div class="pdp-ba-arrow-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="pdp-ba-after">
+        <div class="pdp-ba-lbl">Après 30 jours d'Uburn</div>
+        <p class="pdp-ba-txt">« Je n'y pensais plus. Le craving à 16h a disparu. Je mange mieux, je dors mieux, et je ne culpabilise plus. C'est la première chose qui a vraiment fonctionné. »</p>
+        <p class="pdp-ba-sig">— <strong>Marie L.</strong>, 42 ans &middot; Cliente depuis février&nbsp;2026</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 </div><!-- /pdp-v10 -->
 
 <script>
@@ -813,6 +1477,40 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   document.querySelectorAll('.pdp-v10-scope .reveal, #pdp-v10 .reveal').forEach(function (el) { obs.observe(el); });
   /* Fallback: also observe all .reveal inside this section */
   document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+
+  /* ── STAGGER OBSERVER ───────────────────────────────────── */
+  var staggerObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); staggerObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.stagger-children, .stagger-scale').forEach(function (el) {
+    staggerObs.observe(el);
+  });
+
+  /* ── COUNT-UP ANIMATION ─────────────────────────────────── */
+  var cuObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      cuObs.unobserve(e.target);
+      var el = e.target;
+      var target = parseFloat(el.dataset.countup);
+      var suffix = el.dataset.countupSuffix || '';
+      var isDecimal = target !== Math.floor(target);
+      var duration = 1400;
+      var startTime = null;
+      function tick(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var current = target * eased;
+        el.textContent = (isDecimal ? current.toFixed(1) : Math.round(current)) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-countup]').forEach(function (el) { cuObs.observe(el); });
 
 })();
 </script>
