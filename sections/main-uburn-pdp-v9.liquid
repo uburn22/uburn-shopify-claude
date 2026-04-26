@@ -8,7 +8,7 @@
 <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{font-family:'Red Hat Text',sans-serif;background:#fff;color:#242220;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    body{font-family:'Red Hat Text',sans-serif;background:#fff;color:#242220;overflow-x:clip;-webkit-font-smoothing:antialiased}
     a{text-decoration:none;color:inherit}img{max-width:100%;display:block}ul{list-style:none}
 
     :root{
@@ -224,9 +224,9 @@
     .hero-visual img:hover{animation-play-state:paused}
     @media(max-width:900px){.hero-visual img{max-width:380px!important;animation:none}}
 
-    /* Pulse CTA */
-    .btn-fill{animation:ub-pulse-glow 2.5s ease-in-out infinite}
-    .btn-fill:hover{animation-play-state:paused}
+    /* Pulse CTA — only hero + sticky, not every button on page */
+    .hero .btn-fill,.pdpv9-sticky-btn{animation:ub-pulse-glow 2.5s ease-in-out infinite}
+    .hero .btn-fill:hover,.pdpv9-sticky-btn:hover{animation-play-state:paused}
 
     /* Stagger children */
     .stagger-children > *{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
@@ -272,7 +272,7 @@
     .big-stat-num[data-count]{cursor:default}
 
     @media(prefers-reduced-motion:reduce){
-      .hero-visual img,.btn-fill{animation:none !important}
+      .hero-visual img,.hero .btn-fill,.pdpv9-sticky-btn{animation:none !important}
     }
 
     /* ===== TYPOGRAPHY POLISH ===== */
@@ -283,14 +283,10 @@
     :focus-visible{outline:2px solid var(--purple-main);outline-offset:3px;border-radius:4px}
     .btn:focus-visible{outline-offset:4px}
 
-    /* ===== STICKY MOBILE CTA ===== */
-    .sticky-mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;padding:12px 16px 16px;background:#fff;box-shadow:0 -4px 20px rgba(0,0,0,.1);border-top:1px solid rgba(0,0,0,.06)}
-    .sticky-mobile-cta a{display:block;width:100%;text-align:center;background:var(--purple-main);color:#fff;padding:15px 24px;border-radius:100px;font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:700;text-decoration:none}
+    /* sticky-mobile-cta removed — replaced by pdpv9-sticky-atc form */
 
     /* ===== RESPONSIVE TABLET (≤900px) ===== */
     @media(max-width:900px){
-      body{padding-bottom:72px}
-      .sticky-mobile-cta{display:block}
       .nav-link{display:none}
       .nav{padding:12px 20px}
       .hero{grid-template-columns:1fr;text-align:center;padding:52px 24px 36px}
@@ -371,7 +367,7 @@
 .expert-img{border-radius:20px;overflow:hidden;aspect-ratio:1/1;background:var(--cream)}
 .expert-img img{width:100%;height:100%;object-fit:cover}
 .expert-quote{font-family:'Red Hat Display',sans-serif;font-size:26px;font-weight:700;color:var(--purple-deep);line-height:1.25;letter-spacing:-0.02em;margin-bottom:20px}
-.expert-body{border-left:3px solid var(--purple-main);padding-left:20px;font-size:15px;color:var(--body);line-height:1.7;font-style:italic;margin-bottom:20px}
+.expert-body{padding:20px 24px;background:var(--purple-wash);border-radius:12px;font-size:15px;color:var(--body);line-height:1.7;font-style:italic;margin-bottom:20px}
 .expert-name{font-weight:700;color:var(--dark);font-size:15px;margin-bottom:4px}
 .expert-credentials{text-transform:uppercase;letter-spacing:1.5px;font-size:11px;color:var(--muted);margin-bottom:10px;font-weight:600}
 .expert-link{color:var(--purple-main);font-size:13px;font-weight:600;display:inline-block}
@@ -384,7 +380,7 @@
 .compare-section h2{font-family:'Red Hat Display',sans-serif;font-size:clamp(28px,3.5vw,42px);font-weight:700;color:#fff;letter-spacing:-0.02em;margin-bottom:16px;text-align:center;line-height:1.15}
 .compare-section h2 .accent{color:var(--purple-light)}
 .compare-sub{color:rgba(255,255,255,.7);font-size:16px;max-width:620px;margin:0 auto 48px;text-align:center;line-height:1.6}
-.compare-table{background:rgba(255,255,255,.04);border-radius:20px;overflow:hidden;backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08)}
+.compare-table{background:rgba(255,255,255,.06);border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
 .compare-head{display:grid;grid-template-columns:1.2fr 1.2fr 1.3fr 1.3fr;text-transform:uppercase;letter-spacing:1.5px;font-size:10.5px;color:rgba(255,255,255,.5);padding:18px 24px;border-bottom:1px solid rgba(255,255,255,.1);font-weight:600}
 .compare-row{display:grid;grid-template-columns:1.2fr 1.2fr 1.3fr 1.3fr;padding:18px 24px;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;align-items:center;transition:background .2s}
 .compare-row:hover{background:rgba(255,255,255,.04)}
@@ -542,7 +538,7 @@
       <a href="#ingredients" class="nav-link">Ingrédients</a>
       <a href="#avis" class="nav-link">Avis</a>
       <a href="#faq" class="nav-link">FAQ</a>
-      <a href="#card-decouverte" class="btn btn-fill" style="padding:10px 22px;font-size:13px;">Commander</a>
+      <a href="#offer" class="btn btn-fill" style="padding:10px 22px;font-size:13px;">Voir les offres</a>
     </div>
   </nav>
 
@@ -704,7 +700,7 @@
 
       <!-- Image produit -->
       <div class="offer-block-img reveal">
-        <img src="https://uburn.co/cdn/shop/files/Uburn_Listing_ecom_1.jpg?v=1772700007&width=800" alt="UBurn Pack" loading="lazy" decoding="async" width="800" height="1000">
+        <img src="https://uburn.co/cdn/shop/files/Uburn_Listing_ecom_1.jpg?v=1772700007&width=800&format=webp" alt="UBurn Pack" loading="lazy" decoding="async" width="800" height="1000">
       </div>
 
       <!-- Cartes prix -->
@@ -712,7 +708,10 @@
         {%- assign v_decouverte = product.variants | where: "id", 51289200034111 | first -%}
         {%- assign v_maximum = product.variants | where: "id", 51289200066879 | first -%}
         {%- unless v_decouverte -%}{%- assign v_decouverte = product.variants.first -%}{%- endunless -%}
-        {%- unless v_maximum -%}{%- assign v_maximum = product.variants[1] | default: product.variants.first -%}{%- endunless -%}
+        {%- unless v_maximum -%}
+          {%- assign v_maximum = product.variants[1] -%}
+          {%- unless v_maximum -%}{%- assign v_maximum = product.variants.first -%}{%- endunless -%}
+        {%- endunless -%}
         <div class="pricing-card pdpv9-variant-card" id="card-decouverte" data-variant-id="{{ v_decouverte.id }}">
           <h3>Découverte</h3>
           <p class="pricing-desc">Idéal pour tester · 90g · 1 dose/jour</p>
@@ -752,7 +751,7 @@
               <div class="cart-item-name">Cure Maximum — Poudre Ubé 270g</div>
               <div class="cart-item-meta">Saveur noisette-vanille · Cure 90 jours</div>
             </div>
-            <div class="cart-item-price">54,50€</div>
+            <div class="cart-item-price">{{ v_maximum.price | money }}</div>
           </div>
           <div class="cart-item">
             <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">E</div>
@@ -776,7 +775,7 @@
           </div>
           <div class="cart-sub">
             <div class="cart-sub-row save"><span>Économies totales</span><span>−184€</span></div>
-            <div class="cart-sub-row total"><span>Total</span><span>54,50€</span></div>
+            <div class="cart-sub-row total"><span>Total</span><span>{{ v_maximum.price | money }}</span></div>
             <div class="cart-sub-note">soit 0,61€/jour sur 90 jours</div>
           </div>
           <p class="offer-rating">★★★★★ 4,7/5 · 1 500+ clientes satisfaites</p>
@@ -1175,11 +1174,6 @@
   </footer>
 
 
-  <!-- STICKY MOBILE CTA -->
-  <div class="sticky-mobile-cta">
-    <a href="#card-decouverte">Commencer ma cure — dès 34,50€</a>
-  </div>
-
   <script>
     // ---- UTM H1 DYNAMIQUE ----
     (function(){
@@ -1373,6 +1367,33 @@
     localStorage.setItem('ub_exit_sub','1');
     setTimeout(ubExitClose, 3000);
   }
+</script>
+
+<!-- AJAX CART ADD -->
+<script>
+(function(){
+  document.addEventListener('submit', function(e){
+    var form = e.target;
+    if(!form.classList.contains('pdpv9-atc-form')) return;
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    var origHTML = btn.innerHTML;
+    btn.innerHTML = '<span style="opacity:.7">Ajout en cours…</span>';
+    btn.disabled = true;
+    var variantId = form.querySelector('[data-variant-input]').value;
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest'},
+      body: JSON.stringify({id: parseInt(variantId, 10), quantity: 1})
+    }).then(function(r){
+      if(!r.ok) throw new Error(r.status);
+      window.location.href = '/checkout';
+    }).catch(function(){
+      btn.innerHTML = origHTML;
+      btn.disabled = false;
+    });
+  });
+})();
 </script>
 
 <!-- STICKY ATC MOBILE -->
