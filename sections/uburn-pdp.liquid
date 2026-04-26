@@ -9,22 +9,22 @@ main#main{padding:0 !important}
 
 /* ═══ DESIGN TOKENS ═══ */
 :root {
-  --purple-deep: #3d1873;
-  --purple-main: #6b2fa0;
+  --purple-deep: #2b1e4d;
+  --purple-main: #7d3fff;
   --purple-mid: #8b47c5;
   --purple-light: #b07de8;
   --purple-pale: #e8dcf5;
-  --purple-wash: #f5f0fa;
-  --cream: #faf9f7;
-  --warm: #f2f0ed;
-  --dark: #242220;
+  --purple-wash: #f8f5ff;
+  --cream: #fffaf7;
+  --warm: #f8f5ff;
+  --dark: #2b1e4d;
   --body: #5a5654;
   --muted: #8a8785;
-  --grad: linear-gradient(160deg, #3d1873 0%, #6b2fa0 40%, #8b47c5 100%);
+  --grad: linear-gradient(160deg, #2b1e4d 0%, #7d3fff 58%, #b07de8 100%);
   --shadow-soft: 0 4px 24px oklch(0.35 0.12 300 / 0.12);
   --shadow-card: 0 2px 12px oklch(0.35 0.12 300 / 0.08);
-  --radius: 16px;
-  --radius-sm: 10px;
+  --radius: 8px;
+  --radius-sm: 6px;
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
@@ -122,7 +122,7 @@ a { color: inherit; text-decoration: none; }
   color: #fff;
   border: none;
   padding: 13px 24px;
-  border-radius: 50px;
+  border-radius: 0;
   font-family: 'Red Hat Display', sans-serif;
   font-weight: 700;
   font-size: 14px;
@@ -151,7 +151,7 @@ a { color: inherit; text-decoration: none; }
 .gallery-wrap { position: relative; }
 .gallery-main {
   aspect-ratio: 4/5;
-  border-radius: 20px;
+  border-radius: 8px;
   overflow: hidden;
   background: var(--purple-wash);
   margin-bottom: 12px;
@@ -165,6 +165,21 @@ a { color: inherit; text-decoration: none; }
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .gallery-main:hover img { transform: scale(1.03); }
+.gallery-main::after {
+  content: 'Rituel latte ubé';
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  background: rgba(255,255,255,.88);
+  color: var(--purple-deep);
+  padding: 8px 12px;
+  border: 1px solid rgba(125,63,255,.18);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
 .gallery-thumbs {
   display: flex;
   gap: 8px;
@@ -177,7 +192,7 @@ a { color: inherit; text-decoration: none; }
   flex-shrink: 0;
   width: 64px;
   height: 64px;
-  border-radius: 10px;
+  border-radius: 4px;
   overflow: hidden;
   background: var(--purple-wash);
   cursor: pointer;
@@ -191,13 +206,20 @@ a { color: inherit; text-decoration: none; }
 
 /* Product Info */
 .product-info { padding-top: 8px; }
+.product-info-panel {
+  background: #fff;
+  border: 1px solid var(--purple-pale);
+  border-radius: 8px;
+  padding: 28px;
+  box-shadow: 0 18px 60px rgba(43,30,77,.08);
+}
 .product-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   background: var(--purple-wash);
   color: var(--purple-main);
-  border-radius: 50px;
+  border-radius: 0;
   padding: 5px 14px;
   font-size: 11.5px;
   font-weight: 700;
@@ -336,7 +358,7 @@ a { color: inherit; text-decoration: none; }
   color: #fff;
   border: none;
   padding: 18px 32px;
-  border-radius: 50px;
+  border-radius: 0;
   font-family: 'Red Hat Display', sans-serif;
   font-weight: 800;
   font-size: 16px;
@@ -948,6 +970,17 @@ a { color: inherit; text-decoration: none; }
   transition: opacity 0.2s;
 }
 .offer-card-btn:hover { opacity: 0.9; }
+.offer-card-note {
+  width: 100%;
+  background: var(--purple-wash);
+  color: var(--purple-deep);
+  border: 1px solid var(--purple-pale);
+  padding: 12px;
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+}
 
 /* Bonus block */
 .bonus-block {
@@ -1598,7 +1631,7 @@ a { color: inherit; text-decoration: none; }
   </div>
   <div class="trust-item">
     <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    Satisfait ou remboursé 30j
+    Paiement sécurisé
   </div>
   <div class="trust-item">
     <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
@@ -1610,7 +1643,7 @@ a { color: inherit; text-decoration: none; }
 <div class="sticky-atc" id="stickyAtc">
   <div class="sticky-atc-title">Uburn — Poudre Ubé<br><span style="font-weight:500;font-size:12px;color:var(--body)">Satiété durable · 0% caféine · 6 actifs naturels</span></div>
   <div class="sticky-atc-price" id="stickyPrice">34,50 €</div>
-  <button class="sticky-atc-btn" onclick="document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'center'})">Commander →</button>
+  <button type="button" class="sticky-atc-btn" onclick="document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'center'})">Commander</button>
 </div>
 
 <!-- ═══ HERO ═══ -->
@@ -1621,8 +1654,8 @@ a { color: inherit; text-decoration: none; }
     <div class="gallery-main" id="galleryMain">
       <img
         id="galleryMainImg"
-        src="https://uburn.co/cdn/shop/files/Uburn_Listing_ecom_1.jpg?v=1772700007&width=800"
-        alt="Uburn — Poudre Ubé, vue principale"
+        src="{{ 'latte_hero_01.jpg' | asset_url }}"
+        alt="Uburn — latte ubé crémeux servi le matin"
         loading="eager"
         decoding="async"
       >
@@ -1633,11 +1666,11 @@ a { color: inherit; text-decoration: none; }
   </div>
 
   <!-- PRODUCT INFO -->
-  <div class="product-info">
-    <div class="product-badge">Marque française · 6 actifs naturels</div>
+  <div class="product-info product-info-panel">
+    <div class="product-badge">Rituel latte · 6 actifs naturels</div>
 
-    <h1 class="product-title">Uburn — Reprenez le contrôle</h1>
-    <p class="product-subtitle">4h de satiété durable. 0% caféine. 30 kcal par dose.<br>Formulé autour du glucomannane validé EFSA.</p>
+    <h1 class="product-title">Le latte ubé qui calme les fringales.</h1>
+    <p class="product-subtitle">Une boisson violette, crémeuse et légère. 30 kcal par dose, 0% caféine, formulée autour du glucomannane validé EFSA.</p>
 
     <div class="product-rating">
       <div class="stars">★★★★★</div>
@@ -1667,13 +1700,13 @@ a { color: inherit; text-decoration: none; }
     <!-- VARIANTS -->
     <div class="variant-label">Choisissez votre objectif</div>
     <div class="variants" id="variantSelector">
-      <div class="variant-card active" data-variant="0" data-price="34.50" data-daily="1,15€" onclick="selectVariant(this)">
+      <div class="variant-card active" data-variant="0" data-variant-id="{{ variant_decouverte.id }}" data-price="34.50" data-daily="1,15€" onclick="selectVariant(this)">
         <div class="variant-name">Découverte</div>
         <div class="variant-desc">90g · 1 dose/jour</div>
         <div class="variant-price">34,50 €</div>
         <div class="variant-per-day">soit 1,15€/jour</div>
       </div>
-      <div class="variant-card" data-variant="1" data-price="54.50" data-daily="0,61€" onclick="selectVariant(this)">
+      <div class="variant-card" data-variant="1" data-variant-id="{{ variant_max.id }}" data-price="54.50" data-daily="0,61€" onclick="selectVariant(this)">
         <div class="variant-badge-pop">Le plus populaire</div>
         <div class="variant-name">Résultats Maximum</div>
         <div class="variant-desc">270g · 3 doses/jour</div>
@@ -1687,8 +1720,8 @@ a { color: inherit; text-decoration: none; }
       <div class="price-sub" id="priceSub">Paiement unique · <span id="pricePerDay">1,15€/jour</span></div>
     </div>
 
-    <button class="btn-atc" id="atc-btn">
-      Commander — Livraison offerte →
+    <button class="btn-atc" id="atc-btn" type="submit">
+      Commander — Livraison offerte
     </button>
     <div class="atc-sub">
       <span>
@@ -1707,8 +1740,8 @@ a { color: inherit; text-decoration: none; }
 
     <div class="guarantees">
       <div class="guarantee-item">
-        <div class="guarantee-icon">🔄</div>
-        <div class="guarantee-text">Satisfait ou<br>remboursé 30j</div>
+        <div class="guarantee-icon">🚚</div>
+        <div class="guarantee-text">Livraison<br>offerte</div>
       </div>
       <div class="guarantee-item">
         <div class="guarantee-icon">🌿</div>
@@ -2292,7 +2325,7 @@ a { color: inherit; text-decoration: none; }
         <div class="offer-card-sub">90g · 1 dose/jour · Idéal pour tester</div>
         <div class="offer-card-price">34,50 €</div>
         <div class="offer-card-daily">soit 1,15€/jour · 30 jours</div>
-        <a href="#atc-btn" class="offer-card-btn" onclick="event.preventDefault();document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'center'})">Commander →</a>
+        <div class="offer-card-note">Format sélectionnable en haut de page</div>
       </div>
       <div class="offer-card featured">
         <div class="offer-card-badge">Le plus populaire</div>
@@ -2300,7 +2333,7 @@ a { color: inherit; text-decoration: none; }
         <div class="offer-card-sub">270g · 3 doses/jour · 3× plus de résultats</div>
         <div class="offer-card-price">54,50 €</div>
         <div class="offer-card-daily">= 0,61€/jour · 90 jours</div>
-        <a href="#atc-btn" class="offer-card-btn" onclick="event.preventDefault();document.getElementById('atc-btn').scrollIntoView({behavior:'smooth',block:'center'})">Commander →</a>
+        <div class="offer-card-note">Format sélectionnable en haut de page</div>
       </div>
     </div>
 
@@ -2343,8 +2376,8 @@ a { color: inherit; text-decoration: none; }
         <div class="trust-cell-text">Paiement 100% sécurisé</div>
       </div>
       <div class="trust-cell">
-        <div class="trust-cell-icon">🔄</div>
-        <div class="trust-cell-text">Satisfait ou remboursé 30j</div>
+        <div class="trust-cell-icon">🌿</div>
+        <div class="trust-cell-text">Rituel naturel au quotidien</div>
       </div>
       <div class="trust-cell">
         <div class="trust-cell-icon">🚫</div>
@@ -2368,7 +2401,7 @@ a { color: inherit; text-decoration: none; }
 <script>
 /* Gallery */
 const galleryImages = [
-  { src: "https://uburn.co/cdn/shop/files/Uburn_Listing_ecom_1.jpg?v=1772700007&width=800", alt: "Uburn Poudre Ubé — vue principale" },
+  { src: "{{ 'latte_hero_01.jpg' | asset_url }}", alt: "Uburn — latte ubé crémeux servi le matin" },
   { src: "https://uburn.co/cdn/shop/files/PRODUCTPAGE_0004_3.jpg?v=1773911263&width=800", alt: "Uburn — photo produit 2" },
   { src: "https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1773911263&width=800", alt: "Uburn — photo produit 3" },
   { src: "https://uburn.co/cdn/shop/files/PRODUCTPAGE_0002_5.jpg?v=1773911263&width=800", alt: "Uburn — photo produit 4" },
@@ -2414,10 +2447,14 @@ function selectVariant(el) {
   el.classList.add('active');
   const price = el.dataset.price;
   const daily = el.dataset.daily;
+  const variantId = el.dataset.variantId;
   const formatted = parseFloat(price).toFixed(2).replace('.', ',') + ' €';
   document.getElementById('priceMain').textContent = formatted;
   document.getElementById('pricePerDay').textContent = daily + '/jour';
   document.getElementById('stickyPrice').textContent = formatted;
+  if (variantId) {
+    document.getElementById('variant-id').value = variantId;
+  }
 }
 
 /* FAQ */
@@ -2464,12 +2501,9 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 </script>
 
-
-
 </form>
 
-<script>
-
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Product",
@@ -2498,116 +2532,6 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     "reviewCount": "1500"
   }
 }
- 
-/* Gallery */
-const galleryImages = [
-  { src: "https://uburn.co/cdn/shop/files/Uburn_Listing_ecom_1.jpg?v=1772700007&width=800", alt: "Uburn Poudre Ubé — vue principale" },
-  { src: "https://uburn.co/cdn/shop/files/PRODUCTPAGE_0004_3.jpg?v=1773911263&width=800", alt: "Uburn — photo produit 2" },
-  { src: "https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1773911263&width=800", alt: "Uburn — photo produit 3" },
-  { src: "https://uburn.co/cdn/shop/files/PRODUCTPAGE_0002_5.jpg?v=1773911263&width=800", alt: "Uburn — photo produit 4" },
-  { src: "https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0001_6_6cd95d50-55ff-4349-b486-02ff851786de.jpg?v=1773911263&width=800", alt: "Uburn — photo produit 5" },
-  { src: "https://uburn.co/cdn/shop/files/PRODUCTPAGE_0003_4.jpg?v=1773911263&width=800", alt: "Uburn — photo produit 6" },
-  { src: "https://uburn.co/cdn/shop/files/PRODUCTPAGE_0000_7.jpg?v=1773911263&width=800", alt: "Uburn — photo produit 7" },
-];
-
-const thumbsContainer = document.getElementById('galleryThumbs');
-const mainImg = document.getElementById('galleryMainImg');
-let activeThumb = 0;
-
-galleryImages.forEach((img, i) => {
-  const thumb = document.createElement('div');
-  thumb.className = 'gallery-thumb' + (i === 0 ? ' active' : '');
-  thumb.innerHTML = `<img src="${img.src.replace('width=800','width=200')}" alt="${img.alt}" loading="lazy">`;
-  thumb.addEventListener('click', () => {
-    switchImage(i);
-  });
-  thumbsContainer.appendChild(thumb);
-});
-
-function switchImage(idx) {
-  const thumbs = document.querySelectorAll('.gallery-thumb');
-  thumbs[activeThumb].classList.remove('active');
-  thumbs[idx].classList.add('active');
-  mainImg.style.opacity = '0';
-  mainImg.style.transform = 'scale(0.98)';
-  setTimeout(() => {
-    mainImg.src = galleryImages[idx].src;
-    mainImg.alt = galleryImages[idx].alt;
-    mainImg.style.opacity = '1';
-    mainImg.style.transform = 'scale(1)';
-  }, 150);
-  activeThumb = idx;
-}
-
-mainImg.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-
-/* Variant selector */
-function selectVariant(el) {
-  document.querySelectorAll('.variant-card').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  const price = el.dataset.price;
-  const daily = el.dataset.daily;
-  const formatted = parseFloat(price).toFixed(2).replace('.', ',') + ' €';
-  document.getElementById('priceMain').textContent = formatted;
-  document.getElementById('pricePerDay').textContent = daily + '/jour';
-  document.getElementById('stickyPrice').textContent = formatted;
-}
-
-/* FAQ */
-function toggleFaq(btn) {
-  const answer = btn.nextElementSibling;
-  const isOpen = answer.classList.contains('open');
-
-  document.querySelectorAll('.faq-a.open').forEach(a => {
-    a.classList.remove('open');
-    a.previousElementSibling.classList.remove('open');
-  });
-
-  if (!isOpen) {
-    answer.classList.add('open');
-    btn.classList.add('open');
-  }
-}
-
-/* Sticky ATC */
-const atcBtn = document.getElementById('atc-btn');
-const stickyAtc = document.getElementById('stickyAtc');
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) {
-      stickyAtc.classList.add('visible');
-    } else {
-      stickyAtc.classList.remove('visible');
-    }
-  });
-}, { threshold: 0 });
-
-observer.observe(atcBtn);
-
-/* Scroll reveals */
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-
-// Sync variant selection with Shopify cart form
-document.querySelectorAll('.variant-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const vid = card.dataset.variantId;
-    if(vid) {
-      const input = document.getElementById('variant-id');
-      if(input) input.value = vid;
-    }
-  });
-});
-
 </script>
 
 {% schema %}
