@@ -1,24 +1,126 @@
-<!-- ANNOUNCE -->
-<div class="announce">LIVRAISON GRATUITE EN FRANCE</div>
+<style>
+/* === UB-NAV · UNIFIED NAVIGATION === */
+.ub-announce{background:#1a1118;color:#fff;text-align:center;padding:9px 20px;font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
+.ub-nav{position:sticky;top:0;z-index:300;background:rgba(250,249,247,.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid #e8dcf5;height:64px;display:flex;align-items:center;padding:0 40px;gap:16px;justify-content:space-between}
+.ub-nav-logo{flex-shrink:0;line-height:0}
+.ub-nav-logo img{height:26px;width:auto;display:block}
+.ub-nav-center{display:flex;align-items:center;gap:4px;flex:1;justify-content:center}
+.ub-nav-cta-link{background:linear-gradient(160deg,#3d1873,#6b2fa0,#8b47c5);color:#fff;padding:9px 18px;border-radius:50px;font-family:'Red Hat Display',sans-serif;font-weight:700;font-size:13px;white-space:nowrap;transition:opacity .2s;text-decoration:none;display:inline-block;margin-right:8px}
+.ub-nav-cta-link:hover{opacity:.85}
+.ub-nav-link{font-size:13.5px;font-weight:500;color:#5a5654;padding:6px 10px;border-radius:6px;transition:color .2s;white-space:nowrap;text-decoration:none}
+.ub-nav-link:hover,.ub-nav-link.active{color:#6b2fa0}
+.ub-nav-right{display:flex;align-items:center;gap:2px;flex-shrink:0}
+.ub-nav-icon{width:38px;height:38px;display:flex;align-items:center;justify-content:center;color:#5a5654;border-radius:8px;transition:color .2s,background .2s;position:relative;text-decoration:none}
+.ub-nav-icon:hover{color:#6b2fa0;background:#f5f0fa}
+.ub-nav-icon svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ub-cart-badge{position:absolute;top:4px;right:4px;min-width:16px;height:16px;background:#6b2fa0;color:#fff;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 3px;line-height:1;font-family:'Red Hat Text',sans-serif}
+.ub-nav-burger{display:none;width:38px;height:38px;align-items:center;justify-content:center;border:none;background:none;cursor:pointer;color:#5a5654;border-radius:8px;transition:color .2s,background .2s;padding:0}
+.ub-nav-burger:hover{color:#6b2fa0;background:#f5f0fa}
+.ub-nav-burger svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+/* Trust ribbon */
+.ub-ribbon{background:#f5f0fa;padding:10px 20px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;font-size:13px;color:#5a5654;font-weight:500}
+.ub-ribbon span{display:flex;align-items:center;gap:6px}
+.ub-ribbon svg{width:13px;height:13px;stroke:#6b2fa0;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+/* Mobile menu */
+.ub-nav-mobile{display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:400;background:#faf9f7;padding:0;flex-direction:column;overflow-y:auto}
+.ub-nav-mobile.open{display:flex}
+.ub-mobile-header{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e8dcf5}
+.ub-mobile-close{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border:none;background:none;cursor:pointer;color:#5a5654}
+.ub-mobile-close svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.ub-mobile-links{padding:12px 20px;display:flex;flex-direction:column;gap:0;flex:1}
+.ub-mobile-link{font-family:'Red Hat Display',sans-serif;font-size:17px;font-weight:700;color:#1a1118;padding:14px 0;border-bottom:1px solid #e8dcf5;text-decoration:none;display:block;transition:color .2s}
+.ub-mobile-link:last-child{border-bottom:none}
+.ub-mobile-link:hover{color:#6b2fa0}
+.ub-mobile-cta{display:block;margin:20px;background:linear-gradient(160deg,#3d1873,#6b2fa0,#8b47c5);color:#fff;text-align:center;padding:16px;border-radius:50px;font-family:'Red Hat Display',sans-serif;font-weight:800;font-size:15px;text-decoration:none}
+@media(max-width:960px){
+  .ub-nav-center{display:none}
+  .ub-nav-burger{display:flex}
+  .ub-nav{padding:0 20px;height:58px}
+}
+@media(max-width:600px){
+  .ub-announce{font-size:11px;padding:8px 16px}
+  .ub-ribbon{gap:14px;font-size:12px}
+}
+</style>
+
+<!-- ANNOUNCE BAR -->
+<div class="ub-announce">LIVRAISON GRATUITE EN FRANCE — Sans abonnement · Sans engagement</div>
 
 <!-- NAV -->
-<nav class="nav">
-  <a href="/products/ube-poudre?variant=51289200066879" aria-label="UBurn — page produit">
-    <img class="nav-logo" src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn" width="120" height="28">
+<nav class="ub-nav">
+  <a href="/" class="ub-nav-logo" aria-label="Uburn — Accueil">
+    <img src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn" width="110" height="26">
   </a>
-  <div class="nav-right">
-    <a href="/pages/ingredients" class="nav-link">Ingrédients</a>
-    <a href="/pages/notre-histoire" class="nav-link">À propos</a>
-    <a href="/pages/faq" class="nav-link">FAQ</a>
-    <a href="/pages/contact" class="nav-link">Contact</a>
-    <a href="/products/ube-poudre?variant=51289200066879" class="btn btn-fill" style="padding:10px 22px;font-size:13px;">Commander</a>
+
+  <div class="ub-nav-center">
+    <a href="/products/ube-poudre?variant=51289200066879" class="ub-nav-cta-link">Commander</a>
+    <a href="/pages/comment-ca-marche" class="ub-nav-link">Comment ça marche</a>
+    <a href="/pages/ingredients" class="ub-nav-link">Ingrédients</a>
+    <a href="/pages/avis" class="ub-nav-link">Avis</a>
+    <a href="/pages/about" class="ub-nav-link">Notre histoire</a>
+    <a href="/pages/contact" class="ub-nav-link">Contact</a>
+  </div>
+
+  <div class="ub-nav-right">
+    <a href="/search" class="ub-nav-icon" aria-label="Rechercher">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </a>
+    <a href="/cart" class="ub-nav-icon" aria-label="Panier">
+      <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      {%- if cart.item_count > 0 -%}
+      <span class="ub-cart-badge">{{ cart.item_count }}</span>
+      {%- endif -%}
+    </a>
+    <button class="ub-nav-burger" aria-label="Ouvrir le menu" aria-expanded="false" id="ub-burger-btn">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
   </div>
 </nav>
 
 <!-- TRUST RIBBON -->
-<div class="ribbon">
-  <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> Ingrédients conformes EFSA</span>
-  <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> 100% Végétal</span>
-  <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> Sans abonnement</span>
-  <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> Livraison offerte</span>
+<div class="ub-ribbon">
+  <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Ingrédients validés EFSA</span>
+  <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>100% Végétal</span>
+  <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sans abonnement</span>
+  <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Livraison offerte</span>
 </div>
+
+<!-- MOBILE MENU OVERLAY -->
+<div class="ub-nav-mobile" id="ub-nav-mobile" role="dialog" aria-modal="true" aria-label="Menu principal">
+  <div class="ub-mobile-header">
+    <a href="/" aria-label="Uburn">
+      <img src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn" height="24" style="height:24px;width:auto">
+    </a>
+    <button class="ub-mobile-close" aria-label="Fermer le menu" id="ub-mobile-close">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="ub-mobile-links">
+    <a href="/pages/comment-ca-marche" class="ub-mobile-link">Comment ça marche</a>
+    <a href="/pages/ingredients" class="ub-mobile-link">Ingrédients</a>
+    <a href="/pages/avis" class="ub-mobile-link">Avis</a>
+    <a href="/pages/about" class="ub-mobile-link">Notre histoire</a>
+    <a href="/pages/contact" class="ub-mobile-link">Contact</a>
+    <a href="/pages/faq" class="ub-mobile-link">FAQ</a>
+  </div>
+  <a href="/products/ube-poudre?variant=51289200066879" class="ub-mobile-cta">Commander maintenant →</a>
+</div>
+
+<script>
+(function(){
+  var burger=document.getElementById('ub-burger-btn');
+  var menu=document.getElementById('ub-nav-mobile');
+  var closeBtn=document.getElementById('ub-mobile-close');
+  function open(){menu.classList.add('open');burger.setAttribute('aria-expanded','true');document.body.style.overflow='hidden'}
+  function close(){menu.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow=''}
+  if(burger)burger.addEventListener('click',open);
+  if(closeBtn)closeBtn.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  // Active link highlight
+  var p=location.pathname.replace(/\/$/,'');
+  document.querySelectorAll('.ub-nav-link,.ub-mobile-link').forEach(function(a){
+    var h=a.getAttribute('href').replace(/\/$/,'');
+    if(h&&h===p)a.classList.add('active');
+  });
+})();
+</script>

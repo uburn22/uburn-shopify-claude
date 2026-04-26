@@ -1,71 +1,144 @@
-<!-- GUARANTEE BAR -->
-<div class="guar-bar">
-  <div class="guar-grid">
-    <div class="guar-item">
-      <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_World.svg" alt="" width="48" height="48" loading="lazy"></div>
-      <h4>Formule EFSA</h4><p>Glucomannane ID 3120</p>
-    </div>
-    <div class="guar-item">
-      <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_Fast_shipping.svg" alt="" width="48" height="48" loading="lazy"></div>
-      <h4>Livraison gratuite</h4><p>En France</p>
-    </div>
-    <div class="guar-item">
-      <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_secure_payment.svg" alt="" width="48" height="48" loading="lazy"></div>
-      <h4>Paiement sécurisé</h4><p>100% sécurisé</p>
-    </div>
-    <div class="guar-item">
-      <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_customer.svg" alt="" width="48" height="48" loading="lazy"></div>
-      <h4>Sans abonnement</h4><p>Commandez quand vous voulez</p>
-    </div>
+<style>
+/* === UB-FOOTER · UNIFIED FOOTER === */
+.ub-newsletter{background:linear-gradient(160deg,#3d1873,#6b2fa0);padding:32px 40px;text-align:center}
+.ub-newsletter-inner{max-width:560px;margin:0 auto}
+.ub-newsletter-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;color:rgba(255,255,255,.6);margin-bottom:8px}
+.ub-newsletter-headline{font-family:'Red Hat Display',sans-serif;font-size:22px;font-weight:800;color:#fff;margin-bottom:6px;letter-spacing:-0.02em}
+.ub-newsletter-code{display:inline-block;background:rgba(255,255,255,.15);border:1.5px dashed rgba(255,255,255,.4);color:#fff;font-family:'Red Hat Display',sans-serif;font-size:20px;font-weight:900;letter-spacing:3px;padding:10px 28px;border-radius:10px;margin-top:10px;cursor:pointer;transition:background .2s;user-select:all}
+.ub-newsletter-code:hover{background:rgba(255,255,255,.22)}
+.ub-newsletter-sub{font-size:12px;color:rgba(255,255,255,.5);margin-top:8px}
+/* Footer */
+.ub-footer{background:#1a1118;padding:60px 40px 28px;color:rgba(255,255,255,.55)}
+.ub-footer-inner{max-width:1140px;margin:0 auto}
+.ub-footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:32px}
+.ub-footer-logo{height:22px;width:auto;margin-bottom:16px;filter:brightness(0) invert(1);opacity:.8}
+.ub-footer-desc{font-size:13px;line-height:1.7;color:rgba(255,255,255,.45);max-width:32ch;margin-bottom:16px}
+.ub-footer-email{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:16px}
+.ub-footer-email a{color:rgba(255,255,255,.5);transition:color .2s;text-decoration:none}
+.ub-footer-email a:hover{color:#fff}
+.ub-footer-instagram{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s}
+.ub-footer-instagram:hover{color:#fff}
+.ub-footer-instagram svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ub-footer-col-title{font-family:'Red Hat Display',sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.7);margin-bottom:16px}
+.ub-footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.ub-footer-links a{font-size:13px;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;display:block}
+.ub-footer-links a:hover{color:rgba(255,255,255,.85)}
+/* Payments */
+.ub-footer-payments{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.ub-footer-payments span{font-size:11px;color:rgba(255,255,255,.3);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-right:4px}
+.ub-pay-badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:5px 10px;font-size:11px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.5px}
+/* Bottom */
+.ub-footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11.5px;color:rgba(255,255,255,.22);padding-top:20px;border-top:1px solid rgba(255,255,255,.06)}
+.ub-footer-bottom a{color:rgba(255,255,255,.22);text-decoration:none;transition:color .2s}
+.ub-footer-bottom a:hover{color:rgba(255,255,255,.5)}
+.ub-footer-legal-links{display:flex;gap:16px;flex-wrap:wrap}
+/* Disclaimer */
+.ub-footer-disc{margin-top:20px;padding:14px 18px;background:rgba(255,255,255,.04);border-radius:10px}
+.ub-footer-disc p{font-size:10.5px;color:rgba(255,255,255,.25);line-height:1.65}
+/* Sticky mobile CTA */
+.ub-sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;padding:12px 16px 16px;background:#fff;box-shadow:0 -4px 20px rgba(0,0,0,.1);border-top:1px solid rgba(0,0,0,.06)}
+.ub-sticky-cta a{display:block;width:100%;text-align:center;background:linear-gradient(160deg,#3d1873,#6b2fa0,#8b47c5);color:#fff;padding:15px 24px;border-radius:100px;font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:700;text-decoration:none}
+@media(max-width:900px){
+  .ub-footer-top{grid-template-columns:1fr 1fr;gap:32px}
+  .ub-footer{padding:48px 24px 24px}
+  .ub-newsletter{padding:28px 24px}
+  body{padding-bottom:72px}
+  .ub-sticky-cta{display:block}
+}
+@media(max-width:600px){
+  .ub-footer-top{grid-template-columns:1fr;gap:28px}
+  .ub-newsletter-headline{font-size:19px}
+  .ub-footer-bottom{flex-direction:column;align-items:flex-start;gap:8px}
+}
+</style>
+
+<!-- NEWSLETTER / PROMO BAR -->
+<div class="ub-newsletter">
+  <div class="ub-newsletter-inner">
+    <div class="ub-newsletter-label">Offre de bienvenue</div>
+    <div class="ub-newsletter-headline">-10% sur votre première commande</div>
+    <div class="ub-newsletter-code" title="Cliquez pour copier" onclick="navigator.clipboard&&navigator.clipboard.writeText('UBE10')">UBE10</div>
+    <div class="ub-newsletter-sub">Code à entrer au panier — livraison offerte incluse</div>
   </div>
 </div>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <img class="footer-brand-logo" src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn" loading="lazy" width="120" height="24">
-        <p>Reprenez le contrôle de votre alimentation avec une formule 100% naturelle, validée EFSA. Marque française.</p>
-        <div class="footer-contact">hello@uburn.co</div>
+<footer class="ub-footer">
+  <div class="ub-footer-inner">
+    <div class="ub-footer-top">
+      <!-- Col 1 : Brand -->
+      <div>
+        <img src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn" class="ub-footer-logo" loading="lazy" width="110" height="22">
+        <p class="ub-footer-desc">Complément alimentaire anti-fringales à base de glucomannane. Formule 100% végétale, validée EFSA. Marque française.</p>
+        <div class="ub-footer-email"><a href="mailto:hello@uburn.co">hello@uburn.co</a></div>
+        <a href="https://www.instagram.com/uburn.co/" class="ub-footer-instagram" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+          @uburn.co
+        </a>
       </div>
-      <div class="footer-col">
-        <h4>Produit</h4>
-        <a href="/products/ube-poudre">Ube Poudre</a>
-        <a href="/pages/ingredients">Ingrédients</a>
-        <a href="/collections/all">Boutique</a>
-        <a href="/#avis">Avis clients</a>
+      <!-- Col 2 : Produit -->
+      <div>
+        <div class="ub-footer-col-title">Produit</div>
+        <ul class="ub-footer-links">
+          <li><a href="/products/ube-poudre">Ube Poudre</a></li>
+          <li><a href="/pages/ingredients">Ingrédients</a></li>
+          <li><a href="/pages/comment-ca-marche">Comment ça marche</a></li>
+          <li><a href="/pages/avis">Avis clients</a></li>
+          <li><a href="/pages/resultats">Résultats</a></li>
+        </ul>
       </div>
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="/pages/faq">FAQ</a>
-        <a href="/pages/contact">Contact</a>
-        <a href="/policies/shipping-policy">Livraison</a>
-        <a href="/policies/privacy-policy">Confidentialité</a>
+      <!-- Col 3 : Support -->
+      <div>
+        <div class="ub-footer-col-title">Support</div>
+        <ul class="ub-footer-links">
+          <li><a href="/pages/faq">FAQ</a></li>
+          <li><a href="/pages/contact">Contact</a></li>
+          <li><a href="/pages/livraison">Livraison</a></li>
+          <li><a href="/pages/retour">Retours</a></li>
+        </ul>
       </div>
-      <div class="footer-col">
-        <h4>Entreprise</h4>
-        <a href="/pages/notre-histoire">À propos</a>
-        <a href="/policies/terms-of-service">CGV</a>
-        <a href="/policies/legal-notice">Mentions légales</a>
-        <a href="/pages/contact">Presse</a>
+      <!-- Col 4 : Légal -->
+      <div>
+        <div class="ub-footer-col-title">Légal</div>
+        <ul class="ub-footer-links">
+          <li><a href="/pages/about">Notre histoire</a></li>
+          <li><a href="/pages/mentions-legales">Mentions légales</a></li>
+          <li><a href="/pages/cgv">CGV</a></li>
+          <li><a href="/pages/confidentialite">Confidentialité</a></li>
+        </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; {{ 'now' | date: '%Y' }} UBurn. Tous droits réservés.</p>
-      <div class="footer-legal">
-        <a href="/policies/terms-of-service">CGV</a>
-        <a href="/policies/privacy-policy">Confidentialité</a>
-        <a href="/policies/legal-notice">Mentions légales</a>
+
+    <!-- Paiements -->
+    <div class="ub-footer-payments">
+      <span>Paiement sécurisé</span>
+      <span class="ub-pay-badge">Visa</span>
+      <span class="ub-pay-badge">Mastercard</span>
+      <span class="ub-pay-badge">CB</span>
+      <span class="ub-pay-badge">PayPal</span>
+      <span class="ub-pay-badge">Apple Pay</span>
+      <span class="ub-pay-badge">Google Pay</span>
+      <span class="ub-pay-badge">Klarna</span>
+    </div>
+
+    <!-- Bottom -->
+    <div class="ub-footer-bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} UBurn — R Glow F.Z.E. Tous droits réservés.</span>
+      <div class="ub-footer-legal-links">
+        <a href="/pages/mentions-legales">Mentions légales</a>
+        <a href="/pages/cgv">CGV</a>
+        <a href="/pages/confidentialite">Confidentialité</a>
       </div>
     </div>
-    <div class="footer-disc">
-      <p>Complément alimentaire à base de glucomannane. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas. Ne se substitue pas à une alimentation variée et équilibrée. Déconseillé pendant la grossesse et l'allaitement.</p>
+
+    <!-- Disclaimer légal -->
+    <div class="ub-footer-disc">
+      <p>Complément alimentaire à base de glucomannane de konjac. Le glucomannane contribue à la réduction de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions d'utilisation : 3 g/jour en 3 doses de 1 g avec 1 à 2 grands verres d'eau avant les repas. Ne se substitue pas à une alimentation variée et équilibrée. Déconseillé pendant la grossesse et l'allaitement. Tenez hors de portée des jeunes enfants. Conservez dans un endroit sec, à l'abri de la chaleur. Les résultats varient selon les individus.</p>
     </div>
   </div>
 </footer>
 
 <!-- STICKY MOBILE CTA -->
-<div class="sticky-mobile-cta">
-  <a href="/products/ube-poudre?variant=51289200066879">Commencer ma cure — dès 34,50€</a>
+<div class="ub-sticky-cta">
+  <a href="/products/ube-poudre?variant=51289200066879">Commencer ma cure — dès 34,50 €</a>
 </div>

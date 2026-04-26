@@ -105,16 +105,7 @@ main#main{padding:0 !important}
 @media(max-width:600px){.ing-grid{grid-template-columns:1fr}.ing-card::after{display:none !important}}
 
 </style>
-<nav class="nav">
-  <a href="/" class="nav-logo">Uburn</a>
-  <ul class="nav-links">
-    <li><a href="/products/ube-poudre">Produit</a></li>
-    <li><a href="/pages/ingredients"class='active'>Ingrédients</a></li>
-    <li><a href="/pages/about">Notre histoire</a></li>
-    <li><a href="/pages/resultats">Résultats</a></li>
-  </ul>
-  <a href="/products/ube-poudre" class="nav-cta">Commander →</a>
-</nav>
+{% render 'ub-nav' %}
 
 <section class="ing-hero">
   <div style="position:relative;z-index:1;max-width:700px">
@@ -231,27 +222,9 @@ main#main{padding:0 !important}
     <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6">Les résultats varient selon les individus. Glucomannane — EFSA ID 3120. Conditions : 3g/jour avec eau avant les repas.</p>
   </div>
 </section>
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div>
-        <div class="footer-brand">Uburn</div>
-        <p class="footer-desc">Complément alimentaire à base de glucomannane. Marque française — R Glow F.Z.E.</p>
-        <p class="footer-legal">Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g/jour en 3 doses avec 1-2 verres d'eau avant les repas.</p>
-      </div>
-      <div><div class="footer-col-title">Produit</div><ul class="footer-links"><li><a href="/products/ube-poudre">Ube Poudre</a></li><li><a href="/pages/ingredients">Ingrédients</a></li><li><a href="/pages/resultats">Résultats</a></li><li><a href="/pages/faq">FAQ</a></li></ul></div>
-      <div><div class="footer-col-title">Support</div><ul class="footer-links"><li><a href="/pages/faq">FAQ</a></li><li><a href="/pages/contact">Contact</a></li><li><a href="#">Livraison</a></li><li><a href="#">Retours</a></li></ul></div>
-      <div><div class="footer-col-title">Entreprise</div><ul class="footer-links"><li><a href="/pages/about">Notre histoire</a></li><li><a href="/pages/resultats">Résultats</a></li><li><a href="#">Presse</a></li><li><a href="#">CGV</a></li></ul></div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 UBurn. Tous droits réservés.</span>
-      <span>hello@uburn.co</span>
-      <div style="display:flex;gap:16px"><a href="#" style="color:rgba(255,255,255,0.22)">Confidentialité</a><a href="#" style="color:rgba(255,255,255,0.22)">Mentions légales</a></div>
-    </div>
-  </div>
-</footer>
+{% render 'ub-footer' %}
 <script>
-const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0,rootMargin:'0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 {% schema %}

@@ -532,16 +532,7 @@ a{color:inherit;text-decoration:none}
 
 
 <!-- NAV -->
-<nav class="nav" id="nav">
-  <div class="nav-logo">Uburn</div>
-  <ul class="nav-links">
-    <li><a href="/">Produit</a></li>
-    <li><a href="#">Ingrédients</a></li>
-    <li><a href="#" style="color:#fff;font-weight:700">Notre histoire</a></li>
-    <li><a href="/pages/resultats">Résultats</a></li>
-  </ul>
-  <a href="{{ routes.root_url }}products/ube-poudre" class="nav-cta">Commander →</a>
-</nav>
+{% render 'ub-nav' %}
 
 <!-- HERO EDITORIAL -->
 <section class="hero-about" id="hero">
@@ -862,85 +853,15 @@ a{color:inherit;text-decoration:none}
 </section>
 
 <!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div>
-        <div class="footer-brand-name">Uburn</div>
-        <p class="footer-brand-desc">Complément alimentaire à base de glucomannane. Marque française — R Glow F.Z.E.</p>
-        <p class="footer-legal-note">Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas. Ne se substitue pas à une alimentation variée et équilibrée.</p>
-      </div>
-      <div>
-        <div class="footer-col-title">Produit</div>
-        <ul class="footer-col-links">
-          <li><a href="#">Ube Poudre</a></li>
-          <li><a href="#">Ingrédients</a></li>
-          <li><a href="/pages/resultats">Résultats</a></li>
-          <li><a href="#">Avis clients</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Support</div>
-        <ul class="footer-col-links">
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Livraison</a></li>
-          <li><a href="#">Retours</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Entreprise</div>
-        <ul class="footer-col-links">
-          <li><a href="#">Notre histoire</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Presse</a></li>
-          <li><a href="#">CGV</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 UBurn. Tous droits réservés.</span>
-      <span>hello@uburn.co</span>
-      <div style="display:flex;gap:16px">
-        <a href="#" style="color:rgba(255,255,255,0.25);transition:color 0.2s">Confidentialité</a>
-        <a href="#" style="color:rgba(255,255,255,0.25);transition:color 0.2s">Mentions légales</a>
-        <a href="#" style="color:rgba(255,255,255,0.25);transition:color 0.2s">CGV</a>
-      </div>
-    </div>
-  </div>
-</footer>
+{% render 'ub-footer' %}
 
 <script>
-const nav = document.getElementById('nav');
-window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
-
 // Hero parallax
 const heroPhoto = document.getElementById('heroPhoto');
-setTimeout(()=>heroPhoto.classList.add('loaded'),100);
-
-// Reveal
-const obs = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+if(heroPhoto)setTimeout(()=>heroPhoto.classList.add('loaded'),100);
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0,rootMargin:'0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-</script>
-
-
-<script>
-
-const nav = document.getElementById('nav');
-window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
-
-// Hero parallax
-const heroPhoto = document.getElementById('heroPhoto');
-setTimeout(()=>heroPhoto.classList.add('loaded'),100);
-
-// Reveal
-const obs = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
-},{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
+requestAnimationFrame(()=>document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('visible')}));
 </script>
 
 {% schema %}
