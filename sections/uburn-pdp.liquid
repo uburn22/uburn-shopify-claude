@@ -281,6 +281,7 @@ a { color: inherit; text-decoration: none; }
   transition: all 0.2s;
   background: #fff;
   position: relative;
+  min-width: 0;
 }
 .variant-card:hover { border-color: var(--purple-light); }
 .variant-card.active {
@@ -298,6 +299,10 @@ a { color: inherit; text-decoration: none; }
   padding: 2px 8px;
   border-radius: 50px;
   letter-spacing: 0.3px;
+  white-space: nowrap;
+  max-width: calc(100% - 16px);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .variant-name {
   font-family: 'Red Hat Display', sans-serif;
