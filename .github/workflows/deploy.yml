@@ -15,6 +15,6 @@ jobs:
         run: npm install -g @shopify/cli @shopify/theme
 
       - name: Deploy theme to Shopify
-        run: shopify theme push --store 1t9ayp-tw.myshopify.com --theme 184913330495 --allow-live --force --only sections/uburn-pdp.liquid
+        run: shopify theme push --store 1t9ayp-tw.myshopify.com --theme 184913330495 --allow-live --force
         env:
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_THEME_TOKEN }}
