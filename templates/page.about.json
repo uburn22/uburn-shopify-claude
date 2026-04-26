@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "ub-about-v2": {
+      "type": "ub-about-v2",
+      "settings": {}
+    }
+  },
+  "order": ["ub-about-v2"]
+}
