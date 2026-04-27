@@ -18,12 +18,9 @@ jobs:
         run: |
           shopify theme push \
             --store 1t9ayp-tw.myshopify.com \
-            --theme 184913330495 \
+            --theme 185705234751 \
             --allow-live \
             --force \
-            --only sections/uburn-pdp.liquid \
-            --only sections/main-uburn-pdp-v9.liquid \
-            --only assets/uburn-pdp-v9.css \
-            --only templates/product.uburn-v9.json
+            --only sections/uburn-pdp.liquid
         env:
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_THEME_TOKEN }}
