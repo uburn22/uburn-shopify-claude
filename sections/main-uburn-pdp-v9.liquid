@@ -125,8 +125,8 @@
             <span class="pdpv9-pdp__stars" aria-hidden="true">★★★★★</span>
             <span class="pdpv9-pdp__rating-text">4,7/5 · 1 500+ avis vérifiés</span>
           </div>
-          <h1 class="pdpv9-pdp__title">{{ product.title | default: 'UBurn — Reprenez le contrôle' }}</h1>
-          <p class="pdpv9-pdp__subtitle">Boisson satiété 4h · 30 kcal · 0% caféine · Validée EFSA</p>
+          <h1 class="pdpv9-pdp__title">UBurn — La boisson violette qui aide à calmer les fringales</h1>
+          <p class="pdpv9-pdp__subtitle"><strong>4h de satiété.</strong> 30 kcal · 0% caféine · Validé EFSA.</p>
         </div>
 
         {%- comment -%} Price (mise à jour côté UI, mais reflète selected_or_first par défaut) {%- endcomment -%}
@@ -135,7 +135,7 @@
           {%- if current_variant.compare_at_price > current_variant.price -%}
             <span class="pdpv9-pdp__compare-price"><s>{{ current_variant.compare_at_price | money }}</s></span>
           {%- endif -%}
-          <span class="pdpv9-pdp__price-per">soit dès 0,61€/jour</span>
+          <span class="pdpv9-pdp__price-per" id="pdpv9-price-per">soit {%- if current_variant.id == v_decouverte.id -%} 1,15€/jour {%- else -%} 0,61€/jour {%- endif -%}</span>
         </div>
 
         {%- comment -%} ATC FORM — native Shopify {%- endcomment -%}
@@ -148,7 +148,7 @@
               <legend class="pdpv9-pdp__variants-legend">Choisis ta cure</legend>
               {%- for v in product.variants -%}
                 <label class="pdpv9-pdp__variant{% if v.id == current_variant.id %} pdpv9-pdp__variant--selected{% endif %}{% unless v.available %} pdpv9-pdp__variant--sold{% endunless %}">
-                  <input type="radio" name="id" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %} class="pdpv9-pdp__variant-input">
+                  <input type="radio" name="id" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %} class="pdpv9-pdp__variant-input" data-vidx="{{ forloop.index }}" data-vprice="{{ v.price }}" data-vunit-price="{%- if forloop.first -%}1,15€/jour{%- else -%}0,61€/jour{%- endif -%}">
                   <span class="pdpv9-pdp__variant-body">
                     <span class="pdpv9-pdp__variant-name">{{ v.title }}</span>
                     <span class="pdpv9-pdp__variant-price">{{ v.price | money }}{% if v.compare_at_price > v.price %} <s>{{ v.compare_at_price | money }}</s>{% endif %}</span>
@@ -306,12 +306,16 @@
         <a href="#pdpv9-pdp" class="pdpv9-cta-secondary">Commencer mon rituel →</a>
       </div>
       <div class="pdpv9-moment__media">
-        <div class="pdpv9-img-ph pdpv9-img-ph--dark" data-id="IMAGE_PLACEHOLDER_02_LIFESTYLE_16H" role="img" aria-label="Femme préparant UBurn">
-          <div class="pdpv9-img-ph__inner">
-            <span class="pdpv9-img-ph__id">IMAGE_PLACEHOLDER_02_LIFESTYLE_16H</span>
-            <span class="pdpv9-img-ph__hint">Woman preparing UBurn in a kitchen or office around afternoon, soft light, calm wellness mood.</span>
-          </div>
-        </div>
+        <img
+          class="pdpv9-moment__photo"
+          src="https://uburn.co/cdn/shop/files/Imnt_custom_4pm_craving_1777325148.jpg?v=1777325309&width=1200&format=webp"
+          srcset="https://uburn.co/cdn/shop/files/Imnt_custom_4pm_craving_1777325148.jpg?v=1777325309&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Imnt_custom_4pm_craving_1777325148.jpg?v=1777325309&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Imnt_custom_4pm_craving_1777325148.jpg?v=1777325309&width=1200&format=webp 1200w, https://uburn.co/cdn/shop/files/Imnt_custom_4pm_craving_1777325148.jpg?v=1777325309&width=1600&format=webp 1600w"
+          sizes="(min-width: 900px) 50vw, 100vw"
+          alt="Rituel UBurn de 16h avec boisson violette, sachet UBurn et lumière douce"
+          loading="lazy"
+          decoding="async"
+          width="1200"
+          height="1200">
       </div>
     </div>
   </section>
@@ -325,12 +329,16 @@
     <div class="pdpv9-steps__grid">
       <article class="pdpv9-step-card">
         <div class="pdpv9-step-card__media">
-          <div class="pdpv9-img-ph" data-id="IMAGE_PLACEHOLDER_03_STEP_MIX" role="img" aria-label="Mélanger UBurn">
-            <div class="pdpv9-img-ph__inner">
-              <span class="pdpv9-img-ph__id">IMAGE_PLACEHOLDER_03_STEP_MIX</span>
-              <span class="pdpv9-img-ph__hint">Pouring UBurn powder into a glass of water or plant milk, soft natural light.</span>
-            </div>
-          </div>
+          <img
+            class="pdpv9-step-card__photo"
+            src="https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=1200&format=webp"
+            srcset="https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=400&format=webp 400w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=1200&format=webp 1200w"
+            sizes="(min-width: 900px) 33vw, (min-width: 700px) 33vw, 100vw"
+            alt="Mélange d'UBurn dans un grand verre"
+            loading="lazy"
+            decoding="async"
+            width="1200"
+            height="1200">
         </div>
         <div class="pdpv9-step-card__num">01</div>
         <h3 class="pdpv9-step-card__title">Mélangez</h3>
@@ -338,12 +346,16 @@
       </article>
       <article class="pdpv9-step-card">
         <div class="pdpv9-step-card__media">
-          <div class="pdpv9-img-ph" data-id="IMAGE_PLACEHOLDER_04_STEP_DRINK" role="img" aria-label="Boire UBurn">
-            <div class="pdpv9-img-ph__inner">
-              <span class="pdpv9-img-ph__id">IMAGE_PLACEHOLDER_04_STEP_DRINK</span>
-              <span class="pdpv9-img-ph__hint">Hand holding the violet UBurn drink, drinking from a tall glass, fresh and creamy.</span>
-            </div>
-          </div>
+          <img
+            class="pdpv9-step-card__photo"
+            src="https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=1200&format=webp"
+            srcset="https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=400&format=webp 400w, https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=1200&format=webp 1200w"
+            sizes="(min-width: 700px) 33vw, 100vw"
+            alt="Verre de boisson UBurn violette, fraîche et crémeuse"
+            loading="lazy"
+            decoding="async"
+            width="1200"
+            height="1200">
         </div>
         <div class="pdpv9-step-card__num">02</div>
         <h3 class="pdpv9-step-card__title">Buvez</h3>
@@ -351,12 +363,16 @@
       </article>
       <article class="pdpv9-step-card">
         <div class="pdpv9-step-card__media">
-          <div class="pdpv9-img-ph" data-id="IMAGE_PLACEHOLDER_05_STEP_CONTROL" role="img" aria-label="Sensation de contrôle">
-            <div class="pdpv9-img-ph__inner">
-              <span class="pdpv9-img-ph__id">IMAGE_PLACEHOLDER_05_STEP_CONTROL</span>
-              <span class="pdpv9-img-ph__hint">Calm, smiling woman at her desk or sofa, evening light, sense of being in control.</span>
-            </div>
-          </div>
+          <img
+            class="pdpv9-step-card__photo"
+            src="https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=1200&format=webp"
+            srcset="https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=400&format=webp 400w, https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=1200&format=webp 1200w"
+            sizes="(min-width: 700px) 33vw, 100vw"
+            alt="Femme calme avec UBurn dans sa routine quotidienne"
+            loading="lazy"
+            decoding="async"
+            width="1200"
+            height="1200">
         </div>
         <div class="pdpv9-step-card__num">03</div>
         <h3 class="pdpv9-step-card__title">Restez en contrôle</h3>
@@ -382,12 +398,16 @@
         </ul>
       </div>
       <div class="pdpv9-ritual__media">
-        <div class="pdpv9-img-ph" data-id="IMAGE_PLACEHOLDER_06_RITUAL" role="img" aria-label="Le rituel UBurn">
-          <div class="pdpv9-img-ph__inner">
-            <span class="pdpv9-img-ph__id">IMAGE_PLACEHOLDER_06_RITUAL</span>
-            <span class="pdpv9-img-ph__hint">Flat-lay or side angle: shaker + UBurn powder + glass + fresh ingredients (oat milk, ice). Soft, premium, feminine wellness.</span>
-          </div>
-        </div>
+        <img
+          class="pdpv9-ritual__photo"
+          src="https://uburn.co/cdn/shop/files/HOME_M.png?v=1763138197&width=1200&format=webp"
+          srcset="https://uburn.co/cdn/shop/files/HOME_M.png?v=1763138197&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/HOME_M.png?v=1763138197&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/HOME_M.png?v=1763138197&width=1200&format=webp 1200w, https://uburn.co/cdn/shop/files/HOME_M.png?v=1763138197&width=1600&format=webp 1600w"
+          sizes="(min-width: 900px) 50vw, 100vw"
+          alt="Femme buvant une boisson UBurn violette dans une routine bien-être active"
+          loading="lazy"
+          decoding="async"
+          width="1200"
+          height="1500">
       </div>
     </div>
   </section>
@@ -447,14 +467,23 @@
           <p>« Le glucomannane contribue à la perte de poids dans le cadre d'un régime hypocalorique selon les conditions d'utilisation autorisées. »</p>
           <p class="pdpv9-why__efsa-cond"><em>Condition : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau, avant les repas. ID 3120.</em></p>
         </div>
+
+        <a href="/pages/ingredients" class="pdpv9-why__cta">
+          Découvrir les ingrédients
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
       <div class="pdpv9-why__media">
-        <div class="pdpv9-img-ph" data-id="IMAGE_PLACEHOLDER_07_INGREDIENTS" role="img" aria-label="Ingrédients UBurn">
-          <div class="pdpv9-img-ph__inner">
-            <span class="pdpv9-img-ph__id">IMAGE_PLACEHOLDER_07_INGREDIENTS</span>
-            <span class="pdpv9-img-ph__hint">Editorial flat-lay of the 3 hero ingredients: ube root, konjac, MCT coconut. Soft purple light, premium wellness.</span>
-          </div>
-        </div>
+        <img
+          class="pdpv9-why__photo"
+          src="https://uburn.co/cdn/shop/files/focus_product_1.jpg?v=1771674297&width=1200&format=webp"
+          srcset="https://uburn.co/cdn/shop/files/focus_product_1.jpg?v=1771674297&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/focus_product_1.jpg?v=1771674297&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/focus_product_1.jpg?v=1771674297&width=1200&format=webp 1200w, https://uburn.co/cdn/shop/files/focus_product_1.jpg?v=1771674297&width=1600&format=webp 1600w"
+          sizes="(min-width: 900px) 50vw, 100vw"
+          alt="Boisson UBurn violette avec noix de coco dans un univers lavande premium"
+          loading="lazy"
+          decoding="async"
+          width="1200"
+          height="1500">
       </div>
     </div>
   </section>
@@ -555,16 +584,42 @@
     </div>
   </div>
 
+  {%- comment -%}
+    Sticky mobile CTA — submits the native PDP form via HTML5 form attribute.
+    No JS required. Falls back to anchor link if form not present (defensive).
+  {%- endcomment -%}
   <div class="pdpv9-sticky-cta">
-    <a href="#pdpv9-pdp">Commencer ma cure — dès {{ v_decouverte.price | money }}</a>
+    {%- if current_variant.available -%}
+      <button type="submit" form="pdpv9-pdp-form" name="add" class="pdpv9-sticky-cta__btn" aria-label="Ajouter au panier">
+        Ajouter au panier — dès {{ v_decouverte.price | money }}
+      </button>
+    {%- else -%}
+      <a href="#pdpv9-pdp" class="pdpv9-sticky-cta__btn pdpv9-sticky-cta__btn--disabled" aria-disabled="true">En rupture</a>
+    {%- endif -%}
   </div>
 
 </div>
 
 <script>
-  /* SAFE MODE — JS désactivé totalement.
-     Si la page rend stable maintenant, on réintroduira les features
-     une par une. */
+  /* SAFE MODE PARTIEL — uniquement le price-per dynamique.
+     Pas de visibility gate. Pas d'IntersectionObserver.
+     Si JS fail, le price-per garde sa valeur Liquid initiale (correcte
+     pour la variante par défaut). */
+  (function(){
+    var form = document.getElementById('pdpv9-pdp-form');
+    if (!form) return;
+    var per = document.getElementById('pdpv9-price-per');
+    if (!per) return;
+    function updatePricePer() {
+      var checked = form.querySelector('input[name="id"]:checked');
+      if (!checked) return;
+      var unit = checked.getAttribute('data-vunit-price');
+      if (unit) per.textContent = 'soit ' + unit;
+    }
+    form.querySelectorAll('input[name="id"]').forEach(function(r){
+      r.addEventListener('change', updatePricePer);
+    });
+  })();
 </script>
 
 {% schema %}
