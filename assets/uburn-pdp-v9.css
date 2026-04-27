@@ -189,15 +189,19 @@
   background: var(--pdp-cream);
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  aspect-ratio: 1/1;
+  /* aspect-ratio NOT on flex parent — caused 1600vw blowup on iOS Safari with 16 slides.
+     Container auto-sizes to slide height (slide has aspect-ratio: 1/1). */
   width: 100%;
+  max-width: 100%;
   box-shadow: 0 12px 40px rgba(61, 24, 115, .08);
 }
 .pdpv9-pdp__slides::-webkit-scrollbar { display: none; }
 .pdpv9-pdp__slide {
   flex: 0 0 100%;
   width: 100%;
-  height: 100%;
+  max-width: 100%;
+  /* aspect-ratio on the slide itself (not parent) — robust on all browsers */
+  aspect-ratio: 1/1;
   scroll-snap-align: start;
   scroll-snap-stop: always;
   display: flex;
