@@ -80,6 +80,9 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   background: #fff;
   padding-bottom: 48px;
 }
+.pdp-hero-inner {
+  display: contents; /* mobile: transparent passthrough */
+}
 
 /* ─── CAROUSEL ───────────────────────────────────────────────────────────────── */
 .pdp-carousel-wrap {
@@ -481,28 +484,74 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
 /* ─── DESKTOP ≥768px ─────────────────────────────────────────────────────────── */
 @media (min-width: 768px) {
+  /* Full-bleed dark gradient hero — matches landing page aesthetic */
   .pdp-hero {
-    max-width: 1200px;
-    margin: 0 auto;
+    background: linear-gradient(135deg, #1e0840 0%, #3d1873 35%, #5e28a0 65%, #7a3cb8 100%);
+    padding: 0;
+  }
+  .pdp-hero-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 56px;
-    align-items: start;
-    padding: 48px 40px 80px;
+    gap: 64px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 40px 80px;
   }
+  /* Carousel — glow shadow on dark bg */
   .pdp-carousel-wrap {
-    border-radius: 20px;
+    border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(61,24,115,.12), 0 0 0 1px rgba(107,47,160,.07);
+    box-shadow: 0 32px 80px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.08);
     position: sticky;
     top: 80px;
   }
-  .pdp-carousel-slide { max-height: 560px; aspect-ratio: 1/1; }
+  .pdp-carousel-slide { max-height: 580px; aspect-ratio: 1/1; }
   .pdp-carousel-btn   { display: flex; }
   .pdp-hero-content   { padding: 0; }
-  .pdp-h1             { font-size: clamp(30px, 3.2vw, 44px); }
-  .pdp-sub            { font-size: 16px; }
-  .pdp-cta            { font-size: 16px; }
+  /* Typography on dark bg */
+  .pdp-hero .pdp-h1           { font-size: clamp(32px, 3.4vw, 48px); color: #fff; }
+  .pdp-hero .pdp-h1 .accent   { color: #c99ef5; }
+  .pdp-hero .pdp-sub          { font-size: 16px; color: rgba(255,255,255,.75); }
+  .pdp-hero .pdp-stars        { color: #f8c94a; }
+  .pdp-hero .pdp-rating-score { color: #fff; }
+  .pdp-hero .pdp-rating-count { color: rgba(255,255,255,.6); }
+  .pdp-hero .pdp-bullet       { color: #fff; }
+  .pdp-hero .pdp-bullet-ck    { background: rgba(255,255,255,.12); }
+  .pdp-hero .pdp-bullet-ck svg { stroke: #c99ef5; }
+  .pdp-cta { font-size: 16px; }
+  /* Dots on dark bg */
+  .pdp-hero .pdp-dot          { background: rgba(255,255,255,.25); }
+  .pdp-hero .pdp-dot.dot-active { background: #fff; }
+  /* Carousel nav arrows on dark bg */
+  .pdp-hero .pdp-carousel-btn { background: rgba(255,255,255,.15); backdrop-filter: blur(8px); }
+  .pdp-hero .pdp-carousel-btn svg { stroke: #fff; }
+  /* Variant cards — glassmorphism on dark */
+  .pdp-hero .pdp-variant-card {
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.15);
+    color: #fff;
+  }
+  .pdp-hero .pdp-variant-card.vc-active {
+    background: rgba(255,255,255,.16);
+    border-color: rgba(255,255,255,.5);
+    box-shadow: 0 0 0 3px rgba(255,255,255,.12);
+  }
+  .pdp-hero .pdp-variant-name   { color: #fff; }
+  .pdp-hero .pdp-variant-desc   { color: rgba(255,255,255,.55); }
+  .pdp-hero .pdp-variant-price  { color: #c99ef5; }
+  .pdp-hero .pdp-variant-price-old { color: rgba(255,255,255,.4); }
+  .pdp-hero .pdp-variant-per-day { color: rgba(255,255,255,.5); }
+  /* Bonus block on dark */
+  .pdp-hero .pdp-bonus {
+    background: rgba(255,244,230,.10);
+    border-color: rgba(245,196,122,.35);
+  }
+  .pdp-hero .pdp-bonus-header,
+  .pdp-hero .pdp-bonus-items { color: rgba(255,255,255,.85); }
+  /* Trust strip on dark */
+  .pdp-hero .pdp-trust  { color: rgba(255,255,255,.65); }
+  .pdp-hero .pdp-trust-item svg { stroke: rgba(255,255,255,.55); }
 }
 
 /* ─── REDUCED MOTION ─────────────────────────────────────────────────────────── */
@@ -1466,6 +1515,7 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
      HERO
 ══════════════════════════════════════════════════════════════ -->
 <section class="pdp-hero">
+<div class="pdp-hero-inner">
 
   <!-- ── CARROUSEL ───────────────────────────────── -->
   <div class="pdp-carousel-wrap">
@@ -1680,6 +1730,7 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     </div>
 
   </div><!-- /pdp-hero-content -->
+</div><!-- /pdp-hero-inner -->
 </section><!-- /pdp-hero -->
 
 <!-- ══════════════════════════════════════════════════════════════
