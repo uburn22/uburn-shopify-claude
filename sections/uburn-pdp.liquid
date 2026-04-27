@@ -2493,6 +2493,198 @@ body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 })();
 </script>
 
+<!-- ===== PREMIUM ANIMATIONS v2 — PDP V10 ===== -->
+<style>
+/* (1) Hero entrance — stagger via transition-delay on .reveal mechanism */
+.pdp-hero .pdp-rating   { transition-delay:.05s }
+.pdp-hero .pdp-h1       { transition-delay:.18s }
+.pdp-hero .pdp-sub      { transition-delay:.30s }
+.pdp-hero .pdp-bullets  { transition-delay:.42s }
+.pdp-hero .pdp-variants { transition-delay:.52s }
+.pdp-hero .pdp-bonus    { transition-delay:.60s }
+.pdp-hero .pdp-cta-wrap { transition-delay:.68s }
+.pdp-hero .pdp-payment  { transition-delay:.74s }
+.pdp-hero .pdp-trust    { transition-delay:.78s }
+
+/* (2) Carousel — slide image subtle scale-in on active */
+@keyframes ub-slide-in {
+  from { opacity:0; transform:scale(.97) }
+  to   { opacity:1; transform:scale(1) }
+}
+.pdp-carousel-slide[aria-hidden="false"] img,
+.pdp-carousel-slide.active img {
+  animation: ub-slide-in .4s cubic-bezier(.22,1,.36,1) both;
+}
+
+/* (3) Review cards — lift + purple shadow on hover */
+.pdp-rv-card {
+  transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s cubic-bezier(.22,1,.36,1);
+}
+.pdp-rv-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 48px rgba(107,47,160,.13);
+}
+
+/* (4) Problem cards — ghost number scales on card hover */
+.pdp-s4-ghost {
+  transition: transform .35s cubic-bezier(.22,1,.36,1), color .35s ease;
+}
+.pdp-s4-card:hover .pdp-s4-ghost {
+  transform: scale(1.12) translateY(-8px);
+  color: rgba(255,255,255,.14);
+}
+.pdp-s4-card {
+  transition: background .25s ease, border-color .25s ease;
+}
+.pdp-s4-card:hover {
+  background: rgba(255,255,255,.15);
+  border-color: rgba(255,255,255,.22);
+}
+
+/* (5) Ingredient cards — shimmer sweep on hover */
+@keyframes ub-shimmer {
+  from { background-position:-200% center }
+  to   { background-position: 200% center }
+}
+.pdp-ing-card {
+  position: relative;
+  isolation: isolate;
+  transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s cubic-bezier(.22,1,.36,1);
+}
+.pdp-ing-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(107,47,160,.12);
+}
+.pdp-ing-card::after {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.4) 50%,transparent 65%);
+  background-size:200% 100%;
+  background-position:-200% center;
+  pointer-events:none; opacity:0; z-index:1;
+  border-radius:inherit;
+}
+.pdp-ing-card:hover::after { opacity:1; animation:ub-shimmer .55s ease-out forwards }
+
+/* (6) Stats section glow orb */
+.ub-s7-glow-orb {
+  position:absolute; width:700px; height:700px;
+  left:50%; top:50%;
+  transform:translate(-50%,-50%) scale(.3);
+  background:radial-gradient(circle,rgba(176,125,232,.28) 0%,transparent 65%);
+  pointer-events:none; z-index:0; border-radius:50%; opacity:0;
+  transition:transform 1.8s cubic-bezier(.22,1,.36,1),opacity 1.4s ease-out;
+}
+.pdp-s7.ub-glow-active .ub-s7-glow-orb {
+  transform:translate(-50%,-50%) scale(1); opacity:1;
+}
+
+/* (7) Comparison cards — slide in from left */
+@keyframes ub-comp-in {
+  from { opacity:0; transform:translateX(-18px) }
+  to   { opacity:1; transform:translateX(0) }
+}
+.pdp-comp-card.ub-hidden  { opacity:0; transform:translateX(-18px) }
+.pdp-comp-card.ub-visible { animation:ub-comp-in .38s ease-out forwards }
+
+/* (8) Variant cards — subtle lift on hover */
+.pdp-variant-card {
+  transition: transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s ease;
+}
+.pdp-variant-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(107,47,160,.14);
+}
+
+/* (9) FAQ trigger — icon spin already exists; add row highlight on hover */
+.pdp-faq-item {
+  transition: background .2s ease;
+  border-radius: 8px;
+}
+.pdp-faq-item:hover { background: rgba(107,47,160,.03) }
+
+/* Reduced motion */
+@media (prefers-reduced-motion:reduce) {
+  .pdp-hero .pdp-rating,
+  .pdp-hero .pdp-h1,
+  .pdp-hero .pdp-sub,
+  .pdp-hero .pdp-bullets,
+  .pdp-hero .pdp-variants,
+  .pdp-hero .pdp-bonus,
+  .pdp-hero .pdp-cta-wrap,
+  .pdp-hero .pdp-payment,
+  .pdp-hero .pdp-trust    { transition-delay:0s !important }
+  .pdp-rv-card,.pdp-s4-card,.pdp-ing-card,
+  .pdp-variant-card,.pdp-comp-card,
+  .ub-s7-glow-orb         { animation:none!important; transition:none!important; opacity:1!important; transform:none!important }
+  .pdp-ing-card::after    { display:none }
+}
+</style>
+
+<script>
+(function(){
+  // (6) Stats glow orb — inject and trigger
+  var s7 = document.querySelector('.pdp-s7');
+  if(s7){
+    var orb = document.createElement('div');
+    orb.className = 'ub-s7-glow-orb';
+    s7.appendChild(orb);
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('ub-glow-active'); }
+      });
+    },{ threshold:.25 }).observe(s7);
+  }
+
+  // (7) Comparison cards — staggered slide-in from left
+  var compCards = document.querySelectorAll('.pdp-comp-card');
+  compCards.forEach(function(c){ c.classList.add('ub-hidden'); });
+  new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(!entry.isIntersecting) return;
+      var c = entry.target;
+      var idx = Array.from(compCards).indexOf(c);
+      c.classList.remove('ub-hidden');
+      c.style.animationDelay = (idx * 60) + 'ms';
+      c.classList.add('ub-visible');
+    });
+  },{ threshold:.08, rootMargin:'0px 0px -40px 0px' }).observe(
+    document.querySelector('.pdp-comp-cards') || document.createElement('div')
+  );
+
+  // Observe each card individually for stagger
+  compCards.forEach(function(c){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting) return;
+        var idx = Array.from(compCards).indexOf(entry.target);
+        entry.target.classList.remove('ub-hidden');
+        entry.target.style.animationDelay = (idx * 55) + 'ms';
+        entry.target.classList.add('ub-visible');
+      });
+    },{ threshold:.1 }).observe(c);
+  });
+
+  // (2) Carousel parallax — subtle translateY on scroll (desktop)
+  var carWrap = document.querySelector('.pdp-carousel-wrap');
+  if(carWrap && window.matchMedia('(min-width:768px)').matches){
+    var ticking = false;
+    function updatePx(){
+      var img = carWrap.querySelector('.pdp-carousel-slide:first-child img');
+      if(!img){ ticking=false; return; }
+      var rect = carWrap.getBoundingClientRect();
+      var progress = (rect.top + rect.height/2 - window.innerHeight/2) / window.innerHeight;
+      progress = Math.max(-0.4, Math.min(0.4, progress));
+      img.style.transform = 'translateY('+(progress*10)+'px)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ requestAnimationFrame(updatePx); ticking=true; }
+    },{ passive:true });
+  }
+})();
+</script>
+
 {% schema %}
 {
   "name": "PDP V10",
