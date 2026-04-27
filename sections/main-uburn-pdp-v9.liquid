@@ -581,6 +581,39 @@
     </div>
   </section>
 
+  <!-- GALLERY -->
+  {% if product.media.size > 0 %}
+  <div class="pdpv9-gallery" role="region" aria-label="Photos du produit">
+    <div class="pdpv9-gallery__main">
+      {% for media in product.media %}
+        <div class="pdpv9-gallery__slide"
+             data-index="{{ forloop.index0 }}"
+             {% if forloop.first %}data-active="true"{% endif %}>
+          {{ media | image_url: width: 800 | image_tag:
+             loading: forloop.first ? 'eager' : 'lazy',
+             fetchpriority: forloop.first ? 'high' : 'auto',
+             class: 'pdpv9-gallery__img',
+             alt: product.title }}
+        </div>
+      {% endfor %}
+    </div>
+    {% if product.media.size > 1 %}
+    <div class="pdpv9-gallery__thumbs" role="tablist" aria-label="Sélecteur d'images">
+      {% for media in product.media %}
+        <button class="pdpv9-gallery__thumb"
+                data-index="{{ forloop.index0 }}"
+                {% if forloop.first %}data-active="true" aria-current="true"{% endif %}
+                role="tab"
+                aria-label="Image {{ forloop.index }} sur {{ product.media.size }}">
+          {{ media | image_url: width: 120 | image_tag:
+             loading: 'lazy', alt: '' }}
+        </button>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% endif %}
+
   <!-- MARQUEE -->
   <div class="marquee">
     <div class="marquee-track">
@@ -1449,6 +1482,56 @@
   body { padding-bottom: 80px; }
 }
 </style>
+
+<script>
+(function() {
+  var gallery = document.querySelector('.pdpv9-gallery');
+  if (!gallery) return;
+  var slides = gallery.querySelectorAll('.pdpv9-gallery__slide');
+  var thumbs = gallery.querySelectorAll('.pdpv9-gallery__thumb');
+  if (!slides.length) return;
+  var activeIndex = 0;
+
+  function setActive(index) {
+    if (index < 0 || index >= slides.length) return;
+    slides.forEach(function(s) { s.removeAttribute('data-active'); });
+    thumbs.forEach(function(t) {
+      t.removeAttribute('data-active');
+      t.removeAttribute('aria-current');
+    });
+    slides[index].setAttribute('data-active', 'true');
+    if (thumbs[index]) {
+      thumbs[index].setAttribute('data-active', 'true');
+      thumbs[index].setAttribute('aria-current', 'true');
+      thumbs[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+    activeIndex = index;
+  }
+
+  thumbs.forEach(function(thumb, i) {
+    thumb.addEventListener('click', function() { setActive(i); });
+  });
+
+  // Swipe mobile
+  var touchStartX = 0;
+  var main = gallery.querySelector('.pdpv9-gallery__main');
+  main.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+  main.addEventListener('touchend', function(e) {
+    var diff = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(diff) < 50) return;
+    if (diff < 0) setActive(activeIndex + 1);
+    else setActive(activeIndex - 1);
+  }, { passive: true });
+
+  // Navigation clavier
+  gallery.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); setActive(activeIndex - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); setActive(activeIndex + 1); }
+  });
+})();
+</script>
 
 {% schema %}
 {
