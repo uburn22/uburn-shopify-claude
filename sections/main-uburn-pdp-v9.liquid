@@ -259,385 +259,295 @@
     </div>
   </section>
 
-  <div class="pdpv9-marquee">
-    <div class="pdpv9-marquee__track">
-      <div class="pdpv9-marquee__item"><span class="pdpv9-marquee__dot"></span>Livraison offerte</div>
-      <div class="pdpv9-marquee__item"><span class="pdpv9-marquee__dot"></span>EFSA ID 3120</div>
-      <div class="pdpv9-marquee__item"><span class="pdpv9-marquee__dot"></span>100% Naturel</div>
-      <div class="pdpv9-marquee__item"><span class="pdpv9-marquee__dot"></span>0% Caféine</div>
-      <div class="pdpv9-marquee__item"><span class="pdpv9-marquee__dot"></span>Fabriqué en France</div>
-      <div class="pdpv9-marquee__item"><span class="pdpv9-marquee__dot"></span>Sans abonnement</div>
-      <div class="pdpv9-marquee__item"><span class="pdpv9-marquee__dot"></span>Livraison offerte</div>
-      <div class="pdpv9-marquee__item"><span class="pdpv9-marquee__dot"></span>EFSA ID 3120</div>
-      <div class="pdpv9-marquee__item"><span class="pdpv9-marquee__dot"></span>100% Naturel</div>
-      <div class="pdpv9-marquee__item"><span class="pdpv9-marquee__dot"></span>0% Caféine</div>
-      <div class="pdpv9-marquee__item"><span class="pdpv9-marquee__dot"></span>Fabriqué en France</div>
-      <div class="pdpv9-marquee__item"><span class="pdpv9-marquee__dot"></span>Sans abonnement</div>
-    </div>
-  </div>
+  {%- comment -%}
+    ════════════════════════════════════════════════════════════════
+    8 SECTIONS HORMOZI BELOW THE PDP HERO
+    Value = Dream × Likelihood / (Time × Effort)
+    + sensory desirability angle (taste, ritual, pleasure)
+    Image placeholders ready to be replaced with real assets.
+    ════════════════════════════════════════════════════════════════
+  {%- endcomment -%}
 
-  <section class="pdpv9-expert">
-    <div class="pdpv9-expert__card pdpv9-reveal">
-      <div class="pdpv9-expert__img">
-        <img src="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_gjm16fgjm16fgjm1.png?v=1776424158&width=800" alt="Dr. Claire Dubois — Nutritionniste" loading="lazy" decoding="async" width="800" height="800">
+  {%- comment -%} ─── 1. TASTE / SENSORY HOOK ─── {%- endcomment -%}
+  <section class="pdpv9-taste">
+    <div class="pdpv9-taste__inner">
+      <div class="pdpv9-taste__media">
+        <img
+          class="pdpv9-taste__photo"
+          src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=1200&format=webp"
+          srcset="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=1200&format=webp 1200w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=1600&format=webp 1600w"
+          sizes="(min-width: 900px) 50vw, 100vw"
+          alt="Boisson UBurn violette crémeuse servie dans un grand verre avec glaçons"
+          loading="lazy"
+          decoding="async"
+          width="1200"
+          height="1200">
       </div>
-      <div>
-        <p class="pdpv9-expert__quote">« Une formule rare : la science du konjac au service du quotidien des femmes. »</p>
-        <div class="pdpv9-expert__body">La formule UBurn combine glucomannane validé EFSA et 5 actifs synergiques, chacun dosé cliniquement pour un niveau de soutien rarement atteint dans une seule boisson. Pensée pour la vraie vie.</div>
-        <div class="pdpv9-expert__name">Dr. Claire Dubois</div>
-        <div class="pdpv9-expert__credentials">Nutritionniste · Spécialiste comportement alimentaire</div>
-        <a href="#" class="pdpv9-expert__link">Membre du Comité Scientifique UBurn →</a>
+      <div class="pdpv9-taste__copy">
+        <span class="pdpv9-eyebrow">Le rituel violet</span>
+        <h2 class="pdpv9-h2">Une boisson violette <span class="pdpv9-h2-accent">qu'on a vraiment envie de boire.</span></h2>
+        <p class="pdpv9-lead">Douce, crémeuse, légèrement vanillée, avec une note noisette. UBurn transforme le moment où vous aviez envie de sucre en un rituel plaisir.</p>
+        <ul class="pdpv9-chips">
+          <li class="pdpv9-chip pdpv9-chip--soft">Texture crémeuse</li>
+          <li class="pdpv9-chip pdpv9-chip--soft">Note noisette-vanille</li>
+          <li class="pdpv9-chip pdpv9-chip--soft">Couleur ubé violet</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <section class="pdpv9-gallery">
-    <div class="pdpv9-gallery__inner">
-      {%- if product.media.size > 0 -%}
-        <div class="pdpv9-gallery__main">
-          {%- for media in product.media -%}
-            <div class="pdpv9-gallery__slide{% if forloop.first %} pdpv9-gallery__slide--active{% endif %}" data-idx="{{ forloop.index0 }}">
-              {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
-                {{ media | media_tag: image_size: '1200x', autoplay: false, loop: false, controls: true, preload: 'metadata' }}
-              {%- else -%}
-                <img src="{{ media | image_url: width: 1200 }}&format=webp" alt="{{ media.alt | default: product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async" width="1200" height="1200">
-              {%- endif -%}
-            </div>
-          {%- endfor -%}
-        </div>
-        {%- if product.media.size > 1 -%}
-          <div class="pdpv9-gallery__thumbs">
-            {%- for media in product.media -%}
-              <button type="button" class="pdpv9-gallery__thumb{% if forloop.first %} pdpv9-gallery__thumb--active{% endif %}" data-idx="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }}">
-                <img src="{{ media | image_url: width: 200 }}&format=webp" alt="" loading="lazy" decoding="async" width="200" height="200">
-              </button>
-            {%- endfor -%}
+  {%- comment -%} ─── 2. THE 16H MOMENT ─── {%- endcomment -%}
+  <section class="pdpv9-moment">
+    <div class="pdpv9-moment__inner">
+      <div class="pdpv9-moment__copy">
+        <span class="pdpv9-eyebrow pdpv9-eyebrow--light">Le moment critique</span>
+        <h2 class="pdpv9-h2 pdpv9-h2--light">16h. <span class="pdpv9-h2-accent pdpv9-h2-accent--light">Le moment où tout se joue.</span></h2>
+        <p class="pdpv9-lead pdpv9-lead--light">Au lieu d'ouvrir le placard, vous préparez votre rituel. 30 secondes. Un grand verre. Une texture douce. Une sensation de contrôle.</p>
+        <a href="#pdpv9-pdp" class="pdpv9-cta-secondary">Commencer mon rituel →</a>
+      </div>
+      <div class="pdpv9-moment__media">
+        <div class="pdpv9-img-ph pdpv9-img-ph--dark" data-id="IMAGE_PLACEHOLDER_02_LIFESTYLE_16H" role="img" aria-label="Femme préparant UBurn">
+          <div class="pdpv9-img-ph__inner">
+            <span class="pdpv9-img-ph__id">IMAGE_PLACEHOLDER_02_LIFESTYLE_16H</span>
+            <span class="pdpv9-img-ph__hint">Woman preparing UBurn in a kitchen or office around afternoon, soft light, calm wellness mood.</span>
           </div>
-        {%- endif -%}
-      {%- endif -%}
-    </div>
-  </section>
-
-  {%- comment -%} Old offer-block hidden — purchase action is now in PDP hero above-fold {%- endcomment -%}
-  <section class="pdpv9-offer" id="pdpv9-offer" style="display:none" aria-hidden="true">
-    <div class="pdpv9-offer__inner">
-      <div class="pdpv9-offer__header pdpv9-reveal">
-        <div class="pdpv9-section-label">Votre offre</div>
-        <h2 class="pdpv9-section-title">Une saveur. <span class="pdpv9-accent">Six actifs.</span></h2>
-        <p class="pdpv9-offer__subtitle">Paiement unique · Livraison offerte</p>
-      </div>
-
-      <form id="pdpv9-form" action="/cart/add" method="post" enctype="multipart/form-data" novalidate>
-        <input type="hidden" name="form_type" value="product">
-        <input type="hidden" name="utf8" value="✓">
-
-        <div class="pdpv9-pricing pdpv9-reveal" role="radiogroup" aria-label="Choisis ta cure">
-          {%- for v in product.variants -%}
-            {%- liquid
-              assign is_pop = false
-              if v.id == v_maximum.id and product.variants.size > 1
-                assign is_pop = true
-              endif
-              assign p_jour = '0,61€'
-              if v.id == v_decouverte.id
-                assign p_jour = '1,15€'
-              endif
-            -%}
-            <label class="pdpv9-pricing__card{% if is_pop %} pdpv9-pricing__card--pop{% endif %}{% if v.id == current_variant.id %} pdpv9-pricing__card--selected{% endif %}" data-vid="{{ v.id }}">
-              <input type="radio" name="id" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %}>
-              {%- if is_pop -%}<span class="pdpv9-pricing__badge">Meilleure valeur</span>{%- endif -%}
-              <h3 class="pdpv9-pricing__name">{{ v.title }}</h3>
-              <p class="pdpv9-pricing__desc">{%- if is_pop -%}Le + populaire — 3x plus de résultats{%- else -%}Idéal pour tester · 1 dose/jour{%- endif -%}</p>
-              <div class="pdpv9-pricing__price">{{ v.price | money }}{% if v.compare_at_price > v.price %} <small><s>{{ v.compare_at_price | money }}</s></small>{% endif %}</div>
-              <p class="pdpv9-pricing__per">{{ p_jour }} / jour</p>
-              {%- unless v.available -%}<p class="pdpv9-pricing__sold">En rupture</p>{%- endunless -%}
-            </label>
-          {%- endfor -%}
-        </div>
-
-        <button type="submit" class="pdpv9-btn pdpv9-btn--fill pdpv9-btn--pulse pdpv9-btn--full" name="add" {% unless current_variant.available %}disabled{% endunless %}>
-          {%- if current_variant.available -%}Ajouter au panier — Continuer →{%- else -%}En rupture{%- endif -%}
-        </button>
-
-        <p class="pdpv9-offer__rating">★★★★★ 4,7/5 · 1 500+ clientes satisfaites</p>
-        <p class="pdpv9-offer__proof">✓ Allégation glucomannane validée EFSA (ID 3120)</p>
-        <div class="pdpv9-offer__pay"><span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Shop Pay</span></div>
-      </form>
-
-      <div class="pdpv9-cart-preview pdpv9-reveal">
-        <div class="pdpv9-cart-preview__title">Avec votre Cure Maximum, vous recevez :</div>
-        <div class="pdpv9-cart-item">
-          <div class="pdpv9-cart-item__avatar">E</div>
-          <div class="pdpv9-cart-item__body"><div class="pdpv9-cart-item__name">E-book « 30j pour reprendre le contrôle »</div><div class="pdpv9-cart-item__gift">Offert</div></div>
-          <div class="pdpv9-cart-item__price"><s>47€</s> 0€</div>
-        </div>
-        <div class="pdpv9-cart-item">
-          <div class="pdpv9-cart-item__avatar">G</div>
-          <div class="pdpv9-cart-item__body"><div class="pdpv9-cart-item__name">Groupe privé Uburn Collective</div><div class="pdpv9-cart-item__gift">Offert</div></div>
-          <div class="pdpv9-cart-item__price"><s>40€</s> 0€</div>
-        </div>
-        <div class="pdpv9-cart-item">
-          <div class="pdpv9-cart-item__avatar">É</div>
-          <div class="pdpv9-cart-item__body"><div class="pdpv9-cart-item__name">Événements UBurn en ligne</div><div class="pdpv9-cart-item__gift">Offert</div></div>
-          <div class="pdpv9-cart-item__price"><s>50€</s> 0€</div>
-        </div>
-        <div class="pdpv9-cart-item">
-          <div class="pdpv9-cart-item__avatar">W</div>
-          <div class="pdpv9-cart-item__body"><div class="pdpv9-cart-item__name">Suivi nutrition WhatsApp 30j</div><div class="pdpv9-cart-item__gift">Offert</div></div>
-          <div class="pdpv9-cart-item__price"><s>47€</s> 0€</div>
-        </div>
-        <div class="pdpv9-cart-sub">
-          <div class="pdpv9-cart-sub__row pdpv9-cart-sub__row--save"><span>Économies totales</span><span>−184€</span></div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="pdpv9-problem" id="probleme">
-    <div class="pdpv9-section-inner pdpv9-reveal">
-      <div class="pdpv9-section-label">On connaît ce moment.</div>
-      <h2 class="pdpv9-section-title">Le même schéma, <span class="pdpv9-accent">chaque jour.</span></h2>
-      <div class="pdpv9-prob-cards pdpv9-stagger-scale">
-        <div class="pdpv9-prob-card">
-          <div class="pdpv9-prob-card__num">01</div>
-          <div class="pdpv9-prob-card__title">16h — le placard vous appelle</div>
-          <div class="pdpv9-prob-card__sub">Glycémie en chute libre. C'est physiologique, pas un manque de volonté.</div>
-        </div>
-        <div class="pdpv9-prob-card">
-          <div class="pdpv9-prob-card__num">02</div>
-          <div class="pdpv9-prob-card__title">Le soir devant le frigo</div>
-          <div class="pdpv9-prob-card__sub">La fatigue baisse la garde. Les bonnes intentions du matin s'effacent.</div>
-        </div>
-        <div class="pdpv9-prob-card">
-          <div class="pdpv9-prob-card__num">03</div>
-          <div class="pdpv9-prob-card__title">La volonté ne suffit pas</div>
-          <div class="pdpv9-prob-card__sub">Ce n'est pas vous. C'est biologique. Et ça se traite.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="pdpv9-how">
-    <div class="pdpv9-section-inner pdpv9-reveal">
-      <div class="pdpv9-section-label">Comment Uburn agit</div>
-      <h2 class="pdpv9-section-title pdpv9-section-title--center">3 gestes. <span class="pdpv9-accent">4h de résultat.</span></h2>
-      <div class="pdpv9-how__grid pdpv9-stagger-children">
-        <div class="pdpv9-how__step">
-          <div class="pdpv9-how__photo"><img src="https://uburn.co/cdn/shop/files/etape_1.jpg?v=1763147054&width=600&format=webp" alt="Mélangez UBurn" loading="lazy" decoding="async" width="600" height="600"></div>
-          <div class="pdpv9-how__num">01</div>
-          <h4 class="pdpv9-how__title">Mélangez</h4>
-          <p class="pdpv9-how__desc">Une dose dans un grand verre d'eau <strong>OU</strong> de lait végétal</p>
+  {%- comment -%} ─── 3. HOW IT WORKS — 3 STEPS ─── {%- endcomment -%}
+  <section class="pdpv9-steps">
+    <div class="pdpv9-steps__head">
+      <span class="pdpv9-eyebrow">3 gestes simples</span>
+      <h2 class="pdpv9-h2">30 secondes <span class="pdpv9-h2-accent">pour changer le moment.</span></h2>
+    </div>
+    <div class="pdpv9-steps__grid">
+      <article class="pdpv9-step-card">
+        <div class="pdpv9-step-card__media">
+          <div class="pdpv9-img-ph" data-id="IMAGE_PLACEHOLDER_03_STEP_MIX" role="img" aria-label="Mélanger UBurn">
+            <div class="pdpv9-img-ph__inner">
+              <span class="pdpv9-img-ph__id">IMAGE_PLACEHOLDER_03_STEP_MIX</span>
+              <span class="pdpv9-img-ph__hint">Pouring UBurn powder into a glass of water or plant milk, soft natural light.</span>
+            </div>
+          </div>
         </div>
-        <div class="pdpv9-how__step">
-          <div class="pdpv9-how__photo"><img src="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=600&format=webp" alt="Le glucomannane forme un gel" loading="lazy" decoding="async" width="600" height="600"></div>
-          <div class="pdpv9-how__num">02</div>
-          <h4 class="pdpv9-how__title">Le gel se forme</h4>
-          <p class="pdpv9-how__desc">Le konjac gonfle dans votre estomac et coupe la faim naturellement</p>
+        <div class="pdpv9-step-card__num">01</div>
+        <h3 class="pdpv9-step-card__title">Mélangez</h3>
+        <p class="pdpv9-step-card__copy">Une dose dans un grand verre d'eau fraîche ou de lait végétal.</p>
+      </article>
+      <article class="pdpv9-step-card">
+        <div class="pdpv9-step-card__media">
+          <div class="pdpv9-img-ph" data-id="IMAGE_PLACEHOLDER_04_STEP_DRINK" role="img" aria-label="Boire UBurn">
+            <div class="pdpv9-img-ph__inner">
+              <span class="pdpv9-img-ph__id">IMAGE_PLACEHOLDER_04_STEP_DRINK</span>
+              <span class="pdpv9-img-ph__hint">Hand holding the violet UBurn drink, drinking from a tall glass, fresh and creamy.</span>
+            </div>
+          </div>
         </div>
-        <div class="pdpv9-how__step">
-          <div class="pdpv9-how__photo"><img src="https://uburn.co/cdn/shop/files/etape_3.jpg?v=1763147054&width=600&format=webp" alt="4h sans fringales" loading="lazy" decoding="async" width="600" height="600"></div>
-          <div class="pdpv9-how__num">03</div>
-          <h4 class="pdpv9-how__title">4h sans fringales</h4>
-          <p class="pdpv9-how__desc">Votre estomac est calmé, naturellement</p>
+        <div class="pdpv9-step-card__num">02</div>
+        <h3 class="pdpv9-step-card__title">Buvez</h3>
+        <p class="pdpv9-step-card__copy">Une boisson violette, douce, fraîche et crémeuse.</p>
+      </article>
+      <article class="pdpv9-step-card">
+        <div class="pdpv9-step-card__media">
+          <div class="pdpv9-img-ph" data-id="IMAGE_PLACEHOLDER_05_STEP_CONTROL" role="img" aria-label="Sensation de contrôle">
+            <div class="pdpv9-img-ph__inner">
+              <span class="pdpv9-img-ph__id">IMAGE_PLACEHOLDER_05_STEP_CONTROL</span>
+              <span class="pdpv9-img-ph__hint">Calm, smiling woman at her desk or sofa, evening light, sense of being in control.</span>
+            </div>
+          </div>
         </div>
-      </div>
+        <div class="pdpv9-step-card__num">03</div>
+        <h3 class="pdpv9-step-card__title">Restez en contrôle</h3>
+        <p class="pdpv9-step-card__copy">Une sensation de satiété qui vous aide à traverser le moment critique.</p>
+      </article>
     </div>
   </section>
 
-  <section class="pdpv9-lifestyle">
-    <div class="pdpv9-lifestyle__bg"></div>
-    <div class="pdpv9-lifestyle__inner pdpv9-reveal">
-      <div class="pdpv9-section-label">Un rituel, pas une contrainte</div>
-      <h2 class="pdpv9-lifestyle__title">Un moment <em>pour vous.</em> Une boisson pour votre équilibre.</h2>
-      <p class="pdpv9-lifestyle__text">Eau fraîche ou lait végétal, glaçons ou non — UBurn s'adapte à vos envies. Un rituel de 10 secondes, pensé pour vous.</p>
-      <a href="#pdpv9-offer" class="pdpv9-btn pdpv9-btn--white">Commencer ma cure →</a>
-    </div>
-  </section>
-
-  <div class="pdpv9-prod pdpv9-prod--alt">
-    <div class="pdpv9-prod__inner">
-      <div class="pdpv9-prod__text pdpv9-reveal">
-        <div class="pdpv9-section-label">Ce que vivent nos clientes</div>
-        <h2 class="pdpv9-prod__h2">Leurs résultats <span class="pdpv9-accent">en 30 jours.</span></h2>
-        <h3 class="pdpv9-prod__h3">Formulé autour du glucomannane, allégation santé validée EFSA (ID 3120)</h3>
-        <p class="pdpv9-prod__p">Mélangez UBurn avec un grand verre d'eau ou votre lait végétal préféré. Le konjac forme un gel qui occupe naturellement votre estomac — vous vous sentez rassasiée pendant jusqu'à 4h, sans frustration.</p>
-        <ul class="pdpv9-feats">
-          <li class="pdpv9-feat"><span class="pdpv9-feat__ck">✓</span>Effet satiété dès la première prise</li>
-          <li class="pdpv9-feat"><span class="pdpv9-feat__ck">✓</span>Résultats visibles en 7 à 14 jours</li>
-          <li class="pdpv9-feat"><span class="pdpv9-feat__ck">✓</span>30 kcal seulement par dose</li>
-          <li class="pdpv9-feat"><span class="pdpv9-feat__ck">✓</span>Saveur douce, noisette vanillée</li>
+  {%- comment -%} ─── 4. PAS UN RÉGIME. UN RITUEL. ─── {%- endcomment -%}
+  <section class="pdpv9-ritual">
+    <div class="pdpv9-ritual__inner">
+      <div class="pdpv9-ritual__copy">
+        <span class="pdpv9-eyebrow">Sans contrainte</span>
+        <h2 class="pdpv9-h2">Pas un régime. <span class="pdpv9-h2-accent">Un rituel.</span></h2>
+        <p class="pdpv9-lead">UBurn a été pensé pour s'intégrer dans une vraie journée. Sans caféine, sans abonnement, sans routine compliquée.</p>
+        <ul class="pdpv9-chips pdpv9-chips--grid">
+          <li class="pdpv9-chip">30 secondes à préparer</li>
+          <li class="pdpv9-chip">0% caféine</li>
+          <li class="pdpv9-chip">30 kcal</li>
+          <li class="pdpv9-chip">Eau ou lait végétal</li>
+          <li class="pdpv9-chip">Sans abonnement</li>
+          <li class="pdpv9-chip">Facile à garder dans une routine</li>
         </ul>
-        <a href="#pdpv9-offer" class="pdpv9-btn pdpv9-btn--fill">Essayer Uburn →</a>
       </div>
-      <div class="pdpv9-prod__visual pdpv9-reveal pdpv9-reveal--d">
-        <div class="pdpv9-prod__img"><img src="https://uburn.co/cdn/shop/files/focus_product_2.jpg?v=1772696236&width=800&format=webp" alt="UBurn boisson préparée" loading="lazy" decoding="async" width="800" height="800"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="pdpv9-prod pdpv9-prod--reverse">
-    <div class="pdpv9-prod__inner">
-      <div class="pdpv9-prod__text pdpv9-reveal">
-        <div class="pdpv9-section-label">Formule naturelle</div>
-        <h2 class="pdpv9-prod__h2">6 actifs. <span class="pdpv9-accent">Rien de plus.</span></h2>
-        <h3 class="pdpv9-prod__h3">Chaque ingrédient a un rôle précis. Rien de superflu.</h3>
-        <p class="pdpv9-prod__p">100% végétal · 0% caféine · 0 additifs.</p>
-        <ul class="pdpv9-feats">
-          <li class="pdpv9-feat"><span class="pdpv9-feat__ck">✓</span>5g de fibres par dose</li>
-          <li class="pdpv9-feat"><span class="pdpv9-feat__ck">✓</span>400mg de L-Carnitine</li>
-          <li class="pdpv9-feat"><span class="pdpv9-feat__ck">✓</span>0 additifs, 0 colorants</li>
-          <li class="pdpv9-feat"><span class="pdpv9-feat__ck">✓</span>EFSA ID 3120</li>
-        </ul>
-        <a href="#ingredients" class="pdpv9-btn pdpv9-btn--outline">Voir les ingrédients</a>
-      </div>
-      <div class="pdpv9-prod__visual pdpv9-reveal pdpv9-reveal--d">
-        <div class="pdpv9-prod__img pdpv9-prod__img--full"><img src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0004_3.jpg?v=1749644803&width=800&format=webp" alt="UBurn Powder" loading="lazy" decoding="async" width="800" height="800"></div>
-      </div>
-    </div>
-  </div>
-
-  <section class="pdpv9-compare">
-    <div class="pdpv9-compare__inner pdpv9-reveal">
-      <div class="pdpv9-section-label">Le spectre complet</div>
-      <h2 class="pdpv9-compare__h2">Chaque milligramme compte. <span class="pdpv9-accent">Chaque bienfait amplifié.</span></h2>
-      <div class="pdpv9-compare__table">
-        <div class="pdpv9-compare__head"><div>Actif</div><div>Marché classique</div><div>UBurn</div><div>Votre bénéfice</div></div>
-        <div class="pdpv9-compare__row"><div data-label="Actif" class="pdpv9-compare__actif">Glucomannane</div><div data-label="Marché" class="pdpv9-compare__market">Absent</div><div data-label="UBurn" class="pdpv9-compare__uburn">3g <span class="pdpv9-compare__pill">EFSA 3120</span></div><div data-label="Bénéfice" class="pdpv9-compare__benefit">Satiété 4h clinique</div></div>
-        <div class="pdpv9-compare__row"><div data-label="Actif" class="pdpv9-compare__actif">L-Carnitine</div><div data-label="Marché" class="pdpv9-compare__market">50-100mg</div><div data-label="UBurn" class="pdpv9-compare__uburn">400mg <span class="pdpv9-compare__pill">+400%</span></div><div data-label="Bénéfice" class="pdpv9-compare__benefit">Métabolisme soutenu</div></div>
-        <div class="pdpv9-compare__row"><div data-label="Actif" class="pdpv9-compare__actif">Fibre d'acacia</div><div data-label="Marché" class="pdpv9-compare__market">Absent</div><div data-label="UBurn" class="pdpv9-compare__uburn">1,5g <span class="pdpv9-compare__pill pdpv9-compare__pill--new">Nouveau</span></div><div data-label="Bénéfice" class="pdpv9-compare__benefit">Digestion améliorée</div></div>
-        <div class="pdpv9-compare__row"><div data-label="Actif" class="pdpv9-compare__actif">MCT de coco</div><div data-label="Marché" class="pdpv9-compare__market">Absent</div><div data-label="UBurn" class="pdpv9-compare__uburn">500mg</div><div data-label="Bénéfice" class="pdpv9-compare__benefit">Énergie stable</div></div>
-        <div class="pdpv9-compare__row"><div data-label="Actif" class="pdpv9-compare__actif">Ubé violet</div><div data-label="Marché" class="pdpv9-compare__market">Absent</div><div data-label="UBurn" class="pdpv9-compare__uburn">100mg</div><div data-label="Bénéfice" class="pdpv9-compare__benefit">Antioxydants</div></div>
-        <div class="pdpv9-compare__row"><div data-label="Actif" class="pdpv9-compare__actif">Gingembre</div><div data-label="Marché" class="pdpv9-compare__market">Rare</div><div data-label="UBurn" class="pdpv9-compare__uburn">15mg bio</div><div data-label="Bénéfice" class="pdpv9-compare__benefit">Digestion + métabolisme</div></div>
-        <div class="pdpv9-compare__row"><div data-label="Actif" class="pdpv9-compare__actif">Caféine</div><div data-label="Marché" class="pdpv9-compare__market">200mg+ souvent</div><div data-label="UBurn" class="pdpv9-compare__uburn">0mg</div><div data-label="Bénéfice" class="pdpv9-compare__benefit">Zéro pic · zéro crash</div></div>
-        <div class="pdpv9-compare__row"><div data-label="Actif" class="pdpv9-compare__actif">Conservateurs</div><div data-label="Marché" class="pdpv9-compare__market">Multiples</div><div data-label="UBurn" class="pdpv9-compare__uburn">0</div><div data-label="Bénéfice" class="pdpv9-compare__benefit">100% clean</div></div>
-        <div class="pdpv9-compare__row"><div data-label="Actif" class="pdpv9-compare__actif">Certification</div><div data-label="Marché" class="pdpv9-compare__market">Variable</div><div data-label="UBurn" class="pdpv9-compare__uburn">EFSA ID 3120</div><div data-label="Bénéfice" class="pdpv9-compare__benefit">Garantie officielle</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="pdpv9-ingredients" id="ingredients">
-    <div class="pdpv9-section-inner pdpv9-reveal">
-      <div class="pdpv9-section-label">Ingrédients</div>
-      <h2 class="pdpv9-section-title">Des actifs naturels <span class="pdpv9-accent">hautement sélectionnés.</span></h2>
-      <div class="pdpv9-ingr__grid pdpv9-stagger-scale">
-        <div class="pdpv9-ingr__card"><div class="pdpv9-ingr__img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1749644803&width=500&format=webp" alt="Ubé violet" loading="lazy" decoding="async" width="500" height="375"></div><div class="pdpv9-ingr__body"><h4>Ubé violet</h4><p>Antioxydants naturels</p></div></div>
-        <div class="pdpv9-ingr__card"><div class="pdpv9-ingr__img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1749644803&width=500&format=webp" alt="Konjac" loading="lazy" decoding="async" width="500" height="375"></div><div class="pdpv9-ingr__body"><h4>Konjac</h4><p>Satiété 4h · EFSA</p></div></div>
-        <div class="pdpv9-ingr__card"><div class="pdpv9-ingr__img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1749644803&width=500&format=webp" alt="Fibre d'acacia" loading="lazy" decoding="async" width="500" height="375"></div><div class="pdpv9-ingr__body"><h4>Acacia</h4><p>Prébiotique digestif</p></div></div>
-        <div class="pdpv9-ingr__card"><div class="pdpv9-ingr__img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1749644803&width=500&format=webp" alt="MCT de coco" loading="lazy" decoding="async" width="500" height="375"></div><div class="pdpv9-ingr__body"><h4>MCT coco</h4><p>Énergie stable</p></div></div>
-        <div class="pdpv9-ingr__card"><div class="pdpv9-ingr__img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1749644803&width=500&format=webp" alt="Gingembre" loading="lazy" decoding="async" width="500" height="375"></div><div class="pdpv9-ingr__body"><h4>Gingembre</h4><p>Digestion + métabolisme</p></div></div>
-        <div class="pdpv9-ingr__card"><div class="pdpv9-ingr__img"><img src="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1749644803&width=500&format=webp" alt="L-Carnitine" loading="lazy" decoding="async" width="500" height="375"></div><div class="pdpv9-ingr__body"><h4>L-Carnitine</h4><p>Métabolisme des graisses</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="pdpv9-benefits">
-    <div class="pdpv9-benefits__inner pdpv9-reveal">
-      <div class="pdpv9-benefits__head">
-        <div class="pdpv9-section-label">Soutien complet</div>
-        <h2 class="pdpv9-section-title pdpv9-section-title--center">6 bienfaits, <span class="pdpv9-accent">une seule boisson.</span></h2>
-        <p class="pdpv9-benefits__sub">Une dose. Six bénéfices.</p>
-      </div>
-      <div class="pdpv9-benefits__layout">
-        <div class="pdpv9-benefit-cards">
-          <div class="pdpv9-benefit-card pdpv9-benefit-card--active" data-benefit="satiete"><div class="pdpv9-benefit-icon">●</div><div class="pdpv9-benefit-name">Satiété</div></div>
-          <div class="pdpv9-benefit-card" data-benefit="energie"><div class="pdpv9-benefit-icon">⚡</div><div class="pdpv9-benefit-name">Énergie</div></div>
-          <div class="pdpv9-benefit-card" data-benefit="digestion"><div class="pdpv9-benefit-icon">◉</div><div class="pdpv9-benefit-name">Digestion</div></div>
-          <div class="pdpv9-benefit-card" data-benefit="antioxydants"><div class="pdpv9-benefit-icon">▲</div><div class="pdpv9-benefit-name">Antioxydants</div></div>
-          <div class="pdpv9-benefit-card" data-benefit="metabolisme"><div class="pdpv9-benefit-icon">∿</div><div class="pdpv9-benefit-name">Métabolisme</div></div>
-          <div class="pdpv9-benefit-card" data-benefit="bien_etre"><div class="pdpv9-benefit-icon">♡</div><div class="pdpv9-benefit-name">Bien-être</div></div>
-        </div>
-        <div class="pdpv9-benefit-detail">
-          <div class="pdpv9-benefit-detail__icon">●</div>
-          <div class="pdpv9-benefit-detail__label">Glucomannane · EFSA · Fibres</div>
-          <h3 class="pdpv9-benefit-detail__title">Satiété durable</h3>
-          <p class="pdpv9-benefit-detail__desc">Système complet basé sur le glucomannane (EFSA ID 3120) et 5g de fibres par dose. Le konjac absorbe jusqu'à 100x son poids en eau pour former un gel qui occupe naturellement l'estomac.</p>
-          <span class="pdpv9-benefit-detail__badge">Actifs dosés cliniquement</span>
+      <div class="pdpv9-ritual__media">
+        <div class="pdpv9-img-ph" data-id="IMAGE_PLACEHOLDER_06_RITUAL" role="img" aria-label="Le rituel UBurn">
+          <div class="pdpv9-img-ph__inner">
+            <span class="pdpv9-img-ph__id">IMAGE_PLACEHOLDER_06_RITUAL</span>
+            <span class="pdpv9-img-ph__hint">Flat-lay or side angle: shaker + UBurn powder + glass + fresh ingredients (oat milk, ice). Soft, premium, feminine wellness.</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="pdpv9-press">
-    <p class="pdpv9-press__label">Ils parlent de nous</p>
-    <div class="pdpv9-press__logos">
-      <img src="https://uburn.co/cdn/shop/files/TF1_1989-1990.png?v=1749644803&width=150&format=webp" alt="TF1" loading="lazy" decoding="async" width="150" height="50">
-      <img src="https://uburn.co/cdn/shop/files/Brut_logo_svg.png?v=1749644803&width=150&format=webp" alt="Brut" loading="lazy" decoding="async" width="150" height="50">
-      <img src="https://uburn.co/cdn/shop/files/logo-femmeactuelle-copie_cb5c498d-5470-4a4d-83fc-7b16c264a030.png?v=1749644803&width=150&format=webp" alt="Femme Actuelle" loading="lazy" decoding="async" width="150" height="50">
-      <img src="https://uburn.co/cdn/shop/files/VOGUE_revista_-_logo.png?v=1749644803&width=150&format=webp" alt="Vogue" loading="lazy" decoding="async" width="150" height="50">
-      <img src="https://uburn.co/cdn/shop/files/ELLE_Magazine_Logo.svg" alt="Elle">
+  {%- comment -%} ─── 5. TIMELINE ─── {%- endcomment -%}
+  <section class="pdpv9-timeline">
+    <div class="pdpv9-timeline__head">
+      <span class="pdpv9-eyebrow">Au fil des jours</span>
+      <h2 class="pdpv9-h2">Ce que <span class="pdpv9-h2-accent">vous pouvez ressentir.</span></h2>
+      <p class="pdpv9-lead">Indication sur la base d'un usage régulier dans le cadre d'une alimentation équilibrée.</p>
     </div>
-  </div>
-
-  <section class="pdpv9-stats">
-    <div class="pdpv9-section-inner pdpv9-reveal">
-      <h2 class="pdpv9-stats__h2">UBurn agit dès la première prise</h2>
-      <div class="pdpv9-stats__big pdpv9-stagger-children">
-        <div class="pdpv9-stat-big"><div class="pdpv9-stat-big__num" data-count="95" data-suffix="%">95%</div><div class="pdpv9-stat-big__label">Satiété dès la 1ère prise</div></div>
-        <div class="pdpv9-stat-big"><div class="pdpv9-stat-big__num" data-count="87" data-suffix="%">87%</div><div class="pdpv9-stat-big__label">Moins de grignotage le soir</div></div>
-        <div class="pdpv9-stat-big"><div class="pdpv9-stat-big__num" data-count="82" data-suffix="%">82%</div><div class="pdpv9-stat-big__label">Rythme alimentaire apaisé</div></div>
-        <div class="pdpv9-stat-big"><div class="pdpv9-stat-big__num">4.7/5</div><div class="pdpv9-stat-big__label">Note vérifiée</div></div>
-      </div>
-      <a href="#pdpv9-offer" class="pdpv9-btn pdpv9-btn--white">Commencer ma cure →</a>
-      <div class="pdpv9-stats__small">
-        <div class="pdpv9-stat-small"><div class="pdpv9-stat-small__num">30</div><div class="pdpv9-stat-small__label">kcal par dose</div></div>
-        <div class="pdpv9-stat-small"><div class="pdpv9-stat-small__num">4h</div><div class="pdpv9-stat-small__label">de satiété</div></div>
-        <div class="pdpv9-stat-small"><div class="pdpv9-stat-small__num">6</div><div class="pdpv9-stat-small__label">actifs naturels</div></div>
-        <div class="pdpv9-stat-small"><div class="pdpv9-stat-small__num">0%</div><div class="pdpv9-stat-small__label">caféine</div></div>
-      </div>
-      <p class="pdpv9-stats__note">Résultats sur enquête interne auprès de 1 500+ clientes UBurn.</p>
-    </div>
+    <ol class="pdpv9-timeline__grid">
+      <li class="pdpv9-tl-card">
+        <span class="pdpv9-tl-card__when">Aujourd'hui</span>
+        <h3 class="pdpv9-tl-card__title">Première sensation</h3>
+        <p class="pdpv9-tl-card__copy">Une première sensation de satiété après la prise.</p>
+      </li>
+      <li class="pdpv9-tl-card pdpv9-tl-card--mid">
+        <span class="pdpv9-tl-card__when">7 jours</span>
+        <h3 class="pdpv9-tl-card__title">Moments plus calmes</h3>
+        <p class="pdpv9-tl-card__copy">Des moments critiques plus faciles à gérer.</p>
+      </li>
+      <li class="pdpv9-tl-card pdpv9-tl-card--end">
+        <span class="pdpv9-tl-card__when">30 jours</span>
+        <h3 class="pdpv9-tl-card__title">Routine installée</h3>
+        <p class="pdpv9-tl-card__copy">Une routine plus structurée, plus simple à tenir.</p>
+      </li>
+    </ol>
+    <p class="pdpv9-timeline__disc">Indications individuelles, non garanties. UBurn n'est pas un médicament. Pour une perte de poids, il convient de l'associer à une alimentation hypocalorique et équilibrée.</p>
   </section>
 
-  <section class="pdpv9-testi" id="avis">
-    <div class="pdpv9-section-inner pdpv9-reveal">
-      <h2 class="pdpv9-section-title pdpv9-section-title--center">Elles racontent <span class="pdpv9-accent">leurs résultats.</span></h2>
-      <div class="pdpv9-testi__grid pdpv9-stagger-scale">
-        <div class="pdpv9-testi__card">
-          <div class="pdpv9-testi__stars">★★★★★</div>
-          <p class="pdpv9-testi__text">"Je ne pense plus au placard à 16h. Ça me soulage vraiment au quotidien."</p>
-          <div class="pdpv9-testi__verified">✓ Achat vérifié</div>
-          <div class="pdpv9-testi__author"><div class="pdpv9-testi__avatar">M</div><div><div class="pdpv9-testi__name">Marion L.</div><div class="pdpv9-testi__role">28 ans, Lyon</div></div></div>
+  {%- comment -%} ─── 6. WHY IT WORKS ─── {%- endcomment -%}
+  <section class="pdpv9-why">
+    <div class="pdpv9-why__inner">
+      <div class="pdpv9-why__copy">
+        <span class="pdpv9-eyebrow">La formule</span>
+        <h2 class="pdpv9-h2">Le plaisir de l'ube. <span class="pdpv9-h2-accent">La satiété du konjac.</span></h2>
+        <p class="pdpv9-lead">L'ube apporte la couleur, le goût et le plaisir du rituel. Le konjac, riche en glucomannane, contribue à la satiété dans le cadre d'une alimentation équilibrée.</p>
+
+        <div class="pdpv9-why__pillars">
+          <div class="pdpv9-why-pill">
+            <div class="pdpv9-why-pill__name">Ube violet</div>
+            <div class="pdpv9-why-pill__role">Couleur · plaisir · antioxydants naturels</div>
+          </div>
+          <div class="pdpv9-why-pill">
+            <div class="pdpv9-why-pill__name">Konjac (glucomannane)</div>
+            <div class="pdpv9-why-pill__role">3g par dose · gel naturel · satiété mécanique</div>
+          </div>
+          <div class="pdpv9-why-pill">
+            <div class="pdpv9-why-pill__name">L-Carnitine + MCT coco</div>
+            <div class="pdpv9-why-pill__role">Métabolisme énergétique · énergie stable</div>
+          </div>
         </div>
-        <div class="pdpv9-testi__card">
-          <div class="pdpv9-testi__stars">★★★★★</div>
-          <p class="pdpv9-testi__text">"Pour 0,61€ par jour, y'a pas de risque. Et ça marche. Mon 2e pot en cours."</p>
-          <div class="pdpv9-testi__verified">✓ Achat vérifié</div>
-          <div class="pdpv9-testi__author"><div class="pdpv9-testi__avatar">S</div><div><div class="pdpv9-testi__name">Sophie</div><div class="pdpv9-testi__role">Bordeaux</div></div></div>
-        </div>
-        <div class="pdpv9-testi__card">
-          <div class="pdpv9-testi__stars">★★★★★</div>
-          <p class="pdpv9-testi__text">"Mes collègues m'ont demandé mon secret. Le goût est top et je ne grignote plus le soir."</p>
-          <div class="pdpv9-testi__verified">✓ Achat vérifié</div>
-          <div class="pdpv9-testi__author"><div class="pdpv9-testi__avatar">N</div><div><div class="pdpv9-testi__name">Nathalie</div><div class="pdpv9-testi__role">Toulouse</div></div></div>
+
+        <div class="pdpv9-why__efsa">
+          <div class="pdpv9-why__efsa-badge">EFSA · Allégation officielle</div>
+          <p>« Le glucomannane contribue à la perte de poids dans le cadre d'un régime hypocalorique selon les conditions d'utilisation autorisées. »</p>
+          <p class="pdpv9-why__efsa-cond"><em>Condition : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau, avant les repas. ID 3120.</em></p>
         </div>
       </div>
-    </div>
-  </section>
-
-  {%- comment -%} FAQ standalone retirée — déjà couverte par les accordions du PDP hero {%- endcomment -%}
-  <section class="pdpv9-faq" id="faq" style="display:none" aria-hidden="true">
-    <div class="pdpv9-section-inner pdpv9-reveal">
-      <h2 class="pdpv9-section-title">Questions <span class="pdpv9-accent">fréquentes.</span></h2>
-      <div class="pdpv9-faq__list">
-        <div class="pdpv9-faq__item"><div class="pdpv9-faq__q">Comment fonctionne UBurn ?</div><div class="pdpv9-faq__a">UBurn est formulé autour du glucomannane de konjac, dont l'allégation de satiété est officiellement validée par l'EFSA (ID 3120). Mélangez une dose dans un grand verre d'eau fraîche ou de votre lait végétal préféré. Le konjac absorbe l'eau et forme un gel naturel dans l'estomac — vous vous sentez rassasiée naturellement.</div></div>
-        <div class="pdpv9-faq__item"><div class="pdpv9-faq__q">En combien de temps voit-on des résultats ?</div><div class="pdpv9-faq__a">La plupart des clientes ressentent l'effet satiété dès la première prise. Pour des résultats visibles sur le contrôle des fringales : 7 à 14 jours en utilisation régulière le matin.</div></div>
-        <div class="pdpv9-faq__item"><div class="pdpv9-faq__q">Y a-t-il un abonnement ?</div><div class="pdpv9-faq__a">Non. Aucun abonnement caché. Vous commandez quand vous voulez, vous arrêtez quand vous voulez.</div></div>
-        <div class="pdpv9-faq__item"><div class="pdpv9-faq__q">C'est compatible le soir ? Sans caféine ?</div><div class="pdpv9-faq__a">Oui. Uburn ne contient pas de caféine. Vous pouvez le prendre à n'importe quelle heure, même le soir, sans perturber votre sommeil.</div></div>
-        <div class="pdpv9-faq__item"><div class="pdpv9-faq__q">Avec de l'eau ou avec du lait — quelle différence ?</div><div class="pdpv9-faq__a">Les deux fonctionnent parfaitement. Eau froide = boisson légère et rafraîchissante. Lait végétal = texture crémeuse, saveur noisette-vanille plus prononcée.</div></div>
-        <div class="pdpv9-faq__item"><div class="pdpv9-faq__q">Y a-t-il des contre-indications ?</div><div class="pdpv9-faq__a">UBurn est déconseillé pendant la grossesse et l'allaitement. En cas de traitement médical, consultez votre médecin. Le glucomannane peut interagir avec certains médicaments — prendre UBurn 2h avant ou après votre traitement si nécessaire.</div></div>
+      <div class="pdpv9-why__media">
+        <div class="pdpv9-img-ph" data-id="IMAGE_PLACEHOLDER_07_INGREDIENTS" role="img" aria-label="Ingrédients UBurn">
+          <div class="pdpv9-img-ph__inner">
+            <span class="pdpv9-img-ph__id">IMAGE_PLACEHOLDER_07_INGREDIENTS</span>
+            <span class="pdpv9-img-ph__hint">Editorial flat-lay of the 3 hero ingredients: ube root, konjac, MCT coconut. Soft purple light, premium wellness.</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <div class="pdpv9-guar">
-    <div class="pdpv9-guar__grid">
-      <div class="pdpv9-guar__item"><div class="pdpv9-guar__icon"><img src="https://uburn.co/cdn/shop/files/Picto_World.svg" alt=""></div><h4>Formule EFSA</h4><p>Glucomannane ID 3120</p></div>
-      <div class="pdpv9-guar__item"><div class="pdpv9-guar__icon"><img src="https://uburn.co/cdn/shop/files/Picto_Fast_shipping.svg" alt=""></div><h4>Livraison gratuite</h4><p>En France</p></div>
-      <div class="pdpv9-guar__item"><div class="pdpv9-guar__icon"><img src="https://uburn.co/cdn/shop/files/Picto_secure_payment.svg" alt=""></div><h4>Paiement sécurisé</h4><p>100% sécurisé</p></div>
-      <div class="pdpv9-guar__item"><div class="pdpv9-guar__icon"><img src="https://uburn.co/cdn/shop/files/Picto_customer.svg" alt=""></div><h4>Sans abonnement</h4><p>Commandez quand vous voulez</p></div>
+  {%- comment -%} ─── 7. SOCIAL PROOF ─── {%- endcomment -%}
+  <section class="pdpv9-reviews">
+    <div class="pdpv9-reviews__head">
+      <span class="pdpv9-eyebrow">Elles racontent</span>
+      <h2 class="pdpv9-h2">Elles l'ont intégré <span class="pdpv9-h2-accent">dans leur routine.</span></h2>
+      <div class="pdpv9-reviews__rating">
+        <span class="pdpv9-stars">★★★★★</span>
+        <span class="pdpv9-reviews__rating-text">4,7/5 · 1 500+ avis vérifiés</span>
+      </div>
     </div>
-  </div>
+    <div class="pdpv9-reviews__grid">
+      <article class="pdpv9-review-card">
+        <div class="pdpv9-review-card__stars">★★★★★</div>
+        <p class="pdpv9-review-card__text">« Le goût est vraiment agréable, surtout avec du lait végétal. C'est devenu mon moment plaisir de l'après-midi. »</p>
+        <div class="pdpv9-review-card__verified">✓ Achat vérifié</div>
+        <div class="pdpv9-review-card__author">
+          <div class="pdpv9-review-card__avatar">M</div>
+          <div>
+            <div class="pdpv9-review-card__name">Marion L.</div>
+            <div class="pdpv9-review-card__role">28 ans · Lyon</div>
+          </div>
+        </div>
+      </article>
+      <article class="pdpv9-review-card">
+        <div class="pdpv9-review-card__stars">★★★★★</div>
+        <p class="pdpv9-review-card__text">« J'ai remplacé mon snack de 16h par mon verre UBurn. Texture crémeuse, je n'ai plus l'impression de me priver. »</p>
+        <div class="pdpv9-review-card__verified">✓ Achat vérifié</div>
+        <div class="pdpv9-review-card__author">
+          <div class="pdpv9-review-card__avatar">S</div>
+          <div>
+            <div class="pdpv9-review-card__name">Sophie</div>
+            <div class="pdpv9-review-card__role">Bordeaux</div>
+          </div>
+        </div>
+      </article>
+      <article class="pdpv9-review-card">
+        <div class="pdpv9-review-card__stars">★★★★★</div>
+        <p class="pdpv9-review-card__text">« C'est devenu mon petit rituel violet de l'après-midi. Facile, rapide et il me cale vraiment jusqu'au dîner. »</p>
+        <div class="pdpv9-review-card__verified">✓ Achat vérifié</div>
+        <div class="pdpv9-review-card__author">
+          <div class="pdpv9-review-card__avatar">N</div>
+          <div>
+            <div class="pdpv9-review-card__name">Nathalie</div>
+            <div class="pdpv9-review-card__role">Toulouse</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 8. SUPPORT / BONUS STACK ─── {%- endcomment -%}
+  <section class="pdpv9-support">
+    <div class="pdpv9-support__head">
+      <span class="pdpv9-eyebrow">Inclus avec votre commande</span>
+      <h2 class="pdpv9-h2">Tout est pensé <span class="pdpv9-h2-accent">pour vous aider à réussir.</span></h2>
+      <p class="pdpv9-lead">Pas juste une boisson — un système d'accompagnement complet pour transformer la première dose en routine durable.</p>
+    </div>
+    <div class="pdpv9-support__grid">
+      <article class="pdpv9-support-card">
+        <div class="pdpv9-support-card__icon" aria-hidden="true">📘</div>
+        <div class="pdpv9-support-card__price"><s>47€</s> <strong>Offert</strong></div>
+        <h3 class="pdpv9-support-card__title">E-book « 30j pour reprendre le contrôle »</h3>
+        <p class="pdpv9-support-card__copy">Plan nutrition complet : recettes simples, conseils anti-fringales, structure jour par jour.</p>
+      </article>
+      <article class="pdpv9-support-card">
+        <div class="pdpv9-support-card__icon" aria-hidden="true">💜</div>
+        <div class="pdpv9-support-card__price"><s>40€</s> <strong>Offert</strong></div>
+        <h3 class="pdpv9-support-card__title">Groupe privé UBurn Collective</h3>
+        <p class="pdpv9-support-card__copy">Communauté active de femmes qui partagent recettes, succès et soutien quotidien.</p>
+      </article>
+      <article class="pdpv9-support-card">
+        <div class="pdpv9-support-card__icon" aria-hidden="true">💬</div>
+        <div class="pdpv9-support-card__price"><s>47€</s> <strong>Offert</strong></div>
+        <h3 class="pdpv9-support-card__title">Suivi nutrition WhatsApp 30j</h3>
+        <p class="pdpv9-support-card__copy">Coaching messagerie sur 30 jours : conseils personnalisés, ajustements, motivation.</p>
+      </article>
+      <article class="pdpv9-support-card">
+        <div class="pdpv9-support-card__icon" aria-hidden="true">🎬</div>
+        <div class="pdpv9-support-card__price"><s>50€</s> <strong>Offert</strong></div>
+        <h3 class="pdpv9-support-card__title">Événements UBurn en ligne</h3>
+        <p class="pdpv9-support-card__copy">Sessions live mensuelles avec nutritionnistes invités. Replays disponibles.</p>
+      </article>
+    </div>
+    <div class="pdpv9-support__total">
+      <span>Valeur totale incluse :</span>
+      <strong>184€ OFFERTS</strong>
+    </div>
+    <a href="#pdpv9-pdp" class="pdpv9-cta-primary">Commencer ma cure →</a>
+  </section>
 
   <div class="pdpv9-disc">
     <div class="pdpv9-disc__inner">
@@ -646,7 +556,7 @@
   </div>
 
   <div class="pdpv9-sticky-cta">
-    <a href="#pdpv9-offer">Commencer ma cure — dès {{ v_decouverte.price | money }}</a>
+    <a href="#pdpv9-pdp">Commencer ma cure — dès {{ v_decouverte.price | money }}</a>
   </div>
 
 </div>
@@ -655,119 +565,6 @@
   /* SAFE MODE — JS désactivé totalement.
      Si la page rend stable maintenant, on réintroduira les features
      une par une. */
-  /*
-  (function(){
-    var root = document.querySelector('.pdpv9-root');
-    if(!root) return;
-    root.classList.add('pdpv9-js');
-
-    // Reveal observer
-    var ro = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){
-          e.target.classList.add('pdpv9-reveal--visible');
-          if(e.target.classList.contains('pdpv9-stagger-children')) e.target.classList.add('pdpv9-stagger-children--visible');
-          if(e.target.classList.contains('pdpv9-stagger-scale')) e.target.classList.add('pdpv9-stagger-scale--visible');
-          ro.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    root.querySelectorAll('.pdpv9-reveal, .pdpv9-stagger-children, .pdpv9-stagger-scale').forEach(function(el){ ro.observe(el); });
-
-    // Count-up
-    var co = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(!e.isIntersecting) return;
-        var el = e.target, target = +el.dataset.count, suffix = el.dataset.suffix || '', dur = 1400, start = null;
-        function step(ts){
-          if(!start) start = ts;
-          var p = Math.min((ts - start) / dur, 1);
-          el.textContent = Math.round(p * target) + suffix;
-          if(p < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-        co.unobserve(el);
-      });
-    }, { threshold: 0.3 });
-    root.querySelectorAll('[data-count]').forEach(function(el){ co.observe(el); });
-
-    // FAQ accordion
-    root.querySelectorAll('.pdpv9-faq__item').forEach(function(item){
-      var q = item.querySelector('.pdpv9-faq__q');
-      if(!q) return;
-      q.addEventListener('click', function(){
-        root.querySelectorAll('.pdpv9-faq__item').forEach(function(i){ if(i !== item) i.classList.remove('pdpv9-faq__item--open'); });
-        item.classList.toggle('pdpv9-faq__item--open');
-      });
-    });
-
-    // Benefits tabs
-    var benefits = {
-      satiete:      { label:'Glucomannane · EFSA · Fibres', title:'Satiété durable',     desc:'Système complet basé sur le glucomannane (EFSA ID 3120) et 5g de fibres par dose. Le konjac absorbe jusqu\'à 100x son poids en eau pour former un gel qui occupe naturellement l\'estomac.' },
-      energie:      { label:'MCT · L-Carnitine',            title:'Énergie stable',      desc:'MCT coco et L-Carnitine 400mg pour une énergie sans pic ni crash. Parfait pour les après-midis longs.' },
-      digestion:    { label:'Gingembre · Acacia',           title:'Digestion apaisée',   desc:'Gingembre bio et fibre d\'acacia prébiotique pour un confort digestif au quotidien.' },
-      antioxydants: { label:'Ubé · Anthocyanes',            title:'Antioxydants puissants', desc:'Ubé violet riche en anthocyanes naturelles pour la protection cellulaire et l\'éclat de la peau.' },
-      metabolisme:  { label:'L-Carnitine · Gingembre',      title:'Métabolisme soutenu', desc:'L-Carnitine 400mg et gingembre pour un support métabolique naturel et durable.' },
-      bien_etre:    { label:'Formule complète',             title:'Équilibre global',    desc:'Une formule synergique de 6 actifs pour un bien-être quotidien apaisé et durable.' }
-    };
-    root.querySelectorAll('[data-benefit]').forEach(function(card){
-      card.addEventListener('click', function(){
-        var key = card.getAttribute('data-benefit');
-        root.querySelectorAll('[data-benefit]').forEach(function(c){ c.classList.remove('pdpv9-benefit-card--active'); });
-        card.classList.add('pdpv9-benefit-card--active');
-        var detail = root.querySelector('.pdpv9-benefit-detail');
-        if(detail && benefits[key]){
-          detail.querySelector('.pdpv9-benefit-detail__label').textContent = benefits[key].label;
-          detail.querySelector('.pdpv9-benefit-detail__title').textContent = benefits[key].title;
-          detail.querySelector('.pdpv9-benefit-detail__desc').textContent  = benefits[key].desc;
-        }
-      });
-    });
-
-    // Variant picker — sync visual selected state on radio change
-    root.querySelectorAll('.pdpv9-pricing__card input[type="radio"]').forEach(function(r){
-      r.addEventListener('change', function(){
-        root.querySelectorAll('.pdpv9-pricing__card').forEach(function(c){ c.classList.remove('pdpv9-pricing__card--selected'); });
-        if(r.checked) r.closest('.pdpv9-pricing__card').classList.add('pdpv9-pricing__card--selected');
-      });
-    });
-
-    // Gallery thumbs
-    var slides = root.querySelectorAll('.pdpv9-gallery__slide');
-    var thumbs = root.querySelectorAll('.pdpv9-gallery__thumb');
-    thumbs.forEach(function(t){
-      t.addEventListener('click', function(){
-        var idx = +t.getAttribute('data-idx');
-        slides.forEach(function(s){ s.classList.toggle('pdpv9-gallery__slide--active', +s.getAttribute('data-idx') === idx); });
-        thumbs.forEach(function(x){ x.classList.toggle('pdpv9-gallery__thumb--active', x === t); });
-      });
-    });
-
-    // Promo bar — copy UBE10
-    var bar = document.getElementById('pdpv9-promoBar');
-    var btn = document.getElementById('pdpv9-promoCopy');
-    var txt = document.getElementById('pdpv9-promoText');
-    if(bar && btn && txt){
-      var params = new URLSearchParams(window.location.search);
-      if(params.get('discount') === 'UBE10' || params.get('code') === 'UBE10'){
-        bar.classList.add('applied');
-        txt.innerHTML = '✓ Code <strong>UBE10</strong> appliqué — <strong>-10%</strong> sur ta commande';
-      }
-      btn.addEventListener('click', function(){
-        navigator.clipboard.writeText('UBE10').then(function(){
-          btn.textContent = 'Copié ✓'; btn.classList.add('copied');
-          setTimeout(function(){ btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 2000);
-        }).catch(function(){
-          var ta = document.createElement('textarea'); ta.value = 'UBE10';
-          document.body.appendChild(ta); ta.select();
-          try { document.execCommand('copy'); btn.textContent = 'Copié ✓'; btn.classList.add('copied');
-                setTimeout(function(){ btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 2000); } catch(e){}
-          document.body.removeChild(ta);
-        });
-      });
-    }
-  })();
-  */
 </script>
 
 {% schema %}
