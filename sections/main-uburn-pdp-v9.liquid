@@ -35,15 +35,33 @@
 {{ 'uburn-pdp-v9.css' | asset_url | stylesheet_tag }}
 
 <style>
-  body.template-product .shopify-section--main-product { display: none !important; }
-  body.template-product .shopify-section--multi-column,
-  body.template-product .shopify-section--text-with-media,
-  body.template-product .shopify-section--trust-icons,
-  body.template-product .shopify-section--ss-scrolling-logo-cloud,
-  body.template-product .shopify-section--separator-adjustable,
-  body.template-product .shopify-section--apps,
-  body.template-product .shopify-section--collection-list,
-  body.template-product .shopify-section--faq { display: none !important; }
+  /* Force visibility minimal — sans debug couleurs */
+  .shopify-section.uburn-pdp-v9-section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .pdpv9-root {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Sibling-based hide pour theme parasites */
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--multi-column,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--text-with-media,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--trust-icons,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--ss-scrolling-logo-cloud,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--separator-adjustable,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--apps,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--collection-list,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--faq { display: none !important; }
+
+  /* Reveal toujours visible — pas de gate */
+  .pdpv9-reveal, .pdpv9-stagger-children > *, .pdpv9-stagger-scale > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 </style>
 
 <div class="pdpv9-root">
@@ -62,33 +80,182 @@
     <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 0% caféine</span>
   </div>
 
-  <section class="pdpv9-hero">
-    <div class="pdpv9-hero__content">
-      <div class="pdpv9-hero__tag">Nos premières clientes adorent Uburn</div>
-      <h1 class="pdpv9-hero__h1">16h. <span class="pdpv9-accent">Votre</span> placard reste fermé.</h1>
-      <p class="pdpv9-hero__sub">30 kcal · 0% caféine · 4h de satiété.</p>
-      <div class="pdpv9-hero__badges">
-        <div class="pdpv9-hero__badge">✓ 0% caféine</div>
-        <div class="pdpv9-hero__badge">✓ 30 kcal</div>
-        <div class="pdpv9-hero__badge">✓ France</div>
-        <div class="pdpv9-hero__badge">✓ Livraison offerte</div>
-        <div class="pdpv9-hero__badge">✓ 0% sucre ajouté</div>
+  {%- comment -%} ═══ PDP HERO ABOVE-FOLD — real PDP structure ═══ {%- endcomment -%}
+  <section class="pdpv9-pdp" id="pdpv9-pdp">
+    <div class="pdpv9-pdp__grid">
+
+      {%- comment -%} ─── LEFT: Gallery (CSS-only carousel, mobile swipe via scroll-snap) ─── {%- endcomment -%}
+      <div class="pdpv9-pdp__gallery">
+        {%- if product.media.size > 0 -%}
+          <div class="pdpv9-pdp__slides" role="region" aria-label="Galerie produit" tabindex="0">
+            {%- for media in product.media -%}
+              <div class="pdpv9-pdp__slide" id="pdpv9-slide-{{ forloop.index }}">
+                {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                  {{ media | media_tag: image_size: '1200x', autoplay: false, loop: false, controls: true, preload: 'metadata' }}
+                {%- else -%}
+                  <img src="{{ media | image_url: width: 1200 }}&format=webp" alt="{{ media.alt | default: product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async" width="1200" height="1200">
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+          {%- if product.media.size > 1 -%}
+            <div class="pdpv9-pdp__thumbs" role="tablist" aria-label="Vignettes">
+              {%- for media in product.media -%}
+                <a href="#pdpv9-slide-{{ forloop.index }}" class="pdpv9-pdp__thumb" aria-label="Image {{ forloop.index }}">
+                  <img src="{{ media | image_url: width: 200 }}&format=webp" alt="" loading="lazy" decoding="async" width="200" height="200">
+                </a>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        {%- elsif featured -%}
+          <div class="pdpv9-pdp__slides">
+            <div class="pdpv9-pdp__slide">
+              <img src="{{ featured | image_url: width: 1200 }}&format=webp" alt="{{ featured.alt | default: product.title | escape }}" loading="eager" decoding="async" width="1200" height="1200">
+            </div>
+          </div>
+        {%- endif -%}
       </div>
-      <a href="#pdpv9-offer" class="pdpv9-btn pdpv9-btn--fill pdpv9-btn--pulse">Commencer ma cure →</a>
-      <div class="pdpv9-hero__bonus">
-        <div class="pdpv9-hero__bonus-label">🎁 Offerts avec votre commande aujourd'hui</div>
-        <div class="pdpv9-hero__bonus-items">
-          <span>✓ E-book "30j pour reprendre le contrôle" <em>(47€)</em></span>
-          <span>✓ Accès groupe privé Uburn Collective <em>(40€)</em></span>
-          <span>✓ Accès aux événements UBurn en ligne <em>(50€)</em></span>
-          <span>✓ Suivi nutrition WhatsApp 30j <em>(47€)</em></span>
+
+      {%- comment -%} ─── RIGHT: Purchase panel ─── {%- endcomment -%}
+      <div class="pdpv9-pdp__purchase">
+
+        {%- comment -%} Header: title + rating + subtitle {%- endcomment -%}
+        <div class="pdpv9-pdp__header">
+          <div class="pdpv9-pdp__rating" aria-label="4,7 sur 5 étoiles, 1 500 avis">
+            <span class="pdpv9-pdp__stars" aria-hidden="true">★★★★★</span>
+            <span class="pdpv9-pdp__rating-text">4,7/5 · 1 500+ avis vérifiés</span>
+          </div>
+          <h1 class="pdpv9-pdp__title">{{ product.title | default: 'UBurn — Reprenez le contrôle' }}</h1>
+          <p class="pdpv9-pdp__subtitle">Boisson satiété 4h · 30 kcal · 0% caféine · Validée EFSA</p>
         </div>
-        <div class="pdpv9-hero__bonus-total">Valeur totale : <strong>184€ OFFERTS</strong></div>
+
+        {%- comment -%} Price (mise à jour côté UI, mais reflète selected_or_first par défaut) {%- endcomment -%}
+        <div class="pdpv9-pdp__price-wrap">
+          <span class="pdpv9-pdp__price" id="pdpv9-price">{{ current_variant.price | money }}</span>
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            <span class="pdpv9-pdp__compare-price"><s>{{ current_variant.compare_at_price | money }}</s></span>
+          {%- endif -%}
+          <span class="pdpv9-pdp__price-per">soit dès 0,61€/jour</span>
+        </div>
+
+        {%- comment -%} ATC FORM — native Shopify {%- endcomment -%}
+        <form action="/cart/add" method="post" enctype="multipart/form-data" class="pdpv9-pdp__form" id="pdpv9-pdp-form" novalidate>
+          <input type="hidden" name="form_type" value="product">
+          <input type="hidden" name="utf8" value="✓">
+
+          {%- if product.variants.size > 1 -%}
+            <fieldset class="pdpv9-pdp__variants" role="radiogroup" aria-label="Choisis ta cure">
+              <legend class="pdpv9-pdp__variants-legend">Choisis ta cure</legend>
+              {%- for v in product.variants -%}
+                <label class="pdpv9-pdp__variant{% if v.id == current_variant.id %} pdpv9-pdp__variant--selected{% endif %}{% unless v.available %} pdpv9-pdp__variant--sold{% endunless %}">
+                  <input type="radio" name="id" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %} class="pdpv9-pdp__variant-input">
+                  <span class="pdpv9-pdp__variant-body">
+                    <span class="pdpv9-pdp__variant-name">{{ v.title }}</span>
+                    <span class="pdpv9-pdp__variant-price">{{ v.price | money }}{% if v.compare_at_price > v.price %} <s>{{ v.compare_at_price | money }}</s>{% endif %}</span>
+                  </span>
+                  {%- unless v.available -%}<span class="pdpv9-pdp__variant-sold">Rupture</span>{%- endunless -%}
+                </label>
+              {%- endfor -%}
+            </fieldset>
+          {%- else -%}
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+          {%- endif -%}
+
+          <div class="pdpv9-pdp__qty-row">
+            <label for="pdpv9-pdp-qty" class="pdpv9-pdp__qty-label">Quantité</label>
+            <div class="pdpv9-pdp__qty-input-wrap">
+              <input id="pdpv9-pdp-qty" type="number" name="quantity" value="1" min="1" max="10" inputmode="numeric" class="pdpv9-pdp__qty-input" aria-label="Quantité">
+            </div>
+          </div>
+
+          <button type="submit" name="add" class="pdpv9-pdp__atc"{% unless current_variant.available %} disabled{% endunless %}>
+            {%- if current_variant.available -%}
+              <span class="pdpv9-pdp__atc-text">Ajouter au panier</span>
+              <span class="pdpv9-pdp__atc-price">— {{ current_variant.price | money }}</span>
+            {%- else -%}
+              En rupture
+            {%- endif -%}
+          </button>
+        </form>
+
+        {%- comment -%} Reassurance row {%- endcomment -%}
+        <ul class="pdpv9-pdp__reassurance">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7l3-7z"/></svg> Validé EFSA · Glucomannane ID 3120</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Paiement sécurisé · Apple Pay · Shop Pay</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h13l3 4v6h-3"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg> Livraison gratuite en France · 2-4j</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Sans abonnement · Commandez quand vous voulez</li>
+        </ul>
+
+        {%- comment -%} Bonus stack visualisé {%- endcomment -%}
+        <div class="pdpv9-pdp__bonus">
+          <div class="pdpv9-pdp__bonus-title">🎁 Offerts avec ta commande</div>
+          <div class="pdpv9-pdp__bonus-items">
+            <div><span>E-book « 30j pour reprendre le contrôle »</span><span class="pdpv9-pdp__bonus-val"><s>47€</s> 0€</span></div>
+            <div><span>Groupe privé Uburn Collective</span><span class="pdpv9-pdp__bonus-val"><s>40€</s> 0€</span></div>
+            <div><span>Événements UBurn en ligne</span><span class="pdpv9-pdp__bonus-val"><s>50€</s> 0€</span></div>
+            <div><span>Suivi nutrition WhatsApp 30j</span><span class="pdpv9-pdp__bonus-val"><s>47€</s> 0€</span></div>
+          </div>
+          <div class="pdpv9-pdp__bonus-total">Valeur totale : <strong>184€ OFFERTS</strong></div>
+        </div>
+
       </div>
     </div>
-    <div class="pdpv9-hero__visual">
-      <img class="pdpv9-hero__photo" src="{{ featured | image_url: width: 900 }}&format=webp" alt="{{ featured.alt | default: product.title | escape }}" fetchpriority="high" loading="eager" width="900" height="900">
-      <div class="pdpv9-hero__float pdpv9-hero__float--top"><span class="pdpv9-hero__float-badge">EFSA</span> Glucomannane · ID 3120</div>
+
+    {%- comment -%} ─── ACCORDIONS — CSS-only via <details> ─── {%- endcomment -%}
+    <div class="pdpv9-pdp__accordions">
+      <details class="pdpv9-acc" open>
+        <summary class="pdpv9-acc__q">Description</summary>
+        <div class="pdpv9-acc__a">
+          {%- if product.description != blank -%}
+            {{ product.description }}
+          {%- else -%}
+            <p>UBurn est une boisson satiété naturelle formulée autour du <strong>glucomannane</strong> de konjac (allégation EFSA ID 3120). Mélangée à un grand verre d'eau ou de lait végétal, elle forme un gel qui occupe l'estomac et coupe naturellement les fringales jusqu'à 4 heures.</p>
+            <p>Saveur ubé violet, noisette vanillée. 30 kcal par dose. 0% caféine. 100% végétal. Made in France.</p>
+          {%- endif -%}
+        </div>
+      </details>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">Comment l'utiliser</summary>
+        <div class="pdpv9-acc__a">
+          <ol>
+            <li><strong>Mélange</strong> 1 dose (cuillère fournie) dans 250 ml d'eau froide ou de lait végétal (amande, avoine, coco).</li>
+            <li><strong>Secoue</strong> pendant 10 secondes dans une gourde ou un shaker.</li>
+            <li><strong>Bois</strong> avant un repas ou en collation. La satiété s'installe en 15-20 min et dure jusqu'à 4h.</li>
+          </ol>
+          <p style="font-size:13px;color:#5a5654;margin-top:12px"><em>Recommandé : 1 à 3 doses par jour selon ton objectif. Toujours boire avec un grand verre d'eau.</em></p>
+        </div>
+      </details>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">Ingrédients</summary>
+        <div class="pdpv9-acc__a">
+          <ul>
+            <li><strong>Glucomannane de konjac</strong> — 3g par dose · Allégation EFSA ID 3120 (contrôle de l'appétit)</li>
+            <li><strong>L-Carnitine tartrate</strong> — 400mg · Métabolisme énergétique</li>
+            <li><strong>Fibre d'acacia</strong> — 1,5g · Prébiotique digestif</li>
+            <li><strong>MCT de coco</strong> — 500mg · Énergie stable sans crash</li>
+            <li><strong>Ubé violet</strong> — 100mg · Antioxydants naturels</li>
+            <li><strong>Gingembre bio</strong> — 15mg · Digestion + métabolisme</li>
+          </ul>
+          <p style="font-size:12px;color:#8a8785;margin-top:10px"><em>0 additifs · 0 colorants · 0 conservateurs · 0 caféine · 0 sucre ajouté · Sans gluten · Sans lactose · Vegan</em></p>
+        </div>
+      </details>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">Livraison & retours</summary>
+        <div class="pdpv9-acc__a">
+          <p><strong>Livraison gratuite</strong> en France métropolitaine pour toute commande. Expédition sous 24-48h ouvrées, livraison en 2-4 jours.</p>
+          <p><strong>Sans abonnement.</strong> Tu commandes quand tu veux, tu arrêtes quand tu veux.</p>
+          <p><strong>Retours.</strong> Si le produit n'est pas ouvert, tu peux nous le retourner sous 14 jours et nous te remboursons. Pour toute question, écris-nous à <a href="mailto:hello@uburn.co">hello@uburn.co</a>.</p>
+        </div>
+      </details>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">FAQ — Questions fréquentes</summary>
+        <div class="pdpv9-acc__a">
+          <p><strong>Comment fonctionne UBurn ?</strong><br>Le glucomannane de konjac absorbe l'eau dans l'estomac et forme un gel naturel qui occupe l'espace. La satiété est mécanique et dure 4h. Allégation EFSA ID 3120 officielle.</p>
+          <p><strong>En combien de temps voit-on des résultats ?</strong><br>L'effet satiété est ressenti dès la première prise. Pour le contrôle des fringales : 7-14 jours en utilisation régulière.</p>
+          <p><strong>C'est compatible le soir ?</strong><br>Oui. UBurn ne contient aucune caféine — tu peux le prendre à toute heure, même le soir.</p>
+          <p><strong>Y a-t-il des contre-indications ?</strong><br>Déconseillé pendant la grossesse et l'allaitement. En cas de traitement médical, consulte ton médecin. Le glucomannane peut interagir avec certains médicaments — prendre 2h avant ou après ton traitement.</p>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -151,7 +318,8 @@
     </div>
   </section>
 
-  <section class="pdpv9-offer" id="pdpv9-offer">
+  {%- comment -%} Old offer-block hidden — purchase action is now in PDP hero above-fold {%- endcomment -%}
+  <section class="pdpv9-offer" id="pdpv9-offer" style="display:none" aria-hidden="true">
     <div class="pdpv9-offer__inner">
       <div class="pdpv9-offer__header pdpv9-reveal">
         <div class="pdpv9-section-label">Votre offre</div>
@@ -447,7 +615,8 @@
     </div>
   </section>
 
-  <section class="pdpv9-faq" id="faq">
+  {%- comment -%} FAQ standalone retirée — déjà couverte par les accordions du PDP hero {%- endcomment -%}
+  <section class="pdpv9-faq" id="faq" style="display:none" aria-hidden="true">
     <div class="pdpv9-section-inner pdpv9-reveal">
       <h2 class="pdpv9-section-title">Questions <span class="pdpv9-accent">fréquentes.</span></h2>
       <div class="pdpv9-faq__list">
@@ -481,6 +650,125 @@
   </div>
 
 </div>
+
+<script>
+  /* SAFE MODE — JS désactivé totalement.
+     Si la page rend stable maintenant, on réintroduira les features
+     une par une. */
+  /*
+  (function(){
+    var root = document.querySelector('.pdpv9-root');
+    if(!root) return;
+    root.classList.add('pdpv9-js');
+
+    // Reveal observer
+    var ro = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('pdpv9-reveal--visible');
+          if(e.target.classList.contains('pdpv9-stagger-children')) e.target.classList.add('pdpv9-stagger-children--visible');
+          if(e.target.classList.contains('pdpv9-stagger-scale')) e.target.classList.add('pdpv9-stagger-scale--visible');
+          ro.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    root.querySelectorAll('.pdpv9-reveal, .pdpv9-stagger-children, .pdpv9-stagger-scale').forEach(function(el){ ro.observe(el); });
+
+    // Count-up
+    var co = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var el = e.target, target = +el.dataset.count, suffix = el.dataset.suffix || '', dur = 1400, start = null;
+        function step(ts){
+          if(!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          el.textContent = Math.round(p * target) + suffix;
+          if(p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+        co.unobserve(el);
+      });
+    }, { threshold: 0.3 });
+    root.querySelectorAll('[data-count]').forEach(function(el){ co.observe(el); });
+
+    // FAQ accordion
+    root.querySelectorAll('.pdpv9-faq__item').forEach(function(item){
+      var q = item.querySelector('.pdpv9-faq__q');
+      if(!q) return;
+      q.addEventListener('click', function(){
+        root.querySelectorAll('.pdpv9-faq__item').forEach(function(i){ if(i !== item) i.classList.remove('pdpv9-faq__item--open'); });
+        item.classList.toggle('pdpv9-faq__item--open');
+      });
+    });
+
+    // Benefits tabs
+    var benefits = {
+      satiete:      { label:'Glucomannane · EFSA · Fibres', title:'Satiété durable',     desc:'Système complet basé sur le glucomannane (EFSA ID 3120) et 5g de fibres par dose. Le konjac absorbe jusqu\'à 100x son poids en eau pour former un gel qui occupe naturellement l\'estomac.' },
+      energie:      { label:'MCT · L-Carnitine',            title:'Énergie stable',      desc:'MCT coco et L-Carnitine 400mg pour une énergie sans pic ni crash. Parfait pour les après-midis longs.' },
+      digestion:    { label:'Gingembre · Acacia',           title:'Digestion apaisée',   desc:'Gingembre bio et fibre d\'acacia prébiotique pour un confort digestif au quotidien.' },
+      antioxydants: { label:'Ubé · Anthocyanes',            title:'Antioxydants puissants', desc:'Ubé violet riche en anthocyanes naturelles pour la protection cellulaire et l\'éclat de la peau.' },
+      metabolisme:  { label:'L-Carnitine · Gingembre',      title:'Métabolisme soutenu', desc:'L-Carnitine 400mg et gingembre pour un support métabolique naturel et durable.' },
+      bien_etre:    { label:'Formule complète',             title:'Équilibre global',    desc:'Une formule synergique de 6 actifs pour un bien-être quotidien apaisé et durable.' }
+    };
+    root.querySelectorAll('[data-benefit]').forEach(function(card){
+      card.addEventListener('click', function(){
+        var key = card.getAttribute('data-benefit');
+        root.querySelectorAll('[data-benefit]').forEach(function(c){ c.classList.remove('pdpv9-benefit-card--active'); });
+        card.classList.add('pdpv9-benefit-card--active');
+        var detail = root.querySelector('.pdpv9-benefit-detail');
+        if(detail && benefits[key]){
+          detail.querySelector('.pdpv9-benefit-detail__label').textContent = benefits[key].label;
+          detail.querySelector('.pdpv9-benefit-detail__title').textContent = benefits[key].title;
+          detail.querySelector('.pdpv9-benefit-detail__desc').textContent  = benefits[key].desc;
+        }
+      });
+    });
+
+    // Variant picker — sync visual selected state on radio change
+    root.querySelectorAll('.pdpv9-pricing__card input[type="radio"]').forEach(function(r){
+      r.addEventListener('change', function(){
+        root.querySelectorAll('.pdpv9-pricing__card').forEach(function(c){ c.classList.remove('pdpv9-pricing__card--selected'); });
+        if(r.checked) r.closest('.pdpv9-pricing__card').classList.add('pdpv9-pricing__card--selected');
+      });
+    });
+
+    // Gallery thumbs
+    var slides = root.querySelectorAll('.pdpv9-gallery__slide');
+    var thumbs = root.querySelectorAll('.pdpv9-gallery__thumb');
+    thumbs.forEach(function(t){
+      t.addEventListener('click', function(){
+        var idx = +t.getAttribute('data-idx');
+        slides.forEach(function(s){ s.classList.toggle('pdpv9-gallery__slide--active', +s.getAttribute('data-idx') === idx); });
+        thumbs.forEach(function(x){ x.classList.toggle('pdpv9-gallery__thumb--active', x === t); });
+      });
+    });
+
+    // Promo bar — copy UBE10
+    var bar = document.getElementById('pdpv9-promoBar');
+    var btn = document.getElementById('pdpv9-promoCopy');
+    var txt = document.getElementById('pdpv9-promoText');
+    if(bar && btn && txt){
+      var params = new URLSearchParams(window.location.search);
+      if(params.get('discount') === 'UBE10' || params.get('code') === 'UBE10'){
+        bar.classList.add('applied');
+        txt.innerHTML = '✓ Code <strong>UBE10</strong> appliqué — <strong>-10%</strong> sur ta commande';
+      }
+      btn.addEventListener('click', function(){
+        navigator.clipboard.writeText('UBE10').then(function(){
+          btn.textContent = 'Copié ✓'; btn.classList.add('copied');
+          setTimeout(function(){ btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 2000);
+        }).catch(function(){
+          var ta = document.createElement('textarea'); ta.value = 'UBE10';
+          document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); btn.textContent = 'Copié ✓'; btn.classList.add('copied');
+                setTimeout(function(){ btn.textContent = 'Copier'; btn.classList.remove('copied'); }, 2000); } catch(e){}
+          document.body.removeChild(ta);
+        });
+      });
+    }
+  })();
+  */
+</script>
 
 {% schema %}
 {

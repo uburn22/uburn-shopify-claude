@@ -1,1 +1,9 @@
-{"sections":{"uburn-pdp":{"type":"uburn-pdp","settings":{}}},"order":["uburn-pdp"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-uburn-pdp-v9",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
