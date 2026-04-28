@@ -21,6 +21,6 @@ jobs:
             --theme 185705234751 \
             --allow-live \
             --force \
-            --only "sections/uburn-pdp.liquid,sections/ub-home-v2.liquid,sections/main-uburn-home.liquid,assets/uburn-home.css,templates/index.uburn-v2.json"
+            --only "sections/uburn-pdp.liquid,sections/ub-home-v2.liquid,sections/main-uburn-home.liquid,assets/uburn-home.css,templates/index.uburn-v2.json,templates/product.json"
         env:
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_THEME_TOKEN }}
