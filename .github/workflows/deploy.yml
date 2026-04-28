@@ -18,9 +18,15 @@ jobs:
         run: |
           shopify theme push \
             --store 1t9ayp-tw.myshopify.com \
-            --theme 26554743587135 \
+            --theme 185705234751 \
             --allow-live \
             --force \
-            --only "sections/uburn-pdp.liquid,sections/ub-home-v2.liquid,sections/main-uburn-home.liquid,assets/uburn-home.css,templates/index.uburn-v2.json,templates/index.json,templates/product.json"
+            --only sections/uburn-pdp.liquid \
+            --only sections/ub-home-v2.liquid \
+            --only sections/main-uburn-home.liquid \
+            --only assets/uburn-home.css \
+            --only templates/index.uburn-v2.json \
+            --only templates/index.json \
+            --only templates/product.json
         env:
           SHOPIFY_CLI_THEME_TOKEN: ${{ secrets.SHOPIFY_THEME_TOKEN }}
