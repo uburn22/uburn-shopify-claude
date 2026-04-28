@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main-uburn-home": {
+      "type": "main-uburn-home",
+      "settings": {}
+    }
+  },
+  "order": ["main-uburn-home"]
+}
