@@ -1,9 +1,9 @@
 {
   "sections": {
-    "ub-home-v2": {
-      "type": "ub-home-v2",
+    "main-uburn-home": {
+      "type": "main-uburn-home",
       "settings": {}
     }
   },
-  "order": ["ub-home-v2"]
+  "order": ["main-uburn-home"]
 }
