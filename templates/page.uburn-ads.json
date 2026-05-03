@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "uburn-homepage",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

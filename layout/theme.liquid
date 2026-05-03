@@ -54,7 +54,11 @@
     <script type="module" src="{{ 'theme.js' | asset_url }}"></script>
 
     {{ content_for_header }}
-    <!-- UBurn Typography: system font stack — performance optimized -->
+    <!-- UBurn Typography: Plus Jakarta Sans — AG1-inspired casing -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"></noscript>
           <style>
               /* ======================================================
                      UBURN — AG1-inspired typography rules
@@ -69,7 +73,7 @@
                                                        *, body, p, span, a, li, td, th, label, input, button,
                                                            select, textarea, .rte, nav, header,
                                                                h1, h2, h3, h4, h5, h6 {
-                                                                     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+                                                                     font-family: 'Plus Jakarta Sans', sans-serif !important;
                                                                          }
                                                                          
                                                                              /* 3. Body: readable, clean */
@@ -85,7 +89,7 @@
                                                                                                                          .h1, .h2, .h3, .h4, .h5, .h6,
                                                                                                                              .product__title, .product-title,
                                                                                                                                  .card__heading, [class*="heading"], [class*="title"] {
-                                                                                                                                       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+                                                                                                                                       font-family: 'Plus Jakarta Sans', sans-serif !important;
                                                                                                                                              font-weight: 400 !important;
                                                                                                                                                    letter-spacing: -0.03em !important;
                                                                                                                                                         text-transform: none !important;
@@ -95,7 +99,7 @@
                                                                                                                                                                       /* 5. Navigation: mixed-case, medium weight */
                                                                                                                                                                           nav a, .header__menu-item, .header a,
                                                                                                                                                                               .menu-drawer a, .announcement-bar__message {
-                                                                                                                                                                                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+                                                                                                                                                                                    font-family: 'Plus Jakarta Sans', sans-serif !important;
                                                                                                                                                                                           text-transform: none !important;
                                                                                                                                                                                                 letter-spacing: 0 !important;
                                                                                                                                                                                                       font-weight: 500 !important;
@@ -104,7 +108,7 @@
                                                                                                                                                                                                               /* 6. Buttons: sentence case, semibold */
                                                                                                                                                                                                                   .button, .btn, [class*="button"], button[type="submit"],
                                                                                                                                                                                                                       a.button, input[type="submit"] {
-                                                                                                                                                                                                                            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+                                                                                                                                                                                                                            font-family: 'Plus Jakarta Sans', sans-serif !important;
                                                                                                                                                                                                                                   font-weight: 600 !important;
                                                                                                                                                                                                                                         text-transform: none !important;
                                                                                                                                                                                                                                               letter-spacing: -0.01em !important;
@@ -114,13 +118,13 @@
                                                                                                                                                                                                                                                           footer, footer a, footer li, footer p, footer span,
                                                                                                                                                                                                                                                               .footer, .footer a, .footer li, .footer p {
                                                                                                                                                                                                                                                                     text-transform: none !important;
-                                                                                                                                                                                                                                                                          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+                                                                                                                                                                                                                                                                          font-family: 'Plus Jakarta Sans', sans-serif !important;
                                                                                                                                                                                                                                                                               }
                                                                                                                                                                                                                                                                               
                                                                                                                                                                                                                                                                                   /* 8. Body text / paragraphs / lists: sentence case */
                                                                                                                                                                                                                                                                                       p, li, blockquote, .rte, .prose {
                                                                                                                                                                                                                                                                                             text-transform: none !important;
-                                                                                                                                                                                                                                                                                                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+                                                                                                                                                                                                                                                                                                font-family: 'Plus Jakarta Sans', sans-serif !important;
                                                                                                                                                                                                                                                                                                     }
                                                                                                                                                                                                                                                                                                     
                                                                                                                                                                                                                                                                                                         /* 9. Short ingredient labels & overline badges: keep uppercase (AG1 style) */
@@ -321,7 +325,7 @@
     if (!document.querySelector('.ub-microcopy')) {
       var micro = document.createElement('p');
       micro.className = 'ub-microcopy';
-      micro.textContent = 'Exp\u00e9di\u00e9 sous 24h \u2022 Marque française';
+      micro.textContent = 'Exp\u00e9di\u00e9 sous 24h \u2022 Sans abonnement';
       micro.style.cssText = 'text-align:center;font-size:11px;color:#6B7280;margin-top:6px;margin-bottom:0;';
       var parent = addBtn.closest('.product-form') || addBtn.parentElement;
       parent.appendChild(micro);
@@ -389,7 +393,7 @@
       div.className = 'ub-repeat-cta';
       div.style.cssText = 'text-align:center;padding:32px 16px;';
       div.innerHTML = '<button style="background:#7C3AED;color:#fff;border:none;border-radius:12px;padding:16px 40px;font-size:15px;font-weight:800;cursor:pointer;transition:background 0.2s;letter-spacing:0.3px;max-width:420px;width:100%;" onmouseenter="this.style.background=\'#6D28D9\'" onmouseleave="this.style.background=\'#7C3AED\'" onclick="var t=document.querySelector(\'.product-form__submit\');if(t){t.scrollIntoView({behavior:\'smooth\',block:\'center\'});setTimeout(function(){t.click()},600);}">Je commence ma cure \u2014 Livraison offerte</button>'
-        + '<p style="text-align:center;font-size:11px;color:#6B7280;margin-top:8px;margin-bottom:0;">Exp\u00e9di\u00e9 sous 24h \u2022 Marque française</p>';
+        + '<p style="text-align:center;font-size:11px;color:#6B7280;margin-top:8px;margin-bottom:0;">Marque fran\u00e7aise \u2022 Exp\u00e9di\u00e9 sous 24h</p>';
       return div;
     };
     document.querySelectorAll('.shopify-section').forEach(function(sec) {

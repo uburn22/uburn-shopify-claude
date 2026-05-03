@@ -1,46 +1,9 @@
 <style>
-  /* ══════════════════════════════════════════════
-     UBURN PRODUCT PAGE — Medvi-inspired design
-     Fond blanc · sections aérées · typo heavy
-     Cartes shadow · CTA pill violet
-  ══════════════════════════════════════════════ */
-
-  :root {
-    --uburn-white: #ffffff;
-    --uburn-off-white: #fafafa;
-    --uburn-lavender: #faf5ff;
-    --uburn-lavender-border: #ede9fe;
-    --uburn-violet-50: #f5f3ff;
-    --uburn-violet-100: #ede9fe;
-    --uburn-violet-200: #ddd6fe;
-    --uburn-violet-400: #a78bfa;
-    --uburn-violet-500: #8b5cf6;
-    --uburn-violet-600: #7c3aed;
-    --uburn-violet-700: #6d28d9;
-    --uburn-gray-50: #f9fafb;
-    --uburn-gray-100: #f3f4f6;
-    --uburn-gray-200: #e5e7eb;
-    --uburn-gray-300: #d1d5db;
-    --uburn-gray-400: #9ca3af;
-    --uburn-gray-500: #6b7280;
-    --uburn-gray-600: #4b5563;
-    --uburn-gray-700: #374151;
-    --uburn-gray-800: #1f2937;
-    --uburn-gray-900: #111827;
-    --uburn-green: #16a34a;
-    --uburn-amber: #f59e0b;
-    --uburn-font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --uburn-radius-sm: 8px;
-    --uburn-radius-md: 14px;
-    --uburn-radius-lg: 20px;
-    --uburn-radius-pill: 999px;
-    --uburn-shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
-    --uburn-shadow-md: 0 4px 14px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
-    --uburn-shadow-lg: 0 10px 30px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.04);
-    --uburn-shadow-card: 0 2px 12px rgba(124,58,237,0.06), 0 1px 3px rgba(0,0,0,0.04);
-  }
-
   {%- if section.settings.allow_transparent_header and section.settings.transparent_header_use_primary_colors -%}
+    {%- comment -%}
+    When this setting is enabled, we use the transparent header, but we force the header to use the primary colors and primary logo.
+    {%- endcomment -%}
+
     .header {
       --header-show-transparent-logo: 0 !important;
       --header-transparent-header-text-color: initial;
@@ -53,585 +16,180 @@
     }
   {%- endif -%}
 
-  /* ── Page wrapper ── */
-  .shopify-section--main-product {
-    background: var(--uburn-white);
-    font-family: var(--uburn-font);
+  /* Mobile hero — above the fold for paid traffic */
+  .uburn-mobile-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #f5f0ff 0%, #ede5ff 100%);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    max-height: 60px;
+    overflow: hidden;
+  }
+  .uburn-hero-promise {
+    font-size: 15px;
+    font-weight: 700;
+    color: #5b21b6;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .uburn-hero-details {
+    font-size: 11px;
+    color: #7c3aed;
+    margin: 0;
+  }
+  @media screen and (min-width: 700px) {
+    .uburn-mobile-hero { display: none; }
   }
 
-  .shopify-section--main-product .product {
-    gap: 40px;
-  }
-
-  /* ── Trust bar (Medvi top strip) ── */
+  /* FIX 3 — Trust bar above the fold */
   .uburn-trust-bar {
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-wrap: wrap;
     gap: 0;
-    padding: 14px 20px;
-    background: var(--uburn-white);
-    border: 1px solid var(--uburn-gray-200);
-    border-radius: var(--uburn-radius-md);
-    box-shadow: var(--uburn-shadow-sm);
-    margin-bottom: 12px;
-    grid-column: 1 / -1;
-  }
-  .uburn-trust-bar__stars {
-    color: var(--uburn-amber);
-    font-size: 13px;
-    letter-spacing: 1px;
+    padding: 6px 8px;
+    background: #fff;
+    border-bottom: 1px solid #ede5ff;
+    margin-bottom: 4px;
   }
   .uburn-trust-bar span {
-    font-family: var(--uburn-font);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--uburn-gray-600);
+    font-size: 10px;
+    color: #666;
     white-space: nowrap;
-    padding: 0 12px;
-    line-height: 1.4;
+    padding: 0 6px;
   }
   .uburn-trust-bar span b {
-    color: var(--uburn-violet-600);
+    color: #7c3aed;
     font-weight: 700;
   }
   .uburn-trust-bar span + span {
-    border-left: 1px solid var(--uburn-gray-200);
+    border-left: 1px solid #ede5ff;
   }
 
-  /* ── Variant cards ── */
-  .uburn-variant-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin: 20px 0 12px;
-  }
-  .uburn-variant-card {
-    position: relative;
-    border: 2px solid var(--uburn-gray-200);
-    border-radius: var(--uburn-radius-md);
-    padding: 20px 16px;
-    cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    background: var(--uburn-white);
-    text-align: center;
-    font-family: var(--uburn-font);
-    box-shadow: var(--uburn-shadow-sm);
-  }
-  .uburn-variant-card:hover {
-    border-color: var(--uburn-violet-400);
-    box-shadow: var(--uburn-shadow-md);
-    transform: translateY(-1px);
-  }
-  .uburn-variant-card--selected {
-    border-color: var(--uburn-violet-500);
-    box-shadow: 0 0 0 1px var(--uburn-violet-500), var(--uburn-shadow-md);
-    background: var(--uburn-violet-50);
-  }
-  .uburn-variant-card__badge {
-    position: absolute;
-    top: -11px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, var(--uburn-violet-500), var(--uburn-violet-700));
-    color: #fff;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 4px 14px;
-    border-radius: var(--uburn-radius-pill);
-    white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(124,58,237,0.3);
-  }
-  .uburn-variant-card__qty {
-    font-size: 16px;
-    font-weight: 800;
-    color: var(--uburn-gray-900);
-    margin: 0 0 6px;
-    letter-spacing: -0.01em;
-  }
-  .uburn-variant-card__price {
-    font-size: 24px;
-    font-weight: 900;
-    color: var(--uburn-violet-600);
-    margin: 0 0 4px;
-    letter-spacing: -0.02em;
-  }
-  .uburn-variant-card__daily {
-    font-size: 12px;
-    color: var(--uburn-gray-500);
-    margin: 0;
-    font-weight: 500;
-  }
-  .uburn-variant-card__save {
-    font-size: 12px;
-    color: var(--uburn-green);
-    font-weight: 700;
-    margin: 6px 0 0;
-  }
-
-  /* ── Benefits bullets (Medvi airy grid) ── */
-  .uburn-benefits {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin: 20px 0 0;
-    font-family: var(--uburn-font);
-  }
-  .uburn-benefit {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13.5px;
-    font-weight: 500;
-    line-height: 1.4;
-    color: var(--uburn-gray-700);
-    padding: 10px 14px;
-    background: var(--uburn-gray-50);
-    border-radius: var(--uburn-radius-sm);
-    transition: background 0.2s;
-  }
-  .uburn-benefit:hover {
-    background: var(--uburn-violet-50);
-  }
-  .uburn-benefit__icon {
-    flex-shrink: 0;
-    font-size: 17px;
-    line-height: 1;
-  }
-  @media screen and (max-width: 499px) {
-    .uburn-benefits { grid-template-columns: 1fr; }
-  }
-
-  /* ── Reassurance strip under ATC ── */
-  .uburn-reassurance {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin: 14px 0 0;
-    font-family: var(--uburn-font);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--uburn-gray-500);
-  }
-  .uburn-reassurance span {
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-
-  /* ── Ingredients (Medvi card style) ── */
-  .uburn-ingredients {
-    margin: 28px 0 0;
-    font-family: var(--uburn-font);
-  }
-  .uburn-ingredients__title {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--uburn-gray-900);
-    margin: 0 0 14px;
-    letter-spacing: -0.02em;
-  }
-  .uburn-ingredients__grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .uburn-ingredient {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 16px;
-    background: var(--uburn-white);
-    border-radius: var(--uburn-radius-md);
-    border: 1px solid var(--uburn-gray-200);
-    box-shadow: var(--uburn-shadow-card);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .uburn-ingredient:hover {
-    box-shadow: var(--uburn-shadow-md);
-    transform: translateY(-1px);
-    border-color: var(--uburn-violet-200);
-  }
-  .uburn-ingredient__icon {
-    flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--uburn-violet-500), var(--uburn-violet-700));
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 17px;
-    box-shadow: 0 2px 6px rgba(124,58,237,0.25);
-  }
-  .uburn-ingredient__info strong {
-    display: block;
-    font-size: 13.5px;
-    font-weight: 700;
-    color: var(--uburn-gray-800);
-  }
-  .uburn-ingredient__info span {
-    font-size: 11.5px;
-    color: var(--uburn-gray-500);
-    line-height: 1.3;
-    font-weight: 400;
-  }
-  .uburn-ingredients__footer {
-    margin: 10px 0 0;
-    font-size: 11px;
-    color: var(--uburn-gray-400);
-    text-align: center;
-    font-weight: 500;
-  }
-  @media screen and (max-width: 499px) {
-    .uburn-ingredients__grid { grid-template-columns: 1fr; }
-  }
-
-  /* ── Testimonials (Medvi card style) ── */
-  .uburn-testimonials {
-    margin: 28px 0 0;
-    font-family: var(--uburn-font);
-  }
-  .uburn-testimonials__title {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--uburn-gray-900);
-    margin: 0 0 14px;
-    letter-spacing: -0.02em;
-  }
-  .uburn-testimonials__list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .uburn-testimonial {
-    display: flex;
-    gap: 14px;
-    padding: 18px 20px;
-    background: var(--uburn-white);
-    border: 1px solid var(--uburn-gray-200);
-    border-radius: var(--uburn-radius-md);
-    box-shadow: var(--uburn-shadow-card);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .uburn-testimonial:hover {
-    box-shadow: var(--uburn-shadow-md);
-    transform: translateY(-1px);
-  }
-  .uburn-testimonial__avatar {
-    flex-shrink: 0;
-    width: 42px;
-    height: 42px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--uburn-violet-500), var(--uburn-violet-700));
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 800;
-    box-shadow: 0 2px 6px rgba(124,58,237,0.25);
-  }
-  .uburn-testimonial__content {
-    flex: 1;
-  }
-  .uburn-testimonial__stars {
-    color: var(--uburn-amber);
-    font-size: 13px;
-    letter-spacing: 1px;
-    margin: 0 0 6px;
-  }
-  .uburn-testimonial__text {
-    font-size: 13.5px;
-    color: var(--uburn-gray-700);
-    line-height: 1.6;
-    margin: 0 0 6px;
-    font-style: normal;
-    font-weight: 400;
-  }
-  .uburn-testimonial__name {
-    font-size: 12px;
-    color: var(--uburn-gray-400);
-    margin: 0;
-    font-weight: 600;
-  }
-
-  /* ── Science accordion (Medvi clean) ── */
+  /* Accordion science */
   .uburn-science-accordion {
-    margin-top: 14px;
-    border: 1px solid var(--uburn-gray-200);
-    border-radius: var(--uburn-radius-md);
+    margin-top: 12px;
+    border: 1px solid #e0dce6;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: var(--uburn-shadow-sm);
-    transition: box-shadow 0.2s;
-  }
-  .uburn-science-accordion:hover {
-    box-shadow: var(--uburn-shadow-md);
   }
   .uburn-science-accordion summary {
-    padding: 16px 20px;
-    font-size: 14.5px;
-    font-weight: 700;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    background: var(--uburn-white);
+    background: #f9f7fc;
     list-style: none;
-    color: var(--uburn-gray-800);
-    transition: background 0.2s;
-  }
-  .uburn-science-accordion summary:hover {
-    background: var(--uburn-gray-50);
   }
   .uburn-science-accordion summary::-webkit-details-marker { display: none; }
   .uburn-science-accordion summary::after {
     content: '+';
     float: right;
-    font-size: 20px;
-    font-weight: 300;
-    color: var(--uburn-violet-500);
-    transition: transform 0.2s;
+    font-size: 18px;
+    color: #7c3aed;
   }
-  .uburn-science-accordion[open] summary::after {
-    content: '\2212';
-    transform: rotate(180deg);
-  }
-  .uburn-science-accordion[open] summary {
-    border-bottom: 1px solid var(--uburn-gray-100);
-  }
+  .uburn-science-accordion[open] summary::after { content: '−'; }
   .uburn-science-steps {
-    padding: 16px 20px;
+    padding: 12px 16px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    background: var(--uburn-gray-50);
+    gap: 14px;
   }
   .uburn-science-step {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     align-items: flex-start;
-    font-size: 13.5px;
-    line-height: 1.6;
-    color: var(--uburn-gray-700);
+    font-size: 13px;
+    line-height: 1.5;
   }
   .uburn-step-icon {
     flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, var(--uburn-violet-500), var(--uburn-violet-700));
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #7c3aed;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 12px;
-    font-weight: 800;
-    box-shadow: 0 2px 6px rgba(124,58,237,0.25);
+    font-weight: 700;
   }
+
+  /* Emoji step icons (no background) */
   .uburn-step-icon--emoji {
     background: none;
     font-size: 20px;
-    width: 28px;
-    height: 28px;
-    box-shadow: none;
+    width: 26px;
+    height: 26px;
   }
 
-  /* ── FAQ section (Medvi clean stacked) ── */
+  /* FIX 4 — FAQ section */
   .uburn-faq-section {
-    margin-top: 28px;
+    margin-top: 16px;
   }
   .uburn-faq-heading {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--uburn-gray-900);
-    margin: 0 0 14px 0;
-    letter-spacing: -0.02em;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 8px 0;
   }
   .uburn-faq-section .uburn-science-accordion {
     margin-top: 0;
     border-radius: 0;
     border-bottom: none;
-    box-shadow: none;
-  }
-  .uburn-faq-section .uburn-science-accordion:hover {
-    box-shadow: none;
   }
   .uburn-faq-section .uburn-science-accordion:first-of-type {
-    border-radius: var(--uburn-radius-md) var(--uburn-radius-md) 0 0;
+    border-radius: 8px 8px 0 0;
   }
   .uburn-faq-section .uburn-science-accordion:last-of-type {
-    border-radius: 0 0 var(--uburn-radius-md) var(--uburn-radius-md);
-    border-bottom: 1px solid var(--uburn-gray-200);
+    border-radius: 0 0 8px 8px;
+    border-bottom: 1px solid #e0dce6;
   }
   .uburn-faq-answer {
-    font-size: 13.5px;
-    line-height: 1.7;
-    color: var(--uburn-gray-600);
+    font-size: 13px;
+    line-height: 1.6;
+    color: #444;
     margin: 0;
-    font-weight: 400;
-    padding: 16px 20px;
-    background: var(--uburn-gray-50);
   }
 
-  /* ── Antioxidant note ── */
+  /* TASK 3 — Antioxidant note */
   .uburn-antioxidant-note {
     font-size: 12px;
-    color: var(--uburn-gray-400);
+    color: #888;
     font-style: italic;
-    margin: 8px 0 0 0;
-    font-family: var(--uburn-font);
+    margin: 6px 0 0 0;
   }
 
-  /* ── Price comparison ── */
+  /* TASK 3 — Prix comparison */
   .uburn-price-comparison {
-    font-size: 12.5px;
-    color: var(--uburn-green);
-    font-weight: 700;
-    margin: 6px 0 0 0;
-    font-family: var(--uburn-font);
+    font-size: 12px;
+    color: #16a34a;
+    font-weight: 600;
+    margin: 4px 0 0 0;
   }
 
   .uburn-no-subscription {
-    font-size: 12px;
-    color: var(--uburn-gray-500);
+    font-size: 11px;
+    color: #6b7280;
     text-align: center;
-    margin: 10px 0 0 0;
-    font-family: var(--uburn-font);
-    font-weight: 500;
+    margin: 8px 0 0 0;
   }
 
-  /* ── Legal notices ── */
-  .uburn-legal-notices {
-    margin-top: 12px;
-    font-size: 10.5px;
-    color: var(--uburn-gray-400);
-    line-height: 1.5;
-    font-family: var(--uburn-font);
-  }
 
-  /* ── CTA pill button override (Medvi style) ── */
-  .shopify-section--main-product .button,
-  .shopify-section--main-product [type="submit"].button {
-    border-radius: var(--uburn-radius-pill) !important;
-    font-weight: 700 !important;
-    font-family: var(--uburn-font) !important;
-    letter-spacing: 0.01em !important;
-    padding: 16px 32px !important;
-    font-size: 15px !important;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    box-shadow: 0 4px 14px rgba(124,58,237,0.25) !important;
-  }
-  .shopify-section--main-product .button:hover,
-  .shopify-section--main-product [type="submit"].button:hover {
-    transform: translateY(-1px) !important;
-    box-shadow: 0 6px 20px rgba(124,58,237,0.35) !important;
-  }
-  .shopify-section--main-product .button--solid,
-  .shopify-section--main-product [type="submit"].button--solid {
-    background: linear-gradient(135deg, var(--uburn-violet-500), var(--uburn-violet-700)) !important;
-    color: #fff !important;
-    border: none !important;
-  }
-  .shopify-section--main-product .button--outline {
-    border: 2px solid var(--uburn-violet-500) !important;
-    color: var(--uburn-violet-600) !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-  .shopify-section--main-product .button--outline:hover {
-    background: var(--uburn-violet-50) !important;
-    box-shadow: none !important;
-  }
-
-  /* ── Product info typography overrides (Medvi heavy) ── */
-  .shopify-section--main-product .product-info {
-    font-family: var(--uburn-font);
-  }
-  .shopify-section--main-product .product-info h1,
-  .shopify-section--main-product .product-info h2,
-  .shopify-section--main-product .product-info h3 {
-    font-weight: 900 !important;
-    letter-spacing: -0.03em !important;
-    color: var(--uburn-gray-900) !important;
-    line-height: 1.1 !important;
-  }
-  .shopify-section--main-product .product-info .price {
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    color: var(--uburn-gray-900);
-  }
-  .shopify-section--main-product .product-info .price .price--compare {
-    color: var(--uburn-gray-400);
-    text-decoration: line-through;
-  }
-
-  /* ── Accordion group Medvi spacing ── */
-  .shopify-section--main-product .accordion-group {
-    border: 1px solid var(--uburn-gray-200);
-    border-radius: var(--uburn-radius-md);
-    overflow: hidden;
-    box-shadow: var(--uburn-shadow-sm);
-  }
-
-  /* ── Sticky ATC bottom padding on mobile ── */
+  /* Sticky ATC bottom padding on mobile */
   @media screen and (max-width: 699px) {
-    .shopify-section--main-product { padding-bottom: 72px; }
+    .shopify-section--main-product { padding-bottom: 60px; }
   }
 
   @media screen and (min-width: 1000px) {
     #shopify-section-{{ section.id }} {
       --product-grid: auto / minmax(0, {{ section.settings.product_media_size | divided_by: 100.0 }}fr) minmax(0, {{ 100.0 | minus: section.settings.product_media_size | divided_by: 100.0 }}fr);
     }
-  }
-
-  /* ── Section dividers (Medvi white space) ── */
-  .shopify-section--main-product .product-info__block-list > * + * {
-    margin-top: 8px;
-  }
-
-  /* ── Subheading / vendor overrides ── */
-  .shopify-section--main-product .subheading {
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-size: 11px;
-    color: var(--uburn-violet-500);
-  }
-
-  /* ── Badge styling (Medvi pills) ── */
-  .shopify-section--main-product .badge {
-    border-radius: var(--uburn-radius-pill);
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    padding: 4px 12px;
-  }
-
-  /* ── Separator override ── */
-  .shopify-section--main-product .product-info__block-list hr {
-    border: none;
-    height: 1px;
-    background: var(--uburn-gray-200);
-    margin: 16px 0;
-  }
-
-  /* ── Quantity selector Medvi ── */
-  .shopify-section--main-product .quantity-selector {
-    border-radius: var(--uburn-radius-md);
-    border: 2px solid var(--uburn-gray-200);
-    font-family: var(--uburn-font);
-    font-weight: 600;
-  }
-
-  /* ── Payment terms ── */
-  .shopify-section--main-product .shopify-payment-terms {
-    font-family: var(--uburn-font);
-    font-size: 12px;
-    color: var(--uburn-gray-500);
   }
 </style>
 
@@ -641,12 +199,18 @@
 
     <product-rerender id="product-info-{{ product.id }}-{{ section.id }}" observe-form="{{ product_form_id }}" allow-partial-rerender>
       <div class="product">
-        <!-- Trust bar Medvi-style -->
+        <!-- Mobile hero banner for paid traffic — above the fold -->
+        <div class="uburn-mobile-hero sm:hidden">
+          <p class="uburn-hero-promise">Satiété longue durée · 30 kcal</p>
+          <p class="uburn-hero-details">1500+ femmes l'utilisent · À partir de €1,15/jour</p>
+        </div>
+
+        <!-- Trust bar — 4 badges horizontal -->
         <div class="uburn-trust-bar">
-          <span><span class="uburn-trust-bar__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> Nos clientes adorent Uburn</span>
-          <span><b>&#10003;</b> Livraison offerte</span>
-          <span><b>&#10003;</b> 0% caf&eacute;ine</span>
-          <span><b>&#10003;</b> All&eacute;gation EFSA</span>
+          <span><b>✓</b> Ingrédients conformes EFSA</span>
+          <span><b>✓</b> 100% Végétal</span>
+          <span><b>✓</b> Sans abonnement</span>
+          <span><b>✓</b> Remboursé si insatisfait</span>
         </div>
 
         {%- if product.media.size > 0 -%}
@@ -679,35 +243,17 @@
 {%- render 'product-quick-buy', product: product -%}
 
 <script>
-  // Recently viewed products
+  // We save the product ID in local storage to be eventually used for recently viewed section
   try {
     let recentlyViewedProducts = JSON.parse(localStorage.getItem('theme:recently-viewed-products') || '[]');
-    recentlyViewedProducts = recentlyViewedProducts.filter(item => item !== {{ product.id }});
-    recentlyViewedProducts.unshift({{ product.id }});
+
+    recentlyViewedProducts = recentlyViewedProducts.filter(item => item !== {{ product.id }}); // Delete product to remove to the start
+    recentlyViewedProducts.unshift({{ product.id }}); // Add at the start
+
     localStorage.setItem('theme:recently-viewed-products', JSON.stringify(recentlyViewedProducts));
-  } catch (e) {}
-
-  // Variant card selector — sync with native variant picker
-  (function() {
-    var container = document.querySelector('[data-uburn-variant-cards]');
-    if (!container) return;
-    var cards = container.querySelectorAll('[data-variant-id]');
-    var form = document.getElementById('{{ product_form_id }}');
-    if (!form) return;
-
-    cards.forEach(function(card) {
-      card.addEventListener('click', function() {
-        var variantId = card.getAttribute('data-variant-id');
-        var idInput = form.querySelector('[name="id"]');
-        if (idInput) {
-          idInput.value = variantId;
-          idInput.dispatchEvent(new Event('change', { bubbles: true }));
-        }
-        cards.forEach(function(c) { c.classList.remove('uburn-variant-card--selected'); });
-        card.classList.add('uburn-variant-card--selected');
-      });
-    });
-  })();
+  } catch (e) {
+    // Safari in private mode does not allow setting item, we silently fail
+  }
 </script>
 
 {% schema %}
@@ -1863,7 +1409,7 @@
               "value": "picto-chef",
               "label": "t:global.icons.icon_options.chef",
               "group": "t:global.icons.icon_options.food_and_drink_category"
-            }
+            },
           ],
           "default": "none"
         },
