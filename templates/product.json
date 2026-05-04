@@ -407,7 +407,7 @@
             "rich_text_hHnd3C": {
               "type": "rich-text",
               "settings": {
-                "text": "<h3><strong>SATIÉTÉ LONGUE DURÉE</strong></h3><p></p>",
+                "text": "<h3><strong>POUR LES FRINGALES DE 16H</strong></h3><p></p>",
                 "content_width": "sm"
               },
               "blocks": {}
@@ -745,7 +745,7 @@
             "rich_text_3wxNTd": {
               "type": "rich-text",
               "settings": {
-                "text": "<p>Fibre du konjac qui forme un gel doux dans l'estomac. Le glucomannane contribue à la satiété dans le cadre d'une alimentation adaptée (allégation EFSA glucomannane). Idéal pour mieux gérer les fringales de 16h et du soir.</p>",
+                "text": "<p>Le konjac est une fibre végétale souvent utilisée dans les routines de satiété, à intégrer dans une alimentation variée et équilibrée.</p>",
                 "content_width": "sm"
               },
               "blocks": {}
@@ -834,7 +834,7 @@
             "rich_text_kJM4bH": {
               "type": "rich-text",
               "settings": {
-                "text": "<p>Triglycérides à chaîne moyenne issus de la noix de coco. Apportent une énergie stable, sans pic ni coup de mou — pour réduire l'envie de snacker l'après-midi.</p>",
+                "text": "<p>Le MCT de coco apporte une texture plus douce et une sensation plus nourrissante à la routine du jour.</p>",
                 "content_width": "sm"
               },
               "blocks": {}
@@ -1084,7 +1084,7 @@
         "heading_T6yRr8": {
           "type": "heading",
           "settings": {
-            "text": "Routine douce. Goût vanille-noisette.",
+            "text": "Un goût doux vanille-noisette",
             "heading_tag": "h3",
             "position": "top_left",
             "highlight_effect": "default",
@@ -1229,7 +1229,7 @@
           "type": "question",
           "settings": {
             "question": "UBurn contient-il des allergènes ou substances nocives ?",
-            "answer": "<p>Non, UBurn ne contient pas d'allergènes courants. Tous nos ingrédients sont d'origine naturelle et soigneusement sélectionnés pour leur sécurité et leur efficacité. Notre formule est certifiée sans gluten, sans lactose et sans OGM.</p>",
+            "answer": "<p>UBurn est 100% végétal, sans gluten et sans lactose. Tous les ingrédients sont d'origine naturelle. Vérifiez la liste complète des ingrédients sur l'étiquette si vous avez des sensibilités spécifiques.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -1239,7 +1239,7 @@
           "type": "question",
           "settings": {
             "question": "Est-ce que UBurn est sans danger pour la santé ?",
-            "answer": "<p>Oui, UBurn est sans danger pour la santé lorsqu'il est consommé conformément aux recommandations. Notre formule est développée avec des ingrédients naturels et validée par des experts en nutrition. Toutefois, en cas de doute, consultez votre médecin avant de commencer.</p>",
+            "answer": "<p>UBurn est un complément alimentaire à intégrer dans une alimentation variée et équilibrée. Respectez la dose recommandée. En cas de doute, demandez conseil à votre professionnel de santé.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -1257,8 +1257,8 @@
         "question_perte_poids": {
           "type": "question",
           "settings": {
-            "question": "Comment UBurn agit-il sur la satiété ?",
-            "answer": "<p>UBurn agit sur plusieurs leviers : il soutient le métabolisme, réduit l'appétit et favorise la gestion de l'appétit. Grâce à ses actifs naturels, il aide votre corps à transformer les graisses en énergie plus efficacement.</p>",
+            "question": "Est-ce que UBurn fait perdre du poids ?",
+            "answer": "<p>UBurn n'est pas une solution miracle. Il s'intègre dans une alimentation variée et équilibrée, avec pour objectif d'aider à mieux gérer les fringales et réduire le grignotage.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -1267,8 +1267,8 @@
         "question_combien_temps": {
           "type": "question",
           "settings": {
-            "question": "Combien de temps avant de voir des résultats ?",
-            "answer": "<p>La plupart des utilisatrices ressentent une satiété jusqu'à 4h dès les premières prises, associée à une alimentation équilibrée.</p>",
+            "question": "Combien de temps dure une cure ?",
+            "answer": "<p>Découverte 90g dure environ 30 jours avec 1 dose par jour. Résultats Maximum 270g correspond à 30 jours avec 3 doses par jour.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -1286,8 +1286,8 @@
         "question_quand_prendre": {
           "type": "question",
           "settings": {
-            "question": "Quand prendre UBurn et combien de fois par jour ?",
-            "answer": "<p>Nous recommandons de prendre UBurn 1 à 3 fois par jour selon votre objectif, de préférence le matin ou avant les repas. Chaque dose se prépare en mélangeant 1 mesure de poudre avec 250 ml d'eau froide ou chaude.</p>",
+            "question": "Quand prendre UBurn ?",
+            "answer": "<p>À 16h, après le déjeuner ou le soir, lorsque l'envie de grignoter revient. UBurn étant sans caféine, il s'intègre dans une routine d'après-midi ou du soir.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -1297,7 +1297,7 @@
           "type": "question",
           "settings": {
             "question": "Comment préparer UBurn ?",
-            "answer": "<p>Mélangez simplement 1 mesure (10g) de poudre UBurn avec 250 ml d'eau. Vous pouvez le consommer chaud ou froid selon vos préférences. Vous pouvez aussi l'incorporer dans un smoothie ou un yaourt.</p>",
+            "answer": "<p>Mélangez une dose de poudre UBurn avec de l'eau, du lait ou une boisson végétale. Routine prête en moins d'une minute. Goût doux vanille-noisette, couleur violette naturelle.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -1334,8 +1334,8 @@
         "question_retour": {
           "type": "question",
           "settings": {
-            "question": "Puis-je retourner le produit si je ne suis pas satisfait(e) ?",
-            "answer": "<p>Oui, si vous n'êtes pas satisfait(e) de votre achat, contactez notre service client et nous trouverons une solution adaptée.</p>",
+            "question": "Que faire en cas de question ou de souci ?",
+            "answer": "<p>Vous pouvez nous écrire à hello@uburn.co. Notre support client répond du lundi au vendredi.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
@@ -1345,7 +1345,7 @@
           "type": "question",
           "settings": {
             "question": "Quels sont les délais de livraison ?",
-            "answer": "<p>Nous expédions votre commande sous 24-48h ouvrées. La livraison en France métropolitaine prend généralement 2 à 4 jours ouvrés. La livraison est offerte dès 30€ d'achat.</p>",
+            "answer": "<p>La livraison est gratuite en France. Les commandes sont expédiées sous 24-48h ouvrées et arrivent généralement sous 3 à 5 jours ouvrés.</p>",
             "icon": "none",
             "icon_width": 24,
             "mobile_icon_width": 20
