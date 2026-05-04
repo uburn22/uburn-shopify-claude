@@ -88,7 +88,7 @@
   "product": {
     "general": {
       "description": "Description",
-      "add_to_cart_button": "Ajouter au panier — Livraison offerte 🚚",
+      "add_to_cart_button": "Ajouter au panier",
       "pre_order_button": "Pré-commander",
       "sold_out_button": "En rupture",
       "unavailable_button": "Indisponible",

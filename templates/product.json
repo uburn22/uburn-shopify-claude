@@ -88,7 +88,7 @@
             "icon_2_width": 24,
             "icon_2_text": "📉 Ressentie dès les premières prises",
             "icon_3_width": 24,
-            "icon_3_text": "⏱️ Favorise la satiété durablement",
+            "icon_3_text": "⏱️ Routine prête en moins d'une minute",
             "icon_4_width": 24,
             "icon_4_text": ""
           }
@@ -329,7 +329,7 @@
             "rich_text_qC6k9V": {
               "type": "rich-text",
               "settings": {
-                "text": "<p>Un scoop UBURN contribue au contrpétit sans aucun sucre ajouté et aucune caféine. Restez rassasié du premier meeting jusqu’au dernier entrainement.</p>",
+                "text": "<p>Une dose UBurn s'intègre dans votre routine sans sucre ajouté ni caféine. Compatible le matin, l'après-midi ou le soir, pour mieux gérer les fringales et rester alignée avec votre objectif silhouette.</p>",
                 "content_width": "sm"
               },
               "blocks": {}
@@ -391,7 +391,7 @@
               "type": "rich-text",
               "name": "t:blocks.rich_text.name",
               "settings": {
-                "text": "<h5><strong>DES ACTIFS NATURELS HAUTEMENT SÉLECTIONNÉS POUR SOUTENIR VOTRE BIEN-ÊTRE :</strong></h5>",
+                "text": "<h5><strong>UBE, KONJAC ET MCT DE COCO — LA FORMULE COMPLÈTE :</strong></h5>",
                 "content_width": "sm"
               },
               "blocks": {}
@@ -631,7 +631,7 @@
             "icon_width": 24,
             "mobile_icon_width": 20,
             "title": "Cure satiété",
-            "content": "<strong>Satiété longue durée</strong> validé EFSA. Une routine simple, des résultats visibles."
+            "content": "<strong>Routine anti-snack</strong> pour mieux gérer les fringales de 16h et du soir."
           }
         },
         "item_NWpiwq": {
@@ -745,7 +745,7 @@
             "rich_text_3wxNTd": {
               "type": "rich-text",
               "settings": {
-                "text": "<p>Le glucomannane forme un gel naturel dans ton estomac. Résultat : tu n'as plus faim à 16h, tu ne cherches plus le paquet de gâteaux. La satiété dure des heures.</p>",
+                "text": "<p>Fibre du konjac qui forme un gel doux dans l'estomac. Le glucomannane contribue à la satiété dans le cadre d'une alimentation adaptée (allégation EFSA glucomannane). Idéal pour mieux gérer les fringales de 16h et du soir.</p>",
                 "content_width": "sm"
               },
               "blocks": {}
@@ -789,7 +789,7 @@
             "rich_text_n9a3c7": {
               "type": "rich-text",
               "settings": {
-                "text": "<p>Prébiotique doux issu de la sève d'acacia, il nourrit tes bonnes bactéries intestinales. Résultat : ton ventre gonfle moins, ta digestion devient plus légère. Moins de fringales émotionnelles.</p>",
+                "text": "<p>Prébiotique doux issu de la sève d'acacia. Soutient la digestion et apporte une sensation de légèreté au quotidien.</p>",
                 "content_width": "sm"
               },
               "blocks": {}
@@ -834,7 +834,7 @@
             "rich_text_kJM4bH": {
               "type": "rich-text",
               "settings": {
-                "text": "<p>Les MCT du coco fournissent une énergie rapide et propre. Résultat : plus de coup de barre à 15h, plus besoin de snacker pour tenir. Alerte et concentrée, sans pic glycémique.</p>",
+                "text": "<p>Triglycérides à chaîne moyenne issus de la noix de coco. Apportent une énergie stable, sans pic ni coup de mou — pour réduire l'envie de snacker l'après-midi.</p>",
                 "content_width": "sm"
               },
               "blocks": {}
@@ -941,7 +941,7 @@
           "static": true,
           "settings": {
             "subheading": "",
-            "title": "DES ACTIFS NATURELS HAUTEMENT SÉLECTIONNÉS POUR SOUTENIR VOTRE BIEN-ÊTRE",
+            "title": "UBE, KONJAC ET MCT DE COCO — LA FORMULE COMPLÈTE",
             "content": "",
             "button_text": "",
             "button_link": "",
@@ -1013,7 +1013,7 @@
         "heading_xWBtGT": {
           "type": "heading",
           "settings": {
-            "text": "Satiété longue durée · Ingrédients conformes EFSA",
+            "text": "Reprenez le contrôle de vos fringales de 16h",
             "heading_tag": "h2",
             "position": "top_left",
             "highlight_effect": "default",
@@ -1084,7 +1084,7 @@
         "heading_T6yRr8": {
           "type": "heading",
           "settings": {
-            "text": "Effet satiété. Ingrédients conformes EFSA.",
+            "text": "Routine douce. Goût vanille-noisette.",
             "heading_tag": "h3",
             "position": "top_left",
             "highlight_effect": "default",
