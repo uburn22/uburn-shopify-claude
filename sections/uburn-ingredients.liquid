@@ -1,0 +1,384 @@
+{%- comment -%}
+  ════════════════════════════════════════════════════════════════
+  UBURN Ingrédients v4 — 6 ingrédients + how-to-use
+  Sections: Hero → 6 Ingrédients (Ubé, Konjac, Acacia, Coco, Gingembre, L-Carnitine)
+            → Simple. Efficace. Chaque jour. (3 steps) → Sécurité → CTA
+  ════════════════════════════════════════════════════════════════
+{%- endcomment -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800&family=Red+Hat+Text:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+<style>
+  .uing4 {
+    --up-purple-deep:#3d1873; --up-purple-main:#6b2fa0; --up-purple-mid:#8b47c5;
+    --up-purple-pale:#e8dcf5; --up-purple-wash:#f5f0fa;
+    --up-cream:#faf9f7; --up-dark:#242220; --up-body:#5a5654; --up-muted:#8a8785;
+    --up-ease:cubic-bezier(.22,1,.36,1);
+    font-family:'Red Hat Text',sans-serif; -webkit-font-smoothing:antialiased; color:var(--up-dark);
+  }
+  .uing4 *,.uing4 *::before,.uing4 *::after { box-sizing:border-box; }
+  .uing4 img { display:block; max-width:100%; }
+  .uing4-section { padding:56px 16px 64px; }
+  @media(min-width:900px){ .uing4-section{ padding:80px 32px 96px; } }
+  .uing4-eyebrow {
+    display:inline-block; font-family:'Red Hat Text',sans-serif;
+    font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1.6px;
+    color:var(--up-purple-main); margin-bottom:14px;
+  }
+  .uing4-h1 {
+    font-family:'Red Hat Display',sans-serif; font-size:clamp(36px,5vw,60px);
+    font-weight:800; line-height:1.06; color:var(--up-dark);
+    margin-bottom:20px; text-wrap:balance;
+  }
+  .uing4-h1 .accent { color:var(--up-purple-mid); }
+  .uing4-h2 {
+    font-family:'Red Hat Display',sans-serif; font-size:clamp(26px,3.2vw,40px);
+    font-weight:700; line-height:1.15; letter-spacing:-0.02em;
+    color:var(--up-purple-deep); margin-bottom:16px; text-wrap:balance;
+  }
+  .uing4-h2 .accent { color:var(--up-purple-mid); }
+  .uing4-lead {
+    font-family:'Red Hat Text',sans-serif; font-size:17px; line-height:1.65;
+    color:var(--up-body); font-weight:400; max-width:62ch; margin:0 0 18px;
+  }
+  .uing4-cta-primary {
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:18px 32px; min-height:56px;
+    background:var(--up-purple-main); color:#fff; border:none; border-radius:100px;
+    text-decoration:none; font-family:'Red Hat Display',sans-serif;
+    font-size:16px; font-weight:800; letter-spacing:.3px;
+    box-shadow:0 8px 28px rgba(107,47,160,.28);
+    transition:background .25s var(--up-ease),transform .25s var(--up-ease),box-shadow .25s var(--up-ease);
+    -webkit-appearance:none; appearance:none;
+    touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  }
+  .uing4-cta-primary:hover { background:var(--up-purple-deep); transform:translateY(-2px); box-shadow:0 12px 36px rgba(107,47,160,.4); }
+  .uing4-cta-primary:focus-visible { outline:3px solid var(--up-purple-pale); outline-offset:4px; }
+
+  /* HERO */
+  .uing4-hero { padding:64px 16px 56px; background:linear-gradient(180deg,#fff 0%,var(--up-purple-wash) 100%); text-align:center; }
+  @media(min-width:900px){ .uing4-hero{ padding:96px 32px 72px; } }
+  .uing4-hero__inner { max-width:780px; margin:0 auto; }
+  .uing4-hero__sub {
+    font-family:'Red Hat Text',sans-serif; font-size:17px; line-height:1.65;
+    color:var(--up-body); font-weight:400; max-width:580px; margin:0 auto;
+  }
+
+  /* INGREDIENT BLOCKS — alternating layout, lilas/blanc */
+  .uing4-ing { background:#fff; }
+  .uing4-ing:nth-of-type(even) { background:var(--up-purple-wash); }
+  .uing4-ing__inner {
+    max-width:1180px; margin:0 auto;
+    display:grid; grid-template-columns:1fr; gap:28px; align-items:center;
+  }
+  @media(min-width:900px){ .uing4-ing__inner{ grid-template-columns:1fr 1fr; gap:64px; } }
+  .uing4-ing--reverse .uing4-ing__media { order:2; }
+  @media(max-width:899px){ .uing4-ing--reverse .uing4-ing__media { order:1; } }
+  .uing4-ing__media img {
+    width:100%; height:auto; aspect-ratio:1/1; object-fit:cover;
+    border-radius:18px; display:block;
+    box-shadow:0 12px 36px rgba(61,24,115,.10);
+  }
+  .uing4-ing__copy .uing4-h2 { color:var(--up-purple-deep); }
+  .uing4-ing__tag {
+    display:inline-flex; align-items:center; gap:6px;
+    padding:5px 12px; margin-bottom:12px;
+    background:var(--up-purple-wash); color:var(--up-purple-deep);
+    border:1px solid var(--up-purple-pale); border-radius:100px;
+    font-family:'Red Hat Text',sans-serif; font-size:11px; font-weight:700;
+    text-transform:uppercase; letter-spacing:1.2px;
+  }
+  .uing4-ing__name {
+    font-family:'Red Hat Display',sans-serif; font-size:13px; font-weight:700;
+    color:var(--up-purple-main); margin-bottom:6px; letter-spacing:1.5px;
+    text-transform:uppercase;
+  }
+  .uing4-ing__benefit {
+    display:inline-block; padding:6px 14px;
+    background:#fff; border:1px solid var(--up-purple-pale);
+    border-radius:100px; color:var(--up-purple-deep);
+    font-family:'Red Hat Display',sans-serif; font-size:13px; font-weight:800;
+    margin-top:6px;
+  }
+  .uing4-ing--lilas .uing4-ing__benefit { background:var(--up-purple-wash); }
+  .uing4-ing__legal {
+    background:#fff; border-left:3px solid var(--up-purple-main); border-radius:8px;
+    padding:14px 16px; margin-top:14px;
+    font-family:'Red Hat Text',sans-serif; font-size:13px; line-height:1.55;
+    color:var(--up-body); font-style:italic;
+  }
+  .uing4-ing--lilas .uing4-ing__legal { background:#fff; }
+
+  /* HOW-TO-USE — Simple. Efficace. Chaque jour. */
+  .uing4-howto { background:#fff; }
+  .uing4-howto__head { max-width:760px; margin:0 auto 32px; text-align:center; }
+  .uing4-howto__head .uing4-h2 { color:var(--up-purple-deep); }
+  .uing4-howto__grid {
+    list-style:none; max-width:1180px; margin:0 auto; padding:0;
+    display:grid; grid-template-columns:1fr; gap:18px;
+  }
+  @media(min-width:700px){ .uing4-howto__grid{ grid-template-columns:repeat(3,1fr); gap:22px; } }
+  .uing4-howto-card {
+    background:var(--up-purple-wash); border:1px solid var(--up-purple-pale); border-radius:18px;
+    overflow:hidden; display:flex; flex-direction:column;
+    transition:transform .25s var(--up-ease),box-shadow .25s var(--up-ease);
+  }
+  .uing4-howto-card:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(61,24,115,.10); }
+  .uing4-howto-card__media { aspect-ratio:1/1; overflow:hidden; background:#fff; }
+  .uing4-howto-card__media img { width:100%; height:100%; object-fit:cover; display:block; }
+  .uing4-howto-card__body { padding:22px 20px 24px; }
+  .uing4-howto-card__num {
+    display:inline-block; font-family:'Red Hat Display',sans-serif;
+    font-size:12px; font-weight:800; letter-spacing:1px;
+    color:var(--up-purple-main); background:#fff; border:1px solid var(--up-purple-pale);
+    padding:4px 12px; border-radius:100px; margin-bottom:12px;
+  }
+  .uing4-howto-card__title {
+    font-family:'Red Hat Display',sans-serif; font-size:18px; font-weight:800;
+    color:var(--up-purple-deep); margin-bottom:6px; letter-spacing:-0.01em;
+  }
+  .uing4-howto-card__copy {
+    font-family:'Red Hat Text',sans-serif; font-size:14px; line-height:1.55;
+    color:var(--up-body);
+  }
+
+  /* SECURITE */
+  .uing4-safety { background:var(--up-purple-wash); }
+  .uing4-safety__inner {
+    max-width:800px; margin:0 auto;
+    background:#fff; border:1px solid var(--up-purple-pale);
+    border-radius:16px; padding:32px 24px; text-align:center;
+  }
+  .uing4-safety__inner .uing4-h2 { font-size:clamp(22px,3vw,30px); margin-bottom:14px; }
+  .uing4-safety__copy {
+    font-family:'Red Hat Text',sans-serif; font-size:14.5px; line-height:1.6;
+    color:var(--up-body); max-width:640px; margin:0 auto;
+  }
+
+  /* CTA SECTION */
+  .uing4-cta-sec {
+    background:linear-gradient(180deg,#fff 0%,var(--up-purple-wash) 100%);
+    text-align:center;
+  }
+  .uing4-cta-sec__inner { max-width:720px; margin:0 auto; }
+  .uing4-cta-sec__inner .uing4-h2 { margin-bottom:14px; }
+  .uing4-cta-sec__inner .uing4-lead { margin:0 auto 28px; max-width:50ch; }
+</style>
+
+<div class="uing4">
+
+  {%- comment -%} ─── HERO ─── {%- endcomment -%}
+  <section class="uing4-hero">
+    <div class="uing4-hero__inner">
+      <span class="uing4-eyebrow">La formule UBURN</span>
+      <h1 class="uing4-h1">Une formule simple, gourmande <span class="accent">et pensée pour la satiété.</span></h1>
+      <p class="uing4-hero__sub">UBURN associe l'ubé violet, le glucomannane de konjac, des fibres prébiotiques et une touche de gingembre. Six ingrédients naturels, choisis pour leur efficacité et leur douceur.</p>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 1. KONJAC · GLUCOMANNANE (mis en avant — actif principal) ─── {%- endcomment -%}
+  <section class="uing4-section uing4-ing">
+    <div class="uing4-ing__inner">
+      <div class="uing4-ing__media">
+        <img src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1763559876&width=1200&format=webp"
+             srcset="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1763559876&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1763559876&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1763559876&width=1200&format=webp 1200w"
+             sizes="(min-width:900px) 50vw, 100vw"
+             alt="Glucomannane de konjac — Amorphophallus konjac"
+             loading="lazy" decoding="async" width="1200" height="1200">
+      </div>
+      <div class="uing4-ing__copy">
+        <p class="uing4-ing__name">Amorphophallus konjac</p>
+        <h2 class="uing4-h2">Konjac · <span class="accent">Glucomannane.</span></h2>
+        <p class="uing4-lead">L'actif principal. <strong>3 g par dose</strong> — dose validée par l'EFSA pour contribuer au contrôle de l'appétit dans le cadre d'un régime hypocalorique.</p>
+        <span class="uing4-ing__benefit">EFSA ID 3120 · Dose validée 3 g</span>
+        <details class="uing4-ing__legal-acc"><summary>Conditions EFSA</summary><p>Bénéfice obtenu avec 3 g par jour en 3 prises de 1 g, avec 1-2 verres d'eau avant les repas, dans le cadre d'un régime hypocalorique.</p></details>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 2. UBÉ · IGNAME VIOLET ─── {%- endcomment -%}
+  <section class="uing4-section uing4-ing uing4-ing--reverse uing4-ing--lilas">
+    <div class="uing4-ing__inner">
+      <div class="uing4-ing__media">
+        <img src="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1763559876&width=1200&format=webp"
+             srcset="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1763559876&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1763559876&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1763559876&width=1200&format=webp 1200w"
+             sizes="(min-width:900px) 50vw, 100vw"
+             alt="Ubé violet — Dioscorea alata, igname d'Asie du Sud-Est"
+             loading="lazy" decoding="async" width="1200" height="1200">
+      </div>
+      <div class="uing4-ing__copy">
+        <p class="uing4-ing__name">Dioscorea alata · Asie du Sud-Est</p>
+        <h2 class="uing4-h2">Ubé · <span class="accent">Igname violet.</span></h2>
+        <p class="uing4-lead">L'ingrédient signature. Riche en anthocyanes, des antioxydants puissants qui protègent les cellules. Responsable de la couleur violette naturelle — aucun colorant artificiel.</p>
+        <span class="uing4-ing__benefit">Antioxydants naturels</span>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 3. MCT · COCO ─── {%- endcomment -%}
+  <section class="uing4-section uing4-ing">
+    <div class="uing4-ing__inner">
+      <div class="uing4-ing__media">
+        <img src="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1763559876&width=1200&format=webp"
+             srcset="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1763559876&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1763559876&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1763559876&width=1200&format=webp 1200w"
+             sizes="(min-width:900px) 50vw, 100vw"
+             alt="MCT de noix de coco — acides gras à chaîne moyenne"
+             loading="lazy" decoding="async" width="1200" height="1200">
+      </div>
+      <div class="uing4-ing__copy">
+        <p class="uing4-ing__name">Acides gras à chaîne moyenne</p>
+        <h2 class="uing4-h2">MCT · <span class="accent">Coco.</span></h2>
+        <p class="uing4-lead">Énergie rapide et stable dès <strong>15 minutes</strong> après la prise. Les MCT sont métabolisés directement par le foie — sans pic d'insuline, sans crash de l'après-midi.</p>
+        <span class="uing4-ing__benefit">Énergie stable</span>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 4. L-CARNITINE ─── {%- endcomment -%}
+  <section class="uing4-section uing4-ing uing4-ing--reverse uing4-ing--lilas">
+    <div class="uing4-ing__inner">
+      <div class="uing4-ing__media">
+        <img src="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1763559876&width=1200&format=webp"
+             srcset="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1763559876&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1763559876&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1763559876&width=1200&format=webp 1200w"
+             sizes="(min-width:900px) 50vw, 100vw"
+             alt="L-Carnitine — acide aminé naturel"
+             loading="lazy" decoding="async" width="1200" height="1200">
+      </div>
+      <div class="uing4-ing__copy">
+        <p class="uing4-ing__name">Acide aminé · Naturel</p>
+        <h2 class="uing4-h2">L-<span class="accent">Carnitine.</span></h2>
+        <p class="uing4-lead">Contribue à l'utilisation des acides gras comme source d'énergie. <strong>400 mg par dose</strong>, soit 4× la dose standard.</p>
+        <span class="uing4-ing__benefit">Métabolisme actif</span>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 5. GINGEMBRE VIOLET ─── {%- endcomment -%}
+  <section class="uing4-section uing4-ing">
+    <div class="uing4-ing__inner">
+      <div class="uing4-ing__media">
+        <img src="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1763559876&width=1200&format=webp"
+             srcset="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1763559876&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1763559876&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1763559876&width=1200&format=webp 1200w"
+             sizes="(min-width:900px) 50vw, 100vw"
+             alt="Gingembre violet — Zingiber zerumbet"
+             loading="lazy" decoding="async" width="1200" height="1200">
+      </div>
+      <div class="uing4-ing__copy">
+        <p class="uing4-ing__name">Zingiber zerumbet</p>
+        <h2 class="uing4-h2">Gingembre <span class="accent">violet.</span></h2>
+        <p class="uing4-lead">Soutient la digestion et réduit l'inconfort digestif. Propriétés anti-inflammatoires naturelles. Renforce l'action du glucomannane sur le transit.</p>
+        <span class="uing4-ing__benefit">Confort digestif</span>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 6. FIBRE D'ACACIA (bonus complément microbiote) ─── {%- endcomment -%}
+  <section class="uing4-section uing4-ing uing4-ing--reverse uing4-ing--lilas">
+    <div class="uing4-ing__inner">
+      <div class="uing4-ing__media">
+        <img src="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1763559876&width=1200&format=webp"
+             srcset="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1763559876&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1763559876&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1763559876&width=1200&format=webp 1200w"
+             sizes="(min-width:900px) 50vw, 100vw"
+             alt="Fibre d'acacia — prébiotique naturel"
+             loading="lazy" decoding="async" width="1200" height="1200">
+      </div>
+      <div class="uing4-ing__copy">
+        <p class="uing4-ing__name">Acacia senegal · Prébiotique</p>
+        <h2 class="uing4-h2">Fibre d'<span class="accent">acacia.</span></h2>
+        <p class="uing4-lead">Prébiotique doux qui nourrit le microbiote intestinal. Améliore la digestion et le confort intestinal durablement, sans agressivité.</p>
+        <span class="uing4-ing__benefit">Microbiote équilibré</span>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── SIMPLE. EFFICACE. CHAQUE JOUR. ─── {%- endcomment -%}
+  <section class="uing4-section uing4-howto">
+    <div class="uing4-howto__head">
+      <span class="uing4-eyebrow">Comment l'utiliser</span>
+      <h2 class="uing4-h2">Simple. Efficace. <span class="accent">Chaque jour.</span></h2>
+    </div>
+    <ol class="uing4-howto__grid">
+      <li class="uing4-howto-card">
+        <div class="uing4-howto-card__media">
+          <img src="https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=1200&format=webp"
+               srcset="https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=1200&format=webp 1200w"
+               sizes="(min-width:700px) 33vw, 100vw"
+               alt="Mesurez une dose UBURN dans un grand verre"
+               loading="lazy" decoding="async" width="1200" height="1200">
+        </div>
+        <div class="uing4-howto-card__body">
+          <div class="uing4-howto-card__num">01</div>
+          <h3 class="uing4-howto-card__title">Mesurez une dose</h3>
+          <p class="uing4-howto-card__copy">1 cuillère mesure (8 g) dans un grand verre. La poudre violette vous invite à commencer.</p>
+        </div>
+      </li>
+      <li class="uing4-howto-card">
+        <div class="uing4-howto-card__media">
+          <img src="https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=1200&format=webp"
+               srcset="https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=1200&format=webp 1200w"
+               sizes="(min-width:700px) 33vw, 100vw"
+               alt="Mélangez UBURN dans 200 à 300ml d'eau"
+               loading="lazy" decoding="async" width="1200" height="1200">
+        </div>
+        <div class="uing4-howto-card__body">
+          <div class="uing4-howto-card__num">02</div>
+          <h3 class="uing4-howto-card__title">Mélangez dans l'eau</h3>
+          <p class="uing4-howto-card__copy">200 à 300 ml d'eau froide ou tiède. Mélangez 10 secondes. Le glucomannane se dissout pour agir.</p>
+        </div>
+      </li>
+      <li class="uing4-howto-card">
+        <div class="uing4-howto-card__media">
+          <img src="https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=1200&format=webp"
+               srcset="https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=1200&format=webp 1200w"
+               sizes="(min-width:700px) 33vw, 100vw"
+               alt="Femme calme avec UBURN — satiété 4 heures"
+               loading="lazy" decoding="async" width="1200" height="1200">
+        </div>
+        <div class="uing4-howto-card__body">
+          <div class="uing4-howto-card__num">03</div>
+          <h3 class="uing4-howto-card__title">Profitez de 4 h</h3>
+          <p class="uing4-howto-card__copy">Idéalement 30 min avant le repas ou à 16 h. Satiété durable, sans caféine.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  {%- comment -%} ─── SÉCURITÉ ─── {%- endcomment -%}
+  <section class="uing4-section uing4-safety">
+    <div class="uing4-safety__inner">
+      <details class="uing4-safety__acc">
+        <summary class="uing4-safety__summary"><span class="uing4-eyebrow">À savoir</span> avant de commencer</summary>
+        <ul class="uing4-safety__list">
+          <li>Complément alimentaire, pas un médicament.</li>
+          <li>Ne remplace pas une alimentation équilibrée.</li>
+          <li>À boire avec suffisamment d'eau.</li>
+          <li>Déconseillé pendant la grossesse et l'allaitement.</li>
+          <li>Demande l'avis d'un professionnel en cas de traitement médical.</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  {%- comment -%} ─── CTA FINAL ─── {%- endcomment -%}
+  <section class="uing4-section uing4-cta-sec">
+    <div class="uing4-cta-sec__inner">
+      <span class="uing4-eyebrow">Prête ?</span>
+      <h2 class="uing4-h2">Découvrir <span class="accent">la cure UBURN.</span></h2>
+      <p class="uing4-lead">Une boisson violette gourmande, sans caféine, pensée pour t'aider à mieux gérer les fringales.</p>
+      <a href="/products/ube-poudre" class="uing4-cta-primary">Voir le produit</a>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "UBurn Ingrédients v4",
+  "tag": "section",
+  "class": "uing4-wrap",
+  "settings": [],
+  "presets": [{ "name": "UBurn Ingrédients v4" }]
+}
+{% endschema %}

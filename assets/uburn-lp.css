@@ -3,7 +3,7 @@
 .ulp{font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:70px;}
 .ulp img{max-width:100%;height:auto;display:block;}
 .ulp a{text-decoration:none;color:inherit;}
-.ulp h2{font-size:24px;font-weight:900;text-align:center;margin-bottom:24px;line-height:1.2;}
+.ulp h2{font-size:24px;font-weight:800;text-align:center;margin-bottom:24px;line-height:1.2;}
 .ulp-section{padding:48px 20px;max-width:900px;margin:0 auto;}
 
 /* Buttons */
@@ -13,7 +13,7 @@
 .ulp-btn--violet{background:#6B21A8;color:#fff;}
 
 /* ===== HEADER ===== */
-.ulp-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#fff;border-bottom:1px solid #f0f0f0;position:sticky;top:0;z-index:100;}
+.ulp-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#fff;border-bottom:1px solid #f0f0f0;position:sticky;top:0;z-index:300;}
 .ulp-header img{height:26px;}
 .ulp-header__cart{font-size:18px;}
 
@@ -23,7 +23,7 @@
 .ulp-hero__bgimg{width:100%;height:100%;object-fit:cover;object-position:center top;}
 .ulp-hero__overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(59,7,100,.82) 0%,rgba(59,7,100,.95) 100%);}
 .ulp-hero__content{position:relative;z-index:1;padding:36px 20px 32px;max-width:550px;}
-.ulp-hero h1{font-size:28px;font-weight:900;line-height:1.2;margin-bottom:14px;}
+.ulp-hero h1{font-size:28px;font-weight:800;line-height:1.2;margin-bottom:14px;}
 .ulp-hero__sub{font-size:15px;color:#d8b4fe;margin-bottom:16px;line-height:1.5;}
 .ulp-hero__proof{font-size:14px;color:#FBBF24;font-weight:700;margin-bottom:20px;}
 .ulp-hero__trust{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:16px;font-size:11px;color:#c4b5fd;}
@@ -138,7 +138,7 @@
 .ulp-footer__copy{font-size:10px;color:#9ca3af;}
 
 /* ===== STICKY ATC ===== */
-.ulp-sticky{position:fixed;bottom:0;left:0;right:0;background:#6B21A8;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;z-index:9999;box-shadow:0 -4px 20px rgba(0,0,0,.2);transform:translateY(100%);transition:transform .3s;}
+.ulp-sticky{position:fixed;bottom:0;left:0;right:0;background:#6B21A8;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;z-index:30099;box-shadow:0 -4px 20px rgba(0,0,0,.2);transform:translateY(100%);transition:transform .3s;}
 .ulp-sticky--visible{transform:translateY(0);}
 .ulp-sticky__info{color:#fff;font-size:15px;}
 .ulp-sticky__info small{display:block;font-size:10px;color:#d8b4fe;}
@@ -150,4 +150,26 @@
   .ulp{padding-bottom:0;}
   .ulp-sticky{display:none;}
   .ulp-problem__punchline{font-size:22px;}
+}
+
+/* CRO V1.1 LIGHT (2026-05-04) — accordéon footer-disc, breathing room */
+.footer-disc--acc { background: transparent; padding: 0; margin-top: 12px; }
+.footer-disc--acc summary {
+  cursor: pointer;
+  list-style: none;
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,.65);
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.footer-disc--acc summary::-webkit-details-marker { display: none; }
+.footer-disc--acc summary::after { content: " ▾"; opacity: .6; font-size: 10px; }
+.footer-disc--acc[open] summary::after { content: " ▴"; }
+.footer-disc--acc p {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: rgba(255,255,255,.55);
+  padding: 10px 0 4px;
+  margin: 0;
 }

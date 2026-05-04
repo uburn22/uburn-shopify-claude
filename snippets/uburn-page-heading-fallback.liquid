@@ -1,0 +1,56 @@
+{%- comment -%}
+  UBurn Page Heading Fallback
+  Injected by layout/theme.liquid for /pages/faq and /pages/about
+  whose Shopify template_suffix doesn't render uburn-page-heading.
+  Self-contained: own CSS scope to avoid relying on uburn-design-tokens.css.
+{%- endcomment -%}
+
+{%- assign uburn_subtitle = '' -%}
+{%- if page.handle == 'faq' -%}
+  {%- assign uburn_subtitle = 'Toutes les réponses pour mieux comprendre UBurn.' -%}
+{%- elsif page.handle == 'about' -%}
+  {%- assign uburn_subtitle = 'Découvrez l’histoire et la vision derrière UBurn.' -%}
+{%- endif -%}
+
+<style>
+  .uburn-page-heading-section.uburn-page-heading-fallback {
+    text-align: center;
+    padding: 56px 16px 28px;
+    background: linear-gradient(180deg, #ffffff 0%, #f5f0fa 100%);
+    font-family: 'Red Hat Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  .uburn-page-heading-fallback .uburn-page-heading__h1 {
+    font-family: 'Red Hat Display', sans-serif;
+    font-size: clamp(28px, 5.5vw, 44px);
+    font-weight: 900;
+    letter-spacing: -0.025em;
+    color: #242220;
+    line-height: 1.1;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+  .uburn-page-heading-fallback .uburn-page-heading__subtitle {
+    font-family: 'Red Hat Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: clamp(14px, 2.4vw, 17px);
+    color: #5a5654;
+    line-height: 1.55;
+    max-width: 640px;
+    margin: 0 auto;
+    font-weight: 500;
+  }
+  @media (min-width: 900px) {
+    .uburn-page-heading-section.uburn-page-heading-fallback { padding: 80px 32px 40px; }
+  }
+  /* Safety: if a template-driven .uburn-page-heading-section ever renders
+     on the same page after the fallback, hide it to prevent duplicate H1. */
+  body:has(.uburn-page-heading-fallback) main .uburn-page-heading-section:not(.uburn-page-heading-fallback) {
+    display: none !important;
+  }
+</style>
+
+<section class="uburn-page-heading-section uburn-page-heading-fallback">
+  <h1 class="uburn-page-heading__h1">{{ page.title }}</h1>
+  {%- if uburn_subtitle != '' -%}
+    <p class="uburn-page-heading__subtitle">{{ uburn_subtitle }}</p>
+  {%- endif -%}
+</section>

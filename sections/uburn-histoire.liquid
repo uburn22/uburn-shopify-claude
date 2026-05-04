@@ -1,0 +1,373 @@
+{%- comment -%}
+  ════════════════════════════════════════════════════════════════
+  UBURN Notre Histoire v4 — full storytelling, premium wellness
+  Sections: Hero → Conviction → Ce que le monde ignore → À l'origine
+            → Du champ au verre (full-bleed) → La formule → Simple Efficace
+            → La nature → CTA
+  ════════════════════════════════════════════════════════════════
+{%- endcomment -%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800&family=Red+Hat+Text:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+<style>
+  .uhist3 {
+    --up-purple-deep:#3d1873; --up-purple-main:#6b2fa0; --up-purple-mid:#8b47c5;
+    --up-purple-pale:#e8dcf5; --up-purple-wash:#f5f0fa;
+    --up-cream:#faf9f7; --up-dark:#242220; --up-body:#5a5654; --up-muted:#8a8785;
+    --up-ease:cubic-bezier(.22,1,.36,1);
+    font-family:'Red Hat Text',sans-serif; -webkit-font-smoothing:antialiased; color:var(--up-dark);
+  }
+  .uhist3 *,.uhist3 *::before,.uhist3 *::after { box-sizing:border-box; }
+  .uhist3 img { display:block; max-width:100%; }
+  .uhist3-section { padding:56px 16px 64px; }
+  @media(min-width:900px){ .uhist3-section{ padding:80px 32px 96px; } }
+  .uhist3-eyebrow {
+    display:inline-block; font-family:'Red Hat Text',sans-serif;
+    font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1.6px;
+    color:var(--up-purple-main); margin-bottom:14px;
+  }
+  .uhist3-eyebrow--light { color:rgba(255,255,255,.85); }
+  .uhist3-h1 {
+    font-family:'Red Hat Display',sans-serif; font-size:clamp(36px,5vw,60px);
+    font-weight:800; line-height:1.06; color:var(--up-dark);
+    margin-bottom:20px; text-wrap:balance;
+  }
+  .uhist3-h1 .accent { color:var(--up-purple-mid); }
+  .uhist3-h2 {
+    font-family:'Red Hat Display',sans-serif; font-size:clamp(28px,3.5vw,44px);
+    font-weight:700; line-height:1.1; letter-spacing:-0.02em;
+    color:var(--up-purple-deep); margin-bottom:16px; text-wrap:balance;
+  }
+  .uhist3-h2 .accent { color:var(--up-purple-mid); }
+  .uhist3-h2--light { color:#fff; }
+  .uhist3-h2--light .accent { color:var(--up-purple-pale); }
+  .uhist3-lead {
+    font-family:'Red Hat Text',sans-serif; font-size:17px; line-height:1.65;
+    color:var(--up-body); font-weight:400; max-width:62ch; margin:0 0 18px;
+  }
+  .uhist3-lead--light { color:rgba(255,255,255,.85); }
+  .uhist3-cta-primary {
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:18px 32px; min-height:56px;
+    background:var(--up-purple-main); color:#fff; border:none; border-radius:100px;
+    text-decoration:none; font-family:'Red Hat Display',sans-serif;
+    font-size:16px; font-weight:800; letter-spacing:.3px;
+    box-shadow:0 8px 28px rgba(107,47,160,.28);
+    transition:background .25s var(--up-ease),transform .25s var(--up-ease),box-shadow .25s var(--up-ease);
+    -webkit-appearance:none; appearance:none;
+    touch-action:manipulation; -webkit-tap-highlight-color:transparent;
+  }
+  .uhist3-cta-primary:hover { background:var(--up-purple-deep); transform:translateY(-2px); box-shadow:0 12px 36px rgba(107,47,160,.4); }
+
+  /* HERO */
+  .uhist3-hero { padding:64px 16px 56px; background:linear-gradient(180deg,var(--up-purple-wash) 0%,#fff 100%); text-align:center; }
+  @media(min-width:900px){ .uhist3-hero{ padding:96px 32px 80px; } }
+  .uhist3-hero__inner { max-width:820px; margin:0 auto; }
+  .uhist3-hero__sub {
+    font-family:'Red Hat Text',sans-serif; font-size:17px; line-height:1.65;
+    color:var(--up-body); font-weight:400; max-width:600px; margin:0 auto;
+  }
+
+  /* SPLIT BLOCK (image + text) */
+  .uhist3-block { background:#fff; }
+  .uhist3-block:nth-of-type(even) { background:var(--up-purple-wash); }
+  .uhist3-block__inner {
+    max-width:1180px; margin:0 auto;
+    display:grid; grid-template-columns:1fr; gap:32px; align-items:center;
+  }
+  @media(min-width:900px){ .uhist3-block__inner{ grid-template-columns:1fr 1fr; gap:64px; } }
+  .uhist3-block--reverse .uhist3-block__media { order:2; }
+  @media(max-width:899px){ .uhist3-block--reverse .uhist3-block__media { order:1; } }
+  .uhist3-block__copy .uhist3-h2 { color:var(--up-purple-deep); }
+  .uhist3-block__photo {
+    width:100%; height:auto; aspect-ratio:1/1; object-fit:cover;
+    border-radius:18px; display:block;
+    box-shadow:0 16px 48px rgba(61,24,115,.12);
+  }
+
+  /* FULL-BLEED BG SECTION (Du champ au verre) */
+  .uhist3-bleed {
+    position:relative; min-height:520px; padding:80px 16px;
+    background:#1a0840; color:#fff; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+  }
+  @media(min-width:900px){ .uhist3-bleed{ min-height:640px; padding:120px 32px; } }
+  .uhist3-bleed__bg {
+    position:absolute; inset:0; z-index:0;
+  }
+  .uhist3-bleed__bg img {
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .uhist3-bleed__bg::after {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(180deg,rgba(26,8,64,.4) 0%,rgba(26,8,64,.75) 100%);
+  }
+  .uhist3-bleed__inner {
+    position:relative; z-index:1; max-width:780px; margin:0 auto;
+  }
+  .uhist3-bleed__inner .uhist3-h2 { color:#fff; }
+  .uhist3-bleed__inner .uhist3-h2 .accent { color:var(--up-purple-pale); }
+
+  /* FORMULE (6 actifs) */
+  .uhist3-formule { background:#fff; text-align:center; }
+  .uhist3-formule__head { max-width:760px; margin:0 auto 32px; }
+  .uhist3-formule__head .uhist3-h2 { color:var(--up-purple-deep); }
+  .uhist3-formule__lead { max-width:620px; margin:0 auto 28px; }
+  .uhist3-formule__pills {
+    list-style:none; padding:0; margin:0;
+    max-width:980px; margin-left:auto; margin-right:auto;
+    display:flex; flex-wrap:wrap; justify-content:center; gap:10px;
+  }
+  .uhist3-formule__pill {
+    display:inline-flex; align-items:center; gap:8px;
+    padding:10px 16px;
+    background:var(--up-purple-wash); color:var(--up-purple-deep);
+    border:1px solid var(--up-purple-pale); border-radius:100px;
+    font-family:'Red Hat Display',sans-serif; font-size:13.5px; font-weight:700;
+    letter-spacing:.2px;
+  }
+  .uhist3-formule__pill::before {
+    content:'·'; color:var(--up-purple-main); font-size:18px; line-height:0;
+    margin-right:2px;
+  }
+
+  /* SIMPLE EFFICACE — 3 steps */
+  .uhist3-howto { background:var(--up-purple-wash); }
+  .uhist3-howto__head { max-width:760px; margin:0 auto 32px; text-align:center; }
+  .uhist3-howto__head .uhist3-h2 { color:var(--up-purple-deep); }
+  .uhist3-howto__grid {
+    list-style:none; max-width:1180px; margin:0 auto; padding:0;
+    display:grid; grid-template-columns:1fr; gap:18px;
+  }
+  @media(min-width:700px){ .uhist3-howto__grid{ grid-template-columns:repeat(3,1fr); gap:22px; } }
+  .uhist3-howto-card {
+    background:#fff; border:1px solid var(--up-purple-pale); border-radius:18px;
+    overflow:hidden; display:flex; flex-direction:column;
+    transition:transform .25s var(--up-ease),box-shadow .25s var(--up-ease);
+  }
+  .uhist3-howto-card:hover { transform:translateY(-2px); box-shadow:0 12px 32px rgba(61,24,115,.10); }
+  .uhist3-howto-card__media { aspect-ratio:1/1; overflow:hidden; background:var(--up-purple-wash); }
+  .uhist3-howto-card__media img { width:100%; height:100%; object-fit:cover; display:block; }
+  .uhist3-howto-card__body { padding:22px 20px 24px; }
+  .uhist3-howto-card__num {
+    display:inline-block; font-family:'Red Hat Display',sans-serif;
+    font-size:12px; font-weight:800; letter-spacing:1px;
+    color:var(--up-purple-main); background:var(--up-purple-wash);
+    border:1px solid var(--up-purple-pale);
+    padding:4px 12px; border-radius:100px; margin-bottom:12px;
+  }
+  .uhist3-howto-card__title {
+    font-family:'Red Hat Display',sans-serif; font-size:18px; font-weight:800;
+    color:var(--up-purple-deep); margin-bottom:6px; letter-spacing:-0.01em;
+  }
+  .uhist3-howto-card__copy {
+    font-family:'Red Hat Text',sans-serif; font-size:14px; line-height:1.55;
+    color:var(--up-body);
+  }
+
+  /* CTA SECTION */
+  .uhist3-cta-sec {
+    background:linear-gradient(180deg,#fff 0%,var(--up-purple-wash) 100%);
+    text-align:center;
+  }
+  .uhist3-cta-sec__inner { max-width:720px; margin:0 auto; }
+  .uhist3-cta-sec__inner .uhist3-h2 { margin-bottom:14px; }
+  .uhist3-cta-sec__inner .uhist3-lead { margin:0 auto 28px; max-width:50ch; }
+</style>
+
+<div class="uhist3">
+
+  {%- comment -%} ─── HERO ─── {%- endcomment -%}
+  <section class="uhist3-hero">
+    <div class="uhist3-hero__inner">
+      <span class="uhist3-eyebrow">Notre histoire</span>
+      <h1 class="uhist3-h1">Notre mission : rendre la satiété <span class="accent">plus simple, plus douce et plus gourmande.</span></h1>
+      <p class="uhist3-hero__sub">UBURN est né d'une idée simple : aider à mieux gérer les fringales du quotidien sans caféine, sans routine compliquée et sans perdre le plaisir.</p>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 1. NOTRE HISTOIRE — Né d'une conviction simple ─── {%- endcomment -%}
+  <section class="uhist3-section uhist3-block">
+    <div class="uhist3-block__inner">
+      <div class="uhist3-block__copy">
+        <span class="uhist3-eyebrow">Notre histoire</span>
+        <h2 class="uhist3-h2">Né d'une <span class="accent">conviction simple.</span></h2>
+        <p class="uhist3-lead">La plupart des routines minceur oublient le plaisir. UBurn répond aux moments où l'on craque — après-midi, soir, entre deux repas.</p>
+        <p class="uhist3-lead">La satiété ne doit pas être une contrainte. C'est un rituel.</p>
+      </div>
+      <div class="uhist3-block__media">
+        <img class="uhist3-block__photo"
+             src="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=1200&format=webp"
+             srcset="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=1200&format=webp 1200w"
+             sizes="(min-width:900px) 50vw, 100vw"
+             alt="Notre histoire UBURN — naissance d'une conviction"
+             loading="lazy" decoding="async" width="1200" height="1200">
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 2. CE QUE TOUT LE MONDE IGNORE ─── {%- endcomment -%}
+  <section class="uhist3-section uhist3-block uhist3-block--reverse">
+    <div class="uhist3-block__inner">
+      <div class="uhist3-block__media">
+        <img class="uhist3-block__photo"
+             src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-03-07_at_15.35.46.jpg?v=1772887008&width=1200&format=webp"
+             srcset="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-03-07_at_15.35.46.jpg?v=1772887008&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-03-07_at_15.35.46.jpg?v=1772887008&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-03-07_at_15.35.46.jpg?v=1772887008&width=1200&format=webp 1200w"
+             sizes="(min-width:900px) 50vw, 100vw"
+             alt="Le secret derrière la formule UBURN"
+             loading="lazy" decoding="async" width="1200" height="1200">
+      </div>
+      <div class="uhist3-block__copy">
+        <span class="uhist3-eyebrow">Le secret</span>
+        <h2 class="uhist3-h2">Ce que tout <span class="accent">le monde ignore.</span></h2>
+        <p class="uhist3-lead">Les fringales ne sont pas une question de volonté. C'est mécanique : quand l'estomac se vide, le corps réclame. Le glucomannane (konjac, EFSA) forme un gel qui prolonge la satiété.</p>
+        <p class="uhist3-lead">UBurn a été pensé autour de cette vérité.</p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 3. À L'ORIGINE — L'ubé vient de là ─── {%- endcomment -%}
+  <section class="uhist3-section uhist3-block">
+    <div class="uhist3-block__inner">
+      <div class="uhist3-block__copy">
+        <span class="uhist3-eyebrow">À l'origine</span>
+        <h2 class="uhist3-h2">L'ubé vient de là. <span class="accent">Pas d'un laboratoire.</span></h2>
+        <p class="uhist3-lead">L'ube : igname violette d'Asie du Sud-Est. Cuisine traditionnelle ancienne. C'est elle qui donne à UBurn sa couleur naturelle et son univers gourmand.</p>
+      </div>
+      <div class="uhist3-block__media">
+        <img class="uhist3-block__photo"
+             src="https://uburn.co/cdn/shop/files/Histoire_01.jpg?v=1763569811&width=1200&format=webp"
+             srcset="https://uburn.co/cdn/shop/files/Histoire_01.jpg?v=1763569811&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Histoire_01.jpg?v=1763569811&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Histoire_01.jpg?v=1763569811&width=1200&format=webp 1200w"
+             sizes="(min-width:900px) 50vw, 100vw"
+             alt="Origine de l'ubé — racine violette d'Asie du Sud-Est"
+             loading="lazy" decoding="async" width="1200" height="1200">
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 4. L'ORIGINE — Du champ au verre (full-bleed plantation) ─── {%- endcomment -%}
+  <section class="uhist3-bleed" aria-labelledby="uhist3-bleed-title">
+    <div class="uhist3-bleed__bg" aria-hidden="true">
+      <img src="https://uburn.co/cdn/shop/files/PLANTATION_UBE.jpg?v=1763140858&width=1600&format=webp"
+           srcset="https://uburn.co/cdn/shop/files/PLANTATION_UBE.jpg?v=1763140858&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/PLANTATION_UBE.jpg?v=1763140858&width=1200&format=webp 1200w, https://uburn.co/cdn/shop/files/PLANTATION_UBE.jpg?v=1763140858&width=1600&format=webp 1600w, https://uburn.co/cdn/shop/files/PLANTATION_UBE.jpg?v=1763140858&width=2000&format=webp 2000w"
+           sizes="100vw"
+           alt="Plantation d'ubé — du champ au verre"
+           loading="lazy" decoding="async" width="1600" height="900">
+    </div>
+    <div class="uhist3-bleed__inner">
+      <span class="uhist3-eyebrow uhist3-eyebrow--light">L'origine</span>
+      <h2 class="uhist3-h2 uhist3-h2--light" id="uhist3-bleed-title">Du champ <span class="accent">à votre verre.</span></h2>
+      <p class="uhist3-lead uhist3-lead--light" style="margin:0 auto;max-width:560px;">Sélectionné chez les cultivateurs. Séché et extrait à froid. Aucun colorant. Couleur violette 100 % naturelle.</p>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 5. LA FORMULE — 6 actifs. Un seul objectif. ─── {%- endcomment -%}
+  <section class="uhist3-section uhist3-formule">
+    <div class="uhist3-formule__head">
+      <span class="uhist3-eyebrow">La formule</span>
+      <h2 class="uhist3-h2">6 actifs. <span class="accent">Un seul objectif.</span></h2>
+      <p class="uhist3-lead uhist3-formule__lead">Chaque ingrédient est choisi pour sa complémentarité. Ensemble, ils agissent sur la faim, l'énergie et la digestion — simultanément.</p>
+    </div>
+    <ul class="uhist3-formule__pills">
+      <li class="uhist3-formule__pill">Konjac · Glucomannane</li>
+      <li class="uhist3-formule__pill">Ubé · Igname violet</li>
+      <li class="uhist3-formule__pill">MCT · Coco</li>
+      <li class="uhist3-formule__pill">L-Carnitine</li>
+      <li class="uhist3-formule__pill">Gingembre violet</li>
+      <li class="uhist3-formule__pill">Fibre d'acacia</li>
+    </ul>
+  </section>
+
+  {%- comment -%} ─── 6. SIMPLE. EFFICACE. CHAQUE JOUR. (3 steps) ─── {%- endcomment -%}
+  <section class="uhist3-section uhist3-howto">
+    <div class="uhist3-howto__head">
+      <span class="uhist3-eyebrow">3 gestes simples</span>
+      <h2 class="uhist3-h2">Simple. Efficace. <span class="accent">Chaque jour.</span></h2>
+      <p class="uhist3-lead" style="margin:14px auto 0;max-width:520px;text-align:center;">30 secondes pour changer le moment.</p>
+    </div>
+    <ol class="uhist3-howto__grid">
+      <li class="uhist3-howto-card">
+        <div class="uhist3-howto-card__media">
+          <img src="https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=1200&format=webp"
+               srcset="https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=1200&format=webp 1200w"
+               sizes="(min-width:700px) 33vw, 100vw"
+               alt="Mélange d'UBurn dans un grand verre"
+               loading="lazy" decoding="async" width="1200" height="1200">
+        </div>
+        <div class="uhist3-howto-card__body">
+          <div class="uhist3-howto-card__num">01</div>
+          <h3 class="uhist3-howto-card__title">Mélangez</h3>
+          <p class="uhist3-howto-card__copy">Une dose dans un grand verre d'eau fraîche ou de lait végétal.</p>
+        </div>
+      </li>
+      <li class="uhist3-howto-card">
+        <div class="uhist3-howto-card__media">
+          <img src="https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=1200&format=webp"
+               srcset="https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=1200&format=webp 1200w"
+               sizes="(min-width:700px) 33vw, 100vw"
+               alt="Verre de boisson UBurn violette, fraîche et crémeuse"
+               loading="lazy" decoding="async" width="1200" height="1200">
+        </div>
+        <div class="uhist3-howto-card__body">
+          <div class="uhist3-howto-card__num">02</div>
+          <h3 class="uhist3-howto-card__title">Buvez</h3>
+          <p class="uhist3-howto-card__copy">Une boisson violette, douce, fraîche et crémeuse.</p>
+        </div>
+      </li>
+      <li class="uhist3-howto-card">
+        <div class="uhist3-howto-card__media">
+          <img src="https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=1200&format=webp"
+               srcset="https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=1200&format=webp 1200w"
+               sizes="(min-width:700px) 33vw, 100vw"
+               alt="Femme calme avec UBurn dans sa routine quotidienne"
+               loading="lazy" decoding="async" width="1200" height="1200">
+        </div>
+        <div class="uhist3-howto-card__body">
+          <div class="uhist3-howto-card__num">03</div>
+          <h3 class="uhist3-howto-card__title">Restez en contrôle</h3>
+          <p class="uhist3-howto-card__copy">Une sensation de satiété qui vous aide à traverser le moment critique.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  {%- comment -%} ─── 7. LA NATURE A DÉJÀ FAIT LE TRAVAIL ─── {%- endcomment -%}
+  <section class="uhist3-section uhist3-block uhist3-block--reverse">
+    <div class="uhist3-block__inner">
+      <div class="uhist3-block__media">
+        <img class="uhist3-block__photo"
+             src="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_sr9b8psr9b8psr9b.png?v=1764075410&width=1200&format=webp"
+             srcset="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_sr9b8psr9b8psr9b.png?v=1764075410&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Gemini_Generated_Image_sr9b8psr9b8psr9b.png?v=1764075410&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Gemini_Generated_Image_sr9b8psr9b8psr9b.png?v=1764075410&width=1200&format=webp 1200w"
+             sizes="(min-width:900px) 50vw, 100vw"
+             alt="Nature et ingrédients UBURN"
+             loading="lazy" decoding="async" width="1200" height="1200">
+      </div>
+      <div class="uhist3-block__copy">
+        <span class="uhist3-eyebrow">Notre conviction</span>
+        <h2 class="uhist3-h2">La nature <span class="accent">a déjà fait le travail.</span></h2>
+        <p class="uhist3-lead">Pas besoin de molécules de synthèse. Le konjac, l'ube, le gingembre, la noix de coco existent depuis toujours.</p>
+        <p class="uhist3-lead">UBurn ne réinvente rien. Juste les bons ingrédients, aux bonnes doses, dans une routine simple.</p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── CTA FINAL ─── {%- endcomment -%}
+  <section class="uhist3-section uhist3-cta-sec">
+    <div class="uhist3-cta-sec__inner">
+      <span class="uhist3-eyebrow">Prête ?</span>
+      <h2 class="uhist3-h2">Commencer <span class="accent">votre rituel UBURN.</span></h2>
+      <p class="uhist3-lead">Une boisson violette gourmande, sans caféine, pour t'aider à mieux gérer les fringales du quotidien.</p>
+      <a href="/products/ube-poudre" class="uhist3-cta-primary">Voir la cure</a>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Histoire Uburn v4",
+  "settings": []
+}
+{% endschema %}

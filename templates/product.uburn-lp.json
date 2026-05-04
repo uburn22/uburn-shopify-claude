@@ -1,0 +1,213 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {}
+        },
+        "section_store_block_social_proof_Lqb3PR": {
+          "type": "shopify://apps/section-store/blocks/block-social-proof/d7a2e423-ea88-4344-b866-6d0fb487c3dd",
+          "settings": {
+            "slide_icon_size": 28,
+            "use_carousel": true,
+            "text": "<p><strong>Sophie ✓, Camille ✓ </strong>adorent nos produits !</p>",
+            "text_size": 14,
+            "text_color": "#000000",
+            "checkmark_size": 14,
+            "symbols_color": "#42a5f5",
+            "border": "solid",
+            "border_thickness": 1,
+            "border_color": "#d7d7d7",
+            "radius": 16,
+            "bg_color": "#f6f6f6",
+            "padding_vertical": 12,
+            "padding_horizontal": 16,
+            "clip_as_header_of_wrapper": false
+          }
+        },
+        "badges": {
+          "type": "badges",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "heading_tag": "h1"
+          }
+        },
+        "inventory_8YcMYF": {
+          "type": "inventory",
+          "settings": {
+            "show_in_stock_quantity": true,
+            "low_inventory_threshold": 0,
+            "show_progress_bar": true,
+            "progress_bar_max_value": 50
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "separate_options": false,
+            "selector_style": "block",
+            "swatch_selector_style": "swatch",
+            "swatch_selector_size": "lg",
+            "block_selector_style": "fill",
+            "variant_image_options": "",
+            "size_chart_page": ""
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "separator_CRdTBt": {
+          "type": "separator",
+          "settings": {}
+        },
+        "icons_with_text_kAU97U": {
+          "type": "icons_with_text",
+          "settings": {
+            "items_per_row": 1,
+            "icon_1_width": 24,
+            "icon_1_text": "🔥 Soutient le métabolisme durablement",
+            "icon_2_width": 24,
+            "icon_2_text": "📉 Ressentie dès les premières prises",
+            "icon_3_width": 24,
+            "icon_3_text": "⏱️ Favorise la satiété durablement",
+            "icon_4_width": 24,
+            "icon_4_text": ""
+          }
+        },
+        "separator": {
+          "type": "separator",
+          "settings": {}
+        },
+        "section_store_block_shipping_info_gFePjQ": {
+          "type": "shopify://apps/section-store/blocks/block-shipping-info/d7a2e423-ea88-4344-b866-6d0fb487c3dd",
+          "settings": {
+            "use_dot": true,
+            "icon_color": "#00ff24",
+            "icon_size": 10,
+            "ships_by_text": "Livré avant",
+            "shipping_within_days": 3,
+            "include_weekend": true,
+            "ships_by_font_size": 13,
+            "ships_by_text_color": "#000000",
+            "fast_shipping_text": "🚚 <strong>Livraison Gratuite</strong>",
+            "allow_all_countries": true,
+            "allowed_countries": "US,CH,DE,AT,FR,IT",
+            "fast_shipping_text_for_rest_countries": "Fast International Shipping",
+            "fast_shipping_text_color": "#000000",
+            "border_style": "none",
+            "border_width": 1,
+            "border_color": "#000000",
+            "border_radius": 8,
+            "bg_color": "#f8f5ff",
+            "padding_vertical": 6,
+            "padding_horizontal": 15
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true,
+            "show_quantity_selector": true,
+            "add_quantity_selector_spacing": true,
+            "atc_button_style": "outline",
+            "atc_button_background": "#6acf94",
+            "atc_button_text_color": "#1c1c1c",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
+        },
+        "section_store_block_payment_icons_2_7x6EpJ": {
+          "type": "shopify://apps/section-store/blocks/block-payment-icons-2/d7a2e423-ea88-4344-b866-6d0fb487c3dd",
+          "settings": {
+            "icons_layout": "fixed_grid",
+            "icons_per_row": 10,
+            "icons_per_row_mobile": 8,
+            "gap": 10,
+            "icons_align": "center",
+            "icons_monochrome": false,
+            "enable_first_image": false,
+            "enable_second_image": false,
+            "enable_third_image": false,
+            "icon_size": 20,
+            "border": "none",
+            "border_thickness": 1,
+            "border_color": "#000000",
+            "radius": 0,
+            "background": "",
+            "padding_top": 0,
+            "padding_bottom": 0,
+            "padding_left": 0,
+            "padding_right": 0
+          }
+        },
+        "accordion_4Byccp": {
+          "type": "accordion",
+          "settings": {
+            "title": "Ingrédients",
+            "content": "<p>L'ubé violet · Le glucomannane · La fibre d'acacia · MCT de coco · Le gingembre violet · L-carnitine tartrate</p>",
+            "uppercase_title": false,
+            "icon": "none",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "section_store_block_social_proof_Lqb3PR",
+        "badges",
+        "title",
+        "price",
+        "icons_with_text_kAU97U",
+        "separator_CRdTBt",
+        "variant_picker",
+        "inventory_8YcMYF",
+        "section_store_block_shipping_info_gFePjQ",
+        "buy_buttons",
+        "section_store_block_payment_icons_2_7x6EpJ",
+        "accordion_4Byccp",
+        "separator",
+        "vendor"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "allow_transparent_header": false,
+        "transparent_header_use_primary_colors": false,
+        "add_top_spacing": true,
+        "show_sticky_add_to_cart": true,
+        "product_media_size": 50,
+        "content_alignment": "left",
+        "desktop_media_layout": "carousel",
+        "desktop_carousel_controls": "numbers",
+        "mobile_controls": "lines",
+        "enable_media_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3
+      }
+    },
+    "lp_extras": {
+      "type": "uburn-pdp-extras",
+      "settings": {}
+    }
+  },
+  "order": ["main", "lp_extras"]
+}

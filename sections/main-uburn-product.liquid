@@ -1,0 +1,613 @@
+{%- liquid
+  assign product = product
+  assign variant_disco = product.variants[0]
+  assign variant_max = product.variants[1]
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://uburn.co" crossorigin>
+<link rel="preload" as="image" fetchpriority="high" href="{{ product.featured_image | image_url: width: 900 }}&format=webp">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800&family=Red+Hat+Text:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800&family=Red+Hat+Text:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  .upd{font-family:'Red Hat Text',sans-serif;background:#fff;color:#242220;-webkit-font-smoothing:antialiased}
+  .upd a{text-decoration:none;color:inherit}
+  .upd img{max-width:100%;display:block}
+  .upd ul{list-style:none}
+
+  :root{
+    --p-deep:#3d1873;--p-main:#6b2fa0;--p-mid:#8b47c5;--p-light:#b07de8;
+    --p-pale:#e8dcf5;--p-wash:#f5f0fa;--cream:#faf9f7;--warm:#f2f0ed;
+    --dark:#242220;--body:#5a5654;--muted:#8a8785;
+    --grad:linear-gradient(160deg,#3d1873 0%,#6b2fa0 40%,#8b47c5 100%);
+  }
+
+  /* ===== PROMO BAR ===== */
+  .upd-promo{position:sticky;top:0;z-index:300;background:linear-gradient(90deg,#6B21A8 0%,#8b47c5 100%);color:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:center;gap:12px;font-size:13px;font-weight:600;text-align:center;line-height:1.3;flex-wrap:wrap}
+  .upd-promo strong{font-weight:800;letter-spacing:.5px}
+  .upd-promo__btn{background:#fff;color:#3b0764;border:none;padding:6px 14px;border-radius:100px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap;transition:transform .15s}
+  .upd-promo__btn:active{transform:scale(.95)}
+  .upd-promo__btn.copied{background:#16a34a;color:#fff}
+  .upd-promo.applied{background:linear-gradient(90deg,#16a34a 0%,#22c55e 100%)}
+  .upd-promo.applied .upd-promo__btn{display:none}
+
+  /* ===== HERO / ATC ZONE ===== */
+  .upd-hero{padding:32px 20px 40px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  @media(max-width:900px){.upd-hero{grid-template-columns:1fr;gap:24px;padding:20px 16px 28px}}
+
+  /* Gallery */
+  .upd-gallery{position:relative}
+  .upd-gallery__main{aspect-ratio:1/1;background:var(--p-wash);border-radius:24px;overflow:hidden;position:relative;cursor:zoom-in}
+  .upd-gallery__main img,.upd-gallery__main video{width:100%;height:100%;object-fit:cover;display:block}
+  .upd-gallery__thumbs{display:flex;gap:8px;margin-top:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px}
+  .upd-gallery__thumbs::-webkit-scrollbar{display:none}
+  .upd-thumb{flex-shrink:0;width:64px;height:64px;border-radius:10px;overflow:hidden;border:2px solid transparent;cursor:pointer;background:var(--p-wash);transition:.2s}
+  .upd-thumb img{width:100%;height:100%;object-fit:cover}
+  .upd-thumb.active{border-color:var(--p-main)}
+  .upd-thumb__video::after{content:'▶';position:absolute;color:#fff;font-size:16px;text-shadow:0 2px 6px rgba(0,0,0,.5)}
+  .upd-thumb__video{position:relative;display:flex;align-items:center;justify-content:center}
+
+  /* Buy block */
+  .upd-buy{padding:8px 0}
+  .upd-buy__rating{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:13px;color:var(--body)}
+  .upd-buy__stars{color:#FBBF24;letter-spacing:1px;font-size:14px}
+  .upd-buy__rating a{color:var(--muted);text-decoration:underline}
+  .upd-buy h1{font-family:'Red Hat Display',sans-serif;font-size:clamp(26px,3.4vw,38px);font-weight:800;line-height:1.1;color:var(--dark);margin-bottom:10px;letter-spacing:-.02em}
+  .upd-buy h1 .accent{color:var(--p-mid)}
+  .upd-buy__sub{font-size:15px;color:var(--body);line-height:1.5;margin-bottom:18px}
+  .upd-buy__badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+  .upd-buy__badge{padding:6px 12px;border-radius:100px;background:var(--p-wash);color:var(--p-main);font-size:11.5px;font-weight:700}
+
+  /* Variant picker */
+  .upd-vlabel{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:10px}
+  .upd-variants{display:grid;gap:10px;margin-bottom:18px}
+  .upd-variant{position:relative;border:2px solid var(--p-pale);border-radius:14px;padding:14px 16px;cursor:pointer;transition:.2s;background:#fff;display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px}
+  .upd-variant:hover{border-color:var(--p-light)}
+  .upd-variant input{position:absolute;opacity:0;pointer-events:none}
+  .upd-variant.selected{border-color:var(--p-main);background:var(--p-wash)}
+  .upd-variant.selected .upd-variant__check{background:var(--p-main);border-color:var(--p-main)}
+  .upd-variant.selected .upd-variant__check::after{content:'';width:8px;height:4px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg);margin-top:-2px}
+  .upd-variant__check{width:20px;height:20px;border-radius:50%;border:2px solid var(--p-pale);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s}
+  .upd-variant__info{display:flex;align-items:center;gap:14px;min-width:0}
+  .upd-variant__txt{flex:1;min-width:0}
+  .upd-variant__name{font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:700;color:var(--dark);margin-bottom:2px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .upd-variant__pop{background:var(--p-main);color:#fff;font-size:9.5px;font-weight:800;padding:3px 8px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase}
+  .upd-variant__meta{font-size:12px;color:var(--muted)}
+  .upd-variant__price{text-align:right;font-family:'Red Hat Display',sans-serif}
+  .upd-variant__price-num{font-size:18px;font-weight:800;color:var(--p-deep);line-height:1}
+  .upd-variant__price-day{font-size:11px;color:#16a34a;font-weight:700;margin-top:3px;white-space:nowrap}
+  .upd-variant__save{font-size:10px;color:var(--p-main);font-weight:700;margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
+
+  /* Quantity + ATC */
+  .upd-qatc{display:grid;grid-template-columns:auto 1fr;gap:10px;margin-bottom:14px}
+  .upd-qty{display:flex;align-items:center;border:2px solid var(--p-pale);border-radius:14px;background:#fff;overflow:hidden}
+  .upd-qty button{background:none;border:none;width:42px;height:54px;font-size:18px;color:var(--p-main);cursor:pointer;font-weight:700;transition:background .15s}
+  .upd-qty button:hover{background:var(--p-wash)}
+  .upd-qty input{width:40px;text-align:center;border:none;font-family:'Red Hat Display',sans-serif;font-size:16px;font-weight:700;color:var(--dark);height:54px;-moz-appearance:textfield}
+  .upd-qty input::-webkit-outer-spin-button,.upd-qty input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+  .upd-atc{background:var(--p-main);color:#fff;border:none;border-radius:14px;font-family:'Red Hat Display',sans-serif;font-size:16px;font-weight:800;cursor:pointer;padding:0 24px;height:54px;text-transform:uppercase;letter-spacing:1px;transition:.2s;box-shadow:0 6px 20px rgba(107,47,160,.3);display:flex;align-items:center;justify-content:center;gap:10px}
+  .upd-atc:hover{background:var(--p-deep);transform:translateY(-1px);box-shadow:0 8px 24px rgba(107,47,160,.4)}
+  .upd-atc:active{transform:translateY(0)}
+  .upd-atc[disabled]{opacity:.6;cursor:not-allowed}
+  .upd-atc__loading{display:none;width:18px;height:18px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:upd-spin .6s linear infinite}
+  .upd-atc.loading .upd-atc__loading{display:inline-block}
+  .upd-atc.loading .upd-atc__txt{display:none}
+  @keyframes upd-spin{to{transform:rotate(360deg)}}
+
+  /* Trust strip */
+  .upd-trust{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:16px;padding:14px;background:var(--p-wash);border-radius:12px}
+  .upd-trust-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dark);font-weight:600}
+  .upd-trust-item svg{flex-shrink:0;color:var(--p-main)}
+
+  /* ===== SECTIONS GENERIC ===== */
+  .upd-section{padding:64px 24px;max-width:1100px;margin:0 auto}
+  @media(max-width:600px){.upd-section{padding:48px 16px}}
+  .upd-section--bg{background:var(--cream);max-width:none;padding-left:0;padding-right:0}
+  .upd-section--bg .upd-inner{max-width:1100px;margin:0 auto;padding:0 24px}
+  @media(max-width:600px){.upd-section--bg .upd-inner{padding:0 16px}}
+  .upd-section--purple{background:var(--grad);color:#fff;max-width:none}
+  .upd-eyebrow{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--p-main);margin-bottom:14px;text-align:center}
+  .upd-h2{font-family:'Red Hat Display',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--dark);line-height:1.15;text-align:center;margin-bottom:14px;letter-spacing:-.02em}
+  .upd-h2 .accent{color:var(--p-mid)}
+  .upd-section--purple .upd-h2{color:#fff}
+  .upd-section--purple .upd-h2 .accent{color:var(--p-light)}
+  .upd-section--purple .upd-eyebrow{color:var(--p-light)}
+  .upd-lead{font-size:15px;color:var(--body);text-align:center;max-width:580px;margin:0 auto 36px;line-height:1.65}
+  .upd-section--purple .upd-lead{color:rgba(255,255,255,.8)}
+
+  /* ===== PROBLEM cards ===== */
+  .upd-prob{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-radius:20px;overflow:hidden;box-shadow:0 4px 32px rgba(61,24,115,.1);margin-top:32px}
+  @media(max-width:700px){.upd-prob{grid-template-columns:1fr}}
+  .upd-prob-card{background:linear-gradient(145deg,#2e1060 0%,#5b2199 60%,#7c3abf 100%);padding:36px 28px;border-right:1px solid rgba(255,255,255,.08);position:relative}
+  .upd-prob-card:last-child{border-right:none}
+  @media(max-width:700px){.upd-prob-card{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}.upd-prob-card:last-child{border-bottom:none}}
+  .upd-prob-num{font-family:'Red Hat Display',sans-serif;font-size:60px;font-weight:900;color:rgba(255,255,255,.08);line-height:1;letter-spacing:-.04em;margin-bottom:14px}
+  .upd-prob-title{font-family:'Red Hat Display',sans-serif;font-size:17px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px}
+  .upd-prob-text{font-size:13.5px;color:rgba(255,255,255,.7);line-height:1.6;padding-top:10px;border-top:1px solid rgba(255,255,255,.15)}
+
+  /* ===== HOW IT WORKS ===== */
+  .upd-how{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:40px}
+  @media(max-width:700px){.upd-how{grid-template-columns:1fr;max-width:340px;margin-left:auto;margin-right:auto}}
+  .upd-how-step{text-align:center}
+  .upd-how-step__img{width:140px;height:140px;border-radius:24px;object-fit:cover;margin:0 auto 16px;box-shadow:0 8px 24px rgba(61,24,115,.15)}
+  .upd-how-step__num{font-family:'Red Hat Display',sans-serif;font-size:13px;font-weight:800;color:var(--p-main);text-transform:uppercase;letter-spacing:2px;margin-bottom:6px}
+  .upd-how-step h4{font-family:'Red Hat Display',sans-serif;font-size:17px;font-weight:700;color:var(--dark);margin-bottom:6px}
+  .upd-how-step p{font-size:14px;color:var(--muted);line-height:1.55;max-width:260px;margin:0 auto}
+
+  /* ===== INGREDIENTS ===== */
+  .upd-ingr{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
+  @media(max-width:900px){.upd-ingr{grid-template-columns:repeat(2,1fr);gap:12px}}
+  @media(max-width:400px){.upd-ingr{grid-template-columns:1fr}}
+  .upd-ingr-card{background:#fff;border:1px solid rgba(0,0,0,.05);border-radius:16px;overflow:hidden;transition:.3s}
+  .upd-ingr-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.06);transform:translateY(-2px)}
+  .upd-ingr-card__img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--cream)}
+  .upd-ingr-card__body{padding:16px 18px}
+  .upd-ingr-card h4{font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:700;color:var(--dark);margin-bottom:4px}
+  .upd-ingr-card p{font-size:13px;color:var(--muted);line-height:1.5}
+  .upd-ingr-card__pill{display:inline-block;background:var(--p-wash);color:var(--p-main);font-size:10px;font-weight:800;padding:3px 8px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase;margin-top:8px}
+
+  /* ===== EXPERT ===== */
+  .upd-expert{max-width:920px;margin:32px auto 0;background:#fff;border-radius:24px;padding:40px 48px;box-shadow:0 8px 30px rgba(61,24,115,.08);display:grid;grid-template-columns:38% 62%;gap:40px;align-items:center}
+  @media(max-width:700px){.upd-expert{grid-template-columns:1fr;padding:28px 24px;gap:24px;text-align:center}}
+  .upd-expert__img{border-radius:18px;overflow:hidden;aspect-ratio:1/1;background:var(--cream)}
+  .upd-expert__img img{width:100%;height:100%;object-fit:cover}
+  .upd-expert__quote{font-family:'Red Hat Display',sans-serif;font-size:22px;font-weight:700;color:var(--p-deep);line-height:1.3;margin-bottom:16px;letter-spacing:-.01em}
+  .upd-expert__body{border-left:3px solid var(--p-main);padding-left:18px;font-size:14px;color:var(--body);line-height:1.7;font-style:italic;margin-bottom:16px}
+  @media(max-width:700px){.upd-expert__body{border-left:none;border-top:3px solid var(--p-main);padding:14px 0 0}}
+  .upd-expert__name{font-weight:700;color:var(--dark);font-size:14px;margin-bottom:4px}
+  .upd-expert__cred{text-transform:uppercase;letter-spacing:1.5px;font-size:11px;color:var(--muted);font-weight:600}
+
+  /* ===== PRESS ===== */
+  .upd-press{padding:32px 24px;text-align:center;border-top:1px solid rgba(0,0,0,.04);border-bottom:1px solid rgba(0,0,0,.04)}
+  .upd-press__lead{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-weight:600;margin-bottom:20px}
+  .upd-press__logos{display:flex;gap:32px;justify-content:center;align-items:center;flex-wrap:wrap;opacity:.55}
+  .upd-press__logos img{height:22px;width:auto}
+  @media(max-width:600px){.upd-press__logos{gap:18px}.upd-press__logos img{height:16px}}
+
+  /* ===== TESTIMONIALS ===== */
+  .upd-testi{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:32px}
+  @media(max-width:900px){.upd-testi{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto}}
+  .upd-testi-card{background:#fff;border:1px solid rgba(0,0,0,.05);border-radius:18px;padding:24px;text-align:left}
+  .upd-testi-stars{color:#FBBF24;font-size:14px;letter-spacing:2px;margin-bottom:10px}
+  .upd-testi-text{font-size:14px;color:var(--body);line-height:1.65;margin-bottom:14px}
+  .upd-testi-author{display:flex;align-items:center;gap:10px}
+  .upd-testi-avatar{width:36px;height:36px;border-radius:50%;background:var(--p-wash);display:flex;align-items:center;justify-content:center;font-family:'Red Hat Display',sans-serif;font-weight:700;color:var(--p-main);font-size:13px}
+  .upd-testi-name{font-weight:700;font-size:13px;color:var(--dark)}
+  .upd-testi-verified{font-size:10px;color:#16a34a;font-weight:700;letter-spacing:.5px}
+
+  /* ===== GUARANTEES ===== */
+  .upd-guar{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:32px;text-align:center}
+  @media(max-width:700px){.upd-guar{grid-template-columns:repeat(2,1fr);gap:16px}}
+  .upd-guar-icon{width:46px;height:46px;margin:0 auto 10px;background:var(--p-wash);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--p-main)}
+  .upd-guar-item h4{font-family:'Red Hat Display',sans-serif;font-size:13px;font-weight:700;color:var(--dark);margin-bottom:4px}
+  .upd-guar-item p{font-size:12px;color:var(--muted);line-height:1.4}
+
+  /* ===== FAQ ===== */
+  .upd-faq{max-width:760px;margin:32px auto 0}
+  .upd-faq-item{border-bottom:1px solid rgba(0,0,0,.06);padding:18px 0;cursor:pointer}
+  .upd-faq-q{display:flex;justify-content:space-between;align-items:center;font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:600;color:var(--dark);gap:16px}
+  .upd-faq-q::after{content:'+';font-size:22px;color:var(--p-main);transition:.3s;flex-shrink:0;line-height:1}
+  .upd-faq-item.open .upd-faq-q::after{content:'\2212'}
+  .upd-faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;font-size:14px;color:var(--body);line-height:1.65}
+  .upd-faq-item.open .upd-faq-a{max-height:300px;padding-top:12px}
+
+  /* ===== STICKY MOBILE ATC ===== */
+  .upd-sticky{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;padding:10px 14px 14px;box-shadow:0 -4px 20px rgba(0,0,0,.1);z-index:200;border-top:1px solid rgba(0,0,0,.06);align-items:center;gap:10px}
+  .upd-sticky__price{flex-shrink:0;font-family:'Red Hat Display',sans-serif}
+  .upd-sticky__price-num{font-size:18px;font-weight:800;color:var(--p-deep);line-height:1}
+  .upd-sticky__price-day{font-size:10px;color:#16a34a;font-weight:700;margin-top:2px}
+  .upd-sticky__btn{flex:1;background:var(--p-main);color:#fff;border:none;border-radius:100px;padding:13px;font-family:'Red Hat Display',sans-serif;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+  @media(max-width:900px){.upd-sticky{display:flex}body{padding-bottom:80px}}
+
+  /* ===== DGCCRF MENTIONS ===== */
+  .upd-legal{padding:24px 16px;background:var(--warm);text-align:center;font-size:11px;color:var(--muted);line-height:1.6}
+  .upd-legal p{margin:4px 0;max-width:680px;margin-left:auto;margin-right:auto}
+</style>
+
+<div class="upd">
+
+  <!-- ===== PROMO BAR ===== -->
+  <div class="upd-promo" id="updPromo">
+    <span id="updPromoTxt">🎁 <strong>-10%</strong> sur ta 1ère commande · Code <strong>UBE10</strong></span>
+    <button type="button" class="upd-promo__btn" id="updPromoBtn">Copier</button>
+  </div>
+
+  <!-- ===== HERO / ATC ===== -->
+  <section class="upd-hero">
+
+    <!-- GALLERY -->
+    <div class="upd-gallery">
+      <div class="upd-gallery__main" id="updMain">
+        <img id="updMainImg" src="{{ product.featured_image | image_url: width: 900 }}&format=webp" alt="{{ product.title | escape }}" width="900" height="900" fetchpriority="high">
+      </div>
+      <div class="upd-gallery__thumbs" id="updThumbs">
+        {%- for img in product.images limit: 8 -%}
+          <button type="button" class="upd-thumb{% if forloop.first %} active{% endif %}" data-src="{{ img | image_url: width: 900 }}&format=webp" aria-label="Image {{ forloop.index }}">
+            <img src="{{ img | image_url: width: 160 }}&format=webp" alt="" width="160" height="160" loading="lazy">
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <!-- BUY -->
+    <div class="upd-buy">
+      <div class="upd-buy__rating">
+        <span class="upd-buy__stars">★★★★★</span>
+        <strong>4.7/5</strong>
+        <a href="#avis">· 1 500+ clientes</a>
+      </div>
+
+      <h1>UBurn — <span class="accent">Reprends le contrôle à 16h</span></h1>
+      <p class="upd-buy__sub">Le crash de 16h est physiologique. UBurn favorise une satiété naturelle 4h. 30 kcal · 0% caféine · 100% végétal · Marque française.</p>
+
+      <div class="upd-buy__badges">
+        <span class="upd-buy__badge">✓ Conformes EFSA</span>
+        <span class="upd-buy__badge">✓ 30 kcal</span>
+        <span class="upd-buy__badge">✓ 0% caféine</span>
+        <span class="upd-buy__badge">✓ Sans abonnement</span>
+        <span class="upd-buy__badge">✓ Livraison offerte</span>
+      </div>
+
+      <form id="updForm" action="/cart/add" method="post" enctype="multipart/form-data">
+        <span class="upd-vlabel">Choisis ta cure</span>
+        <div class="upd-variants" role="radiogroup" aria-label="Variants">
+          {%- for v in product.variants -%}
+            {%- assign v_size = '90g' -%}
+            {%- assign v_days = 30 -%}
+            {%- assign v_pop = false -%}
+            {%- if v.id == 51289200066879 -%}
+              {%- assign v_size = '270g' -%}
+              {%- assign v_days = 90 -%}
+              {%- assign v_pop = true -%}
+            {%- endif -%}
+            {%- assign p_jour = v.price | divided_by: v_days | money_without_trailing_zeros -%}
+            <label class="upd-variant{% if v.id == current_variant.id %} selected{% endif %}" data-vid="{{ v.id }}" data-price="{{ v.price }}" data-pday="{{ p_jour }}">
+              <input type="radio" name="id" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}>
+              <div class="upd-variant__info">
+                <span class="upd-variant__check"></span>
+                <div class="upd-variant__txt">
+                  <div class="upd-variant__name">
+                    {%- if v_size == '270g' -%}Cure Maximum · {{ v_size }}{%- else -%}Découverte · {{ v_size }}{%- endif -%}
+                    {%- if v_pop %} <span class="upd-variant__pop">Best</span>{%- endif -%}
+                  </div>
+                  <div class="upd-variant__meta">{{ v_days }} jours · 1 dose/j</div>
+                </div>
+              </div>
+              <div class="upd-variant__price">
+                <div class="upd-variant__price-num">{{ v.price | money_without_trailing_zeros }}</div>
+                <div class="upd-variant__price-day">{{ p_jour }}/jour</div>
+                {%- if v_pop %}<div class="upd-variant__save">Économise 36%</div>{%- endif -%}
+              </div>
+            </label>
+          {%- endfor -%}
+        </div>
+
+        <div class="upd-qatc">
+          <div class="upd-qty" role="group" aria-label="Quantité">
+            <button type="button" id="updQtyMinus" aria-label="Moins">−</button>
+            <input type="number" id="updQty" name="quantity" value="1" min="1" max="10" inputmode="numeric">
+            <button type="button" id="updQtyPlus" aria-label="Plus">+</button>
+          </div>
+          <button type="submit" class="upd-atc" id="updAtc">
+            <span class="upd-atc__loading"></span>
+            <span class="upd-atc__txt">Ajouter au panier</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="upd-trust">
+        <div class="upd-trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Livraison offerte</div>
+        <div class="upd-trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Sans abonnement</div>
+        <div class="upd-trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Paiement sécurisé</div>
+        <div class="upd-trust-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Fabriqué en France</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRESS ===== -->
+  <div class="upd-press">
+    <p class="upd-press__lead">Vu dans</p>
+    <div class="upd-press__logos">
+      <img src="https://uburn.co/cdn/shop/files/TF1_1989-1990.png?v=1749644803&width=150&format=webp" alt="TF1" loading="lazy" width="150" height="50">
+      <img src="https://uburn.co/cdn/shop/files/Brut_logo_svg.png?v=1749644803&width=150&format=webp" alt="Brut" loading="lazy" width="150" height="50">
+      <img src="https://uburn.co/cdn/shop/files/logo-femmeactuelle-copie_cb5c498d-5470-4a4d-83fc-7b16c264a030.png?v=1749644803&width=150&format=webp" alt="Femme Actuelle" loading="lazy" width="150" height="50">
+      <img src="https://uburn.co/cdn/shop/files/VOGUE_revista_-_logo.png?v=1749644803&width=150&format=webp" alt="Vogue" loading="lazy" width="150" height="50">
+    </div>
+  </div>
+
+  <!-- ===== PROBLEM ===== -->
+  <section class="upd-section upd-section--bg">
+    <div class="upd-inner">
+      <span class="upd-eyebrow">Le crash de 16h</span>
+      <h2 class="upd-h2">On connaît ce moment.<br><span class="accent">Le même schéma, chaque jour.</span></h2>
+      <div class="upd-prob">
+        <div class="upd-prob-card">
+          <div class="upd-prob-num">01</div>
+          <div class="upd-prob-title">16h — le placard t'appelle</div>
+          <div class="upd-prob-text">Glycémie en chute libre après le déjeuner. C'est physiologique, pas un manque de volonté.</div>
+        </div>
+        <div class="upd-prob-card">
+          <div class="upd-prob-num">02</div>
+          <div class="upd-prob-title">Le soir devant le frigo</div>
+          <div class="upd-prob-text">La fatigue baisse la garde. Les bonnes intentions du matin s'effacent en quelques minutes.</div>
+        </div>
+        <div class="upd-prob-card">
+          <div class="upd-prob-num">03</div>
+          <div class="upd-prob-title">La volonté ne suffit pas</div>
+          <div class="upd-prob-text">Ce n'est pas toi. C'est biologique. Et c'est exactement pour ça qu'UBurn existe.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="upd-section">
+    <span class="upd-eyebrow">Comment ça marche</span>
+    <h2 class="upd-h2">3 gestes. <span class="accent">4h de résultat.</span></h2>
+    <p class="upd-lead">Une boisson onctueuse au goût ube vanille, à mélanger en 30 secondes.</p>
+    <div class="upd-how">
+      <div class="upd-how-step">
+        <img class="upd-how-step__img" src="https://uburn.co/cdn/shop/files/etape_1.jpg?v=1763147054&width=400&format=webp" alt="Étape 1 : mélanger UBurn" width="280" height="280" loading="lazy">
+        <div class="upd-how-step__num">Étape 1</div>
+        <h4>Mélange</h4>
+        <p>1 dose dans un verre d'eau ou de lait végétal. 30 secondes au shaker.</p>
+      </div>
+      <div class="upd-how-step">
+        <img class="upd-how-step__img" src="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=400&format=webp" alt="Le glucomannane forme un gel naturel" width="280" height="280" loading="lazy">
+        <div class="upd-how-step__num">Étape 2</div>
+        <h4>Le gel se forme</h4>
+        <p>Le glucomannane (konjac) s'hydrate naturellement dans ton estomac.</p>
+      </div>
+      <div class="upd-how-step">
+        <img class="upd-how-step__img" src="https://uburn.co/cdn/shop/files/etape_3.jpg?v=1763147054&width=400&format=webp" alt="4h sans fringales" width="280" height="280" loading="lazy">
+        <div class="upd-how-step__num">Étape 3</div>
+        <h4>4h sans fringales</h4>
+        <p>Estomac apaisé naturellement. Tu reprends le contrôle, sans craquage.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INGREDIENTS ===== -->
+  <section class="upd-section upd-section--bg">
+    <div class="upd-inner">
+      <span class="upd-eyebrow">Une saveur, six actifs</span>
+      <h2 class="upd-h2">La formule, <span class="accent">100% transparente.</span></h2>
+      <p class="upd-lead">6 actifs naturels dosés cliniquement. Aucun additif controversé. Fabriqué en France.</p>
+      <div class="upd-ingr">
+        <div class="upd-ingr-card">
+          <img class="upd-ingr-card__img" src="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1749644803&width=500&format=webp" alt="Ubé violet" loading="lazy" width="500" height="375">
+          <div class="upd-ingr-card__body"><h4>Ubé violet</h4><p>Anthocyanes naturelles, antioxydants puissants. Goût sucré naturel.</p></div>
+        </div>
+        <div class="upd-ingr-card">
+          <img class="upd-ingr-card__img" src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1749644803&width=500&format=webp" alt="Konjac (glucomannane)" loading="lazy" width="500" height="375">
+          <div class="upd-ingr-card__body"><h4>Konjac · 75 mg</h4><p>Glucomannane qui contribue à la sensation de satiété.</p><span class="upd-ingr-card__pill">EFSA ID 3120</span></div>
+        </div>
+        <div class="upd-ingr-card">
+          <img class="upd-ingr-card__img" src="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1749644803&width=500&format=webp" alt="Fibre d'acacia" loading="lazy" width="500" height="375">
+          <div class="upd-ingr-card__body"><h4>Fibre d'acacia</h4><p>Prébiotique naturel doux pour le confort digestif.</p></div>
+        </div>
+        <div class="upd-ingr-card">
+          <img class="upd-ingr-card__img" src="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1749644803&width=500&format=webp" alt="MCT de coco" loading="lazy" width="500" height="375">
+          <div class="upd-ingr-card__body"><h4>MCT de coco</h4><p>Acides gras à chaîne moyenne, source d'énergie rapide.</p></div>
+        </div>
+        <div class="upd-ingr-card">
+          <img class="upd-ingr-card__img" src="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1749644803&width=500&format=webp" alt="Gingembre" loading="lazy" width="500" height="375">
+          <div class="upd-ingr-card__body"><h4>Gingembre</h4><p>Soutient la digestion. Touche épicée chaleureuse.</p></div>
+        </div>
+        <div class="upd-ingr-card">
+          <img class="upd-ingr-card__img" src="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1749644803&width=500&format=webp" alt="L-Carnitine" loading="lazy" width="500" height="375">
+          <div class="upd-ingr-card__body"><h4>L-Carnitine</h4><p>Acide aminé qui soutient le métabolisme énergétique.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERT ===== -->
+  <section class="upd-section">
+    <span class="upd-eyebrow">Validé par notre nutritionniste</span>
+    <h2 class="upd-h2">Une formule <span class="accent">pensée pour la vraie vie.</span></h2>
+    <div class="upd-expert">
+      <div class="upd-expert__img">
+        <img src="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_gjm16fgjm16fgjm1.png?v=1776424158&width=600&format=webp" alt="Dr. Claire Dubois" loading="lazy" width="600" height="600">
+      </div>
+      <div>
+        <p class="upd-expert__quote">« Une formule rare : la science du konjac au service du quotidien des femmes. »</p>
+        <p class="upd-expert__body">UBurn combine glucomannane validé EFSA et 5 actifs synergiques, chacun dosé cliniquement pour un niveau de soutien rarement atteint dans une seule boisson.</p>
+        <div class="upd-expert__name">Dr. Claire Dubois</div>
+        <div class="upd-expert__cred">Nutritionniste · Comportement alimentaire</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="upd-section upd-section--bg" id="avis">
+    <div class="upd-inner">
+      <span class="upd-eyebrow">1 500+ clientes</span>
+      <h2 class="upd-h2">Elles ont retrouvé <span class="accent">leur 16h.</span></h2>
+      <div class="upd-testi">
+        <div class="upd-testi-card">
+          <div class="upd-testi-stars">★★★★★</div>
+          <p class="upd-testi-text">« Première semaine et déjà, je n'ouvre plus le placard à 16h. Goût ube génial, pas du tout chimique. »</p>
+          <div class="upd-testi-author">
+            <div class="upd-testi-avatar">SO</div>
+            <div><div class="upd-testi-name">Sophie O.</div><div class="upd-testi-verified">✓ Achat vérifié</div></div>
+          </div>
+        </div>
+        <div class="upd-testi-card">
+          <div class="upd-testi-stars">★★★★★</div>
+          <p class="upd-testi-text">« Je l'ai acheté pour calmer mes envies de sucre l'après-midi. Effet net dès la deuxième semaine. »</p>
+          <div class="upd-testi-author">
+            <div class="upd-testi-avatar">CM</div>
+            <div><div class="upd-testi-name">Camille M.</div><div class="upd-testi-verified">✓ Achat vérifié</div></div>
+          </div>
+        </div>
+        <div class="upd-testi-card">
+          <div class="upd-testi-stars">★★★★★</div>
+          <p class="upd-testi-text">« Texture super agréable, vraiment rassasiant. J'apprécie qu'il n'y ait pas d'abonnement caché. »</p>
+          <div class="upd-testi-author">
+            <div class="upd-testi-avatar">EL</div>
+            <div><div class="upd-testi-name">Élodie L.</div><div class="upd-testi-verified">✓ Achat vérifié</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GUARANTEES ===== -->
+  <section class="upd-section">
+    <span class="upd-eyebrow">Nos garanties</span>
+    <h2 class="upd-h2">Sans risque, <span class="accent">sans engagement.</span></h2>
+    <div class="upd-guar">
+      <div class="upd-guar-item">
+        <div class="upd-guar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
+        <h4>Livraison offerte</h4><p>Partout en France, dès 24h.</p>
+      </div>
+      <div class="upd-guar-item">
+        <div class="upd-guar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <h4>Paiement sécurisé</h4><p>CB, Apple Pay, PayPal.</p>
+      </div>
+      <div class="upd-guar-item">
+        <div class="upd-guar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <h4>Sans abonnement</h4><p>Tu commandes quand tu veux.</p>
+      </div>
+      <div class="upd-guar-item">
+        <div class="upd-guar-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <h4>Service client FR</h4><p>Réponse en moins de 24h.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="upd-section upd-section--bg" id="faq">
+    <div class="upd-inner">
+      <span class="upd-eyebrow">Questions fréquentes</span>
+      <h2 class="upd-h2">On répond à <span class="accent">tout.</span></h2>
+      <div class="upd-faq">
+        <details class="upd-faq-item"><summary class="upd-faq-q">Combien de temps pour voir les premiers effets ?</summary><div class="upd-faq-a">La sensation de satiété est ressentie dès la première dose, dans les 30 minutes. Pour un effet stable sur tes habitudes, on recommande la cure de 30 jours minimum.</div></details>
+        <details class="upd-faq-item"><summary class="upd-faq-q">90g ou 270g, lequel choisir ?</summary><div class="upd-faq-a">Le 90g (Découverte) = 30 jours à 1.15€/jour, idéal pour tester. Le 270g (Maximum) = 90 jours à 0.61€/jour, recommandé pour des résultats stables. La majorité de nos clientes choisissent le 270g.</div></details>
+        <details class="upd-faq-item"><summary class="upd-faq-q">UBurn remplace-t-il un repas ?</summary><div class="upd-faq-a">Non. UBurn n'est pas un substitut de repas. C'est un complément qui favorise une satiété naturelle entre les repas, pour t'aider à éviter les craquages.</div></details>
+        <details class="upd-faq-item"><summary class="upd-faq-q">Quel goût ?</summary><div class="upd-faq-a">Une saveur ube (igname violet d'Asie) douce et vanillée, sans sucre ajouté. La majorité de nos clientes décrivent le goût comme « addictif ».</div></details>
+        <details class="upd-faq-item"><summary class="upd-faq-q">Y a-t-il un abonnement ?</summary><div class="upd-faq-a">Aucun. Aucun engagement, aucun prélèvement automatique. Tu commandes quand tu en as besoin.</div></details>
+        <details class="upd-faq-item"><summary class="upd-faq-q">Compatible enceinte / allaitement ?</summary><div class="upd-faq-a">Déconseillé aux femmes enceintes et allaitantes. En cas de doute, consulte ton professionnel de santé.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STICKY MOBILE ATC ===== -->
+  <div class="upd-sticky">
+    <div class="upd-sticky__price">
+      <div class="upd-sticky__price-num" id="updStickyPrice">{{ current_variant.price | money_without_trailing_zeros }}</div>
+      <div class="upd-sticky__price-day" id="updStickyDay"></div>
+    </div>
+    <button type="button" class="upd-sticky__btn" id="updStickyBtn">Ajouter au panier →</button>
+  </div>
+
+  <!-- ===== LEGAL DGCCRF ===== -->
+  <div class="upd-legal">
+    <p>Complément alimentaire. Ne se substitue pas à une alimentation variée et équilibrée et à un mode de vie sain.</p>
+    <p>Déconseillé aux femmes enceintes et allaitantes. Tenir hors de portée des enfants.</p>
+    <p>Allégation glucomannane EFSA ID 3120 — l'effet bénéfique est obtenu par la consommation journalière de 4g de glucomannane en trois doses de 1g chacune, avec 1 ou 2 verres d'eau, avant les repas et dans le cadre d'un régime hypocalorique.</p>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  /* ===== PROMO BAR ===== */
+  var params=new URLSearchParams(location.search);
+  var promo=document.getElementById('updPromo');
+  var promoTxt=document.getElementById('updPromoTxt');
+  var promoBtn=document.getElementById('updPromoBtn');
+  if(params.get('discount')==='UBE10'||params.get('code')==='UBE10'){
+    promo.classList.add('applied');
+    promoTxt.innerHTML='✓ Code <strong>UBE10</strong> appliqué — <strong>-10%</strong> sur ta commande';
+  }
+  promoBtn.addEventListener('click',function(){
+    navigator.clipboard.writeText('UBE10').then(function(){
+      promoBtn.textContent='Copié ✓';promoBtn.classList.add('copied');
+      setTimeout(function(){promoBtn.textContent='Copier';promoBtn.classList.remove('copied');},2000);
+    }).catch(function(){
+      var ta=document.createElement('textarea');ta.value='UBE10';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');promoBtn.textContent='Copié ✓';promoBtn.classList.add('copied');setTimeout(function(){promoBtn.textContent='Copier';promoBtn.classList.remove('copied');},2000);}catch(e){}document.body.removeChild(ta);
+    });
+  });
+
+  /* ===== GALLERY ===== */
+  var mainImg=document.getElementById('updMainImg');
+  document.querySelectorAll('.upd-thumb').forEach(function(t){
+    t.addEventListener('click',function(){
+      document.querySelectorAll('.upd-thumb').forEach(function(x){x.classList.remove('active')});
+      t.classList.add('active');
+      mainImg.src=t.dataset.src;
+    });
+  });
+
+  /* ===== VARIANT PICKER ===== */
+  var stickyPrice=document.getElementById('updStickyPrice');
+  var stickyDay=document.getElementById('updStickyDay');
+  function updateSticky(label){
+    if(!label) return;
+    var pday=label.dataset.pday;
+    var price=label.querySelector('.upd-variant__price-num').textContent;
+    stickyPrice.textContent=price;
+    stickyDay.textContent=pday+'/jour';
+  }
+  document.querySelectorAll('.upd-variant').forEach(function(label){
+    label.addEventListener('click',function(){
+      document.querySelectorAll('.upd-variant').forEach(function(x){x.classList.remove('selected')});
+      label.classList.add('selected');
+      label.querySelector('input').checked=true;
+      updateSticky(label);
+    });
+  });
+  updateSticky(document.querySelector('.upd-variant.selected'));
+
+  /* ===== QTY ===== */
+  var qty=document.getElementById('updQty');
+  document.getElementById('updQtyMinus').addEventListener('click',function(){var v=parseInt(qty.value)||1;if(v>1)qty.value=v-1});
+  document.getElementById('updQtyPlus').addEventListener('click',function(){var v=parseInt(qty.value)||1;if(v<10)qty.value=v+1});
+
+  /* ===== ATC AJAX ===== */
+  var form=document.getElementById('updForm');
+  var atc=document.getElementById('updAtc');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    atc.classList.add('loading');atc.disabled=true;
+    var fd=new FormData(form);
+    fetch('/cart/add.js',{method:'POST',body:fd,headers:{'Accept':'application/json'}})
+      .then(function(r){return r.json()})
+      .then(function(){
+        if(typeof window.theme!=='undefined'&&window.theme.cartDrawer){window.theme.cartDrawer.open()}
+        else{document.dispatchEvent(new CustomEvent('cart:refresh'))}
+        // Pixel
+        if(typeof fbq!=='undefined'){fbq('track','AddToCart');}
+        if(typeof gtag!=='undefined'){gtag('event','add_to_cart');}
+        // Try to open cart drawer via existing theme
+        var btn=document.querySelector('[data-cart-drawer-trigger],.cart-drawer-trigger,.cart-icon-bubble,[data-action="open-cart"]');
+        if(btn)btn.click();else location.href='/cart';
+      })
+      .catch(function(){location.href='/cart'})
+      .finally(function(){atc.classList.remove('loading');atc.disabled=false});
+  });
+
+  /* Sticky button → submit form */
+  document.getElementById('updStickyBtn').addEventListener('click',function(){form.requestSubmit?form.requestSubmit():form.dispatchEvent(new Event('submit',{cancelable:true}))});
+
+  /* ===== FAQ — natural details handles open/close ===== */
+  document.querySelectorAll('.upd-faq-item').forEach(function(d){
+    d.addEventListener('toggle',function(){if(d.open)d.classList.add('open');else d.classList.remove('open')});
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "UBurn Product Page",
+  "settings": [],
+  "presets": [{"name": "UBurn Product"}]
+}
+{% endschema %}

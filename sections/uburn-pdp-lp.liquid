@@ -1,0 +1,1031 @@
+{%- comment -%}
+  UBurn — Product page (LP-style)
+  Forked from sections/uburn-lp.liquid → adapted to product context.
+  - Uses default theme layout (header-group + footer-group + cart drawer)
+  - Variant IDs pulled dynamically from product.variants (no hardcoded IDs)
+  - Direct-to-checkout pattern preserved (cart/{id}:1?checkout)
+  - Adds product JSON-LD for SEO
+{%- endcomment -%}
+
+{%- liquid
+  assign v_decouverte = product.variants[0]
+  assign v_maximum = product.variants[1] | default: product.variants[0]
+  assign hero_image = product.featured_image | default: product.media[0]
+-%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link rel="preload" as="image" fetchpriority="high" href="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg?v=1776421390&width=900&format=webp">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800&family=Red+Hat+Text:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800&family=Red+Hat+Text:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+
+<style>
+  /* === UBPDP scope: tout le CSS est scopé à .ubpdp pour ne pas casser le theme === */
+  .ubpdp,.ubpdp *,.ubpdp *::before,.ubpdp *::after{box-sizing:border-box}
+  .ubpdp{font-family:'Red Hat Text',sans-serif;color:#242220;background:#fff;-webkit-font-smoothing:antialiased}
+  .ubpdp a{text-decoration:none;color:inherit}
+  .ubpdp img{max-width:100%;display:block}
+  .ubpdp ul{list-style:none;padding:0;margin:0}
+  .ubpdp h1,.ubpdp h2,.ubpdp h3,.ubpdp h4,.ubpdp p{margin:0;padding:0}
+
+  .ubpdp{
+    --purple-deep:#3d1873;--purple-main:#6b2fa0;--purple-mid:#8b47c5;--purple-light:#b07de8;
+    --purple-pale:#e8dcf5;--purple-wash:#f5f0fa;--cream:#faf9f7;--warm:#f2f0ed;
+    --dark:#242220;--body:#5a5654;--muted:#8a8785;
+    --grad:linear-gradient(160deg,#3d1873 0%,#6b2fa0 40%,#8b47c5 100%);
+  }
+
+  /* PROMO STICKY — UBE10 */
+  .ubpdp .promo-bar{position:sticky;top:0;z-index:300;background:linear-gradient(90deg,#6B21A8 0%,#8b47c5 100%);color:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:center;gap:12px;font-size:13px;font-weight:600;text-align:center;line-height:1.3;flex-wrap:wrap}
+  .ubpdp .promo-bar strong{font-weight:800;letter-spacing:.5px}
+  .ubpdp .promo-copy{background:#fff;color:#3b0764;border:none;padding:6px 14px;border-radius:100px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap;transition:transform .15s}
+  .ubpdp .promo-copy:active{transform:scale(.95)}
+  .ubpdp .promo-copy.copied{background:#16a34a;color:#fff}
+  .ubpdp .promo-bar.applied{background:linear-gradient(90deg,#16a34a 0%,#22c55e 100%)}
+  .ubpdp .promo-bar.applied .promo-copy{display:none}
+  @media(max-width:500px){.ubpdp .promo-bar{font-size:12px;padding:8px 12px;gap:8px}.ubpdp .promo-copy{padding:5px 12px;font-size:11px}}
+
+  /* BTN */
+  .ubpdp .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;border-radius:100px;font-family:'Red Hat Text',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:.3s;border:none}
+  .ubpdp .btn-fill{background:var(--purple-main);color:#fff}
+  .ubpdp .btn-fill:hover{background:var(--purple-deep);transform:translateY(-1px);box-shadow:0 6px 20px rgba(107,47,160,.3)}
+  .ubpdp .btn-white{background:#fff;color:var(--purple-deep)}
+  .ubpdp .btn-white:hover{background:var(--purple-wash);transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,0,0,.15)}
+  .ubpdp .btn-outline{background:transparent;color:var(--purple-main);border:1.5px solid var(--purple-pale)}
+  .ubpdp .btn-outline:hover{background:var(--purple-wash)}
+
+  /* TRUST RIBBON */
+  .ubpdp .ribbon{background:var(--purple-wash);padding:10px 20px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--body);font-weight:500}
+
+  /* MARQUEE */
+  .ubpdp .marquee{padding:12px 0;overflow:hidden;border-bottom:1px solid rgba(0,0,0,.04)}
+  .ubpdp .marquee-track{display:flex;gap:40px;animation:ubp-slide 25s linear infinite;width:max-content}
+  .ubpdp .marquee-item{white-space:nowrap;font-size:12.5px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;display:flex;align-items:center;gap:10px}
+  .ubpdp .marquee-dot{width:5px;height:5px;border-radius:50%;background:var(--purple-light)}
+  @keyframes ubp-slide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+  /* HERO */
+  .ubpdp .hero{padding:80px 40px 60px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .ubpdp .hero-tag{display:inline-block;padding:8px 18px;border-radius:100px;background:var(--purple-wash);font-size:13px;font-weight:600;color:var(--purple-main);margin-bottom:24px}
+  .ubpdp .hero h1{font-family:'Red Hat Display',sans-serif;font-size:clamp(36px,5vw,60px);font-weight:800;line-height:1.06;margin-bottom:24px;color:var(--dark)}
+  .ubpdp .hero h1 .accent{color:var(--purple-mid)}
+  .ubpdp .hero-sub{font-size:17px;color:var(--body);line-height:1.65;margin-bottom:28px;max-width:460px}
+  .ubpdp .hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+  .ubpdp .hero-badge{padding:8px 16px;border-radius:100px;border:1px solid rgba(0,0,0,.08);font-size:13px;font-weight:500;color:var(--body);display:flex;align-items:center;gap:6px}
+  .ubpdp .hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
+  .ubpdp .hero-visual img{width:100%;max-width:520px;height:auto;border-radius:24px;box-shadow:0 32px 80px rgba(61,24,115,.22),0 0 0 1px rgba(107,47,160,.1);display:block}
+  .ubpdp .hero-float{position:absolute;background:#fff;border-radius:14px;padding:12px 18px;box-shadow:0 8px 30px rgba(0,0,0,.1);display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--dark)}
+  .ubpdp .hero-float.top{top:20px;right:0}
+  .ubpdp .hero-float.bottom{bottom:40px;left:0}
+  .ubpdp .float-badge{padding:4px 10px;border-radius:100px;background:var(--purple-wash);color:var(--purple-main);font-size:11px;font-weight:700}
+
+  /* HERO BONUS BLOCK */
+  .ubpdp .hero-bonus{margin-top:20px;background:var(--purple-wash);border:1px solid var(--purple-pale);border-radius:14px;padding:14px 18px}
+  .ubpdp .hero-bonus-label{font-size:12px;font-weight:700;color:var(--purple-main);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
+  .ubpdp .hero-bonus-items{display:flex;flex-direction:column;gap:5px}
+  .ubpdp .hero-bonus-items span{font-size:13px;color:var(--dark);font-weight:500;line-height:1.4}
+  .ubpdp .hero-bonus-items em{color:var(--muted);font-style:normal;font-size:12px}
+  .ubpdp .hero-bonus-total{margin-top:10px;padding-top:10px;border-top:1px solid var(--purple-pale);font-size:13px;color:var(--body)}
+  .ubpdp .hero-bonus-total strong{color:var(--purple-deep);font-weight:800}
+
+  /* SECTIONS */
+  .ubpdp .section{padding:100px 40px}
+  .ubpdp .section-inner{max-width:1100px;margin:0 auto}
+  .ubpdp .section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:2.5px;color:var(--purple-main);margin-bottom:14px}
+  .ubpdp .section-title{font-family:'Red Hat Display',sans-serif;font-size:clamp(26px,3.2vw,40px);font-weight:700;color:var(--dark);line-height:1.15;margin-bottom:16px}
+  .ubpdp .section-title .accent{color:var(--purple-mid)}
+
+  /* PROBLEM */
+  .ubpdp .problem-section{background:var(--cream)}
+  .ubpdp .problem-punchline{margin-top:40px;font-family:'Red Hat Display',sans-serif;font-size:clamp(20px,2.5vw,28px);font-weight:700;color:var(--dark);text-align:center;line-height:1.3}
+  .ubpdp .problem-punchline .accent{color:var(--purple-mid)}
+
+  /* PROD 2-COL */
+  .ubpdp .prod-block{padding:100px 40px;overflow:hidden}
+  .ubpdp .prod-block.alt{background:var(--cream)}
+  .ubpdp .prod-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .ubpdp .prod-block.reverse .prod-inner{direction:rtl}
+  .ubpdp .prod-block.reverse .prod-text,.ubpdp .prod-block.reverse .prod-visual{direction:ltr}
+  .ubpdp .prod-text h2{font-family:'Red Hat Display',sans-serif;font-size:clamp(26px,3vw,38px);font-weight:700;color:var(--dark);line-height:1.12;margin-bottom:12px}
+  .ubpdp .prod-text h2 .accent{color:var(--purple-mid)}
+  .ubpdp .prod-text h3{font-family:'Red Hat Display',sans-serif;font-size:17px;font-weight:500;color:var(--body);margin-bottom:20px;line-height:1.45}
+  .ubpdp .prod-text>p{font-size:15px;color:var(--body);line-height:1.7;margin-bottom:28px}
+  .ubpdp .feats{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+  .ubpdp .feat{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--body)}
+  .ubpdp .feat-ck{width:20px;height:20px;border-radius:50%;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .ubpdp .feat-ck svg{width:12px;height:12px;stroke:var(--purple-main);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+  .ubpdp .prod-img{width:100%;border-radius:24px;overflow:hidden;background:linear-gradient(145deg,#e8dcf5,#f5f0fa);display:flex;align-items:center;justify-content:center;aspect-ratio:1/1}
+  .ubpdp .prod-img img{width:85%;height:auto;filter:drop-shadow(0 12px 30px rgba(61,24,115,.15))}
+  .ubpdp .prod-img-full img{width:100%;height:100%;object-fit:cover}
+
+  /* HOW */
+  .ubpdp .how-section{text-align:center}
+  .ubpdp .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px;text-align:center}
+  .ubpdp .how-num{width:52px;height:52px;margin:0 auto 16px;border-radius:50%;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;font-family:'Red Hat Display',sans-serif;font-size:18px;font-weight:700;color:var(--purple-main)}
+  .ubpdp .how-step h4{font-family:'Red Hat Display',sans-serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:8px}
+  .ubpdp .how-step-photo{width:100%;aspect-ratio:1/1;border-radius:20px;overflow:hidden;margin-bottom:16px;background:var(--purple-wash)}
+  .ubpdp .how-step-photo img{width:100%;height:100%;object-fit:cover}
+
+  /* INGREDIENTS */
+  .ubpdp .ingr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+  .ubpdp .ingr-card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:.3s}
+  .ubpdp .ingr-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.06);transform:translateY(-2px)}
+  .ubpdp .ingr-card-img{width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--cream)}
+  .ubpdp .ingr-card-img img{width:100%;height:100%;object-fit:cover}
+  .ubpdp .ingr-card-body{padding:20px}
+  .ubpdp .ingr-card h4{font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:700;color:var(--dark);margin-bottom:6px}
+  .ubpdp .ingr-card p{font-size:13px;color:var(--muted);line-height:1.55}
+
+  /* PRESS */
+  .ubpdp .press-bar{padding:40px;text-align:center;border-top:1px solid rgba(0,0,0,.04);border-bottom:1px solid rgba(0,0,0,.04)}
+  .ubpdp .press-bar p{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-weight:600;margin-bottom:24px}
+  .ubpdp .press-logos{display:flex;gap:40px;justify-content:center;align-items:center;flex-wrap:wrap;opacity:.5}
+  .ubpdp .press-logos img{height:22px;width:auto}
+
+  /* STATS */
+  .ubpdp .stats-section{padding:100px 40px;background:var(--grad);text-align:center;color:#fff;position:relative;overflow:hidden}
+  .ubpdp .stats-section::before{content:'';position:absolute;inset:0;background:url('https://uburn.co/cdn/shop/files/FOND_FIN.jpg?v=1749644803&width=1600') center/cover no-repeat;opacity:.08;mix-blend-mode:luminosity}
+  .ubpdp .stats-section>*{position:relative;z-index:1}
+  .ubpdp .stats-section .section-inner{max-width:700px}
+  .ubpdp .stats-section h2{font-family:'Red Hat Display',sans-serif;font-size:clamp(26px,3.5vw,42px);font-weight:700;margin-bottom:16px;line-height:1.15;color:#fff}
+  .ubpdp .stats-section p{font-size:16px;color:rgba(255,255,255,.7);line-height:1.65;margin-bottom:36px}
+  .ubpdp .stats-row{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:48px}
+  .ubpdp .stat{text-align:center}
+  .ubpdp .stat-num{font-family:'Red Hat Display',sans-serif;font-size:42px;font-weight:800}
+  .ubpdp .stat-label{font-size:13px;color:rgba(255,255,255,.6);margin-top:4px}
+
+  /* TESTIMONIALS */
+  .ubpdp .testi-section{text-align:center}
+  .ubpdp .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;text-align:left}
+  .ubpdp .testi-card{background:var(--cream);border-radius:20px;padding:32px;border:1px solid rgba(0,0,0,.04);transition:.3s}
+  .ubpdp .testi-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.06)}
+  .ubpdp .testi-stars{color:var(--purple-main);font-size:14px;margin-bottom:14px;letter-spacing:2px}
+  .ubpdp .testi-text{font-size:14.5px;color:var(--body);line-height:1.65;margin-bottom:20px}
+  .ubpdp .testi-verified{font-size:11px;color:var(--purple-main);font-weight:600;margin-bottom:12px}
+  .ubpdp .testi-author{display:flex;align-items:center;gap:10px}
+  .ubpdp .testi-avatar{width:38px;height:38px;border-radius:50%;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;font-family:'Red Hat Display',sans-serif;font-size:13px;font-weight:700;color:var(--purple-main)}
+  .ubpdp .testi-name{font-weight:600;font-size:13px;color:var(--dark)}
+  .ubpdp .testi-role{font-size:12px;color:var(--muted)}
+
+  /* PRICING */
+  .ubpdp .pricing-section{text-align:center}
+  .ubpdp .pricing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:700px;margin:48px auto 0}
+  .ubpdp .pricing-card{background:var(--cream);border-radius:22px;padding:36px;border:2px solid transparent;transition:.3s;position:relative;cursor:pointer}
+  .ubpdp .pricing-card.pop{border-color:var(--purple-main);background:#fff}
+  .ubpdp .pricing-pop-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);padding:5px 18px;border-radius:100px;background:var(--purple-main);color:#fff;font-size:11px;font-weight:700;white-space:nowrap}
+  .ubpdp .pricing-card h3{font-family:'Red Hat Display',sans-serif;font-size:20px;font-weight:700;color:var(--dark);margin-bottom:4px}
+  .ubpdp .pricing-desc{font-size:13px;color:var(--muted);margin-bottom:20px}
+  .ubpdp .pricing-price{font-family:'Red Hat Display',sans-serif;font-size:38px;font-weight:800;color:var(--purple-deep)}
+  .ubpdp .pricing-price small{font-size:14px;font-weight:500;color:var(--muted)}
+  .ubpdp .pricing-per{font-size:13px;color:var(--muted);margin-bottom:24px}
+
+  /* FAQ */
+  .ubpdp .faq-section{background:var(--cream)}
+  .ubpdp .faq-list{max-width:700px;margin:48px auto 0}
+  .ubpdp .faq-item{border-bottom:1px solid rgba(0,0,0,.06);padding:20px 0;cursor:pointer}
+  .ubpdp .faq-q{display:flex;justify-content:space-between;align-items:center;font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:600;color:var(--dark)}
+  .ubpdp .faq-q::after{content:'+';font-size:20px;color:var(--purple-main);transition:.3s}
+  .ubpdp .faq-item.open .faq-q::after{content:'\2212'}
+  .ubpdp .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;font-size:14px;color:var(--body);line-height:1.65}
+  .ubpdp .faq-item.open .faq-a{max-height:400px;padding-top:12px}
+
+  /* GUARANTEE */
+  .ubpdp .guar-bar{padding:44px 40px;border-top:1px solid rgba(0,0,0,.05);border-bottom:1px solid rgba(0,0,0,.05)}
+  .ubpdp .guar-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+  .ubpdp .guar-icon{width:48px;height:48px;margin:0 auto 10px}
+  .ubpdp .guar-icon img{width:100%;height:100%}
+  .ubpdp .guar-item h4{font-family:'Red Hat Display',sans-serif;font-size:13px;font-weight:700;color:var(--dark);margin-bottom:2px}
+  .ubpdp .guar-item p{font-size:12px;color:var(--muted)}
+
+  /* DISCLAIMER */
+  .ubpdp .disc-bar{background:var(--cream);padding:24px 16px}
+  .ubpdp .disc-bar-inner{max-width:1000px;margin:0 auto;padding:16px;background:var(--warm);border-radius:10px}
+  .ubpdp .disc-bar-inner p{font-size:11px;color:var(--muted);line-height:1.6}
+
+  /* ANIMATIONS */
+  .ubpdp .reveal{opacity:0;transform:translateY(36px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+  .ubpdp .reveal.visible{opacity:1;transform:translateY(0)}
+  .ubpdp .reveal-d{transition-delay:.15s}
+  @keyframes ubp-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  @keyframes ubp-pulse-glow{0%,100%{box-shadow:0 4px 20px rgba(107,47,160,.25)}50%{box-shadow:0 8px 40px rgba(107,47,160,.5)}}
+  @keyframes ubp-slide-up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+  .ubpdp .hero-visual img{animation:ubp-float 5s ease-in-out infinite}
+  .ubpdp .hero-visual img:hover{animation-play-state:paused}
+  @media(max-width:900px){.ubpdp .hero-visual img{max-width:380px!important;animation:none}}
+  .ubpdp .btn-fill{animation:ubp-pulse-glow 2.5s ease-in-out infinite}
+  .ubpdp .btn-fill:hover{animation-play-state:paused}
+  .ubpdp .stagger-children > *{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+  .ubpdp .stagger-children.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+  .ubpdp .stagger-children.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:.1s}
+  .ubpdp .stagger-children.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:.2s}
+  .ubpdp .stagger-children.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:.3s}
+  .ubpdp .stagger-children.visible > *:nth-child(5){opacity:1;transform:none;transition-delay:.4s}
+  .ubpdp .stagger-children.visible > *:nth-child(6){opacity:1;transform:none;transition-delay:.5s}
+  .ubpdp .stagger-scale > *{opacity:0;transform:scale(.88) translateY(16px);transition:opacity .5s ease,transform .5s ease}
+  .ubpdp .stagger-scale.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+  .ubpdp .stagger-scale.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:.08s}
+  .ubpdp .stagger-scale.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:.16s}
+  .ubpdp .stagger-scale.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:.24s}
+  .ubpdp .stagger-scale.visible > *:nth-child(5){opacity:1;transform:none;transition-delay:.32s}
+  .ubpdp .stagger-scale.visible > *:nth-child(6){opacity:1;transform:none;transition-delay:.4s}
+
+  /* PROBLEM CARDS */
+  .ubpdp .prob-cards{display:grid;grid-template-columns:repeat(3,1fr);margin-top:48px;border-radius:20px;overflow:hidden;box-shadow:0 4px 32px rgba(61,24,115,.1)}
+  .ubpdp .prob-card{background:linear-gradient(145deg,#2e1060 0%,#5b2199 60%,#7c3abf 100%);padding:40px 32px;border-right:1px solid rgba(255,255,255,.08);position:relative;transition:filter .25s}
+  .ubpdp .prob-card:last-child{border-right:none}
+  .ubpdp .prob-card:hover{filter:brightness(1.08)}
+  .ubpdp .prob-num{font-family:'Red Hat Display',sans-serif;font-size:68px;font-weight:900;color:rgba(255,255,255,.08);line-height:1;letter-spacing:-0.04em;margin-bottom:20px;user-select:none}
+  .ubpdp .prob-title{font-family:'Red Hat Display',sans-serif;font-size:18px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:14px}
+  .ubpdp .prob-sub{font-size:14px;color:rgba(255,255,255,.7);line-height:1.6;padding-top:14px;border-top:1px solid rgba(255,255,255,.15)}
+  @media(max-width:700px){.ubpdp .prob-cards{grid-template-columns:1fr;border-radius:16px}.ubpdp .prob-card{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}.ubpdp .prob-card:last-child{border-bottom:none}}
+
+  .ubpdp .faq-item.open .faq-a{animation:ubp-slide-up .3s ease}
+  .ubpdp h1,.ubpdp h2,.ubpdp h3,.ubpdp .section-title,.ubpdp .hero h1,.ubpdp .benefit-title,.ubpdp .expert-quote{text-wrap:balance}
+  .ubpdp .big-stat-num,.ubpdp .stat-num,.ubpdp .pricing-price{font-variant-numeric:tabular-nums}
+  .ubpdp :focus-visible{outline:2px solid var(--purple-main);outline-offset:3px;border-radius:4px}
+  .ubpdp .btn:focus-visible{outline-offset:4px}
+
+  /* STICKY MOBILE CTA */
+  .ubpdp-sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;padding:12px 16px 16px;background:#fff;box-shadow:0 -4px 20px rgba(0,0,0,.1);border-top:1px solid rgba(0,0,0,.06)}
+  .ubpdp-sticky-cta a{display:block;width:100%;text-align:center;background:var(--purple-main);color:#fff;padding:15px 24px;border-radius:100px;font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:700;text-decoration:none}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    body{padding-bottom:72px}
+    .ubpdp-sticky-cta{display:block}
+    .ubpdp .hero{grid-template-columns:1fr;text-align:center;padding:52px 24px 36px}
+    .ubpdp .hero-sub{margin:0 auto 24px;max-width:480px}
+    .ubpdp .hero-badges{justify-content:center;flex-wrap:wrap;gap:8px}
+    .ubpdp .hero-visual{order:-1}
+    .ubpdp .hero-visual img{width:100%;max-width:380px;height:auto;margin:0 auto;display:block}
+    .ubpdp .hero-float{display:none}
+    .ubpdp .prod-inner{grid-template-columns:1fr;gap:36px}
+    .ubpdp .prod-block{padding:72px 24px}
+    .ubpdp .prod-block.reverse .prod-inner{direction:ltr}
+    .ubpdp .prod-img{max-width:320px;margin:0 auto}
+    .ubpdp .ingr-grid{grid-template-columns:repeat(2,1fr)}
+    .ubpdp .testi-grid{grid-template-columns:1fr}
+    .ubpdp .how-grid{grid-template-columns:1fr;gap:28px;max-width:380px;margin-left:auto;margin-right:auto}
+    .ubpdp .guar-grid{grid-template-columns:repeat(2,1fr)}
+    .ubpdp .pricing-grid{grid-template-columns:1fr;max-width:380px;margin-left:auto;margin-right:auto}
+    .ubpdp .section{padding:72px 24px}
+    .ubpdp .lifestyle-section{padding:72px 24px;min-height:480px}
+    .ubpdp .offer-block-section{padding:72px 24px}
+    .ubpdp .offer-block-img{max-width:360px}
+    .ubpdp .big-stats-row{grid-template-columns:repeat(2,1fr);gap:24px}
+  }
+  @media(max-width:600px){
+    .ubpdp .section,.ubpdp .prod-block{padding:60px 16px}
+    .ubpdp .offer-block-section{padding:60px 16px}
+    .ubpdp .lifestyle-section{padding:60px 16px;min-height:420px}
+    .ubpdp .hero{padding:40px 16px 28px}
+    .ubpdp .hero h1{font-size:clamp(28px,8vw,38px)}
+    .ubpdp .hero-sub{font-size:15px}
+    .ubpdp .hero-badges{gap:6px}
+    .ubpdp .hero-badge{font-size:11.5px;padding:6px 12px}
+    .ubpdp .guar-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+    .ubpdp .guar-bar{padding:32px 16px}
+    .ubpdp .stats-row{gap:20px;flex-wrap:wrap}
+    .ubpdp .stat-num{font-size:34px}
+    .ubpdp .press-logos{gap:20px}
+    .ubpdp .press-logos img{height:18px}
+    .ubpdp .ingr-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+    .ubpdp .testi-grid{grid-template-columns:1fr}
+    .ubpdp .pricing-grid{max-width:100%}
+    .ubpdp .pricing-card{padding:28px 20px}
+    .ubpdp .pricing-price{font-size:32px}
+    .ubpdp .cart-preview{padding:20px 16px}
+    .ubpdp .cart-item{gap:10px}
+    .ubpdp .cart-item-img{width:44px;height:44px;min-width:44px;font-size:15px}
+    .ubpdp .cart-item-name{font-size:13px}
+    .ubpdp .cart-item-price{font-size:13px}
+    .ubpdp .compare-section{padding:60px 16px}
+    .ubpdp .benefits-section{padding:60px 16px}
+    .ubpdp .expert-section{padding:60px 16px}
+    .ubpdp .expert-card{padding:28px 20px}
+    .ubpdp .expert-quote{font-size:19px}
+    .ubpdp .offer-block-pricing{gap:16px}
+    .ubpdp .btn{padding:13px 24px;font-size:14px}
+    .ubpdp .section-title{font-size:clamp(22px,6vw,32px)}
+  }
+  @media(max-width:400px){
+    .ubpdp .ingr-grid{grid-template-columns:1fr}
+    .ubpdp .big-stats-row{grid-template-columns:1fr}
+    .ubpdp .hero h1{font-size:26px}
+  }
+
+  /* EXPERT */
+  .ubpdp .expert-section{background:var(--purple-wash);padding:80px 40px}
+  .ubpdp .expert-card{max-width:950px;margin:0 auto;background:#fff;border-radius:24px;padding:48px 56px;box-shadow:0 8px 30px rgba(61,24,115,.08);display:grid;grid-template-columns:40% 60%;gap:48px;align-items:center}
+  .ubpdp .expert-img{border-radius:20px;overflow:hidden;aspect-ratio:1/1;background:var(--cream)}
+  .ubpdp .expert-img img{width:100%;height:100%;object-fit:cover}
+  .ubpdp .expert-quote{font-family:'Red Hat Display',sans-serif;font-size:26px;font-weight:700;color:var(--purple-deep);line-height:1.25;letter-spacing:-0.02em;margin-bottom:20px}
+  .ubpdp .expert-body{border-left:3px solid var(--purple-main);padding-left:20px;font-size:15px;color:var(--body);line-height:1.7;font-style:italic;margin-bottom:20px}
+  .ubpdp .expert-name{font-weight:700;color:var(--dark);font-size:15px;margin-bottom:4px}
+  .ubpdp .expert-credentials{text-transform:uppercase;letter-spacing:1.5px;font-size:11px;color:var(--muted);margin-bottom:10px;font-weight:600}
+  .ubpdp .expert-link{color:var(--purple-main);font-size:13px;font-weight:600;display:inline-block}
+  @media(max-width:700px){.ubpdp .expert-card{grid-template-columns:1fr;padding:32px 24px;gap:32px}.ubpdp .expert-quote{font-size:22px}}
+
+  /* COMPARE TABLE */
+  .ubpdp .compare-section{background:linear-gradient(160deg,#3d1873 0%,#6b2fa0 100%);padding:100px 40px;color:#fff}
+  .ubpdp .compare-inner{max-width:1000px;margin:0 auto}
+  .ubpdp .compare-section .section-label{color:var(--purple-light);text-align:center;display:block}
+  .ubpdp .compare-section h2{font-family:'Red Hat Display',sans-serif;font-size:clamp(28px,3.5vw,42px);font-weight:700;color:#fff;letter-spacing:-0.02em;margin-bottom:16px;text-align:center;line-height:1.15}
+  .ubpdp .compare-section h2 .accent{color:var(--purple-light)}
+  .ubpdp .compare-sub{color:rgba(255,255,255,.7);font-size:16px;max-width:620px;margin:0 auto 48px;text-align:center;line-height:1.6}
+  .ubpdp .compare-table{background:rgba(255,255,255,.04);border-radius:20px;overflow:hidden;backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08)}
+  .ubpdp .compare-head{display:grid;grid-template-columns:1.2fr 1.2fr 1.3fr 1.3fr;text-transform:uppercase;letter-spacing:1.5px;font-size:10.5px;color:rgba(255,255,255,.5);padding:18px 24px;border-bottom:1px solid rgba(255,255,255,.1);font-weight:600}
+  .ubpdp .compare-row{display:grid;grid-template-columns:1.2fr 1.2fr 1.3fr 1.3fr;padding:18px 24px;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;align-items:center;transition:background .2s}
+  .ubpdp .compare-row:hover{background:rgba(255,255,255,.04)}
+  .ubpdp .compare-row:last-child{border-bottom:none}
+  .ubpdp .compare-actif{font-weight:600;color:#fff}
+  .ubpdp .compare-market{color:rgba(255,255,255,.5)}
+  .ubpdp .compare-uburn{font-weight:700;color:#fff;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .ubpdp .compare-pill{background:var(--purple-main);color:#fff;font-size:9.5px;font-weight:800;padding:3px 9px;border-radius:100px;letter-spacing:.8px;text-transform:uppercase}
+  .ubpdp .compare-pill.new{background:#b07de8;color:#3d1873}
+  .ubpdp .compare-benefit{color:rgba(255,255,255,.75);font-size:13.5px}
+  @media(max-width:800px){.ubpdp .compare-head{display:none}.ubpdp .compare-row{grid-template-columns:1fr;gap:8px;padding:20px 18px}.ubpdp .compare-row>*::before{content:attr(data-label);display:block;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.4);margin-bottom:2px;font-weight:600}}
+
+  /* BENEFITS */
+  .ubpdp .benefits-section{background:#fafafa;padding:100px 40px}
+  .ubpdp .benefits-inner{max-width:1000px;margin:0 auto}
+  .ubpdp .benefits-head{text-align:center;margin-bottom:48px}
+  .ubpdp .benefits-grid-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:40px;align-items:start}
+  .ubpdp .benefit-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ubpdp .benefit-card{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:22px 16px;text-align:center;cursor:pointer;transition:all .3s}
+  .ubpdp .benefit-card:hover{border-color:var(--purple-pale)}
+  .ubpdp .benefit-card.active{background:var(--purple-deep);border-color:var(--purple-deep);color:#fff}
+  .ubpdp .benefit-card.active .benefit-icon svg{stroke:#fff}
+  .ubpdp .benefit-icon{width:32px;height:32px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center}
+  .ubpdp .benefit-icon svg{width:24px;height:24px;stroke:var(--purple-main);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
+  .ubpdp .benefit-name{font-size:13px;font-weight:600;color:inherit}
+  .ubpdp .benefit-detail{background:#fff;border-radius:20px;padding:40px 36px;box-shadow:0 4px 24px rgba(61,24,115,.06);border:1px solid rgba(0,0,0,.04)}
+  .ubpdp .benefit-detail-icon{width:52px;height:52px;border-radius:50%;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .ubpdp .benefit-detail-icon svg{width:24px;height:24px;stroke:var(--purple-main);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .ubpdp .benefit-label{text-transform:uppercase;letter-spacing:2px;font-size:11px;color:var(--purple-main);font-weight:700;margin-bottom:10px}
+  .ubpdp .benefit-title{font-family:'Red Hat Display',sans-serif;font-size:26px;font-weight:700;color:var(--dark);letter-spacing:-0.02em;margin-bottom:14px;line-height:1.2}
+  .ubpdp .benefit-desc{font-size:15px;color:var(--body);line-height:1.7;margin-bottom:20px}
+  .ubpdp .benefit-badge{display:inline-block;background:var(--purple-wash);color:var(--purple-main);padding:7px 14px;border-radius:100px;font-size:12px;font-weight:600}
+  @media(max-width:780px){.ubpdp .benefits-grid-layout{grid-template-columns:1fr;gap:32px}.ubpdp .benefit-cards{grid-template-columns:repeat(3,1fr);gap:8px}.ubpdp .benefit-card{padding:16px 10px}.ubpdp .benefit-detail{padding:32px 24px}}
+
+  /* BIG STATS */
+  .ubpdp .big-stats-row{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+  .ubpdp .big-stat{text-align:center;min-width:140px}
+  .ubpdp .big-stat-num{font-family:'Red Hat Display',sans-serif;font-size:56px;font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1}
+  .ubpdp .big-stat-label{font-size:13px;color:rgba(255,255,255,.65);margin-top:8px;max-width:160px;margin-left:auto;margin-right:auto;line-height:1.4}
+  .ubpdp .stats-note{font-size:11px;color:rgba(255,255,255,.4);margin-top:32px;text-align:center;font-style:italic}
+  @media(max-width:700px){.ubpdp .big-stat-num{font-size:42px}.ubpdp .big-stats-row{gap:24px}}
+
+  /* CART PREVIEW */
+  .ubpdp .cart-section{background:#fff;padding:100px 40px}
+  .ubpdp .cart-section-inner{max-width:1100px;margin:0 auto;text-align:center}
+  .ubpdp .cart-preview{max-width:520px;margin:48px auto 0;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:20px;padding:28px;box-shadow:0 8px 30px rgba(0,0,0,.06);text-align:left}
+  .ubpdp .cart-title{text-transform:uppercase;letter-spacing:2px;font-size:11px;color:var(--muted);font-weight:700;margin-bottom:16px}
+  .ubpdp .cart-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px dashed rgba(0,0,0,.08);align-items:center}
+  .ubpdp .cart-item:last-of-type{border-bottom:none}
+  .ubpdp .cart-item-img{width:56px;height:56px;border-radius:10px;background:var(--purple-wash);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .ubpdp .cart-item-img img{width:100%;height:100%;object-fit:cover}
+  .ubpdp .cart-item-body{flex:1;min-width:0}
+  .ubpdp .cart-item-name{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:2px;line-height:1.3}
+  .ubpdp .cart-item-meta{font-size:12px;color:var(--muted)}
+  .ubpdp .cart-item-price{font-weight:700;color:var(--dark);font-size:14px;white-space:nowrap;text-align:right}
+  .ubpdp .cart-item-price s{color:var(--muted);font-weight:400;display:block;font-size:12px}
+  .ubpdp .cart-item-gift{background:#D1FAE5;color:#065F46;font-size:10px;font-weight:800;padding:3px 8px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase;display:inline-block;margin-top:2px}
+  .ubpdp .cart-sub{background:var(--purple-wash);padding:16px 18px;border-radius:14px;margin-top:18px}
+  .ubpdp .cart-sub-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+  .ubpdp .cart-sub-row.save{color:#059669;font-weight:600}
+  .ubpdp .cart-sub-row.total{font-size:17px;font-weight:800;color:var(--dark);margin-top:8px;padding-top:8px;border-top:1px solid rgba(61,24,115,.1);margin-bottom:0}
+  .ubpdp .cart-sub-note{font-size:11px;color:var(--muted);text-align:right;margin-top:4px}
+  .ubpdp .cart-checkout{display:block;width:100%;text-align:center;background:var(--purple-main);color:#fff;border-radius:100px;padding:15px;font-weight:700;font-size:14.5px;margin-top:18px;transition:.25s;border:none;cursor:pointer}
+  .ubpdp .cart-checkout:hover{background:var(--purple-deep)}
+  .ubpdp .cart-pay{display:flex;gap:10px;justify-content:center;margin-top:12px;font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.5px;text-transform:uppercase;opacity:.6}
+
+  /* LIFESTYLE */
+  .ubpdp .lifestyle-section{position:relative;min-height:640px;overflow:hidden;display:flex;align-items:center;padding:100px 40px}
+  .ubpdp .lifestyle-bg{position:absolute;inset:0;background:linear-gradient(135deg,#2a1054 0%,#6b2fa0 60%,#8b47c5 100%);background-image:url('https://uburn.co/cdn/shop/files/focus_product_1_3dab8125-eab7-4b9d-a33f-e28cdd57aa67.jpg?v=1776425406&width=1600&format=webp');background-size:cover;background-position:center top;z-index:0}
+  .ubpdp .lifestyle-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(42,16,84,.85) 0%,rgba(61,24,115,.5) 60%,rgba(61,24,115,.2) 100%)}
+  .ubpdp .lifestyle-inner{position:relative;z-index:1;max-width:560px;color:#fff}
+  .ubpdp .lifestyle-inner .section-label{color:var(--purple-light)}
+  .ubpdp .lifestyle-inner h2{font-family:'Red Hat Display',sans-serif;font-size:clamp(30px,4vw,48px);font-weight:700;line-height:1.1;letter-spacing:-0.02em;margin-bottom:20px;color:#fff}
+  .ubpdp .lifestyle-inner h2 em{font-style:italic;color:var(--purple-light);font-weight:700}
+  .ubpdp .lifestyle-inner p{color:rgba(255,255,255,.85);font-size:16px;line-height:1.7;margin-bottom:28px}
+
+  /* OFFER BLOCK */
+  .ubpdp .offer-block-section{background:linear-gradient(160deg,var(--cream) 0%,var(--purple-wash) 100%);padding:100px 40px}
+  .ubpdp .offer-block-inner{max-width:980px;margin:0 auto}
+  .ubpdp .offer-block-header{margin-bottom:40px}
+  .ubpdp .offer-block-img{max-width:520px;margin:0 auto 56px;text-align:center;padding:0 16px}
+  .ubpdp .offer-block-img img{width:100%;height:auto;max-height:480px;object-fit:contain;filter:drop-shadow(0 40px 80px rgba(61,24,115,.25))}
+  .ubpdp .offer-block-pricing{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px}
+  @media(max-width:700px){.ubpdp .offer-block-pricing{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}}
+  .ubpdp #offer-timer{text-align:center;font-size:13px;font-weight:600;color:var(--purple-main);margin-top:12px}
+  .ubpdp .pack-duration{font-size:12px;color:var(--muted);margin-bottom:16px;text-align:center}
+  .ubpdp .offer-rating{text-align:center;font-size:14px;color:var(--dark);font-weight:600;margin-bottom:12px;letter-spacing:.2px}
+  .ubpdp .social-proof{text-align:center;font-size:12.5px;color:var(--body);margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px}
+</style>
+
+<div class="ubpdp">
+
+  {%- comment -%} PROMO BAR — UBE10 (sticky sous le header global) {%- endcomment -%}
+  <div class="promo-bar" id="ubpdp-promoBar">
+    <span id="ubpdp-promoText">🎁 <strong>-10%</strong> sur ta 1ère commande · Code <strong>UBE10</strong></span>
+    <button type="button" class="promo-copy" id="ubpdp-promoCopy" aria-label="Copier le code UBE10">Copier</button>
+  </div>
+
+  {%- comment -%} TRUST RIBBON {%- endcomment -%}
+  <div class="ribbon">
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> Ingrédients conformes EFSA</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> 100% Végétal</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> Sans abonnement</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> 0% caféine</span>
+  </div>
+
+  {%- comment -%} HERO {%- endcomment -%}
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tag">Nos premières clientes adorent Uburn</div>
+      <h1>16h. <span class="accent">Votre</span> placard reste fermé.</h1>
+      <p class="hero-sub">30 kcal · 0% caféine · 4h de satiété.</p>
+      <div class="hero-badges">
+        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 0% caféine</div>
+        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 30 kcal</div>
+        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> France</div>
+        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Livraison offerte</div>
+        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 0% sucre ajouté</div>
+      </div>
+      <a href="#offer" class="btn btn-fill">Commencer ma cure →</a>
+      <div class="hero-bonus">
+        <div class="hero-bonus-label">🎁 Offerts avec votre commande aujourd'hui</div>
+        <div class="hero-bonus-items">
+          <span>✓ E-book "30j pour reprendre le contrôle" <em>(47€)</em></span>
+          <span>✓ Accès groupe privé Uburn Collective <em>(40€)</em></span>
+          <span>✓ Accès aux événements UBurn en ligne <em>(50€)</em></span>
+          <span>✓ Suivi nutrition WhatsApp 30j <em>(47€)</em></span>
+        </div>
+        <div class="hero-bonus-total">Valeur totale : <strong>184€ OFFERTS</strong></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      {%- if hero_image -%}
+        <img src="{{ hero_image | image_url: width: 900 }}" alt="{{ hero_image.alt | default: product.title | escape }}" fetchpriority="high" loading="eager" width="900" height="611">
+      {%- else -%}
+        <img src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg?v=1776421390&width=900&format=webp" alt="UBurn — poudre ubé" fetchpriority="high" loading="eager" width="900" height="611">
+      {%- endif -%}
+      <div class="hero-float top"><span class="float-badge">EFSA</span> Glucomannane · Allégation ID 3120</div>
+    </div>
+  </section>
+
+  {%- comment -%} MARQUEE {%- endcomment -%}
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="marquee-item"><span class="marquee-dot"></span>Livraison offerte</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>EFSA ID 3120</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>100% Naturel</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>0% Caféine</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Fabriqué en France</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Sans abonnement</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Livraison offerte</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>EFSA ID 3120</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>100% Naturel</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>0% Caféine</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Fabriqué en France</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Sans abonnement</div>
+    </div>
+  </div>
+
+  {%- comment -%} EXPERT {%- endcomment -%}
+  <section class="expert-section">
+    <div class="expert-card reveal">
+      <div class="expert-img">
+        <img src="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_gjm16fgjm16fgjm1.png?v=1776424158&width=800" alt="Dr. Claire Dubois — Nutritionniste" loading="lazy" decoding="async" width="800" height="800">
+      </div>
+      <div>
+        <p class="expert-quote">« Une formule rare : la science du konjac au service du quotidien des femmes. »</p>
+        <div class="expert-body">
+          La formule UBurn combine glucomannane validé EFSA et 5 actifs synergiques, chacun dosé cliniquement pour un niveau de soutien rarement atteint dans une seule boisson. Pensée pour la vraie vie.
+        </div>
+        <div class="expert-name">Dr. Claire Dubois</div>
+        <div class="expert-credentials">Nutritionniste · Spécialiste comportement alimentaire</div>
+        <a href="#" class="expert-link">Membre du Comité Scientifique UBurn →</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} PROBLEM {%- endcomment -%}
+  <section class="section problem-section" id="probleme">
+    <div class="section-inner reveal">
+      <div class="section-label">On connaît ce moment.</div>
+      <h2 class="section-title">Le même schéma, <span class="accent">chaque jour.</span></h2>
+      <div class="prob-cards stagger-scale">
+        <div class="prob-card">
+          <div class="prob-num">01</div>
+          <div class="prob-title">16h — le placard vous appelle</div>
+          <div class="prob-sub">Glycémie en chute libre. C'est physiologique, pas un manque de volonté.</div>
+        </div>
+        <div class="prob-card">
+          <div class="prob-num">02</div>
+          <div class="prob-title">Le soir devant le frigo</div>
+          <div class="prob-sub">La fatigue baisse la garde. Les bonnes intentions du matin s'effacent.</div>
+        </div>
+        <div class="prob-card">
+          <div class="prob-num">03</div>
+          <div class="prob-title">La volonté ne suffit pas</div>
+          <div class="prob-sub">Ce n'est pas vous. C'est biologique. Et ça se traite.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} HOW IT WORKS {%- endcomment -%}
+  <section class="section how-section">
+    <div class="section-inner reveal">
+      <div class="section-label">Comment Uburn agit</div>
+      <h2 class="section-title" style="text-align:center">3 gestes. <span class="accent">4h de résultat.</span></h2>
+      <div class="how-grid stagger-children" style="align-items:start">
+        <div class="how-step">
+          <div class="how-step-photo"><img src="https://uburn.co/cdn/shop/files/etape_1.jpg?v=1763147054&width=600&format=webp" alt="Mélangez UBurn" loading="lazy" decoding="async" width="600" height="600"></div>
+          <div class="how-num">01</div>
+          <h4>Mélangez</h4>
+          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Une dose dans un grand verre d'eau <strong>OU</strong> de lait végétal</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-photo"><img src="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=600&format=webp" alt="Le glucomannane forme un gel" loading="lazy" decoding="async" width="600" height="600"></div>
+          <div class="how-num">02</div>
+          <h4>Le gel se forme</h4>
+          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Le konjac gonfle dans votre estomac et coupe la faim naturellement</p>
+        </div>
+        <div class="how-step">
+          <div class="how-step-photo"><img src="https://uburn.co/cdn/shop/files/etape_3.jpg?v=1763147054&width=600&format=webp" alt="4h sans fringales" loading="lazy" decoding="async" width="600" height="600"></div>
+          <div class="how-num">03</div>
+          <h4>4h sans fringales</h4>
+          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Votre estomac est calmé, naturellement</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} OFFER BLOCK — VARIANTS DYNAMIQUES {%- endcomment -%}
+  <section class="offer-block-section" id="offer">
+    <div class="offer-block-inner">
+      <div class="offer-block-header reveal">
+        <div class="section-label" style="text-align:center">Votre offre</div>
+        <h2 class="section-title" style="text-align:center">Une saveur. <span class="accent">Six actifs.</span></h2>
+        <p style="max-width:400px;margin:10px auto 0;color:var(--body);font-size:14px;text-align:center">Paiement unique · Livraison offerte</p>
+        <p id="offer-timer">✓ Livraison offerte en France</p>
+      </div>
+
+      <div class="offer-block-img reveal">
+        <img src="https://uburn.co/cdn/shop/files/Uburn_Listing_ecom_1.jpg?v=1772700007&width=800" alt="UBurn Pack" loading="lazy" decoding="async" width="800" height="1000">
+      </div>
+
+      <div class="offer-block-pricing reveal">
+        {%- if v_decouverte -%}
+        <div class="pricing-card" id="card-decouverte">
+          <h3>{{ v_decouverte.title | default: 'Découverte' }}</h3>
+          <p class="pricing-desc">Idéal pour tester · 90g · 1 dose/jour</p>
+          <div class="pricing-price">{{ v_decouverte.price | money }}{% if v_decouverte.compare_at_price > v_decouverte.price %} <small><s>{{ v_decouverte.compare_at_price | money }}</s></small>{% endif %}</div>
+          <p class="pricing-per">soit 1,15€/jour</p>
+          <p class="pack-duration">30 jours · 1 dose/jour</p>
+          {%- if v_decouverte.available -%}
+            <a href="/cart/{{ v_decouverte.id }}:1?checkout" class="btn btn-fill" style="width:100%;justify-content:center">Commander →</a>
+          {%- else -%}
+            <span class="btn btn-outline" style="width:100%;justify-content:center;cursor:not-allowed;opacity:.6">En rupture</span>
+          {%- endif -%}
+        </div>
+        {%- endif -%}
+
+        {%- if v_maximum and v_maximum.id != v_decouverte.id -%}
+        <div class="pricing-card pop" id="card-maximum">
+          <div class="pricing-pop-badge">Meilleure valeur</div>
+          <h3>{{ v_maximum.title | default: 'Résultats Maximum' }}</h3>
+          <p class="pricing-desc">Le + populaire — 3x plus de résultats</p>
+          <div class="pricing-price">{{ v_maximum.price | money }}{% if v_maximum.compare_at_price > v_maximum.price %} <small><s>{{ v_maximum.compare_at_price | money }}</s></small>{% endif %}</div>
+          <p class="pricing-per">= 0,61€/jour</p>
+          <p class="pack-duration">30 jours · 3 doses/jour</p>
+          {%- if v_maximum.available -%}
+            <a href="/cart/{{ v_maximum.id }}:1?checkout" class="btn btn-fill" style="width:100%;justify-content:center">Commander →</a>
+          {%- else -%}
+            <span class="btn btn-outline" style="width:100%;justify-content:center;cursor:not-allowed;opacity:.6">En rupture</span>
+          {%- endif -%}
+        </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} CART PREVIEW (visible si Maximum) {%- endcomment -%}
+      <div class="cart-section-inner reveal" id="cart-preview-block">
+        <div class="section-label" style="text-align:center">Votre commande</div>
+        <h2 class="section-title" style="text-align:center">Avec votre Cure Maximum, <span class="accent">vous recevez :</span></h2>
+        <div class="cart-preview">
+          <div class="cart-title">Votre panier</div>
+          <div class="cart-item">
+            <div class="cart-item-img"><img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=200&format=webp" alt="UBurn Cure Maximum 270g"></div>
+            <div class="cart-item-body">
+              <div class="cart-item-name">{{ v_maximum.title | default: 'Cure Maximum — Poudre Ubé 270g' }}</div>
+              <div class="cart-item-meta">Saveur noisette-vanille · Cure 90 jours</div>
+            </div>
+            <div class="cart-item-price">{{ v_maximum.price | money }}</div>
+          </div>
+          <div class="cart-item">
+            <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">E</div>
+            <div class="cart-item-body"><div class="cart-item-name">E-book « 30j pour reprendre le contrôle »</div><div class="cart-item-gift">Offert</div></div>
+            <div class="cart-item-price"><s>47€</s> 0€</div>
+          </div>
+          <div class="cart-item">
+            <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">G</div>
+            <div class="cart-item-body"><div class="cart-item-name">Groupe privé Uburn Collective</div><div class="cart-item-gift">Offert</div></div>
+            <div class="cart-item-price"><s>40€</s> 0€</div>
+          </div>
+          <div class="cart-item">
+            <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">É</div>
+            <div class="cart-item-body"><div class="cart-item-name">Événements UBurn en ligne</div><div class="cart-item-gift">Offert</div></div>
+            <div class="cart-item-price"><s>50€</s> 0€</div>
+          </div>
+          <div class="cart-item">
+            <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">W</div>
+            <div class="cart-item-body"><div class="cart-item-name">Suivi nutrition WhatsApp 30j</div><div class="cart-item-gift">Offert</div></div>
+            <div class="cart-item-price"><s>47€</s> 0€</div>
+          </div>
+          <div class="cart-sub">
+            <div class="cart-sub-row save"><span>Économies totales</span><span>−184€</span></div>
+            <div class="cart-sub-row total"><span>Total</span><span>{{ v_maximum.price | money }}</span></div>
+            <div class="cart-sub-note">soit 0,61€/jour sur 90 jours</div>
+          </div>
+          <p class="offer-rating">★★★★★ 4,7/5 · 1 500+ clientes satisfaites</p>
+          {%- if v_maximum.available -%}
+            <a href="/cart/{{ v_maximum.id }}:1?checkout" class="cart-checkout">Continuer vers le paiement →</a>
+          {%- endif -%}
+          <p class="social-proof">✓ Allégation glucomannane validée EFSA (ID 3120)</p>
+          <div class="cart-pay"><span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Shop Pay</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} LIFESTYLE {%- endcomment -%}
+  <section class="lifestyle-section">
+    <div class="lifestyle-bg"></div>
+    <div class="lifestyle-inner reveal">
+      <div class="section-label">Un rituel, pas une contrainte</div>
+      <h2>Un moment <em>pour vous.</em> Une boisson pour votre équilibre.</h2>
+      <p>Eau fraîche ou lait végétal, glaçons ou non — UBurn s'adapte à vos envies. Un rituel de 10 secondes, pensé pour vous.</p>
+      <a href="#offer" class="btn btn-white">Commencer ma cure →</a>
+    </div>
+  </section>
+
+  {%- comment -%} PROD: SATIETE {%- endcomment -%}
+  <div class="prod-block alt">
+    <div class="prod-inner">
+      <div class="prod-text reveal">
+        <div class="section-label">Ce que vivent nos clientes</div>
+        <h2>Leurs résultats <span class="accent">en 30 jours.</span></h2>
+        <h3>Formulé autour du glucomannane, allégation santé validée EFSA (ID 3120)</h3>
+        <p>Mélangez UBurn avec un grand verre d'eau ou votre lait végétal préféré. Le konjac forme un gel qui occupe naturellement votre estomac — vous vous sentez rassasiée pendant jusqu'à 4h, sans frustration.</p>
+        <div class="feats">
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Effet satiété dès la première prise</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Résultats visibles en 7 à 14 jours</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>30 kcal seulement par dose</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Saveur douce, noisette vanillée</div>
+        </div>
+        <a href="#offer" class="btn btn-fill">Essayer Uburn →</a>
+      </div>
+      <div class="prod-visual reveal reveal-d">
+        <div class="prod-img">
+          <img src="https://uburn.co/cdn/shop/files/focus_product_2.jpg?v=1772696236&width=800&format=webp" alt="UBurn boisson préparée" loading="lazy" decoding="async" width="800" height="800">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} PROD: FORMULE {%- endcomment -%}
+  <div class="prod-block reverse">
+    <div class="prod-inner">
+      <div class="prod-text reveal">
+        <div class="section-label">Formule naturelle</div>
+        <h2>6 actifs. <span class="accent">Rien de plus.</span></h2>
+        <h3>Chaque ingrédient a un rôle précis. Rien de superflu.</h3>
+        <p>100% végétal · 0% caféine · 0 additifs.</p>
+        <div class="feats">
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>5g de fibres par dose</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>400mg de L-Carnitine</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>0 additifs, 0 colorants, 0 controverses</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>EFSA ID 3120</div>
+        </div>
+        <a href="#ingredients" class="btn btn-outline">Voir les ingrédients</a>
+      </div>
+      <div class="prod-visual reveal reveal-d">
+        <div class="prod-img prod-img-full" style="background:none">
+          <img src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0004_3.jpg?v=1749644803&width=800&format=webp" alt="UBurn Powder" loading="lazy" decoding="async" width="800" height="800">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} COMPARE TABLE {%- endcomment -%}
+  <section class="compare-section">
+    <div class="compare-inner reveal">
+      <div class="section-label">Le spectre complet</div>
+      <h2>Chaque milligramme compte. <span class="accent">Chaque bienfait amplifié.</span></h2>
+      <div class="compare-table">
+        <div class="compare-head"><div>Actif</div><div>Marché classique</div><div>UBurn</div><div>Votre bénéfice</div></div>
+        <div class="compare-row"><div class="compare-actif" data-label="Actif">Glucomannane</div><div class="compare-market" data-label="Marché">Absent</div><div class="compare-uburn" data-label="UBurn">3g <span class="compare-pill">EFSA 3120</span></div><div class="compare-benefit" data-label="Bénéfice">Satiété 4h clinique</div></div>
+        <div class="compare-row"><div class="compare-actif" data-label="Actif">L-Carnitine</div><div class="compare-market" data-label="Marché">50-100mg</div><div class="compare-uburn" data-label="UBurn">400mg <span class="compare-pill">+400%</span></div><div class="compare-benefit" data-label="Bénéfice">Métabolisme soutenu</div></div>
+        <div class="compare-row"><div class="compare-actif" data-label="Actif">Fibre d'acacia</div><div class="compare-market" data-label="Marché">Absent</div><div class="compare-uburn" data-label="UBurn">1,5g <span class="compare-pill new">Nouveau</span></div><div class="compare-benefit" data-label="Bénéfice">Digestion améliorée</div></div>
+        <div class="compare-row"><div class="compare-actif" data-label="Actif">MCT de coco</div><div class="compare-market" data-label="Marché">Absent</div><div class="compare-uburn" data-label="UBurn">500mg</div><div class="compare-benefit" data-label="Bénéfice">Énergie stable</div></div>
+        <div class="compare-row"><div class="compare-actif" data-label="Actif">Ubé violet</div><div class="compare-market" data-label="Marché">Absent</div><div class="compare-uburn" data-label="UBurn">100mg</div><div class="compare-benefit" data-label="Bénéfice">Antioxydants puissants</div></div>
+        <div class="compare-row"><div class="compare-actif" data-label="Actif">Gingembre</div><div class="compare-market" data-label="Marché">Rare</div><div class="compare-uburn" data-label="UBurn">15mg bio</div><div class="compare-benefit" data-label="Bénéfice">Digestion + métabolisme</div></div>
+        <div class="compare-row"><div class="compare-actif" data-label="Actif">Caféine</div><div class="compare-market" data-label="Marché">200mg+ souvent</div><div class="compare-uburn" data-label="UBurn">0mg</div><div class="compare-benefit" data-label="Bénéfice">Zéro pic · zéro crash</div></div>
+        <div class="compare-row"><div class="compare-actif" data-label="Actif">Conservateurs</div><div class="compare-market" data-label="Marché">Multiples</div><div class="compare-uburn" data-label="UBurn">0</div><div class="compare-benefit" data-label="Bénéfice">100% clean</div></div>
+        <div class="compare-row"><div class="compare-actif" data-label="Actif">Certification</div><div class="compare-market" data-label="Marché">Variable</div><div class="compare-uburn" data-label="UBurn">EFSA ID 3120</div><div class="compare-benefit" data-label="Bénéfice">Garantie officielle</div></div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} INGREDIENTS {%- endcomment -%}
+  <section class="section" id="ingredients" style="background:var(--cream)">
+    <div class="section-inner reveal">
+      <div class="section-label">Ingrédients</div>
+      <h2 class="section-title">Des actifs naturels <span class="accent">hautement sélectionnés</span></h2>
+      <div class="ingr-grid stagger-scale">
+        <div class="ingr-card"><div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1749644803&width=500&format=webp" alt="Ubé violet" loading="lazy" decoding="async" width="500" height="375"></div><div class="ingr-card-body"><h4>Ubé violet</h4><p>Antioxydants naturels</p></div></div>
+        <div class="ingr-card"><div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1749644803&width=500&format=webp" alt="Konjac" loading="lazy" decoding="async" width="500" height="375"></div><div class="ingr-card-body"><h4>Konjac</h4><p>Satiété 4h · EFSA</p></div></div>
+        <div class="ingr-card"><div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1749644803&width=500&format=webp" alt="Fibre d'acacia" loading="lazy" decoding="async" width="500" height="375"></div><div class="ingr-card-body"><h4>Acacia</h4><p>Prébiotique digestif</p></div></div>
+        <div class="ingr-card"><div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1749644803&width=500&format=webp" alt="MCT de coco" loading="lazy" decoding="async" width="500" height="375"></div><div class="ingr-card-body"><h4>MCT coco</h4><p>Énergie stable</p></div></div>
+        <div class="ingr-card"><div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1749644803&width=500&format=webp" alt="Gingembre" loading="lazy" decoding="async" width="500" height="375"></div><div class="ingr-card-body"><h4>Gingembre</h4><p>Digestion + métabolisme</p></div></div>
+        <div class="ingr-card"><div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1749644803&width=500&format=webp" alt="L-Carnitine" loading="lazy" decoding="async" width="500" height="375"></div><div class="ingr-card-body"><h4>L-Carnitine</h4><p>Métabolisme des graisses</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} 6 BIENFAITS INTERACTIFS {%- endcomment -%}
+  <section class="benefits-section">
+    <div class="benefits-inner reveal">
+      <div class="benefits-head">
+        <div class="section-label">Soutien complet</div>
+        <h2 class="section-title" style="text-align:center">6 bienfaits, <span class="accent">une seule boisson.</span></h2>
+        <p style="max-width:400px;margin:12px auto 0;color:var(--body);font-size:14px">Une dose. Six bénéfices.</p>
+      </div>
+      <div class="benefits-grid-layout">
+        <div class="benefit-cards">
+          <div class="benefit-card active" data-benefit="satiete"><div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div><div class="benefit-name">Satiété</div></div>
+          <div class="benefit-card" data-benefit="energie"><div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="benefit-name">Énergie</div></div>
+          <div class="benefit-card" data-benefit="digestion"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2"/></svg></div><div class="benefit-name">Digestion</div></div>
+          <div class="benefit-card" data-benefit="antioxydants"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/><path d="M12 8v6"/><path d="M12 18h.01"/></svg></div><div class="benefit-name">Antioxydants</div></div>
+          <div class="benefit-card" data-benefit="metabolisme"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div><div class="benefit-name">Métabolisme</div></div>
+          <div class="benefit-card" data-benefit="bien_etre"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div class="benefit-name">Bien-être</div></div>
+        </div>
+        <div class="benefit-detail">
+          <div class="benefit-detail-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div>
+          <div class="benefit-label">Glucomannane · EFSA · Fibres</div>
+          <h3 class="benefit-title">Satiété durable</h3>
+          <p class="benefit-desc">Système complet basé sur le glucomannane (EFSA ID 3120) et 5g de fibres par dose. Le konjac absorbe jusqu'à 100x son poids en eau pour former un gel qui occupe naturellement l'estomac.</p>
+          <span class="benefit-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Actifs dosés cliniquement</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} PRESS {%- endcomment -%}
+  <div class="press-bar">
+    <p>Ils parlent de nous</p>
+    <div class="press-logos">
+      <img src="https://uburn.co/cdn/shop/files/TF1_1989-1990.png?v=1749644803&width=150&format=webp" alt="TF1" loading="lazy" decoding="async" width="150" height="50">
+      <img src="https://uburn.co/cdn/shop/files/Brut_logo_svg.png?v=1749644803&width=150&format=webp" alt="Brut" loading="lazy" decoding="async" width="150" height="50">
+      <img src="https://uburn.co/cdn/shop/files/logo-femmeactuelle-copie_cb5c498d-5470-4a4d-83fc-7b16c264a030.png?v=1749644803&width=150&format=webp" alt="Femme Actuelle" loading="lazy" decoding="async" width="150" height="50">
+      <img src="https://uburn.co/cdn/shop/files/VOGUE_revista_-_logo.png?v=1749644803&width=150&format=webp" alt="Vogue" loading="lazy" decoding="async" width="150" height="50">
+      <img src="https://uburn.co/cdn/shop/files/ELLE_Magazine_Logo.svg" alt="Elle">
+    </div>
+  </div>
+
+  {%- comment -%} STATS {%- endcomment -%}
+  <section class="stats-section">
+    <div class="section-inner reveal">
+      <h2>UBurn agit dès la première prise</h2>
+      <div class="big-stats-row stagger-children">
+        <div class="big-stat"><div class="big-stat-num" data-count="95" data-suffix="%">95%</div><div class="big-stat-label">Satiété dès la 1ère prise</div></div>
+        <div class="big-stat"><div class="big-stat-num" data-count="87" data-suffix="%">87%</div><div class="big-stat-label">Moins de grignotage le soir</div></div>
+        <div class="big-stat"><div class="big-stat-num" data-count="82" data-suffix="%">82%</div><div class="big-stat-label">Rythme alimentaire apaisé</div></div>
+        <div class="big-stat"><div class="big-stat-num">4.7/5</div><div class="big-stat-label">Note vérifiée</div></div>
+      </div>
+      <a href="#offer" class="btn btn-white">Commencer ma cure →</a>
+      <div class="stats-row" style="margin-top:48px;opacity:.85">
+        <div class="stat"><div class="stat-num">30</div><div class="stat-label">kcal par dose</div></div>
+        <div class="stat"><div class="stat-num">4h</div><div class="stat-label">de satiété</div></div>
+        <div class="stat"><div class="stat-num">6</div><div class="stat-label">actifs naturels</div></div>
+        <div class="stat"><div class="stat-num">0%</div><div class="stat-label">caféine</div></div>
+      </div>
+      <p class="stats-note">Résultats sur enquête interne auprès de 1 500+ clientes UBurn.</p>
+    </div>
+  </section>
+
+  {%- comment -%} TESTIMONIALS {%- endcomment -%}
+  <section class="section testi-section" id="avis">
+    <div class="section-inner reveal">
+      <h2 class="section-title" style="text-align:center">Elles racontent <span class="accent">leurs résultats.</span></h2>
+      <div class="testi-grid stagger-scale">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Je ne pense plus au placard à 16h. Ça me soulage vraiment au quotidien."</p>
+          <div class="testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Achat vérifié</div>
+          <div class="testi-author"><div class="testi-avatar">M</div><div><div class="testi-name">Marion L.</div><div class="testi-role">28 ans, Lyon</div></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Pour 0,61€ par jour, y'a pas de risque. Et ça marche. Mon 2e pot en cours."</p>
+          <div class="testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Achat vérifié</div>
+          <div class="testi-author"><div class="testi-avatar">S</div><div><div class="testi-name">Sophie</div><div class="testi-role">Bordeaux</div></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Mes collègues m'ont demandé mon secret. Le goût est top et je ne grignote plus le soir."</p>
+          <div class="testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Achat vérifié</div>
+          <div class="testi-author"><div class="testi-avatar">N</div><div><div class="testi-name">Nathalie</div><div class="testi-role">Toulouse</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} FAQ {%- endcomment -%}
+  <section class="section faq-section" id="faq">
+    <div class="section-inner reveal">
+      <h2 class="section-title">Questions <span class="accent">fréquentes.</span></h2>
+      <div class="faq-list">
+        <div class="faq-item"><div class="faq-q">Comment fonctionne UBurn ?</div><div class="faq-a">UBurn est formulé autour du glucomannane de konjac, dont l'allégation de satiété est officiellement validée par l'EFSA (ID 3120). Mélangez une dose dans un grand verre d'eau fraîche ou de votre lait végétal préféré (amande, avoine, coco...). Le konjac absorbe l'eau et forme un gel naturel dans l'estomac — vous vous sentez rassasiée naturellement. 1500+ femmes l'utilisent au quotidien.</div></div>
+        <div class="faq-item"><div class="faq-q">Comment ça agit concrètement ?</div><div class="faq-a">Le konjac est une plante naturelle d'Asie. Sa fibre (glucomannane) absorbe jusqu'à 100x son poids en eau et forme un gel dans l'estomac. Vous vous sentez rassasiée sans avoir mangé plus.</div></div>
+        <div class="faq-item"><div class="faq-q">En combien de temps voit-on des résultats ?</div><div class="faq-a">La plupart des clientes ressentent l'effet satiété dès la première prise. Pour des résultats visibles sur le contrôle des fringales : 7 à 14 jours en utilisation régulière le matin.</div></div>
+        <div class="faq-item"><div class="faq-q">Y a-t-il un abonnement ?</div><div class="faq-a">Non. Aucun abonnement caché. Vous commandez quand vous voulez, vous arrêtez quand vous voulez.</div></div>
+        <div class="faq-item"><div class="faq-q">C'est compatible le soir ? Sans caféine ?</div><div class="faq-a">Oui. Uburn ne contient pas de caféine. Vous pouvez le prendre à n'importe quelle heure, même le soir, sans perturber votre sommeil.</div></div>
+        <div class="faq-item"><div class="faq-q">Avec de l'eau ou avec du lait — quelle différence ?</div><div class="faq-a">Les deux fonctionnent parfaitement. Avec de l'eau froide, la boisson est légère et rafraîchissante — idéal en journée ou avant un repas. Avec un lait végétal (amande, avoine, coco...), la texture est plus crémeuse et la saveur noisette-vanille est encore plus prononcée. À vous de choisir selon votre humeur !</div></div>
+        <div class="faq-item"><div class="faq-q">Y a-t-il des contre-indications ?</div><div class="faq-a">UBurn est déconseillé pendant la grossesse et l'allaitement. En cas de traitement médical, consultez votre médecin avant utilisation. Le glucomannane peut interagir avec certains médicaments en ralentissant leur absorption — prendre UBurn 2h avant ou après votre traitement si nécessaire. Complément alimentaire — ne se substitue pas à une alimentation variée et équilibrée.</div></div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} GUARANTEE {%- endcomment -%}
+  <div class="guar-bar">
+    <div class="guar-grid">
+      <div class="guar-item"><div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_World.svg" alt=""></div><h4>Formule EFSA</h4><p>Glucomannane ID 3120</p></div>
+      <div class="guar-item"><div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_Fast_shipping.svg" alt=""></div><h4>Livraison gratuite</h4><p>En France</p></div>
+      <div class="guar-item"><div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_secure_payment.svg" alt=""></div><h4>Paiement sécurisé</h4><p>100% sécurisé</p></div>
+      <div class="guar-item"><div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_customer.svg" alt=""></div><h4>Sans abonnement</h4><p>Commandez quand vous voulez</p></div>
+    </div>
+  </div>
+
+  {%- comment -%} DGCCRF DISCLAIMER {%- endcomment -%}
+  <div class="disc-bar">
+    <div class="disc-bar-inner">
+      <p>Complément alimentaire à base de glucomannane. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas. Ne se substitue pas à une alimentation variée et équilibrée. Déconseillé pendant la grossesse et l'allaitement.</p>
+    </div>
+  </div>
+
+  {%- comment -%} STICKY MOBILE CTA {%- endcomment -%}
+  <div class="ubpdp-sticky-cta">
+    <a href="#offer">Commencer ma cure — dès {{ v_decouverte.price | money }}</a>
+  </div>
+
+</div>
+
+{%- comment -%} JSON-LD product schema (SEO) {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "image": [{{ hero_image | image_url: width: 1200 | prepend: 'https:' | json }}],
+  "description": {{ product.description | strip_html | strip_newlines | truncate: 500 | json }},
+  "brand": { "@type": "Brand", "name": "UBurn" },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "lowPrice": "{{ product.price_min | money_without_currency | replace: ',', '.' }}",
+    "highPrice": "{{ product.price_max | money_without_currency | replace: ',', '.' }}",
+    "offerCount": {{ product.variants.size }},
+    "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+    "url": "{{ shop.url }}{{ product.url }}"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.7",
+    "reviewCount": "1500"
+  }
+}
+</script>
+
+<script>
+(function(){
+  var root = document.querySelector('.ubpdp');
+  if(!root) return;
+
+  // PROMO BAR — copy UBE10
+  (function(){
+    var params=new URLSearchParams(window.location.search);
+    var bar=document.getElementById('ubpdp-promoBar');
+    var txt=document.getElementById('ubpdp-promoText');
+    var btn=document.getElementById('ubpdp-promoCopy');
+    if(!bar||!txt||!btn) return;
+    if(params.get('discount')==='UBE10'||params.get('code')==='UBE10'){
+      bar.classList.add('applied');
+      txt.innerHTML='✓ Code <strong>UBE10</strong> appliqué — <strong>-10%</strong> sur ta commande';
+    }
+    btn.addEventListener('click',function(){
+      navigator.clipboard.writeText('UBE10').then(function(){
+        btn.textContent='Copié ✓';btn.classList.add('copied');
+        setTimeout(function(){btn.textContent='Copier';btn.classList.remove('copied');},2000);
+      }).catch(function(){
+        var ta=document.createElement('textarea');ta.value='UBE10';document.body.appendChild(ta);ta.select();
+        try{document.execCommand('copy');btn.textContent='Copié ✓';btn.classList.add('copied');setTimeout(function(){btn.textContent='Copier';btn.classList.remove('copied');},2000);}catch(e){}
+        document.body.removeChild(ta);
+      });
+    });
+  })();
+
+  // UTM-driven hero copy
+  (function(){
+    var params = new URLSearchParams(window.location.search);
+    var utmContent = (params.get('utm_content') || '').toLowerCase();
+    var map = {
+      'violet': {h1:'La boisson <span class="accent">violette</span> qui coupe les fringales 4h', sub:'30 kcal · 0% caféine · satisfaction durable.'},
+      'ube':    {h1:'Ube + Konjac = <span class="accent">4h</span> sans fringales', sub:'100% naturel · 30 kcal · Marque Française.'},
+      'soir':   {h1:'Votre nouvelle <span class="accent">routine</span> commence ici', sub:'0% caféine · se prend à toute heure · 30 kcal.'},
+      'energie':{h1:'Pourquoi vous avez un coup de pompe <span class="accent">à 15h</span>&nbsp;?', sub:'MCT de coco · énergie stable · sans excitants.'}
+    };
+    var v = map[utmContent];
+    if(v){
+      var h1 = root.querySelector('.hero h1');
+      var sub = root.querySelector('.hero-sub');
+      if(h1) h1.innerHTML = v.h1;
+      if(sub) sub.textContent = v.sub;
+    }
+  })();
+
+  // OFFER cart-preview toggle
+  (function() {
+    var cartBlock = root.querySelector('#cart-preview-block');
+    var cardDec = root.querySelector('#card-decouverte');
+    var cardMax = root.querySelector('#card-maximum');
+    if (!cartBlock || !cardDec || !cardMax) return;
+    function selectMax() { cartBlock.style.display = ''; cardMax.style.outline = '2px solid var(--purple-main)'; cardDec.style.outline = ''; }
+    function selectDec() { cartBlock.style.display = 'none'; cardDec.style.outline = '2px solid var(--purple-main)'; cardMax.style.outline = ''; }
+    cardDec.addEventListener('click', function(e){ if(e.target.tagName!=='A') selectDec(); });
+    cardMax.addEventListener('click', function(e){ if(e.target.tagName!=='A') selectMax(); });
+    selectDec();
+  })();
+
+  // Scroll reveal
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}})},{threshold:.12});
+  root.querySelectorAll('.reveal,.stagger-children,.stagger-scale').forEach(function(el){obs.observe(el)});
+
+  // Count-up
+  var countObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+    var el=e.target,target=+el.dataset.count,suffix=el.dataset.suffix||'',dur=1400;
+    var start=null;
+    function step(ts){if(!start)start=ts;var p=Math.min((ts-start)/dur,1);el.textContent=Math.round(p*target)+suffix;if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+    countObs.unobserve(el);
+  }})},{threshold:.3});
+  root.querySelectorAll('[data-count]').forEach(function(el){countObs.observe(el)});
+
+  // FAQ accordion
+  root.querySelectorAll('.faq-item').forEach(function(item){
+    item.querySelector('.faq-q').addEventListener('click',function(){
+      root.querySelectorAll('.faq-item').forEach(function(i){if(i!==item)i.classList.remove('open')});
+      item.classList.toggle('open');
+    });
+  });
+
+  // 6 bienfaits
+  var benefits = {
+    satiete: {label: 'Glucomannane · EFSA · Fibres', title: 'Satiété durable', desc: 'Système complet basé sur le glucomannane (EFSA ID 3120) et 5g de fibres par dose. Le konjac absorbe jusqu\'à 100x son poids en eau pour former un gel qui occupe naturellement l\'estomac.'},
+    energie: {label: 'MCT · L-Carnitine', title: 'Énergie stable', desc: 'MCT coco et L-Carnitine 400mg pour une énergie sans pic ni crash. Parfait pour les après-midis longs.'},
+    digestion: {label: 'Gingembre · Acacia', title: 'Digestion apaisée', desc: 'Gingembre bio et fibre d\'acacia prébiotique pour un confort digestif au quotidien.'},
+    antioxydants: {label: 'Ubé · Anthocyanes', title: 'Antioxydants puissants', desc: 'Ubé violet riche en anthocyanes naturelles pour la protection cellulaire et l\'éclat de la peau.'},
+    metabolisme: {label: 'L-Carnitine · Gingembre', title: 'Métabolisme soutenu', desc: 'L-Carnitine 400mg et gingembre pour un support métabolique naturel et durable.'},
+    bien_etre: {label: 'Formule complète', title: 'Équilibre global', desc: 'Une formule synergique de 6 actifs pour un bien-être quotidien apaisé et durable.'}
+  };
+  root.querySelectorAll('[data-benefit]').forEach(function(card){
+    card.addEventListener('click', function(){
+      var key = card.getAttribute('data-benefit');
+      root.querySelectorAll('[data-benefit]').forEach(function(c){c.classList.remove('active')});
+      card.classList.add('active');
+      var detail = root.querySelector('.benefit-detail');
+      if (detail && benefits[key]) {
+        detail.querySelector('.benefit-label').textContent = benefits[key].label;
+        detail.querySelector('.benefit-title').textContent = benefits[key].title;
+        detail.querySelector('.benefit-desc').textContent = benefits[key].desc;
+      }
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "UBurn PDP (LP-style)",
+  "tag": "section",
+  "class": "uburn-pdp-lp-section",
+  "settings": [],
+  "presets": [
+    { "name": "UBurn PDP (LP-style)" }
+  ]
+}
+{% endschema %}
