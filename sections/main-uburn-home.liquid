@@ -28,7 +28,7 @@
     <div class="uhome-hero-content">
       <div class="uhome-hero-eyebrow">Glucomannane · {% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</div>
       <h1 class="uhome-hero-title">{% if request.locale.iso_code == 'en' %}4PM.<br><em>Take back<br>control.</em>{% else %}16h.<br><em>Tu reprends<br>le contrôle.</em>{% endif %}</h1>
-      <p class="uhome-hero-sub">Le rituel matinal qui te tient 4h sans craquer. 6 actifs naturels. {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %}. {% if request.locale.iso_code == 'en' %}French brand{% else %}Marque française{% endif %}.</p>
+      <p class="uhome-hero-sub">{% if request.locale.iso_code == 'en' %}The morning ritual that keeps you going for 4 hours without cracking. 6 natural active ingredients. Caffeine-free. French brand.{% else %}Le rituel matinal qui te tient 4h sans craquer. 6 actifs naturels. 0% caféine. Marque française.{% endif %}</p>
       <div class="uhome-hero-actions">
         <a href="/products/ube-poudre?variant=51289200066879" class="uhome-btn uhome-btn-fill">
           Commander — dès 34,50&nbsp;€
@@ -266,7 +266,7 @@
   <div class="uhome-stats">
     <div class="uhome-stats-photo">
       <img src="https://uburn.co/cdn/shop/files/Histoire_Moodboard_01.jpg?v=1763570865&width=1200&format=webp" srcset="https://uburn.co/cdn/shop/files/Histoire_Moodboard_01.jpg?v=1763570865&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Histoire_Moodboard_01.jpg?v=1763570865&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Histoire_Moodboard_01.jpg?v=1763570865&width=1200&format=webp 1200w" sizes="(min-width:900px) 50vw, 100vw" {% if request.locale.iso_code == 'en' %}alt="UBURN internal survey results — satisfied customers"{% else %}alt="Résultats enquête interne UBURN — clientes satisfaites"{% endif %} loading="lazy" decoding="async">
-      <div class="uhome-stats-photo-cap">Énergie stable. Sans crash. Sans {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}.</div>
+      <div class="uhome-stats-photo-cap">{% if request.locale.iso_code == 'en' %}Stable energy. No crash. Caffeine-free.{% else %}Énergie stable. Sans crash. Sans caféine.{% endif %}</div>
     </div>
     <div class="uhome-stats-body">
       {% if request.locale.iso_code == 'en' %}<span class="uhome-section-label uhome-reveal">Internal survey results</span>{% else %}<span class="uhome-section-label uhome-reveal">Résultats enquête interne</span>{% endif %}
@@ -462,8 +462,8 @@
           <div class="uhome-faq-a">Non. Aucun abonnement caché. Vous commandez quand vous voulez, vous arrêtez quand vous voulez. Paiement unique à chaque commande.</div>
         </div>
         <div class="uhome-faq-item">
-          <div class="uhome-faq-q">Compatible le soir ? Sans {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %} ?</div>
-          <div class="uhome-faq-a">Oui. UBurn ne contient pas de {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}. {% if request.locale.iso_code == 'en' %}Drink it{% else %}{% if request.locale.iso_code == 'en' %}You can{% else %}Vous pouvez{% endif %} le prendre{% endif %} à {% if request.locale.iso_code == 'en' %}any time{% else %}n'importe quelle heure{% endif %}, {% if request.locale.iso_code == 'en' %}even at night{% else %}même le soir{% endif %}, {% if request.locale.iso_code == 'en' %}without disrupting sleep{% else %}sans perturber votre sommeil{% endif %}.</div>
+          <div class="uhome-faq-q">{% if request.locale.iso_code == 'en' %}Can I drink it at night? Caffeine-free?{% else %}Compatible le soir ? Sans caféine ?{% endif %}</div>
+          <div class="uhome-faq-a">{% if request.locale.iso_code == 'en' %}Yes. UBurn contains no caffeine. Drink it any time, even at night, without disrupting sleep.{% else %}Oui. UBurn ne contient pas de caféine. Vous pouvez le prendre à n'importe quelle heure, même le soir, sans perturber votre sommeil.{% endif %}</div>
         </div>
         <div class="uhome-faq-item">
           <div class="uhome-faq-q">{% if request.locale.iso_code == 'en' %}Water or plant-based milk — what's the difference?{% else %}Avec de l'eau ou avec du lait — quelle différence ?{% endif %}</div>
@@ -485,7 +485,7 @@
     <div class="uhome-final-content uhome-reveal">
       <span class="uhome-section-label">Commencer maintenant</span>
       <h2 class="uhome-section-title">{% if request.locale.iso_code == 'en' %}Take back control. <em>Starting tomorrow morning.</em>{% else %}{% if request.locale.iso_code == 'en' %}Take back control{% else %}Reprenez le contrôle{% endif %}. <em>Dès demain matin.</em>{% endif %}</h2>
-      <p>{% if request.locale.iso_code == 'en' %}One scoop{% else %}Une dose{% endif %}. Un verre. 4h de tranquillité. Sans régime, sans privation, sans abonnement caché.</p>
+      <p>{% if request.locale.iso_code == 'en' %}One scoop. One glass. 4 hours of calm. No diet, no restriction, no hidden subscription.{% else %}Une dose. Un verre. 4h de tranquillité. Sans régime, sans privation, sans abonnement caché.{% endif %}</p>
       <div class="uhome-final-actions">
         <a href="/products/ube-poudre?variant=51289200066879" class="uhome-btn uhome-btn-white" style="justify-content:center;font-family:'Red Hat Display',sans-serif;font-weight:800;font-size:16px;padding:18px 32px">
           Commander → dès 34,50&nbsp;€

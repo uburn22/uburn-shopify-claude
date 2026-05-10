@@ -247,6 +247,11 @@
 <script>
 (function() {
 
+  // UBURN locale-aware copy
+  var __UB_ISEN = {% if request.locale.iso_code == 'en' %}true{% else %}false{% endif %};
+  var __UB_CTA_TEXT      = __UB_ISEN ? 'Start my journey — Free shipping' : 'Je commence ma cure — Livraison offerte';
+  var __UB_MICRO_TEXT    = __UB_ISEN ? 'Ships within 24h • French brand' : 'Expédié sous 24h • Marque française';
+
   // ===================================================================
   // UBURN — Consolidated product page scripts
   // Single MutationObserver + single entry point = lower TBT
@@ -323,7 +328,7 @@
     if (addBtn.getAttribute('data-ub-singlecta') === 'done') return;
     addBtn.setAttribute('data-ub-singlecta', 'done');
     var textEl = addBtn.querySelector('span') || addBtn;
-    textEl.textContent = 'Je commence ma cure \u2014 Livraison offerte';
+    textEl.textContent = __UB_CTA_TEXT;
     addBtn.style.cssText = 'background:#7C3AED !important;color:#fff !important;border:none !important;border-radius:12px !important;font-weight:800 !important;font-size:15px !important;width:100% !important;padding:16px !important;cursor:pointer !important;transition:background 0.2s !important;letter-spacing:0.3px !important;';
     addBtn.addEventListener('mouseenter', function() { addBtn.style.background = '#6D28D9'; });
     addBtn.addEventListener('mouseleave', function() { addBtn.style.background = '#7C3AED'; });
@@ -331,7 +336,7 @@
     if (!document.querySelector('.ub-microcopy')) {
       var micro = document.createElement('p');
       micro.className = 'ub-microcopy';
-      micro.textContent = 'Exp\u00e9di\u00e9 sous 24h \u2022 Marque française';
+      micro.textContent = __UB_MICRO_TEXT;
       micro.style.cssText = 'text-align:center;font-size:11px;color:#6B7280;margin-top:6px;margin-bottom:0;';
       var parent = addBtn.closest('.product-form') || addBtn.parentElement;
       parent.appendChild(micro);
@@ -398,8 +403,8 @@
       var div = document.createElement('div');
       div.className = 'ub-repeat-cta';
       div.style.cssText = 'text-align:center;padding:32px 16px;';
-      div.innerHTML = '<button style="background:#7C3AED;color:#fff;border:none;border-radius:12px;padding:16px 40px;font-size:15px;font-weight:800;cursor:pointer;transition:background 0.2s;letter-spacing:0.3px;max-width:420px;width:100%;" onmouseenter="this.style.background=\'#6D28D9\'" onmouseleave="this.style.background=\'#7C3AED\'" onclick="var t=document.querySelector(\'.product-form__submit\');if(t){t.scrollIntoView({behavior:\'smooth\',block:\'center\'});setTimeout(function(){t.click()},600);}">Je commence ma cure \u2014 Livraison offerte</button>'
-        + '<p style="text-align:center;font-size:11px;color:#6B7280;margin-top:8px;margin-bottom:0;">Exp\u00e9di\u00e9 sous 24h \u2022 Marque française</p>';
+      div.innerHTML = '<button style="background:#7C3AED;color:#fff;border:none;border-radius:12px;padding:16px 40px;font-size:15px;font-weight:800;cursor:pointer;transition:background 0.2s;letter-spacing:0.3px;max-width:420px;width:100%;" onmouseenter="this.style.background=\'#6D28D9\'" onmouseleave="this.style.background=\'#7C3AED\'" onclick="var t=document.querySelector(\'.product-form__submit\');if(t){t.scrollIntoView({behavior:\'smooth\',block:\'center\'});setTimeout(function(){t.click()},600);}">' + __UB_CTA_TEXT + '</button>'
+        + '<p style="text-align:center;font-size:11px;color:#6B7280;margin-top:8px;margin-bottom:0;">' + __UB_MICRO_TEXT + '</p>';
       return div;
     };
     document.querySelectorAll('.shopify-section').forEach(function(sec) {

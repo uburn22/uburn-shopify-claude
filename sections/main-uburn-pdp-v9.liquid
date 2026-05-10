@@ -558,7 +558,7 @@
       </article>
       <article class="pdpv9-diff-card">
         <h3 class="pdpv9-diff-card__title">{% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</h3>
-        <p class="pdpv9-diff-card__copy">Tu commandes quand tu veux, sans engagement.</p>
+        <p class="pdpv9-diff-card__copy">{% if request.locale.iso_code == 'en' %}Order whenever you want, no commitment.{% else %}Tu commandes quand tu veux, sans engagement.{% endif %}</p>
       </article>
       <article class="pdpv9-diff-card">
         {% if request.locale.iso_code == 'en' %}<h3 class="pdpv9-diff-card__title">Ready in 30 seconds</h3>{% else %}<h3 class="pdpv9-diff-card__title">Prêt en 30 secondes</h3>{% endif %}
