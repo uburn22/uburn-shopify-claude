@@ -1,1640 +1,1036 @@
+{%- comment -%}
+  ════════════════════════════════════════════════════════════════
+  UBURN PDP V9 — Refonte complète avec ADN visuel exact de la LP
+  ────────────────────────────────────────────────────────────────
+  - Préfixe CSS: .pdpv9-* (zéro conflit avec la LP)
+  - Section unique main-* qui remplace tout le main-product natif
+  - Cache les parasites du theme via CSS scoped
+  - Variant picker + form Shopify natif entre sections 7 & 9
+  - Mobile-first 375x812
+  ════════════════════════════════════════════════════════════════
+{%- endcomment -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign featured = product.featured_image
+
+  for img in product.images
+    assign s = img.src | downcase
+    if s contains 'productpage_0000' or s contains 'product_page_0001' or s contains 'uburn_listing'
+      assign featured = img
+      break
+    endif
+  endfor
+
+  assign v_decouverte = product.variants[0]
+  assign v_maximum = product.variants[1] | default: product.variants[0]
+-%}
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://uburn.co" crossorigin>
-<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-<link rel="preload" as="image" fetchpriority="high" href="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg?v=1776421390&width=900&format=webp">
-<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800&family=Red+Hat+Text:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800&family=Red+Hat+Text:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+<link rel="preload" as="image" fetchpriority="high" href="{{ featured | image_url: width: 900 }}&format=webp">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800;900&family=Red+Hat+Text:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800;900&family=Red+Hat+Text:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+
+{{ 'uburn-pdp-v9.css' | asset_url | stylesheet_tag }}
+
 <style>
-    /* Force section visible — theme.js sets display:none on template sections */
-    .pdpv9-section{display:block!important}
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{font-family:'Red Hat Text',sans-serif;background:#fff;color:#242220;overflow-x:clip;-webkit-font-smoothing:antialiased}
-    a{text-decoration:none;color:inherit}img{max-width:100%;display:block}ul{list-style:none}
+  /* Force visibility minimal — sans debug couleurs */
+  .shopify-section.uburn-pdp-v9-section {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .pdpv9-root {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
 
-    :root{
-      --purple-deep:#3d1873;--purple-main:#6b2fa0;--purple-mid:#8b47c5;--purple-light:#b07de8;
-      --purple-pale:#e8dcf5;--purple-wash:#f5f0fa;--cream:#faf9f7;--warm:#f2f0ed;
-      --dark:#242220;--body:#5a5654;--muted:#8a8785;
-      --grad:linear-gradient(160deg,#3d1873 0%,#6b2fa0 40%,#8b47c5 100%);
-    }
+  /* Sibling-based hide pour theme parasites */
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--multi-column,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--text-with-media,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--trust-icons,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--ss-scrolling-logo-cloud,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--separator-adjustable,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--apps,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--collection-list,
+  .shopify-section.uburn-pdp-v9-section ~ .shopify-section--faq { display: none !important; }
 
-    /* ===== ANNOUNCE ===== */
-    .announce{background:var(--dark);color:#fff;text-align:center;padding:10px 20px;font-size:12.5px;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
-
-    /* ===== NAV ===== */
-    .nav{position:sticky;top:0;z-index:100;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid rgba(0,0,0,.05)}
-    .nav-logo{height:28px}
-    .nav-right{display:flex;align-items:center;gap:28px}
-    .nav-link{font-size:13.5px;font-weight:500;color:var(--body);transition:.2s}
-    .nav-link:hover{color:var(--purple-main)}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 30px;border-radius:100px;font-family:'Red Hat Text',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:.3s;border:none}
-    .btn-fill{background:var(--purple-main);color:#fff}
-    .btn-fill:hover{background:var(--purple-deep);transform:translateY(-1px);box-shadow:0 6px 20px rgba(107,47,160,.3)}
-    .btn-white{background:#fff;color:var(--purple-deep)}
-    .btn-white:hover{background:var(--purple-wash);transform:translateY(-1px);box-shadow:0 6px 24px rgba(0,0,0,.15)}
-    .btn-outline{background:transparent;color:var(--purple-main);border:1.5px solid var(--purple-pale)}
-    .btn-outline:hover{background:var(--purple-wash)}
-
-    /* ===== TRUST RIBBON ===== */
-    .ribbon{background:var(--purple-wash);padding:10px 20px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--body);font-weight:500}
-
-    /* ===== MARQUEE ===== */
-    .marquee{padding:12px 0;overflow:hidden;border-bottom:1px solid rgba(0,0,0,.04)}
-    .marquee-track{display:flex;gap:40px;animation:slide 25s linear infinite;width:max-content}
-    .marquee-item{white-space:nowrap;font-size:12.5px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;display:flex;align-items:center;gap:10px}
-    .marquee-dot{width:5px;height:5px;border-radius:50%;background:var(--purple-light)}
-    @keyframes slide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-    /* ===== HERO ===== */
-    .hero{padding:80px 40px 60px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-    .hero-tag{display:inline-block;padding:8px 18px;border-radius:100px;background:var(--purple-wash);font-size:13px;font-weight:600;color:var(--purple-main);margin-bottom:24px}
-    .hero h1{font-family:'Red Hat Display',sans-serif;font-size:clamp(36px,5vw,60px);font-weight:800;line-height:1.06;margin-bottom:24px;color:var(--dark)}
-    .hero h1 .accent{color:var(--purple-mid)}
-    .hero-sub{font-size:17px;color:var(--body);line-height:1.65;margin-bottom:28px;max-width:460px}
-    .hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
-    .hero-badge{padding:8px 16px;border-radius:100px;border:1px solid rgba(0,0,0,.08);font-size:13px;font-weight:500;color:var(--body);display:flex;align-items:center;gap:6px}
-    .hero-badge .ck{color:var(--purple-main);font-weight:700}
-    .hero-visual{position:relative;display:flex;justify-content:center;align-items:center}
-    .hero-visual img{width:100%;max-width:520px;height:auto;border-radius:24px;box-shadow:0 32px 80px rgba(61,24,115,.22),0 0 0 1px rgba(107,47,160,.1);display:block}
-    .hero-float{position:absolute;background:#fff;border-radius:14px;padding:12px 18px;box-shadow:0 8px 30px rgba(0,0,0,.1);display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--dark)}
-    .hero-float.top{top:20px;right:0}
-    .hero-float.bottom{bottom:40px;left:0}
-    .float-badge{padding:4px 10px;border-radius:100px;background:var(--purple-wash);color:var(--purple-main);font-size:11px;font-weight:700}
-
-    /* ===== HERO BONUS BLOCK ===== */
-    .hero-bonus{margin-top:20px;background:var(--purple-wash);border:1px solid var(--purple-pale);border-radius:14px;padding:14px 18px}
-    .hero-bonus-label{font-size:12px;font-weight:700;color:var(--purple-main);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
-    .hero-bonus-items{display:flex;flex-direction:column;gap:5px}
-    .hero-bonus-items span{font-size:13px;color:var(--dark);font-weight:500;line-height:1.4}
-    .hero-bonus-items em{color:var(--muted);font-style:normal;font-size:12px}
-    .hero-bonus-total{margin-top:10px;padding-top:10px;border-top:1px solid var(--purple-pale);font-size:13px;color:var(--body)}
-    .hero-bonus-total strong{color:var(--purple-deep);font-weight:800}
-
-    /* ===== SECTIONS ===== */
-    .section{padding:100px 40px}
-    .section-inner{max-width:1100px;margin:0 auto}
-    .section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:2.5px;color:var(--purple-main);margin-bottom:14px}
-    .section-title{font-family:'Red Hat Display',sans-serif;font-size:clamp(26px,3.2vw,40px);font-weight:700;color:var(--dark);line-height:1.15;margin-bottom:16px}
-    .section-title .accent{color:var(--purple-mid)}
-
-    /* ===== PROBLEM SECTION ===== */
-    .problem-section{background:var(--cream)}
-    .problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-    .problem-card{background:#fff;border-radius:18px;padding:32px;border:1px solid rgba(0,0,0,.04)}
-    .problem-card h3{font-family:'Red Hat Display',sans-serif;font-size:17px;font-weight:700;color:var(--dark);margin-bottom:10px}
-    .problem-card p{font-size:14px;color:var(--body);line-height:1.6}
-    .problem-punchline{margin-top:40px;font-family:'Red Hat Display',sans-serif;font-size:clamp(20px,2.5vw,28px);font-weight:700;color:var(--dark);text-align:center;line-height:1.3}
-    .problem-punchline .accent{color:var(--purple-mid)}
-
-    /* ===== PRODUCT 2-COL ===== */
-    .prod-block{padding:100px 40px;overflow:hidden}
-    .prod-block.alt{background:var(--cream)}
-    .prod-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-    .prod-block.reverse .prod-inner{direction:rtl}
-    .prod-block.reverse .prod-text,.prod-block.reverse .prod-visual{direction:ltr}
-    .prod-text h2{font-family:'Red Hat Display',sans-serif;font-size:clamp(26px,3vw,38px);font-weight:700;color:var(--dark);line-height:1.12;margin-bottom:12px}
-    .prod-text h2 .accent{color:var(--purple-mid)}
-    .prod-text h3{font-family:'Red Hat Display',sans-serif;font-size:17px;font-weight:500;color:var(--body);margin-bottom:20px;line-height:1.45}
-    .prod-text>p{font-size:15px;color:var(--body);line-height:1.7;margin-bottom:28px}
-    .feats{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
-    .feat{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--body)}
-    .feat-ck{width:20px;height:20px;border-radius:50%;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-    .feat-ck svg{width:12px;height:12px;stroke:var(--purple-main);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-    .prod-img{width:100%;border-radius:24px;overflow:hidden;background:linear-gradient(145deg,#e8dcf5,#f5f0fa);display:flex;align-items:center;justify-content:center;aspect-ratio:1/1}
-    .prod-img img{width:85%;height:auto;filter:drop-shadow(0 12px 30px rgba(61,24,115,.15))}
-    .prod-img-full img{width:100%;height:100%;object-fit:cover}
-
-    /* ===== HOW IT WORKS ===== */
-    .how-section{text-align:center}
-    .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px;text-align:center}
-    .how-step{}
-    .how-num{width:52px;height:52px;margin:0 auto 16px;border-radius:50%;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;font-family:'Red Hat Display',sans-serif;font-size:18px;font-weight:700;color:var(--purple-main)}
-    .how-step h4{font-family:'Red Hat Display',sans-serif;font-size:16px;font-weight:700;color:var(--dark);margin-bottom:8px}
-    .how-step p{font-size:14px;color:var(--muted);line-height:1.55;max-width:260px;margin:0 auto}
-
-    /* ===== INGREDIENTS ===== */
-    .ingr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
-    .ingr-card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:.3s}
-    .ingr-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.06);transform:translateY(-2px)}
-    .ingr-card-img{width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--cream)}
-    .ingr-card-img img{width:100%;height:100%;object-fit:cover}
-    .ingr-card-body{padding:20px}
-    .ingr-card h4{font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:700;color:var(--dark);margin-bottom:6px}
-    .ingr-card p{font-size:13px;color:var(--muted);line-height:1.55}
-
-    /* ===== PRESS BAR ===== */
-    .press-bar{padding:40px;text-align:center;border-top:1px solid rgba(0,0,0,.04);border-bottom:1px solid rgba(0,0,0,.04)}
-    .press-bar p{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-weight:600;margin-bottom:24px}
-    .press-logos{display:flex;gap:40px;justify-content:center;align-items:center;flex-wrap:wrap;opacity:.5}
-    .press-logos img{height:22px;width:auto}
-
-    /* ===== STATS BANNER ===== */
-    .stats-section{padding:100px 40px;background:var(--grad);text-align:center;color:#fff;position:relative;overflow:hidden}
-    .stats-section::before{content:'';position:absolute;inset:0;background:url('https://uburn.co/cdn/shop/files/FOND_FIN.jpg?v=1749644803&width=1600') center/cover no-repeat;opacity:.08;mix-blend-mode:luminosity}
-    .stats-section>*{position:relative;z-index:1}
-    .stats-section .section-inner{max-width:700px}
-    .stats-section h2{font-family:'Red Hat Display',sans-serif;font-size:clamp(26px,3.5vw,42px);font-weight:700;margin-bottom:16px;line-height:1.15}
-    .stats-section p{font-size:16px;color:rgba(255,255,255,.7);line-height:1.65;margin-bottom:36px}
-    .stats-row{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:48px}
-    .stat{text-align:center}
-    .stat-num{font-family:'Red Hat Display',sans-serif;font-size:42px;font-weight:800}
-    .stat-label{font-size:13px;color:rgba(255,255,255,.6);margin-top:4px}
-
-    /* ===== TESTIMONIALS ===== */
-    .testi-section{text-align:center}
-    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px;text-align:left}
-    .testi-card{background:var(--cream);border-radius:20px;padding:32px;border:1px solid rgba(0,0,0,.04);transition:.3s}
-    .testi-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.06)}
-    .testi-stars{color:var(--purple-main);font-size:14px;margin-bottom:14px;letter-spacing:2px}
-    .testi-text{font-size:14.5px;color:var(--body);line-height:1.65;margin-bottom:20px}
-    .testi-verified{font-size:11px;color:var(--purple-main);font-weight:600;margin-bottom:12px}
-    .testi-author{display:flex;align-items:center;gap:10px}
-    .testi-avatar{width:38px;height:38px;border-radius:50%;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;font-family:'Red Hat Display',sans-serif;font-size:13px;font-weight:700;color:var(--purple-main)}
-    .testi-name{font-weight:600;font-size:13px;color:var(--dark)}
-    .testi-role{font-size:12px;color:var(--muted)}
-
-    /* ===== BONUS ===== */
-    .bonus-section{background:var(--cream)}
-    .bonus-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:36px}
-    .bonus-card{background:#fff;border-radius:14px;padding:20px 24px;border:1px solid rgba(0,0,0,.04);display:flex;align-items:center;gap:14px}
-    .bonus-tag{padding:5px 12px;border-radius:100px;background:var(--purple-wash);color:var(--purple-main);font-size:11px;font-weight:700;white-space:nowrap}
-    .bonus-card span{font-size:14px;color:var(--dark);font-weight:500}
-
-    /* ===== PRICING ===== */
-    .pricing-section{text-align:center}
-    .pricing-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:700px;margin:48px auto 0}
-    .pricing-card{background:var(--cream);border-radius:22px;padding:36px;border:2px solid transparent;transition:.3s;position:relative}
-    .pricing-card.pop{border-color:var(--purple-main);background:#fff}
-    .pricing-pop-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);padding:5px 18px;border-radius:100px;background:var(--purple-main);color:#fff;font-size:11px;font-weight:700;white-space:nowrap}
-    .pricing-card h3{font-family:'Red Hat Display',sans-serif;font-size:20px;font-weight:700;color:var(--dark);margin-bottom:4px}
-    .pricing-desc{font-size:13px;color:var(--muted);margin-bottom:20px}
-    .pricing-price{font-family:'Red Hat Display',sans-serif;font-size:38px;font-weight:800;color:var(--purple-deep)}
-    .pricing-price small{font-size:14px;font-weight:500;color:var(--muted)}
-    .pricing-per{font-size:13px;color:var(--muted);margin-bottom:24px}
-
-    /* ===== FAQ ===== */
-    .faq-section{background:var(--cream)}
-    .faq-list{max-width:700px;margin:48px auto 0}
-    .faq-item{border-bottom:1px solid rgba(0,0,0,.06);padding:20px 0;cursor:pointer}
-    .faq-q{display:flex;justify-content:space-between;align-items:center;font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:600;color:var(--dark)}
-    .faq-q::after{content:'+';font-size:20px;color:var(--purple-main);transition:.3s}
-    .faq-item.open .faq-q::after{content:'\2212'}
-    .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease;font-size:14px;color:var(--body);line-height:1.65}
-    .faq-item.open .faq-a{max-height:200px;padding-top:12px}
-
-    /* ===== GUARANTEE ===== */
-    .guar-bar{padding:44px 40px;border-top:1px solid rgba(0,0,0,.05);border-bottom:1px solid rgba(0,0,0,.05)}
-    .guar-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
-    .guar-icon{width:48px;height:48px;margin:0 auto 10px}
-    .guar-icon img{width:100%;height:100%}
-    .guar-item h4{font-family:'Red Hat Display',sans-serif;font-size:13px;font-weight:700;color:var(--dark);margin-bottom:2px}
-    .guar-item p{font-size:12px;color:var(--muted)}
-
-    /* ===== FOOTER ===== */
-    .footer{background:var(--cream);padding:56px 40px 28px}
-    .footer-inner{max-width:1100px;margin:0 auto}
-    .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
-    .footer-brand-logo{height:24px;margin-bottom:14px}
-    .footer-brand p{font-size:13px;color:var(--muted);line-height:1.6;max-width:260px;margin-bottom:12px}
-    .footer-contact{font-size:13px;color:var(--body)}
-    .footer-col h4{font-family:'Red Hat Display',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--dark);margin-bottom:14px}
-    .footer-col a{display:block;font-size:13px;color:var(--muted);padding:4px 0;transition:.2s}
-    .footer-col a:hover{color:var(--purple-main)}
-    .footer-bottom{padding-top:20px;border-top:1px solid rgba(0,0,0,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-    .footer-bottom p{font-size:12px;color:var(--muted)}
-    .footer-legal{display:flex;gap:16px}
-    .footer-legal a{font-size:12px;color:var(--muted);transition:.2s}
-    .footer-legal a:hover{color:var(--purple-main)}
-    .footer-disc{margin-top:24px;padding:16px;background:var(--warm);border-radius:10px}
-    .footer-disc p{font-size:11px;color:var(--muted);line-height:1.6}
-
-    /* ===== ANIMATIONS ===== */
-    .reveal{opacity:0;transform:translateY(36px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
-    .reveal.visible{opacity:1;transform:translateY(0)}
-    .reveal-d{transition-delay:.15s}
-
-    /* ===== NEW ANIMATIONS ===== */
-    @keyframes ub-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-    @keyframes ub-pulse-glow{0%,100%{box-shadow:0 4px 20px rgba(107,47,160,.25)}50%{box-shadow:0 8px 40px rgba(107,47,160,.5)}}
-    @keyframes ub-scale-in{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
-    @keyframes ub-slide-up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-
-    /* Float hero product */
-    .hero-visual img{animation:ub-float 5s ease-in-out infinite}
-    .hero-visual img:hover{animation-play-state:paused}
-    @media(max-width:900px){.hero-visual img{max-width:380px!important;animation:none}}
-
-    /* Pulse CTA — only hero + sticky, not every button on page */
-    .hero .btn-fill,.pdpv9-sticky-btn{animation:ub-pulse-glow 2.5s ease-in-out infinite}
-    .hero .btn-fill:hover,.pdpv9-sticky-btn:hover{animation-play-state:paused}
-
-    /* Stagger children */
-    .stagger-children > *{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
-    .stagger-children.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:0s}
-    .stagger-children.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:.1s}
-    .stagger-children.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:.2s}
-    .stagger-children.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:.3s}
-    .stagger-children.visible > *:nth-child(5){opacity:1;transform:none;transition-delay:.4s}
-    .stagger-children.visible > *:nth-child(6){opacity:1;transform:none;transition-delay:.5s}
-
-    /* Stagger scale-in (for cards) */
-    .stagger-scale > *{opacity:0;transform:scale(.88) translateY(16px);transition:opacity .5s ease,transform .5s ease}
-    .stagger-scale.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:0s}
-    .stagger-scale.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:.08s}
-    .stagger-scale.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:.16s}
-    .stagger-scale.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:.24s}
-    .stagger-scale.visible > *:nth-child(5){opacity:1;transform:none;transition-delay:.32s}
-    .stagger-scale.visible > *:nth-child(6){opacity:1;transform:none;transition-delay:.4s}
-
-    /* ===== PROBLEM CARDS (editorial numbered) ===== */
-    .prob-cards{display:grid;grid-template-columns:repeat(3,1fr);margin-top:48px;border-radius:20px;overflow:hidden;box-shadow:0 4px 32px rgba(61,24,115,.1)}
-    .prob-card{background:linear-gradient(145deg,#2e1060 0%,#5b2199 60%,#7c3abf 100%);padding:40px 32px;border-right:1px solid rgba(255,255,255,.08);position:relative;transition:filter .25s}
-    .prob-card:last-child{border-right:none}
-    .prob-card:hover{filter:brightness(1.08)}
-    .prob-num{font-family:'Red Hat Display',sans-serif;font-size:68px;font-weight:900;color:rgba(255,255,255,.08);line-height:1;letter-spacing:-0.04em;margin-bottom:20px;user-select:none}
-    .prob-title{font-family:'Red Hat Display',sans-serif;font-size:18px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:14px}
-    .prob-sub{font-size:14px;color:rgba(255,255,255,.7);line-height:1.6;padding-top:14px;border-top:1px solid rgba(255,255,255,.15)}
-    @media(max-width:700px){
-      .prob-cards{grid-template-columns:1fr;border-radius:16px}
-      .prob-card{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
-      .prob-card:last-child{border-bottom:none}
-    }
-
-    /* How step visual */
-    .how-step__svg{width:80px;height:80px;margin:0 auto 18px;background:var(--purple-wash);border-radius:50%;display:flex;align-items:center;justify-content:center}
-    .how-step__svg svg{width:36px;height:36px;stroke:var(--purple-main);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-    .how-step p{display:none}
-
-    /* FAQ slide open */
-    .faq-item.open .faq-a{animation:ub-slide-up .3s ease}
-
-    /* Count-up numbers */
-    .big-stat-num[data-count]{cursor:default}
-
-    @media(prefers-reduced-motion:reduce){
-      .hero-visual img,.hero .btn-fill,.pdpv9-sticky-btn{animation:none !important}
-    }
-
-    /* ===== TYPOGRAPHY POLISH ===== */
-    h1,h2,h3,.section-title,.hero h1,.benefit-title,.expert-quote{text-wrap:balance}
-    .big-stat-num,.stat-num,.pricing-price{font-variant-numeric:tabular-nums}
-
-    /* ===== FOCUS VISIBLE ===== */
-    :focus-visible{outline:2px solid var(--purple-main);outline-offset:3px;border-radius:4px}
-    .btn:focus-visible{outline-offset:4px}
-
-    /* sticky-mobile-cta removed — replaced by pdpv9-sticky-atc form */
-
-    /* ===== RESPONSIVE TABLET (≤900px) ===== */
-    @media(max-width:900px){
-      .nav-link{display:none}
-      .nav{padding:12px 20px}
-      .hero{grid-template-columns:1fr;text-align:center;padding:52px 24px 36px}
-      .hero-sub{margin:0 auto 24px;max-width:480px}
-      .hero-badges{justify-content:center;flex-wrap:wrap;gap:8px}
-      .hero-visual{order:-1}
-      .hero-visual img{width:100%;max-width:380px;height:auto;margin:0 auto;display:block}
-      .hero-float{display:none}
-      .prod-inner{grid-template-columns:1fr;gap:36px}
-      .prod-block{padding:72px 24px}
-      .prod-block.reverse .prod-inner{direction:ltr}
-      .prod-img{max-width:320px;margin:0 auto}
-      .problem-grid{grid-template-columns:1fr}
-      .ingr-grid{grid-template-columns:repeat(2,1fr)}
-      .testi-grid{grid-template-columns:1fr}
-      .how-grid{grid-template-columns:1fr;gap:28px;max-width:380px;margin-left:auto;margin-right:auto}
-      .footer-top{grid-template-columns:1fr 1fr}
-      .guar-grid{grid-template-columns:repeat(2,1fr)}
-      .pricing-grid{grid-template-columns:1fr;max-width:380px;margin-left:auto;margin-right:auto}
-      .bonus-grid{grid-template-columns:1fr}
-      .section{padding:72px 24px}
-      .lifestyle-section{padding:72px 24px;min-height:480px}
-      .offer-block-section{padding:72px 24px}
-      .offer-block-img{max-width:360px}
-      .big-stats-row{grid-template-columns:repeat(2,1fr);gap:24px}
-    }
-
-    /* ===== RESPONSIVE MOBILE (≤600px) ===== */
-    @media(max-width:600px){
-      .section,.prod-block{padding:60px 16px}
-      .offer-block-section{padding:60px 16px}
-      .lifestyle-section{padding:60px 16px;min-height:420px}
-      .nav{padding:10px 16px}
-      .hero{padding:40px 16px 28px}
-      .hero h1{font-size:clamp(28px,8vw,38px)}
-      .hero-sub{font-size:15px}
-      .hero-badges{gap:6px}
-      .hero-badge{font-size:11.5px;padding:6px 12px}
-      .guar-grid{grid-template-columns:repeat(2,1fr);gap:16px}
-      .guar-bar{padding:32px 16px}
-      .footer-top{grid-template-columns:1fr;gap:24px}
-      .footer{padding:40px 16px 20px}
-      .stats-row{gap:20px;flex-wrap:wrap}
-      .stat-num{font-size:34px}
-      .press-logos{gap:20px}
-      .press-logos img{height:18px}
-      .ingr-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-      .testi-grid{grid-template-columns:1fr}
-      .pricing-grid{max-width:100%}
-      .pricing-card{padding:28px 20px}
-      .pricing-price{font-size:32px}
-      .cart-preview{padding:20px 16px}
-      .cart-item{gap:10px}
-      .cart-item-img{width:44px;height:44px;min-width:44px;font-size:15px}
-      .cart-item-name{font-size:13px}
-      .cart-item-price{font-size:13px}
-      .compare-section{padding:60px 16px}
-      .benefits-section{padding:60px 16px}
-      .expert-section{padding:60px 16px}
-      .expert-card{padding:28px 20px}
-      .expert-quote{font-size:19px}
-      .offer-block-pricing{gap:16px}
-      .btn{padding:13px 24px;font-size:14px}
-      .section-title{font-size:clamp(22px,6vw,32px)}
-    }
-
-    /* ===== RESPONSIVE SMALL (≤400px) ===== */
-    @media(max-width:400px){
-      .ingr-grid{grid-template-columns:1fr}
-      .big-stats-row{grid-template-columns:1fr}
-      .hero h1{font-size:26px}
-    }
-  
-
-/* ═══ NEW: EXPERT TESTIMONIAL CARD ═══ */
-.expert-section{background:var(--purple-wash);padding:80px 40px}
-.expert-card{max-width:950px;margin:0 auto;background:#fff;border-radius:24px;padding:48px 56px;box-shadow:0 8px 30px rgba(61,24,115,.08);display:grid;grid-template-columns:40% 60%;gap:48px;align-items:center}
-.expert-img{border-radius:20px;overflow:hidden;aspect-ratio:1/1;background:var(--cream)}
-.expert-img img{width:100%;height:100%;object-fit:cover}
-.expert-quote{font-family:'Red Hat Display',sans-serif;font-size:26px;font-weight:700;color:var(--purple-deep);line-height:1.25;letter-spacing:-0.02em;margin-bottom:20px}
-.expert-body{padding:20px 24px;background:var(--purple-wash);border-radius:12px;font-size:15px;color:var(--body);line-height:1.7;font-style:italic;margin-bottom:20px}
-.expert-name{font-weight:700;color:var(--dark);font-size:15px;margin-bottom:4px}
-.expert-credentials{text-transform:uppercase;letter-spacing:1.5px;font-size:11px;color:var(--muted);margin-bottom:10px;font-weight:600}
-.expert-link{color:var(--purple-main);font-size:13px;font-weight:600;display:inline-block}
-@media(max-width:700px){.expert-card{grid-template-columns:1fr;padding:32px 24px;gap:32px}.expert-quote{font-size:22px}}
-
-/* ═══ NEW: COMPARISON TABLE ═══ */
-.compare-section{background:linear-gradient(160deg,#3d1873 0%,#6b2fa0 100%);padding:100px 40px;color:#fff}
-.compare-inner{max-width:1000px;margin:0 auto}
-.compare-section .section-label{color:var(--purple-light);text-align:center;display:block}
-.compare-section h2{font-family:'Red Hat Display',sans-serif;font-size:clamp(28px,3.5vw,42px);font-weight:700;color:#fff;letter-spacing:-0.02em;margin-bottom:16px;text-align:center;line-height:1.15}
-.compare-section h2 .accent{color:var(--purple-light)}
-.compare-sub{color:rgba(255,255,255,.7);font-size:16px;max-width:620px;margin:0 auto 48px;text-align:center;line-height:1.6}
-.compare-table{background:rgba(255,255,255,.06);border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
-.compare-head{display:grid;grid-template-columns:1.2fr 1.2fr 1.3fr 1.3fr;text-transform:uppercase;letter-spacing:1.5px;font-size:10.5px;color:rgba(255,255,255,.5);padding:18px 24px;border-bottom:1px solid rgba(255,255,255,.1);font-weight:600}
-.compare-row{display:grid;grid-template-columns:1.2fr 1.2fr 1.3fr 1.3fr;padding:18px 24px;border-bottom:1px solid rgba(255,255,255,.06);font-size:14px;align-items:center;transition:background .2s}
-.compare-row:hover{background:rgba(255,255,255,.04)}
-.compare-row:last-child{border-bottom:none}
-.compare-actif{font-weight:600;color:#fff}
-.compare-market{color:rgba(255,255,255,.5)}
-.compare-uburn{font-weight:700;color:#fff;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.compare-pill{background:var(--purple-main);color:#fff;font-size:9.5px;font-weight:800;padding:3px 9px;border-radius:100px;letter-spacing:.8px;text-transform:uppercase}
-.compare-pill.new{background:#b07de8;color:#3d1873}
-.compare-benefit{color:rgba(255,255,255,.75);font-size:13.5px}
-@media(max-width:800px){.compare-head{display:none}.compare-row{grid-template-columns:1fr;gap:8px;padding:20px 18px}.compare-row>*::before{content:attr(data-label);display:block;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.4);margin-bottom:2px;font-weight:600}}
-
-/* ═══ NEW: 6 BIENFAITS INTERACTIVE ═══ */
-.benefits-section{background:#fafafa;padding:100px 40px}
-.benefits-inner{max-width:1000px;margin:0 auto}
-.benefits-head{text-align:center;margin-bottom:48px}
-.benefits-grid-layout{display:grid;grid-template-columns:1fr 1.3fr;gap:40px;align-items:start}
-.benefit-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.benefit-card{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;padding:22px 16px;text-align:center;cursor:pointer;transition:all .3s}
-.benefit-card:hover{border-color:var(--purple-pale)}
-.benefit-card.active{background:var(--purple-deep);border-color:var(--purple-deep);color:#fff}
-.benefit-card.active .benefit-icon svg{stroke:#fff}
-.benefit-icon{width:32px;height:32px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center}
-.benefit-icon svg{width:24px;height:24px;stroke:var(--purple-main);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .3s}
-.benefit-name{font-size:13px;font-weight:600;color:inherit}
-.benefit-detail{background:#fff;border-radius:20px;padding:40px 36px;box-shadow:0 4px 24px rgba(61,24,115,.06);border:1px solid rgba(0,0,0,.04)}
-.benefit-detail-icon{width:52px;height:52px;border-radius:50%;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
-.benefit-detail-icon svg{width:24px;height:24px;stroke:var(--purple-main);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.benefit-label{text-transform:uppercase;letter-spacing:2px;font-size:11px;color:var(--purple-main);font-weight:700;margin-bottom:10px}
-.benefit-title{font-family:'Red Hat Display',sans-serif;font-size:26px;font-weight:700;color:var(--dark);letter-spacing:-0.02em;margin-bottom:14px;line-height:1.2}
-.benefit-desc{font-size:15px;color:var(--body);line-height:1.7;margin-bottom:20px}
-.benefit-badge{display:inline-block;background:var(--purple-wash);color:var(--purple-main);padding:7px 14px;border-radius:100px;font-size:12px;font-weight:600}
-@media(max-width:780px){.benefits-grid-layout{grid-template-columns:1fr;gap:32px}.benefit-cards{grid-template-columns:repeat(3,1fr);gap:8px}.benefit-card{padding:16px 10px}.benefit-detail{padding:32px 24px}}
-
-/* ═══ NEW: BIG STATS OVERRIDE ═══ */
-.big-stats-row{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
-.big-stat{text-align:center;min-width:140px}
-.big-stat-num{font-family:'Red Hat Display',sans-serif;font-size:56px;font-weight:800;color:#fff;letter-spacing:-0.03em;line-height:1}
-.big-stat-label{font-size:13px;color:rgba(255,255,255,.65);margin-top:8px;max-width:160px;margin-left:auto;margin-right:auto;line-height:1.4}
-.stats-note{font-size:11px;color:rgba(255,255,255,.4);margin-top:32px;text-align:center;font-style:italic}
-@media(max-width:700px){.big-stat-num{font-size:42px}.big-stats-row{gap:24px}}
-
-/* ═══ NEW: CART PREVIEW ═══ */
-.cart-section{background:#fff;padding:100px 40px}
-.cart-section-inner{max-width:1100px;margin:0 auto;text-align:center}
-.cart-preview{max-width:520px;margin:48px auto 0;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:20px;padding:28px;box-shadow:0 8px 30px rgba(0,0,0,.06);text-align:left}
-.cart-title{text-transform:uppercase;letter-spacing:2px;font-size:11px;color:var(--muted);font-weight:700;margin-bottom:16px}
-.cart-item{display:flex;gap:12px;padding:14px 0;border-bottom:1px dashed rgba(0,0,0,.08);align-items:center}
-.cart-item:last-of-type{border-bottom:none}
-.cart-item-img{width:56px;height:56px;border-radius:10px;background:var(--purple-wash);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.cart-item-img img{width:100%;height:100%;object-fit:cover}
-.cart-item-body{flex:1;min-width:0}
-.cart-item-name{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:2px;line-height:1.3}
-.cart-item-meta{font-size:12px;color:var(--muted)}
-.cart-item-qty{display:inline-flex;align-items:center;gap:10px;margin-top:6px;font-size:12px;color:var(--body)}
-.cart-item-qty span{width:22px;height:22px;border:1px solid rgba(0,0,0,.12);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-weight:600;color:var(--muted)}
-.cart-item-price{font-weight:700;color:var(--dark);font-size:14px;white-space:nowrap;text-align:right}
-.cart-item-price s{color:var(--muted);font-weight:400;display:block;font-size:12px}
-.cart-item-gift{background:#D1FAE5;color:#065F46;font-size:10px;font-weight:800;padding:3px 8px;border-radius:100px;letter-spacing:.5px;text-transform:uppercase;display:inline-block;margin-top:2px}
-.cart-sub{background:var(--purple-wash);padding:16px 18px;border-radius:14px;margin-top:18px}
-.cart-sub-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
-.cart-sub-row.save{color:#059669;font-weight:600}
-.cart-sub-row.total{font-size:17px;font-weight:800;color:var(--dark);margin-top:8px;padding-top:8px;border-top:1px solid rgba(61,24,115,.1);margin-bottom:0}
-.cart-sub-note{font-size:11px;color:var(--muted);text-align:right;margin-top:4px}
-.cart-checkout{display:block;width:100%;text-align:center;background:var(--purple-main);color:#fff;border-radius:100px;padding:15px;font-weight:700;font-size:14.5px;margin-top:18px;transition:.25s;border:none;cursor:pointer}
-.cart-checkout:hover{background:var(--purple-deep)}
-.cart-pay{display:flex;gap:10px;justify-content:center;margin-top:12px;font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.5px;text-transform:uppercase;opacity:.6}
-
-/* ═══ NEW: GALLERY MOSAIC ═══ */
-.gallery-section{padding:0;background:#fff}
-.gallery-mosaic{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;grid-template-rows:240px 240px;gap:4px;overflow:hidden}
-.gallery-item{overflow:hidden;position:relative}
-.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.22,1,.36,1)}
-.gallery-item:hover img{transform:scale(1.04)}
-.gallery-item.tall{grid-row:span 2}
-.gallery-item.wide{grid-column:span 2}
-@media(max-width:900px){.gallery-mosaic{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px 180px 180px}.gallery-item.tall{grid-row:auto}.gallery-item.wide{grid-column:span 2}}
-@media(max-width:500px){.gallery-mosaic{grid-template-columns:1fr 1fr;grid-template-rows:repeat(4,160px)}}
-
-/* ═══ NEW: LIFESTYLE BANNER ═══ */
-.lifestyle-section{position:relative;min-height:640px;overflow:hidden;display:flex;align-items:center;padding:100px 40px}
-.lifestyle-bg{position:absolute;inset:0;background:linear-gradient(135deg,#2a1054 0%,#6b2fa0 60%,#8b47c5 100%);background-image:url('https://uburn.co/cdn/shop/files/focus_product_1_3dab8125-eab7-4b9d-a33f-e28cdd57aa67.jpg?v=1776425406&width=1600&format=webp');background-size:cover;background-position:center top;z-index:0}
-.lifestyle-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(42,16,84,.85) 0%,rgba(61,24,115,.5) 60%,rgba(61,24,115,.2) 100%)}
-.lifestyle-inner{position:relative;z-index:1;max-width:560px;color:#fff}
-.lifestyle-inner .section-label{color:var(--purple-light)}
-.lifestyle-inner h2{font-family:'Red Hat Display',sans-serif;font-size:clamp(30px,4vw,48px);font-weight:700;line-height:1.1;letter-spacing:-0.02em;margin-bottom:20px;color:#fff}
-.lifestyle-inner h2 em{font-style:italic;color:var(--purple-light);font-weight:700}
-.lifestyle-inner p{color:rgba(255,255,255,.85);font-size:16px;line-height:1.7;margin-bottom:28px}
-.lifestyle-inner .btn-white{background:#fff;color:var(--purple-deep)}
-.lifestyle-inner .btn-white:hover{background:var(--purple-wash)}
-
-/* ═══ OFFER BLOCK (SHOWCASE + PRICING + BONUS + CART) ═══ */
-.offer-block-section{background:linear-gradient(160deg,var(--cream) 0%,var(--purple-wash) 100%);padding:100px 40px}
-.offer-block-inner{max-width:980px;margin:0 auto}
-.offer-block-header{margin-bottom:40px}
-.offer-block-img{max-width:520px;margin:0 auto 56px;text-align:center;padding:0 16px}
-.offer-block-img img{width:100%;height:auto;max-height:480px;object-fit:contain;filter:drop-shadow(0 40px 80px rgba(61,24,115,.25))}
-.offer-block-pricing{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px}
-.offer-block-bonus{margin-bottom:48px}
-@media(max-width:700px){.offer-block-pricing{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}}
-
-/* ═══ NEW: PRODUCT SHOWCASE ═══ */
-.showcase-section{background:linear-gradient(160deg,var(--cream) 0%,var(--purple-wash) 100%);padding:100px 40px;text-align:center}
-.showcase-inner{max-width:1000px;margin:0 auto}
-.showcase-image{max-width:420px;margin:48px auto 0;position:relative}
-.showcase-image img{width:100%;filter:drop-shadow(0 30px 60px rgba(61,24,115,.2))}
-.showcase-image::before{content:'';position:absolute;inset:-60px;background:radial-gradient(circle,rgba(139,71,197,.25) 0%,transparent 60%);z-index:-1;border-radius:50%}
-
+  /* Reveal toujours visible — pas de gate */
+  .pdpv9-reveal, .pdpv9-stagger-children > *, .pdpv9-stagger-scale > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 </style>
-<!-- ANNOUNCE -->
-  <div class="announce">LIVRAISON GRATUITE EN FRANCE</div>
 
-  <!-- PROMO STICKY — UBE10 -->
-  <div class="promo-bar" id="promoBar">
-    <span id="promoText">🎁 <strong>-10%</strong> sur ta 1ère commande · Code <strong>UBE10</strong></span>
-    <button type="button" class="promo-copy" id="promoCopy" aria-label="Copier le code UBE10">Copier</button>
-  </div>
-  <style>
-    .promo-bar{position:sticky;top:0;z-index:99;background:linear-gradient(90deg,#6B21A8 0%,#8b47c5 100%);color:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:center;gap:12px;font-size:13px;font-weight:600;text-align:center;line-height:1.3;flex-wrap:wrap}
-    .promo-bar strong{font-weight:800;letter-spacing:.5px}
-    .promo-copy{background:#fff;color:#3b0764;border:none;padding:6px 14px;border-radius:100px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap;transition:transform .15s}
-    .promo-copy:active{transform:scale(.95)}
-    .promo-copy.copied{background:#16a34a;color:#fff}
-    .promo-bar.applied{background:linear-gradient(90deg,#16a34a 0%,#22c55e 100%)}
-    .promo-bar.applied .promo-copy{display:none}
-    @media(max-width:500px){.promo-bar{font-size:12px;padding:8px 12px;gap:8px}.promo-copy{padding:5px 12px;font-size:11px}}
-  </style>
-  <script>
-    (function(){
-      var params=new URLSearchParams(window.location.search);
-      var bar=document.getElementById('promoBar');
-      var txt=document.getElementById('promoText');
-      var btn=document.getElementById('promoCopy');
-      if(params.get('discount')==='UBE10'||params.get('code')==='UBE10'){
-        bar.classList.add('applied');
-        txt.innerHTML='✓ Code <strong>UBE10</strong> appliqué — <strong>-10%</strong> sur ta commande';
-      }
-      btn.addEventListener('click',function(){
-        navigator.clipboard.writeText('UBE10').then(function(){
-          btn.textContent='Copié ✓';
-          btn.classList.add('copied');
-          setTimeout(function(){btn.textContent='Copier';btn.classList.remove('copied');},2000);
-        }).catch(function(){
-          var ta=document.createElement('textarea');ta.value='UBE10';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');btn.textContent='Copié ✓';btn.classList.add('copied');setTimeout(function(){btn.textContent='Copier';btn.classList.remove('copied');},2000);}catch(e){}document.body.removeChild(ta);
-        });
-      });
-    })();
-  </script>
+<div class="pdpv9-root">
 
-  <!-- NAV -->
-  <nav class="nav">
-    <a href="{{ product.url }}" aria-label="UBurn — page produit"><img class="nav-logo" src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn"></a>
-    <div class="nav-right">
-      <a href="#probleme" class="nav-link">Pourquoi UBurn</a>
-      <a href="#ingredients" class="nav-link">Ingrédients</a>
-      <a href="#avis" class="nav-link">Avis</a>
-      <a href="#faq" class="nav-link">FAQ</a>
-      <a href="#offer" class="btn btn-fill" style="padding:10px 22px;font-size:13px;">Voir les offres</a>
-    </div>
-  </nav>
+  <div class="pdpv9-announce">LIVRAISON GRATUITE EN FRANCE</div>
 
-  <!-- TRUST RIBBON -->
-  <div class="ribbon">
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> Ingrédients conformes EFSA</span>
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> 100% Végétal</span>
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> Sans abonnement</span>
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> 0% caféine</span>
+  <div class="pdpv9-promo-bar" id="pdpv9-promoBar">
+    <span id="pdpv9-promoText">🎁 <strong>-10%</strong> sur ta 1ère commande · Code <strong>UBE10</strong></span>
+    <button type="button" class="pdpv9-promo-copy" id="pdpv9-promoCopy" aria-label="Copier le code UBE10">Copier</button>
   </div>
 
-  <!-- HERO COMPACT -->
-  <section class="hero hero--compact">
-    <div class="hero-content">
-      <div class="hero-tag">Nos premières clientes adorent Uburn</div>
-      <h1>16h. <span class="accent">Votre</span> placard reste fermé.</h1>
-      <p class="hero-sub">30 kcal · 0% caféine · 4h de satiété.</p>
-      <div class="hero-badges">
-        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 0% caféine</div>
-        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 30 kcal</div>
-        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Livraison offerte</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  {% if product.media.size > 0 %}
-  <div class="pdpv9-gallery" role="region" aria-label="Photos du produit">
-    <div class="pdpv9-gallery__main">
-      {% for media in product.media %}
-        <div class="pdpv9-gallery__slide"
-             data-index="{{ forloop.index0 }}"
-             {% if forloop.first %}data-active="true"{% endif %}>
-          {{ media | image_url: width: 800 | image_tag:
-             loading: forloop.first ? 'eager' : 'lazy',
-             fetchpriority: forloop.first ? 'high' : 'auto',
-             class: 'pdpv9-gallery__img',
-             alt: product.title }}
-        </div>
-      {% endfor %}
-    </div>
-    {% if product.media.size > 1 %}
-    <div class="pdpv9-gallery__thumbs" role="tablist" aria-label="Sélecteur d'images">
-      {% for media in product.media %}
-        <button class="pdpv9-gallery__thumb"
-                data-index="{{ forloop.index0 }}"
-                {% if forloop.first %}data-active="true" aria-current="true"{% endif %}
-                role="tab"
-                aria-label="Image {{ forloop.index }} sur {{ product.media.size }}">
-          {{ media | image_url: width: 120 | image_tag:
-             loading: 'lazy', alt: '' }}
-        </button>
-      {% endfor %}
-    </div>
-    {% endif %}
+  <div class="pdpv9-ribbon">
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Glucomannane reconnu par l'EFSA</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 100% Végétal</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Sans abonnement</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 0% caféine</span>
   </div>
-  {% endif %}
 
-  <!-- OFFER BLOCK: SHOWCASE + PRICING + BONUS + CART -->
-  <style>
-    #offer-timer{text-align:center;font-size:13px;font-weight:600;color:var(--purple-main);margin-top:12px}
-    #offer-timer span{font-weight:800}
-    .pack-duration{font-size:12px;color:var(--muted);margin-bottom:16px;text-align:center}
-    .offer-rating{text-align:center;font-size:14px;color:var(--dark);font-weight:600;margin-bottom:12px;letter-spacing:.2px}
-    .social-proof{text-align:center;font-size:12.5px;color:var(--body);margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px}
-  </style>
-  <section class="offer-block-section" id="offer">
-    <div class="offer-block-inner">
+  {%- comment -%} ═══ PDP HERO ABOVE-FOLD — real PDP structure ═══ {%- endcomment -%}
+  <section class="pdpv9-pdp" id="pdpv9-pdp">
+    <div class="pdpv9-pdp__grid">
 
-      <!-- Titre -->
-      <div class="offer-block-header reveal">
-        <div class="section-label" style="text-align:center">Votre offre</div>
-        <h2 class="section-title" style="text-align:center">Une saveur. <span class="accent">Six actifs.</span></h2>
-        <p style="max-width:400px;margin:10px auto 0;color:var(--body);font-size:14px;text-align:center">Paiement unique · Livraison offerte</p>
-        <p id="offer-timer">✓ Livraison offerte en France</p>
-      </div>
-
-      <!-- Image produit -->
-      <div class="offer-block-img reveal">
-        <img src="https://uburn.co/cdn/shop/files/Uburn_Listing_ecom_1.jpg?v=1772700007&width=800&format=webp" alt="UBurn Pack" loading="lazy" decoding="async" width="800" height="1000">
-      </div>
-
-      <!-- Cartes prix -->
-      <div class="offer-block-pricing reveal">
-        {%- assign v_decouverte = product.variants | where: "id", 51289200034111 | first -%}
-        {%- assign v_maximum = product.variants | where: "id", 51289200066879 | first -%}
-        {%- unless v_decouverte -%}{%- assign v_decouverte = product.variants.first -%}{%- endunless -%}
-        {%- unless v_maximum -%}
-          {%- assign v_maximum = product.variants[1] -%}
-          {%- unless v_maximum -%}{%- assign v_maximum = product.variants.first -%}{%- endunless -%}
-        {%- endunless -%}
-        <div class="pricing-card pdpv9-variant-card" id="card-decouverte" data-variant-id="{{ v_decouverte.id }}">
-          <h3>Découverte</h3>
-          <p class="pricing-desc">Idéal pour tester · 90g · 1 dose/jour</p>
-          <div class="pricing-price">{{ v_decouverte.price | money }}</div>
-          <p class="pricing-per">soit 1,15€/jour</p>
-          <p class="pack-duration">30 jours · 1 dose/jour</p>
-          <form action="/cart/add" method="post" class="pdpv9-atc-form">
-            <input type="hidden" name="id" value="{{ v_decouverte.id }}" data-variant-input>
-            <input type="hidden" name="quantity" value="1">
-            <button type="submit" class="btn btn-fill pdpv9-cta" style="width:100%;justify-content:center">Commander — <span data-price>{{ v_decouverte.price | money }}</span> →</button>
-          </form>
-        </div>
-        <div class="pricing-card pop pdpv9-variant-card" id="card-maximum" data-variant-id="{{ v_maximum.id }}">
-          <div class="pricing-pop-badge">Meilleure valeur</div>
-          <h3>Résultats Maximum</h3>
-          <p class="pricing-desc">Le + populaire — 3x plus de résultats</p>
-          <div class="pricing-price">{{ v_maximum.price | money }} <small><s>69€</s></small></div>
-          <p class="pricing-per">= 0,61€/jour</p>
-          <p class="pack-duration">30 jours · 3 doses/jour</p>
-          <form action="/cart/add" method="post" class="pdpv9-atc-form">
-            <input type="hidden" name="id" value="{{ v_maximum.id }}" data-variant-input>
-            <input type="hidden" name="quantity" value="1">
-            <button type="submit" class="btn btn-fill pdpv9-cta" style="width:100%;justify-content:center">Commander — <span data-price>{{ v_maximum.price | money }}</span> →</button>
-          </form>
-        </div>
-      </div>
-
-      <!-- Cart preview — visible uniquement si Maximum sélectionné -->
-      <div class="cart-section-inner reveal" id="cart-preview-block">
-        <div class="section-label" style="text-align:center">Votre commande</div>
-        <h2 class="section-title" style="text-align:center">Avec votre Cure Maximum, <span class="accent">vous recevez :</span></h2>
-        <div class="cart-preview">
-          <div class="cart-title">Votre panier</div>
-          <div class="cart-item">
-            <div class="cart-item-img"><img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=200&format=webp" alt="UBurn Cure Maximum 270g"></div>
-            <div class="cart-item-body">
-              <div class="cart-item-name">Cure Maximum — Poudre Ubé 270g</div>
-              <div class="cart-item-meta">Saveur noisette-vanille · Cure 90 jours</div>
+      {%- comment -%} ─── LEFT: Gallery (CSS-only carousel, mobile swipe via scroll-snap) ─── {%- endcomment -%}
+      <div class="pdpv9-pdp__gallery">
+        {%- if product.media.size > 0 -%}
+          <div class="pdpv9-pdp__slides" role="region" aria-label="Galerie produit" tabindex="0">
+            {%- for media in product.media -%}
+              <div class="pdpv9-pdp__slide" id="pdpv9-slide-{{ forloop.index }}">
+                {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                  {{ media | media_tag: image_size: '1200x', autoplay: false, loop: false, controls: true, preload: 'metadata' }}
+                {%- else -%}
+                  <img src="{{ media | image_url: width: 1200 }}&format=webp" alt="{{ media.alt | default: product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async" width="1200" height="1200">
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+          {%- if product.media.size > 1 -%}
+            <div class="pdpv9-pdp__thumbs" role="tablist" aria-label="Vignettes">
+              {%- for media in product.media -%}
+                <a href="#pdpv9-slide-{{ forloop.index }}" class="pdpv9-pdp__thumb" aria-label="Image {{ forloop.index }}">
+                  <img src="{{ media | image_url: width: 200 }}&format=webp" alt="" loading="lazy" decoding="async" width="200" height="200">
+                </a>
+              {%- endfor -%}
             </div>
-            <div class="cart-item-price">{{ v_maximum.price | money }}</div>
+          {%- endif -%}
+        {%- elsif featured -%}
+          <div class="pdpv9-pdp__slides">
+            <div class="pdpv9-pdp__slide">
+              <img src="{{ featured | image_url: width: 1200 }}&format=webp" alt="{{ featured.alt | default: product.title | escape }}" loading="eager" decoding="async" width="1200" height="1200">
+            </div>
           </div>
-          <div class="cart-item">
-            <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">E</div>
-            <div class="cart-item-body"><div class="cart-item-name">E-book « 30j pour reprendre le contrôle »</div><div class="cart-item-gift">Offert</div></div>
-            <div class="cart-item-price"><s>47€</s> 0€</div>
-          </div>
-          <div class="cart-item">
-            <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">G</div>
-            <div class="cart-item-body"><div class="cart-item-name">Groupe privé Uburn Collective</div><div class="cart-item-gift">Offert</div></div>
-            <div class="cart-item-price"><s>40€</s> 0€</div>
-          </div>
-          <div class="cart-item">
-            <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">É</div>
-            <div class="cart-item-body"><div class="cart-item-name">Événements UBurn en ligne</div><div class="cart-item-gift">Offert</div></div>
-            <div class="cart-item-price"><s>50€</s> 0€</div>
-          </div>
-          <div class="cart-item">
-            <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">W</div>
-            <div class="cart-item-body"><div class="cart-item-name">Suivi nutrition WhatsApp 30j</div><div class="cart-item-gift">Offert</div></div>
-            <div class="cart-item-price"><s>47€</s> 0€</div>
-          </div>
-          <div class="cart-sub">
-            <div class="cart-sub-row save"><span>Économies totales</span><span>−184€</span></div>
-            <div class="cart-sub-row total"><span>Total</span><span>{{ v_maximum.price | money }}</span></div>
-            <div class="cart-sub-note">soit 0,61€/jour sur 90 jours</div>
-          </div>
-          <p class="offer-rating">★★★★★ 4,7/5 · 1 500+ clientes satisfaites</p>
-          <form action="/cart/add" method="post" class="pdpv9-atc-form">
-            <input type="hidden" name="id" value="{{ v_maximum.id }}" data-variant-input>
-            <input type="hidden" name="quantity" value="1">
-            <button type="submit" class="cart-checkout pdpv9-cta">Continuer vers le paiement →</button>
-          </form>
-          <p class="social-proof">✓ Allégation glucomannane validée EFSA (ID 3120)</p>
-          <div class="cart-pay"><span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Shop Pay</span></div>
-        </div>
+        {%- endif -%}
       </div>
 
+      {%- comment -%} ─── RIGHT: Purchase panel ─── {%- endcomment -%}
+      <div class="pdpv9-pdp__purchase">
+
+        {%- comment -%} Header: rating + social pill + title + subtitle + benefits bullets {%- endcomment -%}
+        <div class="pdpv9-pdp__header">
+          <div class="pdpv9-pdp__rating" aria-label="Lancement France, stock limité">
+            <span class="pdpv9-pdp__stars pdpv9-pdp__stars--badge" aria-hidden="true">●</span>
+            <span class="pdpv9-pdp__rating-text">Lancement France · Stock limité</span>
+          </div>
+          <div class="pdpv9-pdp__social-pill" role="note">
+            <svg class="pdpv9-pdp__social-pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <span>Formulé avec ube, konjac et MCT de coco</span>
+          </div>
+          <h1 class="pdpv9-pdp__title">Reprenez le contrôle<br>de vos fringales</h1>
+          <p class="pdpv9-pdp__subtitle">Routine violette pour les fringales de 16h et du soir.</p>
+          <ul class="pdpv9-pdp__bullets" aria-label="Bénéfices clés">
+            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">🔥</span> Pour les fringales de 16h et du soir</li>
+            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">⏱️</span> Jusqu'à 4h de satiété</li>
+            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">☕</span> 0% caféine, routine douce</li>
+          </ul>
+        </div>
+
+        {%- comment -%} Price — initial render shows "À partir de €34,50" if no explicit user choice yet. JS removes prefix on first variant click. {%- endcomment -%}
+        <div class="pdpv9-pdp__price-wrap">
+          <span class="pdpv9-pdp__price-prefix" id="pdpv9-price-prefix">À partir de </span>
+          <span class="pdpv9-pdp__price" id="pdpv9-price">{{ v_decouverte.price | money }}</span>
+          {%- if current_variant.compare_at_price > current_variant.price -%}
+            <span class="pdpv9-pdp__compare-price"><s>{{ current_variant.compare_at_price | money }}</s></span>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} ATC FORM — native Shopify {%- endcomment -%}
+        <form action="/cart/add" method="post" enctype="multipart/form-data" class="pdpv9-pdp__form" id="pdpv9-pdp-form" novalidate>
+          <input type="hidden" name="form_type" value="product">
+          <input type="hidden" name="utf8" value="✓">
+
+          {%- if product.variants.size > 1 -%}
+            <fieldset class="pdpv9-pdp__variants" role="radiogroup" aria-label="Choisis ta cure">
+              <legend class="pdpv9-pdp__variants-legend">Choisis ta cure</legend>
+              {%- for v in product.variants -%}
+                {%- liquid
+                  assign vmeta = '90g · 1 dose/jour · 30 jours'
+                  assign vunit = '1,15€/jour'
+                  assign vdays = '30'
+                  assign vtag = 'Pour tester la routine'
+                  if forloop.index == 2
+                    assign vmeta = '270g · 3 doses/jour · 30 jours'
+                    assign vunit = '0,65€/jour'
+                    assign vdays = '30'
+                    assign vtag = 'Le meilleur prix par dose'
+                  endif
+                -%}
+                <label class="pdpv9-pdp__variant{% if forloop.index == 2 %} pdpv9-pdp__variant--pop{% endif %}{% if v.id == current_variant.id %} pdpv9-pdp__variant--selected{% endif %}{% unless v.available %} pdpv9-pdp__variant--sold{% endunless %}">
+                  <input type="radio" name="id" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %} class="pdpv9-pdp__variant-input" data-vidx="{{ forloop.index }}" data-vprice="{{ v.price }}" data-vprice-money="{{ v.price | money }}" data-vunit-price="{{ vunit }}" data-vdays="{{ vdays }}">
+                  {%- if forloop.index == 2 -%}<span class="pdpv9-pdp__variant-badge">Le + populaire</span>{%- endif -%}
+                  <span class="pdpv9-pdp__variant-body">
+                    <span class="pdpv9-pdp__variant-name">{{ v.title | split: ' | ' | first | replace: ' ⭐', '' }}</span>
+                    <span class="pdpv9-pdp__variant-tag">{{ vtag }}</span>
+                    <span class="pdpv9-pdp__variant-meta">{{ vmeta }}</span>
+                    <span class="pdpv9-pdp__variant-price-row">
+                      <span class="pdpv9-pdp__variant-price">{{ v.price | money }}{% if v.compare_at_price > v.price %} <s>{{ v.compare_at_price | money }}</s>{% endif %}</span>
+                      <span class="pdpv9-pdp__variant-perday">{{ vunit }}</span>
+                    </span>
+                  </span>
+                  {%- unless v.available -%}<span class="pdpv9-pdp__variant-sold">Rupture</span>{%- endunless -%}
+                </label>
+              {%- endfor -%}
+            </fieldset>
+          {%- else -%}
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+          {%- endif -%}
+
+          <div class="pdpv9-pdp__qty-row">
+            <label for="pdpv9-pdp-qty" class="pdpv9-pdp__qty-label">Quantité</label>
+            <div class="pdpv9-pdp__qty-input-wrap">
+              <input id="pdpv9-pdp-qty" type="number" name="quantity" value="1" min="1" max="10" inputmode="numeric" class="pdpv9-pdp__qty-input" aria-label="Quantité">
+            </div>
+          </div>
+
+          <button type="submit" name="add" class="pdpv9-pdp__atc"{% unless current_variant.available %} disabled{% endunless %}>
+            {%- if current_variant.available -%}
+              <span class="pdpv9-pdp__atc-text" id="pdpv9-atc-text">Commencer ma cure 30 jours</span>
+              <span class="pdpv9-pdp__atc-price" id="pdpv9-atc-price">— {{ current_variant.price | money }}</span>
+            {%- else -%}
+              En rupture
+            {%- endif -%}
+          </button>
+        </form>
+
+        {%- comment -%} Sub-CTA trust line (under the CTA) {%- endcomment -%}
+        <p class="pdpv9-pdp__atc-trust">Livraison gratuite en France · Paiement sécurisé · Bonus inclus</p>
+
+        {%- comment -%} Reassurance compact (post-ATC) — 4 trust signals factuels {%- endcomment -%}
+        <ul class="pdpv9-pdp__reassurance">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h13l3 4v6h-3"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg> Livraison gratuite en France</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Paiement sécurisé</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Expédié depuis la France</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Support client disponible</li>
+        </ul>
+
+        {%- comment -%} ─── BLOC DÉCISION : Quelle cure choisir ? (CRO V1 — sous reassurance) ─── {%- endcomment -%}
+        <div class="pdpv9-decide" aria-labelledby="pdpv9-decide-title">
+          <h3 class="pdpv9-decide__title" id="pdpv9-decide-title">Quelle cure choisir ?</h3>
+          <div class="pdpv9-decide__grid">
+            <article class="pdpv9-decide__card">
+              <span class="pdpv9-decide__label">Découverte 90g</span>
+              <p class="pdpv9-decide__desc">Idéal si tu veux tester UBurn tranquillement avec 1 dose par jour.</p>
+            </article>
+            <article class="pdpv9-decide__card pdpv9-decide__card--pop">
+              <span class="pdpv9-decide__pop">Le + populaire</span>
+              <span class="pdpv9-decide__label">Résultats Maximum 270g</span>
+              <p class="pdpv9-decide__desc">Idéal si tes fringales reviennent plusieurs fois dans la journée et que tu veux le meilleur prix par dose.</p>
+            </article>
+          </div>
+          <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary pdpv9-decide__cta">Choisir ma cure →</a>
+        </div>
+
+        {%- comment -%} ─── BLOC BÉNÉFICES : Pourquoi UBURN aide à contrôler les fringales ─── {%- endcomment -%}
+        <div class="pdpv9-why" aria-labelledby="pdpv9-why-title">
+          <h3 class="pdpv9-why__title" id="pdpv9-why-title">Pourquoi UBurn aide à contrôler les fringales ?</h3>
+          <ul class="pdpv9-why__list">
+            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">🌿</span><span>Le konjac contribue à la sensation de satiété dans le cadre d'une alimentation adaptée.</span></li>
+            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">💜</span><span>L'ube apporte une routine gourmande, violette et naturellement originale.</span></li>
+            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">🥥</span><span>Le MCT de coco apporte une texture douce et une sensation plus nourrissante.</span></li>
+            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">☕</span><span>0% caféine : utilisable l'après-midi ou le soir.</span></li>
+          </ul>
+          <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary pdpv9-why__cta">Essayer UBurn →</a>
+        </div>
+
+        {%- comment -%} Bonus stack — collapsible <details> on mobile, expanded on desktop {%- endcomment -%}
+        <details class="pdpv9-pdp__bonus pdpv9-pdp__bonus--collapsible">
+          <summary class="pdpv9-pdp__bonus-summary">
+            <span class="pdpv9-pdp__bonus-summary-label">🎁 <strong>184€ de bonus</strong> offerts</span>
+            <span class="pdpv9-pdp__bonus-count">+4</span>
+          </summary>
+          <div class="pdpv9-pdp__bonus-items">
+            <div><span>E-book « 30j pour reprendre le contrôle »</span><span class="pdpv9-pdp__bonus-val"><s>47€</s> 0€</span></div>
+            <div><span>Groupe privé Uburn Collective</span><span class="pdpv9-pdp__bonus-val"><s>40€</s> 0€</span></div>
+            <div><span>Événements UBurn en ligne</span><span class="pdpv9-pdp__bonus-val"><s>50€</s> 0€</span></div>
+            <div><span>Suivi nutrition WhatsApp 30j</span><span class="pdpv9-pdp__bonus-val"><s>47€</s> 0€</span></div>
+          </div>
+        </details>
+
+      </div>
+    </div>
+
+  </section>
+
+  {%- comment -%} ─── STORIES CAROUSEL — humanise avant moment 16h ─── {%- endcomment -%}
+  {{ 'uburn-stories-carousel.css' | asset_url | stylesheet_tag }}
+  <section class="pdpv9-stories" aria-labelledby="pdpv9-stories-title">
+    <div class="pdpv9-stories__inner">
+      <div class="pdpv9-stories__head">
+        <span class="pdpv9-eyebrow">Elles l'utilisent</span>
+        <h2 class="pdpv9-h2" id="pdpv9-stories-title">Le rituel <span class="pdpv9-h2-accent">en vrai.</span></h2>
+        <p class="pdpv9-stories__sub">Pas de pub. Des femmes. Des routines. 4h de satiété naturelle.</p>
+      </div>
+      <div class="pdpv9-stories__rail" tabindex="0">
+        <article class="pdpv9-stories__card" data-stories-card="1">
+          <div class="pdpv9-stories__media">
+            <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-latte-prep.mp4' | asset_url }}" type="video/mp4"></video>
+            <button class="pdpv9-stories__play" aria-label="Lecture vidéo Marie" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
+          </div>
+          <div class="pdpv9-stories__caption"><strong>Marie, 42 ans</strong> · Paris<br><span>"Ma routine matin. Plus de fringale 16h."</span></div>
+        </article>
+        <article class="pdpv9-stories__card" data-stories-card="2">
+          <div class="pdpv9-stories__media">
+            <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-lifestyle.mp4' | asset_url }}" type="video/mp4"></video>
+            <button class="pdpv9-stories__play" aria-label="Lecture vidéo Sophie" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
+          </div>
+          <div class="pdpv9-stories__caption"><strong>Sophie, 38 ans</strong> · Lyon<br><span>"3 mois après. Plus calme. Plus stable."</span></div>
+        </article>
+        <article class="pdpv9-stories__card" data-stories-card="3">
+          <div class="pdpv9-stories__media">
+            <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-product-hero.mp4' | asset_url }}" type="video/mp4"></video>
+            <button class="pdpv9-stories__play" aria-label="Lecture vidéo Laurence" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
+          </div>
+          <div class="pdpv9-stories__caption"><strong>Laurence, 47 ans</strong> · Marseille<br><span>"Goût vanille noisette. Pas chimique."</span></div>
+        </article>
+        <article class="pdpv9-stories__card" data-stories-card="4">
+          <div class="pdpv9-stories__media">
+            <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-sport.mp4' | asset_url }}" type="video/mp4"></video>
+            <button class="pdpv9-stories__play" aria-label="Lecture vidéo Camille" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
+          </div>
+          <div class="pdpv9-stories__caption"><strong>Camille, 39 ans</strong> · Bordeaux<br><span>"Avant le sport. Sans excitant."</span></div>
+        </article>
+      </div>
+      <div class="pdpv9-stories__dots">
+        <button class="pdpv9-stories__dot is-active" data-stories-dot="0"></button>
+        <button class="pdpv9-stories__dot" data-stories-dot="1"></button>
+        <button class="pdpv9-stories__dot" data-stories-dot="2"></button>
+        <button class="pdpv9-stories__dot" data-stories-dot="3"></button>
+      </div>
+    </div>
+  </section>
+  {{ 'uburn-stories-carousel.js' | asset_url | script_tag }}
+
+  {%- comment -%} ─── 16H. LE MOMENT OÙ TOUT SE JOUE — placée juste après hero ─── {%- endcomment -%}
+  <section class="pdpv9-moment16h" aria-labelledby="pdpv9-moment16h-title">
+    <div class="pdpv9-moment16h__inner">
+      <div class="pdpv9-moment16h__copy">
+        <span class="pdpv9-eyebrow">Le moment critique</span>
+        <h2 class="pdpv9-h2" id="pdpv9-moment16h-title">16h. <span class="pdpv9-h2-accent">Le moment où tout se joue.</span></h2>
+        <p class="pdpv9-lead">Une envie de sucre. Un coup de mou. Le grignotage qui revient. UBurn transforme ce moment en rituel violet — gourmand et simple.</p>
+        <p class="pdpv9-moment16h__sub">Eau, lait ou boisson végétale. À toi de choisir.</p>
+
+        <ul class="pdpv9-moment16h__pills" aria-label="Notes et préparation">
+          <li class="pdpv9-moment16h__pill">Notes naturelles de vanille</li>
+          <li class="pdpv9-moment16h__pill">Touche noisette</li>
+          <li class="pdpv9-moment16h__pill">Eau, lait ou lait végétal</li>
+          <li class="pdpv9-moment16h__pill">Rituel violet gourmand</li>
+        </ul>
+
+        <a href="#pdpv9-pdp" class="pdpv9-cta-secondary pdpv9-moment16h__cta">Créer mon rituel de 16h →</a>
+      </div>
+
+      <aside class="pdpv9-moment16h__ritual" aria-label="Ton rituel UBURN">
+        <div class="pdpv9-moment16h__ritual-head">
+          <span class="pdpv9-eyebrow">Ton rituel UBURN</span>
+        </div>
+        <ul class="pdpv9-moment16h__ritual-list">
+          <li class="pdpv9-moment16h__ritual-item">
+            <span class="pdpv9-moment16h__ritual-name">Eau</span>
+            <span class="pdpv9-moment16h__ritual-desc">Léger et rapide</span>
+          </li>
+          <li class="pdpv9-moment16h__ritual-item">
+            <span class="pdpv9-moment16h__ritual-name">Lait</span>
+            <span class="pdpv9-moment16h__ritual-desc">Doux et crémeux</span>
+          </li>
+          <li class="pdpv9-moment16h__ritual-item">
+            <span class="pdpv9-moment16h__ritual-name">Lait végétal</span>
+            <span class="pdpv9-moment16h__ritual-desc">Gourmand et digeste</span>
+          </li>
+        </ul>
+      </aside>
     </div>
   </section>
 
-  <script>
-    (function() {
-      var cartBlock = document.getElementById('cart-preview-block');
-      var cardDec = document.getElementById('card-decouverte');
-      var cardMax = document.getElementById('card-maximum');
-      if (!cartBlock || !cardDec || !cardMax) return;
+  {%- comment -%}
+    ════════════════════════════════════════════════════════════════
+    POST-16H STRUCTURE — CRO-optimized order
+    1. Le Rituel Violet (taste hook with image — DESIRE)
+    2. 3 Gestes Simples (visual demo — EASE OF USE)
+    3. Pour qui est UBURN (qualification)
+    4. Comment ça marche (mechanism + EFSA legal)
+    5. Pourquoi UBURN est différent (USP)
+    6. Avis / UGC (social proof)
+    7. Comparatif (differentiation)
+    8. Formule / Ingrédients (credibility)
+    9. Offre 184€ Bonus (value stack)
+    10. Votre commande (cart recap — DECISION MOMENT)
+    11. Sécurité / Précautions (risk reversal)
+    12. FAQ (objection handling)
+    13. CTA Final (action)
+    ════════════════════════════════════════════════════════════════
+  {%- endcomment -%}
 
-      function syncVariant(variantId, price) {
-        document.querySelectorAll('[data-variant-input]').forEach(function(i) { i.value = variantId; });
-        document.querySelectorAll('[data-price]').forEach(function(p) { p.textContent = price; });
-        document.querySelectorAll('.pdpv9-variant-card').forEach(function(c) { c.classList.remove('selected'); });
-      }
-
-      function selectMax() {
-        cartBlock.style.display = '';
-        cardMax.style.outline = '2px solid var(--purple-main)';
-        cardDec.style.outline = '';
-        cardMax.classList.add('selected');
-        cardDec.classList.remove('selected');
-        var vid = cardMax.dataset.variantId;
-        var priceEl = cardMax.querySelector('[data-price]');
-        syncVariant(vid, priceEl ? priceEl.textContent : '');
-      }
-      function selectDec() {
-        cartBlock.style.display = 'none';
-        cardDec.style.outline = '2px solid var(--purple-main)';
-        cardMax.style.outline = '';
-        cardDec.classList.add('selected');
-        cardMax.classList.remove('selected');
-        var vid = cardDec.dataset.variantId;
-        var priceEl = cardDec.querySelector('[data-price]');
-        syncVariant(vid, priceEl ? priceEl.textContent : '');
-      }
-
-      // Empêcher le clic sur le bouton submit de changer la card
-      document.querySelectorAll('.pdpv9-atc-form').forEach(function(f) {
-        f.addEventListener('click', function(e) { e.stopPropagation(); });
-      });
-
-      cardDec.addEventListener('click', selectDec);
-      cardMax.addEventListener('click', selectMax);
-      selectDec(); // état initial — Découverte sélectionnée
-    })();
-  </script>
-
-
-  <!-- BONUS 184€ -->
-  <div class="pdpv9-bonus-stack">
-    <div class="pdpv9-bonus-stack__inner">
-      <div class="pdpv9-bonus-stack__label">🎁 Offerts avec votre commande aujourd'hui</div>
-      <div class="pdpv9-bonus-stack__items">
-        <div class="pdpv9-bonus-stack__item"><span class="pdpv9-bonus-stack__name">E-book "30j pour reprendre le contrôle"</span><span class="pdpv9-bonus-stack__price"><s>47€</s> <strong>OFFERT</strong></span></div>
-        <div class="pdpv9-bonus-stack__item"><span class="pdpv9-bonus-stack__name">Accès groupe privé Uburn Collective</span><span class="pdpv9-bonus-stack__price"><s>40€</s> <strong>OFFERT</strong></span></div>
-        <div class="pdpv9-bonus-stack__item"><span class="pdpv9-bonus-stack__name">Accès aux événements UBurn en ligne</span><span class="pdpv9-bonus-stack__price"><s>50€</s> <strong>OFFERT</strong></span></div>
-        <div class="pdpv9-bonus-stack__item"><span class="pdpv9-bonus-stack__name">Suivi nutrition WhatsApp 30j</span><span class="pdpv9-bonus-stack__price"><s>47€</s> <strong>OFFERT</strong></span></div>
+  {%- comment -%} ─── 1. LE RITUEL VIOLET (taste hook) ─── {%- endcomment -%}
+  <section class="pdpv9-taste">
+    <div class="pdpv9-taste__inner">
+      <div class="pdpv9-taste__media">
+        <img
+          class="pdpv9-taste__photo"
+          src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=1200&format=webp"
+          srcset="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=1200&format=webp 1200w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=1600&format=webp 1600w"
+          sizes="(min-width: 900px) 50vw, 100vw"
+          alt="Boisson UBurn violette crémeuse servie dans un grand verre avec glaçons"
+          loading="lazy"
+          decoding="async"
+          width="1200"
+          height="1200">
       </div>
-      <div class="pdpv9-bonus-stack__total">Valeur totale incluse : <strong>184€ OFFERTS</strong></div>
+      <div class="pdpv9-taste__copy">
+        <span class="pdpv9-eyebrow">Le rituel violet</span>
+        <h2 class="pdpv9-h2">Un goût doux <span class="pdpv9-h2-accent">vanille-noisette.</span></h2>
+        <p class="pdpv9-lead">À boire avec de l'eau, du lait ou une boisson végétale. Une texture douce, une couleur violette naturelle et une routine simple à intégrer dans la journée.</p>
+        <ul class="pdpv9-chips">
+          <li class="pdpv9-chip pdpv9-chip--soft">Eau, lait ou boisson végétale</li>
+          <li class="pdpv9-chip pdpv9-chip--soft">0% caféine</li>
+          <li class="pdpv9-chip pdpv9-chip--soft">Prêt en moins d'une minute</li>
+        </ul>
+        <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary pdpv9-taste__cta">Choisir ma cure →</a>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 2. 3 GESTES SIMPLES (visual demo) ─── {%- endcomment -%}
+  <section class="pdpv9-steps">
+    <div class="pdpv9-steps__head">
+      <span class="pdpv9-eyebrow">3 gestes simples</span>
+      <h2 class="pdpv9-h2">30 secondes <span class="pdpv9-h2-accent">pour changer le moment.</span></h2>
+    </div>
+    <div class="pdpv9-steps__grid">
+      <article class="pdpv9-step-card">
+        <div class="pdpv9-step-card__media">
+          <img
+            class="pdpv9-step-card__photo"
+            src="https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=1200&format=webp"
+            srcset="https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=400&format=webp 400w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=1200&format=webp 1200w"
+            sizes="(min-width: 900px) 33vw, (min-width: 700px) 33vw, 100vw"
+            alt="Mélange d'UBurn dans un grand verre"
+            loading="lazy"
+            decoding="async"
+            width="1200"
+            height="1200">
+        </div>
+        <div class="pdpv9-step-card__num">01</div>
+        <h3 class="pdpv9-step-card__title">Mélangez</h3>
+        <p class="pdpv9-step-card__copy">Une dose dans un grand verre d'eau fraîche ou de lait végétal.</p>
+      </article>
+      <article class="pdpv9-step-card">
+        <div class="pdpv9-step-card__media">
+          <img
+            class="pdpv9-step-card__photo"
+            src="https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=1200&format=webp"
+            srcset="https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=400&format=webp 400w, https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=1200&format=webp 1200w"
+            sizes="(min-width: 700px) 33vw, 100vw"
+            alt="Verre de boisson UBurn violette, fraîche et crémeuse"
+            loading="lazy"
+            decoding="async"
+            width="1200"
+            height="1200">
+        </div>
+        <div class="pdpv9-step-card__num">02</div>
+        <h3 class="pdpv9-step-card__title">Buvez</h3>
+        <p class="pdpv9-step-card__copy">Une boisson violette, douce, fraîche et crémeuse.</p>
+      </article>
+      <article class="pdpv9-step-card">
+        <div class="pdpv9-step-card__media">
+          <img
+            class="pdpv9-step-card__photo"
+            src="https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=1200&format=webp"
+            srcset="https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=400&format=webp 400w, https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=1200&format=webp 1200w"
+            sizes="(min-width: 700px) 33vw, 100vw"
+            alt="Femme calme avec UBurn dans sa routine quotidienne"
+            loading="lazy"
+            decoding="async"
+            width="1200"
+            height="1200">
+        </div>
+        <div class="pdpv9-step-card__num">03</div>
+        <h3 class="pdpv9-step-card__title">Restez en contrôle</h3>
+        <p class="pdpv9-step-card__copy">Une sensation de satiété qui vous aide à traverser le moment critique.</p>
+      </article>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 3. POUR QUI EST UBURN ─── {%- endcomment -%}
+  <section class="pdpv9-foryou" aria-labelledby="pdpv9-foryou-title">
+    <div class="pdpv9-foryou__inner">
+      <div class="pdpv9-foryou__copy">
+        <span class="pdpv9-eyebrow">Est-ce pour toi ?</span>
+        <h2 class="pdpv9-h2" id="pdpv9-foryou-title">UBURN est <span class="pdpv9-h2-accent">fait pour toi si…</span></h2>
+        <ul class="pdpv9-foryou__list">
+          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Tu grignotes souvent entre les repas.</li>
+          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Tu as des envies sucrées vers 16h ou le soir.</li>
+          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Tu veux éviter les boissons caféinées.</li>
+          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Tu cherches une routine simple, pas un régime compliqué.</li>
+          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Tu veux une boisson plaisir, douce, violette et gourmande.</li>
+        </ul>
+        <p class="pdpv9-foryou__trust">UBURN n'est pas une solution miracle. C'est une routine de satiété pensée pour t'aider à mieux gérer les moments critiques de ta journée.</p>
+      </div>
+      <div class="pdpv9-foryou__media">
+        <img src="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=1200&format=webp"
+             srcset="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=1200&format=webp 1200w"
+             sizes="(min-width:900px) 50vw, 100vw"
+             alt="UBURN est fait pour toi — routine simple et gourmande"
+             loading="lazy" decoding="async" width="1200" height="1500"
+             style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:16px;display:block;box-shadow:0 16px 48px rgba(61,24,115,.12);">
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 3. COMMENT ÇA MARCHE ─── {%- endcomment -%}
+  <section class="pdpv9-howit" aria-labelledby="pdpv9-howit-title">
+    <div class="pdpv9-howit__head">
+      <span class="pdpv9-eyebrow">Comment ça marche</span>
+      <h2 class="pdpv9-h2" id="pdpv9-howit-title">Comment UBURN aide à <span class="pdpv9-h2-accent">calmer les fringales.</span></h2>
+      <p class="pdpv9-lead">Mélange. Bois. Le konjac fait son travail.</p>
+    </div>
+    <ol class="pdpv9-howit__grid">
+      <li class="pdpv9-howit-card">
+        <div class="pdpv9-howit-card__num">01</div>
+        <h3 class="pdpv9-howit-card__title">Tu mélanges</h3>
+        <p class="pdpv9-howit-card__copy">Une dose dans de l'eau, du lait ou du lait végétal selon la texture que tu préfères.</p>
+      </li>
+      <li class="pdpv9-howit-card">
+        <div class="pdpv9-howit-card__num">02</div>
+        <h3 class="pdpv9-howit-card__title">Le glucomannane absorbe l'eau</h3>
+        <p class="pdpv9-howit-card__copy">Cette fibre issue du konjac forme un gel naturel au contact de l'eau.</p>
+      </li>
+      <li class="pdpv9-howit-card">
+        <div class="pdpv9-howit-card__num">03</div>
+        <h3 class="pdpv9-howit-card__title">Tu restes rassasiée plus longtemps</h3>
+        <p class="pdpv9-howit-card__copy">Une aide simple pour traverser les moments où tu aurais normalement grignoté.</p>
+      </li>
+    </ol>
+    <details class="pdpv9-acc pdpv9-howit__legal-acc">
+      <summary class="pdpv9-acc__q">Conditions EFSA glucomannane</summary>
+      <div class="pdpv9-acc__a"><p>Bénéfice obtenu avec 3 g par jour en 3 prises de 1 g, avec 1-2 verres d'eau avant les repas, dans le cadre d'un régime hypocalorique.</p></div>
+    </details>
+    {%- comment -%} IMAGE SLOT (à ajouter plus tard) : infographie glucomannane {%- endcomment -%}
+  </section>
+
+  {%- comment -%} ─── 4. POURQUOI UBURN EST DIFFÉRENT ─── {%- endcomment -%}
+  <section class="pdpv9-diff" aria-labelledby="pdpv9-diff-title">
+    <div class="pdpv9-diff__head">
+      <span class="pdpv9-eyebrow">La différence UBURN</span>
+      <h2 class="pdpv9-h2" id="pdpv9-diff-title">Pourquoi UBURN <span class="pdpv9-h2-accent">est différent.</span></h2>
+    </div>
+    <div class="pdpv9-diff__grid">
+      <article class="pdpv9-diff-card">
+        <h3 class="pdpv9-diff-card__title">0% caféine</h3>
+        <p class="pdpv9-diff-card__copy">Une routine douce, sans effet excitant.</p>
+      </article>
+      <article class="pdpv9-diff-card">
+        <h3 class="pdpv9-diff-card__title">30 kcal par dose</h3>
+        <p class="pdpv9-diff-card__copy">Un rituel léger qui s'intègre facilement dans la journée.</p>
+      </article>
+      <article class="pdpv9-diff-card">
+        <h3 class="pdpv9-diff-card__title">Sans sucre ajouté</h3>
+        <p class="pdpv9-diff-card__copy">Une alternative gourmande aux snacks sucrés.</p>
+      </article>
+      <article class="pdpv9-diff-card">
+        <h3 class="pdpv9-diff-card__title">Notes vanille &amp; noisette</h3>
+        <p class="pdpv9-diff-card__copy">Un goût doux et naturel, pensé pour donner envie d'y revenir.</p>
+      </article>
+      <article class="pdpv9-diff-card">
+        <h3 class="pdpv9-diff-card__title">Sans abonnement</h3>
+        <p class="pdpv9-diff-card__copy">Tu commandes quand tu veux, sans engagement.</p>
+      </article>
+      <article class="pdpv9-diff-card">
+        <h3 class="pdpv9-diff-card__title">Prêt en 30 secondes</h3>
+        <p class="pdpv9-diff-card__copy">À mélanger simplement avec de l'eau, du lait ou du lait végétal.</p>
+      </article>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 5. AVIS / UGC ─── {%- endcomment -%}
+  <section class="pdpv9-reviews" aria-labelledby="pdpv9-reviews-title">
+    <div class="pdpv9-reviews__head">
+      <span class="pdpv9-eyebrow">Elles racontent</span>
+      <h2 class="pdpv9-h2" id="pdpv9-reviews-title">Elles ont intégré UBURN <span class="pdpv9-h2-accent">à leur routine.</span></h2>
+      <p class="pdpv9-lead">Des routines simples. Des moments réels.</p>
+      <div class="pdpv9-reviews__rating">
+        <span class="pdpv9-stars" aria-hidden="true">●</span>
+        <span class="pdpv9-reviews__rating-text">Lancement France · Stock limité</span>
+      </div>
+    </div>
+    {%- comment -%} IMAGE SLOTS (à ajouter plus tard) : UGC photo 1, UGC photo 2, UGC video 1 {%- endcomment -%}
+    <div class="pdpv9-reviews__grid">
+      <article class="pdpv9-review-card">
+        <div class="pdpv9-review-card__stars">★★★★★</div>
+        <p class="pdpv9-review-card__text">« Je le prends à 16h, ça m'aide à éviter le grignotage avant le dîner. »</p>
+        <div class="pdpv9-review-card__verified">✓ Achat vérifié</div>
+        <div class="pdpv9-review-card__author">
+          <div class="pdpv9-review-card__avatar">M</div>
+          <div>
+            <div class="pdpv9-review-card__name">Marion L.</div>
+            <div class="pdpv9-review-card__role">28 ans · Lyon</div>
+          </div>
+        </div>
+      </article>
+      <article class="pdpv9-review-card">
+        <div class="pdpv9-review-card__stars">★★★★★</div>
+        <p class="pdpv9-review-card__text">« Le goût est doux, surtout avec du lait d'amande. C'est devenu mon moment plaisir de l'après-midi. »</p>
+        <div class="pdpv9-review-card__verified">✓ Achat vérifié</div>
+        <div class="pdpv9-review-card__author">
+          <div class="pdpv9-review-card__avatar">S</div>
+          <div>
+            <div class="pdpv9-review-card__name">Sophie</div>
+            <div class="pdpv9-review-card__role">Bordeaux</div>
+          </div>
+        </div>
+      </article>
+      <article class="pdpv9-review-card">
+        <div class="pdpv9-review-card__stars">★★★★★</div>
+        <p class="pdpv9-review-card__text">« J'aime le fait que ce soit sans caféine. C'est devenu mon petit rituel de l'après-midi. »</p>
+        <div class="pdpv9-review-card__verified">✓ Achat vérifié</div>
+        <div class="pdpv9-review-card__author">
+          <div class="pdpv9-review-card__avatar">N</div>
+          <div>
+            <div class="pdpv9-review-card__name">Nathalie</div>
+            <div class="pdpv9-review-card__role">Toulouse</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 6. COMPARATIF ─── {%- endcomment -%}
+  <section class="pdpv9-compare" aria-labelledby="pdpv9-compare-title">
+    <div class="pdpv9-compare__head">
+      <span class="pdpv9-eyebrow">Comparatif</span>
+      <h2 class="pdpv9-h2" id="pdpv9-compare-title">UBURN <span class="pdpv9-h2-accent">vs les solutions classiques.</span></h2>
+    </div>
+    {%- comment -%} Desktop: full table; Mobile: stacked cards (CSS toggle via media query) {%- endcomment -%}
+    <div class="pdpv9-compare__table-wrap" role="region" aria-label="Tableau comparatif">
+      <table class="pdpv9-compare__table">
+        <thead>
+          <tr>
+            <th scope="col">Critère</th>
+            <th scope="col" class="pdpv9-compare__hl">UBURN</th>
+            <th scope="col">Snack sucré</th>
+            <th scope="col">Café</th>
+            <th scope="col">Coupe-faim stimulant</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Aide à gérer les fringales</th><td class="pdpv9-compare__hl">Oui</td><td>Non</td><td>Peu</td><td>Variable</td></tr>
+          <tr><th scope="row">Sans caféine</th><td class="pdpv9-compare__hl">Oui</td><td>Oui</td><td>Non</td><td>Souvent non</td></tr>
+          <tr><th scope="row">30 kcal</th><td class="pdpv9-compare__hl">Oui</td><td>Non</td><td>Oui</td><td>Variable</td></tr>
+          <tr><th scope="row">Goût gourmand</th><td class="pdpv9-compare__hl">Oui</td><td>Oui</td><td>Variable</td><td>Rare</td></tr>
+          <tr><th scope="row">Routine simple</th><td class="pdpv9-compare__hl">Oui</td><td>Non</td><td>Oui</td><td>Variable</td></tr>
+          <tr><th scope="row">Sans abonnement</th><td class="pdpv9-compare__hl">Oui</td><td>Oui</td><td>Oui</td><td>Variable</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 7. FORMULE / INGREDIENTS ─── {%- endcomment -%}
+  <section class="pdpv9-formula" aria-labelledby="pdpv9-formula-title">
+    <div class="pdpv9-formula__inner">
+      <div class="pdpv9-formula__copy">
+        <span class="pdpv9-eyebrow">La formule</span>
+        <h2 class="pdpv9-h2" id="pdpv9-formula-title">Une formule simple, gourmande <span class="pdpv9-h2-accent">et pensée pour la satiété.</span></h2>
+        <p class="pdpv9-lead">Ube violet. Konjac. Notes vanille-noisette. Une formule simple et gourmande.</p>
+
+        <div class="pdpv9-formula__pillars">
+          <div class="pdpv9-formula-pill">
+            <div class="pdpv9-formula-pill__name">Ube violet</div>
+            <div class="pdpv9-formula-pill__role">Couleur · plaisir · antioxydants naturels</div>
+          </div>
+          <div class="pdpv9-formula-pill">
+            <div class="pdpv9-formula-pill__name">Konjac (glucomannane)</div>
+            <div class="pdpv9-formula-pill__role">3g par dose · gel naturel · aide à mieux gérer les fringales</div>
+          </div>
+          <div class="pdpv9-formula-pill">
+            <div class="pdpv9-formula-pill__name">L-Carnitine + MCT coco</div>
+            <div class="pdpv9-formula-pill__role">Aide à mieux gérer les fringales dans le cadre d'une alimentation équilibrée</div>
+          </div>
+          <div class="pdpv9-formula-pill">
+            <div class="pdpv9-formula-pill__name">Vanille &amp; noisette</div>
+            <div class="pdpv9-formula-pill__role">Notes naturelles · texture douce · plaisir du rituel</div>
+          </div>
+        </div>
+
+        <details class="pdpv9-acc pdpv9-formula__efsa-acc">
+          <summary class="pdpv9-acc__q">Allégation EFSA officielle (ID 3120)</summary>
+          <div class="pdpv9-acc__a">
+            <p>« Le glucomannane contribue à la perte de poids dans le cadre d'un régime hypocalorique selon les conditions d'utilisation autorisées. »</p>
+            <p><em>Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas.</em></p>
+          </div>
+        </details>
+
+        <a href="/pages/ingredients" class="pdpv9-why__cta pdpv9-formula__cta">
+          Découvrir les ingrédients
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="pdpv9-formula__media">
+        <img src="https://uburn.co/cdn/shop/files/f9e98b558abe22aa8524279d4bcc494e.jpg?v=1777324703&width=1200&format=webp"
+             srcset="https://uburn.co/cdn/shop/files/f9e98b558abe22aa8524279d4bcc494e.jpg?v=1777324703&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/f9e98b558abe22aa8524279d4bcc494e.jpg?v=1777324703&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/f9e98b558abe22aa8524279d4bcc494e.jpg?v=1777324703&width=1200&format=webp 1200w"
+             sizes="(min-width:900px) 50vw, 100vw"
+             alt="Formule UBURN — boisson violette gourmande pensée pour la satiété"
+             loading="lazy" decoding="async" width="1200" height="1500"
+             style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:16px;display:block;box-shadow:0 16px 48px rgba(61,24,115,.12);">
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 9. OFFRE 184€ BONUS (value stack) ─── {%- endcomment -%}
+  <section class="pdpv9-offer" aria-labelledby="pdpv9-offer-title">
+    <div class="pdpv9-offer__inner">
+      <div class="pdpv9-offer__head">
+        <span class="pdpv9-eyebrow">Inclus avec ta cure</span>
+        <h2 class="pdpv9-h2" id="pdpv9-offer-title">Aujourd'hui, ta cure inclut <span class="pdpv9-h2-accent">184€ de bonus offerts</span></h2>
+        <p class="pdpv9-lead">Une cure. Un accompagnement complet. Tout inclus.</p>
+      </div>
+      {%- comment -%} IMAGE SLOT (à ajouter plus tard) : bonus pack visual {%- endcomment -%}
+      <div class="pdpv9-offer__grid">
+        <article class="pdpv9-offer-card">
+          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>47€</s></span> <strong>Offert</strong></div>
+          <h3 class="pdpv9-offer-card__title">E-book 30 jours</h3>
+          <p class="pdpv9-offer-card__copy">Recettes, conseils, plan jour par jour.</p>
+        </article>
+        <article class="pdpv9-offer-card">
+          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>47€</s></span> <strong>Offert</strong></div>
+          <h3 class="pdpv9-offer-card__title">Suivi WhatsApp 30j</h3>
+          <p class="pdpv9-offer-card__copy">Conseils personnalisés, à ton rythme.</p>
+        </article>
+        <article class="pdpv9-offer-card">
+          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>40€</s></span> <strong>Offert</strong></div>
+          <h3 class="pdpv9-offer-card__title">UBURN Collective</h3>
+          <p class="pdpv9-offer-card__copy">Le groupe privé. Soutien, recettes, succès.</p>
+        </article>
+        <article class="pdpv9-offer-card">
+          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>50€</s></span> <strong>Offert</strong></div>
+          <h3 class="pdpv9-offer-card__title">Événements live</h3>
+          <p class="pdpv9-offer-card__copy">Sessions mensuelles + replays.</p>
+        </article>
+      </div>
+      <p class="pdpv9-offer__total">Total bonus : <strong>184€ offerts</strong> avec ta cure UBURN.</p>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 10. VOTRE COMMANDE — cart recap (DECISION MOMENT) ─── {%- endcomment -%}
+  <section class="pdpv9-cart" aria-labelledby="pdpv9-cart-title">
+    <div class="pdpv9-cart__inner">
+      <div class="pdpv9-cart__head">
+        <span class="pdpv9-eyebrow">Votre commande</span>
+        <h2 class="pdpv9-h2" id="pdpv9-cart-title">Avec votre cure, <span class="pdpv9-h2-accent">vous recevez :</span></h2>
+      </div>
+
+      <div class="pdpv9-cart__card">
+        <div class="pdpv9-cart__title">Votre panier</div>
+
+        {%- comment -%} Main product line — uses dynamic variant from current_variant {%- endcomment -%}
+        <div class="pdpv9-cart__line pdpv9-cart__line--product">
+          <div class="pdpv9-cart__product-thumb" aria-hidden="true">
+            {%- if product.featured_image -%}
+              <img src="{{ product.featured_image | image_url: width: 160 }}&format=webp" alt="" loading="lazy" decoding="async" width="80" height="80">
+            {%- endif -%}
+          </div>
+          <div class="pdpv9-cart__product-info">
+            <div class="pdpv9-cart__product-name">{{ product.title | default: 'UBurn — Poudre Ubé' }}</div>
+            <div class="pdpv9-cart__product-meta" id="pdpv9-cart-meta">
+              {%- if current_variant.id == v_decouverte.id -%}
+                Saveur noisette-vanille · Cure 30 jours · 1 dose/jour
+              {%- else -%}
+                Saveur noisette-vanille · Cure 30 jours · 3 doses/jour
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="pdpv9-cart__product-price" id="pdpv9-cart-price">{{ current_variant.price | money }}</div>
+        </div>
+
+        {%- comment -%} 4 bonuses, struck-through then 0€ {%- endcomment -%}
+        <div class="pdpv9-cart__line">
+          <div class="pdpv9-cart__bonus-icon" aria-hidden="true">E</div>
+          <div class="pdpv9-cart__bonus-info">
+            <div class="pdpv9-cart__bonus-name">E-book « 30j pour reprendre le contrôle »</div>
+            <div class="pdpv9-cart__bonus-tag">Offert</div>
+          </div>
+          <div class="pdpv9-cart__bonus-price"><s>47€</s> <strong>0€</strong></div>
+        </div>
+        <div class="pdpv9-cart__line">
+          <div class="pdpv9-cart__bonus-icon" aria-hidden="true">G</div>
+          <div class="pdpv9-cart__bonus-info">
+            <div class="pdpv9-cart__bonus-name">Groupe privé UBurn Collective</div>
+            <div class="pdpv9-cart__bonus-tag">Offert</div>
+          </div>
+          <div class="pdpv9-cart__bonus-price"><s>40€</s> <strong>0€</strong></div>
+        </div>
+        <div class="pdpv9-cart__line">
+          <div class="pdpv9-cart__bonus-icon" aria-hidden="true">É</div>
+          <div class="pdpv9-cart__bonus-info">
+            <div class="pdpv9-cart__bonus-name">Événements UBurn en ligne</div>
+            <div class="pdpv9-cart__bonus-tag">Offert</div>
+          </div>
+          <div class="pdpv9-cart__bonus-price"><s>50€</s> <strong>0€</strong></div>
+        </div>
+        <div class="pdpv9-cart__line">
+          <div class="pdpv9-cart__bonus-icon" aria-hidden="true">W</div>
+          <div class="pdpv9-cart__bonus-info">
+            <div class="pdpv9-cart__bonus-name">Suivi nutrition WhatsApp 30j</div>
+            <div class="pdpv9-cart__bonus-tag">Offert</div>
+          </div>
+          <div class="pdpv9-cart__bonus-price"><s>47€</s> <strong>0€</strong></div>
+        </div>
+
+        {%- comment -%} Savings summary {%- endcomment -%}
+        <div class="pdpv9-cart__savings">
+          <span>Économies totales</span>
+          <span class="pdpv9-cart__savings-amount">−184€</span>
+        </div>
+
+        {%- comment -%} Total + per-day {%- endcomment -%}
+        <div class="pdpv9-cart__total">
+          <span class="pdpv9-cart__total-label">Total</span>
+          <span class="pdpv9-cart__total-amount" id="pdpv9-cart-total">{{ current_variant.price | money }}</span>
+        </div>
+        <div class="pdpv9-cart__per-day" id="pdpv9-cart-per-day">
+          {%- if current_variant.id == v_decouverte.id -%}
+            soit 1,15€/jour sur 30 jours
+          {%- else -%}
+            soit 1,82€/jour sur 30 jours
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Trust + CTA {%- endcomment -%}
+        <div class="pdpv9-cart__rating">
+          <span class="pdpv9-stars" aria-hidden="true">●</span>
+          <span class="pdpv9-cart__rating-text">Lancement France · Expédié depuis la France</span>
+        </div>
+        <button type="submit" form="pdpv9-pdp-form" name="add" class="pdpv9-cart__cta">
+          Continuer vers le paiement →
+        </button>
+        <div class="pdpv9-cart__efsa">✓ Allégation glucomannane validée EFSA (ID 3120)</div>
+        <div class="pdpv9-cart__pay">
+          <span class="pdpv9-cart__pay-badge">Visa</span>
+          <span class="pdpv9-cart__pay-badge">Mastercard</span>
+          <span class="pdpv9-cart__pay-badge">Apple Pay</span>
+          <span class="pdpv9-cart__pay-badge">Shop Pay</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 11. SÉCURITÉ / PRÉCAUTIONS ─── {%- endcomment -%}
+  <section class="pdpv9-safety" aria-labelledby="pdpv9-safety-title">
+    <div class="pdpv9-safety__inner">
+      <details class="pdpv9-acc pdpv9-safety__acc">
+        <summary class="pdpv9-acc__q">À savoir avant de commencer</summary>
+        <div class="pdpv9-acc__a">
+          <ul>
+            <li>Complément alimentaire, pas un médicament.</li>
+            <li>Ne remplace pas une alimentation équilibrée.</li>
+            <li>À boire avec suffisamment d'eau.</li>
+            <li>Déconseillé pendant la grossesse et l'allaitement.</li>
+            <li>Demande l'avis d'un professionnel en cas de traitement médical.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 9. FAQ ─── {%- endcomment -%}
+  {%- comment -%} ─── CTA Pre-FAQ (CRO V1) ─── {%- endcomment -%}
+  <div class="pdpv9-cta-band">
+    <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary">Choisir ma cure →</a>
+  </div>
+
+  <section class="pdpv9-faq" aria-labelledby="pdpv9-faq-title">
+    <div class="pdpv9-faq__inner">
+      <div class="pdpv9-faq__head">
+        <span class="pdpv9-eyebrow">Questions fréquentes</span>
+        <h2 class="pdpv9-h2" id="pdpv9-faq-title">Tout ce que tu veux <span class="pdpv9-h2-accent">savoir avant de commander.</span></h2>
+      </div>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">Quel goût a UBurn ?</summary>
+        <div class="pdpv9-acc__a"><p>Un goût doux vanille-noisette, naturellement violet, sans arrière-goût chimique. Pensé pour donner envie d'y revenir.</p></div>
+      </details>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">Comment l'utiliser ?</summary>
+        <div class="pdpv9-acc__a"><p>Mélange une dose dans 200 à 300 ml d'eau, de lait ou de boisson végétale. Remue, attends quelques secondes que la texture se forme, et bois. Prêt en moins d'une minute.</p></div>
+      </details>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">Eau ou lait, qu'est-ce qui est mieux ?</summary>
+        <div class="pdpv9-acc__a"><p>Eau pour une version légère et désaltérante. Lait, lait d'amande ou lait d'avoine pour une texture plus douce et crémeuse. Les deux fonctionnent — c'est une question de goût.</p></div>
+      </details>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">Quand prendre UBurn ?</summary>
+        <div class="pdpv9-acc__a"><p>Tu peux le prendre avant un repas ou au moment où les fringales arrivent, par exemple vers 16h. Pour le glucomannane, le bénéfice réglementaire est associé à 3 prises de 1 g par jour avant les repas, avec suffisamment d'eau.</p></div>
+      </details>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">Est-ce qu'UBurn contient de la caféine ?</summary>
+        <div class="pdpv9-acc__a"><p>Non, UBurn est 0% caféine. Tu peux donc le prendre l'après-midi ou le soir sans risquer de perturber ton sommeil.</p></div>
+      </details>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">Combien de temps dure une cure ?</summary>
+        <div class="pdpv9-acc__a"><p>Découverte 90g : environ 30 jours à raison de 1 dose/jour. Résultats Maximum 270g : environ 30 jours à raison de 3 doses/jour. Tu choisis le rythme qui te convient.</p></div>
+      </details>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">Livraison en combien de temps ?</summary>
+        <div class="pdpv9-acc__a"><p>Expédié depuis la France. Livraison gratuite en France, généralement reçue sous 2 à 4 jours ouvrés après expédition.</p></div>
+      </details>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">Puis-je commencer avec Découverte ?</summary>
+        <div class="pdpv9-acc__a"><p>Oui — c'est même le format conseillé pour tester la routine UBurn avant de passer sur Résultats Maximum si tu veux le meilleur prix par dose.</p></div>
+      </details>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">Est-ce compatible avec un régime ?</summary>
+        <div class="pdpv9-acc__a"><p>Oui, UBurn peut s'intégrer dans une alimentation équilibrée et un régime hypocalorique. Ce n'est pas une solution miracle, mais une routine pour aider à mieux gérer les fringales.</p></div>
+      </details>
+      <details class="pdpv9-acc">
+        <summary class="pdpv9-acc__q">Est-ce adapté pendant la grossesse ou l'allaitement ?</summary>
+        <div class="pdpv9-acc__a"><p>Non, par précaution, UBurn est déconseillé pendant la grossesse et l'allaitement.</p></div>
+      </details>
+    </div>
+  </section>
+
+  {%- comment -%} ─── 10. CTA FINAL ─── {%- endcomment -%}
+  <section class="pdpv9-final" aria-labelledby="pdpv9-final-title">
+    <div class="pdpv9-final__inner">
+      <span class="pdpv9-eyebrow">Prête ?</span>
+      <h2 class="pdpv9-h2" id="pdpv9-final-title">Prête à créer <span class="pdpv9-h2-accent">ton rituel UBURN ?</span></h2>
+      <p class="pdpv9-lead">Boisson violette. Sans caféine. Routine simple.</p>
+      <a href="#pdpv9-pdp" class="pdpv9-cta-primary pdpv9-final__cta">Commencer ma cure 30 jours</a>
+      <p class="pdpv9-final__sub">Livraison offerte · Paiement sécurisé · Sans abonnement</p>
+    </div>
+  </section>
+
+
+  <div class="pdpv9-disc">
+    <div class="pdpv9-disc__inner">
+      <p>Complément alimentaire à base de glucomannane. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas. Ne se substitue pas à une alimentation variée et équilibrée. Déconseillé pendant la grossesse et l'allaitement.</p>
     </div>
   </div>
-  <!-- PROBLEM -->
-  <section class="section problem-section" id="probleme">
-    <div class="section-inner reveal">
-      <div class="section-label">On connaît ce moment.</div>
-      <h2 class="section-title">Le même schéma, <span class="accent">chaque jour.</span></h2>
-      <div class="prob-cards stagger-scale">
-        <div class="prob-card">
-          <div class="prob-num">01</div>
-          <div class="prob-title">16h — le placard vous appelle</div>
-          <div class="prob-sub">Glycémie en chute libre. C'est physiologique, pas un manque de volonté.</div>
-        </div>
-        <div class="prob-card">
-          <div class="prob-num">02</div>
-          <div class="prob-title">Le soir devant le frigo</div>
-          <div class="prob-sub">La fatigue baisse la garde. Les bonnes intentions du matin s'effacent.</div>
-        </div>
-        <div class="prob-card">
-          <div class="prob-num">03</div>
-          <div class="prob-title">La volonté ne suffit pas</div>
-          <div class="prob-sub">Ce n'est pas vous. C'est biologique. Et ça se traite.</div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- HOW IT WORKS -->
-  <section class="section how-section">
-    <div class="section-inner reveal">
-      <div class="section-label">Comment Uburn agit</div>
-      <h2 class="section-title" style="text-align:center">3 gestes. <span class="accent">4h de résultat.</span></h2>
-      <div class="how-grid stagger-children" style="align-items:start">
-        <div class="how-step">
-          <div class="how-step-photo">
-            <img src="https://uburn.co/cdn/shop/files/etape_1.jpg?v=1763147054&width=600&format=webp" alt="Mélangez UBurn dans un verre d'eau ou de lait végétal" loading="lazy" decoding="async" width="600" height="600">
-          </div>
-          <div class="how-num">01</div>
-          <h4>Mélangez</h4>
-          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Une dose dans un grand verre d'eau <strong>OU</strong> de lait végétal</p>
-        </div>
-        <div class="how-step">
-          <div class="how-step-photo">
-            <img src="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=600&format=webp" alt="Le glucomannane forme un gel naturel dans votre estomac" loading="lazy" decoding="async" width="600" height="600">
-          </div>
-          <div class="how-num">02</div>
-          <h4>Le gel se forme</h4>
-          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Le konjac gonfle dans votre estomac et coupe la faim naturellement</p>
-        </div>
-        <div class="how-step">
-          <div class="how-step-photo">
-            <img src="https://uburn.co/cdn/shop/files/etape_3.jpg?v=1763147054&width=600&format=webp" alt="4h sans fringales — votre estomac est calmé naturellement" loading="lazy" decoding="async" width="600" height="600">
-          </div>
-          <div class="how-num">03</div>
-          <h4>4h sans fringales</h4>
-          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Votre estomac est calmé, naturellement</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <style>
-    .how-step-photo{width:100%;aspect-ratio:1/1;border-radius:20px;overflow:hidden;margin-bottom:16px;background:var(--purple-wash)}
-    .how-step-photo img{width:100%;height:100%;object-fit:cover}
-  </style>
-
-  <!-- INGREDIENTS -->
-  <section class="section" id="ingredients" style="background:var(--cream)">
-    <div class="section-inner reveal">
-      <div class="section-label">Ingrédients</div>
-      <h2 class="section-title">Des actifs naturels <span class="accent">hautement sélectionnés</span></h2>
-      <div class="ingr-grid stagger-scale">
-        <div class="ingr-card">
-          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1749644803&width=500&format=webp" alt="Ubé violet" loading="lazy" decoding="async" width="500" height="375"></div>
-          <div class="ingr-card-body"><h4>Ubé violet</h4><p>Antioxydants naturels</p></div>
-        </div>
-        <div class="ingr-card">
-          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1749644803&width=500&format=webp" alt="Konjac" loading="lazy" decoding="async" width="500" height="375"></div>
-          <div class="ingr-card-body"><h4>Konjac</h4><p>Satiété 4h · EFSA</p></div>
-        </div>
-        <div class="ingr-card">
-          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1749644803&width=500&format=webp" alt="Fibre d'acacia" loading="lazy" decoding="async" width="500" height="375"></div>
-          <div class="ingr-card-body"><h4>Acacia</h4><p>Prébiotique digestif</p></div>
-        </div>
-        <div class="ingr-card">
-          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1749644803&width=500&format=webp" alt="MCT de coco" loading="lazy" decoding="async" width="500" height="375"></div>
-          <div class="ingr-card-body"><h4>MCT coco</h4><p>Énergie stable</p></div>
-        </div>
-        <div class="ingr-card">
-          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1749644803&width=500&format=webp" alt="Gingembre" loading="lazy" decoding="async" width="500" height="375"></div>
-          <div class="ingr-card-body"><h4>Gingembre</h4><p>Digestion + métabolisme</p></div>
-        </div>
-        <div class="ingr-card">
-          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1749644803&width=500&format=webp" alt="L-Carnitine" loading="lazy" decoding="async" width="500" height="375"></div>
-          <div class="ingr-card-body"><h4>L-Carnitine</h4><p>Métabolisme des graisses</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="section testi-section-placeholder" style="display:none">
-    <div class="benefits-inner reveal">
-      <div class="benefits-head">
-        <div class="section-label">Soutien complet</div>
-        <h2 class="section-title" style="text-align:center">6 bienfaits, <span class="accent">une seule boisson.</span></h2>
-        <p style="max-width:400px;margin:12px auto 0;color:var(--body);font-size:14px">Une dose. Six bénéfices.</p>
-      </div>
-      <div class="benefits-grid-layout">
-        <div class="benefit-cards">
-          <div class="benefit-card active" data-benefit="satiete">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div>
-            <div class="benefit-name">Satiété</div>
-          </div>
-          <div class="benefit-card" data-benefit="energie">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-            <div class="benefit-name">Énergie</div>
-          </div>
-          <div class="benefit-card" data-benefit="digestion">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2"/></svg></div>
-            <div class="benefit-name">Digestion</div>
-          </div>
-          <div class="benefit-card" data-benefit="antioxydants">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/><path d="M12 8v6"/><path d="M12 18h.01"/></svg></div>
-            <div class="benefit-name">Antioxydants</div>
-          </div>
-          <div class="benefit-card" data-benefit="metabolisme">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
-            <div class="benefit-name">Métabolisme</div>
-          </div>
-          <div class="benefit-card" data-benefit="bien_etre">
-            <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-            <div class="benefit-name">Bien-être</div>
-          </div>
-        </div>
-        <div class="benefit-detail">
-          <div class="benefit-detail-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div>
-          <div class="benefit-label">Glucomannane · EFSA · Fibres</div>
-          <h3 class="benefit-title">Satiété durable</h3>
-          <p class="benefit-desc">Système complet basé sur le glucomannane (EFSA ID 3120) et 5g de fibres par dose. Le konjac absorbe jusqu'à 100x son poids en eau pour former un gel qui occupe naturellement l'estomac.</p>
-          <span class="benefit-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Actifs dosés cliniquement</span>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- PRESS -->
-  <div class="press-bar">
-    <p>Ils parlent de nous</p>
-    <div class="press-logos">
-      <img src="https://uburn.co/cdn/shop/files/TF1_1989-1990.png?v=1749644803&width=150&format=webp" alt="TF1" loading="lazy" decoding="async" width="150" height="50">
-      <img src="https://uburn.co/cdn/shop/files/Brut_logo_svg.png?v=1749644803&width=150&format=webp" alt="Brut" loading="lazy" decoding="async" width="150" height="50">
-      <img src="https://uburn.co/cdn/shop/files/logo-femmeactuelle-copie_cb5c498d-5470-4a4d-83fc-7b16c264a030.png?v=1749644803&width=150&format=webp" alt="Femme Actuelle" loading="lazy" decoding="async" width="150" height="50">
-      <img src="https://uburn.co/cdn/shop/files/VOGUE_revista_-_logo.png?v=1749644803&width=150&format=webp" alt="Vogue" loading="lazy" decoding="async" width="150" height="50">
-      <img src="https://uburn.co/cdn/shop/files/ELLE_Magazine_Logo.svg" alt="Elle">
-    </div>
+  {%- comment -%}
+    Sticky mobile CTA — submits the native PDP form via HTML5 form attribute.
+    No JS required. Falls back to anchor link if form not present (defensive).
+  {%- endcomment -%}
+  <div class="pdpv9-sticky-cta">
+    {%- if current_variant.available -%}
+      <button type="submit" form="pdpv9-pdp-form" name="add" class="pdpv9-sticky-cta__btn" aria-label="Ajouter au panier">
+        Ajouter au panier — <span id="pdpv9-sticky-price">{{ current_variant.price | money }}</span>
+      </button>
+    {%- else -%}
+      <a href="#pdpv9-pdp" class="pdpv9-sticky-cta__btn pdpv9-sticky-cta__btn--disabled" aria-disabled="true">En rupture</a>
+    {%- endif -%}
   </div>
 
-  <!-- STATS with BIG PERCENTAGES (IM8-inspired) -->
-  <section class="stats-section">
-    <div class="section-inner reveal">
-      <h2>UBurn agit dès la première prise</h2>
-      <div class="big-stats-row stagger-children">
-        <div class="big-stat"><div class="big-stat-num" data-count="95" data-suffix="%">95%</div><div class="big-stat-label">Satiété dès la 1ère prise</div></div>
-        <div class="big-stat"><div class="big-stat-num" data-count="87" data-suffix="%">87%</div><div class="big-stat-label">Moins de grignotage le soir</div></div>
-        <div class="big-stat"><div class="big-stat-num" data-count="82" data-suffix="%">82%</div><div class="big-stat-label">Rythme alimentaire apaisé</div></div>
-        <div class="big-stat"><div class="big-stat-num">4.7/5</div><div class="big-stat-label">Note vérifiée</div></div>
-      </div>
-      <a href="#card-decouverte" class="btn btn-white">Commencer ma cure →</a>
-      <div class="stats-row" style="margin-top:48px;opacity:.85">
-        <div class="stat"><div class="stat-num">30</div><div class="stat-label">kcal par dose</div></div>
-        <div class="stat"><div class="stat-num">4h</div><div class="stat-label">de satiété</div></div>
-        <div class="stat"><div class="stat-num">6</div><div class="stat-label">actifs naturels</div></div>
-        <div class="stat"><div class="stat-num">0%</div><div class="stat-label">caféine</div></div>
-      </div>
-      <p class="stats-note">Résultats sur enquête interne auprès de 1 500+ clientes UBurn.</p>
-    </div>
-  <section class="section testi-section" id="avis">
-    <div class="section-inner reveal">
-      <h2 class="section-title" style="text-align:center">Elles racontent <span class="accent">leurs résultats.</span></h2>
-      <div class="testi-grid stagger-scale">
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"Je ne pense plus au placard à 16h. Ça me soulage vraiment au quotidien."</p>
-          <div class="testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Achat vérifié</div>
-          <div class="testi-author">
-            <div class="testi-avatar">M</div>
-            <div><div class="testi-name">Marion L.</div><div class="testi-role">28 ans, Lyon</div></div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"Pour 0,61€ par jour, y'a pas de risque. Et ça marche. Mon 2e pot en cours."</p>
-          <div class="testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Achat vérifié</div>
-          <div class="testi-author">
-            <div class="testi-avatar">S</div>
-            <div><div class="testi-name">Sophie</div><div class="testi-role">Bordeaux</div></div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"Mes collègues m'ont demandé mon secret. Le goût est top et je ne grignote plus le soir."</p>
-          <div class="testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Achat vérifié</div>
-          <div class="testi-author">
-            <div class="testi-avatar">N</div>
-            <div><div class="testi-name">Nathalie</div><div class="testi-role">Toulouse</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- NEW: COMPARISON TABLE (IM8-inspired) -->
-  <section class="compare-section">
-    <div class="compare-inner reveal">
-      <div class="section-label">Le spectre complet</div>
-      <h2>Chaque milligramme compte. <span class="accent">Chaque bienfait amplifié.</span></h2>
-      <div class="compare-table">
-        <div class="compare-head">
-          <div>Actif</div>
-          <div>Marché classique</div>
-          <div>UBurn</div>
-          <div>Votre bénéfice</div>
-        </div>
-        <div class="compare-row">
-          <div class="compare-actif" data-label="Actif">Glucomannane</div>
-          <div class="compare-market" data-label="Marché">Absent</div>
-          <div class="compare-uburn" data-label="UBurn">3g <span class="compare-pill">EFSA 3120</span></div>
-          <div class="compare-benefit" data-label="Bénéfice">Satiété 4h clinique</div>
-        </div>
-        <div class="compare-row">
-          <div class="compare-actif" data-label="Actif">L-Carnitine</div>
-          <div class="compare-market" data-label="Marché">50-100mg</div>
-          <div class="compare-uburn" data-label="UBurn">400mg <span class="compare-pill">+400%</span></div>
-          <div class="compare-benefit" data-label="Bénéfice">Métabolisme soutenu</div>
-        </div>
-        <div class="compare-row">
-          <div class="compare-actif" data-label="Actif">Fibre d'acacia</div>
-          <div class="compare-market" data-label="Marché">Absent</div>
-          <div class="compare-uburn" data-label="UBurn">1,5g <span class="compare-pill new">Nouveau</span></div>
-          <div class="compare-benefit" data-label="Bénéfice">Digestion améliorée</div>
-        </div>
-        <div class="compare-row">
-          <div class="compare-actif" data-label="Actif">MCT de coco</div>
-          <div class="compare-market" data-label="Marché">Absent</div>
-          <div class="compare-uburn" data-label="UBurn">500mg</div>
-          <div class="compare-benefit" data-label="Bénéfice">Énergie stable</div>
-        </div>
-        <div class="compare-row">
-          <div class="compare-actif" data-label="Actif">Ubé violet</div>
-          <div class="compare-market" data-label="Marché">Absent</div>
-          <div class="compare-uburn" data-label="UBurn">100mg</div>
-          <div class="compare-benefit" data-label="Bénéfice">Antioxydants puissants</div>
-        </div>
-        <div class="compare-row">
-          <div class="compare-actif" data-label="Actif">Gingembre</div>
-          <div class="compare-market" data-label="Marché">Rare</div>
-          <div class="compare-uburn" data-label="UBurn">15mg bio</div>
-          <div class="compare-benefit" data-label="Bénéfice">Digestion + métabolisme</div>
-        </div>
-        <div class="compare-row">
-          <div class="compare-actif" data-label="Actif">Caféine</div>
-          <div class="compare-market" data-label="Marché">200mg+ souvent</div>
-          <div class="compare-uburn" data-label="UBurn">0mg</div>
-          <div class="compare-benefit" data-label="Bénéfice">Zéro pic · zéro crash</div>
-        </div>
-        <div class="compare-row">
-          <div class="compare-actif" data-label="Actif">Conservateurs</div>
-          <div class="compare-market" data-label="Marché">Multiples</div>
-          <div class="compare-uburn" data-label="UBurn">0</div>
-          <div class="compare-benefit" data-label="Bénéfice">100% clean</div>
-        </div>
-        <div class="compare-row">
-          <div class="compare-actif" data-label="Actif">Certification</div>
-          <div class="compare-market" data-label="Marché">Variable</div>
-          <div class="compare-uburn" data-label="UBurn">EFSA ID 3120</div>
-          <div class="compare-benefit" data-label="Bénéfice">Garantie officielle</div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- FAQ -->
-  <section class="section faq-section" id="faq">
-    <div class="section-inner reveal">
-      <h2 class="section-title">Questions <span class="accent">fréquentes.</span></h2>
-      <div class="faq-list">
-        <div class="faq-item"><div class="faq-q">Comment fonctionne UBurn ?</div><div class="faq-a">UBurn est formulé autour du glucomannane de konjac, dont l'allégation de satiété est officiellement validée par l'EFSA (ID 3120). Mélangez une dose dans un grand verre d'eau fraîche ou de votre lait végétal préféré (amande, avoine, coco...). Le konjac absorbe l'eau et forme un gel naturel dans l'estomac — vous vous sentez rassasiée naturellement. 1500+ femmes l'utilisent au quotidien.</div></div>
-        <div class="faq-item"><div class="faq-q">Comment ça agit concrètement ?</div><div class="faq-a">Le konjac est une plante naturelle d'Asie. Sa fibre (glucomannane) absorbe jusqu'à 100x son poids en eau et forme un gel dans l'estomac. Vous vous sentez rassasiée sans avoir mangé plus.</div></div>
-        <div class="faq-item"><div class="faq-q">En combien de temps voit-on des résultats ?</div><div class="faq-a">La plupart des clientes ressentent l'effet satiété dès la première prise. Pour des résultats visibles sur le contrôle des fringales : 7 à 14 jours en utilisation régulière le matin.</div></div>
-        <div class="faq-item"><div class="faq-q">Y a-t-il un abonnement ?</div><div class="faq-a">Non. Aucun abonnement caché. Vous commandez quand vous voulez, vous arrêtez quand vous voulez.</div></div>
-        <div class="faq-item"><div class="faq-q">C'est compatible le soir ? Sans caféine ?</div><div class="faq-a">Oui. Uburn ne contient pas de caféine. Vous pouvez le prendre à n'importe quelle heure, même le soir, sans perturber votre sommeil.</div></div>
-        <div class="faq-item"><div class="faq-q">Avec de l'eau ou avec du lait — quelle différence ?</div><div class="faq-a">Les deux fonctionnent parfaitement. Avec de l'eau froide, la boisson est légère et rafraîchissante — idéal en journée ou avant un repas. Avec un lait végétal (amande, avoine, coco...), la texture est plus crémeuse et la saveur noisette-vanille est encore plus prononcée. À vous de choisir selon votre humeur !</div></div>
-        <div class="faq-item"><div class="faq-q">Y a-t-il des contre-indications ?</div><div class="faq-a">UBurn est déconseillé pendant la grossesse et l'allaitement. En cas de traitement médical, consultez votre médecin avant utilisation. Le glucomannane peut interagir avec certains médicaments en ralentissant leur absorption — prendre UBurn 2h avant ou après votre traitement si nécessaire. Complément alimentaire — ne se substitue pas à une alimentation variée et équilibrée.</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GUARANTEE -->
-  <div class="guar-bar">
-    <div class="guar-grid">
-      <div class="guar-item">
-        <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_World.svg" alt=""></div>
-        <h4>Formule EFSA</h4><p>Glucomannane ID 3120</p>
-      </div>
-      <div class="guar-item">
-        <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_Fast_shipping.svg" alt=""></div>
-        <h4>Livraison gratuite</h4><p>En France</p>
-      </div>
-      <div class="guar-item">
-        <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_secure_payment.svg" alt=""></div>
-        <h4>Paiement sécurisé</h4><p>100% sécurisé</p>
-      </div>
-      <div class="guar-item">
-        <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_customer.svg" alt=""></div>
-        <h4>Sans abonnement</h4><p>Commandez quand vous voulez</p>
-      </div>
-    </div>
-  </div>
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <img class="footer-brand-logo" src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn" loading="lazy">
-          <p>Reprenez le contrôle de votre alimentation avec une formule 100% naturelle, validée EFSA. Marque française.</p>
-          <div class="footer-contact">hello@uburn.co</div>
-        </div>
-        <div class="footer-col"><h4>Produit</h4><a href="#">Ube Poudre</a><a href="#">Ingrédients</a><a href="#">Résultats</a><a href="#">Avis clients</a></div>
-        <div class="footer-col"><h4>Support</h4><a href="#">FAQ</a><a href="#">Contact</a><a href="#">Livraison</a><a href="#">Retours</a></div>
-        <div class="footer-col"><h4>Entreprise</h4><a href="#">À propos</a><a href="#">Blog</a><a href="#">Presse</a><a href="#">CGV</a></div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 UBurn. Tous droits réservés.</p>
-        <div class="footer-legal"><a href="/policies/terms-of-service">CGV</a><a href="/policies/privacy-policy">Confidentialité</a><a href="/policies/legal-notice">Mentions légales</a></div>
-      </div>
-      <div class="footer-disc">
-        <p>Complément alimentaire à base de glucomannane. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas. Ne se substitue pas à une alimentation variée et équilibrée. Déconseillé pendant la grossesse et l'allaitement.</p>
-      </div>
-    </div>
-  </footer>
-
-
-  <script>
-    // ---- UTM H1 DYNAMIQUE ----
-    (function(){
-      var params = new URLSearchParams(window.location.search);
-      var utmContent = params.get('utm_content') || '';
-      var map = {
-        'violet': {h1:'La boisson <span class="accent">violette</span> qui coupe les fringales 4h', sub:'30 kcal · 0% caféine · satisfaction durable.'},
-        'ube':    {h1:'Ube + Konjac = <span class="accent">4h</span> sans fringales', sub:'100% naturel · 30 kcal · Marque Française.'},
-        'soir':   {h1:'Votre nouvelle <span class="accent">routine</span> commence ici', sub:'0% caféine · se prend à toute heure · 30 kcal.'},
-        'energie':{h1:'Pourquoi vous avez un coup de pompe <span class="accent">à 15h</span>&nbsp;?', sub:'MCT de coco · énergie stable · sans excitants.'}
-      };
-      var v = map[utmContent.toLowerCase()];
-      if(v){
-        var h1 = document.querySelector('.hero h1');
-        var sub = document.querySelector('.hero-sub');
-        if(h1) h1.innerHTML = v.h1;
-        if(sub) sub.textContent = v.sub;
-      }
-    })();
-
-    // Countdown timer (6h, sessionStorage)
-    (function(){
-      var el=document.getElementById('countdown');
-      if(!el)return;
-      var KEY='ub_timer_end';
-      var end=parseInt(sessionStorage.getItem(KEY)||'0');
-      if(!end||end<Date.now()){end=Date.now()+6*3600*1000;sessionStorage.setItem(KEY,end);}
-      function tick(){
-        var diff=Math.max(0,end-Date.now());
-        var h=Math.floor(diff/3600000);
-        var m=Math.floor((diff%3600000)/60000);
-        el.textContent=h+'h '+String(m).padStart(2,'0')+'min';
-        if(diff>0)setTimeout(tick,30000);
-      }
-      tick();
-    })();
-
-    // Scroll reveal + stagger
-    const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}})},{threshold:.12});
-    document.querySelectorAll('.reveal,.stagger-children,.stagger-scale').forEach(el=>obs.observe(el));
-
-    // Count-up animation
-    const countObs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
-      const el=e.target,target=+el.dataset.count,suffix=el.dataset.suffix||'',dur=1400;
-      let start=null;
-      function step(ts){
-        if(!start)start=ts;
-        const p=Math.min((ts-start)/dur,1);
-        el.textContent=Math.round(p*target)+suffix;
-        if(p<1)requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-      countObs.unobserve(el);
-    }})},{threshold:.3});
-    document.querySelectorAll('[data-count]').forEach(el=>countObs.observe(el));
-
-    // FAQ accordion
-    document.querySelectorAll('.faq-item').forEach(item=>{
-      item.querySelector('.faq-q').addEventListener('click',()=>{
-        document.querySelectorAll('.faq-item').forEach(i=>{if(i!==item)i.classList.remove('open')});
-        item.classList.toggle('open');
-      });
-    });
-
-    // Benefit cards interactive
-    const benefits = {
-      satiete: {label: 'Glucomannane · EFSA · Fibres', title: 'Satiété durable', desc: 'Système complet basé sur le glucomannane (EFSA ID 3120) et 5g de fibres par dose. Le konjac absorbe jusqu\'à 100x son poids en eau pour former un gel qui occupe naturellement l\'estomac.'},
-      energie: {label: 'MCT · L-Carnitine', title: 'Énergie stable', desc: 'MCT coco et L-Carnitine 400mg pour une énergie sans pic ni crash. Parfait pour les après-midis longs.'},
-      digestion: {label: 'Gingembre · Acacia', title: 'Digestion apaisée', desc: 'Gingembre bio et fibre d\'acacia prébiotique pour un confort digestif au quotidien.'},
-      antioxydants: {label: 'Ubé · Anthocyanes', title: 'Antioxydants puissants', desc: 'Ubé violet riche en anthocyanes naturelles pour la protection cellulaire et l\'éclat de la peau.'},
-      metabolisme: {label: 'L-Carnitine · Gingembre', title: 'Métabolisme soutenu', desc: 'L-Carnitine 400mg et gingembre pour un support métabolique naturel et durable.'},
-      bien_etre: {label: 'Formule complète', title: 'Équilibre global', desc: 'Une formule synergique de 6 actifs pour un bien-être quotidien apaisé et durable.'}
-    };
-    document.querySelectorAll('[data-benefit]').forEach(card => {
-      card.addEventListener('click', () => {
-        const key = card.getAttribute('data-benefit');
-        document.querySelectorAll('[data-benefit]').forEach(c => c.classList.remove('active'));
-        card.classList.add('active');
-        const detail = document.querySelector('.benefit-detail');
-        if (detail && benefits[key]) {
-          detail.querySelector('.benefit-label').textContent = benefits[key].label;
-          detail.querySelector('.benefit-title').textContent = benefits[key].title;
-          detail.querySelector('.benefit-desc').textContent = benefits[key].desc;
-        }
-      });
-    });
-  </script>
-
-<!-- ===== EXIT-INTENT POPUP ===== -->
-<style>
-  #ub-exit-overlay{display:none;position:fixed;inset:0;z-index:99998;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:20px}
-  #ub-exit-overlay.open{display:flex}
-  #ub-exit-modal{background:#fff;border-radius:24px;padding:40px 36px;max-width:420px;width:100%;position:relative;text-align:center;box-shadow:0 32px 80px rgba(61,24,115,.2)}
-  #ub-exit-modal .exit-icon{font-size:36px;margin-bottom:12px}
-  #ub-exit-modal h2{font-family:'Red Hat Display',sans-serif;font-size:22px;font-weight:800;color:#242220;line-height:1.2;margin-bottom:10px}
-  #ub-exit-modal p{font-size:14px;color:#5a5654;line-height:1.55;margin-bottom:24px}
-  #ub-exit-modal .exit-value{display:inline-block;background:#f5f0fa;border-radius:100px;padding:6px 16px;font-size:12.5px;font-weight:700;color:#6b2fa0;margin-bottom:20px}
-  #ub-exit-form{display:flex;flex-direction:column;gap:10px}
-  #ub-exit-email{padding:13px 18px;border-radius:100px;border:1.5px solid #e8dcf5;font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;text-align:center}
-  #ub-exit-email:focus{border-color:#6b2fa0}
-  #ub-exit-submit{padding:13px 24px;border-radius:100px;border:none;background:#6b2fa0;color:#fff;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;transition:.25s}
-  #ub-exit-submit:hover{background:#3d1873;transform:translateY(-1px)}
-  #ub-exit-form .exit-legal{font-size:11.5px;color:#8a8785;margin-top:4px}
-  #ub-exit-close{position:absolute;top:14px;right:18px;background:none;border:none;font-size:22px;cursor:pointer;color:#8a8785;line-height:1}
-  #ub-exit-success{display:none;padding:16px 0 4px}
-  #ub-exit-success p{color:#6b2fa0;font-weight:700;font-size:15px}
-  @media(max-width:480px){#ub-exit-modal{padding:32px 24px}#ub-exit-modal h2{font-size:19px}}
-</style>
-
-<div id="ub-exit-overlay" role="dialog" aria-modal="true" aria-labelledby="ub-exit-title">
-  <div id="ub-exit-modal">
-    <button id="ub-exit-close" onclick="ubExitClose()" aria-label="Fermer">×</button>
-    <div class="exit-icon">🎁</div>
-    <span class="exit-value">PDF offert — valeur 47€</span>
-    <h2 id="ub-exit-title">Avant de partir</h2>
-    <p>Recevez notre guide <strong>"30j pour reprendre le contrôle"</strong> — plan nutrition complet, gratuit.</p>
-    <div id="ub-exit-form-wrap">
-      <form id="ub-exit-form" onsubmit="ubExitSubmit(event)">
-        <input id="ub-exit-email" type="email" name="contact[email]" placeholder="Votre adresse email" required autocomplete="email">
-        <button id="ub-exit-submit" type="submit">Je veux mon guide →</button>
-        <p class="exit-legal">Pas de spam. Désabonnement en 1 clic.</p>
-      </form>
-      <div id="ub-exit-success"><p>✓ Guide envoyé — vérifiez vos emails !</p></div>
-    </div>
-  </div>
 </div>
 
 <script>
-  // ---- EXIT-INTENT ----
+  /* PROGRESSIVE ENHANCEMENT (no visibility gate on core content):
+     1. Price-per dynamique selon variant
+     2. Sticky CTA mobile : slide-up quand main ATC sort du viewport
+     Si JS fail : tout reste fonctionnel (price-per garde valeur Liquid,
+     sticky reste caché par défaut). */
   (function(){
-    var SEEN_KEY='ub_exit_seen', SUB_KEY='ub_exit_sub';
-    var ready=false, fired=false;
+    var form = document.getElementById('pdpv9-pdp-form');
+    if (!form) return;
 
-    // Guards
-    function canShow(){
-      if(fired) return false;
-      if(localStorage.getItem(SUB_KEY)) return false;
-      var seen=parseInt(localStorage.getItem(SEEN_KEY)||'0');
-      if(seen && (Date.now()-seen) < 7*24*3600*1000) return false;
-      return true;
+    // 1. ALL price/text refs — dynamic on variant change
+    var mainPrice   = document.getElementById('pdpv9-price');         // main hero price
+    var pricePrefix = document.getElementById('pdpv9-price-prefix');  // "À partir de " — removed on variant click
+    var per         = document.getElementById('pdpv9-price-per');     // sub-price meta line
+    var atcPrice    = document.getElementById('pdpv9-atc-price');     // "— €34,50" inside CTA
+    var atcText     = document.getElementById('pdpv9-atc-text');      // "Commencer ma cure 30 jours"
+    var cartMeta    = document.getElementById('pdpv9-cart-meta');     // cart product meta line
+    var cartPrice   = document.getElementById('pdpv9-cart-price');    // cart product price
+    var cartTotal   = document.getElementById('pdpv9-cart-total');    // cart total
+    var cartPerDay  = document.getElementById('pdpv9-cart-per-day');  // cart per-day line
+    var stickyPrice = document.getElementById('pdpv9-sticky-price');  // sticky CTA price
+
+    function formatPrice(cents) {
+      var n = parseInt(cents, 10);
+      if (isNaN(n)) return '';
+      return (n / 100).toFixed(2).replace('.', ',') + '€';
     }
 
-    function show(){
-      if(!canShow()) return;
-      fired=true;
-      localStorage.setItem(SEEN_KEY, Date.now());
-      document.getElementById('ub-exit-overlay').classList.add('open');
+    function updateOnVariant() {
+      var checked = form.querySelector('input[name="id"]:checked');
+      if (!checked) return;
+      var unit       = checked.getAttribute('data-vunit-price');
+      var days       = checked.getAttribute('data-vdays')       || '30';
+      var price      = checked.getAttribute('data-vprice');
+      var priceMoney = checked.getAttribute('data-vprice-money'); // pre-formatted by Liquid
+      var idx        = checked.getAttribute('data-vidx');
+      var priceStr   = priceMoney || formatPrice(price);
+      var doses      = (idx === '2') ? '3 doses/jour' : '1 dose/jour';
+
+      // 1. Main hero price
+      if (mainPrice && priceStr) mainPrice.textContent = priceStr;
+
+      // 2. Sub-price meta line
+      if (per && unit && days) {
+        per.textContent = unit + ' · Cure ' + days + ' jours · Sans abonnement';
+      }
+
+      // 3. ATC button price ("— €X,XX")
+      if (atcPrice && priceStr) atcPrice.textContent = '— ' + priceStr;
+
+      // 4. ATC button text (uniform "30 jours")
+      if (atcText && days) atcText.textContent = 'Commencer ma cure ' + days + ' jours';
+
+      // 5. Cart-recap product meta + price + total
+      if (cartMeta && days) {
+        cartMeta.textContent = 'Saveur noisette-vanille · Cure ' + days + ' jours · ' + doses;
+      }
+      if (cartPrice && priceStr) cartPrice.textContent = priceStr;
+      if (cartTotal && priceStr) cartTotal.textContent = priceStr;
+      if (cartPerDay && unit && days) {
+        cartPerDay.textContent = 'soit ' + unit + ' sur ' + days + ' jours';
+      }
+
+      // 6. Sticky CTA mobile price (synced with selected variant)
+      if (stickyPrice && priceStr) stickyPrice.textContent = priceStr;
+
+      // 7. Hero price : remove "À partir de" prefix on first explicit selection
+      if (pricePrefix && pricePrefix.textContent) pricePrefix.textContent = '';
     }
-
-    // Activer après 5s
-    setTimeout(function(){ ready=true; }, 5000);
-
-    // Desktop : mouseleave (souris vers le haut)
-    document.addEventListener('mouseleave', function(e){
-      if(!ready || e.clientY > 50) return;
-      show();
+    form.querySelectorAll('input[name="id"]').forEach(function(r){
+      r.addEventListener('change', updateOnVariant);
     });
 
-    // Mobile : scroll rapide vers le haut
-    var lastY=0, lastT=0;
-    window.addEventListener('scroll', function(){
-      var y=window.scrollY, t=Date.now(), dy=y-lastY, dt=t-lastT;
-      if(ready && dy < -80 && dt < 300 && y > 300) show();
-      lastY=y; lastT=t;
-    }, {passive:true});
-
-    // Fermer overlay click
-    document.getElementById('ub-exit-overlay').addEventListener('click', function(e){
-      if(e.target===this) ubExitClose();
-    });
+    // 2. Sticky CTA — appears only after the entire purchase block has scrolled out
+    // Observe the LAST element of the purchase panel (bonus stack) — sticky stays
+    // hidden as long as the user is anywhere within the purchase area.
+    var lastPurchaseEl = document.querySelector('.pdpv9-pdp__bonus--collapsible')
+                       || form.querySelector('.pdpv9-pdp__atc');
+    var sticky = document.querySelector('.pdpv9-sticky-cta');
+    if (lastPurchaseEl && sticky && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          // visible = last purchase element NOT in viewport (user has scrolled past hero)
+          sticky.classList.toggle('pdpv9-sticky-cta--visible', !e.isIntersecting);
+        });
+      }, { rootMargin: '0px 0px -60px 0px', threshold: 0 });
+      io.observe(lastPurchaseEl);
+    }
   })();
-
-  function ubExitClose(){
-    document.getElementById('ub-exit-overlay').classList.remove('open');
-  }
-
-  function ubExitSubmit(e){
-    e.preventDefault();
-    var email = document.getElementById('ub-exit-email').value.trim();
-    if(!email) return;
-    // Submit Shopify newsletter
-    var fd = new FormData();
-    fd.append('form_type','newsletter');
-    fd.append('utf8','✓');
-    fd.append('contact[email]', email);
-    fetch('/contact', {method:'POST', headers:{'X-Requested-With':'XMLHttpRequest'}, body:fd})
-      .catch(function(){});
-    // Show success
-    document.getElementById('ub-exit-form').style.display='none';
-    document.getElementById('ub-exit-success').style.display='block';
-    localStorage.setItem('ub_exit_sub','1');
-    setTimeout(ubExitClose, 3000);
-  }
-</script>
-
-<!-- AJAX CART ADD -->
-<script>
-(function(){
-  document.addEventListener('submit', function(e){
-    var form = e.target;
-    if(!form.classList.contains('pdpv9-atc-form')) return;
-    e.preventDefault();
-    var btn = form.querySelector('button[type="submit"]');
-    var origHTML = btn.innerHTML;
-    btn.innerHTML = '<span style="opacity:.7">Ajout en cours…</span>';
-    btn.disabled = true;
-    var variantId = form.querySelector('[data-variant-input]').value;
-    fetch('/cart/add.js', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest'},
-      body: JSON.stringify({id: parseInt(variantId, 10), quantity: 1})
-    }).then(function(r){
-      if(!r.ok) throw new Error(r.status);
-      window.location.href = '/checkout';
-    }).catch(function(){
-      btn.innerHTML = origHTML;
-      btn.disabled = false;
-    });
-  });
-})();
-</script>
-
-<!-- STICKY ATC MOBILE -->
-<div class="pdpv9-sticky-atc" id="pdpv9-sticky">
-  <span class="pdpv9-sticky-price" data-price>{{ product.selected_or_first_available_variant.price | money }}</span>
-  <form action="/cart/add" method="post" class="pdpv9-sticky-form">
-    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-variant-input>
-    <input type="hidden" name="quantity" value="1">
-    <button type="submit" class="pdpv9-sticky-btn">COMMANDER →</button>
-  </form>
-</div>
-
-<style>
-.pdpv9-sticky-atc { display: none; }
-
-@media (max-width: 768px) {
-  .pdpv9-sticky-atc {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: white;
-    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-    box-shadow: 0 -4px 16px rgba(0,0,0,0.1);
-    z-index: 100;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .pdpv9-sticky-price {
-    font-weight: 700;
-    font-size: 18px;
-    color: #2b1e4d;
-    flex-shrink: 0;
-  }
-  .pdpv9-sticky-form {
-    flex: 1;
-  }
-  .pdpv9-sticky-btn {
-    width: 100%;
-    background: #7d3fff;
-    color: white;
-    border: none;
-    padding: 14px;
-    font-weight: 600;
-    font-size: 15px;
-    border-radius: 0;
-    cursor: pointer;
-    letter-spacing: .5px;
-  }
-  .pdpv9-sticky-btn:active { opacity: .85; }
-  body { padding-bottom: 80px; }
-}
-</style>
-
-<script>
-(function() {
-  var gallery = document.querySelector('.pdpv9-gallery');
-  if (!gallery) return;
-  var slides = gallery.querySelectorAll('.pdpv9-gallery__slide');
-  var thumbs = gallery.querySelectorAll('.pdpv9-gallery__thumb');
-  if (!slides.length) return;
-  var activeIndex = 0;
-
-  function setActive(index) {
-    if (index < 0 || index >= slides.length) return;
-    slides.forEach(function(s) { s.removeAttribute('data-active'); });
-    thumbs.forEach(function(t) {
-      t.removeAttribute('data-active');
-      t.removeAttribute('aria-current');
-    });
-    slides[index].setAttribute('data-active', 'true');
-    if (thumbs[index]) {
-      thumbs[index].setAttribute('data-active', 'true');
-      thumbs[index].setAttribute('aria-current', 'true');
-      thumbs[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    }
-    activeIndex = index;
-  }
-
-  thumbs.forEach(function(thumb, i) {
-    thumb.addEventListener('click', function() { setActive(i); });
-  });
-
-  // Swipe mobile
-  var touchStartX = 0;
-  var main = gallery.querySelector('.pdpv9-gallery__main');
-  main.addEventListener('touchstart', function(e) {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-  main.addEventListener('touchend', function(e) {
-    var diff = e.changedTouches[0].screenX - touchStartX;
-    if (Math.abs(diff) < 50) return;
-    if (diff < 0) setActive(activeIndex + 1);
-    else setActive(activeIndex - 1);
-  }, { passive: true });
-
-  // Navigation clavier
-  gallery.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowLeft') { e.preventDefault(); setActive(activeIndex - 1); }
-    if (e.key === 'ArrowRight') { e.preventDefault(); setActive(activeIndex + 1); }
-  });
-})();
-</script>
-
-<!-- ===== PREMIUM ANIMATIONS v2 ===== -->
-<style>
-/* (1) Hero entrance — tag slides from left, h1/sub rise, badges pop in sequence */
-@keyframes ub-hero-left {
-  from { opacity:0; transform:translateX(-18px) }
-  to   { opacity:1; transform:translateX(0) }
-}
-@keyframes ub-hero-pop {
-  from { opacity:0; transform:scale(.82) translateY(6px) }
-  to   { opacity:1; transform:scale(1) translateY(0) }
-}
-.hero-tag { animation:ub-hero-left .5s cubic-bezier(.22,1,.36,1) both .05s }
-.hero h1  { animation:ub-slide-up  .65s cubic-bezier(.22,1,.36,1) both .18s }
-.hero-sub { animation:ub-slide-up  .6s  cubic-bezier(.22,1,.36,1) both .32s }
-.hero-badges .hero-badge:nth-child(1) { animation:ub-hero-pop .4s cubic-bezier(.34,1.56,.64,1) both .44s }
-.hero-badges .hero-badge:nth-child(2) { animation:ub-hero-pop .4s cubic-bezier(.34,1.56,.64,1) both .55s }
-.hero-badges .hero-badge:nth-child(3) { animation:ub-hero-pop .4s cubic-bezier(.34,1.56,.64,1) both .66s }
-.hero-badges .hero-badge:nth-child(4) { animation:ub-hero-pop .4s cubic-bezier(.34,1.56,.64,1) both .77s }
-
-/* (2) Gallery — thumbnail hover lift; slide overflow-hidden for parallax */
-.pdpv9-gallery__thumb { transition:transform .2s ease-out,box-shadow .2s ease-out }
-.pdpv9-gallery__thumb:hover { transform:translateY(-3px) scale(1.04); box-shadow:0 6px 18px rgba(107,47,160,.18) }
-.pdpv9-gallery__slide { overflow:hidden }
-
-/* (3) Ingredient card — shimmer sweep on hover */
-@keyframes ub-shimmer {
-  from { background-position:-200% center }
-  to   { background-position: 200% center }
-}
-.ingr-card { position:relative; isolation:isolate }
-.ingr-card::after {
-  content:'';
-  position:absolute; inset:0;
-  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.45) 50%,transparent 65%);
-  background-size:200% 100%;
-  background-position:-200% center;
-  pointer-events:none; opacity:0; z-index:1;
-  border-radius:inherit;
-}
-.ingr-card:hover::after { opacity:1; animation:ub-shimmer .55s ease-out forwards }
-
-/* (4) Compare rows — slide in from left + pill bounce */
-@keyframes ub-row-in {
-  from { opacity:0; transform:translateX(-20px) }
-  to   { opacity:1; transform:translateX(0) }
-}
-@keyframes ub-pill-pop {
-  0%   { transform:scale(.5); opacity:0 }
-  70%  { transform:scale(1.15) }
-  100% { transform:scale(1); opacity:1 }
-}
-.compare-row.ub-row-hidden  { opacity:0; transform:translateX(-20px) }
-.compare-row.ub-row-visible { animation:ub-row-in .4s ease-out forwards }
-.compare-row.ub-row-visible .compare-pill { animation:ub-pill-pop .35s cubic-bezier(.34,1.56,.64,1) both .28s }
-
-/* (5) Stats section — radial glow orb pulses in on enter */
-.ub-glow-orb {
-  position:absolute; width:800px; height:800px;
-  left:50%; top:50%;
-  transform:translate(-50%,-50%) scale(.4);
-  background:radial-gradient(circle,rgba(176,125,232,.3) 0%,transparent 65%);
-  pointer-events:none; z-index:0; border-radius:50%; opacity:0;
-  transition:transform 1.6s cubic-bezier(.22,1,.36,1),opacity 1.2s ease-out;
-}
-.stats-section.ub-stats-glow .ub-glow-orb {
-  transform:translate(-50%,-50%) scale(1); opacity:1;
-}
-
-/* (6) Testimonial cards — enhanced hover lift + purple shadow */
-.testi-card { transition:transform .28s cubic-bezier(.22,1,.36,1),box-shadow .28s cubic-bezier(.22,1,.36,1) }
-.testi-card:hover { transform:translateY(-5px); box-shadow:0 20px 48px rgba(107,47,160,.13) }
-
-/* (7) Sticky ATC — slides up from bottom when hero exits viewport */
-@media (max-width:768px) {
-  .pdpv9-sticky-atc { transform:translateY(100%); transition:transform .38s cubic-bezier(.22,1,.36,1) }
-  .pdpv9-sticky-atc.ub-atc-visible { transform:translateY(0) }
-}
-
-/* (8) Problem card num — brightens and scales on card hover */
-.prob-card .prob-num { transition:transform .3s cubic-bezier(.22,1,.36,1),color .3s ease; display:block }
-.prob-card:hover .prob-num { transform:scale(1.1) translateY(-6px); color:rgba(255,255,255,.18) }
-
-/* (9) Benefit card — ripple on click */
-.benefit-card { overflow:hidden; isolation:isolate }
-@keyframes ub-ripple {
-  from { transform:scale(0); opacity:.35 }
-  to   { transform:scale(2.5); opacity:0 }
-}
-.ub-ripple {
-  position:absolute; border-radius:50%;
-  background:rgba(107,47,160,.25);
-  animation:ub-ripple .6s ease-out forwards;
-  pointer-events:none; z-index:0;
-}
-.benefit-card.active .ub-ripple { background:rgba(255,255,255,.25) }
-
-/* Reduced-motion fallback — respect user preference */
-@media (prefers-reduced-motion:reduce) {
-  .hero-tag,.hero h1,.hero-sub,
-  .hero-badges .hero-badge,
-  .compare-row,.prob-card .prob-num,
-  .ingr-card::after,.testi-card,
-  .pdpv9-gallery__thumb,.ub-glow-orb,
-  .pdpv9-sticky-atc {
-    animation:none!important;
-    transition:none!important;
-    opacity:1!important;
-    transform:none!important;
-  }
-}
-</style>
-
-<script>
-(function(){
-  // (4) Compare rows — staggered slide-in from left
-  var compareRows = document.querySelectorAll('.compare-row');
-  compareRows.forEach(function(row){ row.classList.add('ub-row-hidden'); });
-  var rowObs = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(!entry.isIntersecting) return;
-      var row = entry.target;
-      var idx = Array.from(compareRows).indexOf(row);
-      row.classList.remove('ub-row-hidden');
-      row.style.animationDelay = (idx * 55) + 'ms';
-      row.classList.add('ub-row-visible');
-      rowObs.unobserve(row);
-    });
-  }, { threshold:0.1 });
-  compareRows.forEach(function(row){ rowObs.observe(row); });
-
-  // (5) Stats glow orb — injected via JS and triggered on enter
-  var statsEl = document.querySelector('.stats-section');
-  if(statsEl){
-    var orb = document.createElement('div');
-    orb.className = 'ub-glow-orb';
-    statsEl.appendChild(orb);
-    new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ e.target.classList.add('ub-stats-glow'); }
-      });
-    }, { threshold:0.25 }).observe(statsEl);
-  }
-
-  // (7) Sticky ATC — reveal after hero scrolls out of view
-  var heroEl = document.querySelector('.hero');
-  var stickyEl = document.getElementById('pdpv9-sticky');
-  if(heroEl && stickyEl){
-    new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(!e.isIntersecting) stickyEl.classList.add('ub-atc-visible');
-        else stickyEl.classList.remove('ub-atc-visible');
-      });
-    }, { threshold:0 }).observe(heroEl);
-  }
-
-  // (9) Benefit card ripple — spawns on click at cursor position
-  document.querySelectorAll('.benefit-card').forEach(function(card){
-    card.addEventListener('click', function(e){
-      var prev = card.querySelector('.ub-ripple');
-      if(prev) prev.remove();
-      var rip = document.createElement('span');
-      rip.className = 'ub-ripple';
-      var rect = card.getBoundingClientRect();
-      var size = Math.max(rect.width, rect.height) * 2;
-      rip.style.cssText = 'width:'+size+'px;height:'+size+'px;left:'+(e.clientX-rect.left-size/2)+'px;top:'+(e.clientY-rect.top-size/2)+'px;position:absolute';
-      card.appendChild(rip);
-      setTimeout(function(){ rip.remove(); }, 660);
-    });
-  });
-
-  // (2) Gallery parallax — subtle ±12px translateY on scroll (desktop only)
-  var galleryMain = document.querySelector('.pdpv9-gallery__main');
-  if(galleryMain && window.matchMedia('(min-width:769px)').matches){
-    var ticking = false;
-    function updatePx(){
-      var img = galleryMain.querySelector('.pdpv9-gallery__slide[data-active="true"] .pdpv9-gallery__img');
-      if(!img){ ticking=false; return; }
-      var rect = galleryMain.getBoundingClientRect();
-      var progress = (rect.top + rect.height/2 - window.innerHeight/2) / window.innerHeight;
-      progress = Math.max(-0.5, Math.min(0.5, progress));
-      img.style.transform = 'translateY('+(progress*12)+'px)';
-      ticking = false;
-    }
-    window.addEventListener('scroll', function(){
-      if(!ticking){ requestAnimationFrame(updatePx); ticking=true; }
-    }, { passive:true });
-  }
-})();
 </script>
 
 {% schema %}
 {
-  "name": "main-uburn-pdp-v9",
+  "name": "UBurn PDP V9",
   "tag": "section",
-  "class": "pdpv9-section",
+  "class": "uburn-pdp-v9-section",
   "settings": [],
   "presets": [
-    {
-      "name": "main-uburn-pdp-v9"
-    }
+    { "name": "UBurn PDP V9" }
   ]
 }
 {% endschema %}
