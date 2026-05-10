@@ -495,12 +495,12 @@
 
 </style>
 <!-- ANNOUNCE -->
-  <div class="announce">LIVRAISON GRATUITE EN FRANCE</div>
+  <div class="announce">{% if request.locale.iso_code == 'en' %}FREE U.S. SHIPPING ON ORDERS $40+{% else %}LIVRAISON GRATUITE EN FRANCE{% endif %}</div>
 
   <!-- PROMO STICKY — UBE10 -->
   <div class="promo-bar" id="promoBar">
-    <span id="promoText">🎁 <strong>10% off</strong> your first order · Code <strong>UBE10</strong></span>
-    <button type="button" class="promo-copy" id="promoCopy" aria-label="Copier le code UBE10">Copier</button>
+    <span id="promoText">{% if request.locale.iso_code == 'en' %}🎁 <strong>10% off</strong> your first order · Code <strong>UBE10</strong>{% else %}🎁 <strong>-10%</strong> sur ta 1ère commande · Code <strong>UBE10</strong>{% endif %}</span>
+    <button type="button" class="promo-copy" id="promoCopy" aria-label="{% if request.locale.iso_code == 'en' %}Copy code UBE10{% else %}Copier le code UBE10{% endif %}">Copier</button>
   </div>
   <style>
     .promo-bar{position:sticky;top:0;z-index:300;background:linear-gradient(90deg,#6B21A8 0%,#8b47c5 100%);color:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:center;gap:12px;font-size:13px;font-weight:600;text-align:center;line-height:1.3;flex-wrap:wrap}
@@ -520,7 +520,7 @@
       var btn=document.getElementById('promoCopy');
       if(params.get('discount')==='UBE10'||params.get('code')==='UBE10'){
         bar.classList.add('applied');
-        txt.innerHTML='✓ Code <strong>UBE10</strong> applied — <strong>10% off</strong> your order';
+        {% if request.locale.iso_code == 'en' %}txt.innerHTML='✓ Code <strong>UBE10</strong> applied — <strong>10% off</strong> your order';{% else %}txt.innerHTML='✓ Code <strong>UBE10</strong> appliqué — <strong>-10%</strong> sur ta commande';{% endif %}
       }
       btn.addEventListener('click',function(){
         navigator.clipboard.writeText('UBE10').then(function(){
@@ -539,67 +539,67 @@
     <a href="https://uburn.co/products/ube-poudre?variant=51289200066879" aria-label="UBurn — page produit"><img class="nav-logo" src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn"></a>
     <div class="nav-right">
       <a href="#probleme" class="nav-link">Pourquoi UBurn</a>
-      <a href="#ingredients" class="nav-link">Ingredients</a>
+      {% if request.locale.iso_code == 'en' %}<a href="#ingredients" class="nav-link">Ingredients</a>{% else %}<a href="#ingredients" class="nav-link">Ingrédients</a>{% endif %}
       <a href="#avis" class="nav-link">Avis</a>
       <a href="#faq" class="nav-link">FAQ</a>
-      <a href="#card-decouverte" class="btn btn-fill" style="padding:10px 22px;font-size:13px;">Order</a>
+      <a href="#card-decouverte" class="btn btn-fill" style="padding:10px 22px;font-size:13px;">Commander</a>
     </div>
   </nav>
 
   <!-- TRUST RIBBON -->
   <div class="ribbon">
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> Research-backed dietary fiber*</span>
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> 100% Plant-based</span>
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> No subscription</span>
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> 0% caffeine</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}Research-backed dietary fiber*{% else %}Ingrédients conformes EFSA{% endif %}</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}100% Plant-based{% else %}100% Végétal{% endif %}</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;color:var(--purple-main)"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %}</span>
   </div>
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-tag">Our early customers love UBurn</div>
+      {% if request.locale.iso_code == 'en' %}<div class="hero-tag">Our early customers love UBurn</div>{% else %}<div class="hero-tag">Nos premières clientes adorent Uburn</div>{% endif %}
       <h1>16h. <span class="accent">Votre</span> placard reste fermé.</h1>
-      <p class="hero-sub">30 kcal · 0% caffeine · 4 hours of satiety*.</p>
+      <p class="hero-sub">30 kcal · {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %} · 4h de satiété.</p>
       <div class="hero-badges">
-        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 0% caffeine</div>
+        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %}</div>
         <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 30 kcal</div>
         <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> France</div>
-        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Shipping offerte</div>
+        <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Livraison offerte</div>
         <div class="hero-badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 0% sucre ajouté</div>
       </div>
-      <a href="#card-decouverte" class="btn btn-fill">Commencer ma pack →</a>
+      <a href="#card-decouverte" class="btn btn-fill">Commencer ma cure →</a>
       <div class="hero-bonus">
-        <div class="hero-bonus-label">🎁 Offerts avec votre commande audayd'hui</div>
+        <div class="hero-bonus-label">🎁 Offerts avec votre commande aujourd'hui</div>
         <div class="hero-bonus-items">
-          <span>✓ E-book "30 days to take back control" <em>($47)</em></span>
-          <span>✓ Access to private Uburn Collective group <em>($40)</em></span>
-          <span>✓ Access to UBurn online events <em>($50)</em></span>
-          <span>✓ Suivi nutrition WhatsApp 30j <em>($47)</em></span>
+          <span>✓ {% if request.locale.iso_code == 'en' %}E-book "30 days to take back control"{% else %}E-book "30j pour reprendre le contrôle"{% endif %} <em>(47€)</em></span>
+          <span>✓ {% if request.locale.iso_code == 'en' %}Access to private Uburn Collective group{% else %}Accès groupe privé Uburn Collective{% endif %} <em>(40€)</em></span>
+          <span>✓ {% if request.locale.iso_code == 'en' %}Access to UBurn online events{% else %}Accès aux événements UBurn en ligne{% endif %} <em>(50€)</em></span>
+          <span>✓ Suivi nutrition WhatsApp 30j <em>(47€)</em></span>
         </div>
-        <div class="hero-bonus-total">Valeur totale : <strong>$184 OFFERTS</strong></div>
+        <div class="hero-bonus-total">Valeur totale : <strong>184€ OFFERTS</strong></div>
       </div>
     </div>
     <div class="hero-visual">
-      <img src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg?v=1776421390&width=900&format=webp" alt="UBurn — purple ube powder mixed with milk or water for a satiating drink" fetchpriority="high" loading="eager" width="900" height="611" style="width:100%;max-width:520px;height:auto">
-      <div class="hero-float top"><span class="float-badge">FIBER</span> Glucomannan · FDA dietary fiber*</div>
+      <img src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg?v=1776421390&width=900&format=webp" {% if request.locale.iso_code == 'en' %}alt="UBurn — purple ube powder mixed with milk or water for a satiating drink"{% else %}alt="UBurn — poudre ubé violette versée avec du lait ou de l'eau pour une boisson rassasiante"{% endif %} fetchpriority="high" loading="eager" width="900" height="611" style="width:100%;max-width:520px;height:auto">
+      <div class="hero-float top"><span {% if request.locale.iso_code == 'en' %}class="float-badge">FIBER<{% else %}class="float-badge">EFSA<{% endif %}/span> Glucomannane · {% if request.locale.iso_code == 'en' %}Research-backed*{% else %}Allégation{% endif %} ID 3120</div>
     </div>
   </section>
 
   <!-- MARQUEE -->
   <div class="marquee">
     <div class="marquee-track">
-      <div class="marquee-item"><span class="marquee-dot"></span>Shipping offerte</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>FDA dietary fiber*</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Livraison offerte</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</div>
       <div class="marquee-item"><span class="marquee-dot"></span>100% Naturel</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>0% Caffeine</div>
+      {% if request.locale.iso_code == 'en' %}<div class="marquee-item"><span class="marquee-dot"></span>0% Caffeine</div>{% else %}<div class="marquee-item"><span class="marquee-dot"></span>0% {% if request.locale.iso_code == 'en' %}Caffeine{% else %}Caféine{% endif %}</div>{% endif %}
       <div class="marquee-item"><span class="marquee-dot"></span>Fabriqué en France</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>No subscription</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>Shipping offerte</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>FDA dietary fiber*</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>{% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>Livraison offerte</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</div>
       <div class="marquee-item"><span class="marquee-dot"></span>100% Naturel</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>0% Caffeine</div>
+      {% if request.locale.iso_code == 'en' %}<div class="marquee-item"><span class="marquee-dot"></span>0% Caffeine</div>{% else %}<div class="marquee-item"><span class="marquee-dot"></span>0% {% if request.locale.iso_code == 'en' %}Caffeine{% else %}Caféine{% endif %}</div>{% endif %}
       <div class="marquee-item"><span class="marquee-dot"></span>Fabriqué en France</div>
-      <div class="marquee-item"><span class="marquee-dot"></span>No subscription</div>
+      <div class="marquee-item"><span class="marquee-dot"></span>{% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</div>
     </div>
   </div>
 
@@ -610,12 +610,12 @@
         <img src="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_gjm16fgjm16fgjm1.png?v=1776424158&width=800" alt="Dr. Claire Dubois — Nutritionniste" loading="lazy" decoding="async" width="800" height="800">
       </div>
       <div>
-        <p class="expert-quote">"Une formule rare : la science du konjac au service du quotidien des femmes."</p>
+        <p class="expert-quote">« Une formule rare : la science du konjac au service du quotidien des femmes. »</p>
         <div class="expert-body">
-          The UBurn formula combines research-backed glucomannan with 5 synergistic actives, each scientifically formulated for a level of support rarely found in a single drink. Designed for real life.*
+          {% if request.locale.iso_code == 'en' %}The UBurn formula combines research-backed glucomannan with 5 synergistic actives, each scientifically formulated for a level of support rarely found in a single drink. Designed for real life.*{% else %}La formule UBurn combine glucomannane validé EFSA et 5 actifs synergiques, chacun dosé cliniquement pour un niveau de soutien rarement atteint dans une seule boisson. Pensée pour la vraie vie.{% endif %}
         </div>
         <div class="expert-name">Dr. Claire Dubois</div>
-        <div class="expert-credentials">Nutritionist · Food behavior specialist</div>
+        {% if request.locale.iso_code == 'en' %}<div class="expert-credentials">Nutritionist · Food behavior specialist</div>{% else %}<div class="expert-credentials">Nutritionniste · Spécialiste comportement alimentaire</div>{% endif %}
         <a href="#" class="expert-link">Membre du Comité Scientifique UBurn →</a>
       </div>
     </div>
@@ -623,23 +623,23 @@
   <!-- PROBLEM -->
   <section class="section problem-section" id="probleme">
     <div class="section-inner reveal">
-      <div class="section-label">We know that moment.</div>
-      <h2 class="section-title">The same pattern, <span class="accent">every day.</span></h2>
+      {% if request.locale.iso_code == 'en' %}<div class="section-label">We know that moment.</div>{% else %}<div class="section-label">On connaît ce moment.</div>{% endif %}
+      <h2 class="section-title">Le même schéma, <span class="accent">chaque jour.</span></h2>
       <div class="prob-cards stagger-scale">
         <div class="prob-card">
           <div class="prob-num">01</div>
           <div class="prob-title">16h — le placard vous appelle</div>
-          <div class="prob-sub">Blood sugar crashing. It's physiology, not a lack of willpower.</div>
+          {% if request.locale.iso_code == 'en' %}<div class="prob-sub">Blood sugar crashing. It's physiology, not a lack of willpower.</div>{% else %}<div class="prob-sub">Glycémie en chute libre. C'est physiologique, pas un manque de volonté.</div>{% endif %}
         </div>
         <div class="prob-card">
           <div class="prob-num">02</div>
-          <div class="prob-title">Evening at the fridge</div>
-          <div class="prob-sub">Fatigue lowers your guard. Morning intentions fade.</div>
+          {% if request.locale.iso_code == 'en' %}<div class="prob-title">Evening at the fridge</div>{% else %}<div class="prob-title">Le soir devant le frigo</div>{% endif %}
+          {% if request.locale.iso_code == 'en' %}<div class="prob-sub">Fatigue lowers your guard. Morning intentions fade.</div>{% else %}<div class="prob-sub">La fatigue baisse la garde. Les bonnes intentions du matin s'effacent.</div>{% endif %}
         </div>
         <div class="prob-card">
           <div class="prob-num">03</div>
           <div class="prob-title">La volonté ne suffit pas</div>
-          <div class="prob-sub">It's not you. It's biology. And it can be addressed.*</div>
+          {% if request.locale.iso_code == 'en' %}<div class="prob-sub">It's not you. It's biology. And it can be addressed.*</div>{% else %}<div class="prob-sub">Ce n'est pas vous. C'est biologique. Et ça se traite.</div>{% endif %}
         </div>
       </div>
     </div>
@@ -649,31 +649,31 @@
   <section class="section how-section">
     <div class="section-inner reveal">
       <div class="section-label">Comment Uburn agit</div>
-      <h2 class="section-title" style="text-align:center">3 simple steps. <span class="accent">4 hours of results.*</span></h2>
+      {% if request.locale.iso_code == 'en' %}<h2 class="section-title" style="text-align:center">3 simple steps. <span class="accent">4 hours of results.*</span></h2>{% else %}<h2 class="section-title" style="text-align:center">3 gestes. <span class="accent">4h de résultat.</span></h2>{% endif %}
       <div class="how-grid stagger-children" style="align-items:start">
         <div class="how-step">
           <div class="how-step-photo">
-            <img src="https://uburn.co/cdn/shop/files/etape_1.jpg?v=1763147054&width=600&format=webp" alt="Mix UBurn dans un glass of water ou de plant-based milk" loading="lazy" decoding="async" width="600" height="600">
+            <img src="https://uburn.co/cdn/shop/files/etape_1.jpg?v=1763147054&width=600&format=webp" alt="{% if request.locale.iso_code == 'en' %}Mix{% else %}Mélangez{% endif %} UBurn dans un {% if request.locale.iso_code == 'en' %}glass of water{% else %}verre d'eau{% endif %} ou de lait végétal" loading="lazy" decoding="async" width="600" height="600">
           </div>
           <div class="how-num">01</div>
-          <h4>Mix</h4>
-          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">One scoop in a large glass of water <strong>OR</strong> plant-based milk</p>
+          <h4>{% if request.locale.iso_code == 'en' %}Mix{% else %}Mélangez{% endif %}</h4>
+          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">{% if request.locale.iso_code == 'en' %}One scoop{% else %}Une dose{% endif %} dans un grand {% if request.locale.iso_code == 'en' %}glass of water{% else %}verre d'eau{% endif %} <strong>OU</strong> de lait végétal</p>
         </div>
         <div class="how-step">
           <div class="how-step-photo">
-            <img src="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=600&format=webp" alt="Le glucomannane forme un natural gel dans votre estomac" loading="lazy" decoding="async" width="600" height="600">
+            <img src="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=600&format=webp" alt="Le glucomannane forme un gel naturel dans votre estomac" loading="lazy" decoding="async" width="600" height="600">
           </div>
           <div class="how-num">02</div>
           <h4>Le gel se forme</h4>
-          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Konjac fiber expands in your stomach and helps you feel full naturally*</p>
+          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Le konjac gonfle dans votre estomac et coupe la faim naturellement</p>
         </div>
         <div class="how-step">
           <div class="how-step-photo">
-            <img src="https://uburn.co/cdn/shop/files/etape_3.jpg?v=1763147054&width=600&format=webp" alt="Up to 4 hours without cravings* — your stomach naturally calmed" loading="lazy" decoding="async" width="600" height="600">
+            <img src="https://uburn.co/cdn/shop/files/etape_3.jpg?v=1763147054&width=600&format=webp" {% if request.locale.iso_code == 'en' %}alt="4 hours without cravings* — your stomach naturally calmed"{% else %}alt="4h sans {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s — {% if request.locale.iso_code == 'en' %}your stomach naturally calmed{% else %}votre estomac est calmé{% endif %} naturellement"{% endif %} loading="lazy" decoding="async" width="600" height="600">
           </div>
           <div class="how-num">03</div>
-          <h4>Up to 4 hours without cravings*</h4>
-          <p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Your stomach is naturally calmed</p>
+          {% if request.locale.iso_code == 'en' %}<h4>4 hours without cravings*</h4>{% else %}<h4>4h sans {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s</h4>{% endif %}
+          {% if request.locale.iso_code == 'en' %}<p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">Your stomach is naturally calmed</p>{% else %}<p style="font-size:13px;color:var(--body);line-height:1.5;margin-top:6px">{% if request.locale.iso_code == 'en' %}Your stomach naturally calmed{% else %}Votre estomac est calmé{% endif %}, naturellement</p>{% endif %}
         </div>
       </div>
     </div>
@@ -698,8 +698,8 @@
       <div class="offer-block-header reveal">
         <div class="section-label" style="text-align:center">Votre offre</div>
         <h2 class="section-title" style="text-align:center">Une saveur. <span class="accent">Six actifs.</span></h2>
-        <p style="max-width:400px;margin:10px auto 0;color:var(--body);font-size:14px;text-align:center">Paiement unique · Shipping offerte</p>
-        <p id="offer-timer">✓ Shipping offerte en France</p>
+        <p style="max-width:400px;margin:10px auto 0;color:var(--body);font-size:14px;text-align:center">Paiement unique · Livraison offerte</p>
+        <p id="offer-timer">✓ Livraison offerte en France</p>
       </div>
 
       <!-- Image produit -->
@@ -710,66 +710,66 @@
       <!-- Cartes prix -->
       <div class="offer-block-pricing reveal">
         <div class="pricing-card" id="card-decouverte">
-          <h3>Starter</h3>
-          <p class="pricing-desc">Ideal for trying · 90g · 1 scoop/day</p>
-          <div class="pricing-price">$35</div>
-          <p class="pricing-per">soit $1.16/day</p>
-          <p class="pack-duration">30 days · 1 scoop/day</p>
-          <a href="https://uburn.co/cart/51289200034111:1?checkout" class="btn btn-fill" style="width:100%;justify-content:center">Order →</a>
+          {% if request.locale.iso_code == 'en' %}<h3>Starter</h3>{% else %}<h3>{% if request.locale.iso_code == 'en' %}Starter{% else %}Découverte{% endif %}</h3>{% endif %}
+          <p class="pricing-desc">Idéal pour tester · 90g · 1 dose/jour</p>
+          <div class="pricing-price">34,50€</div>
+          <p class="pricing-per">soit 1,15€/jour</p>
+          <p class="pack-duration">30 jours · 1 dose/jour</p>
+          <a href="https://uburn.co/cart/51289200034111:1?checkout" class="btn btn-fill" style="width:100%;justify-content:center">Commander →</a>
         </div>
         <div class="pricing-card pop" id="card-maximum">
           <div class="pricing-pop-badge">Meilleure valeur</div>
-          <h3>Maximum Pack</h3>
-          <p class="pricing-desc">Most popular — 3× more results</p>
-          <div class="pricing-price">$84 <small><s>$105</s></small></div>
-          <p class="pricing-per">= $0.93/day</p>
-          <p class="pack-duration">90 days · 1 scoop/day</p>
-          <a href="https://uburn.co/cart/51289200066879:1?checkout" class="btn btn-fill" style="width:100%;justify-content:center">Order →</a>
+          {% if request.locale.iso_code == 'en' %}<h3>Maximum Pack</h3>{% else %}<h3>{% if request.locale.iso_code == 'en' %}Maximum Pack{% else %}Résultats Maximum{% endif %}</h3>{% endif %}
+          <p class="pricing-desc">{% if request.locale.iso_code == 'en' %}Best Value{% else %}Le + populaire{% endif %} — 3x plus de résultats</p>
+          <div class="pricing-price">54,50€ <small><s>69€</s></small></div>
+          <p class="pricing-per">= 0,61€/jour</p>
+          <p class="pack-duration">30 jours · 3 doses/jour</p>
+          <a href="https://uburn.co/cart/51289200066879:1?checkout" class="btn btn-fill" style="width:100%;justify-content:center">Commander →</a>
         </div>
       </div>
 
       <!-- Cart preview — visible uniquement si Maximum sélectionné -->
       <div class="cart-section-inner reveal" id="cart-preview-block">
         <div class="section-label" style="text-align:center">Votre commande</div>
-        <h2 class="section-title" style="text-align:center">With your Pack Maximum, <span class="accent">vous recevez :</span></h2>
+        <h2 class="section-title" style="text-align:center">{% if request.locale.iso_code == 'en' %}With your{% else %}Avec votre{% endif %} Cure Maximum, <span class="accent">vous recevez :</span></h2>
         <div class="cart-preview">
           <div class="cart-title">Votre panier</div>
           <div class="cart-item">
-            <div class="cart-item-img"><img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=200&format=webp" alt="UBurn Pack Maximum 270g"></div>
+            <div class="cart-item-img"><img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=200&format=webp" alt="UBurn Cure Maximum 270g"></div>
             <div class="cart-item-body">
-              <div class="cart-item-name">Pack Maximum — Poudre Ubé 270g</div>
-              <div class="cart-item-meta">Hazelnut-vanilla flavor · 90-day supply</div>
+              <div class="cart-item-name">Cure Maximum — Poudre Ubé 270g</div>
+              <div class="cart-item-meta">Saveur noisette-vanille · Cure 90 jours</div>
             </div>
-            <div class="cart-item-price">$84</div>
+            <div class="cart-item-price">54,50€</div>
           </div>
           <div class="cart-item">
             <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">E</div>
-            <div class="cart-item-body"><div class="cart-item-name">E-book "30 days to take back control"</div><div class="cart-item-gift">Offert</div></div>
-            <div class="cart-item-price"><s>$47</s> 0$</div>
+            <div class="cart-item-body"><div class="cart-item-name">E-book « 30j pour reprendre le contrôle »</div><div class="cart-item-gift">Offert</div></div>
+            <div class="cart-item-price"><s>47€</s> 0€</div>
           </div>
           <div class="cart-item">
             <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">G</div>
             <div class="cart-item-body"><div class="cart-item-name">Groupe privé Uburn Collective</div><div class="cart-item-gift">Offert</div></div>
-            <div class="cart-item-price"><s>$40</s> 0$</div>
+            <div class="cart-item-price"><s>40€</s> 0€</div>
           </div>
           <div class="cart-item">
             <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">É</div>
-            <div class="cart-item-body"><div class="cart-item-name">UBurn online events</div><div class="cart-item-gift">Free</div></div>
-            <div class="cart-item-price"><s>$50</s> 0$</div>
+            <div class="cart-item-body">{% if request.locale.iso_code == 'en' %}<div class="cart-item-name">UBurn online events</div><div class="cart-item-gift">Free</div>{% else %}<div class="cart-item-name">Événements UBurn en ligne</div><div class="cart-item-gift">Offert</div>{% endif %}</div>
+            <div class="cart-item-price"><s>50€</s> 0€</div>
           </div>
           <div class="cart-item">
             <div class="cart-item-img" style="background:#f5f0fa;color:#6b2fa0;font-weight:800;font-size:18px;font-family:'Red Hat Display',sans-serif">W</div>
             <div class="cart-item-body"><div class="cart-item-name">Suivi nutrition WhatsApp 30j</div><div class="cart-item-gift">Offert</div></div>
-            <div class="cart-item-price"><s>$47</s> 0$</div>
+            <div class="cart-item-price"><s>47€</s> 0€</div>
           </div>
           <div class="cart-sub">
-            <div class="cart-sub-row save"><span>Total savings</span><span>−$184</span></div>
-            <div class="cart-sub-row total"><span>Total</span><span>$84</span></div>
-            <div class="cart-sub-note">soit $0.93/day sur 90 days</div>
+            <div class="cart-sub-row save">{% if request.locale.iso_code == 'en' %}<span>Total savings</span>{% else %}<span>Économies totales</span>{% endif %}<span>−184€</span></div>
+            <div class="cart-sub-row total"><span>Total</span><span>54,50€</span></div>
+            <div class="cart-sub-note">soit 0,61€/jour sur 90 jours</div>
           </div>
-          <p class="offer-rating">★★★★★ 4,7/5 · 1,500+ early French customers satisfaites</p>
-          <a href="https://uburn.co/cart/51289200066879:1?checkout" class="cart-checkout">Continue to checkout →</a>
-          <p class="social-proof">✓ Research-backed* glucomannan dietary fiber</p>
+          <p class="offer-rating">★★★★★ 4,7/5 · 1 500+ clientes satisfaites</p>
+          <a href="https://uburn.co/cart/51289200066879:1?checkout" class="cart-checkout">{% if request.locale.iso_code == 'en' %}Continue to checkout →{% else %}Continuer vers le paiement →{% endif %}</a>
+          <p class="social-proof">✓ {% if request.locale.iso_code == 'en' %}Research-backed glucomannan dietary fiber*{% else %}{% if request.locale.iso_code == 'en' %}Research-backed*{% else %}Allégation{% endif %} glucomannane validée EFSA (ID 3120){% endif %}</p>
           <div class="cart-pay"><span>Visa</span><span>Mastercard</span><span>Apple Pay</span><span>Shop Pay</span></div>
         </div>
       </div>
@@ -798,19 +798,19 @@
 
       cardDec.addEventListener('click', selectDec);
       cardMax.addEventListener('click', selectMax);
-      selectDec(); // état initial — Starter sélectionnée
+      selectDec(); // état initial — {% if request.locale.iso_code == 'en' %}Starter{% else %}Découverte{% endif %} sélectionnée
     })();
   </script>
 
   <!-- LIFESTYLE BANNER -->
   <section class="lifestyle-section" style="position:relative;overflow:hidden">
-    <!-- TODO: replace background with assets/lifestyle-rituel.jpg — woman drinking UBurn on couch/desk/sun -->
+    <!-- TODO: remplacer le fond par assets/lifestyle-rituel.jpg — femme qui boit UBurn sur canapé/bureau/soleil -->
     <div class="lifestyle-bg"></div>
     <div class="lifestyle-inner reveal">
-      <div class="section-label">A ritual, not a chore</div>
-      <h2>A moment <em>for you.</em> A drink for your balance.</h2>
-      <p>Cold water or plant-based milk, ice or not — UBurn adapts to your taste. A 10-second ritual, designed for you.</p>
-      <a href="#card-decouverte" class="btn btn-white">Commencer ma pack →</a>
+      {% if request.locale.iso_code == 'en' %}<div class="section-label">A ritual, not a chore</div>{% else %}<div class="section-label">Un rituel, pas une contrainte</div>{% endif %}
+      {% if request.locale.iso_code == 'en' %}<h2>A moment <em>for you.</em> A drink for your balance.</h2>{% else %}<h2>Un moment <em>pour vous.</em> Une boisson pour votre équilibre.</h2>{% endif %}
+      <p>Eau fraîche ou lait végétal, glaçons ou non — UBurn s'adapte à vos envies. Un rituel de 10 secondes, pensé pour vous.</p>
+      <a href="#card-decouverte" class="btn btn-white">Commencer ma cure →</a>
     </div>
   </section>
 
@@ -819,20 +819,20 @@
     <div class="prod-inner">
       <div class="prod-text reveal">
         <div class="section-label">Ce que vivent nos clientes</div>
-        <h2>Their results <span class="accent">in 30 days.</span></h2>
-        <h3>Formulated around glucomannan, a research-backed dietary fiber*</h3>
-        <p>Mix UBurn with a large glass of water or your favorite plant-based milk. Konjac fiber forms a natural gel in your stomach — you feel full for up to 4 hours, without frustration.*</p>
+        <h2>Leurs résultats <span class="accent">en 30 jours.</span></h2>
+        <h3>Formulé autour du glucomannane, allégation santé validée EFSA (ID 3120)</h3>
+        <p>{% if request.locale.iso_code == 'en' %}Mix{% else %}Mélangez{% endif %} UBurn avec un grand {% if request.locale.iso_code == 'en' %}glass of water{% else %}verre d'eau{% endif %} ou votre lait végétal préféré. Le konjac forme un gel qui occupe naturellement votre estomac — vous vous sentez rassasiée pendant {% if request.locale.iso_code == 'en' %}up to 4 hours{% else %}{% if request.locale.iso_code == 'en' %}up to{% else %}jusqu'à{% endif %} 4h{% endif %}, sans frustration.</p>
         <div class="feats">
-          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Satiety from the very first sip*</div>
-          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Visible results in 7 to 14 days*</div>
-          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>30 kcal seulement per scoop</div>
-          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Smooth flavor, vanilla-hazelnut</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>{% if request.locale.iso_code == 'en' %}Satiety from the very first sip*{% else %}Effet satiété dès la première prise{% endif %}</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Résultats visibles en 7 à 14 jours</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>30 kcal seulement par dose</div>
+          {% if request.locale.iso_code == 'en' %}<div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Smooth flavor, vanilla-hazelnut</div>{% else %}<div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Saveur douce, noisette vanillée</div>{% endif %}
         </div>
         <a href="#card-decouverte" class="btn btn-fill">Essayer Uburn →</a>
       </div>
       <div class="prod-visual reveal reveal-d">
         <div class="prod-img">
-          <img src="https://uburn.co/cdn/shop/files/focus_product_2.jpg?v=1772696236&width=800&format=webp" alt="UBurn — ube drink prepared with water or plant-based milk" loading="lazy" decoding="async" width="800" height="800">
+          <img src="https://uburn.co/cdn/shop/files/focus_product_2.jpg?v=1772696236&width=800&format=webp" alt="UBurn — boisson ubé préparée avec de l'eau ou du lait végétal" loading="lazy" decoding="async" width="800" height="800">
         </div>
       </div>
     </div>
@@ -842,17 +842,17 @@
   <div class="prod-block reverse">
     <div class="prod-inner">
       <div class="prod-text reveal">
-        <div class="section-label">Natural formula</div>
+        <div class="section-label">Formule naturelle</div>
         <h2>6 actifs. <span class="accent">Rien de plus.</span></h2>
-        <h3>Every ingredient has a precise role. Nothing extra.</h3>
-        <p>100% plant-based · 0% caffeine · 0 additives.</p>
+        <h3>Chaque ingrédient a un rôle précis. Rien de superflu.</h3>
+        <p>100% végétal · {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %} · 0 additifs.</p>
         <div class="feats">
-          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>5g de fibres per scoop</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>5g de fibres par dose</div>
           <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>400mg de L-Carnitine</div>
           <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>0 additifs, 0 colorants, 0 controverses</div>
-          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>FDA dietary fiber*</div>
+          <div class="feat"><div class="feat-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</div>
         </div>
-        <a href="#ingredients" class="btn btn-outline">See the ingredients</a>
+        {% if request.locale.iso_code == 'en' %}<a href="#ingredients" class="btn btn-outline">See the ingredients</a>{% else %}<a href="#ingredients" class="btn btn-outline">Voir les ingrédients</a>{% endif %}
       </div>
       <div class="prod-visual reveal reveal-d">
         <div class="prod-img prod-img-full" style="background:none">
@@ -872,61 +872,61 @@
           <div>Actif</div>
           <div>Marché classique</div>
           <div>UBurn</div>
-          <div>Your benefit</div>
+          {% if request.locale.iso_code == 'en' %}<div>Your benefit</div>{% else %}<div>Votre bénéfice</div>{% endif %}
         </div>
         <div class="compare-row">
-          <div class="compare-actif" data-label="Actif">Glucomannan</div>
+          <div class="compare-actif" data-label="Actif">Glucomannane</div>
           <div class="compare-market" data-label="Marché">Absent</div>
-          <div class="compare-uburn" data-label="UBurn">3g <span class="compare-pill">FDA fiber*</span></div>
-          <div class="compare-benefit" data-label="Benefit">Lasting 4-hour satiety*</div>
+          <div class="compare-uburn" data-label="UBurn">3g <span class="compare-pill">{% if request.locale.iso_code == 'en' %}FDA fiber*{% else %}EFSA 3120{% endif %}</span></div>
+          {% if request.locale.iso_code == 'en' %}<div class="compare-benefit" data-label="Benefit">Lasting 4-hour satiety*</div>{% else %}<div class="compare-benefit" data-label="Bénéfice">Satiété 4h clinique</div>{% endif %}
         </div>
         <div class="compare-row">
           <div class="compare-actif" data-label="Actif">L-Carnitine</div>
           <div class="compare-market" data-label="Marché">50-100mg</div>
           <div class="compare-uburn" data-label="UBurn">400mg <span class="compare-pill">+400%</span></div>
-          <div class="compare-benefit" data-label="Benefit">Metabolic support*</div>
+          {% if request.locale.iso_code == 'en' %}<div class="compare-benefit" data-label="Benefit">Metabolic support*</div>{% else %}<div class="compare-benefit" data-label="Bénéfice">Métabolisme soutenu</div>{% endif %}
         </div>
         <div class="compare-row">
           <div class="compare-actif" data-label="Actif">Fibre d'acacia</div>
           <div class="compare-market" data-label="Marché">Absent</div>
           <div class="compare-uburn" data-label="UBurn">1,5g <span class="compare-pill new">Nouveau</span></div>
-          <div class="compare-benefit" data-label="Benefit">Better digestion*</div>
+          {% if request.locale.iso_code == 'en' %}<div class="compare-benefit" data-label="Benefit">Better digestion*</div>{% else %}<div class="compare-benefit" data-label="Bénéfice">Digestion améliorée</div>{% endif %}
         </div>
         <div class="compare-row">
           <div class="compare-actif" data-label="Actif">MCT de coco</div>
           <div class="compare-market" data-label="Marché">Absent</div>
           <div class="compare-uburn" data-label="UBurn">500mg</div>
-          <div class="compare-benefit" data-label="Benefit">Steady energy*</div>
+          {% if request.locale.iso_code == 'en' %}<div class="compare-benefit" data-label="Benefit">Steady energy*</div>{% else %}<div class="compare-benefit" data-label="Bénéfice">Énergie stable</div>{% endif %}
         </div>
         <div class="compare-row">
           <div class="compare-actif" data-label="Actif">Ubé violet</div>
           <div class="compare-market" data-label="Marché">Absent</div>
           <div class="compare-uburn" data-label="UBurn">100mg</div>
-          <div class="compare-benefit" data-label="Benefit">Powerful antioxidants*</div>
+          {% if request.locale.iso_code == 'en' %}<div class="compare-benefit" data-label="Benefit">Powerful antioxidants*</div>{% else %}<div class="compare-benefit" data-label="Bénéfice">Antioxydants puissants</div>{% endif %}
         </div>
         <div class="compare-row">
           <div class="compare-actif" data-label="Actif">Gingembre</div>
           <div class="compare-market" data-label="Marché">Rare</div>
           <div class="compare-uburn" data-label="UBurn">15mg bio</div>
-          <div class="compare-benefit" data-label="Benefit">Digestion + metabolism*</div>
+          {% if request.locale.iso_code == 'en' %}<div class="compare-benefit" data-label="Benefit">Digestion + metabolism*</div>{% else %}<div class="compare-benefit" data-label="Bénéfice">Digestion + métabolisme</div>{% endif %}
         </div>
         <div class="compare-row">
-          <div class="compare-actif" data-label="Active">Caffeine</div>
+          {% if request.locale.iso_code == 'en' %}<div class="compare-actif" data-label="Active">Caffeine</div>{% else %}<div class="compare-actif" data-label="Actif">{% if request.locale.iso_code == 'en' %}Caffeine{% else %}Caféine{% endif %}</div>{% endif %}
           <div class="compare-market" data-label="Marché">200mg+ souvent</div>
           <div class="compare-uburn" data-label="UBurn">0mg</div>
-          <div class="compare-benefit" data-label="Benefit">Zero spikes · zero crashes*</div>
+          {% if request.locale.iso_code == 'en' %}<div class="compare-benefit" data-label="Benefit">Zero spikes · zero crashes*</div>{% else %}<div class="compare-benefit" data-label="Bénéfice">Zéro pic · zéro crash</div>{% endif %}
         </div>
         <div class="compare-row">
           <div class="compare-actif" data-label="Actif">Conservateurs</div>
           <div class="compare-market" data-label="Marché">Multiples</div>
           <div class="compare-uburn" data-label="UBurn">0</div>
-          <div class="compare-benefit" data-label="Benefit">100% clean</div>
+          {% if request.locale.iso_code == 'en' %}<div class="compare-benefit" data-label="Benefit">100% clean</div>{% else %}<div class="compare-benefit" data-label="Bénéfice">100% clean</div>{% endif %}
         </div>
         <div class="compare-row">
           <div class="compare-actif" data-label="Actif">Certification</div>
           <div class="compare-market" data-label="Marché">Variable</div>
-          <div class="compare-uburn" data-label="UBurn">FDA dietary fiber*</div>
-          <div class="compare-benefit" data-label="Benefit">Quality guarantee</div>
+          <div class="compare-uburn" data-label="UBurn">{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</div>
+          {% if request.locale.iso_code == 'en' %}<div class="compare-benefit" data-label="Benefit">Quality guarantee</div>{% else %}<div class="compare-benefit" data-label="Bénéfice">Garantie officielle</div>{% endif %}
         </div>
       </div>
     </div>
@@ -934,32 +934,32 @@
   <!-- INGREDIENTS -->
   <section class="section" id="ingredients" style="background:var(--cream)">
     <div class="section-inner reveal">
-      <div class="section-label">Ingredients</div>
-      <h2 class="section-title">Natural ingredients, <span class="accent">carefully selected</span></h2>
+      {% if request.locale.iso_code == 'en' %}<div class="section-label">Ingredients</div>{% else %}<div class="section-label">Ingrédients</div>{% endif %}
+      {% if request.locale.iso_code == 'en' %}<h2 class="section-title">Natural ingredients, <span class="accent">carefully selected</span></h2>{% else %}<h2 class="section-title">Des actifs naturels <span class="accent">hautement sélectionnés</span></h2>{% endif %}
       <div class="ingr-grid stagger-scale">
         <div class="ingr-card">
           <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1749644803&width=500&format=webp" alt="Ubé violet" loading="lazy" decoding="async" width="500" height="375"></div>
           <div class="ingr-card-body"><h4>Ubé violet</h4><p>Antioxydants naturels</p></div>
         </div>
         <div class="ingr-card">
-          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannan.jpg?v=1749644803&width=500&format=webp" alt="Konjac glucomannan" loading="lazy" decoding="async" width="500" height="375"></div>
-          <div class="ingr-card-body"><h4>Konjac</h4><p>4-hour satiety* · FDA fiber*</p></div>
+          <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1749644803&width=500&format=webp" alt="Konjac" loading="lazy" decoding="async" width="500" height="375"></div>
+          {% if request.locale.iso_code == 'en' %}<div class="ingr-card-body"><h4>Konjac</h4><p>4-hour satiety* · FDA fiber*</p></div>{% else %}<div class="ingr-card-body"><h4>Konjac</h4><p>Satiété 4h · EFSA</p></div>{% endif %}
         </div>
         <div class="ingr-card">
           <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1749644803&width=500&format=webp" alt="Fibre d'acacia" loading="lazy" decoding="async" width="500" height="375"></div>
-          <div class="ingr-card-body"><h4>Acacia</h4><p>Digestive prebiotic*</p></div>
+          {% if request.locale.iso_code == 'en' %}<div class="ingr-card-body"><h4>Acacia</h4><p>Digestive prebiotic*</p></div>{% else %}<div class="ingr-card-body"><h4>Acacia</h4><p>Prébiotique digestif</p></div>{% endif %}
         </div>
         <div class="ingr-card">
           <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1749644803&width=500&format=webp" alt="MCT de coco" loading="lazy" decoding="async" width="500" height="375"></div>
-          <div class="ingr-card-body"><h4>Coconut MCT</h4><p>Steady energy*</p></div>
+          {% if request.locale.iso_code == 'en' %}<div class="ingr-card-body"><h4>Coconut MCT</h4><p>Steady energy*</p></div>{% else %}<div class="ingr-card-body"><h4>MCT coco</h4><p>Énergie stable</p></div>{% endif %}
         </div>
         <div class="ingr-card">
           <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1749644803&width=500&format=webp" alt="Gingembre" loading="lazy" decoding="async" width="500" height="375"></div>
-          <div class="ingr-card-body"><h4>Ginger</h4><p>Digestion + metabolism*</p></div>
+          {% if request.locale.iso_code == 'en' %}<div class="ingr-card-body"><h4>Ginger</h4><p>Digestion + metabolism*</p></div>{% else %}<div class="ingr-card-body"><h4>Gingembre</h4><p>Digestion + métabolisme</p></div>{% endif %}
         </div>
         <div class="ingr-card">
           <div class="ingr-card-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1749644803&width=500&format=webp" alt="L-Carnitine" loading="lazy" decoding="async" width="500" height="375"></div>
-          <div class="ingr-card-body"><h4>L-Carnitine</h4><p>Fat metabolism*</p></div>
+          {% if request.locale.iso_code == 'en' %}<div class="ingr-card-body"><h4>L-Carnitine</h4><p>Fat metabolism*</p></div>{% else %}<div class="ingr-card-body"><h4>L-Carnitine</h4><p>Métabolisme des graisses</p></div>{% endif %}
         </div>
       </div>
     </div>
@@ -971,18 +971,18 @@
     <div class="benefits-inner reveal">
       <div class="benefits-head">
         <div class="section-label">Soutien complet</div>
-        <h2 class="section-title" style="text-align:center">6 benefits, <span class="accent">one single drink.</span></h2>
-        <p style="max-width:400px;margin:12px auto 0;color:var(--body);font-size:14px">One scoop. Six benefits.</p>
+        <h2 class="section-title" style="text-align:center">{% if request.locale.iso_code == 'en' %}6 benefits, <span class="accent">one single drink.</span>{% else %}6 bienfaits, <span class="accent">une seule boisson.</span>{% endif %}</h2>
+        <p style="max-width:400px;margin:12px auto 0;color:var(--body);font-size:14px">{% if request.locale.iso_code == 'en' %}One scoop. Six benefits.{% else %}{% if request.locale.iso_code == 'en' %}One scoop{% else %}Une dose{% endif %}. Six bénéfices.{% endif %}</p>
       </div>
       <div class="benefits-grid-layout">
         <div class="benefit-cards">
           <div class="benefit-card active" data-benefit="satiete">
             <div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div>
-            <div class="benefit-name">Satiety</div>
+            {% if request.locale.iso_code == 'en' %}<div class="benefit-name">Satiety</div>{% else %}<div class="benefit-name">Satiété</div>{% endif %}
           </div>
           <div class="benefit-card" data-benefit="energie">
             <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-            <div class="benefit-name">Energy</div>
+            {% if request.locale.iso_code == 'en' %}<div class="benefit-name">Energy</div>{% else %}<div class="benefit-name">Énergie</div>{% endif %}
           </div>
           <div class="benefit-card" data-benefit="digestion">
             <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7z"/><circle cx="12" cy="9" r="2"/></svg></div>
@@ -994,26 +994,26 @@
           </div>
           <div class="benefit-card" data-benefit="metabolisme">
             <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
-            <div class="benefit-name">Metabolism</div>
+            {% if request.locale.iso_code == 'en' %}<div class="benefit-name">Metabolism</div>{% else %}<div class="benefit-name">Métabolisme</div>{% endif %}
           </div>
           <div class="benefit-card" data-benefit="bien_etre">
             <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-            <div class="benefit-name">Wellness</div>
+            {% if request.locale.iso_code == 'en' %}<div class="benefit-name">Wellness</div>{% else %}<div class="benefit-name">Bien-être</div>{% endif %}
           </div>
         </div>
         <div class="benefit-detail">
           <div class="benefit-detail-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div>
-          <div class="benefit-label">Glucomannan · EFSA · Fibres</div>
-          <h3 class="benefit-title">Lasting satiety*</h3>
-          <p class="benefit-desc">Glucomannan EFSA + 5g de fibres per scoop. Konjac fiber forms a natural gel in your stomach.*</p>
-          <span class="benefit-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Research-backed actives*</span>
+          <div class="benefit-label">Glucomannane · EFSA · Fibres</div>
+          {% if request.locale.iso_code == 'en' %}<h3 class="benefit-title">Lasting satiety*</h3>{% else %}<h3 class="benefit-title">Satiété durable</h3>{% endif %}
+          <p class="benefit-desc">Glucomannane EFSA + 5g de fibres par dose. Le konjac forme un gel qui occupe naturellement l'estomac.</p>
+          {% if request.locale.iso_code == 'en' %}<span class="benefit-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Research-backed actives*</span>{% else %}<span class="benefit-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Actifs dosés cliniquement</span>{% endif %}
         </div>
       </div>
     </div>
   </section>
   <!-- PRESS -->
   <div class="press-bar">
-    <p>As featured in</p>
+    {% if request.locale.iso_code == 'en' %}<p>As featured in</p>{% else %}<p>Ils parlent de nous</p>{% endif %}
     <div class="press-logos">
       <img src="https://uburn.co/cdn/shop/files/TF1_1989-1990.png?v=1749644803&width=150&format=webp" alt="TF1" loading="lazy" decoding="async" width="150" height="50">
       <img src="https://uburn.co/cdn/shop/files/Brut_logo_svg.png?v=1749644803&width=150&format=webp" alt="Brut" loading="lazy" decoding="async" width="150" height="50">
@@ -1026,31 +1026,31 @@
   <!-- STATS with BIG PERCENTAGES (IM8-inspired) -->
   <section class="stats-section">
     <div class="section-inner reveal">
-      <h2>UBurn works from the very first sip*</h2>
+      <h2>{% if request.locale.iso_code == 'en' %}UBurn works from the very first sip*{% else %}UBurn agit dès la première prise{% endif %}</h2>
       <div class="big-stats-row stagger-children">
-        <div class="big-stat"><div class="big-stat-num" data-count="95" data-suffix="%">95%</div><div class="big-stat-label">Satiety from the very first sip*</div></div>
-        <div class="big-stat"><div class="big-stat-num" data-count="87" data-suffix="%">87%</div><div class="big-stat-label">Less evening snacking</div></div>
+        <div class="big-stat"><div class="big-stat-num" data-count="95" data-suffix="%">95%</div>{% if request.locale.iso_code == 'en' %}<div class="big-stat-label">Satiety from the very first sip*</div>{% else %}<div class="big-stat-label">Satiété dès la 1ère prise</div>{% endif %}</div>
+        <div class="big-stat"><div class="big-stat-num" data-count="87" data-suffix="%">87%</div>{% if request.locale.iso_code == 'en' %}<div class="big-stat-label">Less evening snacking</div>{% else %}<div class="big-stat-label">Moins de {% if request.locale.iso_code == 'en' %}snacking{% else %}grignotage{% endif %} le soir</div>{% endif %}</div>
         <div class="big-stat"><div class="big-stat-num" data-count="82" data-suffix="%">82%</div><div class="big-stat-label">Rythme alimentaire apaisé</div></div>
-        <div class="big-stat"><div class="big-stat-num">4.7/5</div><div class="big-stat-label">Verified rating</div></div>
+        <div class="big-stat"><div class="big-stat-num">4.7/5</div>{% if request.locale.iso_code == 'en' %}<div class="big-stat-label">Verified rating</div>{% else %}<div class="big-stat-label">Note vérifiée</div>{% endif %}</div>
       </div>
-      <a href="#card-decouverte" class="btn btn-white">Commencer ma pack →</a>
+      <a href="#card-decouverte" class="btn btn-white">Commencer ma cure →</a>
       <div class="stats-row" style="margin-top:48px;opacity:.85">
-        <div class="stat"><div class="stat-num">30</div><div class="stat-label">kcal per scoop</div></div>
-        <div class="stat"><div class="stat-num">4h</div><div class="stat-label">satiety*</div></div>
+        <div class="stat"><div class="stat-num">30</div><div class="stat-label">kcal par dose</div></div>
+        <div class="stat">{% if request.locale.iso_code == 'en' %}<div class="stat-num">4h</div><div class="stat-label">satiety*</div>{% else %}<div class="stat-num">4h</div><div class="stat-label">de satiété</div>{% endif %}</div>
         <div class="stat"><div class="stat-num">6</div><div class="stat-label">actifs naturels</div></div>
-        <div class="stat"><div class="stat-num">0%</div><div class="stat-label">caffeine</div></div>
+        <div class="stat"><div class="stat-num">0%</div><div class="stat-label">{% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}</div></div>
       </div>
-      <p class="stats-note">Data from UBurn internal surveys of early customers.</p>
+      {% if request.locale.iso_code == 'en' %}<p class="stats-note">Data from UBurn internal surveys of early customers.</p>{% else %}<p class="stats-note">Données issues d'enquêtes internes UBurn auprès des premières clientes.</p>{% endif %}
     </div>
   </section>
   <section class="section testi-section" id="avis">
     <div class="section-inner reveal">
-      <h2 class="section-title" style="text-align:center">They share <span class="accent">their results.</span></h2>
+      {% if request.locale.iso_code == 'en' %}<h2 class="section-title" style="text-align:center">They share <span class="accent">their results.</span></h2>{% else %}<h2 class="section-title" style="text-align:center">Elles racontent <span class="accent">leurs résultats.</span></h2>{% endif %}
       <div class="testi-grid stagger-scale">
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"I don't think about the pantry at 4PM anymore. It's a real relief day to day."</p>
-          <div class="testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Verified purchase</div>
+          {% if request.locale.iso_code == 'en' %}<p class="testi-text">"I don't think about the pantry at 4PM anymore. It's a real relief day to day."</p>{% else %}<p class="testi-text">"Je ne pense plus au placard à 16h. Ça me soulage vraiment au quotidien."</p>{% endif %}
+          <div class="testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</div>
           <div class="testi-author">
             <div class="testi-avatar">M</div>
             <div><div class="testi-name">Marion L.</div><div class="testi-role">28 ans, Lyon</div></div>
@@ -1058,8 +1058,8 @@
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"For $0.93 per day, there's no risk. And it works. On my second jar."</p>
-          <div class="testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Verified purchase</div>
+          <p class="testi-text">"Pour 0,61€ par jour, y'a pas de risque. Et ça marche. Mon 2e pot en cours."</p>
+          <div class="testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</div>
           <div class="testi-author">
             <div class="testi-avatar">S</div>
             <div><div class="testi-name">Sophie</div><div class="testi-role">Bordeaux</div></div>
@@ -1067,8 +1067,8 @@
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"My coworkers asked me my secret. The taste is great and I don't snack at night anymore."</p>
-          <div class="testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> Verified purchase</div>
+          <p class="testi-text">{% if request.locale.iso_code == 'en' %}"My coworkers asked me my secret. The taste is great and I don't snack at night anymore."{% else %}"Mes collègues m'ont demandé mon secret. Le goût est top et je ne grignote plus le soir."{% endif %}</p>
+          <div class="testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</div>
           <div class="testi-author">
             <div class="testi-avatar">N</div>
             <div><div class="testi-name">Nathalie</div><div class="testi-role">Toulouse</div></div>
@@ -1081,15 +1081,15 @@
   <!-- FAQ -->
   <section class="section faq-section" id="faq">
     <div class="section-inner reveal">
-      <h2 class="section-title">Frequently <span class="accent">asked questions.</span></h2>
+      {% if request.locale.iso_code == 'en' %}<h2 class="section-title">Frequently <span class="accent">asked questions.</span></h2>{% else %}<h2 class="section-title">Questions <span class="accent">fréquentes.</span></h2>{% endif %}
       <div class="faq-list">
-        <div class="faq-item"><div class="faq-q">How does UBurn work?</div><div class="faq-a">UBurn is formulated around konjac glucomannan — a research-backed dietary fiber added to the FDA's official list in January 2020. Mix one scoop in a large glass of cold water or your favorite plant-based milk (almond, oat, coconut). Konjac absorbs water and forms a natural gel in your stomach — you feel full naturally.* Used daily by 1,500+ early French customers.</div></div>
-        <div class="faq-item"><div class="faq-q">How does it actually work?</div><div class="faq-a">Konjac is a natural plant from Asia. Its fiber (glucomannan) absorbs up to 100x its weight in water and forms a gel in your stomach. You feel full without eating more.*</div></div>
-        <div class="faq-item"><div class="faq-q">How long until I see results?</div><div class="faq-a">Most early customers feel satiety from their first scoop. For visible results on craving control: 7 to 14 days with consistent morning use.*</div></div>
-        <div class="faq-item"><div class="faq-q">Is there a subscription?</div><div class="faq-a">No hidden subscription. Order when you want, stop when you want.</div></div>
-        <div class="faq-item"><div class="faq-q">Can I drink it at night? Caffeine-free?</div><div class="faq-a">Yes. UBurn is caffeine-free. Drink it any time of day, even at night — no sleep disruption.</div></div>
-        <div class="faq-item"><div class="faq-q">Water or plant-based milk — what's the difference?</div><div class="faq-a">Both work perfectly. Cold water makes it light and refreshing — ideal during the day or before a meal. Plant-based milk (almond, oat, coconut) gives it a creamier texture and brings out the hazelnut-vanilla notes. Pick what your mood calls for.</div></div>
-        <div class="faq-item"><div class="faq-q">Y a-t-il des contre-indications ?</div><div class="faq-a">UBurn is not recommended during pregnancy or breastfeeding. If you're on medication, consult your healthcare provider before use. Glucomannan may slow the absorption of certain medications — take UBurn 2 hours before or after any medication. Dietary supplement — not a substitute for a balanced diet.</div></div>
+        <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}How does UBurn work?{% else %}Comment fonctionne UBurn ?{% endif %}</div><div class="faq-a">UBurn est formulé autour du glucomannane de konjac, dont l'allégation de satiété est officiellement validée par l'EFSA (ID 3120). {% if request.locale.iso_code == 'en' %}Mix{% else %}Mélangez{% endif %} {% if request.locale.iso_code == 'en' %}one scoop{% else %}une dose{% endif %} dans un grand {% if request.locale.iso_code == 'en' %}glass of water{% else %}verre d'eau{% endif %} fraîche ou de votre lait végétal préféré (amande, avoine, coco...). Le konjac absorbe l'eau et forme un gel naturel dans l'estomac — vous vous sentez rassasiée naturellement. 1500+ femmes l'utilisent au quotidien.</div></div>
+        <div class="faq-item">{% if request.locale.iso_code == 'en' %}<div class="faq-q">How does it actually work?</div>{% else %}<div class="faq-q">Comment ça agit concrètement ?</div>{% endif %}<div class="faq-a">Le konjac est une plante naturelle d'Asie. Sa fibre (glucomannane) absorbe {% if request.locale.iso_code == 'en' %}up to{% else %}jusqu'à{% endif %} 100x son poids en eau et forme un gel dans l'estomac. {% if request.locale.iso_code == 'en' %}You feel{% else %}Vous vous sentez{% endif %} rassasiée sans avoir mangé plus.</div></div>
+        <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}How long until I see results?{% else %}En combien de temps voit-on des résultats ?{% endif %}</div><div class="faq-a">{% if request.locale.iso_code == 'en' %}Most early customers feel satiety from their first scoop. For visible results on craving control: 7 to 14 days with consistent morning use.*{% else %}La plupart des clientes ressentent l'effet satiété dès la première prise. Pour des résultats visibles sur le contrôle des {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s : 7 à 14 jours en {% if request.locale.iso_code == 'en' %}consistent use{% else %}utilisation régulière{% endif %} {% if request.locale.iso_code == 'en' %}in the morning{% else %}le matin{% endif %}.{% endif %}</div></div>
+        <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}Is there a subscription?{% else %}Y a-t-il un abonnement ?{% endif %}</div><div class="faq-a">Non. Aucun abonnement caché. Vous commandez quand vous voulez, vous arrêtez quand vous voulez.</div></div>
+        <div class="faq-item"><div class="faq-q">C'est compatible le soir ? Sans {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %} ?</div><div class="faq-a">Oui. Uburn ne contient pas de {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}. {% if request.locale.iso_code == 'en' %}Drink it{% else %}{% if request.locale.iso_code == 'en' %}You can{% else %}Vous pouvez{% endif %} le prendre{% endif %} à {% if request.locale.iso_code == 'en' %}any time{% else %}n'importe quelle heure{% endif %}, {% if request.locale.iso_code == 'en' %}even at night{% else %}même le soir{% endif %}, {% if request.locale.iso_code == 'en' %}without disrupting sleep{% else %}sans perturber votre sommeil{% endif %}.</div></div>
+        <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}Water or plant-based milk — what's the difference?{% else %}Avec de l'eau ou avec du lait — quelle différence ?{% endif %}</div><div class="faq-a">Les deux fonctionnent parfaitement. Avec de l'eau froide, la boisson est légère et rafraîchissante — idéal en journée ou avant un repas. Avec un lait végétal (amande, avoine, coco...), la texture est plus crémeuse et la saveur noisette-vanille est encore plus prononcée. À vous de choisir selon votre humeur !</div></div>
+        <div class="faq-item"><div class="faq-q">Y a-t-il des contre-indications ?</div><div class="faq-a">UBurn est déconseillé pendant la grossesse et l'allaitement. En cas de traitement médical, consultez votre médecin avant utilisation. Le glucomannane peut interagir avec certains médicaments en ralentissant leur absorption — prendre UBurn 2h avant ou après votre traitement si nécessaire. Complément alimentaire — ne se substitue pas à une alimentation variée et équilibrée.</div></div>
       </div>
     </div>
   </section>
@@ -1099,19 +1099,19 @@
     <div class="guar-grid">
       <div class="guar-item">
         <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_World.svg" alt=""></div>
-        <h4>Research-backed*</h4><p>Research-backed glucomannan*</p>
+        <h4>Formule EFSA</h4><p>Glucomannane ID 3120</p>
       </div>
       <div class="guar-item">
         <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_Fast_shipping.svg" alt=""></div>
-        <h4>Free U.S. shipping</h4><p>Over $40</p>
+        <h4>Livraison gratuite</h4><p>En France</p>
       </div>
       <div class="guar-item">
-        <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_sepack_payment.svg" alt=""></div>
-        <h4>Secure checkout</h4><p>SSL encrypted</p>
+        <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_secure_payment.svg" alt=""></div>
+        <h4>{% if request.locale.iso_code == 'en' %}Secure checkout{% else %}Paiement sécurisé{% endif %}</h4><p>100% sécurisé</p>
       </div>
       <div class="guar-item">
         <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_customer.svg" alt=""></div>
-        <h4>No subscription</h4><p>Order when you want</p>
+        <h4>{% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</h4><p>Commandez quand vous voulez</p>
       </div>
     </div>
   </div>
@@ -1121,20 +1121,20 @@
       <div class="footer-top">
         <div class="footer-brand">
           <img class="footer-brand-logo" src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn" loading="lazy">
-          <p>Take back control of your diet with a 100% natural, French formula.</p>
+          <p>{% if request.locale.iso_code == 'en' %}Take back control{% else %}Reprenez le contrôle{% endif %} de {% if request.locale.iso_code == 'en' %}your diet{% else %}votre alimentation{% endif %} avec une formule 100% naturelle, validée EFSA. {% if request.locale.iso_code == 'en' %}French brand{% else %}Marque française{% endif %}.</p>
           <div class="footer-contact">hello@uburn.co</div>
         </div>
-        <div class="footer-col"><h4>Product</h4><a href="#">Ube Powder</a><a href="#">Ingredients</a><a href="#">Results</a><a href="#">Reviews</a></div>
-        <div class="footer-col"><h4>Support</h4><a href="#">FAQ</a><a href="#">Contact</a><a href="#">Shipping</a><a href="#">Returns</a></div>
+        {% if request.locale.iso_code == 'en' %}<div class="footer-col"><h4>Product</h4><a href="#">Ube Powder</a><a href="#">Ingredients</a><a href="#">Results</a><a href="#">Reviews</a></div>{% else %}<div class="footer-col"><h4>Produit</h4><a href="#">Ube Poudre</a><a href="#">Ingrédients</a><a href="#">Résultats</a><a href="#">Avis clients</a></div>{% endif %}
+        <div class="footer-col"><h4>Support</h4><a href="#">FAQ</a><a href="#">Contact</a><a href="#">Livraison</a><a href="#">Retours</a></div>
         <div class="footer-col"><h4>Entreprise</h4><a href="#">À propos</a><a href="#">Blog</a><a href="#">Presse</a><a href="#">CGV</a></div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 UBurn. All rights reserved.</p>
-        <div class="footer-legal"><a href="/policies/terms-of-service">Terms</a><a href="/policies/privacy-policy">Privacy</a><a href="/policies/legal-notice">Legal Notice</a></div>
+        <p>{% if request.locale.iso_code == 'en' %}&copy; 2026 UBurn. All rights reserved.{% else %}&copy; 2026 UBurn. Tous droits réservés.{% endif %}</p>
+        {% if request.locale.iso_code == 'en' %}<div class="footer-legal"><a href="/policies/terms-of-service">Terms</a><a href="/policies/privacy-policy">Privacy</a><a href="/policies/legal-notice">Legal Notice</a></div>{% else %}<div class="footer-legal"><a href="/policies/terms-of-service">CGV</a><a href="/policies/privacy-policy">Confidentialité</a><a href="/policies/legal-notice">Mentions légales</a></div>{% endif %}
       </div>
       <details class="footer-disc footer-disc--acc">
-        <summary>Legal disclaimers (FDA · precautions)</summary>
-        <p>Dietary supplement containing glucomannan. Glucomannan supports satiety as part of a healthy lifestyle.* Recommended use: 3g/day in 3 doses of 1g with 1-2 large glasses of water before meals. Not a substitute for a balanced diet. Not recommended during pregnancy or breastfeeding.</p>
+        {% if request.locale.iso_code == 'en' %}<summary>Legal disclaimers (FDA · precautions)</summary>{% else %}<summary>Mentions réglementaires (EFSA · précautions)</summary>{% endif %}
+        <p>{% if request.locale.iso_code == 'en' %}Dietary supplement containing glucomannan.{% else %}Complément alimentaire à base de glucomannane.{% endif %} Contribue au contrôle de l'appétit dans le cadre d'un {% if request.locale.iso_code == 'en' %}healthy lifestyle{% else %}régime hypocalorique{% endif %} ({% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}). {% if request.locale.iso_code == 'en' %}Recommended use: 3g/day in 3 doses of 1g with 1-2 large glasses of water before meals.{% else %}Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas.{% endif %} {% if request.locale.iso_code == 'en' %}Not a substitute for a balanced diet.{% else %}Ne se substitue pas à une alimentation variée et équilibrée.{% endif %} {% if request.locale.iso_code == 'en' %}Not recommended during pregnancy or breastfeeding.{% else %}Déconseillé pendant la grossesse et l'allaitement.{% endif %}</p>
       </details>
     </div>
   </footer>
@@ -1142,7 +1142,7 @@
 
   <!-- STICKY MOBILE CTA -->
   <div class="sticky-mobile-cta">
-    <a href="#card-decouverte">Start my pack — from $35</a>
+    <a href="#card-decouverte">Commencer ma cure — dès 34,50€</a>
   </div>
 
   <script>
@@ -1151,10 +1151,10 @@
       var params = new URLSearchParams(window.location.search);
       var utmContent = params.get('utm_content') || '';
       var map = {
-        'violet': {h1:'The <span class="accent">purple</span> drink that handles 4PM cravings', sub:'30 kcal · 0% caffeine · lasting satisfaction.*'},
-        'ube':    {h1:'Ube + Konjac = <span class="accent">4h</span> without cravings*', sub:'100% natural · 30 kcal · French brand.'},
-        'soir':   {h1:'Your new <span class="accent">routine</span> starts here', sub:'0% caffeine · drink any time · 30 kcal.'},
-        'energie':{h1:'Why your <span class="accent">3PM crash</span> hits so hard', sub:'Coconut MCT · steady energy* · no stimulants.'}
+        'violet': {h1:'La boisson <span class="accent">violette</span> qui coupe les {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s 4h', sub:'30 kcal · {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %} · satisfaction durable.'},
+        'ube':    {h1:'Ube + Konjac = <span class="accent">4h</span> sans {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s', sub:'100% naturel · 30 kcal · {% if request.locale.iso_code == 'en' %}French brand{% else %}Marque Française{% endif %}.'},
+        'soir':   {h1:'Votre nouvelle <span class="accent">routine</span> commence ici', sub:'{% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %} · se prend à toute heure · 30 kcal.'},
+        {% if request.locale.iso_code == 'en' %}'energie':{h1:'Why your <span class="accent">3PM crash</span> hits so hard', sub:'Coconut MCT · steady energy* · no stimulants.'}{% else %}'energie':{h1:'Pourquoi vous avez un coup de pompe <span class="accent">à 15h</span>&nbsp;?', sub:'MCT de coco · énergie stable · sans excitants.'}{% endif %}
       };
       var v = map[utmContent.toLowerCase()];
       if(v){
@@ -1211,12 +1211,12 @@
 
     // Benefit cards interactive
     const benefits = {
-      satiete: {label: 'Glucomannan · Plant fiber · 5g per scoop', title: 'Lasting satiety*', desc: 'A complete system built around glucomannan (FDA dietary fiber*) and 5g of fiber per scoop. Konjac absorbs up to 100x its weight in water to form a gel that naturally fills your stomach.*'},
-      energie: {label: 'MCT · L-Carnitine', title: 'Steady energy*', desc: 'Coconut MCT and L-Carnitine 400mg for energy without spikes or crashes.* Perfect for long afternoons.'},
-      digestion: {label: 'Ginger · Acacia', title: 'Digestive comfort*', desc: 'Organic ginger and acacia prebiotic fiber for daily digestive comfort.*'},
-      antioxydants: {label: 'Ube · Anthocyanins', title: 'Powerful antioxidants*', desc: 'Purple ube rich in natural anthocyanins for cellular protection and skin radiance.*'},
-      metabolisme: {label: 'L-Carnitine · Ginger', title: 'Metabolic support*', desc: 'L-Carnitine 400mg and ginger for natural, lasting metabolic support.*'},
-      bien_etre: {label: 'Complete formula', title: 'Total balance*', desc: 'A synergistic formula of 6 active ingredients for daily, lasting wellness.*'}
+      satiete: {label: 'Glucomannane · EFSA · Fibres', title: 'Satiété durable', desc: '{% if request.locale.iso_code == 'en' %}A complete system built around glucomannan{% else %}Système complet basé sur le glucomannane{% endif %} ({% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}) et 5g de fibres par dose. {% if request.locale.iso_code == 'en' %}Konjac absorbs up to 100x its weight in water to form a gel that naturally fills your stomach.*{% else %}Le konjac absorbe jusqu\'à 100x son poids en eau pour former un gel qui occupe naturellement l\'estomac.{% endif %}'},
+      {% if request.locale.iso_code == 'en' %}energie: {label: 'MCT · L-Carnitine', title: 'Steady energy*', desc: 'Coconut MCT and L-Carnitine 400mg for energy without spikes or crashes.* Perfect for long afternoons.'}{% else %}energie: {label: 'MCT · L-Carnitine', title: 'Énergie stable', desc: 'MCT coco et L-Carnitine 400mg pour une énergie sans pic ni crash. Parfait pour les après-midis longs.'}{% endif %},
+      {% if request.locale.iso_code == 'en' %}digestion: {label: 'Ginger · Acacia', title: 'Digestive comfort*', desc: 'Organic ginger and acacia prebiotic fiber for daily digestive comfort.*'}{% else %}digestion: {label: 'Gingembre · Acacia', title: 'Digestion apaisée', desc: 'Gingembre bio et fibre d\'acacia prébiotique pour un confort digestif au quotidien.'}{% endif %},
+      {% if request.locale.iso_code == 'en' %}antioxydants: {label: 'Ube · Anthocyanins', title: 'Powerful antioxidants*', desc: 'Purple ube rich in natural anthocyanins for cellular protection and skin radiance.*'}{% else %}antioxydants: {label: 'Ubé · Anthocyanes', title: 'Antioxydants puissants', desc: 'Ubé violet riche en anthocyanes naturelles pour la protection cellulaire et l\'éclat de la peau.'}{% endif %},
+      {% if request.locale.iso_code == 'en' %}metabolisme: {label: 'L-Carnitine · Ginger', title: 'Metabolic support*', desc: 'L-Carnitine 400mg and ginger for natural, lasting metabolic support.*'}{% else %}metabolisme: {label: 'L-Carnitine · Gingembre', title: 'Métabolisme soutenu', desc: 'L-Carnitine 400mg et gingembre pour un support métabolique naturel et durable.'}{% endif %},
+      {% if request.locale.iso_code == 'en' %}bien_etre: {label: 'Complete formula', title: 'Total balance*', desc: 'A synergistic formula of 6 active ingredients for daily, lasting wellness.*'}{% else %}bien_etre: {label: 'Formule complète', title: 'Équilibre global', desc: 'Une formule synergique de 6 actifs pour un bien-être quotidien apaisé et durable.'}{% endif %}
     };
     document.querySelectorAll('[data-benefit]').forEach(card => {
       card.addEventListener('click', () => {
@@ -1258,16 +1258,16 @@
   <div id="ub-exit-modal">
     <button id="ub-exit-close" onclick="ubExitClose()" aria-label="Fermer">×</button>
     <div class="exit-icon">🎁</div>
-    <span class="exit-value">PDF offert — valeur $47</span>
-    <h2 id="ub-exit-title">Avant de partir</h2>
-    <p>Get our guide <strong>"30 days to take back control"</strong> — complete nutrition plan, free.</p>
+    <span class="exit-value">PDF offert — valeur 47€</span>
+    <h2 id="ub-exit-title">{% if request.locale.iso_code == 'en' %}Before you go{% else %}Avant de partir{% endif %}</h2>
+    {% if request.locale.iso_code == 'en' %}<p>Get our guide <strong>"30 days to take back control"</strong> — complete nutrition plan, free.</p>{% else %}<p>Recevez notre guide <strong>"30j pour reprendre le contrôle"</strong> — plan nutrition complet, gratuit.</p>{% endif %}
     <div id="ub-exit-form-wrap">
       <form id="ub-exit-form" onsubmit="ubExitSubmit(event)">
         <input id="ub-exit-email" type="email" name="contact[email]" placeholder="Votre adresse email" required autocomplete="email">
-        <button id="ub-exit-submit" type="submit">Get my free guide →</button>
-        <p class="exit-legal">No spam. One-click unsubscribe.</p>
+        {% if request.locale.iso_code == 'en' %}<button id="ub-exit-submit" type="submit">Get my free guide →</button>{% else %}<button id="ub-exit-submit" type="submit">Je veux mon guide →</button>{% endif %}
+        <p class="exit-legal">{% if request.locale.iso_code == 'en' %}No spam. One-click unsubscribe.{% else %}Pas de spam. {% if request.locale.iso_code == 'en' %}Unsubscribe{% else %}Désabonnement{% endif %} en 1 clic.{% endif %}</p>
       </form>
-      <div id="ub-exit-success"><p>✓ Guide sent — check your inbox!</p></div>
+      {% if request.locale.iso_code == 'en' %}<div id="ub-exit-success"><p>✓ Guide sent — check your inbox!</p></div>{% else %}<div id="ub-exit-success"><p>✓ Guide envoyé — vérifiez vos emails !</p></div>{% endif %}
     </div>
   </div>
 </div>
