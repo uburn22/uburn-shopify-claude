@@ -1,11 +1,11 @@
 {%- comment -%}
   ════════════════════════════════════════════════════════════════
-  UBURN PDP V9 — Refonte complète avec ADN visuel exact de la LP
+  UBURN PDP V9 — Complete redesign avec ADN visuel exact de la LP
   ────────────────────────────────────────────────────────────────
-  - Préfixe CSS: .pdpv9-* (zéro conflit avec la LP)
-  - Section unique main-* qui remplace tout le main-product natif
-  - Cache les parasites du theme via CSS scoped
-  - Variant picker + form Shopify natif entre sections 7 & 9
+  - CSS prefix: .pdpv9-* (zéro conflit avec la LP)
+  - Single main-* section that replaces all native main-product
+  - Hides theme parasites via scoped CSS
+  - Variant picker + native Shopify form between sections 7 & 9
   - Mobile-first 375x812
   ════════════════════════════════════════════════════════════════
 {%- endcomment -%}
@@ -57,7 +57,7 @@
   .shopify-section.uburn-pdp-v9-section ~ .shopify-section--collection-list,
   .shopify-section.uburn-pdp-v9-section ~ .shopify-section--faq { display: none !important; }
 
-  /* Reveal toujours visible — pas de gate */
+  /* Reveal toudays visible — pas de gate */
   .pdpv9-reveal, .pdpv9-stagger-children > *, .pdpv9-stagger-scale > * {
     opacity: 1 !important;
     transform: none !important;
@@ -66,18 +66,18 @@
 
 <div class="pdpv9-root">
 
-  <div class="pdpv9-announce">LIVRAISON GRATUITE EN FRANCE</div>
+  <div class="pdpv9-announce">FREE U.S. SHIPPING ON ORDERS $40+</div>
 
   <div class="pdpv9-promo-bar" id="pdpv9-promoBar">
-    <span id="pdpv9-promoText">🎁 <strong>-10%</strong> sur ta 1ère commande · Code <strong>UBE10</strong></span>
-    <button type="button" class="pdpv9-promo-copy" id="pdpv9-promoCopy" aria-label="Copier le code UBE10">Copier</button>
+    <span id="pdpv9-promoText">🎁 <strong>10% off</strong> your first order · Code <strong>UBE10</strong></span>
+    <button type="button" class="pdpv9-promo-copy" id="pdpv9-promoCopy" aria-label="Copy code UBE10">Copy</button>
   </div>
 
   <div class="pdpv9-ribbon">
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Glucomannane reconnu par l'EFSA</span>
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 100% Végétal</span>
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Sans abonnement</span>
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 0% caféine</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Research-backed glucomannan*</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 100% Plant-based</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> No subscription trap</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Caffeine-free</span>
   </div>
 
   {%- comment -%} ═══ PDP HERO ABOVE-FOLD — real PDP structure ═══ {%- endcomment -%}
@@ -121,26 +121,26 @@
 
         {%- comment -%} Header: rating + social pill + title + subtitle + benefits bullets {%- endcomment -%}
         <div class="pdpv9-pdp__header">
-          <div class="pdpv9-pdp__rating" aria-label="Lancement France, stock limité">
+          <div class="pdpv9-pdp__rating" aria-label="Now in the U.S., limited launch stock">
             <span class="pdpv9-pdp__stars pdpv9-pdp__stars--badge" aria-hidden="true">●</span>
-            <span class="pdpv9-pdp__rating-text">Lancement France · Stock limité</span>
+            <span class="pdpv9-pdp__rating-text">Now in the U.S. · Limited launch stock</span>
           </div>
           <div class="pdpv9-pdp__social-pill" role="note">
             <svg class="pdpv9-pdp__social-pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            <span>Formulé avec ube, konjac et MCT de coco</span>
+            <span>Formulated with ube, konjac, and coconut MCT</span>
           </div>
-          <h1 class="pdpv9-pdp__title">Reprenez le contrôle<br>de vos fringales</h1>
-          <p class="pdpv9-pdp__subtitle">Routine violette pour les fringales de 16h et du soir.</p>
+          <h1 class="pdpv9-pdp__title">Calm your cravings,<br>naturally.*</h1>
+          <p class="pdpv9-pdp__subtitle">The purple ritual for 4PM and evening cravings.*</p>
           <ul class="pdpv9-pdp__bullets" aria-label="Bénéfices clés">
-            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">🔥</span> Pour les fringales de 16h et du soir</li>
-            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">⏱️</span> Jusqu'à 4h de satiété</li>
-            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">☕</span> 0% caféine, routine douce</li>
+            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">🔥</span> For 4PM and evening cravings</li>
+            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">⏱️</span> Up to 4 hours of satiety*</li>
+            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">☕</span> Caffeine-free, routine douce</li>
           </ul>
         </div>
 
-        {%- comment -%} Price — initial render shows "À partir de €34,50" if no explicit user choice yet. JS removes prefix on first variant click. {%- endcomment -%}
+        {%- comment -%} Price — initial render shows "From $35" if no explicit user choice yet. JS removes prefix on first variant click. {%- endcomment -%}
         <div class="pdpv9-pdp__price-wrap">
-          <span class="pdpv9-pdp__price-prefix" id="pdpv9-price-prefix">À partir de </span>
+          <span class="pdpv9-pdp__price-prefix" id="pdpv9-price-prefix">From </span>
           <span class="pdpv9-pdp__price" id="pdpv9-price">{{ v_decouverte.price | money }}</span>
           {%- if current_variant.compare_at_price > current_variant.price -%}
             <span class="pdpv9-pdp__compare-price"><s>{{ current_variant.compare_at_price | money }}</s></span>
@@ -153,24 +153,24 @@
           <input type="hidden" name="utf8" value="✓">
 
           {%- if product.variants.size > 1 -%}
-            <fieldset class="pdpv9-pdp__variants" role="radiogroup" aria-label="Choisis ta cure">
-              <legend class="pdpv9-pdp__variants-legend">Choisis ta cure</legend>
+            <fieldset class="pdpv9-pdp__variants" role="radiogroup" aria-label="Pick your pack">
+              <legend class="pdpv9-pdp__variants-legend">Pick your pack</legend>
               {%- for v in product.variants -%}
                 {%- liquid
-                  assign vmeta = '90g · 1 dose/jour · 30 jours'
-                  assign vunit = '1,15€/jour'
+                  assign vmeta = '90g · 1 scoop/day · 30 days'
+                  assign vunit = '$1.16/day'
                   assign vdays = '30'
                   assign vtag = 'Pour tester la routine'
                   if forloop.index == 2
-                    assign vmeta = '270g · 3 doses/jour · 30 jours'
-                    assign vunit = '0,65€/jour'
+                    assign vmeta = '270g · 1 scoop/day · 90 days'
+                    assign vunit = '0,65$/day'
                     assign vdays = '30'
-                    assign vtag = 'Le meilleur prix par dose'
+                    assign vtag = 'Best price per scoop'
                   endif
                 -%}
                 <label class="pdpv9-pdp__variant{% if forloop.index == 2 %} pdpv9-pdp__variant--pop{% endif %}{% if v.id == current_variant.id %} pdpv9-pdp__variant--selected{% endif %}{% unless v.available %} pdpv9-pdp__variant--sold{% endunless %}">
                   <input type="radio" name="id" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %} class="pdpv9-pdp__variant-input" data-vidx="{{ forloop.index }}" data-vprice="{{ v.price }}" data-vprice-money="{{ v.price | money }}" data-vunit-price="{{ vunit }}" data-vdays="{{ vdays }}">
-                  {%- if forloop.index == 2 -%}<span class="pdpv9-pdp__variant-badge">Le + populaire</span>{%- endif -%}
+                  {%- if forloop.index == 2 -%}<span class="pdpv9-pdp__variant-badge">Best Value</span>{%- endif -%}
                   <span class="pdpv9-pdp__variant-body">
                     <span class="pdpv9-pdp__variant-name">{{ v.title | split: ' | ' | first | replace: ' ⭐', '' }}</span>
                     <span class="pdpv9-pdp__variant-tag">{{ vtag }}</span>
@@ -189,15 +189,15 @@
           {%- endif -%}
 
           <div class="pdpv9-pdp__qty-row">
-            <label for="pdpv9-pdp-qty" class="pdpv9-pdp__qty-label">Quantité</label>
+            <label for="pdpv9-pdp-qty" class="pdpv9-pdp__qty-label">Quantity</label>
             <div class="pdpv9-pdp__qty-input-wrap">
-              <input id="pdpv9-pdp-qty" type="number" name="quantity" value="1" min="1" max="10" inputmode="numeric" class="pdpv9-pdp__qty-input" aria-label="Quantité">
+              <input id="pdpv9-pdp-qty" type="number" name="quantity" value="1" min="1" max="10" inputmode="numeric" class="pdpv9-pdp__qty-input" aria-label="Quantity">
             </div>
           </div>
 
           <button type="submit" name="add" class="pdpv9-pdp__atc"{% unless current_variant.available %} disabled{% endunless %}>
             {%- if current_variant.available -%}
-              <span class="pdpv9-pdp__atc-text" id="pdpv9-atc-text">Commencer ma cure 30 jours</span>
+              <span class="pdpv9-pdp__atc-text" id="pdpv9-atc-text">Start my 30-day routine</span>
               <span class="pdpv9-pdp__atc-price" id="pdpv9-atc-price">— {{ current_variant.price | money }}</span>
             {%- else -%}
               En rupture
@@ -206,56 +206,56 @@
         </form>
 
         {%- comment -%} Sub-CTA trust line (under the CTA) {%- endcomment -%}
-        <p class="pdpv9-pdp__atc-trust">Livraison gratuite en France · Paiement sécurisé · Bonus inclus</p>
+        <p class="pdpv9-pdp__atc-trust">Free U.S. shipping · Sepack checkout · Bonuses included</p>
 
         {%- comment -%} Reassurance compact (post-ATC) — 4 trust signals factuels {%- endcomment -%}
         <ul class="pdpv9-pdp__reassurance">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h13l3 4v6h-3"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg> Livraison gratuite en France</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Paiement sécurisé</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Expédié depuis la France</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Support client disponible</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h13l3 4v6h-3"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg> Free U.S. shipping</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Sepack checkout</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Ships from France</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Customer support available</li>
         </ul>
 
-        {%- comment -%} ─── BLOC DÉCISION : Quelle cure choisir ? (CRO V1 — sous reassurance) ─── {%- endcomment -%}
+        {%- comment -%} ─── BLOC DÉCISION : Which pack is right for you? (CRO V1 — sous reassurance) ─── {%- endcomment -%}
         <div class="pdpv9-decide" aria-labelledby="pdpv9-decide-title">
-          <h3 class="pdpv9-decide__title" id="pdpv9-decide-title">Quelle cure choisir ?</h3>
+          <h3 class="pdpv9-decide__title" id="pdpv9-decide-title">Which pack is right for you?</h3>
           <div class="pdpv9-decide__grid">
             <article class="pdpv9-decide__card">
-              <span class="pdpv9-decide__label">Découverte 90g</span>
-              <p class="pdpv9-decide__desc">Idéal si tu veux tester UBurn tranquillement avec 1 dose par jour.</p>
+              <span class="pdpv9-decide__label">Starter 90g</span>
+              <p class="pdpv9-decide__desc">Ideal if you want to try UBurn at your own pace, 1 scoop per day.</p>
             </article>
             <article class="pdpv9-decide__card pdpv9-decide__card--pop">
-              <span class="pdpv9-decide__pop">Le + populaire</span>
-              <span class="pdpv9-decide__label">Résultats Maximum 270g</span>
-              <p class="pdpv9-decide__desc">Idéal si tes fringales reviennent plusieurs fois dans la journée et que tu veux le meilleur prix par dose.</p>
+              <span class="pdpv9-decide__pop">Best Value</span>
+              <span class="pdpv9-decide__label">Maximum Pack 270g</span>
+              <p class="pdpv9-decide__desc">Ideal for your daily routine and best value per scoop — 90-day supply.</p>
             </article>
           </div>
-          <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary pdpv9-decide__cta">Choisir ma cure →</a>
+          <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary pdpv9-decide__cta">Pick my pack →</a>
         </div>
 
-        {%- comment -%} ─── BLOC BÉNÉFICES : Pourquoi UBURN aide à contrôler les fringales ─── {%- endcomment -%}
+        {%- comment -%} ─── BLOC BÉNÉFICES : Why UBurn helps handle cravings naturally* ─── {%- endcomment -%}
         <div class="pdpv9-why" aria-labelledby="pdpv9-why-title">
-          <h3 class="pdpv9-why__title" id="pdpv9-why-title">Pourquoi UBurn aide à contrôler les fringales ?</h3>
+          <h3 class="pdpv9-why__title" id="pdpv9-why-title">Why UBurn helps handle cravings naturally*</h3>
           <ul class="pdpv9-why__list">
-            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">🌿</span><span>Le konjac contribue à la sensation de satiété dans le cadre d'une alimentation adaptée.</span></li>
-            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">💜</span><span>L'ube apporte une routine gourmande, violette et naturellement originale.</span></li>
-            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">🥥</span><span>Le MCT de coco apporte une texture douce et une sensation plus nourrissante.</span></li>
-            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">☕</span><span>0% caféine : utilisable l'après-midi ou le soir.</span></li>
+            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">🌿</span><span>Konjac fiber contributes to a feeling of fullness within a balanced diet.*</span></li>
+            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">💜</span><span>Purple ube brings a comforting, naturally vibrant ritual.</span></li>
+            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">🥥</span><span>Coconut MCT adds a smooth texture and lasting fullness sensation.*</span></li>
+            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">☕</span><span>Caffeine-free: drink any time, even at night.</span></li>
           </ul>
-          <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary pdpv9-why__cta">Essayer UBurn →</a>
+          <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary pdpv9-why__cta">Try UBurn risk-free →</a>
         </div>
 
         {%- comment -%} Bonus stack — collapsible <details> on mobile, expanded on desktop {%- endcomment -%}
         <details class="pdpv9-pdp__bonus pdpv9-pdp__bonus--collapsible">
           <summary class="pdpv9-pdp__bonus-summary">
-            <span class="pdpv9-pdp__bonus-summary-label">🎁 <strong>184€ de bonus</strong> offerts</span>
+            <span class="pdpv9-pdp__bonus-summary-label">🎁 <strong>$184 in bonuses</strong> offerts</span>
             <span class="pdpv9-pdp__bonus-count">+4</span>
           </summary>
           <div class="pdpv9-pdp__bonus-items">
-            <div><span>E-book « 30j pour reprendre le contrôle »</span><span class="pdpv9-pdp__bonus-val"><s>47€</s> 0€</span></div>
-            <div><span>Groupe privé Uburn Collective</span><span class="pdpv9-pdp__bonus-val"><s>40€</s> 0€</span></div>
-            <div><span>Événements UBurn en ligne</span><span class="pdpv9-pdp__bonus-val"><s>50€</s> 0€</span></div>
-            <div><span>Suivi nutrition WhatsApp 30j</span><span class="pdpv9-pdp__bonus-val"><s>47€</s> 0€</span></div>
+            <div><span>E-book "30 Days to Reset"</span><span class="pdpv9-pdp__bonus-val"><s>$47</s> 0$</span></div>
+            <div><span>Private community: UBurn Collective</span><span class="pdpv9-pdp__bonus-val"><s>$40</s> 0$</span></div>
+            <div><span>UBurn online events</span><span class="pdpv9-pdp__bonus-val"><s>$50</s> 0$</span></div>
+            <div><span>30-day nutrition support via WhatsApp</span><span class="pdpv9-pdp__bonus-val"><s>$47</s> 0$</span></div>
           </div>
         </details>
 
@@ -270,8 +270,8 @@
     <div class="pdpv9-stories__inner">
       <div class="pdpv9-stories__head">
         <span class="pdpv9-eyebrow">Elles l'utilisent</span>
-        <h2 class="pdpv9-h2" id="pdpv9-stories-title">Le rituel <span class="pdpv9-h2-accent">en vrai.</span></h2>
-        <p class="pdpv9-stories__sub">Pas de pub. Des femmes. Des routines. 4h de satiété naturelle.</p>
+        <h2 class="pdpv9-h2" id="pdpv9-stories-title">The ritual, <span class="pdpv9-h2-accent">in real life.</span></h2>
+        <p class="pdpv9-stories__sub">No ads. Real women. Real routines. Up to 4 hours of natural satiety.*</p>
       </div>
       <div class="pdpv9-stories__rail" tabindex="0">
         <article class="pdpv9-stories__card" data-stories-card="1">
@@ -279,28 +279,28 @@
             <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-latte-prep.mp4' | asset_url }}" type="video/mp4"></video>
             <button class="pdpv9-stories__play" aria-label="Lecture vidéo Marie" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
           </div>
-          <div class="pdpv9-stories__caption"><strong>Marie, 42 ans</strong> · Paris<br><span>"Ma routine matin. Plus de fringale 16h."</span></div>
+          <div class="pdpv9-stories__caption"><strong>Marie, 42</strong> · Paris, France<br><span>"My morning ritual. No more 4PM cravings."</span></div>
         </article>
         <article class="pdpv9-stories__card" data-stories-card="2">
           <div class="pdpv9-stories__media">
             <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-lifestyle.mp4' | asset_url }}" type="video/mp4"></video>
             <button class="pdpv9-stories__play" aria-label="Lecture vidéo Sophie" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
           </div>
-          <div class="pdpv9-stories__caption"><strong>Sophie, 38 ans</strong> · Lyon<br><span>"3 mois après. Plus calme. Plus stable."</span></div>
+          <div class="pdpv9-stories__caption"><strong>Sophie, 38 ans</strong> · Lyon, France<br><span>"3 months in. Calmer. More stable."</span></div>
         </article>
         <article class="pdpv9-stories__card" data-stories-card="3">
           <div class="pdpv9-stories__media">
             <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-product-hero.mp4' | asset_url }}" type="video/mp4"></video>
             <button class="pdpv9-stories__play" aria-label="Lecture vidéo Laurence" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
           </div>
-          <div class="pdpv9-stories__caption"><strong>Laurence, 47 ans</strong> · Marseille<br><span>"Goût vanille noisette. Pas chimique."</span></div>
+          <div class="pdpv9-stories__caption"><strong>Laurence, 47 ans</strong> · Marseille, France<br><span>"Hazelnut-vanilla flavor. Nothing artificial."</span></div>
         </article>
         <article class="pdpv9-stories__card" data-stories-card="4">
           <div class="pdpv9-stories__media">
             <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-sport.mp4' | asset_url }}" type="video/mp4"></video>
             <button class="pdpv9-stories__play" aria-label="Lecture vidéo Camille" type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
           </div>
-          <div class="pdpv9-stories__caption"><strong>Camille, 39 ans</strong> · Bordeaux<br><span>"Avant le sport. Sans excitant."</span></div>
+          <div class="pdpv9-stories__caption"><strong>Camille, 39 ans</strong> · Bordeaux, France<br><span>"Before workouts. Zero stimulants."</span></div>
         </article>
       </div>
       <div class="pdpv9-stories__dots">
@@ -317,37 +317,37 @@
   <section class="pdpv9-moment16h" aria-labelledby="pdpv9-moment16h-title">
     <div class="pdpv9-moment16h__inner">
       <div class="pdpv9-moment16h__copy">
-        <span class="pdpv9-eyebrow">Le moment critique</span>
-        <h2 class="pdpv9-h2" id="pdpv9-moment16h-title">16h. <span class="pdpv9-h2-accent">Le moment où tout se joue.</span></h2>
-        <p class="pdpv9-lead">Une envie de sucre. Un coup de mou. Le grignotage qui revient. UBurn transforme ce moment en rituel violet — gourmand et simple.</p>
-        <p class="pdpv9-moment16h__sub">Eau, lait ou boisson végétale. À toi de choisir.</p>
+        <span class="pdpv9-eyebrow">The critical moment</span>
+        <h2 class="pdpv9-h2" id="pdpv9-moment16h-title">16h. <span class="pdpv9-h2-accent">When everything's on the line.</span></h2>
+        <p class="pdpv9-lead">Sugar cravings. The afternoon crash. The snacking that creeps back in. UBurn turns that moment into a purple ritual — comforting and simple.</p>
+        <p class="pdpv9-moment16h__sub">Water, milk, or plant-based milk. Your choice.</p>
 
         <ul class="pdpv9-moment16h__pills" aria-label="Notes et préparation">
-          <li class="pdpv9-moment16h__pill">Notes naturelles de vanille</li>
-          <li class="pdpv9-moment16h__pill">Touche noisette</li>
-          <li class="pdpv9-moment16h__pill">Eau, lait ou lait végétal</li>
-          <li class="pdpv9-moment16h__pill">Rituel violet gourmand</li>
+          <li class="pdpv9-moment16h__pill">Natural vanilla notes</li>
+          <li class="pdpv9-moment16h__pill">Hazelnut touch</li>
+          <li class="pdpv9-moment16h__pill">Water, milk, or plant-based milk</li>
+          <li class="pdpv9-moment16h__pill">Comforting purple ritual</li>
         </ul>
 
-        <a href="#pdpv9-pdp" class="pdpv9-cta-secondary pdpv9-moment16h__cta">Créer mon rituel de 16h →</a>
+        <a href="#pdpv9-pdp" class="pdpv9-cta-secondary pdpv9-moment16h__cta">Create my 4PM ritual →</a>
       </div>
 
-      <aside class="pdpv9-moment16h__ritual" aria-label="Ton rituel UBURN">
+      <aside class="pdpv9-moment16h__ritual" aria-label="Your UBurn ritual">
         <div class="pdpv9-moment16h__ritual-head">
-          <span class="pdpv9-eyebrow">Ton rituel UBURN</span>
+          <span class="pdpv9-eyebrow">Your UBurn ritual</span>
         </div>
         <ul class="pdpv9-moment16h__ritual-list">
           <li class="pdpv9-moment16h__ritual-item">
             <span class="pdpv9-moment16h__ritual-name">Eau</span>
-            <span class="pdpv9-moment16h__ritual-desc">Léger et rapide</span>
+            <span class="pdpv9-moment16h__ritual-desc">Light and quick</span>
           </li>
           <li class="pdpv9-moment16h__ritual-item">
             <span class="pdpv9-moment16h__ritual-name">Lait</span>
-            <span class="pdpv9-moment16h__ritual-desc">Doux et crémeux</span>
+            <span class="pdpv9-moment16h__ritual-desc">Smooth and creamy</span>
           </li>
           <li class="pdpv9-moment16h__ritual-item">
-            <span class="pdpv9-moment16h__ritual-name">Lait végétal</span>
-            <span class="pdpv9-moment16h__ritual-desc">Gourmand et digeste</span>
+            <span class="pdpv9-moment16h__ritual-name">Plant-based milk</span>
+            <span class="pdpv9-moment16h__ritual-desc">Comforting and easy on the stomach</span>
           </li>
         </ul>
       </aside>
@@ -360,13 +360,13 @@
     1. Le Rituel Violet (taste hook with image — DESIRE)
     2. 3 Gestes Simples (visual demo — EASE OF USE)
     3. Pour qui est UBURN (qualification)
-    4. Comment ça marche (mechanism + EFSA legal)
-    5. Pourquoi UBURN est différent (USP)
+    4. How it works (mechanism + FDA fiber claim)
+    5. What makes UBurn different (USP)
     6. Avis / UGC (social proof)
     7. Comparatif (differentiation)
     8. Formule / Ingrédients (credibility)
-    9. Offre 184€ Bonus (value stack)
-    10. Votre commande (cart recap — DECISION MOMENT)
+    9. Offre $184 Bonus (value stack)
+    10. Your order (cart recap — DECISION MOMENT)
     11. Sécurité / Précautions (risk reversal)
     12. FAQ (objection handling)
     13. CTA Final (action)
@@ -382,22 +382,22 @@
           src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=1200&format=webp"
           srcset="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=1200&format=webp 1200w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=1600&format=webp 1600w"
           sizes="(min-width: 900px) 50vw, 100vw"
-          alt="Boisson UBurn violette crémeuse servie dans un grand verre avec glaçons"
+          alt="Creamy purple UBurn drink served in a tall glass with ice"
           loading="lazy"
           decoding="async"
           width="1200"
           height="1200">
       </div>
       <div class="pdpv9-taste__copy">
-        <span class="pdpv9-eyebrow">Le rituel violet</span>
-        <h2 class="pdpv9-h2">Un goût doux <span class="pdpv9-h2-accent">vanille-noisette.</span></h2>
-        <p class="pdpv9-lead">À boire avec de l'eau, du lait ou une boisson végétale. Une texture douce, une couleur violette naturelle et une routine simple à intégrer dans la journée.</p>
+        <span class="pdpv9-eyebrow">The purple ritual</span>
+        <h2 class="pdpv9-h2">A smooth taste <span class="pdpv9-h2-accent">hazelnut-vanilla.</span></h2>
+        <p class="pdpv9-lead">Drink with water, milk, or plant-based milk. A smooth texture, naturally purple color, and a simple ritual to fit into your day.</p>
         <ul class="pdpv9-chips">
           <li class="pdpv9-chip pdpv9-chip--soft">Eau, lait ou boisson végétale</li>
-          <li class="pdpv9-chip pdpv9-chip--soft">0% caféine</li>
-          <li class="pdpv9-chip pdpv9-chip--soft">Prêt en moins d'une minute</li>
+          <li class="pdpv9-chip pdpv9-chip--soft">Caffeine-free</li>
+          <li class="pdpv9-chip pdpv9-chip--soft">Ready in under a minute</li>
         </ul>
-        <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary pdpv9-taste__cta">Choisir ma cure →</a>
+        <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary pdpv9-taste__cta">Pick my pack →</a>
       </div>
     </div>
   </section>
@@ -405,8 +405,8 @@
   {%- comment -%} ─── 2. 3 GESTES SIMPLES (visual demo) ─── {%- endcomment -%}
   <section class="pdpv9-steps">
     <div class="pdpv9-steps__head">
-      <span class="pdpv9-eyebrow">3 gestes simples</span>
-      <h2 class="pdpv9-h2">30 secondes <span class="pdpv9-h2-accent">pour changer le moment.</span></h2>
+      <span class="pdpv9-eyebrow">3 simple steps</span>
+      <h2 class="pdpv9-h2">30 seconds <span class="pdpv9-h2-accent">to reset the moment.</span></h2>
     </div>
     <div class="pdpv9-steps__grid">
       <article class="pdpv9-step-card">
@@ -416,15 +416,15 @@
             src="https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=1200&format=webp"
             srcset="https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=400&format=webp 400w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=1200&format=webp 1200w"
             sizes="(min-width: 900px) 33vw, (min-width: 700px) 33vw, 100vw"
-            alt="Mélange d'UBurn dans un grand verre"
+            alt="UBurn being mixed in a tall glass"
             loading="lazy"
             decoding="async"
             width="1200"
             height="1200">
         </div>
         <div class="pdpv9-step-card__num">01</div>
-        <h3 class="pdpv9-step-card__title">Mélangez</h3>
-        <p class="pdpv9-step-card__copy">Une dose dans un grand verre d'eau fraîche ou de lait végétal.</p>
+        <h3 class="pdpv9-step-card__title">Mix</h3>
+        <p class="pdpv9-step-card__copy">One scoop in a large glass of cold water or plant-based milk.</p>
       </article>
       <article class="pdpv9-step-card">
         <div class="pdpv9-step-card__media">
@@ -433,15 +433,15 @@
             src="https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=1200&format=webp"
             srcset="https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=400&format=webp 400w, https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Imnt_site_step02_buvez_v2_1777326260.jpg?v=1777326325&width=1200&format=webp 1200w"
             sizes="(min-width: 700px) 33vw, 100vw"
-            alt="Verre de boisson UBurn violette, fraîche et crémeuse"
+            alt="Glass of UBurn drink, smooth, cool, and creamy"
             loading="lazy"
             decoding="async"
             width="1200"
             height="1200">
         </div>
         <div class="pdpv9-step-card__num">02</div>
-        <h3 class="pdpv9-step-card__title">Buvez</h3>
-        <p class="pdpv9-step-card__copy">Une boisson violette, douce, fraîche et crémeuse.</p>
+        <h3 class="pdpv9-step-card__title">Sip</h3>
+        <p class="pdpv9-step-card__copy">A purple drink, smooth, cool, and creamy.</p>
       </article>
       <article class="pdpv9-step-card">
         <div class="pdpv9-step-card__media">
@@ -450,15 +450,15 @@
             src="https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=1200&format=webp"
             srcset="https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=400&format=webp 400w, https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/03_CONTROLE.jpg?v=1777326326&width=1200&format=webp 1200w"
             sizes="(min-width: 700px) 33vw, 100vw"
-            alt="Femme calme avec UBurn dans sa routine quotidienne"
+            alt="Calm woman with UBurn in her daily routine"
             loading="lazy"
             decoding="async"
             width="1200"
             height="1200">
         </div>
         <div class="pdpv9-step-card__num">03</div>
-        <h3 class="pdpv9-step-card__title">Restez en contrôle</h3>
-        <p class="pdpv9-step-card__copy">Une sensation de satiété qui vous aide à traverser le moment critique.</p>
+        <h3 class="pdpv9-step-card__title">Stay in control*</h3>
+        <p class="pdpv9-step-card__copy">A feeling of fullness that helps you through the critical moment.*</p>
       </article>
     </div>
   </section>
@@ -467,22 +467,22 @@
   <section class="pdpv9-foryou" aria-labelledby="pdpv9-foryou-title">
     <div class="pdpv9-foryou__inner">
       <div class="pdpv9-foryou__copy">
-        <span class="pdpv9-eyebrow">Est-ce pour toi ?</span>
-        <h2 class="pdpv9-h2" id="pdpv9-foryou-title">UBURN est <span class="pdpv9-h2-accent">fait pour toi si…</span></h2>
+        <span class="pdpv9-eyebrow">Is UBurn for you?</span>
+        <h2 class="pdpv9-h2" id="pdpv9-foryou-title">UBurn is <span class="pdpv9-h2-accent">for you if…</span></h2>
         <ul class="pdpv9-foryou__list">
-          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Tu grignotes souvent entre les repas.</li>
-          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Tu as des envies sucrées vers 16h ou le soir.</li>
-          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Tu veux éviter les boissons caféinées.</li>
-          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Tu cherches une routine simple, pas un régime compliqué.</li>
-          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Tu veux une boisson plaisir, douce, violette et gourmande.</li>
+          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> You snack often between meals.</li>
+          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> You crave sweets around 4PM or in the evening.</li>
+          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> You want to skip caffeine-loaded drinks.</li>
+          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> You want a simple ritual, not a complicated diet.</li>
+          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> You want a comforting, smooth, purple drink that feels like a treat.</li>
         </ul>
-        <p class="pdpv9-foryou__trust">UBURN n'est pas une solution miracle. C'est une routine de satiété pensée pour t'aider à mieux gérer les moments critiques de ta journée.</p>
+        <p class="pdpv9-foryou__trust">UBurn isn't a miracle product. It's a satiety ritual designed to help you handle the critical moments of your day.*</p>
       </div>
       <div class="pdpv9-foryou__media">
         <img src="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=1200&format=webp"
              srcset="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=1200&format=webp 1200w"
              sizes="(min-width:900px) 50vw, 100vw"
-             alt="UBURN est fait pour toi — routine simple et gourmande"
+             alt="UBurn is fait pour toi — routine simple et gourmande"
              loading="lazy" decoding="async" width="1200" height="1500"
              style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:16px;display:block;box-shadow:0 16px 48px rgba(61,24,115,.12);">
       </div>
@@ -492,30 +492,30 @@
   {%- comment -%} ─── 3. COMMENT ÇA MARCHE ─── {%- endcomment -%}
   <section class="pdpv9-howit" aria-labelledby="pdpv9-howit-title">
     <div class="pdpv9-howit__head">
-      <span class="pdpv9-eyebrow">Comment ça marche</span>
-      <h2 class="pdpv9-h2" id="pdpv9-howit-title">Comment UBURN aide à <span class="pdpv9-h2-accent">calmer les fringales.</span></h2>
-      <p class="pdpv9-lead">Mélange. Bois. Le konjac fait son travail.</p>
+      <span class="pdpv9-eyebrow">How it works</span>
+      <h2 class="pdpv9-h2" id="pdpv9-howit-title">How UBurn <span class="pdpv9-h2-accent">helps calm cravings naturally.*</span></h2>
+      <p class="pdpv9-lead">Mix. Sip. Konjac does the work.*</p>
     </div>
     <ol class="pdpv9-howit__grid">
       <li class="pdpv9-howit-card">
         <div class="pdpv9-howit-card__num">01</div>
-        <h3 class="pdpv9-howit-card__title">Tu mélanges</h3>
-        <p class="pdpv9-howit-card__copy">Une dose dans de l'eau, du lait ou du lait végétal selon la texture que tu préfères.</p>
+        <h3 class="pdpv9-howit-card__title">You mix</h3>
+        <p class="pdpv9-howit-card__copy">One scoop in water, milk, or plant-based milk — whichever texture you prefer.</p>
       </li>
       <li class="pdpv9-howit-card">
         <div class="pdpv9-howit-card__num">02</div>
-        <h3 class="pdpv9-howit-card__title">Le glucomannane absorbe l'eau</h3>
-        <p class="pdpv9-howit-card__copy">Cette fibre issue du konjac forme un gel naturel au contact de l'eau.</p>
+        <h3 class="pdpv9-howit-card__title">Glucomannan absorbs water</h3>
+        <p class="pdpv9-howit-card__copy">This konjac-derived fiber forms a natural gel when it meets water.*</p>
       </li>
       <li class="pdpv9-howit-card">
         <div class="pdpv9-howit-card__num">03</div>
-        <h3 class="pdpv9-howit-card__title">Tu restes rassasiée plus longtemps</h3>
-        <p class="pdpv9-howit-card__copy">Une aide simple pour traverser les moments où tu aurais normalement grignoté.</p>
+        <h3 class="pdpv9-howit-card__title">You feel full longer*</h3>
+        <p class="pdpv9-howit-card__copy">A simple tool for the moments you'd otherwise snack.*</p>
       </li>
     </ol>
     <details class="pdpv9-acc pdpv9-howit__legal-acc">
-      <summary class="pdpv9-acc__q">Conditions EFSA glucomannane</summary>
-      <div class="pdpv9-acc__a"><p>Bénéfice obtenu avec 3 g par jour en 3 prises de 1 g, avec 1-2 verres d'eau avant les repas, dans le cadre d'un régime hypocalorique.</p></div>
+      <summary class="pdpv9-acc__q">About glucomannan</summary>
+      <div class="pdpv9-acc__a"><p>Glucomannan was added to the FDA's official list of dietary fibers in 2020. Recommended use: 3g/day in 1 scoop of 1g, with 1-2 large glasses of water before meals.*</p></div>
     </details>
     {%- comment -%} IMAGE SLOT (à ajouter plus tard) : infographie glucomannane {%- endcomment -%}
   </section>
@@ -523,33 +523,33 @@
   {%- comment -%} ─── 4. POURQUOI UBURN EST DIFFÉRENT ─── {%- endcomment -%}
   <section class="pdpv9-diff" aria-labelledby="pdpv9-diff-title">
     <div class="pdpv9-diff__head">
-      <span class="pdpv9-eyebrow">La différence UBURN</span>
+      <span class="pdpv9-eyebrow">What makes UBurn different</span>
       <h2 class="pdpv9-h2" id="pdpv9-diff-title">Pourquoi UBURN <span class="pdpv9-h2-accent">est différent.</span></h2>
     </div>
     <div class="pdpv9-diff__grid">
       <article class="pdpv9-diff-card">
-        <h3 class="pdpv9-diff-card__title">0% caféine</h3>
-        <p class="pdpv9-diff-card__copy">Une routine douce, sans effet excitant.</p>
+        <h3 class="pdpv9-diff-card__title">Caffeine-free</h3>
+        <p class="pdpv9-diff-card__copy">A gentle ritual, no buzz, no crash.</p>
       </article>
       <article class="pdpv9-diff-card">
-        <h3 class="pdpv9-diff-card__title">30 kcal par dose</h3>
-        <p class="pdpv9-diff-card__copy">Un rituel léger qui s'intègre facilement dans la journée.</p>
+        <h3 class="pdpv9-diff-card__title">30 calories per scoop</h3>
+        <p class="pdpv9-diff-card__copy">A light ritual that fits any day.</p>
       </article>
       <article class="pdpv9-diff-card">
-        <h3 class="pdpv9-diff-card__title">Sans sucre ajouté</h3>
-        <p class="pdpv9-diff-card__copy">Une alternative gourmande aux snacks sucrés.</p>
+        <h3 class="pdpv9-diff-card__title">No added sugar</h3>
+        <p class="pdpv9-diff-card__copy">A satisfying alternative to sweet snacks.</p>
       </article>
       <article class="pdpv9-diff-card">
-        <h3 class="pdpv9-diff-card__title">Notes vanille &amp; noisette</h3>
-        <p class="pdpv9-diff-card__copy">Un goût doux et naturel, pensé pour donner envie d'y revenir.</p>
+        <h3 class="pdpv9-diff-card__title">Vanilla & hazelnut notes</h3>
+        <p class="pdpv9-diff-card__copy">A smooth, natural taste worth coming back to.</p>
       </article>
       <article class="pdpv9-diff-card">
-        <h3 class="pdpv9-diff-card__title">Sans abonnement</h3>
-        <p class="pdpv9-diff-card__copy">Tu commandes quand tu veux, sans engagement.</p>
+        <h3 class="pdpv9-diff-card__title">No subscription trap</h3>
+        <p class="pdpv9-diff-card__copy">Order whenever you want, no commitment.</p>
       </article>
       <article class="pdpv9-diff-card">
-        <h3 class="pdpv9-diff-card__title">Prêt en 30 secondes</h3>
-        <p class="pdpv9-diff-card__copy">À mélanger simplement avec de l'eau, du lait ou du lait végétal.</p>
+        <h3 class="pdpv9-diff-card__title">Ready in 30 seconds</h3>
+        <p class="pdpv9-diff-card__copy">Just mix with water, milk, or plant-based milk.</p>
       </article>
     </div>
   </section>
@@ -557,49 +557,49 @@
   {%- comment -%} ─── 5. AVIS / UGC ─── {%- endcomment -%}
   <section class="pdpv9-reviews" aria-labelledby="pdpv9-reviews-title">
     <div class="pdpv9-reviews__head">
-      <span class="pdpv9-eyebrow">Elles racontent</span>
+      <span class="pdpv9-eyebrow">They share</span>
       <h2 class="pdpv9-h2" id="pdpv9-reviews-title">Elles ont intégré UBURN <span class="pdpv9-h2-accent">à leur routine.</span></h2>
       <p class="pdpv9-lead">Des routines simples. Des moments réels.</p>
       <div class="pdpv9-reviews__rating">
         <span class="pdpv9-stars" aria-hidden="true">●</span>
-        <span class="pdpv9-reviews__rating-text">Lancement France · Stock limité</span>
+        <span class="pdpv9-reviews__rating-text">Now in the U.S. · Limited launch stock</span>
       </div>
     </div>
     {%- comment -%} IMAGE SLOTS (à ajouter plus tard) : UGC photo 1, UGC photo 2, UGC video 1 {%- endcomment -%}
     <div class="pdpv9-reviews__grid">
       <article class="pdpv9-review-card">
         <div class="pdpv9-review-card__stars">★★★★★</div>
-        <p class="pdpv9-review-card__text">« Je le prends à 16h, ça m'aide à éviter le grignotage avant le dîner. »</p>
-        <div class="pdpv9-review-card__verified">✓ Achat vérifié</div>
+        <p class="pdpv9-review-card__text">"I take it at 4PM. It helps me skip the snacking before dinner."*</p>
+        <div class="pdpv9-review-card__verified">✓ Verified purchase</div>
         <div class="pdpv9-review-card__author">
           <div class="pdpv9-review-card__avatar">M</div>
           <div>
             <div class="pdpv9-review-card__name">Marion L.</div>
-            <div class="pdpv9-review-card__role">28 ans · Lyon</div>
+            <div class="pdpv9-review-card__role">28 ans · Lyon, France</div>
           </div>
         </div>
       </article>
       <article class="pdpv9-review-card">
         <div class="pdpv9-review-card__stars">★★★★★</div>
-        <p class="pdpv9-review-card__text">« Le goût est doux, surtout avec du lait d'amande. C'est devenu mon moment plaisir de l'après-midi. »</p>
-        <div class="pdpv9-review-card__verified">✓ Achat vérifié</div>
+        <p class="pdpv9-review-card__text">"The flavor is smooth, especially with almond milk. It's become my afternoon treat."</p>
+        <div class="pdpv9-review-card__verified">✓ Verified purchase</div>
         <div class="pdpv9-review-card__author">
           <div class="pdpv9-review-card__avatar">S</div>
           <div>
             <div class="pdpv9-review-card__name">Sophie</div>
-            <div class="pdpv9-review-card__role">Bordeaux</div>
+            <div class="pdpv9-review-card__role">Bordeaux, France</div>
           </div>
         </div>
       </article>
       <article class="pdpv9-review-card">
         <div class="pdpv9-review-card__stars">★★★★★</div>
-        <p class="pdpv9-review-card__text">« J'aime le fait que ce soit sans caféine. C'est devenu mon petit rituel de l'après-midi. »</p>
-        <div class="pdpv9-review-card__verified">✓ Achat vérifié</div>
+        <p class="pdpv9-review-card__text">"I love that it's caffeine-free. It's become my little afternoon ritual."</p>
+        <div class="pdpv9-review-card__verified">✓ Verified purchase</div>
         <div class="pdpv9-review-card__author">
           <div class="pdpv9-review-card__avatar">N</div>
           <div>
             <div class="pdpv9-review-card__name">Nathalie</div>
-            <div class="pdpv9-review-card__role">Toulouse</div>
+            <div class="pdpv9-review-card__role">Toulouse, France</div>
           </div>
         </div>
       </article>
@@ -617,20 +617,20 @@
       <table class="pdpv9-compare__table">
         <thead>
           <tr>
-            <th scope="col">Critère</th>
+            <th scope="col">Criteria</th>
             <th scope="col" class="pdpv9-compare__hl">UBURN</th>
-            <th scope="col">Snack sucré</th>
-            <th scope="col">Café</th>
-            <th scope="col">Coupe-faim stimulant</th>
+            <th scope="col">Sugary snack</th>
+            <th scope="col">Coffee</th>
+            <th scope="col">Stimulant pills</th>
           </tr>
         </thead>
         <tbody>
-          <tr><th scope="row">Aide à gérer les fringales</th><td class="pdpv9-compare__hl">Oui</td><td>Non</td><td>Peu</td><td>Variable</td></tr>
-          <tr><th scope="row">Sans caféine</th><td class="pdpv9-compare__hl">Oui</td><td>Oui</td><td>Non</td><td>Souvent non</td></tr>
-          <tr><th scope="row">30 kcal</th><td class="pdpv9-compare__hl">Oui</td><td>Non</td><td>Oui</td><td>Variable</td></tr>
-          <tr><th scope="row">Goût gourmand</th><td class="pdpv9-compare__hl">Oui</td><td>Oui</td><td>Variable</td><td>Rare</td></tr>
-          <tr><th scope="row">Routine simple</th><td class="pdpv9-compare__hl">Oui</td><td>Non</td><td>Oui</td><td>Variable</td></tr>
-          <tr><th scope="row">Sans abonnement</th><td class="pdpv9-compare__hl">Oui</td><td>Oui</td><td>Oui</td><td>Variable</td></tr>
+          <tr><th scope="row">Helps handle cravings*</th><td class="pdpv9-compare__hl">Oui</td><td>Non</td><td>Peu</td><td>Varies</td></tr>
+          <tr><th scope="row">Sans Caffeine-free</th><td class="pdpv9-compare__hl">Oui</td><td>Oui</td><td>Non</td><td>Often non</td></tr>
+          <tr><th scope="row">30 calories</th><td class="pdpv9-compare__hl">Oui</td><td>Non</td><td>Oui</td><td>Varies</td></tr>
+          <tr><th scope="row">Comforting taste</th><td class="pdpv9-compare__hl">Oui</td><td>Oui</td><td>Varies</td><td>Rarely</td></tr>
+          <tr><th scope="row">Simple ritual</th><td class="pdpv9-compare__hl">Oui</td><td>Non</td><td>Oui</td><td>Varies</td></tr>
+          <tr><th scope="row">No subscription trap</th><td class="pdpv9-compare__hl">Oui</td><td>Oui</td><td>Oui</td><td>Varies</td></tr>
         </tbody>
       </table>
     </div>
@@ -640,34 +640,34 @@
   <section class="pdpv9-formula" aria-labelledby="pdpv9-formula-title">
     <div class="pdpv9-formula__inner">
       <div class="pdpv9-formula__copy">
-        <span class="pdpv9-eyebrow">La formule</span>
-        <h2 class="pdpv9-h2" id="pdpv9-formula-title">Une formule simple, gourmande <span class="pdpv9-h2-accent">et pensée pour la satiété.</span></h2>
-        <p class="pdpv9-lead">Ube violet. Konjac. Notes vanille-noisette. Une formule simple et gourmande.</p>
+        <span class="pdpv9-eyebrow">The formula</span>
+        <h2 class="pdpv9-h2" id="pdpv9-formula-title">A simple, comforting formula <span class="pdpv9-h2-accent">designed for satiety.*</span></h2>
+        <p class="pdpv9-lead">Ube violet. Konjac. Notes hazelnut-vanilla. Une formule simple et gourmande.</p>
 
         <div class="pdpv9-formula__pillars">
           <div class="pdpv9-formula-pill">
             <div class="pdpv9-formula-pill__name">Ube violet</div>
-            <div class="pdpv9-formula-pill__role">Couleur · plaisir · antioxydants naturels</div>
+            <div class="pdpv9-formula-pill__role">Color · pleasure · natural antioxidants*</div>
           </div>
           <div class="pdpv9-formula-pill">
-            <div class="pdpv9-formula-pill__name">Konjac (glucomannane)</div>
-            <div class="pdpv9-formula-pill__role">3g par dose · gel naturel · aide à mieux gérer les fringales</div>
+            <div class="pdpv9-formula-pill__name">Konjac (glucomannan)</div>
+            <div class="pdpv9-formula-pill__role">3g per scoop · forms a natural gel · helps you handle cravings*</div>
           </div>
           <div class="pdpv9-formula-pill">
-            <div class="pdpv9-formula-pill__name">L-Carnitine + MCT coco</div>
-            <div class="pdpv9-formula-pill__role">Aide à mieux gérer les fringales dans le cadre d'une alimentation équilibrée</div>
+            <div class="pdpv9-formula-pill__name">L-Carnitine + Coconut MCT</div>
+            <div class="pdpv9-formula-pill__role">Supports your daily balance*</div>
           </div>
           <div class="pdpv9-formula-pill">
-            <div class="pdpv9-formula-pill__name">Vanille &amp; noisette</div>
-            <div class="pdpv9-formula-pill__role">Notes naturelles · texture douce · plaisir du rituel</div>
+            <div class="pdpv9-formula-pill__name">Vanilla & hazelnut</div>
+            <div class="pdpv9-formula-pill__role">Natural notes · smooth texture · ritual pleasure</div>
           </div>
         </div>
 
         <details class="pdpv9-acc pdpv9-formula__efsa-acc">
-          <summary class="pdpv9-acc__q">Allégation EFSA officielle (ID 3120)</summary>
+          <summary class="pdpv9-acc__q">Research-backed dietary fiber*</summary>
           <div class="pdpv9-acc__a">
-            <p>« Le glucomannane contribue à la perte de poids dans le cadre d'un régime hypocalorique selon les conditions d'utilisation autorisées. »</p>
-            <p><em>Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas.</em></p>
+            <p>Glucomannan was added to the FDA's official list of dietary fibers in January 2020. Research suggests it contributes to a feeling of fullness when taken with adequate water before meals.*</p>
+            <p><em>Recommended use: 3g/day in 1 scoop of 1g with 1-2 large glasses of water before meals.</em></p>
           </div>
         </details>
 
@@ -680,45 +680,45 @@
         <img src="https://uburn.co/cdn/shop/files/f9e98b558abe22aa8524279d4bcc494e.jpg?v=1777324703&width=1200&format=webp"
              srcset="https://uburn.co/cdn/shop/files/f9e98b558abe22aa8524279d4bcc494e.jpg?v=1777324703&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/f9e98b558abe22aa8524279d4bcc494e.jpg?v=1777324703&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/f9e98b558abe22aa8524279d4bcc494e.jpg?v=1777324703&width=1200&format=webp 1200w"
              sizes="(min-width:900px) 50vw, 100vw"
-             alt="Formule UBURN — boisson violette gourmande pensée pour la satiété"
+             alt="UBurn formula — comforting purple drink designed for satiety"
              loading="lazy" decoding="async" width="1200" height="1500"
              style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:16px;display:block;box-shadow:0 16px 48px rgba(61,24,115,.12);">
       </div>
     </div>
   </section>
 
-  {%- comment -%} ─── 9. OFFRE 184€ BONUS (value stack) ─── {%- endcomment -%}
+  {%- comment -%} ─── 9. OFFRE $184 BONUS (value stack) ─── {%- endcomment -%}
   <section class="pdpv9-offer" aria-labelledby="pdpv9-offer-title">
     <div class="pdpv9-offer__inner">
       <div class="pdpv9-offer__head">
-        <span class="pdpv9-eyebrow">Inclus avec ta cure</span>
-        <h2 class="pdpv9-h2" id="pdpv9-offer-title">Aujourd'hui, ta cure inclut <span class="pdpv9-h2-accent">184€ de bonus offerts</span></h2>
-        <p class="pdpv9-lead">Une cure. Un accompagnement complet. Tout inclus.</p>
+        <span class="pdpv9-eyebrow">Included with your pack</span>
+        <h2 class="pdpv9-h2" id="pdpv9-offer-title">Today, your pack includes <span class="pdpv9-h2-accent">$184 in bonuses offerts</span></h2>
+        <p class="pdpv9-lead">One pack. Complete support. All included.</p>
       </div>
       {%- comment -%} IMAGE SLOT (à ajouter plus tard) : bonus pack visual {%- endcomment -%}
       <div class="pdpv9-offer__grid">
         <article class="pdpv9-offer-card">
-          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>47€</s></span> <strong>Offert</strong></div>
-          <h3 class="pdpv9-offer-card__title">E-book 30 jours</h3>
-          <p class="pdpv9-offer-card__copy">Recettes, conseils, plan jour par jour.</p>
+          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>$47</s></span> <strong>Offert</strong></div>
+          <h3 class="pdpv9-offer-card__title">E-book 30 Days</h3>
+          <p class="pdpv9-offer-card__copy">Recipes, tips, day-by-day plan.</p>
         </article>
         <article class="pdpv9-offer-card">
-          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>47€</s></span> <strong>Offert</strong></div>
-          <h3 class="pdpv9-offer-card__title">Suivi WhatsApp 30j</h3>
-          <p class="pdpv9-offer-card__copy">Conseils personnalisés, à ton rythme.</p>
+          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>$47</s></span> <strong>Offert</strong></div>
+          <h3 class="pdpv9-offer-card__title">30-day WhatsApp support</h3>
+          <p class="pdpv9-offer-card__copy">Personalized guidance, at your own pace.</p>
         </article>
         <article class="pdpv9-offer-card">
-          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>40€</s></span> <strong>Offert</strong></div>
+          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>$40</s></span> <strong>Offert</strong></div>
           <h3 class="pdpv9-offer-card__title">UBURN Collective</h3>
-          <p class="pdpv9-offer-card__copy">Le groupe privé. Soutien, recettes, succès.</p>
+          <p class="pdpv9-offer-card__copy">Private group · support · recipes · success.</p>
         </article>
         <article class="pdpv9-offer-card">
-          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>50€</s></span> <strong>Offert</strong></div>
-          <h3 class="pdpv9-offer-card__title">Événements live</h3>
-          <p class="pdpv9-offer-card__copy">Sessions mensuelles + replays.</p>
+          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>$50</s></span> <strong>Offert</strong></div>
+          <h3 class="pdpv9-offer-card__title">Live events</h3>
+          <p class="pdpv9-offer-card__copy">Monthly sessions + replays.</p>
         </article>
       </div>
-      <p class="pdpv9-offer__total">Total bonus : <strong>184€ offerts</strong> avec ta cure UBURN.</p>
+      <p class="pdpv9-offer__total">Total value: <strong>$184 free</strong> with your UBurn pack.</p>
     </div>
   </section>
 
@@ -726,12 +726,12 @@
   <section class="pdpv9-cart" aria-labelledby="pdpv9-cart-title">
     <div class="pdpv9-cart__inner">
       <div class="pdpv9-cart__head">
-        <span class="pdpv9-eyebrow">Votre commande</span>
-        <h2 class="pdpv9-h2" id="pdpv9-cart-title">Avec votre cure, <span class="pdpv9-h2-accent">vous recevez :</span></h2>
+        <span class="pdpv9-eyebrow">Your order</span>
+        <h2 class="pdpv9-h2" id="pdpv9-cart-title">With your pack, <span class="pdpv9-h2-accent">you'll receive:</span></h2>
       </div>
 
       <div class="pdpv9-cart__card">
-        <div class="pdpv9-cart__title">Votre panier</div>
+        <div class="pdpv9-cart__title">Your cart</div>
 
         {%- comment -%} Main product line — uses dynamic variant from current_variant {%- endcomment -%}
         <div class="pdpv9-cart__line pdpv9-cart__line--product">
@@ -744,53 +744,53 @@
             <div class="pdpv9-cart__product-name">{{ product.title | default: 'UBurn — Poudre Ubé' }}</div>
             <div class="pdpv9-cart__product-meta" id="pdpv9-cart-meta">
               {%- if current_variant.id == v_decouverte.id -%}
-                Saveur noisette-vanille · Cure 30 jours · 1 dose/jour
+                Hazelnut-vanilla flavor · 30-day supply · 1 scoop/day
               {%- else -%}
-                Saveur noisette-vanille · Cure 30 jours · 3 doses/jour
+                Hazelnut-vanilla flavor · 90-day supply · 1 scoop/day
               {%- endif -%}
             </div>
           </div>
           <div class="pdpv9-cart__product-price" id="pdpv9-cart-price">{{ current_variant.price | money }}</div>
         </div>
 
-        {%- comment -%} 4 bonuses, struck-through then 0€ {%- endcomment -%}
+        {%- comment -%} 4 bonuses, struck-through then 0$ {%- endcomment -%}
         <div class="pdpv9-cart__line">
           <div class="pdpv9-cart__bonus-icon" aria-hidden="true">E</div>
           <div class="pdpv9-cart__bonus-info">
-            <div class="pdpv9-cart__bonus-name">E-book « 30j pour reprendre le contrôle »</div>
+            <div class="pdpv9-cart__bonus-name">E-book "30 Days to Reset"</div>
             <div class="pdpv9-cart__bonus-tag">Offert</div>
           </div>
-          <div class="pdpv9-cart__bonus-price"><s>47€</s> <strong>0€</strong></div>
+          <div class="pdpv9-cart__bonus-price"><s>$47</s> <strong>0$</strong></div>
         </div>
         <div class="pdpv9-cart__line">
           <div class="pdpv9-cart__bonus-icon" aria-hidden="true">G</div>
           <div class="pdpv9-cart__bonus-info">
-            <div class="pdpv9-cart__bonus-name">Groupe privé UBurn Collective</div>
+            <div class="pdpv9-cart__bonus-name">Private community: UBurn Collective</div>
             <div class="pdpv9-cart__bonus-tag">Offert</div>
           </div>
-          <div class="pdpv9-cart__bonus-price"><s>40€</s> <strong>0€</strong></div>
+          <div class="pdpv9-cart__bonus-price"><s>$40</s> <strong>0$</strong></div>
         </div>
         <div class="pdpv9-cart__line">
           <div class="pdpv9-cart__bonus-icon" aria-hidden="true">É</div>
           <div class="pdpv9-cart__bonus-info">
-            <div class="pdpv9-cart__bonus-name">Événements UBurn en ligne</div>
+            <div class="pdpv9-cart__bonus-name">UBurn online events</div>
             <div class="pdpv9-cart__bonus-tag">Offert</div>
           </div>
-          <div class="pdpv9-cart__bonus-price"><s>50€</s> <strong>0€</strong></div>
+          <div class="pdpv9-cart__bonus-price"><s>$50</s> <strong>0$</strong></div>
         </div>
         <div class="pdpv9-cart__line">
           <div class="pdpv9-cart__bonus-icon" aria-hidden="true">W</div>
           <div class="pdpv9-cart__bonus-info">
-            <div class="pdpv9-cart__bonus-name">Suivi nutrition WhatsApp 30j</div>
+            <div class="pdpv9-cart__bonus-name">30-day nutrition support via WhatsApp</div>
             <div class="pdpv9-cart__bonus-tag">Offert</div>
           </div>
-          <div class="pdpv9-cart__bonus-price"><s>47€</s> <strong>0€</strong></div>
+          <div class="pdpv9-cart__bonus-price"><s>$47</s> <strong>0$</strong></div>
         </div>
 
         {%- comment -%} Savings summary {%- endcomment -%}
         <div class="pdpv9-cart__savings">
-          <span>Économies totales</span>
-          <span class="pdpv9-cart__savings-amount">−184€</span>
+          <span>Total savings</span>
+          <span class="pdpv9-cart__savings-amount">−$184</span>
         </div>
 
         {%- comment -%} Total + per-day {%- endcomment -%}
@@ -800,21 +800,21 @@
         </div>
         <div class="pdpv9-cart__per-day" id="pdpv9-cart-per-day">
           {%- if current_variant.id == v_decouverte.id -%}
-            soit 1,15€/jour sur 30 jours
+            $1.16/day for 30 days
           {%- else -%}
-            soit 1,82€/jour sur 30 jours
+            soit 1,82$/day sur 30 days
           {%- endif -%}
         </div>
 
         {%- comment -%} Trust + CTA {%- endcomment -%}
         <div class="pdpv9-cart__rating">
           <span class="pdpv9-stars" aria-hidden="true">●</span>
-          <span class="pdpv9-cart__rating-text">Lancement France · Expédié depuis la France</span>
+          <span class="pdpv9-cart__rating-text">Now in the U.S. · Ships from France</span>
         </div>
         <button type="submit" form="pdpv9-pdp-form" name="add" class="pdpv9-cart__cta">
-          Continuer vers le paiement →
+          Continue to checkout →
         </button>
-        <div class="pdpv9-cart__efsa">✓ Allégation glucomannane validée EFSA (ID 3120)</div>
+        <div class="pdpv9-cart__efsa">✓ Research-backed glucomannan dietary fiber*</div>
         <div class="pdpv9-cart__pay">
           <span class="pdpv9-cart__pay-badge">Visa</span>
           <span class="pdpv9-cart__pay-badge">Mastercard</span>
@@ -832,11 +832,11 @@
         <summary class="pdpv9-acc__q">À savoir avant de commencer</summary>
         <div class="pdpv9-acc__a">
           <ul>
-            <li>Complément alimentaire, pas un médicament.</li>
+            <li>Dietary supplement, not a medication.</li>
             <li>Ne remplace pas une alimentation équilibrée.</li>
-            <li>À boire avec suffisamment d'eau.</li>
-            <li>Déconseillé pendant la grossesse et l'allaitement.</li>
-            <li>Demande l'avis d'un professionnel en cas de traitement médical.</li>
+            <li>Drink with enough water.</li>
+            <li>Not recommended during pregnancy or breastfeeding.</li>
+            <li>Demande l'avis d'un professionnel if you're on medication.</li>
           </ul>
         </div>
       </details>
@@ -846,54 +846,54 @@
   {%- comment -%} ─── 9. FAQ ─── {%- endcomment -%}
   {%- comment -%} ─── CTA Pre-FAQ (CRO V1) ─── {%- endcomment -%}
   <div class="pdpv9-cta-band">
-    <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary">Choisir ma cure →</a>
+    <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary">Pick my pack →</a>
   </div>
 
   <section class="pdpv9-faq" aria-labelledby="pdpv9-faq-title">
     <div class="pdpv9-faq__inner">
       <div class="pdpv9-faq__head">
         <span class="pdpv9-eyebrow">Questions fréquentes</span>
-        <h2 class="pdpv9-h2" id="pdpv9-faq-title">Tout ce que tu veux <span class="pdpv9-h2-accent">savoir avant de commander.</span></h2>
+        <h2 class="pdpv9-h2" id="pdpv9-faq-title">Everything you want to know <span class="pdpv9-h2-accent">before ordering.</span></h2>
       </div>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Quel goût a UBurn ?</summary>
-        <div class="pdpv9-acc__a"><p>Un goût doux vanille-noisette, naturellement violet, sans arrière-goût chimique. Pensé pour donner envie d'y revenir.</p></div>
+        <summary class="pdpv9-acc__q">What does UBurn taste like?</summary>
+        <div class="pdpv9-acc__a"><p>A smooth hazelnut-vanilla taste, naturally purple, no artificial aftertaste. Designed to keep you coming back.</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Comment l'utiliser ?</summary>
-        <div class="pdpv9-acc__a"><p>Mélange une dose dans 200 à 300 ml d'eau, de lait ou de boisson végétale. Remue, attends quelques secondes que la texture se forme, et bois. Prêt en moins d'une minute.</p></div>
+        <summary class="pdpv9-acc__q">How to use it?</summary>
+        <div class="pdpv9-acc__a"><p>Mix one scoop in 8-10 oz of water, milk, or plant-based milk. Stir, wait a few seconds for the texture to form, and drink. Ready in under a minute.</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Eau ou lait, qu'est-ce qui est mieux ?</summary>
+        <summary class="pdpv9-acc__q">Water or milk, which is better?</summary>
         <div class="pdpv9-acc__a"><p>Eau pour une version légère et désaltérante. Lait, lait d'amande ou lait d'avoine pour une texture plus douce et crémeuse. Les deux fonctionnent — c'est une question de goût.</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Quand prendre UBurn ?</summary>
-        <div class="pdpv9-acc__a"><p>Tu peux le prendre avant un repas ou au moment où les fringales arrivent, par exemple vers 16h. Pour le glucomannane, le bénéfice réglementaire est associé à 3 prises de 1 g par jour avant les repas, avec suffisamment d'eau.</p></div>
+        <summary class="pdpv9-acc__q">When should I take UBurn?</summary>
+        <div class="pdpv9-acc__a"><p>Take it before a meal or when cravings arise, for example around 4PM. For glucomannan, the recommended dosage is 3 doses of 1g per day before meals, with adequate water.</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Est-ce qu'UBurn contient de la caféine ?</summary>
-        <div class="pdpv9-acc__a"><p>Non, UBurn est 0% caféine. Tu peux donc le prendre l'après-midi ou le soir sans risquer de perturber ton sommeil.</p></div>
+        <summary class="pdpv9-acc__q">Est-ce qu'UBurn contient de la Caffeine-free ?</summary>
+        <div class="pdpv9-acc__a"><p>No, UBurn is caffeine-free. Drink it in the afternoon or evening without disrupting sleep.</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Combien de temps dure une cure ?</summary>
-        <div class="pdpv9-acc__a"><p>Découverte 90g : environ 30 jours à raison de 1 dose/jour. Résultats Maximum 270g : environ 30 jours à raison de 3 doses/jour. Tu choisis le rythme qui te convient.</p></div>
+        <summary class="pdpv9-acc__q">How long does one pack last?</summary>
+        <div class="pdpv9-acc__a"><p>Starter 90g : environ 30 days à raison de 1 scoop/day. Maximum Pack 270g : environ 30 days à raison de 1 scoop/day. Tu choisis le rythme qui te convient.</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Livraison en combien de temps ?</summary>
-        <div class="pdpv9-acc__a"><p>Expédié depuis la France. Livraison gratuite en France, généralement reçue sous 2 à 4 jours ouvrés après expédition.</p></div>
+        <summary class="pdpv9-acc__q">How long does shipping take?</summary>
+        <div class="pdpv9-acc__a"><p>Ships from France. Free U.S. shipping, typically delivered within 7-14 business days.</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Puis-je commencer avec Découverte ?</summary>
-        <div class="pdpv9-acc__a"><p>Oui — c'est même le format conseillé pour tester la routine UBurn avant de passer sur Résultats Maximum si tu veux le meilleur prix par dose.</p></div>
+        <summary class="pdpv9-acc__q">Can I start with the Starter pack?</summary>
+        <div class="pdpv9-acc__a"><p>Oui — c'est même le format conseillé pour tester la routine UBurn avant de passer sur Maximum Pack si tu veux le meilleur prix per scoop.</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Est-ce compatible avec un régime ?</summary>
-        <div class="pdpv9-acc__a"><p>Oui, UBurn peut s'intégrer dans une alimentation équilibrée et un régime hypocalorique. Ce n'est pas une solution miracle, mais une routine pour aider à mieux gérer les fringales.</p></div>
+        <summary class="pdpv9-acc__q">Compatible with a diet?</summary>
+        <div class="pdpv9-acc__a"><p>Yes, UBurn fits within a balanced diet. It's not a miracle product, just a ritual to help handle cravings.*</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Est-ce adapté pendant la grossesse ou l'allaitement ?</summary>
-        <div class="pdpv9-acc__a"><p>Non, par précaution, UBurn est déconseillé pendant la grossesse et l'allaitement.</p></div>
+        <summary class="pdpv9-acc__q">Safe during pregnancy or breastfeeding?</summary>
+        <div class="pdpv9-acc__a"><p>No, as a precaution, UBurn is not recommended during pregnancy or breastfeeding.</p></div>
       </details>
     </div>
   </section>
@@ -901,18 +901,18 @@
   {%- comment -%} ─── 10. CTA FINAL ─── {%- endcomment -%}
   <section class="pdpv9-final" aria-labelledby="pdpv9-final-title">
     <div class="pdpv9-final__inner">
-      <span class="pdpv9-eyebrow">Prête ?</span>
-      <h2 class="pdpv9-h2" id="pdpv9-final-title">Prête à créer <span class="pdpv9-h2-accent">ton rituel UBURN ?</span></h2>
-      <p class="pdpv9-lead">Boisson violette. Sans caféine. Routine simple.</p>
-      <a href="#pdpv9-pdp" class="pdpv9-cta-primary pdpv9-final__cta">Commencer ma cure 30 jours</a>
-      <p class="pdpv9-final__sub">Livraison offerte · Paiement sécurisé · Sans abonnement</p>
+      <span class="pdpv9-eyebrow">Ready?</span>
+      <h2 class="pdpv9-h2" id="pdpv9-final-title">Ready to create <span class="pdpv9-h2-accent">your UBurn ritual?</span></h2>
+      <p class="pdpv9-lead">Boisson violette. Sans Caffeine-free. Simple ritual.</p>
+      <a href="#pdpv9-pdp" class="pdpv9-cta-primary pdpv9-final__cta">Start my 30-day routine</a>
+      <p class="pdpv9-final__sub">Free U.S. shipping · Sepack checkout · No subscription trap</p>
     </div>
   </section>
 
 
   <div class="pdpv9-disc">
     <div class="pdpv9-disc__inner">
-      <p>Complément alimentaire à base de glucomannane. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas. Ne se substitue pas à une alimentation variée et équilibrée. Déconseillé pendant la grossesse et l'allaitement.</p>
+      <p>Dietary supplement containing glucomannan. Glucomannan supports satiety as part of a healthy lifestyle* (FDA dietary fiber*). Recommended use: 3g/day in 1 scoop of 1g with 1-2 large glasses of water before meals. Not a substitute for a balanced diet. Not recommended during pregnancy or breastfeeding.</p>
     </div>
   </div>
 
@@ -922,8 +922,8 @@
   {%- endcomment -%}
   <div class="pdpv9-sticky-cta">
     {%- if current_variant.available -%}
-      <button type="submit" form="pdpv9-pdp-form" name="add" class="pdpv9-sticky-cta__btn" aria-label="Ajouter au panier">
-        Ajouter au panier — <span id="pdpv9-sticky-price">{{ current_variant.price | money }}</span>
+      <button type="submit" form="pdpv9-pdp-form" name="add" class="pdpv9-sticky-cta__btn" aria-label="Add to cart">
+        Add to cart — <span id="pdpv9-sticky-price">{{ current_variant.price | money }}</span>
       </button>
     {%- else -%}
       <a href="#pdpv9-pdp" class="pdpv9-sticky-cta__btn pdpv9-sticky-cta__btn--disabled" aria-disabled="true">En rupture</a>
@@ -944,10 +944,10 @@
 
     // 1. ALL price/text refs — dynamic on variant change
     var mainPrice   = document.getElementById('pdpv9-price');         // main hero price
-    var pricePrefix = document.getElementById('pdpv9-price-prefix');  // "À partir de " — removed on variant click
+    var pricePrefix = document.getElementById('pdpv9-price-prefix');  // "From " — removed on variant click
     var per         = document.getElementById('pdpv9-price-per');     // sub-price meta line
-    var atcPrice    = document.getElementById('pdpv9-atc-price');     // "— €34,50" inside CTA
-    var atcText     = document.getElementById('pdpv9-atc-text');      // "Commencer ma cure 30 jours"
+    var atcPrice    = document.getElementById('pdpv9-atc-price');     // "— $35" inside CTA
+    var atcText     = document.getElementById('pdpv9-atc-text');      // "Start my 30-day routine"
     var cartMeta    = document.getElementById('pdpv9-cart-meta');     // cart product meta line
     var cartPrice   = document.getElementById('pdpv9-cart-price');    // cart product price
     var cartTotal   = document.getElementById('pdpv9-cart-total');    // cart total
@@ -957,7 +957,7 @@
     function formatPrice(cents) {
       var n = parseInt(cents, 10);
       if (isNaN(n)) return '';
-      return (n / 100).toFixed(2).replace('.', ',') + '€';
+      return (n / 100).toFixed(2).replace('.', ',') + '$';
     }
 
     function updateOnVariant() {
@@ -969,36 +969,36 @@
       var priceMoney = checked.getAttribute('data-vprice-money'); // pre-formatted by Liquid
       var idx        = checked.getAttribute('data-vidx');
       var priceStr   = priceMoney || formatPrice(price);
-      var doses      = (idx === '2') ? '3 doses/jour' : '1 dose/jour';
+      var doses      = (idx === '2') ? '1 scoop/day' : '1 scoop/day';
 
       // 1. Main hero price
       if (mainPrice && priceStr) mainPrice.textContent = priceStr;
 
       // 2. Sub-price meta line
       if (per && unit && days) {
-        per.textContent = unit + ' · Cure ' + days + ' jours · Sans abonnement';
+        per.textContent = unit + ' · Pack ' + days + ' days · No subscription trap';
       }
 
-      // 3. ATC button price ("— €X,XX")
+      // 3. ATC button price ("— $X,XX")
       if (atcPrice && priceStr) atcPrice.textContent = '— ' + priceStr;
 
-      // 4. ATC button text (uniform "30 jours")
-      if (atcText && days) atcText.textContent = 'Commencer ma cure ' + days + ' jours';
+      // 4. ATC button text (uniform "30 days")
+      if (atcText && days) atcText.textContent = 'Start my routine ' + days + ' days';
 
       // 5. Cart-recap product meta + price + total
       if (cartMeta && days) {
-        cartMeta.textContent = 'Saveur noisette-vanille · Cure ' + days + ' jours · ' + doses;
+        cartMeta.textContent = 'Hazelnut-vanilla flavor · Pack ' + days + ' days · ' + doses;
       }
       if (cartPrice && priceStr) cartPrice.textContent = priceStr;
       if (cartTotal && priceStr) cartTotal.textContent = priceStr;
       if (cartPerDay && unit && days) {
-        cartPerDay.textContent = 'soit ' + unit + ' sur ' + days + ' jours';
+        cartPerDay.textContent = 'soit ' + unit + ' sur ' + days + ' days';
       }
 
       // 6. Sticky CTA mobile price (synced with selected variant)
       if (stickyPrice && priceStr) stickyPrice.textContent = priceStr;
 
-      // 7. Hero price : remove "À partir de" prefix on first explicit selection
+      // 7. Hero price : remove "From" prefix on first explicit selection
       if (pricePrefix && pricePrefix.textContent) pricePrefix.textContent = '';
     }
     form.querySelectorAll('input[name="id"]').forEach(function(r){
