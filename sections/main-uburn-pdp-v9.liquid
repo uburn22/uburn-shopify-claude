@@ -77,7 +77,7 @@
     <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}Research-backed glucomannan*{% else %}Glucomannane reconnu par l'EFSA{% endif %}</span>
     <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}100% Plant-based{% else %}100% Végétal{% endif %}</span>
     <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</span>
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %}</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% caféine{% endif %}</span>
   </div>
 
   {%- comment -%} ═══ PDP HERO ABOVE-FOLD — real PDP structure ═══ {%- endcomment -%}
@@ -134,7 +134,7 @@
           <ul class="pdpv9-pdp__bullets" {% if request.locale.iso_code == 'en' %}aria-label="Key benefits"{% else %}aria-label="Bénéfices clés"{% endif %}>
             <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">🔥</span> {% if request.locale.iso_code == 'en' %}For 4PM and evening cravings{% else %}Pour les {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s de 16h et du soir{% endif %}</li>
             <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">⏱️</span> {% if request.locale.iso_code == 'en' %}Up to 4 hours of satiety*{% else %}Jusqu'à 4h de satiété{% endif %}</li>
-            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">☕</span> {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %}, routine douce</li>
+            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">☕</span> {% if request.locale.iso_code == 'en' %}Caffeine-free, gentle routine{% else %}0% caféine, routine douce{% endif %}</li>
           </ul>
         </div>
 
@@ -157,15 +157,28 @@
               <legend class="pdpv9-pdp__variants-legend">{% if request.locale.iso_code == 'en' %}Pick your pack{% else %}Choisis ta cure{% endif %}</legend>
               {%- for v in product.variants -%}
                 {%- liquid
-                  assign vmeta = '90g · 1 dose/jour · 30 jours'
-                  assign vunit = '1,15€/jour'
-                  assign vdays = '30'
-                  assign vtag = 'Pour tester la routine'
-                  if forloop.index == 2
-                    assign vmeta = '270g · 3 doses/jour · 30 jours'
-                    assign vunit = '0,65€/jour'
+                  if request.locale.iso_code == 'en'
+                    assign vmeta = '90g · 1 scoop/day · 30 days'
+                    assign vunit = '$1.15/day'
                     assign vdays = '30'
-                    assign vtag = 'Le meilleur prix par dose'
+                    assign vtag = 'To try the routine'
+                    if forloop.index == 2
+                      assign vmeta = '270g · 3 scoops/day · 30 days'
+                      assign vunit = '$0.65/day'
+                      assign vdays = '30'
+                      assign vtag = 'Best price per scoop'
+                    endif
+                  else
+                    assign vmeta = '90g · 1 dose/jour · 30 jours'
+                    assign vunit = '1,15€/jour'
+                    assign vdays = '30'
+                    assign vtag = 'Pour tester la routine'
+                    if forloop.index == 2
+                      assign vmeta = '270g · 3 doses/jour · 30 jours'
+                      assign vunit = '0,65€/jour'
+                      assign vdays = '30'
+                      assign vtag = 'Le meilleur prix par dose'
+                    endif
                   endif
                 -%}
                 <label class="pdpv9-pdp__variant{% if forloop.index == 2 %} pdpv9-pdp__variant--pop{% endif %}{% if v.id == current_variant.id %} pdpv9-pdp__variant--selected{% endif %}{% unless v.available %} pdpv9-pdp__variant--sold{% endunless %}">
@@ -180,7 +193,7 @@
                       <span class="pdpv9-pdp__variant-perday">{{ vunit }}</span>
                     </span>
                   </span>
-                  {%- unless v.available -%}<span class="pdpv9-pdp__variant-sold">Rupture</span>{%- endunless -%}
+                  {%- unless v.available -%}<span class="pdpv9-pdp__variant-sold">{% if request.locale.iso_code == 'en' %}Sold out{% else %}Rupture{% endif %}</span>{%- endunless -%}
                 </label>
               {%- endfor -%}
             </fieldset>
@@ -200,7 +213,7 @@
               <span class="pdpv9-pdp__atc-text" id="pdpv9-atc-text">{% if request.locale.iso_code == 'en' %}Start my 30-day routine{% else %}Commencer ma cure 30 jours{% endif %}</span>
               <span class="pdpv9-pdp__atc-price" id="pdpv9-atc-price">— {{ current_variant.price | money }}</span>
             {%- else -%}
-              En rupture
+              {% if request.locale.iso_code == 'en' %}Sold out{% else %}En rupture{% endif %}
             {%- endif -%}
           </button>
         </form>
@@ -240,7 +253,7 @@
             <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">🌿</span><span>{% if request.locale.iso_code == 'en' %}Konjac fiber contributes to a feeling of fullness within a balanced diet.*{% else %}Le konjac contribue à la sensation de satiété dans le cadre d'une alimentation adaptée.{% endif %}</span></li>
             <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">💜</span><span>{% if request.locale.iso_code == 'en' %}Purple ube brings a comforting, naturally vibrant ritual.{% else %}L'ube apporte une routine gourmande, violette et naturellement originale.{% endif %}</span></li>
             <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">🥥</span><span>{% if request.locale.iso_code == 'en' %}Coconut MCT adds a smooth texture and lasting fullness sensation.*{% else %}Le MCT de coco apporte une texture douce et une sensation plus nourrissante.{% endif %}</span></li>
-            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">☕</span><span>{% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %} : utilisable {% if request.locale.iso_code == 'en' %}in the afternoon or evening{% else %}l'après-midi ou le soir{% endif %}.</span></li>
+            <li class="pdpv9-why__item"><span class="pdpv9-why__bullet" aria-hidden="true">☕</span><span>{% if request.locale.iso_code == 'en' %}Caffeine-free: drink it in the afternoon or evening.{% else %}0% caféine : utilisable l'après-midi ou le soir.{% endif %}</span></li>
           </ul>
           <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary pdpv9-why__cta">{% if request.locale.iso_code == 'en' %}Try UBurn risk-free →{% else %}Essayer UBurn →{% endif %}</a>
         </div>
@@ -248,14 +261,14 @@
         {%- comment -%} Bonus stack — collapsible <details> on mobile, expanded on desktop {%- endcomment -%}
         <details class="pdpv9-pdp__bonus pdpv9-pdp__bonus--collapsible">
           <summary class="pdpv9-pdp__bonus-summary">
-            <span class="pdpv9-pdp__bonus-summary-label">🎁 <strong>184€ de bonus</strong> offerts</span>
+            <span class="pdpv9-pdp__bonus-summary-label">🎁 <strong>{% if request.locale.iso_code == 'en' %}$200 in bonuses{% else %}184€ de bonus{% endif %}</strong> {% if request.locale.iso_code == 'en' %}included{% else %}offerts{% endif %}</span>
             <span class="pdpv9-pdp__bonus-count">+4</span>
           </summary>
           <div class="pdpv9-pdp__bonus-items">
-            <div><span>E-book « 30j pour reprendre le contrôle »</span><span class="pdpv9-pdp__bonus-val"><s>47€</s> 0€</span></div>
-            <div><span>Groupe privé Uburn Collective</span><span class="pdpv9-pdp__bonus-val"><s>40€</s> 0€</span></div>
-            <div><span>Événements UBurn en ligne</span><span class="pdpv9-pdp__bonus-val"><s>50€</s> 0€</span></div>
-            <div><span>Suivi nutrition WhatsApp 30j</span><span class="pdpv9-pdp__bonus-val"><s>47€</s> 0€</span></div>
+            <div><span>{% if request.locale.iso_code == 'en' %}E-book "30 days to take back control"{% else %}E-book « 30j pour reprendre le contrôle »{% endif %}</span><span class="pdpv9-pdp__bonus-val"><s>{% if request.locale.iso_code == 'en' %}$50{% else %}47€{% endif %}</s> {% if request.locale.iso_code == 'en' %}$0{% else %}0€{% endif %}</span></div>
+            <div><span>{% if request.locale.iso_code == 'en' %}Private UBurn Collective group{% else %}Groupe privé Uburn Collective{% endif %}</span><span class="pdpv9-pdp__bonus-val"><s>{% if request.locale.iso_code == 'en' %}$45{% else %}40€{% endif %}</s> {% if request.locale.iso_code == 'en' %}$0{% else %}0€{% endif %}</span></div>
+            <div><span>{% if request.locale.iso_code == 'en' %}Online UBurn events{% else %}Événements UBurn en ligne{% endif %}</span><span class="pdpv9-pdp__bonus-val"><s>{% if request.locale.iso_code == 'en' %}$55{% else %}50€{% endif %}</s> {% if request.locale.iso_code == 'en' %}$0{% else %}0€{% endif %}</span></div>
+            <div><span>{% if request.locale.iso_code == 'en' %}30-day WhatsApp nutrition support{% else %}Suivi nutrition WhatsApp 30j{% endif %}</span><span class="pdpv9-pdp__bonus-val"><s>{% if request.locale.iso_code == 'en' %}$50{% else %}47€{% endif %}</s> {% if request.locale.iso_code == 'en' %}$0{% else %}0€{% endif %}</span></div>
           </div>
         </details>
 
@@ -269,38 +282,38 @@
   <section class="pdpv9-stories" aria-labelledby="pdpv9-stories-title">
     <div class="pdpv9-stories__inner">
       <div class="pdpv9-stories__head">
-        <span class="pdpv9-eyebrow">Elles l'utilisent</span>
-        <h2 class="pdpv9-h2" id="pdpv9-stories-title">Le rituel <span class="pdpv9-h2-accent">en vrai.</span></h2>
+        <span class="pdpv9-eyebrow">{% if request.locale.iso_code == 'en' %}They use it{% else %}Elles l'utilisent{% endif %}</span>
+        <h2 class="pdpv9-h2" id="pdpv9-stories-title">{% if request.locale.iso_code == 'en' %}The ritual, <span class="pdpv9-h2-accent">in real life.</span>{% else %}Le rituel <span class="pdpv9-h2-accent">en vrai.</span>{% endif %}</h2>
         <p class="pdpv9-stories__sub">{% if request.locale.iso_code == 'en' %}No ads. Real women. Real routines. Up to 4 hours of natural satiety.*{% else %}Pas de pub. Des femmes. Des routines. 4h de satiété naturelle.{% endif %}</p>
       </div>
       <div class="pdpv9-stories__rail" tabindex="0">
         <article class="pdpv9-stories__card" data-stories-card="1">
           <div class="pdpv9-stories__media">
             <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-latte-prep.mp4' | asset_url }}" type="video/mp4"></video>
-            <button class="pdpv9-stories__play" {% if request.locale.iso_code == 'en' %}aria-label="Play Marie's video"{% else %}aria-label="Lecture vidéo Marie"{% endif %} type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
+            <button class="pdpv9-stories__play" {% if request.locale.iso_code == 'en' %}aria-label="Play Ashley's video"{% else %}aria-label="Lecture vidéo Marie"{% endif %} type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
           </div>
-          <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Marie, 42{% else %}Marie, 42 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Paris, France{% else %}· Paris{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"My morning ritual. No more 4PM cravings."{% else %}"Ma routine matin. Plus de {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %} 16h."{% endif %}</span></div>
+          <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Ashley K., 32{% else %}Marie, 42 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Phoenix, AZ{% else %}· Paris{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"My morning ritual. No more 4PM cravings."{% else %}"Ma routine matin. Plus de fringale 16h."{% endif %}</span></div>
         </article>
         <article class="pdpv9-stories__card" data-stories-card="2">
           <div class="pdpv9-stories__media">
             <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-lifestyle.mp4' | asset_url }}" type="video/mp4"></video>
-            <button class="pdpv9-stories__play" {% if request.locale.iso_code == 'en' %}aria-label="Play Sophie's video"{% else %}aria-label="Lecture vidéo Sophie"{% endif %} type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
+            <button class="pdpv9-stories__play" {% if request.locale.iso_code == 'en' %}aria-label="Play Jennifer's video"{% else %}aria-label="Lecture vidéo Sophie"{% endif %} type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
           </div>
-          <div class="pdpv9-stories__caption"><strong>Sophie, 38 ans</strong> {% if request.locale.iso_code == 'en' %}· Lyon, France{% else %}· Lyon{% endif %}<br><span>"3 mois après. Plus calme. Plus stable."</span></div>
+          <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Jennifer M., 38{% else %}Sophie, 38 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Miami, FL{% else %}· Lyon{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"3 months in. Calmer. More stable."{% else %}"3 mois après. Plus calme. Plus stable."{% endif %}</span></div>
         </article>
         <article class="pdpv9-stories__card" data-stories-card="3">
           <div class="pdpv9-stories__media">
             <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-product-hero.mp4' | asset_url }}" type="video/mp4"></video>
-            <button class="pdpv9-stories__play" {% if request.locale.iso_code == 'en' %}aria-label="Play Laurence's video"{% else %}aria-label="Lecture vidéo Laurence"{% endif %} type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
+            <button class="pdpv9-stories__play" {% if request.locale.iso_code == 'en' %}aria-label="Play Rachel's video"{% else %}aria-label="Lecture vidéo Laurence"{% endif %} type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
           </div>
-          <div class="pdpv9-stories__caption"><strong>Laurence, 47 ans</strong> {% if request.locale.iso_code == 'en' %}· Marseille, France{% else %}· Marseille{% endif %}<br><span>"Goût vanille noisette. Pas chimique."</span></div>
+          <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Rachel B., 47{% else %}Laurence, 47 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Denver, CO{% else %}· Marseille{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"Vanilla-hazelnut taste. Nothing chemical."{% else %}"Goût vanille noisette. Pas chimique."{% endif %}</span></div>
         </article>
         <article class="pdpv9-stories__card" data-stories-card="4">
           <div class="pdpv9-stories__media">
             <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-sport.mp4' | asset_url }}" type="video/mp4"></video>
-            <button class="pdpv9-stories__play" {% if request.locale.iso_code == 'en' %}aria-label="Play Camille's video"{% else %}aria-label="Lecture vidéo Camille"{% endif %} type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
+            <button class="pdpv9-stories__play" {% if request.locale.iso_code == 'en' %}aria-label="Play Megan's video"{% else %}aria-label="Lecture vidéo Camille"{% endif %} type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
           </div>
-          <div class="pdpv9-stories__caption"><strong>Camille, 39 ans</strong> {% if request.locale.iso_code == 'en' %}· Bordeaux, France{% else %}· Bordeaux{% endif %}<br><span>"Avant le sport. Sans excitant."</span></div>
+          <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Megan T., 39{% else %}Camille, 39 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Austin, TX{% else %}· Bordeaux{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"Before workouts. Stim-free."{% else %}"Avant le sport. Sans excitant."{% endif %}</span></div>
         </article>
       </div>
       <div class="pdpv9-stories__dots">
@@ -325,7 +338,7 @@
         <ul class="pdpv9-moment16h__pills" {% if request.locale.iso_code == 'en' %}aria-label="Notes and preparation"{% else %}aria-label="Notes et préparation"{% endif %}>
           <li class="pdpv9-moment16h__pill">{% if request.locale.iso_code == 'en' %}Natural vanilla notes{% else %}Notes naturelles de vanille{% endif %}</li>
           <li class="pdpv9-moment16h__pill">{% if request.locale.iso_code == 'en' %}Hazelnut hint{% else %}Touche noisette{% endif %}</li>
-          <li class="pdpv9-moment16h__pill">Eau, lait ou lait végétal</li>
+          <li class="pdpv9-moment16h__pill">{% if request.locale.iso_code == 'en' %}Water, milk, or plant-based milk{% else %}Eau, lait ou lait végétal{% endif %}</li>
           <li class="pdpv9-moment16h__pill">{% if request.locale.iso_code == 'en' %}Indulgent purple ritual{% else %}Rituel violet gourmand{% endif %}</li>
         </ul>
 
@@ -382,7 +395,7 @@
           src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=1200&format=webp"
           srcset="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=1200&format=webp 1200w, https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_13.03.02.jpg?v=1776421077&width=1600&format=webp 1600w"
           sizes="(min-width: 900px) 50vw, 100vw"
-          alt="Boisson UBurn violette crémeuse servie dans {% if request.locale.iso_code == 'en' %}a large glass{% else %}un grand verre{% endif %} avec glaçons"
+          alt="{% if request.locale.iso_code == 'en' %}UBurn purple creamy drink served in a large glass with ice{% else %}Boisson UBurn violette crémeuse servie dans un grand verre avec glaçons{% endif %}"
           loading="lazy"
           decoding="async"
           width="1200"
@@ -391,10 +404,10 @@
       <div class="pdpv9-taste__copy">
         <span class="pdpv9-eyebrow">{% if request.locale.iso_code == 'en' %}The purple ritual{% else %}Le rituel violet{% endif %}</span>
         <h2 class="pdpv9-h2">{% if request.locale.iso_code == 'en' %}A smooth <span class="pdpv9-h2-accent">vanilla-hazelnut taste.</span>{% else %}Un goût doux <span class="pdpv9-h2-accent">vanille-noisette.</span>{% endif %}</h2>
-        <p class="pdpv9-lead">À boire avec de l'eau, du lait ou une boisson végétale. Une texture douce, une couleur violette naturelle et une routine simple à intégrer dans la journée.</p>
+        <p class="pdpv9-lead">{% if request.locale.iso_code == 'en' %}Drink with water, milk, or plant-based milk. A smooth texture, a naturally purple color, and a simple routine that fits into your day.{% else %}À boire avec de l'eau, du lait ou une boisson végétale. Une texture douce, une couleur violette naturelle et une routine simple à intégrer dans la journée.{% endif %}</p>
         <ul class="pdpv9-chips">
           <li class="pdpv9-chip pdpv9-chip--soft">{% if request.locale.iso_code == 'en' %}Water, milk, or plant-based milk{% else %}Eau, lait ou boisson végétale{% endif %}</li>
-          <li class="pdpv9-chip pdpv9-chip--soft">{% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %}</li>
+          <li class="pdpv9-chip pdpv9-chip--soft">{% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% caféine{% endif %}</li>
           {% if request.locale.iso_code == 'en' %}<li class="pdpv9-chip pdpv9-chip--soft">Ready in under a minute</li>{% else %}<li class="pdpv9-chip pdpv9-chip--soft">Prêt en moins d'une minute</li>{% endif %}
         </ul>
         <a href="#pdpv9-pdp-form" class="pdpv9-cta-secondary pdpv9-taste__cta">{% if request.locale.iso_code == 'en' %}Pick my pack →{% else %}Choisir ma cure →{% endif %}</a>
@@ -416,7 +429,7 @@
             src="https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=1200&format=webp"
             srcset="https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=400&format=webp 400w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Imnt_site_step01_melangez_v2_1777326239.jpg?v=1777326326&width=1200&format=webp 1200w"
             sizes="(min-width: 900px) 33vw, (min-width: 700px) 33vw, 100vw"
-            alt="Mélange d'UBurn dans {% if request.locale.iso_code == 'en' %}a large glass{% else %}un grand verre{% endif %}"
+            alt="{% if request.locale.iso_code == 'en' %}UBurn mix in a large glass{% else %}Mélange d'UBurn dans un grand verre{% endif %}"
             loading="lazy"
             decoding="async"
             width="1200"
@@ -467,22 +480,22 @@
   <section class="pdpv9-foryou" aria-labelledby="pdpv9-foryou-title">
     <div class="pdpv9-foryou__inner">
       <div class="pdpv9-foryou__copy">
-        <span class="pdpv9-eyebrow">Est-ce pour toi ?</span>
-        <h2 class="pdpv9-h2" id="pdpv9-foryou-title">UBURN est <span class="pdpv9-h2-accent">fait pour toi si…</span></h2>
+        <span class="pdpv9-eyebrow">{% if request.locale.iso_code == 'en' %}Is it for you?{% else %}Est-ce pour toi ?{% endif %}</span>
+        <h2 class="pdpv9-h2" id="pdpv9-foryou-title">{% if request.locale.iso_code == 'en' %}UBurn <span class="pdpv9-h2-accent">is for you if…</span>{% else %}UBURN est <span class="pdpv9-h2-accent">fait pour toi si…</span>{% endif %}</h2>
         <ul class="pdpv9-foryou__list">
           <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> {% if request.locale.iso_code == 'en' %}You often snack between meals.{% else %}Tu grignotes souvent entre les repas.{% endif %}</li>
           <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> {% if request.locale.iso_code == 'en' %}You get sugar cravings around 4PM or in the evening.{% else %}Tu as des envies sucrées vers 16h ou le soir.{% endif %}</li>
-          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> Tu veux éviter les boissons {% if request.locale.iso_code == 'en' %}caffeinated{% else %}caféinées{% endif %}.</li>
+          <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> {% if request.locale.iso_code == 'en' %}You want to skip caffeinated drinks.{% else %}Tu veux éviter les boissons caféinées.{% endif %}</li>
           <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> {% if request.locale.iso_code == 'en' %}You want a simple routine, not a complicated diet.{% else %}Tu cherches une routine simple, pas un régime compliqué.{% endif %}</li>
           <li><span class="pdpv9-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span> {% if request.locale.iso_code == 'en' %}You want an enjoyable drink — smooth, purple, and indulgent.{% else %}Tu veux une boisson plaisir, douce, violette et gourmande.{% endif %}</li>
         </ul>
-        <p class="pdpv9-foryou__trust">UBURN n'est pas une solution miracle. C'est une routine de satiété pensée pour t'aider à mieux gérer les moments critiques de ta journée.</p>
+        <p class="pdpv9-foryou__trust">{% if request.locale.iso_code == 'en' %}UBurn is not a miracle solution. It's a satiety routine designed to help you handle the critical moments of your day.{% else %}UBURN n'est pas une solution miracle. C'est une routine de satiété pensée pour t'aider à mieux gérer les moments critiques de ta journée.{% endif %}</p>
       </div>
       <div class="pdpv9-foryou__media">
         <img src="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=1200&format=webp"
              srcset="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Gemini_Generated_Image_j56t4sj56t4sj56t.png?v=1764138766&width=1200&format=webp 1200w"
              sizes="(min-width:900px) 50vw, 100vw"
-             alt="UBURN est fait pour toi — routine simple et gourmande"
+             alt="{% if request.locale.iso_code == 'en' %}UBurn is for you — simple and indulgent routine{% else %}UBURN est fait pour toi — routine simple et gourmande{% endif %}"
              loading="lazy" decoding="async" width="1200" height="1500"
              style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:16px;display:block;box-shadow:0 16px 48px rgba(61,24,115,.12);">
       </div>
@@ -504,8 +517,8 @@
       </li>
       <li class="pdpv9-howit-card">
         <div class="pdpv9-howit-card__num">02</div>
-        <h3 class="pdpv9-howit-card__title">Le glucomannane absorbe l'eau</h3>
-        <p class="pdpv9-howit-card__copy">Cette fibre issue du konjac forme un gel naturel au contact de l'eau.</p>
+        <h3 class="pdpv9-howit-card__title">{% if request.locale.iso_code == 'en' %}Glucomannan absorbs water{% else %}Le glucomannane absorbe l'eau{% endif %}</h3>
+        <p class="pdpv9-howit-card__copy">{% if request.locale.iso_code == 'en' %}This konjac-derived fiber forms a natural gel on contact with water.{% else %}Cette fibre issue du konjac forme un gel naturel au contact de l'eau.{% endif %}</p>
       </li>
       <li class="pdpv9-howit-card">
         <div class="pdpv9-howit-card__num">03</div>
@@ -514,8 +527,8 @@
       </li>
     </ol>
     <details class="pdpv9-acc pdpv9-howit__legal-acc">
-      <summary class="pdpv9-acc__q">Conditions EFSA glucomannane</summary>
-      <div class="pdpv9-acc__a"><p>Bénéfice obtenu avec 3 g par jour en 3 prises de 1 g, avec 1-2 verres d'eau avant les repas, dans le cadre d'un {% if request.locale.iso_code == 'en' %}healthy lifestyle{% else %}régime hypocalorique{% endif %}.</p></div>
+      <summary class="pdpv9-acc__q">{% if request.locale.iso_code == 'en' %}Recommended use guidelines{% else %}Conditions EFSA glucomannane{% endif %}</summary>
+      <div class="pdpv9-acc__a"><p>{% if request.locale.iso_code == 'en' %}Recommended use: 3g/day in 3 doses of 1g, with 1-2 large glasses of water before meals, as part of a healthy lifestyle.*{% else %}Bénéfice obtenu avec 3 g par jour en 3 prises de 1 g, avec 1-2 verres d'eau avant les repas, dans le cadre d'un régime hypocalorique.{% endif %}</p></div>
     </details>
     {%- comment -%} IMAGE SLOT (à ajouter plus tard) : infographie glucomannane {%- endcomment -%}
   </section>
@@ -528,15 +541,15 @@
     </div>
     <div class="pdpv9-diff__grid">
       <article class="pdpv9-diff-card">
-        <h3 class="pdpv9-diff-card__title">{% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %}</h3>
-        <p class="pdpv9-diff-card__copy">Une routine douce, sans effet excitant.</p>
+        <h3 class="pdpv9-diff-card__title">{% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% caféine{% endif %}</h3>
+        <p class="pdpv9-diff-card__copy">{% if request.locale.iso_code == 'en' %}A gentle routine, no stimulant effect.{% else %}Une routine douce, sans effet excitant.{% endif %}</p>
       </article>
       <article class="pdpv9-diff-card">
-        <h3 class="pdpv9-diff-card__title">30 kcal par dose</h3>
-        <p class="pdpv9-diff-card__copy">Un rituel léger qui s'intègre facilement dans la journée.</p>
+        <h3 class="pdpv9-diff-card__title">{% if request.locale.iso_code == 'en' %}30 kcal per scoop{% else %}30 kcal par dose{% endif %}</h3>
+        <p class="pdpv9-diff-card__copy">{% if request.locale.iso_code == 'en' %}A light ritual that fits easily into your day.{% else %}Un rituel léger qui s'intègre facilement dans la journée.{% endif %}</p>
       </article>
       <article class="pdpv9-diff-card">
-        <h3 class="pdpv9-diff-card__title">Sans sucre ajouté</h3>
+        <h3 class="pdpv9-diff-card__title">{% if request.locale.iso_code == 'en' %}No added sugar{% else %}Sans sucre ajouté{% endif %}</h3>
         <p class="pdpv9-diff-card__copy">{% if request.locale.iso_code == 'en' %}An indulgent alternative to sugary snacks.{% else %}Une alternative gourmande aux snacks sucrés.{% endif %}</p>
       </article>
       <article class="pdpv9-diff-card">
@@ -549,7 +562,7 @@
       </article>
       <article class="pdpv9-diff-card">
         {% if request.locale.iso_code == 'en' %}<h3 class="pdpv9-diff-card__title">Ready in 30 seconds</h3>{% else %}<h3 class="pdpv9-diff-card__title">Prêt en 30 secondes</h3>{% endif %}
-        <p class="pdpv9-diff-card__copy">À mélanger simplement avec de l'eau, du lait ou du lait végétal.</p>
+        <p class="pdpv9-diff-card__copy">{% if request.locale.iso_code == 'en' %}Just mix with water, milk, or plant-based milk.{% else %}À mélanger simplement avec de l'eau, du lait ou du lait végétal.{% endif %}</p>
       </article>
     </div>
   </section>
@@ -557,7 +570,7 @@
   {%- comment -%} ─── 5. AVIS / UGC ─── {%- endcomment -%}
   <section class="pdpv9-reviews" aria-labelledby="pdpv9-reviews-title">
     <div class="pdpv9-reviews__head">
-      <span class="pdpv9-eyebrow">Elles racontent</span>
+      <span class="pdpv9-eyebrow">{% if request.locale.iso_code == 'en' %}They share{% else %}Elles racontent{% endif %}</span>
       <h2 class="pdpv9-h2" id="pdpv9-reviews-title">{% if request.locale.iso_code == 'en' %}They added UBURN <span class="pdpv9-h2-accent">to their routine.</span>{% else %}Elles ont intégré UBURN <span class="pdpv9-h2-accent">à leur routine.</span>{% endif %}</h2>
       <p class="pdpv9-lead">{% if request.locale.iso_code == 'en' %}Simple routines. Real moments.{% else %}Des routines simples. Des moments réels.{% endif %}</p>
       <div class="pdpv9-reviews__rating">
@@ -572,34 +585,34 @@
         {% if request.locale.iso_code == 'en' %}<p class="pdpv9-review-card__text">"I take it at 4PM — it helps me avoid snacking before dinner."</p>{% else %}<p class="pdpv9-review-card__text">« Je le prends à 16h, ça m'aide à éviter le {% if request.locale.iso_code == 'en' %}snacking{% else %}grignotage{% endif %} avant le dîner. »</p>{% endif %}
         <div class="pdpv9-review-card__verified">✓ {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</div>
         <div class="pdpv9-review-card__author">
-          <div class="pdpv9-review-card__avatar">M</div>
+          <div class="pdpv9-review-card__avatar">{% if request.locale.iso_code == 'en' %}A{% else %}M{% endif %}</div>
           <div>
-            <div class="pdpv9-review-card__name">Marion L.</div>
-            <div class="pdpv9-review-card__role">28 ans {% if request.locale.iso_code == 'en' %}· Lyon, France{% else %}· Lyon{% endif %}</div>
+            <div class="pdpv9-review-card__name">{% if request.locale.iso_code == 'en' %}Ashley K.{% else %}Marion L.{% endif %}</div>
+            <div class="pdpv9-review-card__role">{% if request.locale.iso_code == 'en' %}32 · Phoenix, AZ{% else %}28 ans · Lyon{% endif %}</div>
           </div>
         </div>
       </article>
       <article class="pdpv9-review-card">
         <div class="pdpv9-review-card__stars">★★★★★</div>
-        <p class="pdpv9-review-card__text">« Le goût est doux, surtout avec du lait d'amande. C'est devenu mon moment plaisir de l'après-midi. »</p>
+        <p class="pdpv9-review-card__text">{% if request.locale.iso_code == 'en' %}"The taste is smooth, especially with almond milk. It's become my afternoon moment of pleasure."{% else %}« Le goût est doux, surtout avec du lait d'amande. C'est devenu mon moment plaisir de l'après-midi. »{% endif %}</p>
         <div class="pdpv9-review-card__verified">✓ {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</div>
         <div class="pdpv9-review-card__author">
-          <div class="pdpv9-review-card__avatar">S</div>
+          <div class="pdpv9-review-card__avatar">{% if request.locale.iso_code == 'en' %}J{% else %}S{% endif %}</div>
           <div>
-            <div class="pdpv9-review-card__name">Sophie</div>
-            <div class="pdpv9-review-card__role">Bordeaux</div>
+            <div class="pdpv9-review-card__name">{% if request.locale.iso_code == 'en' %}Jennifer M.{% else %}Sophie{% endif %}</div>
+            <div class="pdpv9-review-card__role">{% if request.locale.iso_code == 'en' %}38 · Miami, FL{% else %}Bordeaux{% endif %}</div>
           </div>
         </div>
       </article>
       <article class="pdpv9-review-card">
         <div class="pdpv9-review-card__stars">★★★★★</div>
-        <p class="pdpv9-review-card__text">« J'aime le fait que ce soit sans {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}. C'est devenu mon petit rituel de l'après-midi. »</p>
+        <p class="pdpv9-review-card__text">{% if request.locale.iso_code == 'en' %}"I love that it's caffeine-free. It's become my little afternoon ritual."{% else %}« J'aime le fait que ce soit sans caféine. C'est devenu mon petit rituel de l'après-midi. »{% endif %}</p>
         <div class="pdpv9-review-card__verified">✓ {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</div>
         <div class="pdpv9-review-card__author">
-          <div class="pdpv9-review-card__avatar">N</div>
+          <div class="pdpv9-review-card__avatar">{% if request.locale.iso_code == 'en' %}R{% else %}N{% endif %}</div>
           <div>
-            <div class="pdpv9-review-card__name">Nathalie</div>
-            <div class="pdpv9-review-card__role">Toulouse</div>
+            <div class="pdpv9-review-card__name">{% if request.locale.iso_code == 'en' %}Rachel B.{% else %}Nathalie{% endif %}</div>
+            <div class="pdpv9-review-card__role">{% if request.locale.iso_code == 'en' %}29 · Denver, CO{% else %}Toulouse{% endif %}</div>
           </div>
         </div>
       </article>
@@ -609,8 +622,8 @@
   {%- comment -%} ─── 6. COMPARATIF ─── {%- endcomment -%}
   <section class="pdpv9-compare" aria-labelledby="pdpv9-compare-title">
     <div class="pdpv9-compare__head">
-      <span class="pdpv9-eyebrow">Comparatif</span>
-      <h2 class="pdpv9-h2" id="pdpv9-compare-title">UBURN <span class="pdpv9-h2-accent">vs les solutions classiques.</span></h2>
+      <span class="pdpv9-eyebrow">{% if request.locale.iso_code == 'en' %}Comparison{% else %}Comparatif{% endif %}</span>
+      <h2 class="pdpv9-h2" id="pdpv9-compare-title">UBURN <span class="pdpv9-h2-accent">{% if request.locale.iso_code == 'en' %}vs traditional solutions.{% else %}vs les solutions classiques.{% endif %}</span></h2>
     </div>
     {%- comment -%} Desktop: full table; Mobile: stacked cards (CSS toggle via media query) {%- endcomment -%}
     <div class="pdpv9-compare__table-wrap" role="region" aria-label="Tableau comparatif">
@@ -619,18 +632,18 @@
           <tr>
             {% if request.locale.iso_code == 'en' %}<th scope="col">Criteria</th>{% else %}<th scope="col">Critère</th>{% endif %}
             <th scope="col" class="pdpv9-compare__hl">UBURN</th>
-            <th scope="col">Snack sucré</th>
-            <th scope="col">Café</th>
+            <th scope="col">{% if request.locale.iso_code == 'en' %}Sugary snack{% else %}Snack sucré{% endif %}</th>
+            <th scope="col">{% if request.locale.iso_code == 'en' %}Coffee{% else %}Café{% endif %}</th>
             <th scope="col">{% if request.locale.iso_code == 'en' %}Stimulant pills{% else %}Coupe-faim stimulant{% endif %}</th>
           </tr>
         </thead>
         <tbody>
-          <tr>{% if request.locale.iso_code == 'en' %}<th scope="row">Helps with cravings</th><td class="pdpv9-compare__hl">Yes</td><td>No</td><td>Barely</td><td>Variable</td>{% else %}<th scope="row">{% if request.locale.iso_code == 'en' %}Helps with{% else %}Aide à gérer{% endif %} les {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s</th><td class="pdpv9-compare__hl">Oui</td><td>Non</td><td>Peu</td><td>Variable</td>{% endif %}</tr>
-          <tr><th scope="row">Sans {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}</th><td class="pdpv9-compare__hl">Oui</td><td>Oui</td><td>Non</td><td>Souvent non</td></tr>
-          <tr><th scope="row">30 kcal</th><td class="pdpv9-compare__hl">Oui</td><td>Non</td><td>Oui</td><td>Variable</td></tr>
-          <tr><th scope="row">Goût gourmand</th><td class="pdpv9-compare__hl">Oui</td><td>Oui</td><td>Variable</td><td>Rare</td></tr>
-          <tr><th scope="row">Routine simple</th><td class="pdpv9-compare__hl">Oui</td><td>Non</td><td>Oui</td><td>Variable</td></tr>
-          <tr><th scope="row">{% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</th><td class="pdpv9-compare__hl">Oui</td><td>Oui</td><td>Oui</td><td>Variable</td></tr>
+          <tr>{% if request.locale.iso_code == 'en' %}<th scope="row">Helps with cravings</th><td class="pdpv9-compare__hl">Yes</td><td>No</td><td>Barely</td><td>Variable</td>{% else %}<th scope="row">Aide à gérer les fringales</th><td class="pdpv9-compare__hl">Oui</td><td>Non</td><td>Peu</td><td>Variable</td>{% endif %}</tr>
+          <tr><th scope="row">{% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}Sans caféine{% endif %}</th><td class="pdpv9-compare__hl">{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}No{% else %}Non{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Often no{% else %}Souvent non{% endif %}</td></tr>
+          <tr><th scope="row">30 kcal</th><td class="pdpv9-compare__hl">{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}No{% else %}Non{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Variable{% else %}Variable{% endif %}</td></tr>
+          <tr><th scope="row">{% if request.locale.iso_code == 'en' %}Indulgent taste{% else %}Goût gourmand{% endif %}</th><td class="pdpv9-compare__hl">{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Variable{% else %}Variable{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Rarely{% else %}Rare{% endif %}</td></tr>
+          <tr><th scope="row">{% if request.locale.iso_code == 'en' %}Simple routine{% else %}Routine simple{% endif %}</th><td class="pdpv9-compare__hl">{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}No{% else %}Non{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Variable{% else %}Variable{% endif %}</td></tr>
+          <tr><th scope="row">{% if request.locale.iso_code == 'en' %}No subscription trap{% else %}Sans abonnement{% endif %}</th><td class="pdpv9-compare__hl">{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Variable{% else %}Variable{% endif %}</td></tr>
         </tbody>
       </table>
     </div>
@@ -640,25 +653,25 @@
   <section class="pdpv9-formula" aria-labelledby="pdpv9-formula-title">
     <div class="pdpv9-formula__inner">
       <div class="pdpv9-formula__copy">
-        <span class="pdpv9-eyebrow">La formule</span>
+        <span class="pdpv9-eyebrow">{% if request.locale.iso_code == 'en' %}The formula{% else %}La formule{% endif %}</span>
         <h2 class="pdpv9-h2" id="pdpv9-formula-title">{% if request.locale.iso_code == 'en' %}A simple, indulgent formula <span class="pdpv9-h2-accent">designed for satiety.*</span>{% else %}Une formule simple, gourmande <span class="pdpv9-h2-accent">et pensée pour la satiété.</span>{% endif %}</h2>
         <p class="pdpv9-lead">{% if request.locale.iso_code == 'en' %}Purple ube. Konjac. Vanilla-hazelnut notes. A simple, indulgent formula.{% else %}Ube violet. Konjac. Notes vanille-noisette. Une formule simple et gourmande.{% endif %}</p>
 
         <div class="pdpv9-formula__pillars">
           <div class="pdpv9-formula-pill">
-            <div class="pdpv9-formula-pill__name">Ube violet</div>
-            <div class="pdpv9-formula-pill__role">Couleur · plaisir · antioxydants naturels</div>
+            <div class="pdpv9-formula-pill__name">{% if request.locale.iso_code == 'en' %}Purple ube{% else %}Ube violet{% endif %}</div>
+            <div class="pdpv9-formula-pill__role">{% if request.locale.iso_code == 'en' %}Color · pleasure · natural antioxidants{% else %}Couleur · plaisir · antioxydants naturels{% endif %}</div>
           </div>
           <div class="pdpv9-formula-pill">
-            <div class="pdpv9-formula-pill__name">Konjac (glucomannane)</div>
+            <div class="pdpv9-formula-pill__name">{% if request.locale.iso_code == 'en' %}Konjac (glucomannan){% else %}Konjac (glucomannane){% endif %}</div>
             {% if request.locale.iso_code == 'en' %}<div class="pdpv9-formula-pill__role">3g per scoop · natural gel · helps with cravings*</div>{% else %}<div class="pdpv9-formula-pill__role">3g par dose · gel naturel · {% if request.locale.iso_code == 'en' %}helps with{% else %}aide à mieux gérer{% endif %} les {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s</div>{% endif %}
           </div>
           <div class="pdpv9-formula-pill">
-            <div class="pdpv9-formula-pill__name">L-Carnitine + MCT coco</div>
+            <div class="pdpv9-formula-pill__name">{% if request.locale.iso_code == 'en' %}L-Carnitine + coconut MCT{% else %}L-Carnitine + MCT coco{% endif %}</div>
             <div class="pdpv9-formula-pill__role">{% if request.locale.iso_code == 'en' %}Helps with cravings as part of a balanced diet*{% else %}{% if request.locale.iso_code == 'en' %}Helps with{% else %}Aide à mieux gérer{% endif %} les {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s dans le cadre d'une {% if request.locale.iso_code == 'en' %}balanced diet{% else %}alimentation équilibrée{% endif %}{% endif %}</div>
           </div>
           <div class="pdpv9-formula-pill">
-            <div class="pdpv9-formula-pill__name">Vanille &amp; noisette</div>
+            <div class="pdpv9-formula-pill__name">{% if request.locale.iso_code == 'en' %}Vanilla &amp; hazelnut{% else %}Vanille &amp; noisette{% endif %}</div>
             <div class="pdpv9-formula-pill__role">{% if request.locale.iso_code == 'en' %}Natural notes · smooth texture · ritual you enjoy{% else %}Notes naturelles · texture douce · plaisir du rituel{% endif %}</div>
           </div>
         </div>
@@ -691,34 +704,34 @@
   <section class="pdpv9-offer" aria-labelledby="pdpv9-offer-title">
     <div class="pdpv9-offer__inner">
       <div class="pdpv9-offer__head">
-        <span class="pdpv9-eyebrow">Inclus avec ta cure</span>
-        <h2 class="pdpv9-h2" id="pdpv9-offer-title">Aujourd'hui, ta cure inclut <span class="pdpv9-h2-accent">184€ de bonus offerts</span></h2>
-        <p class="pdpv9-lead">Une cure. Un accompagnement complet. Tout inclus.</p>
+        <span class="pdpv9-eyebrow">{% if request.locale.iso_code == 'en' %}Included with your routine{% else %}Inclus avec ta cure{% endif %}</span>
+        <h2 class="pdpv9-h2" id="pdpv9-offer-title">{% if request.locale.iso_code == 'en' %}Today, your routine includes <span class="pdpv9-h2-accent">$200 in free bonuses</span>{% else %}Aujourd'hui, ta cure inclut <span class="pdpv9-h2-accent">184€ de bonus offerts</span>{% endif %}</h2>
+        <p class="pdpv9-lead">{% if request.locale.iso_code == 'en' %}One pack. Full support. All included.{% else %}Une cure. Un accompagnement complet. Tout inclus.{% endif %}</p>
       </div>
       {%- comment -%} IMAGE SLOT (à ajouter plus tard) : bonus pack visual {%- endcomment -%}
       <div class="pdpv9-offer__grid">
         <article class="pdpv9-offer-card">
-          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>47€</s></span> <strong>Offert</strong></div>
-          <h3 class="pdpv9-offer-card__title">E-book 30 jours</h3>
-          <p class="pdpv9-offer-card__copy">Recettes, conseils, plan jour par jour.</p>
+          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>{% if request.locale.iso_code == 'en' %}$50{% else %}47€{% endif %}</s></span> <strong>{% if request.locale.iso_code == 'en' %}Free{% else %}Offert{% endif %}</strong></div>
+          <h3 class="pdpv9-offer-card__title">{% if request.locale.iso_code == 'en' %}30-day e-book{% else %}E-book 30 jours{% endif %}</h3>
+          <p class="pdpv9-offer-card__copy">{% if request.locale.iso_code == 'en' %}Recipes, tips, day-by-day plan.{% else %}Recettes, conseils, plan jour par jour.{% endif %}</p>
         </article>
         <article class="pdpv9-offer-card">
-          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>47€</s></span> <strong>Offert</strong></div>
-          <h3 class="pdpv9-offer-card__title">Suivi WhatsApp 30j</h3>
+          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>{% if request.locale.iso_code == 'en' %}$50{% else %}47€{% endif %}</s></span> <strong>{% if request.locale.iso_code == 'en' %}Free{% else %}Offert{% endif %}</strong></div>
+          <h3 class="pdpv9-offer-card__title">{% if request.locale.iso_code == 'en' %}30-day WhatsApp support{% else %}Suivi WhatsApp 30j{% endif %}</h3>
           {% if request.locale.iso_code == 'en' %}<p class="pdpv9-offer-card__copy">Personalized tips, at your own pace.</p>{% else %}<p class="pdpv9-offer-card__copy">Conseils personnalisés, à ton rythme.</p>{% endif %}
         </article>
         <article class="pdpv9-offer-card">
-          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>40€</s></span> <strong>Offert</strong></div>
+          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>{% if request.locale.iso_code == 'en' %}$45{% else %}40€{% endif %}</s></span> <strong>{% if request.locale.iso_code == 'en' %}Free{% else %}Offert{% endif %}</strong></div>
           <h3 class="pdpv9-offer-card__title">UBURN Collective</h3>
           {% if request.locale.iso_code == 'en' %}<p class="pdpv9-offer-card__copy">Private group. Support, recipes, success stories.</p>{% else %}<p class="pdpv9-offer-card__copy">Le groupe privé. Soutien, recettes, succès.</p>{% endif %}
         </article>
         <article class="pdpv9-offer-card">
-          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>50€</s></span> <strong>Offert</strong></div>
+          <div class="pdpv9-offer-card__value"><span class="pdpv9-offer-card__price"><s>{% if request.locale.iso_code == 'en' %}$55{% else %}50€{% endif %}</s></span> <strong>{% if request.locale.iso_code == 'en' %}Free{% else %}Offert{% endif %}</strong></div>
           {% if request.locale.iso_code == 'en' %}<h3 class="pdpv9-offer-card__title">Live events</h3>{% else %}<h3 class="pdpv9-offer-card__title">Événements live</h3>{% endif %}
-          <p class="pdpv9-offer-card__copy">Sessions mensuelles + replays.</p>
+          <p class="pdpv9-offer-card__copy">{% if request.locale.iso_code == 'en' %}Monthly sessions + replays.{% else %}Sessions mensuelles + replays.{% endif %}</p>
         </article>
       </div>
-      <p class="pdpv9-offer__total">Total bonus : <strong>184€ offerts</strong> avec ta cure UBURN.</p>
+      <p class="pdpv9-offer__total">{% if request.locale.iso_code == 'en' %}Total bonus: <strong>$200 free</strong> with your UBurn routine.{% else %}Total bonus : <strong>184€ offerts</strong> avec ta cure UBURN.{% endif %}</p>
     </div>
   </section>
 
@@ -726,12 +739,12 @@
   <section class="pdpv9-cart" aria-labelledby="pdpv9-cart-title">
     <div class="pdpv9-cart__inner">
       <div class="pdpv9-cart__head">
-        <span class="pdpv9-eyebrow">Votre commande</span>
-        <h2 class="pdpv9-h2" id="pdpv9-cart-title">{% if request.locale.iso_code == 'en' %}With your{% else %}Avec votre{% endif %} cure, <span class="pdpv9-h2-accent">vous recevez :</span></h2>
+        <span class="pdpv9-eyebrow">{% if request.locale.iso_code == 'en' %}Your order{% else %}Votre commande{% endif %}</span>
+        <h2 class="pdpv9-h2" id="pdpv9-cart-title">{% if request.locale.iso_code == 'en' %}With your pack, <span class="pdpv9-h2-accent">you receive:</span>{% else %}Avec votre cure, <span class="pdpv9-h2-accent">vous recevez :</span>{% endif %}</h2>
       </div>
 
       <div class="pdpv9-cart__card">
-        <div class="pdpv9-cart__title">Votre panier</div>
+        <div class="pdpv9-cart__title">{% if request.locale.iso_code == 'en' %}Your cart{% else %}Votre panier{% endif %}</div>
 
         {%- comment -%} Main product line — uses dynamic variant from current_variant {%- endcomment -%}
         <div class="pdpv9-cart__line pdpv9-cart__line--product">
@@ -741,12 +754,12 @@
             {%- endif -%}
           </div>
           <div class="pdpv9-cart__product-info">
-            <div class="pdpv9-cart__product-name">{{ product.title | default: 'UBurn — Poudre Ubé' }}</div>
+            <div class="pdpv9-cart__product-name">{{ product.title | default: 'UBurn' }}</div>
             <div class="pdpv9-cart__product-meta" id="pdpv9-cart-meta">
               {%- if current_variant.id == v_decouverte.id -%}
-                Saveur noisette-vanille · Cure 30 jours · 1 dose/jour
+                {% if request.locale.iso_code == 'en' %}Hazelnut-vanilla flavor · 30-day pack · 1 scoop/day{% else %}Saveur noisette-vanille · Cure 30 jours · 1 dose/jour{% endif %}
               {%- else -%}
-                Saveur noisette-vanille · Cure 30 jours · 3 doses/jour
+                {% if request.locale.iso_code == 'en' %}Hazelnut-vanilla flavor · 30-day pack · 3 scoops/day{% else %}Saveur noisette-vanille · Cure 30 jours · 3 doses/jour{% endif %}
               {%- endif -%}
             </div>
           </div>
@@ -757,40 +770,40 @@
         <div class="pdpv9-cart__line">
           <div class="pdpv9-cart__bonus-icon" aria-hidden="true">E</div>
           <div class="pdpv9-cart__bonus-info">
-            <div class="pdpv9-cart__bonus-name">E-book « 30j pour reprendre le contrôle »</div>
-            <div class="pdpv9-cart__bonus-tag">Offert</div>
+            <div class="pdpv9-cart__bonus-name">{% if request.locale.iso_code == 'en' %}E-book "30 days to take back control"{% else %}E-book « 30j pour reprendre le contrôle »{% endif %}</div>
+            <div class="pdpv9-cart__bonus-tag">{% if request.locale.iso_code == 'en' %}Free{% else %}Offert{% endif %}</div>
           </div>
-          <div class="pdpv9-cart__bonus-price"><s>47€</s> <strong>0€</strong></div>
+          <div class="pdpv9-cart__bonus-price"><s>{% if request.locale.iso_code == 'en' %}$50{% else %}47€{% endif %}</s> <strong>{% if request.locale.iso_code == 'en' %}$0{% else %}0€{% endif %}</strong></div>
         </div>
         <div class="pdpv9-cart__line">
           <div class="pdpv9-cart__bonus-icon" aria-hidden="true">G</div>
           <div class="pdpv9-cart__bonus-info">
-            <div class="pdpv9-cart__bonus-name">Groupe privé UBurn Collective</div>
-            <div class="pdpv9-cart__bonus-tag">Offert</div>
+            <div class="pdpv9-cart__bonus-name">{% if request.locale.iso_code == 'en' %}Private UBurn Collective group{% else %}Groupe privé UBurn Collective{% endif %}</div>
+            <div class="pdpv9-cart__bonus-tag">{% if request.locale.iso_code == 'en' %}Free{% else %}Offert{% endif %}</div>
           </div>
-          <div class="pdpv9-cart__bonus-price"><s>40€</s> <strong>0€</strong></div>
+          <div class="pdpv9-cart__bonus-price"><s>{% if request.locale.iso_code == 'en' %}$45{% else %}40€{% endif %}</s> <strong>{% if request.locale.iso_code == 'en' %}$0{% else %}0€{% endif %}</strong></div>
         </div>
         <div class="pdpv9-cart__line">
-          <div class="pdpv9-cart__bonus-icon" aria-hidden="true">É</div>
+          <div class="pdpv9-cart__bonus-icon" aria-hidden="true">{% if request.locale.iso_code == 'en' %}E{% else %}É{% endif %}</div>
           <div class="pdpv9-cart__bonus-info">
             {% if request.locale.iso_code == 'en' %}<div class="pdpv9-cart__bonus-name">UBurn online events</div>{% else %}<div class="pdpv9-cart__bonus-name">Événements UBurn en ligne</div>{% endif %}
-            <div class="pdpv9-cart__bonus-tag">Offert</div>
+            <div class="pdpv9-cart__bonus-tag">{% if request.locale.iso_code == 'en' %}Free{% else %}Offert{% endif %}</div>
           </div>
-          <div class="pdpv9-cart__bonus-price"><s>50€</s> <strong>0€</strong></div>
+          <div class="pdpv9-cart__bonus-price"><s>{% if request.locale.iso_code == 'en' %}$55{% else %}50€{% endif %}</s> <strong>{% if request.locale.iso_code == 'en' %}$0{% else %}0€{% endif %}</strong></div>
         </div>
         <div class="pdpv9-cart__line">
           <div class="pdpv9-cart__bonus-icon" aria-hidden="true">W</div>
           <div class="pdpv9-cart__bonus-info">
-            <div class="pdpv9-cart__bonus-name">Suivi nutrition WhatsApp 30j</div>
-            <div class="pdpv9-cart__bonus-tag">Offert</div>
+            <div class="pdpv9-cart__bonus-name">{% if request.locale.iso_code == 'en' %}30-day WhatsApp nutrition support{% else %}Suivi nutrition WhatsApp 30j{% endif %}</div>
+            <div class="pdpv9-cart__bonus-tag">{% if request.locale.iso_code == 'en' %}Free{% else %}Offert{% endif %}</div>
           </div>
-          <div class="pdpv9-cart__bonus-price"><s>47€</s> <strong>0€</strong></div>
+          <div class="pdpv9-cart__bonus-price"><s>{% if request.locale.iso_code == 'en' %}$50{% else %}47€{% endif %}</s> <strong>{% if request.locale.iso_code == 'en' %}$0{% else %}0€{% endif %}</strong></div>
         </div>
 
         {%- comment -%} Savings summary {%- endcomment -%}
         <div class="pdpv9-cart__savings">
           {% if request.locale.iso_code == 'en' %}<span>Total savings</span>{% else %}<span>Économies totales</span>{% endif %}
-          <span class="pdpv9-cart__savings-amount">−184€</span>
+          <span class="pdpv9-cart__savings-amount">{% if request.locale.iso_code == 'en' %}−$200{% else %}−184€{% endif %}</span>
         </div>
 
         {%- comment -%} Total + per-day {%- endcomment -%}
@@ -800,16 +813,16 @@
         </div>
         <div class="pdpv9-cart__per-day" id="pdpv9-cart-per-day">
           {%- if current_variant.id == v_decouverte.id -%}
-            soit 1,15€/jour sur 30 jours
+            {% if request.locale.iso_code == 'en' %}about $1.15/day for 30 days{% else %}soit 1,15€/jour sur 30 jours{% endif %}
           {%- else -%}
-            soit 1,82€/jour sur 30 jours
+            {% if request.locale.iso_code == 'en' %}about $1.82/day for 30 days{% else %}soit 1,82€/jour sur 30 jours{% endif %}
           {%- endif -%}
         </div>
 
         {%- comment -%} Trust + CTA {%- endcomment -%}
         <div class="pdpv9-cart__rating">
           <span class="pdpv9-stars" aria-hidden="true">●</span>
-          <span class="pdpv9-cart__rating-text">Lancement France · {% if request.locale.iso_code == 'en' %}Ships from France{% else %}Expédié depuis la France{% endif %}</span>
+          <span class="pdpv9-cart__rating-text">{% if request.locale.iso_code == 'en' %}Now in the U.S. · Ships from France{% else %}Lancement France · Expédié depuis la France{% endif %}</span>
         </div>
         <button type="submit" form="pdpv9-pdp-form" name="add" class="pdpv9-cart__cta">
           {% if request.locale.iso_code == 'en' %}Continue to checkout →{% else %}Continuer vers le paiement →{% endif %}
@@ -829,14 +842,14 @@
   <section class="pdpv9-safety" aria-labelledby="pdpv9-safety-title">
     <div class="pdpv9-safety__inner">
       <details class="pdpv9-acc pdpv9-safety__acc">
-        <summary class="pdpv9-acc__q">À savoir avant de commencer</summary>
+        <summary class="pdpv9-acc__q">{% if request.locale.iso_code == 'en' %}Before you start{% else %}À savoir avant de commencer{% endif %}</summary>
         <div class="pdpv9-acc__a">
           <ul>
             {% if request.locale.iso_code == 'en' %}<li>Dietary supplement, not a medication.</li>{% else %}<li>Complément alimentaire, pas un médicament.</li>{% endif %}
-            <li>{% if request.locale.iso_code == 'en' %}Not a substitute for a balanced diet.{% else %}Ne remplace pas une {% if request.locale.iso_code == 'en' %}balanced diet{% else %}alimentation équilibrée{% endif %}.{% endif %}</li>
-            <li>À boire avec suffisamment d'eau.</li>
+            <li>{% if request.locale.iso_code == 'en' %}Not a substitute for a balanced diet.{% else %}Ne remplace pas une alimentation équilibrée.{% endif %}</li>
+            <li>{% if request.locale.iso_code == 'en' %}Drink with adequate water.{% else %}À boire avec suffisamment d'eau.{% endif %}</li>
             <li>{% if request.locale.iso_code == 'en' %}Not recommended during pregnancy or breastfeeding.{% else %}Déconseillé pendant la grossesse et l'allaitement.{% endif %}</li>
-            <li>Demande l'avis d'un professionnel en cas de traitement médical.</li>
+            <li>{% if request.locale.iso_code == 'en' %}Consult a healthcare professional if you're under medical treatment.{% else %}Demande l'avis d'un professionnel en cas de traitement médical.{% endif %}</li>
           </ul>
         </div>
       </details>
@@ -853,47 +866,47 @@
     <div class="pdpv9-faq__inner">
       <div class="pdpv9-faq__head">
         {% if request.locale.iso_code == 'en' %}<span class="pdpv9-eyebrow">Frequently asked questions</span>{% else %}<span class="pdpv9-eyebrow">Questions fréquentes</span>{% endif %}
-        <h2 class="pdpv9-h2" id="pdpv9-faq-title">Tout ce que tu veux <span class="pdpv9-h2-accent">savoir avant de commander.</span></h2>
+        <h2 class="pdpv9-h2" id="pdpv9-faq-title">{% if request.locale.iso_code == 'en' %}Everything you want to know <span class="pdpv9-h2-accent">before ordering.</span>{% else %}Tout ce que tu veux <span class="pdpv9-h2-accent">savoir avant de commander.</span>{% endif %}</h2>
       </div>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Quel goût a UBurn ?</summary>
+        <summary class="pdpv9-acc__q">{% if request.locale.iso_code == 'en' %}What does UBurn taste like?{% else %}Quel goût a UBurn ?{% endif %}</summary>
         <div class="pdpv9-acc__a"><p>{% if request.locale.iso_code == 'en' %}A smooth vanilla-hazelnut taste, naturally purple, with no chemical aftertaste. Designed to make you come back for more.{% else %}Un goût doux vanille-noisette, naturellement violet, sans arrière-goût chimique. Pensé pour donner envie d'y revenir.{% endif %}</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Comment l'utiliser ?</summary>
-        <div class="pdpv9-acc__a"><p>Mélange {% if request.locale.iso_code == 'en' %}one scoop{% else %}une dose{% endif %} dans 200 à 300 ml d'eau, de lait ou de boisson végétale. Remue, attends quelques secondes que la texture se forme, et bois. Prêt en moins d'une minute.</p></div>
+        <summary class="pdpv9-acc__q">{% if request.locale.iso_code == 'en' %}How do I use it?{% else %}Comment l'utiliser ?{% endif %}</summary>
+        <div class="pdpv9-acc__a"><p>{% if request.locale.iso_code == 'en' %}Mix one scoop in 8-10 oz of water, milk, or plant-based milk. Stir, wait a few seconds for the texture to form, and drink. Ready in under a minute.{% else %}Mélange une dose dans 200 à 300 ml d'eau, de lait ou de boisson végétale. Remue, attends quelques secondes que la texture se forme, et bois. Prêt en moins d'une minute.{% endif %}</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Eau ou lait, qu'est-ce qui est mieux ?</summary>
+        <summary class="pdpv9-acc__q">{% if request.locale.iso_code == 'en' %}Water or milk, which is better?{% else %}Eau ou lait, qu'est-ce qui est mieux ?{% endif %}</summary>
         <div class="pdpv9-acc__a"><p>{% if request.locale.iso_code == 'en' %}Water for a light, refreshing version. Milk, almond milk, or oat milk for a smoother, creamier texture. Both work — it's a matter of taste.{% else %}Eau pour une version légère et désaltérante. Lait, lait d'amande ou lait d'avoine pour une texture plus douce et crémeuse. Les deux fonctionnent — c'est une question de goût.{% endif %}</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Quand prendre UBurn ?</summary>
+        <summary class="pdpv9-acc__q">{% if request.locale.iso_code == 'en' %}When should I take UBurn?{% else %}Quand prendre UBurn ?{% endif %}</summary>
         <div class="pdpv9-acc__a"><p>{% if request.locale.iso_code == 'en' %}Take it before a meal or when cravings arise, for example around 4PM. For glucomannan, the recommended dosage is 3 doses of 1g per day before meals, with adequate water.{% else %}Tu peux le prendre avant un repas ou au moment où les {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s arrivent, par exemple vers 16h. Pour le glucomannane, le bénéfice réglementaire est associé à 3 prises de 1 g par jour avant les repas, avec suffisamment d'eau.{% endif %}</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Est-ce qu'UBurn contient de la {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %} ?</summary>
-        <div class="pdpv9-acc__a"><p>Non, UBurn est {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %}. {% if request.locale.iso_code == 'en' %}Drink it{% else %}Tu peux donc le prendre{% endif %} {% if request.locale.iso_code == 'en' %}in the afternoon or evening{% else %}l'après-midi ou le soir{% endif %} {% if request.locale.iso_code == 'en' %}without disrupting sleep{% else %}sans risquer de perturber ton sommeil{% endif %}.</p></div>
+        <summary class="pdpv9-acc__q">{% if request.locale.iso_code == 'en' %}Does UBurn contain caffeine?{% else %}Est-ce qu'UBurn contient de la caféine ?{% endif %}</summary>
+        <div class="pdpv9-acc__a"><p>{% if request.locale.iso_code == 'en' %}No, UBurn is caffeine-free. Drink it in the afternoon or evening without disrupting sleep.{% else %}Non, UBurn est 0% caféine. Tu peux donc le prendre l'après-midi ou le soir sans risquer de perturber ton sommeil.{% endif %}</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Combien de temps dure une cure ?</summary>
-        <div class="pdpv9-acc__a"><p>{% if request.locale.iso_code == 'en' %}Starter 90g{% else %}{% if request.locale.iso_code == 'en' %}Starter{% else %}Découverte{% endif %} 90g{% endif %} : environ 30 jours à raison de 1 dose/jour. {% if request.locale.iso_code == 'en' %}Maximum Pack 270g{% else %}{% if request.locale.iso_code == 'en' %}Maximum Pack{% else %}Résultats Maximum{% endif %} 270g{% endif %} : environ 30 jours à raison de 3 doses/jour. Tu choisis le rythme qui te convient.</p></div>
+        <summary class="pdpv9-acc__q">{% if request.locale.iso_code == 'en' %}How long does a routine last?{% else %}Combien de temps dure une cure ?{% endif %}</summary>
+        <div class="pdpv9-acc__a"><p>{% if request.locale.iso_code == 'en' %}Starter 90g: about 30 days at 1 scoop/day. Maximum Pack 270g: about 30 days at 3 scoops/day. You choose the pace that suits you.{% else %}Découverte 90g : environ 30 jours à raison de 1 dose/jour. Résultats Maximum 270g : environ 30 jours à raison de 3 doses/jour. Tu choisis le rythme qui te convient.{% endif %}</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Livraison en combien de temps ?</summary>
-        <div class="pdpv9-acc__a"><p>{% if request.locale.iso_code == 'en' %}Ships from France{% else %}Expédié depuis la France{% endif %}. {% if request.locale.iso_code == 'en' %}Free U.S. shipping{% else %}Livraison gratuite en France{% endif %}, généralement reçue sous 2 à 4 jours ouvrés après expédition.</p></div>
+        <summary class="pdpv9-acc__q">{% if request.locale.iso_code == 'en' %}How long is delivery?{% else %}Livraison en combien de temps ?{% endif %}</summary>
+        <div class="pdpv9-acc__a"><p>{% if request.locale.iso_code == 'en' %}Ships from France. Free U.S. shipping, typically delivered in 2-4 business days after shipping.{% else %}Expédié depuis la France. Livraison gratuite en France, généralement reçue sous 2 à 4 jours ouvrés après expédition.{% endif %}</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Puis-je commencer avec {% if request.locale.iso_code == 'en' %}Starter{% else %}Découverte{% endif %} ?</summary>
-        <div class="pdpv9-acc__a"><p>Oui — c'est même le format conseillé pour tester la routine UBurn avant de passer sur {% if request.locale.iso_code == 'en' %}Maximum Pack{% else %}Résultats Maximum{% endif %} si tu veux le meilleur prix par dose.</p></div>
+        <summary class="pdpv9-acc__q">{% if request.locale.iso_code == 'en' %}Can I start with Starter?{% else %}Puis-je commencer avec Découverte ?{% endif %}</summary>
+        <div class="pdpv9-acc__a"><p>{% if request.locale.iso_code == 'en' %}Yes — it's actually the recommended format to try the UBurn routine before moving on to Maximum Pack if you want the best price per scoop.{% else %}Oui — c'est même le format conseillé pour tester la routine UBurn avant de passer sur Résultats Maximum si tu veux le meilleur prix par dose.{% endif %}</p></div>
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Est-ce compatible avec un régime ?</summary>
-        {% if request.locale.iso_code == 'en' %}<div class="pdpv9-acc__a"><p>Yes, UBurn can fit into a balanced diet and a healthy lifestyle. It's not a miracle solution — just a routine that helps with cravings.*</p></div>{% else %}<div class="pdpv9-acc__a"><p>Oui, UBurn peut s'intégrer dans une {% if request.locale.iso_code == 'en' %}balanced diet{% else %}alimentation équilibrée{% endif %} et un {% if request.locale.iso_code == 'en' %}healthy lifestyle{% else %}régime hypocalorique{% endif %}. Ce n'est pas une solution miracle, mais une routine pour aider à mieux gérer les {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s.</p></div>{% endif %}
+        <summary class="pdpv9-acc__q">{% if request.locale.iso_code == 'en' %}Is it compatible with a diet?{% else %}Est-ce compatible avec un régime ?{% endif %}</summary>
+        {% if request.locale.iso_code == 'en' %}<div class="pdpv9-acc__a"><p>Yes, UBurn can fit into a balanced diet and a healthy lifestyle. It's not a miracle solution — just a routine that helps with cravings.*</p></div>{% else %}<div class="pdpv9-acc__a"><p>Oui, UBurn peut s'intégrer dans une alimentation équilibrée et un régime hypocalorique. Ce n'est pas une solution miracle, mais une routine pour aider à mieux gérer les fringales.</p></div>{% endif %}
       </details>
       <details class="pdpv9-acc">
-        <summary class="pdpv9-acc__q">Est-ce adapté pendant la grossesse ou l'allaitement ?</summary>
-        <div class="pdpv9-acc__a"><p>Non, par précaution, UBurn est déconseillé pendant la grossesse et l'allaitement.</p></div>
+        <summary class="pdpv9-acc__q">{% if request.locale.iso_code == 'en' %}Is it safe during pregnancy or breastfeeding?{% else %}Est-ce adapté pendant la grossesse ou l'allaitement ?{% endif %}</summary>
+        <div class="pdpv9-acc__a"><p>{% if request.locale.iso_code == 'en' %}As a precaution, UBurn is not recommended during pregnancy or breastfeeding.{% else %}Non, par précaution, UBurn est déconseillé pendant la grossesse et l'allaitement.{% endif %}</p></div>
       </details>
     </div>
   </section>
@@ -902,10 +915,10 @@
   <section class="pdpv9-final" aria-labelledby="pdpv9-final-title">
     <div class="pdpv9-final__inner">
       <span class="pdpv9-eyebrow">{% if request.locale.iso_code == 'en' %}Ready?{% else %}Prête ?{% endif %}</span>
-      <h2 class="pdpv9-h2" id="pdpv9-final-title">Prête à créer <span class="pdpv9-h2-accent">ton rituel UBURN ?</span></h2>
-      <p class="pdpv9-lead">Boisson violette. Sans {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}. Routine simple.</p>
+      <h2 class="pdpv9-h2" id="pdpv9-final-title">{% if request.locale.iso_code == 'en' %}Ready to build <span class="pdpv9-h2-accent">your UBurn ritual?</span>{% else %}Prête à créer <span class="pdpv9-h2-accent">ton rituel UBURN ?</span>{% endif %}</h2>
+      <p class="pdpv9-lead">{% if request.locale.iso_code == 'en' %}Purple drink. Caffeine-free. Simple routine.{% else %}Boisson violette. Sans caféine. Routine simple.{% endif %}</p>
       <a href="#pdpv9-pdp" class="pdpv9-cta-primary pdpv9-final__cta">{% if request.locale.iso_code == 'en' %}Start my 30-day routine{% else %}Commencer ma cure 30 jours{% endif %}</a>
-      <p class="pdpv9-final__sub">Livraison offerte · {% if request.locale.iso_code == 'en' %}Secure checkout{% else %}Paiement sécurisé{% endif %} · {% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</p>
+      <p class="pdpv9-final__sub">{% if request.locale.iso_code == 'en' %}Free shipping · Secure checkout · No subscription trap{% else %}Livraison offerte · Paiement sécurisé · Sans abonnement{% endif %}</p>
     </div>
   </section>
 
@@ -922,11 +935,11 @@
   {%- endcomment -%}
   <div class="pdpv9-sticky-cta">
     {%- if current_variant.available -%}
-      <button type="submit" form="pdpv9-pdp-form" name="add" class="pdpv9-sticky-cta__btn" aria-label="Ajouter au panier">
-        Ajouter au panier — <span id="pdpv9-sticky-price">{{ current_variant.price | money }}</span>
+      <button type="submit" form="pdpv9-pdp-form" name="add" class="pdpv9-sticky-cta__btn" aria-label="{% if request.locale.iso_code == 'en' %}Add to cart{% else %}Ajouter au panier{% endif %}">
+        {% if request.locale.iso_code == 'en' %}Add to cart{% else %}Ajouter au panier{% endif %} — <span id="pdpv9-sticky-price">{{ current_variant.price | money }}</span>
       </button>
     {%- else -%}
-      <a href="#pdpv9-pdp" class="pdpv9-sticky-cta__btn pdpv9-sticky-cta__btn--disabled" aria-disabled="true">En rupture</a>
+      <a href="#pdpv9-pdp" class="pdpv9-sticky-cta__btn pdpv9-sticky-cta__btn--disabled" aria-disabled="true">{% if request.locale.iso_code == 'en' %}Sold out{% else %}En rupture{% endif %}</a>
     {%- endif -%}
   </div>
 
@@ -941,6 +954,8 @@
   (function(){
     var form = document.getElementById('pdpv9-pdp-form');
     if (!form) return;
+
+    var __isEn = document.documentElement.lang === 'en' || location.pathname.indexOf('/en/') === 0;
 
     // 1. ALL price/text refs — dynamic on variant change
     var mainPrice   = document.getElementById('pdpv9-price');         // main hero price
@@ -969,30 +984,30 @@
       var priceMoney = checked.getAttribute('data-vprice-money'); // pre-formatted by Liquid
       var idx        = checked.getAttribute('data-vidx');
       var priceStr   = priceMoney || formatPrice(price);
-      var doses      = (idx === '2') ? '3 doses/jour' : '1 dose/jour';
+      var doses      = (idx === '2') ? (__isEn ? '3 scoops/day' : '3 doses/jour') : (__isEn ? '1 scoop/day' : '1 dose/jour');
 
       // 1. Main hero price
       if (mainPrice && priceStr) mainPrice.textContent = priceStr;
 
       // 2. Sub-price meta line
       if (per && unit && days) {
-        per.textContent = unit + ' · Cure ' + days + ' jours · {% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}';
+        per.textContent = unit + ' · ' + (__isEn ? ('Pack ' + days + ' days') : ('Cure ' + days + ' jours')) + ' · ' + (__isEn ? 'No subscription trap' : 'Sans abonnement');
       }
 
       // 3. ATC button price ("— €X,XX")
       if (atcPrice && priceStr) atcPrice.textContent = '— ' + priceStr;
 
       // 4. ATC button text (uniform "30 jours")
-      if (atcText && days) atcText.textContent = 'Commencer ma cure ' + days + ' jours';
+      if (atcText && days) atcText.textContent = (__isEn ? ('Start my ' + days + '-day routine') : ('Commencer ma cure ' + days + ' jours'));
 
       // 5. Cart-recap product meta + price + total
       if (cartMeta && days) {
-        cartMeta.textContent = 'Saveur noisette-vanille · Cure ' + days + ' jours · ' + doses;
+        cartMeta.textContent = (__isEn ? ('Hazelnut-vanilla flavor · Pack ' + days + ' days · ' + doses) : ('Saveur noisette-vanille · Cure ' + days + ' jours · ' + doses));
       }
       if (cartPrice && priceStr) cartPrice.textContent = priceStr;
       if (cartTotal && priceStr) cartTotal.textContent = priceStr;
       if (cartPerDay && unit && days) {
-        cartPerDay.textContent = 'soit ' + unit + ' sur ' + days + ' jours';
+        cartPerDay.textContent = (__isEn ? ('about ' + unit + ' for ' + days + ' days') : ('soit ' + unit + ' sur ' + days + ' jours'));
       }
 
       // 6. Sticky CTA mobile price (synced with selected variant)
