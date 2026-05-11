@@ -638,7 +638,7 @@
             <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-latte-prep.mp4' | asset_url }}" type="video/mp4"></video>
             <button class="pdpv9-stories__play" {% if request.locale.iso_code == 'en' %}aria-label="Play Ashley's video"{% else %}aria-label="Lecture vidéo Marie"{% endif %} type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
           </div>
-          <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Ashley K., 32{% else %}Marie, 42 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Phoenix, AZ{% else %}· Paris{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"My morning ritual. No more 4PM cravings."{% else %}"Ma routine matin. Plus de fringale 16h."{% endif %}</span></div>
+          <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Sarah J., 32{% else %}Marie, 42 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Brooklyn, NY{% else %}· Paris{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"My afternoon ritual. No more 4PM cravings."{% else %}"Ma routine matin. Plus de fringale 16h."{% endif %}</span></div>
         </article>
         <article class="pdpv9-stories__card" data-stories-card="2">
           <div class="pdpv9-stories__media">
@@ -737,10 +737,10 @@
         {% if request.locale.iso_code == 'en' %}<p class="pdpv9-review-card__text">"I tried so many things that made me feel weird or jittery. UBurn is the first that just feels like a calm afternoon ritual."</p>{% else %}<p class="pdpv9-review-card__text">« Je le prends à 16h, ça m'aide à éviter le grignotage avant le dîner. »</p>{% endif %}
         <div class="pdpv9-review-card__verified">✓ {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</div>
         <div class="pdpv9-review-card__author">
-          {% if request.locale.iso_code == 'en' %}<img class="pdpv9-review-card__avatar" src="{{ 'uburn-reviewer-ashley.jpg' | asset_url }}" alt="Ashley K. customer photo" loading="lazy" decoding="async" width="48" height="48" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">{% else %}<div class="pdpv9-review-card__avatar">M</div>{% endif %}
+          {% if request.locale.iso_code == 'en' %}<img class="pdpv9-review-card__avatar" src="{{ 'uburn-reviewer-ashley.jpg' | asset_url }}" alt="Sarah J. customer photo" loading="lazy" decoding="async" width="48" height="48" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">{% else %}<div class="pdpv9-review-card__avatar">M</div>{% endif %}
           <div>
-            <div class="pdpv9-review-card__name">{% if request.locale.iso_code == 'en' %}Ashley K.{% else %}Marion L.{% endif %}</div>
-            <div class="pdpv9-review-card__role">{% if request.locale.iso_code == 'en' %}32 · Phoenix, AZ{% else %}28 ans · Lyon{% endif %}</div>
+            <div class="pdpv9-review-card__name">{% if request.locale.iso_code == 'en' %}Sarah J.{% else %}Marion L.{% endif %}</div>
+            <div class="pdpv9-review-card__role">{% if request.locale.iso_code == 'en' %}32 · Brooklyn, NY{% else %}28 ans · Lyon{% endif %}</div>
           </div>
         </div>
       </article>
