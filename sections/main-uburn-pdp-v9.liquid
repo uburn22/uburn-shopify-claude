@@ -35,6 +35,7 @@
 {{ 'uburn-pdp-v9.css' | asset_url | stylesheet_tag }}
 
 <style>
+  /* refactor-e733587 2026-05-11 cache-bust marker */
   /* Force visibility minimal — sans debug couleurs */
   .shopify-section.uburn-pdp-v9-section {
     display: block !important;
@@ -420,16 +421,16 @@
             <fieldset class="pdpv9-pdp__purchase-mode" role="radiogroup">
               <legend class="pdpv9-pdp__purchase-mode-legend">Pick your option</legend>
 
-              <label class="pdpv9-pdp__mode pdpv9-pdp__mode--sub">
-                <span class="pdpv9-pdp__mode-badge">Save {{ _plan_discount_pct }}% · Most Popular</span>
-                <input type="radio" name="selling_plan" value="{{ _plan.id }}" class="pdpv9-pdp__mode-input" checked>
+              <label class="pdpv9-pdp__mode pdpv9-pdp__mode--sub" data-discount-pct="{{ _plan_discount_pct }}">
+                <span class="pdpv9-pdp__mode-badge">Save {{ _plan_discount_pct }}%</span>
+                <input type="radio" name="selling_plan" value="{{ _plan.id }}" class="pdpv9-pdp__mode-input pdpv9-pdp__mode-input--sub" checked>
                 <span class="pdpv9-pdp__mode-radio" aria-hidden="true"></span>
                 <span class="pdpv9-pdp__mode-body">
                   <span class="pdpv9-pdp__mode-row">
                     <span class="pdpv9-pdp__mode-title">Subscribe &amp; Save</span>
                     <span class="pdpv9-pdp__mode-price">
-                      <s class="pdpv9-pdp__mode-strike">{% render 'locale-price', price: current_variant.price %}</s>
-                      <span class="pdpv9-pdp__mode-final">{% render 'locale-price', price: _sub_price %}</span>
+                      <s class="pdpv9-pdp__mode-strike" id="pdpv9-sub-strike">{% render 'locale-price', price: current_variant.price %}</s>
+                      <span class="pdpv9-pdp__mode-final" id="pdpv9-sub-final">{% render 'locale-price', price: _sub_price %}</span>
                     </span>
                   </span>
                   <span class="pdpv9-pdp__mode-meta">Ships every 30 days · Cancel, skip or pause anytime</span>
@@ -442,13 +443,13 @@
               </label>
 
               <label class="pdpv9-pdp__mode pdpv9-pdp__mode--onetime">
-                <input type="radio" name="selling_plan" value="" class="pdpv9-pdp__mode-input">
+                <input type="radio" name="selling_plan" value="" class="pdpv9-pdp__mode-input pdpv9-pdp__mode-input--onetime">
                 <span class="pdpv9-pdp__mode-radio" aria-hidden="true"></span>
                 <span class="pdpv9-pdp__mode-body">
                   <span class="pdpv9-pdp__mode-row">
                     <span class="pdpv9-pdp__mode-title">One-time purchase</span>
                     <span class="pdpv9-pdp__mode-price">
-                      <span class="pdpv9-pdp__mode-final">{% render 'locale-price', price: current_variant.price %}</span>
+                      <span class="pdpv9-pdp__mode-final" id="pdpv9-onetime-final">{% render 'locale-price', price: current_variant.price %}</span>
                     </span>
                   </span>
                   <span class="pdpv9-pdp__mode-meta">No commitment</span>
@@ -1404,10 +1405,30 @@
     var cartPerDay  = document.getElementById('pdpv9-cart-per-day');  // cart per-day line
     var stickyPrice = document.getElementById('pdpv9-sticky-price');  // sticky CTA price
 
+    // Subscribe & Save UI refs (EN only)
+    var subStrike    = document.getElementById('pdpv9-sub-strike');    // crossed-out original (sub card)
+    var subFinal     = document.getElementById('pdpv9-sub-final');     // final sub price (sub card)
+    var onetimeFinal = document.getElementById('pdpv9-onetime-final'); // one-time price (one-time card)
+    var subLabel     = document.querySelector('.pdpv9-pdp__mode--sub');
+    var discountPct  = subLabel ? parseInt(subLabel.getAttribute('data-discount-pct') || '10', 10) : 10;
+
     function formatPrice(cents) {
       var n = parseInt(cents, 10);
       if (isNaN(n)) return '';
       return (n / 100).toFixed(2).replace('.', ',') + '€';
+    }
+
+    // EN locale = USD output via locale-price snippet (rate 1.08, rounded to nearest $).
+    // FR locale = native €X,XX
+    function formatPriceLocale(cents) {
+      var n = parseInt(cents, 10);
+      if (isNaN(n)) return '';
+      if (__isEn) {
+        // mirror locale-price.liquid: cents * 1.08, round to whole dollars
+        var usd = Math.round((n * 1.08) / 100);
+        return '$' + usd;
+      }
+      return formatPrice(n);
     }
 
     function updateOnVariant() {
@@ -1421,7 +1442,18 @@
       var priceStr   = priceMoney || formatPrice(price);
       var doses      = (idx === '2') ? (__isEn ? '3 scoops/day' : '3 doses/jour') : (__isEn ? '1 scoop/day' : '1 dose/jour');
 
-      // 1. Main hero price
+      // Compute sub price (one-time × (1 - discount/100))
+      var priceCents = parseInt(price, 10);
+      var subCents = isNaN(priceCents) ? 0 : Math.round(priceCents * (100 - discountPct) / 100);
+      var subStr = formatPriceLocale(subCents);
+
+      // Which purchase mode selected? (Sub default checked, else One-time)
+      var subRadio = form.querySelector('input[name="selling_plan"][value]:not([value=""]):checked');
+      var isSubMode = !!subRadio;
+      // Active price = sub price if Sub mode, else regular variant price
+      var activePriceStr = isSubMode ? subStr : priceStr;
+
+      // 1. Main hero price (always one-time variant price for clarity — "From $XX")
       if (mainPrice && priceStr) mainPrice.textContent = priceStr;
 
       // 2. Sub-price meta line
@@ -1429,31 +1461,42 @@
         per.textContent = unit + ' · ' + (__isEn ? ('Pack ' + days + ' days') : ('Cure ' + days + ' jours')) + ' · ' + (__isEn ? 'No subscription trap' : 'Sans abonnement');
       }
 
-      // 3. ATC button price ("— €X,XX")
-      if (atcPrice && priceStr) atcPrice.textContent = '— ' + priceStr;
+      // 3. ATC button price reflects mode + variant
+      if (atcPrice && activePriceStr) atcPrice.textContent = '— ' + activePriceStr;
 
-      // 4. ATC button text (uniform "30 jours")
-      if (atcText && days) atcText.textContent = (__isEn ? ('Start my ' + days + '-day routine') : ('Commencer ma cure ' + days + ' jours'));
+      // 4. ATC button text
+      if (atcText && days) atcText.textContent = (__isEn ? (isSubMode ? 'Start my subscription' : ('Start my ' + days + '-day routine')) : ('Commencer ma cure ' + days + ' jours'));
 
       // 5. Cart-recap product meta + price + total
       if (cartMeta && days) {
         cartMeta.textContent = (__isEn ? ('Hazelnut-vanilla flavor · Pack ' + days + ' days · ' + doses) : ('Saveur noisette-vanille · Cure ' + days + ' jours · ' + doses));
       }
-      if (cartPrice && priceStr) cartPrice.textContent = priceStr;
-      if (cartTotal && priceStr) cartTotal.textContent = priceStr;
+      if (cartPrice && activePriceStr) cartPrice.textContent = activePriceStr;
+      if (cartTotal && activePriceStr) cartTotal.textContent = activePriceStr;
       if (cartPerDay && unit && days) {
         cartPerDay.textContent = (__isEn ? ('about ' + unit + ' for ' + days + ' days') : ('soit ' + unit + ' sur ' + days + ' jours'));
       }
 
-      // 6. Sticky CTA mobile price (synced with selected variant)
-      if (stickyPrice && priceStr) stickyPrice.textContent = priceStr;
+      // 6. Sticky CTA price reflects mode + variant
+      if (stickyPrice && activePriceStr) stickyPrice.textContent = activePriceStr;
 
-      // 7. Hero price : remove "{% if request.locale.iso_code == 'en' %}From{% else %}À partir de{% endif %}" prefix on first explicit selection
+      // 7. Sub & Save card prices (EN only)
+      if (subStrike && priceStr)    subStrike.textContent = priceStr;
+      if (subFinal && subStr)       subFinal.textContent = subStr;
+      if (onetimeFinal && priceStr) onetimeFinal.textContent = priceStr;
+
+      // 8. Hero price prefix removal on first variant choice
       if (pricePrefix && pricePrefix.textContent) pricePrefix.textContent = '';
     }
     form.querySelectorAll('input[name="id"]').forEach(function(r){
       r.addEventListener('change', updateOnVariant);
     });
+    // Listen to purchase mode changes (Sub ↔ One-time) — refresh ATC + sticky + cart prices
+    form.querySelectorAll('input[name="selling_plan"]').forEach(function(r){
+      r.addEventListener('change', updateOnVariant);
+    });
+    // Initial run to sync everything to current variant + default mode
+    updateOnVariant();
 
     // 2. Sticky CTA — appears only after the entire purchase block has scrolled out
     // Observe the LAST element of the purchase panel (bonus stack) — sticky stays
