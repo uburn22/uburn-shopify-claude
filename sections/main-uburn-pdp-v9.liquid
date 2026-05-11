@@ -62,6 +62,191 @@
     opacity: 1 !important;
     transform: none !important;
   }
+
+  /* Purchase mode cards (Sub & Save / One-time) — US PDP */
+  .pdpv9-pdp__purchase-mode {
+    border: 0;
+    padding: 0;
+    margin: 16px 0 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pdpv9-pdp__purchase-mode-legend {
+    font: 600 13px/1.3 'DM Sans', system-ui, sans-serif;
+    color: #1a1a1a;
+    margin: 0 0 4px;
+    padding: 0;
+    letter-spacing: 0.2px;
+  }
+  .pdpv9-pdp__mode {
+    position: relative;
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 14px;
+    align-items: start;
+    padding: 16px 18px;
+    border: 1.5px solid #E0DCE5;
+    border-radius: 14px;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .pdpv9-pdp__mode:hover { border-color: #C9C0D6; }
+  .pdpv9-pdp__mode-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .pdpv9-pdp__mode-radio {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid #C9C0D6;
+    border-radius: 50%;
+    background: #fff;
+    position: relative;
+    margin-top: 2px;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .pdpv9-pdp__mode-input:checked ~ .pdpv9-pdp__mode-radio {
+    border-color: #2A1054;
+    background: #2A1054;
+    box-shadow: inset 0 0 0 4px #fff;
+  }
+  .pdpv9-pdp__mode-input:checked ~ * { color: inherit; }
+  .pdpv9-pdp__mode:has(.pdpv9-pdp__mode-input:checked) {
+    border-color: #2A1054;
+    background: linear-gradient(135deg, #F7F4FB 0%, #FBF9FC 100%);
+    box-shadow: 0 4px 14px rgba(42,16,84,0.08);
+  }
+  .pdpv9-pdp__mode-badge {
+    position: absolute;
+    top: -10px;
+    left: 14px;
+    background: #2A1054;
+    color: #fff;
+    font: 700 10px/1 'DM Sans', system-ui, sans-serif;
+    padding: 5px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .pdpv9-pdp__mode-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  .pdpv9-pdp__mode-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .pdpv9-pdp__mode-title {
+    font: 700 16px/1.3 'Montserrat', system-ui, sans-serif;
+    color: #1a1a1a;
+  }
+  .pdpv9-pdp__mode:has(.pdpv9-pdp__mode-input:checked) .pdpv9-pdp__mode-title {
+    color: #2A1054;
+  }
+  .pdpv9-pdp__mode-price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .pdpv9-pdp__mode-strike {
+    font: 500 13px/1 'DM Sans', system-ui, sans-serif;
+    color: #999;
+    text-decoration: line-through;
+  }
+  .pdpv9-pdp__mode-final {
+    font: 800 20px/1 'Montserrat', system-ui, sans-serif;
+    color: #1a1a1a;
+  }
+  .pdpv9-pdp__mode:has(.pdpv9-pdp__mode-input:checked) .pdpv9-pdp__mode-final {
+    color: #2A1054;
+  }
+  .pdpv9-pdp__mode-meta {
+    font: 500 12px/1.4 'DM Sans', system-ui, sans-serif;
+    color: #666;
+  }
+  .pdpv9-pdp__mode-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+  }
+  .pdpv9-pdp__mode-benefits li {
+    font: 500 12px/1.5 'DM Sans', system-ui, sans-serif;
+    color: #4a4a4a;
+    padding-left: 16px;
+    position: relative;
+  }
+  .pdpv9-pdp__mode-benefits li::before {
+    content: '✓';
+    color: #059669;
+    font-weight: 700;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  /* Press logos bar */
+  .pdpv9-press {
+    padding: 24px 16px;
+    background: #FAF9F7;
+    border-top: 1px solid #F0EDE7;
+    border-bottom: 1px solid #F0EDE7;
+  }
+  .pdpv9-press__inner {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .pdpv9-press__label {
+    font: 600 11px/1 'DM Sans', system-ui, sans-serif;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .pdpv9-press__logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 28px 36px;
+    opacity: 0.65;
+  }
+  .pdpv9-press__logo {
+    font: 700 16px/1 'Playfair Display', 'Georgia', serif;
+    color: #1a1a1a;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .pdpv9-press__logo--script {
+    font-style: italic;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  @media (max-width: 600px) {
+    .pdpv9-pdp__mode {
+      padding: 14px 14px 14px 16px;
+      grid-template-columns: 20px 1fr;
+      gap: 12px;
+    }
+    .pdpv9-pdp__mode-title { font-size: 15px; }
+    .pdpv9-pdp__mode-final { font-size: 18px; }
+    .pdpv9-press__logos { gap: 16px 20px; }
+    .pdpv9-press__logo { font-size: 13px; }
+  }
 </style>
 
 <div class="pdpv9-root">
@@ -137,8 +322,8 @@
             <svg class="pdpv9-pdp__social-pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
             {% if request.locale.iso_code == 'en' %}<span>Formulated with ube, konjac, and coconut MCT</span>{% else %}<span>Formulé avec ube, konjac et MCT de coco</span>{% endif %}
           </div>
-          <h1 class="pdpv9-pdp__title">{% if request.locale.iso_code == 'en' %}The natural way<br>to handle cravings.*{% else %}Reprenez le contrôle<br>de vos fringales{% endif %}</h1>
-          <p class="pdpv9-pdp__subtitle">{% if request.locale.iso_code == 'en' %}Plant-based satiety drink. Konjac fiber. Up to 4 hours of fullness.* Caffeine-free. 30 calories.{% else %}Routine violette pour les fringales de 16h et du soir.{% endif %}</p>
+          <h1 class="pdpv9-pdp__title">{% if request.locale.iso_code == 'en' %}Crush the<br>4PM crash.*{% else %}Reprenez le contrôle<br>de vos fringales{% endif %}</h1>
+          <p class="pdpv9-pdp__subtitle">{% if request.locale.iso_code == 'en' %}Plant-based drink. 30 calories. Calms cravings for hours.*{% else %}Routine violette pour les fringales de 16h et du soir.{% endif %}</p>
           {%- if request.locale.iso_code == 'en' -%}
           <div class="pdpv9-pdp__rating" style="display:flex;align-items:center;gap:8px;margin:8px 0 16px;font-size:14px;color:#1a1a1a;">
             <span style="color:#f5a623;font-size:16px;letter-spacing:1px;">★★★★★</span>
@@ -147,9 +332,9 @@
           </div>
           {%- endif -%}
           <ul class="pdpv9-pdp__bullets" {% if request.locale.iso_code == 'en' %}aria-label="Key benefits"{% else %}aria-label="Bénéfices clés"{% endif %}>
-            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> {% if request.locale.iso_code == 'en' %}Calms cravings naturally*{% else %}Pour les fringales de 16h et du soir{% endif %}</li>
-            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> {% if request.locale.iso_code == 'en' %}Up to 4 hours of fullness*{% else %}Jusqu'à 4h de satiété{% endif %}</li>
-            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> {% if request.locale.iso_code == 'en' %}Caffeine-free, no jitters{% else %}0% caféine, routine douce{% endif %}</li>
+            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> {% if request.locale.iso_code == 'en' %}Stops the 4PM crash*{% else %}Pour les fringales de 16h et du soir{% endif %}</li>
+            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> {% if request.locale.iso_code == 'en' %}Stays full for hours*{% else %}Jusqu'à 4h de satiété{% endif %}</li>
+            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> {% if request.locale.iso_code == 'en' %}Zero caffeine. Zero jitters.{% else %}0% caféine, routine douce{% endif %}</li>
           </ul>
         </div>
 
@@ -219,7 +404,7 @@
             <input type="hidden" name="id" value="{{ current_variant.id }}">
           {%- endif -%}
 
-          {%- comment -%} ─── Subscription radio (EN only — FR keeps "Sans abonnement" trust point) ─── {%- endcomment -%}
+          {%- comment -%} ─── Subscription cards (EN only — FR keeps "Sans abonnement") ─── {%- endcomment -%}
           {%- if product.selling_plan_groups.size > 0 and request.locale.iso_code == 'en' -%}
             {%- assign _plan_group = product.selling_plan_groups | first -%}
             {%- assign _plan = _plan_group.selling_plans | first -%}
@@ -232,22 +417,41 @@
             {%- endif -%}
             {%- assign _discount_cents = current_variant.price | times: _plan_discount_pct | divided_by: 100 -%}
             {%- assign _sub_price = current_variant.price | minus: _discount_cents -%}
-            <fieldset class="pdpv9-pdp__purchase-mode" role="radiogroup" style="margin:14px 0;border:0;padding:0;">
-              <legend style="font-weight:700;font-size:14px;margin-bottom:8px;color:#1a1a1a;">{% if request.locale.iso_code == 'en' %}Purchase option{% else %}Mode d'achat{% endif %}</legend>
-              <label class="pdpv9-pdp__mode pdpv9-pdp__mode--sub" style="display:flex;gap:10px;padding:14px 16px;border:2px solid #2A1054;border-radius:12px;cursor:pointer;background:linear-gradient(135deg,#F2F0FA 0%,#FAF9F7 100%);align-items:flex-start;position:relative;margin-bottom:8px;box-shadow:0 2px 8px rgba(42,16,84,0.08);">
-                <span style="position:absolute;top:-10px;right:14px;background:#2A1054;color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:6px;letter-spacing:0.4px;">MOST POPULAR · SAVE {{ _plan_discount_pct }}%</span>
-                <input type="radio" name="selling_plan" value="{{ _plan.id }}" checked style="margin-top:2px;accent-color:#2A1054;">
-                <span style="flex:1;">
-                  <strong style="display:block;font-size:14px;color:#2A1054;">Subscribe & Save {{ _plan_discount_pct }}%</strong>
-                  <span style="display:block;font-size:13px;color:#2A1054;font-weight:600;margin-top:2px;">{% render 'locale-price', price: _sub_price %} every 30 days</span>
-                  <span style="display:block;font-size:11px;color:#555;margin-top:5px;line-height:1.5;">✓ Cancel anytime  ✓ Skip or pause  ✓ Lock in this price<br>✓ Free shipping  ✓ Bonuses included</span>
+            <fieldset class="pdpv9-pdp__purchase-mode" role="radiogroup">
+              <legend class="pdpv9-pdp__purchase-mode-legend">Pick your option</legend>
+
+              <label class="pdpv9-pdp__mode pdpv9-pdp__mode--sub">
+                <span class="pdpv9-pdp__mode-badge">Save {{ _plan_discount_pct }}% · Most Popular</span>
+                <input type="radio" name="selling_plan" value="{{ _plan.id }}" class="pdpv9-pdp__mode-input" checked>
+                <span class="pdpv9-pdp__mode-radio" aria-hidden="true"></span>
+                <span class="pdpv9-pdp__mode-body">
+                  <span class="pdpv9-pdp__mode-row">
+                    <span class="pdpv9-pdp__mode-title">Subscribe &amp; Save</span>
+                    <span class="pdpv9-pdp__mode-price">
+                      <s class="pdpv9-pdp__mode-strike">{% render 'locale-price', price: current_variant.price %}</s>
+                      <span class="pdpv9-pdp__mode-final">{% render 'locale-price', price: _sub_price %}</span>
+                    </span>
+                  </span>
+                  <span class="pdpv9-pdp__mode-meta">Ships every 30 days · Cancel, skip or pause anytime</span>
+                  <ul class="pdpv9-pdp__mode-benefits">
+                    <li>Free U.S. shipping</li>
+                    <li>Lock in this price</li>
+                    <li>Bonuses included</li>
+                  </ul>
                 </span>
               </label>
-              <label class="pdpv9-pdp__mode pdpv9-pdp__mode--onetime" style="display:flex;gap:10px;padding:12px 14px;border:1.5px solid #E0DCE5;border-radius:10px;cursor:pointer;align-items:flex-start;">
-                <input type="radio" name="selling_plan" value="" style="margin-top:2px;accent-color:#2A1054;">
-                <span style="flex:1;">
-                  <strong style="display:block;font-size:14px;color:#1a1a1a;">One-time purchase</strong>
-                  <span style="display:block;font-size:13px;color:#666;margin-top:2px;">{% render 'locale-price', price: current_variant.price %}</span>
+
+              <label class="pdpv9-pdp__mode pdpv9-pdp__mode--onetime">
+                <input type="radio" name="selling_plan" value="" class="pdpv9-pdp__mode-input">
+                <span class="pdpv9-pdp__mode-radio" aria-hidden="true"></span>
+                <span class="pdpv9-pdp__mode-body">
+                  <span class="pdpv9-pdp__mode-row">
+                    <span class="pdpv9-pdp__mode-title">One-time purchase</span>
+                    <span class="pdpv9-pdp__mode-price">
+                      <span class="pdpv9-pdp__mode-final">{% render 'locale-price', price: current_variant.price %}</span>
+                    </span>
+                  </span>
+                  <span class="pdpv9-pdp__mode-meta">No commitment</span>
                 </span>
               </label>
             </fieldset>
@@ -348,6 +552,22 @@
 
   </section>
 
+  {%- comment -%} ─── Trust signals bar (EN only — honest certifications, no fake press) ─── {%- endcomment -%}
+  {%- if request.locale.iso_code == 'en' -%}
+  <section class="pdpv9-press" aria-label="Trust signals">
+    <div class="pdpv9-press__inner">
+      <div class="pdpv9-press__logos">
+        <span class="pdpv9-press__logo">PLANT-BASED</span>
+        <span class="pdpv9-press__logo">CAFFEINE-FREE</span>
+        <span class="pdpv9-press__logo">GLUTEN-FREE</span>
+        <span class="pdpv9-press__logo">NON-GMO</span>
+        <span class="pdpv9-press__logo">EFSA-BACKED FIBER</span>
+        <span class="pdpv9-press__logo">EU LAB-TESTED</span>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
   {%- comment -%} ─── {% if request.locale.iso_code == 'en' %}STORIES CAROUSEL — humanize before 4PM moment{% else %}STORIES CAROUSEL — humanise avant moment 16h{% endif %} ─── {%- endcomment -%}
   {{ 'uburn-stories-carousel.css' | asset_url | stylesheet_tag }}
   <section class="pdpv9-stories" aria-labelledby="pdpv9-stories-title">
@@ -396,6 +616,51 @@
     </div>
   </section>
   {{ 'uburn-stories-carousel.js' | asset_url | script_tag }}
+
+  {%- comment -%} ─── EN-only: MADE IN LYON section ─── {%- endcomment -%}
+  {% if request.locale.iso_code == 'en' %}
+  <section class="pdpv9-formula" style="background:#FAF9F7;">
+    <div class="pdpv9-formula__inner">
+      <div class="pdpv9-formula__media">
+        <img src="{{ 'uburn-lab-manufacturing.jpg' | asset_url }}"
+             alt="UBurn laboratory — precision measuring of konjac powder"
+             loading="lazy" decoding="async" width="1600" height="1200"
+             style="width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:16px;display:block;box-shadow:0 16px 48px rgba(61,24,115,.12);">
+      </div>
+      <div class="pdpv9-formula__copy">
+        <span class="pdpv9-eyebrow">European quality</span>
+        <h2 class="pdpv9-h2">Made with precision. <span class="pdpv9-h2-accent">Tested for purity.</span></h2>
+        <p class="pdpv9-lead">Every batch is measured, traced, and quality-controlled. Plant-based fiber from a single source. No artificial additives. No fillers.</p>
+        <ul class="pdpv9-pdp__bullets" style="margin-top:16px;">
+          <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> GMP-certified facility</li>
+          <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> Single-source konjac glucomannan</li>
+          <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> Third-party lab-tested for purity</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {%- comment -%} ─── EN-only: FOUNDER STORY ─── {%- endcomment -%}
+  {% if request.locale.iso_code == 'en' %}
+  <section class="pdpv9-formula">
+    <div class="pdpv9-formula__inner">
+      <div class="pdpv9-formula__copy">
+        <span class="pdpv9-eyebrow">The story</span>
+        <h2 class="pdpv9-h2">Made for women who want to <span class="pdpv9-h2-accent">handle cravings their way.</span></h2>
+        <p class="pdpv9-lead" style="font-size:18px;font-style:italic;color:#3d1873;border-left:3px solid #6b2fa0;padding-left:16px;margin:24px 0;">"I built the ritual I wished existed when I started."</p>
+        <p style="font-size:15px;line-height:1.7;color:#4a4a4a;">Years of fighting 4PM cravings with coffee taught me one thing — willpower runs out. So I built UBurn. Plant-based. Caffeine-free. For women who handle cravings instead of fighting them.</p>
+        <p style="margin-top:20px;font-weight:700;color:#3d1873;">— Mariana, Founder</p>
+      </div>
+      <div class="pdpv9-formula__media">
+        <img src="{{ 'uburn-founder-mariana.jpg' | asset_url }}"
+             alt="Mariana, founder of UBurn"
+             loading="lazy" decoding="async" width="1200" height="1600"
+             style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:16px;display:block;box-shadow:0 16px 48px rgba(61,24,115,.12);">
+      </div>
+    </div>
+  </section>
+  {% endif %}
 
 
 
@@ -863,52 +1128,6 @@
     </div>
   </section>
 
-  {%- comment -%} ─── EN-only: MADE IN LYON section ─── {%- endcomment -%}
-  {% if request.locale.iso_code == 'en' %}
-  <section class="pdpv9-formula" style="background:#FAF9F7;">
-    <div class="pdpv9-formula__inner">
-      <div class="pdpv9-formula__media">
-        <img src="{{ 'uburn-lab-manufacturing.jpg' | asset_url }}"
-             alt="UBurn laboratory — precision measuring of konjac powder"
-             loading="lazy" decoding="async" width="1600" height="1200"
-             style="width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:16px;display:block;box-shadow:0 16px 48px rgba(61,24,115,.12);">
-      </div>
-      <div class="pdpv9-formula__copy">
-        <span class="pdpv9-eyebrow">European quality</span>
-        <h2 class="pdpv9-h2">Made with precision. <span class="pdpv9-h2-accent">Tested for purity.</span></h2>
-        <p class="pdpv9-lead">Every batch is measured, traced, and quality-controlled. Plant-based fiber from a single source. No artificial additives. No fillers.</p>
-        <ul class="pdpv9-pdp__bullets" style="margin-top:16px;">
-          <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> GMP-certified facility</li>
-          <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> Single-source konjac glucomannan</li>
-          <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> Third-party lab-tested for purity</li>
-          <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> Cold-extracted to preserve ingredient potency</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-  {% endif %}
-
-  {%- comment -%} ─── EN-only: FOUNDER STORY ─── {%- endcomment -%}
-  {% if request.locale.iso_code == 'en' %}
-  <section class="pdpv9-formula">
-    <div class="pdpv9-formula__inner">
-      <div class="pdpv9-formula__copy">
-        <span class="pdpv9-eyebrow">The story</span>
-        <h2 class="pdpv9-h2">Made for women who want to <span class="pdpv9-h2-accent">handle cravings their way.</span></h2>
-        <p class="pdpv9-lead" style="font-size:18px;font-style:italic;color:#3d1873;border-left:3px solid #6b2fa0;padding-left:16px;margin:24px 0;">"I created the ritual I wished existed when I started my journey."</p>
-        <p style="font-size:15px;line-height:1.7;color:#4a4a4a;">After years of fighting 4PM cravings with coffee and willpower, I discovered konjac fiber. Coming from a family of European herbalists, I knew real plants could deliver real results — without stimulants, without restriction.</p>
-        <p style="font-size:15px;line-height:1.7;color:#4a4a4a;margin-top:12px;">UBurn is plant-based, caffeine-free, and made for women who want to handle cravings naturally — not fight them.</p>
-        <p style="margin-top:20px;font-weight:700;color:#3d1873;">— Mariana, Founder</p>
-      </div>
-      <div class="pdpv9-formula__media">
-        <img src="{{ 'uburn-founder-mariana.jpg' | asset_url }}"
-             alt="Mariana, founder of UBurn"
-             loading="lazy" decoding="async" width="1200" height="1600"
-             style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:16px;display:block;box-shadow:0 16px 48px rgba(61,24,115,.12);">
-      </div>
-    </div>
-  </section>
-  {% endif %}
 
   {%- comment -%} ─── 9. OFFRE 184€ BONUS (value stack) ─── {%- endcomment -%}
   {% if request.locale.iso_code != 'en' %}
