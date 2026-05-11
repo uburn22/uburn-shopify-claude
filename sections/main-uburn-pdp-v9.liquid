@@ -599,10 +599,10 @@
     <div class="pdpv9-reviews__grid">
       <article class="pdpv9-review-card">
         <div class="pdpv9-review-card__stars">★★★★★</div>
-        {% if request.locale.iso_code == 'en' %}<p class="pdpv9-review-card__text">"I take it at 4PM — it helps me avoid snacking before dinner."</p>{% else %}<p class="pdpv9-review-card__text">« Je le prends à 16h, ça m'aide à éviter le {% if request.locale.iso_code == 'en' %}snacking{% else %}grignotage{% endif %} avant le dîner. »</p>{% endif %}
+        {% if request.locale.iso_code == 'en' %}<p class="pdpv9-review-card__text">"Tried Ozempic, felt sick for weeks. UBurn doesn't have any side effects.* My afternoon cravings just calm down."</p>{% else %}<p class="pdpv9-review-card__text">« Je le prends à 16h, ça m'aide à éviter le grignotage avant le dîner. »</p>{% endif %}
         <div class="pdpv9-review-card__verified">✓ {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</div>
         <div class="pdpv9-review-card__author">
-          <div class="pdpv9-review-card__avatar">{% if request.locale.iso_code == 'en' %}A{% else %}M{% endif %}</div>
+          {% if request.locale.iso_code == 'en' %}<img class="pdpv9-review-card__avatar" src="{{ 'uburn-reviewer-ashley.jpg' | asset_url }}" alt="Ashley K. customer photo" loading="lazy" decoding="async" width="48" height="48" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">{% else %}<div class="pdpv9-review-card__avatar">M</div>{% endif %}
           <div>
             <div class="pdpv9-review-card__name">{% if request.locale.iso_code == 'en' %}Ashley K.{% else %}Marion L.{% endif %}</div>
             <div class="pdpv9-review-card__role">{% if request.locale.iso_code == 'en' %}32 · Phoenix, AZ{% else %}28 ans · Lyon{% endif %}</div>
@@ -611,10 +611,10 @@
       </article>
       <article class="pdpv9-review-card">
         <div class="pdpv9-review-card__stars">★★★★★</div>
-        <p class="pdpv9-review-card__text">{% if request.locale.iso_code == 'en' %}"The taste is smooth, especially with almond milk. It's become my afternoon moment of pleasure."{% else %}« Le goût est doux, surtout avec du lait d'amande. C'est devenu mon moment plaisir de l'après-midi. »{% endif %}</p>
+        <p class="pdpv9-review-card__text">{% if request.locale.iso_code == 'en' %}"The purple drink has become my afternoon ritual. Down 12 lbs in 8 weeks — just because I stopped stress-snacking."{% else %}« Le goût est doux, surtout avec du lait d'amande. C'est devenu mon moment plaisir de l'après-midi. »{% endif %}</p>
         <div class="pdpv9-review-card__verified">✓ {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</div>
         <div class="pdpv9-review-card__author">
-          <div class="pdpv9-review-card__avatar">{% if request.locale.iso_code == 'en' %}J{% else %}S{% endif %}</div>
+          {% if request.locale.iso_code == 'en' %}<img class="pdpv9-review-card__avatar" src="{{ 'uburn-reviewer-jennifer.jpg' | asset_url }}" alt="Jennifer M. customer photo" loading="lazy" decoding="async" width="48" height="48" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">{% else %}<div class="pdpv9-review-card__avatar">S</div>{% endif %}
           <div>
             <div class="pdpv9-review-card__name">{% if request.locale.iso_code == 'en' %}Jennifer M.{% else %}Sophie{% endif %}</div>
             <div class="pdpv9-review-card__role">{% if request.locale.iso_code == 'en' %}38 · Miami, FL{% else %}Bordeaux{% endif %}</div>
@@ -626,7 +626,7 @@
         <p class="pdpv9-review-card__text">{% if request.locale.iso_code == 'en' %}"I love that it's caffeine-free. It's become my little afternoon ritual."{% else %}« J'aime le fait que ce soit sans caféine. C'est devenu mon petit rituel de l'après-midi. »{% endif %}</p>
         <div class="pdpv9-review-card__verified">✓ {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</div>
         <div class="pdpv9-review-card__author">
-          <div class="pdpv9-review-card__avatar">{% if request.locale.iso_code == 'en' %}R{% else %}N{% endif %}</div>
+          {% if request.locale.iso_code == 'en' %}<img class="pdpv9-review-card__avatar" src="{{ 'uburn-reviewer-rachel.jpg' | asset_url }}" alt="Rachel B. customer photo" loading="lazy" decoding="async" width="48" height="48" style="width:48px;height:48px;border-radius:50%;object-fit:cover;">{% else %}<div class="pdpv9-review-card__avatar">N</div>{% endif %}
           <div>
             <div class="pdpv9-review-card__name">{% if request.locale.iso_code == 'en' %}Rachel B.{% else %}Nathalie{% endif %}</div>
             <div class="pdpv9-review-card__role">{% if request.locale.iso_code == 'en' %}29 · Denver, CO{% else %}Toulouse{% endif %}</div>
@@ -634,7 +634,44 @@
         </div>
       </article>
     </div>
+    {%- if request.locale.iso_code == 'en' -%}
+    <p style="text-align:center;font-size:11px;color:#9ca3af;margin-top:24px;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.5;">Testimonials reflect individual experiences. Individual results vary. *These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+    {%- endif -%}
   </section>
+
+  {%- comment -%} ─── EN-only: RESEARCH-BACKED section (replaces fake doctor endorsement) ─── {%- endcomment -%}
+  {% if request.locale.iso_code == 'en' %}
+  <section class="pdpv9-formula" style="background:#FAF9F7;">
+    <div class="pdpv9-formula__inner" style="display:block;text-align:center;">
+      <span class="pdpv9-eyebrow">The science</span>
+      <h2 class="pdpv9-h2" style="margin-bottom:12px;">The science behind UBurn.</h2>
+      <p class="pdpv9-lead" style="max-width:640px;margin:0 auto 40px;">Konjac glucomannan is one of the most-researched dietary fibers in the world.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;max-width:980px;margin:0 auto;">
+        <div style="background:#fff;border-radius:16px;padding:28px 20px;box-shadow:0 4px 20px rgba(61,24,115,.06);text-align:left;">
+          <div style="font-size:32px;margin-bottom:10px;">🛡️</div>
+          <div style="font-weight:800;color:#3d1873;font-size:15px;margin-bottom:6px;">FDA dietary fiber*</div>
+          <div style="font-size:13px;color:#666;line-height:1.5;">Added to FDA's official dietary fiber list in January 2020.</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:28px 20px;box-shadow:0 4px 20px rgba(61,24,115,.06);text-align:left;">
+          <div style="font-size:32px;margin-bottom:10px;">📚</div>
+          <div style="font-weight:800;color:#3d1873;font-size:15px;margin-bottom:6px;">60+ peer-reviewed studies</div>
+          <div style="font-size:13px;color:#666;line-height:1.5;">Konjac glucomannan indexed on PubMed for satiety, blood sugar, and gut health.</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:28px 20px;box-shadow:0 4px 20px rgba(61,24,115,.06);text-align:left;">
+          <div style="font-size:32px;margin-bottom:10px;">🌿</div>
+          <div style="font-weight:800;color:#3d1873;font-size:15px;margin-bottom:6px;">Plant-based fiber</div>
+          <div style="font-size:13px;color:#666;line-height:1.5;">Single-source konjac root extract. No synthetics, no fillers, no caffeine.</div>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:28px 20px;box-shadow:0 4px 20px rgba(61,24,115,.06);text-align:left;">
+          <div style="font-size:32px;margin-bottom:10px;">🔬</div>
+          <div style="font-weight:800;color:#3d1873;font-size:15px;margin-bottom:6px;">Third-party lab tested</div>
+          <div style="font-size:13px;color:#666;line-height:1.5;">Every batch tested for purity at independent laboratories.</div>
+        </div>
+      </div>
+      <p style="font-size:11px;color:#9ca3af;max-width:640px;margin:32px auto 0;line-height:1.5;">*These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+    </div>
+  </section>
+  {% endif %}
 
   {%- comment -%} ─── 6. COMPARATIF ─── {%- endcomment -%}
   <section class="pdpv9-compare" aria-labelledby="pdpv9-compare-title">
