@@ -88,12 +88,20 @@
       <div class="pdpv9-pdp__gallery">
         {%- if product.media.size > 0 -%}
           <div class="pdpv9-pdp__slides" role="region" aria-label="Galerie produit" tabindex="0">
+            {%- if request.locale.iso_code == 'en' -%}
+              <div class="pdpv9-pdp__slide" id="pdpv9-slide-en-hero">
+                <img src="{{ 'uburn-hero-product.jpg' | asset_url }}" alt="UBurn purple ube satiety drink in a glass" loading="eager" decoding="async" width="1600" height="1600">
+              </div>
+              <div class="pdpv9-pdp__slide" id="pdpv9-slide-en-lifestyle">
+                <img src="{{ 'uburn-lifestyle-brooklyn.jpg' | asset_url }}" alt="UBurn afternoon ritual — woman enjoying purple drink at home office" loading="lazy" decoding="async" width="1200" height="1600">
+              </div>
+            {%- endif -%}
             {%- for media in product.media -%}
               <div class="pdpv9-pdp__slide" id="pdpv9-slide-{{ forloop.index }}">
                 {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
                   {{ media | media_tag: image_size: '1200x', autoplay: false, loop: false, controls: true, preload: 'metadata' }}
                 {%- else -%}
-                  <img src="{{ media | image_url: width: 1200 }}&format=webp" alt="{{ media.alt | default: product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async" width="1200" height="1200">
+                  <img src="{{ media | image_url: width: 1200 }}&format=webp" alt="{{ media.alt | default: product.title | escape }}" loading="{% if forloop.first and request.locale.iso_code != 'en' %}eager{% else %}lazy{% endif %}" decoding="async" width="1200" height="1200">
                 {%- endif -%}
               </div>
             {%- endfor -%}
@@ -708,6 +716,53 @@
       </div>
     </div>
   </section>
+
+  {%- comment -%} ─── EN-only: MADE IN LYON section ─── {%- endcomment -%}
+  {% if request.locale.iso_code == 'en' %}
+  <section class="pdpv9-formula" style="background:#FAF9F7;">
+    <div class="pdpv9-formula__inner">
+      <div class="pdpv9-formula__media">
+        <img src="{{ 'uburn-lab-manufacturing.jpg' | asset_url }}"
+             alt="UBurn laboratory — precision measuring of konjac powder"
+             loading="lazy" decoding="async" width="1600" height="1200"
+             style="width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:16px;display:block;box-shadow:0 16px 48px rgba(61,24,115,.12);">
+      </div>
+      <div class="pdpv9-formula__copy">
+        <span class="pdpv9-eyebrow">European quality</span>
+        <h2 class="pdpv9-h2">Made with precision. <span class="pdpv9-h2-accent">Tested for purity.</span></h2>
+        <p class="pdpv9-lead">Every batch is measured, traced, and quality-controlled. Plant-based fiber from a single source. No artificial additives. No fillers.</p>
+        <ul class="pdpv9-pdp__bullets" style="margin-top:16px;">
+          <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> GMP-certified facility</li>
+          <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> Single-source konjac glucomannan</li>
+          <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> Third-party lab-tested for purity</li>
+          <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> Cold-extracted to preserve ingredient potency</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {%- comment -%} ─── EN-only: FOUNDER STORY ─── {%- endcomment -%}
+  {% if request.locale.iso_code == 'en' %}
+  <section class="pdpv9-formula">
+    <div class="pdpv9-formula__inner">
+      <div class="pdpv9-formula__copy">
+        <span class="pdpv9-eyebrow">The story</span>
+        <h2 class="pdpv9-h2">Made for women who want to <span class="pdpv9-h2-accent">handle cravings their way.</span></h2>
+        <p class="pdpv9-lead" style="font-size:18px;font-style:italic;color:#3d1873;border-left:3px solid #6b2fa0;padding-left:16px;margin:24px 0;">"I created the ritual I wished existed when I started my journey."</p>
+        <p style="font-size:15px;line-height:1.7;color:#4a4a4a;">After years of fighting 4PM cravings with coffee and willpower, I discovered konjac fiber. Coming from a family of European herbalists, I knew real plants could deliver real results — without stimulants, without restriction.</p>
+        <p style="font-size:15px;line-height:1.7;color:#4a4a4a;margin-top:12px;">UBurn is plant-based, caffeine-free, and made for women who want to handle cravings naturally — not fight them.</p>
+        <p style="margin-top:20px;font-weight:700;color:#3d1873;">— Mariana, Founder</p>
+      </div>
+      <div class="pdpv9-formula__media">
+        <img src="{{ 'uburn-founder-mariana.jpg' | asset_url }}"
+             alt="Mariana, founder of UBurn"
+             loading="lazy" decoding="async" width="1200" height="1600"
+             style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:16px;display:block;box-shadow:0 16px 48px rgba(61,24,115,.12);">
+      </div>
+    </div>
+  </section>
+  {% endif %}
 
   {%- comment -%} ─── 9. OFFRE 184€ BONUS (value stack) ─── {%- endcomment -%}
   {% if request.locale.iso_code != 'en' %}
