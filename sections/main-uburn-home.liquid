@@ -33,7 +33,7 @@
         <a href="/products/ube-poudre?variant=51289200066879" class="uhome-btn uhome-btn-fill">
           Commander — dès 34,50&nbsp;€
         </a>
-        <span class="uhome-hero-note">Livraison offerte · {% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</span>
+        <span class="uhome-hero-note">Livraison offerte · {% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</span>
       </div>
     </div>
     <div class="uhome-hero-trust">
@@ -51,7 +51,7 @@
       <span class="uhome-marquee-item">30 kcal par dose</span>
       <span class="uhome-marquee-item">Livraison offerte</span>
       <span class="uhome-marquee-item">1&nbsp;500+ clientes</span>
-      <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</span>
+      <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</span>
       {% if request.locale.iso_code == 'en' %}<span class="uhome-marquee-item">Lasting 4-hour satiety*</span>{% else %}<span class="uhome-marquee-item">Satiété durable 4h</span>{% endif %}
       <span class="uhome-marquee-item">6 actifs naturels</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}French brand{% else %}Marque française{% endif %}</span>
@@ -60,7 +60,7 @@
       <span class="uhome-marquee-item">30 kcal par dose</span>
       <span class="uhome-marquee-item">Livraison offerte</span>
       <span class="uhome-marquee-item">1&nbsp;500+ clientes</span>
-      <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</span>
+      <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</span>
       {% if request.locale.iso_code == 'en' %}<span class="uhome-marquee-item">Lasting 4-hour satiety*</span>{% else %}<span class="uhome-marquee-item">Satiété durable 4h</span>{% endif %}
       <span class="uhome-marquee-item">6 actifs naturels</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}French brand{% else %}Marque française{% endif %}</span>
@@ -458,8 +458,8 @@
           <div class="uhome-faq-a">{% if request.locale.iso_code == 'en' %}Most early customers feel satiety from their first scoop. For visible results on craving control: 7 to 14 days with consistent morning use.*{% else %}La plupart des clientes ressentent l'effet satiété dès la première prise. Pour des résultats visibles sur le contrôle des {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s : 7 à 14 jours en {% if request.locale.iso_code == 'en' %}consistent use{% else %}utilisation régulière{% endif %} {% if request.locale.iso_code == 'en' %}in the morning{% else %}le matin{% endif %}.{% endif %}</div>
         </div>
         <div class="uhome-faq-item">
-          <div class="uhome-faq-q">{% if request.locale.iso_code == 'en' %}Is there a subscription?{% else %}Y a-t-il un abonnement ?{% endif %}</div>
-          <div class="uhome-faq-a">Non. Aucun abonnement caché. Vous commandez quand vous voulez, vous arrêtez quand vous voulez. Paiement unique à chaque commande.</div>
+          <div class="uhome-faq-q">{% if request.locale.iso_code == 'en' %}Is subscription required?{% else %}L'abonnement est-il obligatoire ?{% endif %}</div>
+          <div class="uhome-faq-a">Tu peux choisir un achat unique OU un abonnement avec -10% (annulable, sautable ou en pause à tout moment). Aucune obligation.</div>
         </div>
         <div class="uhome-faq-item">
           <div class="uhome-faq-q">{% if request.locale.iso_code == 'en' %}Can I drink it at night? Caffeine-free?{% else %}Compatible le soir ? Sans caféine ?{% endif %}</div>
@@ -485,7 +485,7 @@
     <div class="uhome-final-content uhome-reveal">
       <span class="uhome-section-label">Commencer maintenant</span>
       <h2 class="uhome-section-title">{% if request.locale.iso_code == 'en' %}Take back control. <em>Starting tomorrow morning.</em>{% else %}{% if request.locale.iso_code == 'en' %}Take back control{% else %}Reprenez le contrôle{% endif %}. <em>Dès demain matin.</em>{% endif %}</h2>
-      <p>{% if request.locale.iso_code == 'en' %}One scoop. One glass. 4 hours of calm. No diet, no restriction, no hidden subscription.{% else %}Une dose. Un verre. 4h de tranquillité. Sans régime, sans privation, sans abonnement caché.{% endif %}</p>
+      <p>{% if request.locale.iso_code == 'en' %}One scoop. One glass. 4 hours of calm. No diet, no restriction, flexible subscription.{% else %}Une dose. Un verre. 4h de tranquillité. Sans régime, sans privation, abonnement flexible.{% endif %}</p>
       <div class="uhome-final-actions">
         <a href="/products/ube-poudre?variant=51289200066879" class="uhome-btn uhome-btn-white" style="justify-content:center;font-family:'Red Hat Display',sans-serif;font-weight:800;font-size:16px;padding:18px 32px">
           Commander → dès 34,50&nbsp;€
@@ -494,7 +494,7 @@
       </div>
       <div class="uhome-final-guarantees">
         <div class="uhome-final-g">{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</div>
-        <div class="uhome-final-g">{% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</div>
+        <div class="uhome-final-g">{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</div>
         <div class="uhome-final-g">{% if request.locale.iso_code == 'en' %}Secure checkout{% else %}Paiement sécurisé{% endif %}</div>
         <div class="uhome-final-g">Livraison offerte</div>
       </div>
@@ -529,7 +529,7 @@
         <div class="uhome-guar-icon">
           <img src="https://uburn.co/cdn/shop/files/Picto_customer.svg" alt="" aria-hidden="true">
         </div>
-        <h4>{% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</h4>
+        <h4>{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</h4>
         <p>Commandez quand vous voulez</p>
       </div>
     </div>

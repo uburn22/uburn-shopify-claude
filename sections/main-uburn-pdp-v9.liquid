@@ -311,7 +311,7 @@
   <div class="pdpv9-ribbon">
     <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}Research-backed glucomannan*{% else %}Glucomannane reconnu par l'EFSA{% endif %}</span>
     <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}100% Plant-based{% else %}100% Végétal{% endif %}</span>
-    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</span>
+    <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</span>
     <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% caféine{% endif %}</span>
   </div>
 
@@ -454,8 +454,8 @@
             <input type="hidden" name="id" value="{{ current_variant.id }}">
           {%- endif -%}
 
-          {%- comment -%} ─── Subscription cards (EN only — FR keeps "Sans abonnement") ─── {%- endcomment -%}
-          {%- if product.selling_plan_groups.size > 0 and request.locale.iso_code == 'en' -%}
+          {%- comment -%} ─── Subscription cards (EN + FR, same UI both locales) ─── {%- endcomment -%}
+          {%- if product.selling_plan_groups.size > 0 -%}
             {%- assign _plan_group = product.selling_plan_groups | first -%}
             {%- assign _plan = _plan_group.selling_plans | first -%}
             {%- assign _plan_discount_pct = 10 -%}
@@ -467,7 +467,7 @@
             {%- endif -%}
             {%- assign _discount_cents = current_variant.price | times: _plan_discount_pct | divided_by: 100 -%}
             {%- assign _sub_price = current_variant.price | minus: _discount_cents -%}
-            <div class="pdpv9-pdp__purchase-mode" role="radiogroup" aria-label="Purchase option">
+            <div class="pdpv9-pdp__purchase-mode" role="radiogroup" aria-label="{% if request.locale.iso_code == 'en' %}Purchase option{% else %}Mode d'achat{% endif %}">
 
               <label class="pdpv9-pdp__mode pdpv9-pdp__mode--sub" data-discount-pct="{{ _plan_discount_pct }}">
                 <input type="radio" name="selling_plan" value="{{ _plan.id }}" class="pdpv9-pdp__mode-input pdpv9-pdp__mode-input--sub" checked>
@@ -475,22 +475,22 @@
                 <span class="pdpv9-pdp__mode-body">
                   <span class="pdpv9-pdp__mode-header">
                     <span class="pdpv9-pdp__mode-title-wrap">
-                      <span class="pdpv9-pdp__mode-title">Subscribe &amp; Save</span>
-                      <span class="pdpv9-pdp__mode-tag">SAVE {{ _plan_discount_pct }}%</span>
+                      <span class="pdpv9-pdp__mode-title">{% if request.locale.iso_code == 'en' %}Subscribe &amp; Save{% else %}Abonnement & Économies{% endif %}</span>
+                      <span class="pdpv9-pdp__mode-tag">{% if request.locale.iso_code == 'en' %}SAVE {{ _plan_discount_pct }}%{% else %}-{{ _plan_discount_pct }}%{% endif %}</span>
                     </span>
                     <span class="pdpv9-pdp__mode-price">
                       <s class="pdpv9-pdp__mode-strike" id="pdpv9-sub-strike">{% render 'locale-price', price: current_variant.price %}</s>
                       <span class="pdpv9-pdp__mode-final" id="pdpv9-sub-final">{% render 'locale-price', price: _sub_price %}</span>
                     </span>
                   </span>
-                  <span class="pdpv9-pdp__mode-meta">Ships every 30 days · Cancel, skip or pause anytime</span>
+                  <span class="pdpv9-pdp__mode-meta">{% if request.locale.iso_code == 'en' %}Ships every 30 days · Cancel, skip or pause anytime{% else %}Livré tous les 30 jours · Annulable, sautable ou en pause à tout moment{% endif %}</span>
                   <div class="pdpv9-pdp__mode-bonuses">
-                    <div class="pdpv9-pdp__mode-bonuses-title">🎁 Includes $200 in free bonuses</div>
+                    <div class="pdpv9-pdp__mode-bonuses-title">{% if request.locale.iso_code == 'en' %}🎁 Includes $200 in free bonuses{% else %}🎁 Inclut 184€ de bonus offerts{% endif %}</div>
                     <ul class="pdpv9-pdp__mode-bonuses-list">
-                      <li><span class="pdpv9-pdp__bonus-icon">📖</span> 30-day e-book <em>($50 value)</em></li>
-                      <li><span class="pdpv9-pdp__bonus-icon">👯</span> Private UBurn Collective group <em>($45)</em></li>
-                      <li><span class="pdpv9-pdp__bonus-icon">🎟️</span> Online UBurn events <em>($55)</em></li>
-                      <li><span class="pdpv9-pdp__bonus-icon">💬</span> WhatsApp nutrition support <em>($50)</em></li>
+                      <li><span class="pdpv9-pdp__bonus-icon">📖</span> {% if request.locale.iso_code == 'en' %}30-day e-book <em>($50 value)</em>{% else %}E-book 30 jours <em>(47€ valeur)</em>{% endif %}</li>
+                      <li><span class="pdpv9-pdp__bonus-icon">👯</span> {% if request.locale.iso_code == 'en' %}Private UBurn Collective group <em>($45)</em>{% else %}Groupe privé UBurn Collective <em>(40€)</em>{% endif %}</li>
+                      <li><span class="pdpv9-pdp__bonus-icon">🎟️</span> {% if request.locale.iso_code == 'en' %}Online UBurn events <em>($55)</em>{% else %}Événements UBurn en ligne <em>(50€)</em>{% endif %}</li>
+                      <li><span class="pdpv9-pdp__bonus-icon">💬</span> {% if request.locale.iso_code == 'en' %}WhatsApp nutrition support <em>($50)</em>{% else %}Suivi nutrition WhatsApp <em>(47€)</em>{% endif %}</li>
                     </ul>
                   </div>
                 </span>
@@ -501,12 +501,12 @@
                 <span class="pdpv9-pdp__mode-radio" aria-hidden="true"></span>
                 <span class="pdpv9-pdp__mode-body">
                   <span class="pdpv9-pdp__mode-header">
-                    <span class="pdpv9-pdp__mode-title">One-time purchase</span>
+                    <span class="pdpv9-pdp__mode-title">{% if request.locale.iso_code == 'en' %}One-time purchase{% else %}Achat unique{% endif %}</span>
                     <span class="pdpv9-pdp__mode-price">
                       <span class="pdpv9-pdp__mode-final" id="pdpv9-onetime-final">{% render 'locale-price', price: current_variant.price %}</span>
                     </span>
                   </span>
-                  <span class="pdpv9-pdp__mode-meta">No bonuses · No commitment</span>
+                  <span class="pdpv9-pdp__mode-meta">{% if request.locale.iso_code == 'en' %}No bonuses · No commitment{% else %}Sans bonus · Sans engagement{% endif %}</span>
                 </span>
               </label>
             </div>
@@ -1058,8 +1058,8 @@
         <p class="pdpv9-diff-card__copy">{% if request.locale.iso_code == 'en' %}A smooth, natural taste designed to make you come back for more.{% else %}Un goût doux et naturel, pensé pour donner envie d'y revenir.{% endif %}</p>
       </article>
       <article class="pdpv9-diff-card">
-        <h3 class="pdpv9-diff-card__title">{% if request.locale.iso_code == 'en' %}No subscription trap{% else %}{% if request.locale.iso_code == 'en' %}No subscription{% else %}Sans abonnement{% endif %}{% endif %}</h3>
-        <p class="pdpv9-diff-card__copy">{% if request.locale.iso_code == 'en' %}Order whenever you want, no commitment.{% else %}Tu commandes quand tu veux, sans engagement.{% endif %}</p>
+        <h3 class="pdpv9-diff-card__title">{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</h3>
+        <p class="pdpv9-diff-card__copy">{% if request.locale.iso_code == 'en' %}Flexible subscription or one-time — your choice, no commitment.{% else %}Abonnement flexible ou achat unique — tu choisis, sans engagement.{% endif %}</p>
       </article>
       <article class="pdpv9-diff-card">
         {% if request.locale.iso_code == 'en' %}<h3 class="pdpv9-diff-card__title">Ready in 30 seconds</h3>{% else %}<h3 class="pdpv9-diff-card__title">Prêt en 30 secondes</h3>{% endif %}
@@ -1126,7 +1126,7 @@
           <tr><th scope="row">30 kcal</th><td class="pdpv9-compare__hl">{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}No{% else %}Non{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Variable{% else %}Variable{% endif %}</td></tr>
           <tr><th scope="row">{% if request.locale.iso_code == 'en' %}Indulgent taste{% else %}Goût gourmand{% endif %}</th><td class="pdpv9-compare__hl">{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Variable{% else %}Variable{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Rarely{% else %}Rare{% endif %}</td></tr>
           <tr><th scope="row">{% if request.locale.iso_code == 'en' %}Simple routine{% else %}Routine simple{% endif %}</th><td class="pdpv9-compare__hl">{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}No{% else %}Non{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Variable{% else %}Variable{% endif %}</td></tr>
-          <tr><th scope="row">{% if request.locale.iso_code == 'en' %}No subscription trap{% else %}Sans abonnement{% endif %}</th><td class="pdpv9-compare__hl">{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Variable{% else %}Variable{% endif %}</td></tr>
+          <tr><th scope="row">{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</th><td class="pdpv9-compare__hl">{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Yes{% else %}Oui{% endif %}</td><td>{% if request.locale.iso_code == 'en' %}Variable{% else %}Variable{% endif %}</td></tr>
         </tbody>
       </table>
     </div>
@@ -1408,7 +1408,7 @@
       <h2 class="pdpv9-h2" id="pdpv9-final-title">{% if request.locale.iso_code == 'en' %}Ready to build <span class="pdpv9-h2-accent">your UBurn ritual?</span>{% else %}Prête à créer <span class="pdpv9-h2-accent">ton rituel UBURN ?</span>{% endif %}</h2>
       <p class="pdpv9-lead">{% if request.locale.iso_code == 'en' %}Calm cravings naturally. Made in France.{% else %}Boisson violette. Sans caféine. Routine simple.{% endif %}</p>
       <a href="#pdpv9-pdp" class="pdpv9-cta-primary pdpv9-final__cta">{% if request.locale.iso_code == 'en' %}Start my routine{% else %}Commencer ma cure 30 jours{% endif %}</a>
-      <p class="pdpv9-final__sub">{% if request.locale.iso_code == 'en' %}Free U.S. shipping over $40 · 30-day money-back · No commitment{% else %}Livraison offerte · Paiement sécurisé · Sans abonnement{% endif %}</p>
+      <p class="pdpv9-final__sub">{% if request.locale.iso_code == 'en' %}Free U.S. shipping · Cancel anytime · Subscribe & save 10%{% else %}Livraison offerte · Annulable à tout moment · Abonne-toi et économise 10%{% endif %}</p>
     </div>
   </section>
 
@@ -1520,7 +1520,7 @@
 
       // 2. Sub-price meta line
       if (per && unit && days) {
-        per.textContent = unit + ' · ' + (__isEn ? ('Pack ' + days + ' days') : ('Cure ' + days + ' jours')) + ' · ' + (__isEn ? 'No subscription trap' : 'Sans abonnement');
+        per.textContent = unit + ' · ' + (__isEn ? ('Pack ' + days + ' days') : ('Cure ' + days + ' jours'));
       }
 
       // 3. ATC button price reflects mode + variant
