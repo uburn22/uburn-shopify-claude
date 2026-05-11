@@ -28,10 +28,10 @@
     <div class="uhome-hero-content">
       <div class="uhome-hero-eyebrow">Glucomannane · {% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</div>
       <h1 class="uhome-hero-title">{% if request.locale.iso_code == 'en' %}4PM.<br><em>Take back<br>control.</em>{% else %}16h.<br><em>Tu reprends<br>le contrôle.</em>{% endif %}</h1>
-      <p class="uhome-hero-sub">{% if request.locale.iso_code == 'en' %}The morning ritual that keeps you going for 4 hours without cracking. 6 natural active ingredients. Caffeine-free. French brand.{% else %}Le rituel matinal qui te tient 4h sans craquer. 6 actifs naturels. 0% caféine. Marque française.{% endif %}</p>
+      <p class="uhome-hero-sub">{% if request.locale.iso_code == 'en' %}The afternoon ritual that keeps you full for 4 hours without snacking. 6 natural active ingredients. Caffeine-free. French brand.{% else %}Le rituel matinal qui te tient 4h sans craquer. 6 actifs naturels. 0% caféine. Marque française.{% endif %}</p>
       <div class="uhome-hero-actions">
         <a href="/products/ube-poudre?variant=51289200066879" class="uhome-btn uhome-btn-fill">
-          Commander — dès 34,50&nbsp;€
+          {% if request.locale.iso_code == 'en' %}Order — from $35{% else %}Commander — dès 34,50&nbsp;€{% endif %}
         </a>
         <span class="uhome-hero-note">{% if request.locale.iso_code == 'en' %}Free shipping{% else %}Livraison offerte{% endif %} · {% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</span>
       </div>
@@ -96,7 +96,7 @@
         </div>
         <div class="uhome-expert-name">Dr. Claire Dubois</div>
         {% if request.locale.iso_code == 'en' %}<div class="uhome-expert-creds">Nutritionist · Food behavior specialist</div>{% else %}<div class="uhome-expert-creds">Nutritionniste · Spécialiste comportement alimentaire</div>{% endif %}
-        <a href="#uhome-offer" class="uhome-expert-link">Membre du Comité Scientifique UBurn →</a>
+        <a href="#uhome-offer" class="uhome-expert-link">{% if request.locale.iso_code == 'en' %}UBurn Scientific Committee member →{% else %}Membre du Comité Scientifique UBurn →{% endif %}</a>
       </div>
     </div>
   </section>
@@ -105,9 +105,9 @@
   <section class="uhome-rituel">
     <div class="uhome-rituel-inner">
       <div class="uhome-rituel-head uhome-reveal">
-        <span class="uhome-section-label">{% if request.locale.iso_code == 'en' %}2 minutes in the morning{% else %}2 minutes {% if request.locale.iso_code == 'en' %}in the morning{% else %}le matin{% endif %}{% endif %}</span>
+        <span class="uhome-section-label">{% if request.locale.iso_code == 'en' %}2 minutes in the afternoon{% else %}2 minutes le matin{% endif %}</span>
         <h2 class="uhome-section-title">{% if request.locale.iso_code == 'en' %}The <span class="uhome-accent">UBurn</span> ritual.{% else %}Le rituel <span class="uhome-accent">Uburn.</span>{% endif %}</h2>
-        <p class="uhome-rituel-desc">« {% if request.locale.iso_code == 'en' %}In the morning{% else %}Le matin{% endif %}, tu prends 2 minutes pour toi. Tu mesures, tu mélanges, tu profites. C'est tout. »</p>
+        <p class="uhome-rituel-desc">{% if request.locale.iso_code == 'en' %}"In the afternoon, you take 2 minutes for yourself. You measure, you mix, you enjoy. That's all."{% else %}« Le matin, tu prends 2 minutes pour toi. Tu mesures, tu mélanges, tu profites. C'est tout. »{% endif %}</p>
       </div>
       <div class="uhome-rituel-steps uhome-stagger">
         <div class="uhome-rituel-step">
@@ -120,11 +120,11 @@
         </div>
         <div class="uhome-rituel-step">
           <div class="uhome-rituel-step-img">
-            <img src="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=1200&format=webp" srcset="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=1200&format=webp 1200w" sizes="(min-width:900px) 33vw, 100vw" alt="Mélange UBURN avec eau, lait végétal ou lait de coco" loading="lazy" decoding="async" width="1200" height="1200">
+            <img src="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=1200&format=webp" srcset="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=1200&format=webp 1200w" sizes="(min-width:900px) 33vw, 100vw" alt="{% if request.locale.iso_code == 'en' %}Mix UBURN with water, plant-based milk or coconut milk{% else %}Mélange UBURN avec eau, lait végétal ou lait de coco{% endif %}" loading="lazy" decoding="async" width="1200" height="1200">
           </div>
           <div class="uhome-rituel-step-num">2</div>
           {% if request.locale.iso_code == 'en' %}<div class="uhome-rituel-step-title">Mix</div>{% else %}<div class="uhome-rituel-step-title">Mélange</div>{% endif %}
-          <div class="uhome-rituel-step-desc">Eau froide, lait végétal ou lait de coco. Secoue 15 secondes.</div>
+          <div class="uhome-rituel-step-desc">{% if request.locale.iso_code == 'en' %}Cold water, plant-based milk or coconut milk. Shake for 15 seconds.{% else %}Eau froide, lait végétal ou lait de coco. Secoue 15 secondes.{% endif %}</div>
         </div>
         <div class="uhome-rituel-step">
           <div class="uhome-rituel-step-img">
@@ -224,15 +224,15 @@
             <div class="uhome-cart-thumb"><span class="uhome-cart-thumb-letter">E</span></div>
             <div class="uhome-cart-body">
               <div class="uhome-cart-name">{% if request.locale.iso_code == 'en' %}E-book "30 days to take back control"{% else %}E-book « 30j pour reprendre le contrôle »{% endif %}</div>
-              <span class="uhome-gift-tag">Offert</span>
+              <span class="uhome-gift-tag">{% if request.locale.iso_code == 'en' %}Free{% else %}Offert{% endif %}</span>
             </div>
             <div class="uhome-cart-price"><s>47&nbsp;€</s> 0&nbsp;€</div>
           </div>
           <div class="uhome-cart-item">
             <div class="uhome-cart-thumb"><span class="uhome-cart-thumb-letter">G</span></div>
             <div class="uhome-cart-body">
-              <div class="uhome-cart-name">Groupe privé Uburn Collective</div>
-              <span class="uhome-gift-tag">Offert</span>
+              <div class="uhome-cart-name">{% if request.locale.iso_code == 'en' %}Private community: UBurn Collective{% else %}Groupe privé Uburn Collective{% endif %}</div>
+              <span class="uhome-gift-tag">{% if request.locale.iso_code == 'en' %}Free{% else %}Offert{% endif %}</span>
             </div>
             <div class="uhome-cart-price"><s>40&nbsp;€</s> 0&nbsp;€</div>
           </div>
@@ -240,7 +240,7 @@
             <div class="uhome-cart-thumb"><span class="uhome-cart-thumb-letter">W</span></div>
             <div class="uhome-cart-body">
               <div class="uhome-cart-name">Suivi nutrition WhatsApp 30j</div>
-              <span class="uhome-gift-tag">Offert</span>
+              <span class="uhome-gift-tag">{% if request.locale.iso_code == 'en' %}Free{% else %}Offert{% endif %}</span>
             </div>
             <div class="uhome-cart-price"><s>47&nbsp;€</s> 0&nbsp;€</div>
           </div>
@@ -300,11 +300,11 @@
     <div class="uhome-origine-inner">
       <div class="uhome-origine-photos uhome-reveal">
         <div class="uhome-origine-ph-main">
-          <img src="https://uburn.co/cdn/shop/files/Histoire_01.jpg?v=1763569811&width=1200&format=webp" srcset="https://uburn.co/cdn/shop/files/Histoire_01.jpg?v=1763569811&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Histoire_01.jpg?v=1763569811&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Histoire_01.jpg?v=1763569811&width=1200&format=webp 1200w" sizes="(min-width:900px) 50vw, 100vw" alt="L'ubé vient de là — origine asiatique de la racine violette" loading="lazy" decoding="async">
+          <img src="https://uburn.co/cdn/shop/files/Histoire_01.jpg?v=1763569811&width=1200&format=webp" srcset="https://uburn.co/cdn/shop/files/Histoire_01.jpg?v=1763569811&width=600&format=webp 600w, https://uburn.co/cdn/shop/files/Histoire_01.jpg?v=1763569811&width=900&format=webp 900w, https://uburn.co/cdn/shop/files/Histoire_01.jpg?v=1763569811&width=1200&format=webp 1200w" sizes="(min-width:900px) 50vw, 100vw" alt="{% if request.locale.iso_code == 'en' %}Ube comes from here — purple root origin in Southeast Asia{% else %}L'ubé vient de là — origine asiatique de la racine violette{% endif %}" loading="lazy" decoding="async">
         </div>
         <div class="uhome-origine-ph-sec">
           <img src="{{ 'Mission_M.jpg' | asset_url }}" {% if request.locale.iso_code == 'en' %}alt="On the ground — receiving purple yams"{% else %}alt="Mission terrain — réception des ignames violets"{% endif %} loading="lazy">
-          <img src="{{ 'Histoire_Moodboard_03.png' | asset_url }}" alt="Tranches d'ubé violet frais" loading="lazy">
+          <img src="{{ 'Histoire_Moodboard_03.png' | asset_url }}" alt="{% if request.locale.iso_code == 'en' %}Fresh purple ube slices{% else %}Tranches d'ubé violet frais{% endif %}" loading="lazy">
         </div>
       </div>
       <div class="uhome-reveal uhome-rd2">
@@ -362,10 +362,10 @@
       {% if request.locale.iso_code == 'en' %}<span class="uhome-section-label uhome-reveal">1,500+ customers · Verified reviews</span>{% else %}<span class="uhome-section-label uhome-reveal">1&nbsp;500+ clientes · Avis vérifiés</span>{% endif %}
       {% if request.locale.iso_code == 'en' %}<h2 class="uhome-section-title uhome-reveal uhome-rd1">Their words. <span class="uhome-accent">Not ours.</span></h2>{% else %}<h2 class="uhome-section-title uhome-reveal uhome-rd1">Leurs mots. <span class="uhome-accent">Pas les nôtres.</span></h2>{% endif %}
       <blockquote class="uhome-testi-pull uhome-reveal uhome-rd2">
-        « Je ne pense plus au placard à 16h. Ça me soulage vraiment au quotidien. Une chose simple qui a changé mon rapport à la nourriture. »
+        {% if request.locale.iso_code == 'en' %}"I don't think about the pantry at 4pm anymore. It really helps me day after day. One simple thing that changed how I relate to food."{% else %}« Je ne pense plus au placard à 16h. Ça me soulage vraiment au quotidien. Une chose simple qui a changé mon rapport à la nourriture. »{% endif %}
       </blockquote>
       <div class="uhome-testi-pull-author uhome-reveal uhome-rd3">
-        <span style="color:#f59e0b">★★★★★</span> Marion L., 28 ans, Lyon — {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}
+        <span style="color:#f59e0b">★★★★★</span> Marion L., {% if request.locale.iso_code == 'en' %}28, Lyon{% else %}28 ans, Lyon{% endif %} — {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}
       </div>
       <div class="uhome-testi-grid uhome-stagger-scale">
         <div class="uhome-testi-card">
@@ -467,7 +467,7 @@
         </div>
         <div class="uhome-faq-item">
           <div class="uhome-faq-q">{% if request.locale.iso_code == 'en' %}Water or plant-based milk — what's the difference?{% else %}Avec de l'eau ou avec du lait — quelle différence ?{% endif %}</div>
-          <div class="uhome-faq-a">Les deux fonctionnent parfaitement. Avec de l'eau froide, la boisson est légère et rafraîchissante. Avec un lait végétal (amande, avoine, coco), la texture est plus crémeuse et la saveur noisette-vanille encore plus prononcée.</div>
+          <div class="uhome-faq-a">{% if request.locale.iso_code == 'en' %}Both work great. With cold water, the drink is light and refreshing. With plant-based milk (almond, oat, coconut), the texture is creamier and the hazelnut-vanilla flavor more pronounced.{% else %}Les deux fonctionnent parfaitement. Avec de l'eau froide, la boisson est légère et rafraîchissante. Avec un lait végétal (amande, avoine, coco), la texture est plus crémeuse et la saveur noisette-vanille encore plus prononcée.{% endif %}</div>
         </div>
       </div>
     </div>
@@ -488,7 +488,7 @@
       <p>{% if request.locale.iso_code == 'en' %}One scoop. One glass. 4 hours of calm. No diet, no restriction, flexible subscription.{% else %}Une dose. Un verre. 4h de tranquillité. Sans régime, sans privation, abonnement flexible.{% endif %}</p>
       <div class="uhome-final-actions">
         <a href="/products/ube-poudre?variant=51289200066879" class="uhome-btn uhome-btn-white" style="justify-content:center;font-family:'Red Hat Display',sans-serif;font-weight:800;font-size:16px;padding:18px 32px">
-          Commander → dès 34,50&nbsp;€
+          {% if request.locale.iso_code == 'en' %}Order → from $35{% else %}Commander → dès 34,50&nbsp;€{% endif %}
         </a>
         <div class="uhome-final-sub">{% if request.locale.iso_code == 'en' %}Free shipping · Ships in 24-48h{% else %}Livraison offerte · Expédition 24-48h{% endif %}</div>
       </div>
@@ -523,7 +523,7 @@
           <img src="https://uburn.co/cdn/shop/files/Picto_secure_payment.svg" alt="" aria-hidden="true">
         </div>
         <h4>{% if request.locale.iso_code == 'en' %}Secure checkout{% else %}Paiement sécurisé{% endif %}</h4>
-        <p>100% sécurisé</p>
+        <p>{% if request.locale.iso_code == 'en' %}100% secure{% else %}100% sécurisé{% endif %}</p>
       </div>
       <div class="uhome-guar-item">
         <div class="uhome-guar-icon">
@@ -538,7 +538,7 @@
   {%- comment -%} ══ STICKY MOBILE CTA ══ {%- endcomment -%}
   <div class="uhome-sticky" id="uhome-sticky" aria-label="CTA mobile">
     <a href="/products/ube-poudre?variant=51289200066879">
-      Commencer ma cure — dès 34,50&nbsp;€
+      {% if request.locale.iso_code == 'en' %}Start my pack — from $35{% else %}Commencer ma cure — dès 34,50&nbsp;€{% endif %}
     </a>
   </div>
 
