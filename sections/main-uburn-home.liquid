@@ -37,8 +37,8 @@
       </div>
     </div>
     <div class="uhome-hero-trust">
-      <div class="uhome-hero-pill">★★★★★ 4,7/5 · 1&nbsp;500+ clientes</div>
-      <div class="uhome-hero-pill">{% if request.locale.iso_code == 'en' %}Research-backed*{% else %}Allégation{% endif %} EFSA validée</div>
+      <div class="uhome-hero-pill">★★★★★ 4,7/5 · {% if request.locale.iso_code == 'en' %}1,500+ customers{% else %}1&nbsp;500+ clientes{% endif %}</div>
+      <div class="uhome-hero-pill">{% if request.locale.iso_code == 'en' %}Research-backed* FDA dietary fiber*{% else %}Allégation EFSA validée{% endif %}</div>
       <div class="uhome-hero-pill">{% if request.locale.iso_code == 'en' %}Free U.S. shipping on orders $40+{% else %}Livraison offerte en France{% endif %}</div>
     </div>
   </section>
@@ -48,21 +48,21 @@
     <div class="uhome-marquee-track">
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %}</span>
-      <span class="uhome-marquee-item">30 kcal par dose</span>
+      <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}30 kcal per scoop{% else %}30 kcal par dose{% endif %}</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Free shipping{% else %}Livraison offerte{% endif %}</span>
-      <span class="uhome-marquee-item">1&nbsp;500+ clientes</span>
+      <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}1,500+ customers{% else %}1&nbsp;500+ clientes{% endif %}</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</span>
       {% if request.locale.iso_code == 'en' %}<span class="uhome-marquee-item">Lasting 4-hour satiety*</span>{% else %}<span class="uhome-marquee-item">Satiété durable 4h</span>{% endif %}
-      <span class="uhome-marquee-item">6 actifs naturels</span>
+      <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}6 natural actives{% else %}6 actifs naturels{% endif %}</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}French brand{% else %}Marque française{% endif %}</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %}</span>
-      <span class="uhome-marquee-item">30 kcal par dose</span>
+      <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}30 kcal per scoop{% else %}30 kcal par dose{% endif %}</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Free shipping{% else %}Livraison offerte{% endif %}</span>
-      <span class="uhome-marquee-item">1&nbsp;500+ clientes</span>
+      <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}1,500+ customers{% else %}1&nbsp;500+ clientes{% endif %}</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</span>
       {% if request.locale.iso_code == 'en' %}<span class="uhome-marquee-item">Lasting 4-hour satiety*</span>{% else %}<span class="uhome-marquee-item">Satiété durable 4h</span>{% endif %}
-      <span class="uhome-marquee-item">6 actifs naturels</span>
+      <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}6 natural actives{% else %}6 actifs naturels{% endif %}</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}French brand{% else %}Marque française{% endif %}</span>
     </div>
   </div>
@@ -85,12 +85,12 @@
       <div class="uhome-expert-img">
         <img
           src="https://uburn.co/cdn/shop/files/Gemini_Generated_Image_gjm16fgjm16fgjm1.png?v=1776424158&width=800"
-          alt="Dr. Claire Dubois — Nutritionniste"
+          alt="{% if request.locale.iso_code == 'en' %}Dr. Claire Dubois — Nutritionist{% else %}Dr. Claire Dubois — Nutritionniste{% endif %}"
           loading="lazy" decoding="async" width="800" height="800"
         >
       </div>
       <div>
-        <p class="uhome-expert-quote">« Une formule rare : la science du konjac au service du quotidien des femmes. »</p>
+        <p class="uhome-expert-quote">{% if request.locale.iso_code == 'en' %}"A rare formula: konjac science at the service of women's daily lives."{% else %}« Une formule rare : la science du konjac au service du quotidien des femmes. »{% endif %}</p>
         <div class="uhome-expert-body">
           {% if request.locale.iso_code == 'en' %}The UBurn formula combines research-backed glucomannan with 5 synergistic actives, each scientifically formulated for a level of support rarely found in a single drink. Designed for real life.*{% else %}La formule UBurn combine glucomannane validé EFSA et 5 actifs synergiques, chacun dosé cliniquement pour un niveau de soutien rarement atteint dans une seule boisson. Pensée pour la vraie vie.{% endif %}
         </div>
@@ -142,7 +142,7 @@
   <section class="uhome-problem">
     <div class="uhome-problem-inner uhome-reveal">
       <span class="uhome-section-label">{% if request.locale.iso_code == 'en' %}It's not a willpower problem{% else %}Ce n'est pas un manque de volonté{% endif %}</span>
-      <h2 class="uhome-section-title">C'est <span class="uhome-accent">biologique.</span></h2>
+      <h2 class="uhome-section-title">{% if request.locale.iso_code == 'en' %}It's <span class="uhome-accent">biological.</span>{% else %}C'est <span class="uhome-accent">biologique.</span>{% endif %}</h2>
       <div class="uhome-prob-cards uhome-stagger-scale">
         <div class="uhome-prob-card">
           <div class="uhome-prob-num">16h</div>
@@ -324,7 +324,7 @@
   <section class="uhome-benefits">
     <div class="uhome-benefits-inner">
       <div class="uhome-benefits-head uhome-reveal">
-        <span class="uhome-section-label">Soutien complet</span>
+        <span class="uhome-section-label">{% if request.locale.iso_code == 'en' %}Complete support{% else %}Soutien complet{% endif %}</span>
         <h2 class="uhome-section-title">{% if request.locale.iso_code == 'en' %}6 benefits. <span class="uhome-accent">One single drink.</span>{% else %}6 bienfaits. <span class="uhome-accent">Une seule boisson.</span>{% endif %}</h2>
       </div>
       <div class="uhome-benefits-grid uhome-stagger-scale">
@@ -334,7 +334,7 @@
           </div>
           {% if request.locale.iso_code == 'en' %}<div class="uhome-benefit-name">4-hour satiety*</div>{% else %}<div class="uhome-benefit-name">Satiété 4h</div>{% endif %}
           <p class="uhome-benefit-desc">{% if request.locale.iso_code == 'en' %}Konjac forms a natural gel in the stomach.{% else %}Le konjac forme un gel naturel dans l'estomac.{% endif %} {% if request.locale.iso_code == 'en' %}Research-backed*{% else %}Allégation{% endif %} {% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID&nbsp;3120{% endif %} — {% if request.locale.iso_code == 'en' %}clinically validated satiety from the first dose.{% else %}satiété cliniquement validée dès la 1ère prise.{% endif %}</p>
-          <span class="uhome-benefit-badge">Glucomannane · 3g/dose</span>
+          <span class="uhome-benefit-badge">{% if request.locale.iso_code == 'en' %}Glucomannan · 3g/scoop{% else %}Glucomannane · 3g/dose{% endif %}</span>
         </div>
         <div class="uhome-benefit-card">
           <div class="uhome-benefit-icon">
@@ -350,7 +350,7 @@
           </div>
           {% if request.locale.iso_code == 'en' %}<div class="uhome-benefit-name">Digestive comfort*</div>{% else %}<div class="uhome-benefit-name">Digestion apaisée</div>{% endif %}
           {% if request.locale.iso_code == 'en' %}<p class="uhome-benefit-desc">Prebiotic acacia fiber + organic ginger for daily digestive comfort and a balanced microbiome.*</p>{% else %}<p class="uhome-benefit-desc">Fibre d'acacia prébiotique + gingembre bio pour un confort digestif au quotidien et un microbiote équilibré.</p>{% endif %}
-          <span class="uhome-benefit-badge">6 actifs naturels</span>
+          <span class="uhome-benefit-badge">{% if request.locale.iso_code == 'en' %}6 natural actives{% else %}6 actifs naturels{% endif %}</span>
         </div>
       </div>
     </div>
@@ -459,7 +459,7 @@
         </div>
         <div class="uhome-faq-item">
           <div class="uhome-faq-q">{% if request.locale.iso_code == 'en' %}Is subscription required?{% else %}L'abonnement est-il obligatoire ?{% endif %}</div>
-          <div class="uhome-faq-a">Tu peux choisir un achat unique OU un abonnement avec -10% (annulable, sautable ou en pause à tout moment). Aucune obligation.</div>
+          <div class="uhome-faq-a">{% if request.locale.iso_code == 'en' %}You can choose a one-time purchase OR a subscription with 10% off (cancel, skip or pause anytime). No commitment.{% else %}Tu peux choisir un achat unique OU un abonnement avec -10% (annulable, sautable ou en pause à tout moment). Aucune obligation.{% endif %}</div>
         </div>
         <div class="uhome-faq-item">
           <div class="uhome-faq-q">{% if request.locale.iso_code == 'en' %}Can I drink it at night? Caffeine-free?{% else %}Compatible le soir ? Sans caféine ?{% endif %}</div>
