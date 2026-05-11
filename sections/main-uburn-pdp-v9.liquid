@@ -219,6 +219,40 @@
             <input type="hidden" name="id" value="{{ current_variant.id }}">
           {%- endif -%}
 
+          {%- comment -%} ─── Subscription radio (EN only — FR keeps "Sans abonnement" trust point) ─── {%- endcomment -%}
+          {%- if product.selling_plan_groups.size > 0 and request.locale.iso_code == 'en' -%}
+            {%- assign _plan_group = product.selling_plan_groups | first -%}
+            {%- assign _plan = _plan_group.selling_plans | first -%}
+            {%- assign _plan_discount_pct = 10 -%}
+            {%- if _plan.price_adjustments.size > 0 -%}
+              {%- assign _adj = _plan.price_adjustments | first -%}
+              {%- if _adj.value_type == 'percentage' -%}
+                {%- assign _plan_discount_pct = _adj.value -%}
+              {%- endif -%}
+            {%- endif -%}
+            {%- assign _sub_price_cents = current_variant.price | times: 100 | minus: current_variant.price | times: _plan_discount_pct | divided_by: 100 -%}
+            {%- assign _sub_price = current_variant.price | times: 100 | minus: current_variant.price | times: _plan_discount_pct | divided_by: 100 -%}
+            <fieldset class="pdpv9-pdp__purchase-mode" role="radiogroup" style="margin:14px 0;border:0;padding:0;">
+              <legend style="font-weight:700;font-size:14px;margin-bottom:8px;color:#1a1a1a;">{% if request.locale.iso_code == 'en' %}Purchase option{% else %}Mode d'achat{% endif %}</legend>
+              <label class="pdpv9-pdp__mode pdpv9-pdp__mode--onetime" style="display:flex;gap:10px;padding:12px 14px;border:1.5px solid #E0DCE5;border-radius:10px;cursor:pointer;margin-bottom:8px;align-items:flex-start;">
+                <input type="radio" name="selling_plan" value="" checked style="margin-top:2px;accent-color:#2A1054;">
+                <span style="flex:1;">
+                  <strong style="display:block;font-size:14px;color:#1a1a1a;">{% if request.locale.iso_code == 'en' %}One-time purchase{% else %}Achat unique{% endif %}</strong>
+                  <span style="display:block;font-size:13px;color:#666;margin-top:2px;">{% render 'locale-price', price: current_variant.price %}</span>
+                </span>
+              </label>
+              <label class="pdpv9-pdp__mode pdpv9-pdp__mode--sub" style="display:flex;gap:10px;padding:12px 14px;border:1.5px solid #2A1054;border-radius:10px;cursor:pointer;background:linear-gradient(135deg,#F2F0FA 0%,#FAF9F7 100%);align-items:flex-start;position:relative;">
+                <span style="position:absolute;top:-9px;right:14px;background:#2A1054;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;letter-spacing:0.3px;">{% if request.locale.iso_code == 'en' %}SAVE {{ _plan_discount_pct }}%{% else %}-{{ _plan_discount_pct }}%{% endif %}</span>
+                <input type="radio" name="selling_plan" value="{{ _plan.id }}" style="margin-top:2px;accent-color:#2A1054;">
+                <span style="flex:1;">
+                  <strong style="display:block;font-size:14px;color:#2A1054;">{% if request.locale.iso_code == 'en' %}Subscribe & Save {{ _plan_discount_pct }}%{% else %}Abonnement -{{ _plan_discount_pct }}%{% endif %}</strong>
+                  <span style="display:block;font-size:13px;color:#2A1054;font-weight:600;margin-top:2px;">{% render 'locale-price', price: _sub_price %} {{ _plan.name | downcase | replace: 'subscribe & save 10%', '' | strip }}</span>
+                  <span style="display:block;font-size:11px;color:#555;margin-top:4px;">{% if request.locale.iso_code == 'en' %}✓ Cancel anytime  ✓ Free shipping  ✓ Bonuses included{% else %}✓ Annulable à tout moment  ✓ Livraison offerte  ✓ Bonus inclus{% endif %}</span>
+                </span>
+              </label>
+            </fieldset>
+          {%- endif -%}
+
           <div class="pdpv9-pdp__qty-row">
             <label for="pdpv9-pdp-qty" class="pdpv9-pdp__qty-label">{% if request.locale.iso_code == 'en' %}Quantity{% else %}Quantité{% endif %}</label>
             <div class="pdpv9-pdp__qty-input-wrap">
@@ -239,8 +273,8 @@
         {%- comment -%} Sub-CTA trust line (under the CTA) {%- endcomment -%}
         <p class="pdpv9-pdp__atc-trust">{% if request.locale.iso_code == 'en' %}Free U.S. shipping · Secure checkout · Bonuses included{% else %}{% if request.locale.iso_code == 'en' %}Free U.S. shipping{% else %}Livraison gratuite en France{% endif %} · {% if request.locale.iso_code == 'en' %}Secure checkout{% else %}Paiement sécurisé{% endif %} · Bonus inclus{% endif %}</p>
 
-        {%- comment -%} ─── Subscribe & Save tease (EN only) ─── {%- endcomment -%}
-        {%- if request.locale.iso_code == 'en' -%}
+        {%- comment -%} ─── Subscribe & Save tease (EN only, hidden if real selling plan installed) ─── {%- endcomment -%}
+        {%- if request.locale.iso_code == 'en' and product.selling_plan_groups.size == 0 -%}
         <div class="pdpv9-pdp__sub-tease" style="margin:20px 0 12px;padding:16px 18px;background:linear-gradient(135deg,#F2F0FA 0%,#FAF9F7 100%);border:1px solid #E8E4F0;border-radius:14px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
             <span style="font-size:20px;line-height:1;" aria-hidden="true">🔁</span>
