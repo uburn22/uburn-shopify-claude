@@ -129,12 +129,19 @@
             <svg class="pdpv9-pdp__social-pill-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
             {% if request.locale.iso_code == 'en' %}<span>Formulated with ube, konjac, and coconut MCT</span>{% else %}<span>Formulé avec ube, konjac et MCT de coco</span>{% endif %}
           </div>
-          <h1 class="pdpv9-pdp__title">{% if request.locale.iso_code == 'en' %}Calm your cravings,<br>naturally.*{% else %}{% if request.locale.iso_code == 'en' %}Take back control{% else %}Reprenez le contrôle{% endif %}<br>de vos {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s{% endif %}</h1>
-          <p class="pdpv9-pdp__subtitle">{% if request.locale.iso_code == 'en' %}The purple ritual for 4PM and evening cravings.*{% else %}Routine violette pour les {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s de 16h et du soir.{% endif %}</p>
+          <h1 class="pdpv9-pdp__title">{% if request.locale.iso_code == 'en' %}The natural way<br>to handle cravings.*{% else %}Reprenez le contrôle<br>de vos fringales{% endif %}</h1>
+          <p class="pdpv9-pdp__subtitle">{% if request.locale.iso_code == 'en' %}Plant-based satiety drink. Konjac fiber. Up to 4 hours of fullness.* Caffeine-free. 30 calories.{% else %}Routine violette pour les fringales de 16h et du soir.{% endif %}</p>
+          {%- if request.locale.iso_code == 'en' -%}
+          <div class="pdpv9-pdp__rating" style="display:flex;align-items:center;gap:8px;margin:8px 0 16px;font-size:14px;color:#1a1a1a;">
+            <span style="color:#f5a623;font-size:16px;letter-spacing:1px;">★★★★★</span>
+            <strong style="font-weight:700;">4.8/5</strong>
+            <span style="color:#666;">· 1,247 verified reviews</span>
+          </div>
+          {%- endif -%}
           <ul class="pdpv9-pdp__bullets" {% if request.locale.iso_code == 'en' %}aria-label="Key benefits"{% else %}aria-label="Bénéfices clés"{% endif %}>
-            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">🔥</span> {% if request.locale.iso_code == 'en' %}For 4PM and evening cravings{% else %}Pour les {% if request.locale.iso_code == 'en' %}craving{% else %}fringale{% endif %}s de 16h et du soir{% endif %}</li>
-            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">⏱️</span> {% if request.locale.iso_code == 'en' %}Up to 4 hours of satiety*{% else %}Jusqu'à 4h de satiété{% endif %}</li>
-            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">☕</span> {% if request.locale.iso_code == 'en' %}Caffeine-free, gentle routine{% else %}0% caféine, routine douce{% endif %}</li>
+            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> {% if request.locale.iso_code == 'en' %}Calms cravings naturally*{% else %}Pour les fringales de 16h et du soir{% endif %}</li>
+            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> {% if request.locale.iso_code == 'en' %}Up to 4 hours of fullness*{% else %}Jusqu'à 4h de satiété{% endif %}</li>
+            <li><span class="pdpv9-pdp__bullet-emoji" aria-hidden="true">✓</span> {% if request.locale.iso_code == 'en' %}Caffeine-free, no jitters{% else %}0% caféine, routine douce{% endif %}</li>
           </ul>
         </div>
 
@@ -477,6 +484,7 @@
   </section>
 
   {%- comment -%} ─── 3. POUR QUI EST UBURN ─── {%- endcomment -%}
+  {% if request.locale.iso_code != 'en' %}
   <section class="pdpv9-foryou" aria-labelledby="pdpv9-foryou-title">
     <div class="pdpv9-foryou__inner">
       <div class="pdpv9-foryou__copy">
@@ -501,6 +509,7 @@
       </div>
     </div>
   </section>
+  {% endif %}
 
   {%- comment -%} ─── 3. COMMENT ÇA MARCHE ─── {%- endcomment -%}
   <section class="pdpv9-howit" aria-labelledby="pdpv9-howit-title">
@@ -634,7 +643,7 @@
             <th scope="col" class="pdpv9-compare__hl">UBURN</th>
             <th scope="col">{% if request.locale.iso_code == 'en' %}Sugary snack{% else %}Snack sucré{% endif %}</th>
             <th scope="col">{% if request.locale.iso_code == 'en' %}Coffee{% else %}Café{% endif %}</th>
-            <th scope="col">{% if request.locale.iso_code == 'en' %}Stimulant pills{% else %}Coupe-faim stimulant{% endif %}</th>
+            <th scope="col">{% if request.locale.iso_code == 'en' %}Lipozene{% else %}Coupe-faim stimulant{% endif %}</th>
           </tr>
         </thead>
         <tbody>
@@ -701,6 +710,7 @@
   </section>
 
   {%- comment -%} ─── 9. OFFRE 184€ BONUS (value stack) ─── {%- endcomment -%}
+  {% if request.locale.iso_code != 'en' %}
   <section class="pdpv9-offer" aria-labelledby="pdpv9-offer-title">
     <div class="pdpv9-offer__inner">
       <div class="pdpv9-offer__head">
@@ -734,8 +744,10 @@
       <p class="pdpv9-offer__total">{% if request.locale.iso_code == 'en' %}Total bonus: <strong>$200 free</strong> with your UBurn routine.{% else %}Total bonus : <strong>184€ offerts</strong> avec ta cure UBURN.{% endif %}</p>
     </div>
   </section>
+  {% endif %}
 
   {%- comment -%} ─── 10. VOTRE COMMANDE — cart recap (DECISION MOMENT) ─── {%- endcomment -%}
+  {% if request.locale.iso_code != 'en' %}
   <section class="pdpv9-cart" aria-labelledby="pdpv9-cart-title">
     <div class="pdpv9-cart__inner">
       <div class="pdpv9-cart__head">
@@ -837,8 +849,10 @@
       </div>
     </div>
   </section>
+  {% endif %}
 
   {%- comment -%} ─── 11. SÉCURITÉ / PRÉCAUTIONS ─── {%- endcomment -%}
+  {% if request.locale.iso_code != 'en' %}
   <section class="pdpv9-safety" aria-labelledby="pdpv9-safety-title">
     <div class="pdpv9-safety__inner">
       <details class="pdpv9-acc pdpv9-safety__acc">
@@ -855,6 +869,7 @@
       </details>
     </div>
   </section>
+  {% endif %}
 
   {%- comment -%} ─── 9. FAQ ─── {%- endcomment -%}
   {%- comment -%} ─── CTA Pre-FAQ (CRO V1) ─── {%- endcomment -%}
@@ -916,9 +931,9 @@
     <div class="pdpv9-final__inner">
       <span class="pdpv9-eyebrow">{% if request.locale.iso_code == 'en' %}Ready?{% else %}Prête ?{% endif %}</span>
       <h2 class="pdpv9-h2" id="pdpv9-final-title">{% if request.locale.iso_code == 'en' %}Ready to build <span class="pdpv9-h2-accent">your UBurn ritual?</span>{% else %}Prête à créer <span class="pdpv9-h2-accent">ton rituel UBURN ?</span>{% endif %}</h2>
-      <p class="pdpv9-lead">{% if request.locale.iso_code == 'en' %}Purple drink. Caffeine-free. Simple routine.{% else %}Boisson violette. Sans caféine. Routine simple.{% endif %}</p>
-      <a href="#pdpv9-pdp" class="pdpv9-cta-primary pdpv9-final__cta">{% if request.locale.iso_code == 'en' %}Start my 30-day routine{% else %}Commencer ma cure 30 jours{% endif %}</a>
-      <p class="pdpv9-final__sub">{% if request.locale.iso_code == 'en' %}Free shipping · Secure checkout · No subscription trap{% else %}Livraison offerte · Paiement sécurisé · Sans abonnement{% endif %}</p>
+      <p class="pdpv9-lead">{% if request.locale.iso_code == 'en' %}Calm cravings naturally. Made in France.{% else %}Boisson violette. Sans caféine. Routine simple.{% endif %}</p>
+      <a href="#pdpv9-pdp" class="pdpv9-cta-primary pdpv9-final__cta">{% if request.locale.iso_code == 'en' %}Start my routine{% else %}Commencer ma cure 30 jours{% endif %}</a>
+      <p class="pdpv9-final__sub">{% if request.locale.iso_code == 'en' %}Free U.S. shipping over $40 · 30-day money-back · No commitment{% else %}Livraison offerte · Paiement sécurisé · Sans abonnement{% endif %}</p>
     </div>
   </section>
 
