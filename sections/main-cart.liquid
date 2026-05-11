@@ -143,12 +143,10 @@
                             <div class="h-stack justify-between gap-4">
                               <span>{{ 'cart.general.subtotal' | t }}</span>
                               <span>
-                                {%- if settings.currency_code_enabled -%}
-                                  {%- if request.locale.iso_code == 'en' -%}
-                                    {%- render 'locale-price', price: cart.items_subtotal_price -%} <small style="font-size:10px;color:#888;">({{ cart.items_subtotal_price | money }})</small>
-                                  {%- else -%}
-                                    {{- cart.items_subtotal_price | money_with_currency -}}
-                                  {%- endif -%}
+                                {%- if request.locale.iso_code == 'en' -%}
+                                  {%- render 'locale-price', price: cart.items_subtotal_price -%} <small style="font-size:10px;color:#888;">({{ cart.items_subtotal_price | money }})</small>
+                                {%- elsif settings.currency_code_enabled -%}
+                                  {{- cart.items_subtotal_price | money_with_currency -}}
                                 {%- else -%}
                                   {{- cart.items_subtotal_price | money -}}
                                 {%- endif -%}
