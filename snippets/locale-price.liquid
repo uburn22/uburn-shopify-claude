@@ -1,0 +1,22 @@
+{%- comment -%}
+  locale-price.liquid — renders price in $USD for EN locale, €EUR for FR.
+
+  Usage: {% render 'locale-price', price: variant.price %}
+
+  Conversion: EUR cents × 1.08 → USD, rounded to nearest dollar.
+  Liquid integer math: use times:108 then divided_by:100 keeps cents, then
+  divided_by:100.0 (float) before round gives proper rounding.
+
+  Format EN: $XX (no decimals, psychological pricing)
+  Format FR: standard {{ price | money }} → €X,XX
+
+  Note: Shopify checkout charges in EUR (store base currency). Display USD is
+  informational. Disclaimer added near main price.
+{%- endcomment -%}
+{%- if request.locale.iso_code == 'en' -%}
+  {%- assign _usd_cents = price | times: 108 | divided_by: 100 -%}
+  {%- assign _usd = _usd_cents | divided_by: 100.0 | round -%}
+  ${{ _usd }}
+{%- else -%}
+  {{ price | money }}
+{%- endif -%}
