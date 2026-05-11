@@ -207,6 +207,39 @@
     text-align: center;
     flex-shrink: 0;
   }
+  /* Compact variant cards (EN US) — reduce visual dominance, let Sub/One-time lead */
+  .pdpv9-pdp__variant--compact .pdpv9-pdp__variant-tag { display: none; }
+  .pdpv9-pdp__variant--compact {
+    padding: 12px 14px !important;
+    min-height: auto;
+  }
+  .pdpv9-pdp__variant--compact .pdpv9-pdp__variant-name {
+    font-size: 15px !important;
+    font-weight: 700;
+    margin: 0;
+  }
+  .pdpv9-pdp__variant--compact .pdpv9-pdp__variant-meta {
+    font-size: 11px !important;
+    color: #888 !important;
+    margin: 2px 0 4px;
+  }
+  .pdpv9-pdp__variant--compact .pdpv9-pdp__variant-price {
+    font-size: 17px !important;
+    font-weight: 800;
+  }
+  .pdpv9-pdp__variant--compact .pdpv9-pdp__variant-perday {
+    font-size: 11px !important;
+  }
+  .pdpv9-pdp__variant--compact .pdpv9-pdp__variant-badge {
+    font-size: 9px !important;
+    padding: 3px 7px !important;
+  }
+  @media (max-width: 600px) {
+    .pdpv9-pdp__variant--compact { padding: 10px 12px !important; }
+    .pdpv9-pdp__variant--compact .pdpv9-pdp__variant-name { font-size: 14px !important; }
+    .pdpv9-pdp__variant--compact .pdpv9-pdp__variant-price { font-size: 16px !important; }
+  }
+
   /* Press logos bar */
   .pdpv9-press {
     padding: 24px 16px;
@@ -378,15 +411,15 @@
               {%- for v in product.variants -%}
                 {%- liquid
                   if request.locale.iso_code == 'en'
-                    assign vmeta = '90g · 1 scoop/day · 30 days'
-                    assign vunit = '$1.24/day'
+                    assign vmeta = '90g · 30 days'
+                    assign vunit = '$1.23/day'
                     assign vdays = '30'
-                    assign vtag = 'To try the routine'
+                    assign vtag = ''
                     if forloop.index == 2
-                      assign vmeta = '270g · 3 scoops/day · 30 days'
+                      assign vmeta = '270g · 30 days'
                       assign vunit = '$0.66/scoop'
                       assign vdays = '30'
-                      assign vtag = 'Best price per scoop'
+                      assign vtag = ''
                     endif
                   else
                     assign vmeta = '90g · 1 dose/jour · 30 jours'
@@ -401,12 +434,12 @@
                     endif
                   endif
                 -%}
-                <label class="pdpv9-pdp__variant{% if forloop.index == 2 %} pdpv9-pdp__variant--pop{% endif %}{% if v.id == current_variant.id %} pdpv9-pdp__variant--selected{% endif %}{% unless v.available %} pdpv9-pdp__variant--sold{% endunless %}">
+                <label class="pdpv9-pdp__variant pdpv9-pdp__variant--compact{% if forloop.index == 2 %} pdpv9-pdp__variant--pop{% endif %}{% if v.id == current_variant.id %} pdpv9-pdp__variant--selected{% endif %}{% unless v.available %} pdpv9-pdp__variant--sold{% endunless %}">
                   <input type="radio" name="id" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %} class="pdpv9-pdp__variant-input" data-vidx="{{ forloop.index }}" data-vprice="{{ v.price }}" data-vprice-money="{% render 'locale-price', price: v.price %}" data-vunit-price="{{ vunit }}" data-vdays="{{ vdays }}">
                   {%- if forloop.index == 2 -%}<span class="pdpv9-pdp__variant-badge">{% if request.locale.iso_code == 'en' %}Best Value{% else %}Le + populaire{% endif %}</span>{%- endif -%}
                   <span class="pdpv9-pdp__variant-body">
                     <span class="pdpv9-pdp__variant-name">{{ v.title | split: ' | ' | first | replace: ' ⭐', '' }}</span>
-                    <span class="pdpv9-pdp__variant-tag">{{ vtag }}</span>
+                    {%- if vtag != '' -%}<span class="pdpv9-pdp__variant-tag">{{ vtag }}</span>{%- endif -%}
                     <span class="pdpv9-pdp__variant-meta">{{ vmeta }}</span>
                     <span class="pdpv9-pdp__variant-price-row">
                       <span class="pdpv9-pdp__variant-price">{% render 'locale-price', price: v.price %}{% if v.compare_at_price > v.price %} <s>{% render 'locale-price', price: v.compare_at_price %}</s>{% endif %}</span>
@@ -1439,13 +1472,21 @@
       return (n / 100).toFixed(2).replace('.', ',') + '€';
     }
 
-    // EN locale = USD output via locale-price snippet (rate 1.08, rounded to nearest $).
+    // EN locale = USD output via locale-price snippet (hardcoded psychological pricing per variant).
     // FR locale = native €X,XX
+    // Keep in sync with snippets/locale-price.liquid case map.
+    var USD_PSYCHOLOGICAL = {
+      3450: '$36.99',  // Starter base (€34.50)
+      5450: '$58.99',  // Maximum base (€54.50)
+      3105: '$32.99',  // Starter sub -10% (€31.05)
+      4905: '$52.99'   // Maximum sub -10% (€49.05)
+    };
     function formatPriceLocale(cents) {
       var n = parseInt(cents, 10);
       if (isNaN(n)) return '';
       if (__isEn) {
-        // mirror locale-price.liquid: cents * 1.08, round to whole dollars
+        if (USD_PSYCHOLOGICAL[n]) return USD_PSYCHOLOGICAL[n];
+        // fallback: cents * 1.08, round to whole dollars
         var usd = Math.round((n * 1.08) / 100);
         return '$' + usd;
       }
