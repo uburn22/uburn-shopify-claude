@@ -32,23 +32,23 @@
       <div class="footer-col">
         <h4>{% if request.locale.iso_code == 'en' %}Product{% else %}Produit{% endif %}</h4>
         <a href="/products/ube-poudre">{% if request.locale.iso_code == 'en' %}Ube Powder{% else %}Ube Poudre{% endif %}</a>
-        <a href="{% if request.locale.iso_code == 'en' %}/en/pages/ingredients{% else %}/pages/ingredients{% endif %}">{% if request.locale.iso_code == 'en' %}Ingredients{% else %}Ingrédients{% endif %}</a>
+        <a href="/pages/ingredients">{% if request.locale.iso_code == 'en' %}Ingredients{% else %}Ingrédients{% endif %}</a>
         <a href="/collections/all">{% if request.locale.iso_code == 'en' %}Shop{% else %}Boutique{% endif %}</a>
         <a href="/#avis">{% if request.locale.iso_code == 'en' %}Reviews{% else %}Avis clients{% endif %}</a>
       </div>
       <div class="footer-col">
         <h4>{% if request.locale.iso_code == 'en' %}Support{% else %}Support{% endif %}</h4>
-        <a href="{% if request.locale.iso_code == 'en' %}/en/pages/faq{% else %}/pages/faq{% endif %}">FAQ</a>
-        <a href="{% if request.locale.iso_code == 'en' %}/en/pages/contact{% else %}/pages/contact{% endif %}">Contact</a>
+        <a href="{% if request.locale.iso_code == 'en' %}/pages/faq-us-en{% else %}/pages/faq{% endif %}">FAQ</a>
+        <a href="/pages/contact">Contact</a>
         <a href="/policies/shipping-policy">{% if request.locale.iso_code == 'en' %}Shipping{% else %}Livraison{% endif %}</a>
         <a href="/policies/privacy-policy">{% if request.locale.iso_code == 'en' %}Privacy{% else %}Confidentialité{% endif %}</a>
       </div>
       <div class="footer-col">
         <h4>{% if request.locale.iso_code == 'en' %}Company{% else %}Entreprise{% endif %}</h4>
-        <a href="{% if request.locale.iso_code == 'en' %}/en/pages/notre-histoire{% else %}/pages/notre-histoire{% endif %}">{% if request.locale.iso_code == 'en' %}About{% else %}À propos{% endif %}</a>
+        <a href="{% if request.locale.iso_code == 'en' %}/pages/about-us-en{% else %}/pages/notre-histoire{% endif %}">{% if request.locale.iso_code == 'en' %}About{% else %}À propos{% endif %}</a>
         <a href="/policies/terms-of-service">{% if request.locale.iso_code == 'en' %}Terms{% else %}CGV{% endif %}</a>
         <a href="/policies/legal-notice">{% if request.locale.iso_code == 'en' %}Legal notice{% else %}Mentions légales{% endif %}</a>
-        <a href="{% if request.locale.iso_code == 'en' %}/en/pages/contact{% else %}/pages/contact{% endif %}">{% if request.locale.iso_code == 'en' %}Press{% else %}Presse{% endif %}</a>
+        <a href="/pages/contact">{% if request.locale.iso_code == 'en' %}Press{% else %}Presse{% endif %}</a>
       </div>
     </div>
     <div class="footer-bottom">

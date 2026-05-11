@@ -33,13 +33,13 @@
         <a href="/products/ube-poudre?variant=51289200066879" class="uhome-btn uhome-btn-fill">
           Commander — dès 34,50&nbsp;€
         </a>
-        <span class="uhome-hero-note">Livraison offerte · {% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</span>
+        <span class="uhome-hero-note">{% if request.locale.iso_code == 'en' %}Free shipping{% else %}Livraison offerte{% endif %} · {% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</span>
       </div>
     </div>
     <div class="uhome-hero-trust">
       <div class="uhome-hero-pill">★★★★★ 4,7/5 · 1&nbsp;500+ clientes</div>
       <div class="uhome-hero-pill">{% if request.locale.iso_code == 'en' %}Research-backed*{% else %}Allégation{% endif %} EFSA validée</div>
-      <div class="uhome-hero-pill">Livraison offerte en France</div>
+      <div class="uhome-hero-pill">{% if request.locale.iso_code == 'en' %}Free U.S. shipping on orders $40+{% else %}Livraison offerte en France{% endif %}</div>
     </div>
   </section>
 
@@ -49,7 +49,7 @@
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %}</span>
       <span class="uhome-marquee-item">30 kcal par dose</span>
-      <span class="uhome-marquee-item">Livraison offerte</span>
+      <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Free shipping{% else %}Livraison offerte{% endif %}</span>
       <span class="uhome-marquee-item">1&nbsp;500+ clientes</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</span>
       {% if request.locale.iso_code == 'en' %}<span class="uhome-marquee-item">Lasting 4-hour satiety*</span>{% else %}<span class="uhome-marquee-item">Satiété durable 4h</span>{% endif %}
@@ -58,7 +58,7 @@
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% {% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}{% if request.locale.iso_code == 'en' %}caffeine{% else %}caféine{% endif %}{% endif %}{% endif %}</span>
       <span class="uhome-marquee-item">30 kcal par dose</span>
-      <span class="uhome-marquee-item">Livraison offerte</span>
+      <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Free shipping{% else %}Livraison offerte{% endif %}</span>
       <span class="uhome-marquee-item">1&nbsp;500+ clientes</span>
       <span class="uhome-marquee-item">{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</span>
       {% if request.locale.iso_code == 'en' %}<span class="uhome-marquee-item">Lasting 4-hour satiety*</span>{% else %}<span class="uhome-marquee-item">Satiété durable 4h</span>{% endif %}
@@ -69,7 +69,7 @@
 
   {%- comment -%} ══ S3 — PRESS ══ {%- endcomment -%}
   <div class="uhome-press uhome-reveal">
-    <span class="uhome-press-label">Ils parlent de nous</span>
+    <span class="uhome-press-label">{% if request.locale.iso_code == 'en' %}As seen in{% else %}Ils parlent de nous{% endif %}</span>
     <div class="uhome-press-logos">
       <div class="uhome-press-logo"><img src="https://uburn.co/cdn/shop/files/TF1_1989-1990.png?v=1749644803&width=150&format=webp" alt="TF1" loading="lazy"></div>
       <div class="uhome-press-logo"><img src="https://uburn.co/cdn/shop/files/Brut_logo_svg.png?v=1749644803&width=150&format=webp" alt="Brut" loading="lazy"></div>
@@ -141,22 +141,22 @@
   {%- comment -%} ══ S6 — PROBLÈME ══ {%- endcomment -%}
   <section class="uhome-problem">
     <div class="uhome-problem-inner uhome-reveal">
-      <span class="uhome-section-label">Ce n'est pas un manque de volonté</span>
+      <span class="uhome-section-label">{% if request.locale.iso_code == 'en' %}It's not a willpower problem{% else %}Ce n'est pas un manque de volonté{% endif %}</span>
       <h2 class="uhome-section-title">C'est <span class="uhome-accent">biologique.</span></h2>
       <div class="uhome-prob-cards uhome-stagger-scale">
         <div class="uhome-prob-card">
           <div class="uhome-prob-num">16h</div>
-          <div class="uhome-prob-title">Le placard vous appelle</div>
+          <div class="uhome-prob-title">{% if request.locale.iso_code == 'en' %}The pantry calls you{% else %}Le placard vous appelle{% endif %}</div>
           {% if request.locale.iso_code == 'en' %}<div class="uhome-prob-sub">Blood sugar crashing. It's physiology — not a character flaw.</div>{% else %}<div class="uhome-prob-sub">Glycémie en chute libre. C'est physiologique — pas un défaut de caractère.</div>{% endif %}
         </div>
         <div class="uhome-prob-card">
           <div class="uhome-prob-num">Soir</div>
-          <div class="uhome-prob-title">Devant le frigo</div>
+          <div class="uhome-prob-title">{% if request.locale.iso_code == 'en' %}In front of the fridge{% else %}Devant le frigo{% endif %}</div>
           <div class="uhome-prob-sub">{% if request.locale.iso_code == 'en' %}Fatigue lowers your guard. Morning intentions fade one by one.{% else %}La fatigue baisse la garde. Les bonnes intentions du matin s'effacent une par une.{% endif %}</div>
         </div>
         <div class="uhome-prob-card">
           <div class="uhome-prob-num">→</div>
-          <div class="uhome-prob-title">La volonté ne suffit pas</div>
+          <div class="uhome-prob-title">{% if request.locale.iso_code == 'en' %}Willpower isn't enough{% else %}La volonté ne suffit pas{% endif %}</div>
           {% if request.locale.iso_code == 'en' %}<div class="uhome-prob-sub">It's a biological response. It calls for a biological answer.</div>{% else %}<div class="uhome-prob-sub">C'est une réponse biologique. Elle demande une réponse biologique.</div>{% endif %}
         </div>
       </div>
@@ -167,10 +167,10 @@
   <section class="uhome-offer" id="uhome-offer">
     <div class="uhome-offer-inner">
       <div class="uhome-offer-header uhome-reveal">
-        <span class="uhome-section-label">Votre offre</span>
-        <h2 class="uhome-section-title">Une saveur. <span class="uhome-accent">Six actifs.</span></h2>
+        <span class="uhome-section-label">{% if request.locale.iso_code == 'en' %}Your offer{% else %}Votre offre{% endif %}</span>
+        <h2 class="uhome-section-title">{% if request.locale.iso_code == 'en' %}One flavor. <span class="uhome-accent">Six actives.</span>{% else %}Une saveur. <span class="uhome-accent">Six actifs.</span>{% endif %}</h2>
         <p style="max-width:400px;margin:10px auto 0;color:var(--uhome-body);font-size:14px;text-align:center;font-family:'Red Hat Text',sans-serif">
-          Paiement unique · Livraison offerte en France
+          {% if request.locale.iso_code == 'en' %}One-time payment · Free U.S. shipping on $40+{% else %}Paiement unique · Livraison offerte en France{% endif %}
         </p>
       </div>
       <div class="uhome-offer-img uhome-reveal uhome-rd1">
@@ -183,7 +183,7 @@
       <div class="uhome-pricing-grid uhome-reveal uhome-rd2">
         <div class="uhome-pricing-card" id="uhome-card-dec">
           {% if request.locale.iso_code == 'en' %}<h3>Starter</h3>{% else %}<h3>{% if request.locale.iso_code == 'en' %}Starter{% else %}Découverte{% endif %}</h3>{% endif %}
-          <p class="uhome-pricing-desc">Idéal pour tester · 90g · 1 dose/jour</p>
+          <p class="uhome-pricing-desc">{% if request.locale.iso_code == 'en' %}Perfect to try · 90g · 1 dose/day{% else %}Idéal pour tester · 90g · 1 dose/jour{% endif %}</p>
           <div class="uhome-pricing-price">34,50&nbsp;€</div>
           <p class="uhome-pricing-per">soit 1,15&nbsp;€/jour</p>
           <p class="uhome-pricing-dur">30 jours · 1 dose/jour</p>
@@ -192,7 +192,7 @@
           </a>
         </div>
         <div class="uhome-pricing-card uhome-pop" id="uhome-card-max">
-          <div class="uhome-pop-badge">Meilleure valeur</div>
+          <div class="uhome-pop-badge">{% if request.locale.iso_code == 'en' %}Best value{% else %}Meilleure valeur{% endif %}</div>
           {% if request.locale.iso_code == 'en' %}<h3>Maximum Pack</h3>{% else %}<h3>{% if request.locale.iso_code == 'en' %}Maximum Pack{% else %}Résultats Maximum{% endif %}</h3>{% endif %}
           <p class="uhome-pricing-desc">{% if request.locale.iso_code == 'en' %}Best Value{% else %}Le + populaire{% endif %} — 3× plus de résultats</p>
           <div class="uhome-pricing-price">54,50&nbsp;€ <small><s>69&nbsp;€</s></small></div>
@@ -205,25 +205,25 @@
       </div>
       <div class="uhome-cart-block uhome-reveal uhome-rd3" id="uhome-cart-block">
         <div class="uhome-cart-block-head">
-          <span class="uhome-section-label" style="text-align:center;display:block">Votre commande</span>
+          <span class="uhome-section-label" style="text-align:center;display:block">{% if request.locale.iso_code == 'en' %}Your order{% else %}Votre commande{% endif %}</span>
           <h2 class="uhome-section-title" style="text-align:center">{% if request.locale.iso_code == 'en' %}With your{% else %}Avec votre{% endif %} Cure Maximum, <span class="uhome-accent">vous recevez :</span></h2>
         </div>
         <div class="uhome-cart-preview">
-          <div class="uhome-cart-title">Votre panier</div>
+          <div class="uhome-cart-title">{% if request.locale.iso_code == 'en' %}Your cart{% else %}Votre panier{% endif %}</div>
           <div class="uhome-cart-item">
             <div class="uhome-cart-thumb">
               <img src="https://uburn.co/cdn/shop/files/PRODUCT_PAGE_0005_2_1.jpg?v=1749644803&width=200&format=webp" alt="UBurn Cure Maximum 270g" loading="lazy" width="200" height="200">
             </div>
             <div class="uhome-cart-body">
-              <div class="uhome-cart-name">Cure Maximum — Poudre Ubé 270g</div>
-              <div class="uhome-cart-meta">Saveur noisette-vanille · Cure 90 jours</div>
+              <div class="uhome-cart-name">{% if request.locale.iso_code == 'en' %}Maximum Pack — Ube Powder 270g{% else %}Cure Maximum — Poudre Ubé 270g{% endif %}</div>
+              <div class="uhome-cart-meta">{% if request.locale.iso_code == 'en' %}Hazelnut-vanilla flavor · 90-day pack{% else %}Saveur noisette-vanille · Cure 90 jours{% endif %}</div>
             </div>
             <div class="uhome-cart-price">54,50&nbsp;€</div>
           </div>
           <div class="uhome-cart-item">
             <div class="uhome-cart-thumb"><span class="uhome-cart-thumb-letter">E</span></div>
             <div class="uhome-cart-body">
-              <div class="uhome-cart-name">E-book « 30j pour reprendre le contrôle »</div>
+              <div class="uhome-cart-name">{% if request.locale.iso_code == 'en' %}E-book "30 days to take back control"{% else %}E-book « 30j pour reprendre le contrôle »{% endif %}</div>
               <span class="uhome-gift-tag">Offert</span>
             </div>
             <div class="uhome-cart-price"><s>47&nbsp;€</s> 0&nbsp;€</div>
@@ -270,7 +270,7 @@
     </div>
     <div class="uhome-stats-body">
       {% if request.locale.iso_code == 'en' %}<span class="uhome-section-label uhome-reveal">Internal survey results</span>{% else %}<span class="uhome-section-label uhome-reveal">Résultats enquête interne</span>{% endif %}
-      <h2 class="uhome-section-title uhome-reveal uhome-rd1">Ce que ressentent<br><em>nos clientes.</em></h2>
+      <h2 class="uhome-section-title uhome-reveal uhome-rd1">{% if request.locale.iso_code == 'en' %}How our customers<br><em>actually feel.</em>{% else %}Ce que ressentent<br><em>nos clientes.</em>{% endif %}</h2>
       <div class="uhome-stats-layout">
         <div class="uhome-reveal uhome-rd2">
           <div class="uhome-stat-big-val">95%</div>
@@ -283,7 +283,7 @@
           </div>
           <div class="uhome-stat-row">
             <div class="uhome-stat-row-val">82%</div>
-            <div class="uhome-stat-row-lbl">rythme alimentaire apaisé</div>
+            <div class="uhome-stat-row-lbl">{% if request.locale.iso_code == 'en' %}calmer eating rhythm{% else %}rythme alimentaire apaisé{% endif %}</div>
           </div>
           <div class="uhome-stat-row">
             <div class="uhome-stat-row-val">4,7/5</div>
@@ -309,12 +309,12 @@
       </div>
       <div class="uhome-reveal uhome-rd2">
         <span class="uhome-section-label">À l'origine</span>
-        <h2 class="uhome-section-title">L'ubé vient de là.<br><em>Pas d'un laboratoire.</em></h2>
+        <h2 class="uhome-section-title">{% if request.locale.iso_code == 'en' %}Ube comes from here.<br><em>Not a lab.</em>{% else %}L'ubé vient de là.<br><em>Pas d'un laboratoire.</em>{% endif %}</h2>
         <p style="font-size:16px;line-height:1.75;color:var(--uhome-body);margin-bottom:28px;max-width:52ch">{% if request.locale.iso_code == 'en' %}Ube from Southeast Asia. Rich soils, off industrial paths. Selected at the source.{% else %}Ube d'Asie du Sud-Est. Sols riches, hors circuits industriels. Sélectionné à la source.{% endif %}</p>
         <div class="uhome-origine-points">
           {% if request.locale.iso_code == 'en' %}<div class="uhome-origine-point"><strong>Sourced directly from growers</strong>Full traceability from seed to scoop.</div>{% else %}<div class="uhome-origine-point"><strong>Sélectionné directement auprès des cultivateurs</strong>Traçabilité complète de la graine à la dose.</div>{% endif %}
           {% if request.locale.iso_code == 'en' %}<div class="uhome-origine-point"><strong>Cold-dried and cold-extracted</strong>To preserve the natural anthocyanin concentration.</div>{% else %}<div class="uhome-origine-point"><strong>Séché et extrait à froid</strong>Pour préserver la concentration en anthocyanes naturels.</div>{% endif %}
-          <div class="uhome-origine-point"><strong>Aucun colorant artificiel</strong>La couleur violette est 100% naturelle — c'est l'ubé lui-même.</div>
+          {% if request.locale.iso_code == 'en' %}<div class="uhome-origine-point"><strong>No artificial coloring</strong>The purple color is 100% natural — it's the ube itself.</div>{% else %}<div class="uhome-origine-point"><strong>Aucun colorant artificiel</strong>La couleur violette est 100% naturelle — c'est l'ubé lui-même.</div>{% endif %}
         </div>
       </div>
     </div>
@@ -333,7 +333,7 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg>
           </div>
           {% if request.locale.iso_code == 'en' %}<div class="uhome-benefit-name">4-hour satiety*</div>{% else %}<div class="uhome-benefit-name">Satiété 4h</div>{% endif %}
-          <p class="uhome-benefit-desc">Le konjac forme un gel naturel dans l'estomac. {% if request.locale.iso_code == 'en' %}Research-backed*{% else %}Allégation{% endif %} {% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID&nbsp;3120{% endif %} — satiété cliniquement validée dès la 1ère prise.</p>
+          <p class="uhome-benefit-desc">{% if request.locale.iso_code == 'en' %}Konjac forms a natural gel in the stomach.{% else %}Le konjac forme un gel naturel dans l'estomac.{% endif %} {% if request.locale.iso_code == 'en' %}Research-backed*{% else %}Allégation{% endif %} {% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID&nbsp;3120{% endif %} — {% if request.locale.iso_code == 'en' %}clinically validated satiety from the first dose.{% else %}satiété cliniquement validée dès la 1ère prise.{% endif %}</p>
           <span class="uhome-benefit-badge">Glucomannane · 3g/dose</span>
         </div>
         <div class="uhome-benefit-card">
@@ -370,7 +370,7 @@
       <div class="uhome-testi-grid uhome-stagger-scale">
         <div class="uhome-testi-card">
           <div class="uhome-testi-stars">★★★★★</div>
-          <p class="uhome-testi-q">« Pour 0,61&nbsp;€ par jour, y'a pas de risque. Et ça marche. Mon 2e pot en cours. »</p>
+          <p class="uhome-testi-q">{% if request.locale.iso_code == 'en' %}"For $0.65 a day, there's no risk. And it works. On my 2nd pack now."{% else %}« Pour 0,61&nbsp;€ par jour, y'a pas de risque. Et ça marche. Mon 2e pot en cours. »{% endif %}</p>
           <div class="uhome-testi-verified">✓ {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</div>
           <div class="uhome-testi-footer">
             <div class="uhome-tav">S</div>
@@ -379,7 +379,7 @@
         </div>
         <div class="uhome-testi-card">
           <div class="uhome-testi-stars">★★★★★</div>
-          <p class="uhome-testi-q">« Mes collègues m'ont demandé mon secret. Le goût est top et je ne grignote plus le soir. »</p>
+          <p class="uhome-testi-q">{% if request.locale.iso_code == 'en' %}"My coworkers asked me my secret. Tastes great and I don't snack at night anymore."{% else %}« Mes collègues m'ont demandé mon secret. Le goût est top et je ne grignote plus le soir. »{% endif %}</p>
           <div class="uhome-testi-verified">✓ {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</div>
           <div class="uhome-testi-footer">
             <div class="uhome-tav">N</div>
@@ -388,7 +388,7 @@
         </div>
         <div class="uhome-testi-card">
           <div class="uhome-testi-stars">★★★★★</div>
-          <p class="uhome-testi-q">« J'avais essayé beaucoup de choses avant. Uburn est la première qui a vraiment fonctionné sur la durée. »</p>
+          <p class="uhome-testi-q">{% if request.locale.iso_code == 'en' %}"I'd tried many things before. UBurn is the first that actually worked long-term."{% else %}« J'avais essayé beaucoup de choses avant. Uburn est la première qui a vraiment fonctionné sur la durée. »{% endif %}</p>
           <div class="uhome-testi-verified">✓ {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</div>
           <div class="uhome-testi-footer">
             <div class="uhome-tav">C</div>
@@ -406,10 +406,10 @@
       {% if request.locale.iso_code == 'en' %}<h2 class="uhome-section-title uhome-reveal uhome-rd1">What changes. <em>After 4 weeks.</em></h2>{% else %}<h2 class="uhome-section-title uhome-reveal uhome-rd1">Ce qui change. <em>Après 4 semaines.</em></h2>{% endif %}
       <div class="uhome-ba-card uhome-reveal uhome-rd2">
         <div class="uhome-ba-col uhome-ba-before">
-          <span class="uhome-ba-pill uhome-ba-pill-before">Avant</span>
-          <div class="uhome-ba-headline">« Je craquais tous les jours à 16h. »</div>
+          <span class="uhome-ba-pill uhome-ba-pill-before">{% if request.locale.iso_code == 'en' %}Before{% else %}Avant{% endif %}</span>
+          <div class="uhome-ba-headline">{% if request.locale.iso_code == 'en' %}"I cracked every day at 4pm."{% else %}« Je craquais tous les jours à 16h. »{% endif %}</div>
           <ul class="uhome-ba-list">
-            <li>Biscuits, chocolat, parfois pire</li>
+            <li>{% if request.locale.iso_code == 'en' %}Cookies, chocolate, sometimes worse{% else %}Biscuits, chocolat, parfois pire{% endif %}</li>
             <li>{% if request.locale.iso_code == 'en' %}I felt guilty at night{% else %}Je me sentais coupable le soir{% endif %}</li>
             {% if request.locale.iso_code == 'en' %}<li>I kept promising tomorrow would be different</li>{% else %}<li>Je me promettais que demain serait différent</li>{% endif %}
             {% if request.locale.iso_code == 'en' %}<li>I was constantly calculating what I would snack on</li>{% else %}<li>Je calculais constamment ce que j'allais grignoter</li>{% endif %}
@@ -426,10 +426,10 @@
           {% if request.locale.iso_code == 'en' %}<span class="uhome-ba-pill uhome-ba-pill-after">After 4 weeks</span>{% else %}<span class="uhome-ba-pill uhome-ba-pill-after">Après 4 semaines</span>{% endif %}
           <div class="uhome-ba-headline">{% if request.locale.iso_code == 'en' %}"I make it to dinner without thinking about it."{% else %}« Je tiens jusqu'au dîner sans y penser. »{% endif %}</div>
           <ul class="uhome-ba-list uhome-ba-list-after">
-            <li>Pas de privation, pas de volonté de fer</li>
-            <li>Juste une faim qui n'arrive plus</li>
+            <li>{% if request.locale.iso_code == 'en' %}No restriction, no iron will needed{% else %}Pas de privation, pas de volonté de fer{% endif %}</li>
+            <li>{% if request.locale.iso_code == 'en' %}Just hunger that doesn't show up anymore{% else %}Juste une faim qui n'arrive plus{% endif %}</li>
             {% if request.locale.iso_code == 'en' %}<li>Free from food guilt</li>{% else %}<li>Libérée de la culpabilité alimentaire</li>{% endif %}
-            <li>Le rituel matinal s'est installé naturellement</li>
+            <li>{% if request.locale.iso_code == 'en' %}The morning ritual settled in naturally{% else %}Le rituel matinal s'est installé naturellement{% endif %}</li>
           </ul>
         </div>
       </div>
@@ -437,7 +437,7 @@
         <div class="uhome-ba-avatar">M</div>
         <div>
           <div class="uhome-ba-aname">{% if request.locale.iso_code == 'en' %}Marie, 42{% else %}Marie, 42 ans{% endif %} — Paris</div>
-          <div class="uhome-ba-ameta">Cure {% if request.locale.iso_code == 'en' %}Maximum Pack{% else %}Résultats Maximum{% endif %} · Cliente depuis 2 mois · <span class="uhome-ba-verified">✓ {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</span></div>
+          <div class="uhome-ba-ameta">Cure {% if request.locale.iso_code == 'en' %}Maximum Pack{% else %}Résultats Maximum{% endif %} · {% if request.locale.iso_code == 'en' %}Customer for 2 months{% else %}Cliente depuis 2 mois{% endif %} · <span class="uhome-ba-verified">✓ {% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</span></div>
         </div>
         <div class="uhome-ba-stars">★★★★★</div>
       </div>
@@ -490,13 +490,13 @@
         <a href="/products/ube-poudre?variant=51289200066879" class="uhome-btn uhome-btn-white" style="justify-content:center;font-family:'Red Hat Display',sans-serif;font-weight:800;font-size:16px;padding:18px 32px">
           Commander → dès 34,50&nbsp;€
         </a>
-        <div class="uhome-final-sub">Livraison offerte · Expédition 24-48h</div>
+        <div class="uhome-final-sub">{% if request.locale.iso_code == 'en' %}Free shipping · Ships in 24-48h{% else %}Livraison offerte · Expédition 24-48h{% endif %}</div>
       </div>
       <div class="uhome-final-guarantees">
         <div class="uhome-final-g">{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</div>
         <div class="uhome-final-g">{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</div>
         <div class="uhome-final-g">{% if request.locale.iso_code == 'en' %}Secure checkout{% else %}Paiement sécurisé{% endif %}</div>
-        <div class="uhome-final-g">Livraison offerte</div>
+        <div class="uhome-final-g">{% if request.locale.iso_code == 'en' %}Free shipping{% else %}Livraison offerte{% endif %}</div>
       </div>
     </div>
   </section>
@@ -509,14 +509,14 @@
           <img src="https://uburn.co/cdn/shop/files/Picto_World.svg" alt="" aria-hidden="true">
         </div>
         <h4>Formule EFSA</h4>
-        <p>Glucomannane ID 3120</p>
+        <p>{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}Glucomannane ID 3120{% endif %}</p>
       </div>
       <div class="uhome-guar-item">
         <div class="uhome-guar-icon">
           <img src="https://uburn.co/cdn/shop/files/Picto_Fast_shipping.svg" alt="" aria-hidden="true">
         </div>
-        <h4>Livraison gratuite</h4>
-        <p>En France</p>
+        <h4>{% if request.locale.iso_code == 'en' %}Free shipping{% else %}Livraison gratuite{% endif %}</h4>
+        <p>{% if request.locale.iso_code == 'en' %}On orders $40+{% else %}En France{% endif %}</p>
       </div>
       <div class="uhome-guar-item">
         <div class="uhome-guar-icon">
@@ -530,7 +530,7 @@
           <img src="https://uburn.co/cdn/shop/files/Picto_customer.svg" alt="" aria-hidden="true">
         </div>
         <h4>{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</h4>
-        <p>Commandez quand vous voulez</p>
+        <p>{% if request.locale.iso_code == 'en' %}Order whenever you want{% else %}Commandez quand vous voulez{% endif %}</p>
       </div>
     </div>
   </div>
