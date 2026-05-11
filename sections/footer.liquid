@@ -56,26 +56,19 @@
                   {%- endif -%}
 
                 {%- when 'text' -%}
-                  {%- liquid
-                    assign _ft_title = block.settings.title
-                    assign _ft_content = block.settings.content
-                    if request.locale.iso_code == 'en'
-                      case _ft_title
-                        when 'À propos'
-                          assign _ft_title = 'About'
-                      endcase
-                      assign _ft_content = _ft_content | replace: 'UBURN, marque profondément enracinée dans la conviction que la beauté commence par l''équilibre naturel du corps.', 'UBurn — a plant-based wellness brand built around the belief that beauty starts with your body''s natural balance.'
-                    endif
-                  -%}
-                  {%- if _ft_title != blank or _ft_content != blank or shop.features.follow_on_shop? and block.settings.enable_follow_on_shop -%}
+                  {%- if block.settings.title != blank or block.settings.content != blank or shop.features.follow_on_shop? and block.settings.enable_follow_on_shop -%}
                     <div class="v-stack gap-4.5">
-                      {%- if _ft_title != blank -%}
-                        <p class="subheading">{{ _ft_title }}</p>
+                      {%- if block.settings.title != blank -%}
+                        <p class="subheading">{% if request.locale.iso_code == 'en' and block.settings.title == 'À propos' %}About{% else %}{{ block.settings.title }}{% endif %}</p>
                       {%- endif -%}
 
-                      {%- if _ft_content != blank -%}
+                      {%- if block.settings.content != blank -%}
                         <div class="prose">
-                          {{- _ft_content -}}
+                          {%- if request.locale.iso_code == 'en' -%}
+                            <p>UBurn — a plant-based wellness brand built around the belief that beauty starts with your body's natural balance.</p>
+                          {%- else -%}
+                            {{- block.settings.content -}}
+                          {%- endif -%}
                         </div>
                       {%- endif -%}
 
@@ -117,26 +110,19 @@
                   {%- endif -%}
 
                 {%- when 'newsletter' -%}
-                  {%- liquid
-                    assign _nl_title = block.settings.title
-                    assign _nl_content = block.settings.content
-                    if request.locale.iso_code == 'en'
-                      case _nl_title
-                        when 'Newsletter'
-                          assign _nl_title = 'Newsletter'
-                      endcase
-                      assign _nl_content = _nl_content | replace: 'Inscrivez-vous à notre newsletter pour recevoir nos offres exclusives.', 'Sign up to our newsletter for exclusive offers and new launches.'
-                    endif
-                  -%}
                   <div class="v-stack gap-4.5">
-                    {%- if _nl_title != blank -%}
-                      <p class="subheading">{{ _nl_title }}</p>
+                    {%- if block.settings.title != blank -%}
+                      <p class="subheading">{{ block.settings.title }}</p>
                     {%- endif -%}
 
                     <div class="v-stack gap-5.5">
-                      {%- if _nl_content != blank -%}
+                      {%- if block.settings.content != blank -%}
                         <div class="prose">
-                          {{- _nl_content -}}
+                          {%- if request.locale.iso_code == 'en' -%}
+                            <p>Sign up to our newsletter for exclusive offers and new launches.</p>
+                          {%- else -%}
+                            {{- block.settings.content -}}
+                          {%- endif -%}
                         </div>
                       {%- endif -%}
 
