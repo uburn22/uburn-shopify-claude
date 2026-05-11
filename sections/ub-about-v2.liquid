@@ -534,126 +534,16 @@ a{color:inherit;text-decoration:none}
 <!-- NAV -->
 {% render 'ub-nav' %}
 
-{%- assign _is_en = false -%}
-{%- if request.locale.iso_code contains 'en' -%}{%- assign _is_en = true -%}{%- endif -%}
-
-{%- if _is_en -%}
-<!-- ENGLISH VERSION (US market) -->
-<section class="hero-about" id="hero">
-  <div class="hero-photo-col" id="heroPhoto">
-    <img src="{{ 'Histoire_01.jpg' | asset_url }}" alt="Meeting our farmers — ube sourcing in Southeast Asia" loading="eager">
-  </div>
-  <div class="hero-text-col">
-    <div class="hero-eyebrow">Our story</div>
-    <h1>Built on a<br>simple <em>belief.</em></h1>
-    <p class="hero-about-sub">Cravings aren't a willpower problem. They're a biological response. UBurn gives you a biological answer.*</p>
-    <div class="hero-scroll-hint">Scroll to discover</div>
-  </div>
-</section>
-
-<section class="conviction">
-  <div class="conviction-inner">
-    <div class="conviction-text">
-      <div class="section-label reveal">Our philosophy</div>
-      <h2 class="section-title reveal rd1">What most people<br><em>get wrong.</em></h2>
-      <div class="conviction-body reveal rd2">
-        <p>At 4PM, <strong>your blood sugar dips</strong>. Your brain asks for sugar. The pantry opens. It's not a lack of discipline — it's biology.</p>
-        <p>Most solutions bet on guilt or restriction. <strong>UBurn bets on physiology.</strong></p>
-        <p>By supporting the real mechanisms of satiety — with ingredients backed by research — we change the relationship you have with food.*</p>
-      </div>
-      <div class="conviction-pull reveal rd3">
-        Cravings aren't a character flaw. They're a biological signal that deserves a biological answer.*
-      </div>
-    </div>
-    <div class="conviction-visual reveal rd2">
-      <div class="conviction-img-wrap">
-        <img src="{{ 'Mission_M.jpg' | asset_url }}" alt="Ingredient sourcing — field mission">
-      </div>
-      <div class="conviction-badge">
-        <div class="conviction-badge-num">4h</div>
-        <div class="conviction-badge-lbl">Up to 4 hours<br>of fullness*</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="sourcing">
-  <div class="sourcing-bg">
-    <img src="{{ 'PLANTATION_UBE.png' | asset_url }}" alt="Konjac plantation — sustainable sourcing">
-  </div>
-  <div class="sourcing-content">
-    <div class="sourcing-text">
-      <div class="section-label reveal">The origin</div>
-      <h2 class="section-title reveal rd1">From farm<br><em>to your glass.</em></h2>
-      <p class="reveal rd2">Each ingredient is selected for its quality and traceability. Konjac — our hero active — is grown in optimal conditions to ensure the glucomannan concentration backed by EFSA research.</p>
-    </div>
-  </div>
-  <div class="sourcing-coords">12°N 108°E · Southeast Asia</div>
-</div>
-
-<section class="ingredients">
-  <div class="ingredients-inner">
-    <div class="ingredients-header">
-      <div>
-        <div class="section-label reveal">The formula</div>
-        <h2 class="section-title reveal rd1">6 plant actives.<br><em>One purpose.</em></h2>
-      </div>
-      <p class="reveal rd2">Each ingredient is selected for how they work together. Fullness, energy, digestion — all at once.*</p>
-    </div>
-
-    <div class="ing-grid">
-      <div class="ing-card ing-card--featured reveal">
-        <div class="ing-photo">
-          <img src="{{ 'Histoire_Moodboard_03.png' | asset_url }}" alt="Ube — purple yam from Southeast Asia" loading="lazy">
-        </div>
-        <div class="ing-body">
-          <div class="ing-origin">Southeast Asia · Dioscorea alata</div>
-          <div class="ing-name">Ube · Purple yam</div>
-          <div class="ing-desc">Our signature ingredient. Rich in anthocyanins — powerful antioxidants. Ube gives UBurn its natural purple color. No artificial coloring.</div>
-          <span class="ing-tag">Natural antioxidants</span>
-        </div>
-      </div>
-
-      <div class="ing-card ing-card--small reveal rd1">
-        <div class="ing-photo" style="min-height:140px">
-          <img src="{{ 'PLANTATION_UBE.png' | asset_url }}" alt="Konjac · Glucomannan EFSA" loading="lazy" style="object-position:center 60%">
-        </div>
-        <div class="ing-body">
-          <div class="ing-origin">Asia · Amorphophallus konjac</div>
-          <div class="ing-name">Konjac · Glucomannan</div>
-          <div class="ing-desc">3g per daily serving. The only fiber officially recognized by EFSA (ID 3120) for supporting satiety.</div>
-          <span class="ing-tag">EFSA ID 3120</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="final-cta">
-  <div style="position:relative;z-index:1">
-    <div class="final-cta-label reveal">Start now</div>
-    <h2 class="reveal rd1">Join<br><em>1,500+ women.</em></h2>
-    <p class="reveal rd2">Who chose biology over guilt. One scoop. Up to 4 hours of fullness.* That's it.</p>
-    <a href="{{ routes.root_url }}products/ube-poudre" class="btn-primary-lg reveal rd2">Shop now → from $36.99</a>
-    <div class="final-guarantees reveal rd3">
-      <div class="final-g">Free U.S. shipping</div>
-      <div class="final-g">Cancel anytime</div>
-      <div class="final-g">Subscribe & save 10%</div>
-    </div>
-    <p style="text-align:center;font-size:11px;color:rgba(255,255,255,0.5);margin-top:20px;line-height:1.5;">*Individual results may vary. UBurn is a dietary supplement, not a medication. Not intended to diagnose, treat, cure, or prevent any disease.</p>
-  </div>
-</section>
-{%- else -%}
 <!-- HERO EDITORIAL -->
 <section class="hero-about" id="hero">
   <div class="hero-photo-col" id="heroPhoto">
-    <img src="{{ 'Histoire_01.jpg' | asset_url }}" alt="Rencontre avec nos agriculteurs — sourcing ube en Asie du Sud-Est" loading="eager">
+    <img src="{{ 'Histoire_01.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'en' %}Meeting our farmers — ube sourcing in Southeast Asia{% else %}Rencontre avec nos agriculteurs — sourcing ube en Asie du Sud-Est{% endif %}" loading="eager">
   </div>
   <div class="hero-text-col">
-    <div class="hero-eyebrow">Notre histoire</div>
-    <h1>Né d'une<br>conviction <em>simple.</em></h1>
-    <p class="hero-about-sub">Les fringales ne sont pas un problème de volonté. C'est une réponse biologique. Uburn apporte une réponse biologique.</p>
-    <div class="hero-scroll-hint">Défiler pour découvrir</div>
+    <div class="hero-eyebrow">{% if request.locale.iso_code == 'en' %}Our story{% else %}Notre histoire{% endif %}</div>
+    <h1>{% if request.locale.iso_code == 'en' %}Built on a<br>simple <em>belief.</em>{% else %}Né d'une<br>conviction <em>simple.</em>{% endif %}</h1>
+    <p class="hero-about-sub">{% if request.locale.iso_code == 'en' %}Cravings aren't a willpower problem. They're a biological response. UBurn gives you a biological answer.*{% else %}Les fringales ne sont pas un problème de volonté. C'est une réponse biologique. Uburn apporte une réponse biologique.{% endif %}</p>
+    <div class="hero-scroll-hint">{% if request.locale.iso_code == 'en' %}Scroll to discover{% else %}Défiler pour découvrir{% endif %}</div>
   </div>
 </section>
 
@@ -661,24 +551,24 @@ a{color:inherit;text-decoration:none}
 <section class="conviction">
   <div class="conviction-inner">
     <div class="conviction-text">
-      <div class="section-label reveal">Notre philosophie</div>
-      <h2 class="section-title reveal rd1">Ce que tout<br>le monde <em>ignore.</em></h2>
+      <div class="section-label reveal">{% if request.locale.iso_code == 'en' %}Our philosophy{% else %}Notre philosophie{% endif %}</div>
+      <h2 class="section-title reveal rd1">{% if request.locale.iso_code == 'en' %}What most people<br><em>get wrong.</em>{% else %}Ce que tout<br>le monde <em>ignore.</em>{% endif %}</h2>
       <div class="conviction-body reveal rd2">
-        <p>À 16h, <strong>votre glycémie chute</strong>. Le cerveau réclame du sucre. Le placard s'ouvre. Ce n'est pas un manque de discipline — c'est de la biologie.</p>
-        <p>Les solutions existantes parient sur la culpabilisation ou la privation. <strong>Uburn parie sur la physiologie.</strong></p>
-        <p>En agissant sur les mécanismes réels de la satiété — avec des ingrédients dont l'efficacité est validée scientifiquement — nous changeons la relation que vous avez avec la nourriture.</p>
+        <p>{% if request.locale.iso_code == 'en' %}At 4PM, <strong>your blood sugar dips</strong>. Your brain asks for sugar. The pantry opens. It's not a lack of discipline — it's biology.{% else %}À 16h, <strong>votre glycémie chute</strong>. Le cerveau réclame du sucre. Le placard s'ouvre. Ce n'est pas un manque de discipline — c'est de la biologie.{% endif %}</p>
+        <p>{% if request.locale.iso_code == 'en' %}Most solutions bet on guilt or restriction. <strong>UBurn bets on physiology.</strong>{% else %}Les solutions existantes parient sur la culpabilisation ou la privation. <strong>Uburn parie sur la physiologie.</strong>{% endif %}</p>
+        <p>{% if request.locale.iso_code == 'en' %}By supporting the real mechanisms of satiety — with research-backed* ingredients — we change the relationship you have with food.*{% else %}En agissant sur les mécanismes réels de la satiété — avec des ingrédients dont l'efficacité est validée scientifiquement — nous changeons la relation que vous avez avec la nourriture.{% endif %}</p>
       </div>
       <div class="conviction-pull reveal rd3">
-        Les fringales ne sont pas un défaut de caractère. C'est un signal biologique qui mérite une réponse biologique.
+        {% if request.locale.iso_code == 'en' %}Cravings aren't a character flaw. They're a biological signal that deserves a biological answer.*{% else %}Les fringales ne sont pas un défaut de caractère. C'est un signal biologique qui mérite une réponse biologique.{% endif %}
       </div>
     </div>
     <div class="conviction-visual reveal rd2">
       <div class="conviction-img-wrap">
-        <img src="{{ 'Mission_M.jpg' | asset_url }}" alt="Sourcing des ingrédients — mission terrain">
+        <img src="{{ 'Mission_M.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'en' %}Ingredient sourcing — field mission{% else %}Sourcing des ingrédients — mission terrain{% endif %}">
       </div>
       <div class="conviction-badge">
         <div class="conviction-badge-num">4h</div>
-        <div class="conviction-badge-lbl">Satiété durable<br>validée EFSA</div>
+        <div class="conviction-badge-lbl">{% if request.locale.iso_code == 'en' %}Up to 4-hour<br>satiety*{% else %}Satiété durable<br>validée EFSA{% endif %}</div>
       </div>
     </div>
   </div>
@@ -687,16 +577,16 @@ a{color:inherit;text-decoration:none}
 <!-- SOURCING CINEMATIC -->
 <div class="sourcing">
   <div class="sourcing-bg">
-    <img src="{{ 'PLANTATION_UBE.png' | asset_url }}" alt="Plantation de konjac — sourcing durable">
+    <img src="{{ 'PLANTATION_UBE.png' | asset_url }}" alt="{% if request.locale.iso_code == 'en' %}Konjac plantation — sustainable sourcing{% else %}Plantation de konjac — sourcing durable{% endif %}">
   </div>
   <div class="sourcing-content">
     <div class="sourcing-text">
-      <div class="section-label reveal">L'origine</div>
-      <h2 class="section-title reveal rd1">Du champ<br><em>à votre verre.</em></h2>
-      <p class="reveal rd2">Chaque ingrédient est sélectionné pour son efficacité et traçabilité. Le konjac — notre actif principal — est cultivé dans des conditions optimales pour garantir la concentration en glucomannane validée par l'EFSA.</p>
+      <div class="section-label reveal">{% if request.locale.iso_code == 'en' %}The origin{% else %}L'origine{% endif %}</div>
+      <h2 class="section-title reveal rd1">{% if request.locale.iso_code == 'en' %}From farm<br><em>to your glass.</em>{% else %}Du champ<br><em>à votre verre.</em>{% endif %}</h2>
+      <p class="reveal rd2">{% if request.locale.iso_code == 'en' %}Each ingredient is selected for its quality and traceability. Konjac — our hero active — is grown in optimal conditions to ensure the research-backed* glucomannan concentration.{% else %}Chaque ingrédient est sélectionné pour son efficacité et traçabilité. Le konjac — notre actif principal — est cultivé dans des conditions optimales pour garantir la concentration en glucomannane validée par l'EFSA.{% endif %}</p>
     </div>
   </div>
-  <div class="sourcing-coords">12°N 108°E · Asie du Sud-Est</div>
+  <div class="sourcing-coords">{% if request.locale.iso_code == 'en' %}12°N 108°E · Southeast Asia{% else %}12°N 108°E · Asie du Sud-Est{% endif %}</div>
 </div>
 
 <!-- INGRÉDIENTS -->
@@ -704,66 +594,66 @@ a{color:inherit;text-decoration:none}
   <div class="ingredients-inner">
     <div class="ingredients-header">
       <div>
-        <div class="section-label reveal">La formule</div>
-        <h2 class="section-title reveal rd1">6 actifs.<br><em>Un seul objectif.</em></h2>
+        <div class="section-label reveal">{% if request.locale.iso_code == 'en' %}The formula{% else %}La formule{% endif %}</div>
+        <h2 class="section-title reveal rd1">{% if request.locale.iso_code == 'en' %}6 plant actives.<br><em>One purpose.</em>{% else %}6 actifs.<br><em>Un seul objectif.</em>{% endif %}</h2>
       </div>
-      <p class="reveal rd2">Chaque ingrédient est choisi pour sa complémentarité avec les autres. Ensemble, ils agissent sur la faim, l'énergie et la digestion — simultanément.</p>
+      <p class="reveal rd2">{% if request.locale.iso_code == 'en' %}Each ingredient is selected for how they work together. Satiety, energy, digestion — all at once.*{% else %}Chaque ingrédient est choisi pour sa complémentarité avec les autres. Ensemble, ils agissent sur la faim, l'énergie et la digestion — simultanément.{% endif %}</p>
     </div>
 
     <div class="ing-grid">
       <!-- Featured: Ube -->
       <div class="ing-card ing-card--featured reveal">
         <div class="ing-photo">
-          <img src="{{ 'Histoire_Moodboard_03.png' | asset_url }}" alt="Ube — igname violet d'Asie du Sud-Est" loading="lazy">
+          <img src="{{ 'Histoire_Moodboard_03.png' | asset_url }}" alt="{% if request.locale.iso_code == 'en' %}Ube — purple yam from Southeast Asia{% else %}Ube — igname violet d'Asie du Sud-Est{% endif %}" loading="lazy">
         </div>
         <div class="ing-body">
-          <div class="ing-origin">Asie du Sud-Est · Dioscorea alata</div>
-          <div class="ing-name">Ube · Igname violet</div>
-          <div class="ing-desc">L'ingrédient signature Uburn. Riche en anthocyanes — des antioxydants puissants — l'ube apporte sa couleur violette naturelle et ses propriétés protectrices. Aucun colorant artificiel.</div>
-          <span class="ing-tag">Antioxydants naturels</span>
+          <div class="ing-origin">{% if request.locale.iso_code == 'en' %}Southeast Asia · Dioscorea alata{% else %}Asie du Sud-Est · Dioscorea alata{% endif %}</div>
+          <div class="ing-name">{% if request.locale.iso_code == 'en' %}Ube · Purple yam{% else %}Ube · Igname violet{% endif %}</div>
+          <div class="ing-desc">{% if request.locale.iso_code == 'en' %}Our signature ingredient. Rich in anthocyanins — powerful antioxidants. Ube gives UBurn its natural purple color and protective properties. No artificial coloring.{% else %}L'ingrédient signature Uburn. Riche en anthocyanes — des antioxydants puissants — l'ube apporte sa couleur violette naturelle et ses propriétés protectrices. Aucun colorant artificiel.{% endif %}</div>
+          <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Natural antioxidants{% else %}Antioxydants naturels{% endif %}</span>
         </div>
       </div>
 
       <!-- Konjac -->
       <div class="ing-card ing-card--small reveal rd1">
         <div class="ing-photo" style="min-height:140px">
-          <img src="{{ 'PLANTATION_UBE.png' | asset_url }}" alt="Konjac · Glucomannane EFSA" loading="lazy" style="object-position:center 60%">
+          <img src="{{ 'PLANTATION_UBE.png' | asset_url }}" alt="{% if request.locale.iso_code == 'en' %}Konjac · Glucomannan FDA dietary fiber{% else %}Konjac · Glucomannane EFSA{% endif %}" loading="lazy" style="object-position:center 60%">
         </div>
         <div class="ing-body">
-          <div class="ing-origin">Asie · Amorphophallus konjac</div>
-          <div class="ing-name">Konjac · Glucomannane</div>
-          <div class="ing-desc">3g par dose. L'unique allégation satiété validée par l'EFSA (ID 3120) en Europe.</div>
-          <span class="ing-tag">EFSA ID 3120 · Validé</span>
+          <div class="ing-origin">{% if request.locale.iso_code == 'en' %}Asia · Amorphophallus konjac{% else %}Asie · Amorphophallus konjac{% endif %}</div>
+          <div class="ing-name">{% if request.locale.iso_code == 'en' %}Konjac · Glucomannan{% else %}Konjac · Glucomannane{% endif %}</div>
+          <div class="ing-desc">{% if request.locale.iso_code == 'en' %}3g per daily serving. Research-backed* FDA dietary fiber* for supporting satiety.{% else %}3g par dose. L'unique allégation satiété validée par l'EFSA (ID 3120) en Europe.{% endif %}</div>
+          <span class="ing-tag">{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120 · Validé{% endif %}</span>
         </div>
       </div>
 
       <!-- MCT -->
       <div class="ing-card ing-card--pill reveal rd2">
         <div class="ing-body" style="padding:0">
-          <div class="ing-origin">Coco · Acides gras</div>
-          <div class="ing-name">MCT · Coco</div>
-          <div class="ing-desc">Énergie rapide et stable. Sans pic d'insuline, sans crash. Dès 15 minutes après la prise.</div>
-          <span class="ing-tag">Énergie cétogène</span>
+          <div class="ing-origin">{% if request.locale.iso_code == 'en' %}Coconut · Fatty acids{% else %}Coco · Acides gras{% endif %}</div>
+          <div class="ing-name">{% if request.locale.iso_code == 'en' %}MCT · Coconut{% else %}MCT · Coco{% endif %}</div>
+          <div class="ing-desc">{% if request.locale.iso_code == 'en' %}Fast, stable energy. No insulin spike, no crash. Active within 15 minutes.{% else %}Énergie rapide et stable. Sans pic d'insuline, sans crash. Dès 15 minutes après la prise.{% endif %}</div>
+          <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Ketogenic energy{% else %}Énergie cétogène{% endif %}</span>
         </div>
       </div>
 
       <!-- L-Carnitine -->
       <div class="ing-card ing-card--small reveal rd1">
         <div class="ing-body" style="padding:24px">
-          <div class="ing-origin">Acide aminé · Naturel</div>
+          <div class="ing-origin">{% if request.locale.iso_code == 'en' %}Amino acid · Natural{% else %}Acide aminé · Naturel{% endif %}</div>
           <div class="ing-name">L-Carnitine</div>
-          <div class="ing-desc">Soutient le métabolisme des acides gras. Contribue à l'utilisation des réserves lipidiques comme source d'énergie.</div>
-          <span class="ing-tag">Métabolisme actif</span>
+          <div class="ing-desc">{% if request.locale.iso_code == 'en' %}Supports fatty acid metabolism. Contributes to the use of fat reserves as a source of energy.{% else %}Soutient le métabolisme des acides gras. Contribue à l'utilisation des réserves lipidiques comme source d'énergie.{% endif %}</div>
+          <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Active metabolism{% else %}Métabolisme actif{% endif %}</span>
         </div>
       </div>
 
       <!-- Gingembre + Acacia -->
       <div class="ing-card ing-card--pill reveal rd3" style="grid-column:3">
         <div class="ing-body" style="padding:0">
-          <div class="ing-origin">Épice · Légumineuse</div>
-          <div class="ing-name">Gingembre + Acacia</div>
-          <div class="ing-desc">Digestion optimisée. Le gingembre facilite le transit, la fibre d'acacia nourrit le microbiote.</div>
-          <span class="ing-tag">Confort digestif</span>
+          <div class="ing-origin">{% if request.locale.iso_code == 'en' %}Spice · Legume{% else %}Épice · Légumineuse{% endif %}</div>
+          <div class="ing-name">{% if request.locale.iso_code == 'en' %}Ginger + Acacia{% else %}Gingembre + Acacia{% endif %}</div>
+          <div class="ing-desc">{% if request.locale.iso_code == 'en' %}Optimized digestion. Ginger eases transit, acacia fiber feeds the microbiome.{% else %}Digestion optimisée. Le gingembre facilite le transit, la fibre d'acacia nourrit le microbiote.{% endif %}</div>
+          <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Digestive comfort{% else %}Confort digestif{% endif %}</span>
         </div>
       </div>
     </div>
@@ -774,34 +664,34 @@ a{color:inherit;text-decoration:none}
 <section class="how">
   <div class="how-inner">
     <div class="how-header">
-      <div class="section-label reveal">Utilisation</div>
-      <h2 class="section-title reveal rd1">Simple.<br><em>Efficace. Chaque jour.</em></h2>
-      <p class="reveal rd2">Une dose matin ou après-midi, dans un grand verre d'eau. C'est tout.</p>
+      <div class="section-label reveal">{% if request.locale.iso_code == 'en' %}How to use{% else %}Utilisation{% endif %}</div>
+      <h2 class="section-title reveal rd1">{% if request.locale.iso_code == 'en' %}Simple.<br><em>Effective. Every day.</em>{% else %}Simple.<br><em>Efficace. Chaque jour.</em>{% endif %}</h2>
+      <p class="reveal rd2">{% if request.locale.iso_code == 'en' %}One scoop afternoon or evening, in a tall glass of water. That's it.{% else %}Une dose matin ou après-midi, dans un grand verre d'eau. C'est tout.{% endif %}</p>
     </div>
     <div class="how-steps reveal rd1">
       <div class="how-step">
-        <div class="how-step-num">Étape 01</div>
+        <div class="how-step-num">{% if request.locale.iso_code == 'en' %}Step 01{% else %}Étape 01{% endif %}</div>
         <div class="how-step-photo">
-          <img src="{{ 'etape_1.jpg' | asset_url }}" alt="Mesurer une dose d'Uburn" loading="lazy">
+          <img src="{{ 'etape_1.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'en' %}Measure one UBurn scoop{% else %}Mesurer une dose d'Uburn{% endif %}" loading="lazy">
         </div>
-        <h3>Mesurez une dose</h3>
-        <p>1 cuillère mesure (8g) dans un grand verre. La poudre violette vous invite à commencer.</p>
+        <h3>{% if request.locale.iso_code == 'en' %}Measure one scoop{% else %}Mesurez une dose{% endif %}</h3>
+        <p>{% if request.locale.iso_code == 'en' %}1 scoop (8g) into a tall glass. The purple powder invites you to begin.{% else %}1 cuillère mesure (8g) dans un grand verre. La poudre violette vous invite à commencer.{% endif %}</p>
       </div>
       <div class="how-step">
-        <div class="how-step-num">Étape 02</div>
+        <div class="how-step-num">{% if request.locale.iso_code == 'en' %}Step 02{% else %}Étape 02{% endif %}</div>
         <div class="how-step-photo">
-          <img src="{{ 'etape_2.jpg' | asset_url }}" alt="Mélanger Uburn dans un verre d'eau" loading="lazy">
+          <img src="{{ 'etape_2.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'en' %}Mix UBurn in a glass of water{% else %}Mélanger Uburn dans un verre d'eau{% endif %}" loading="lazy">
         </div>
-        <h3>Mélangez dans l'eau</h3>
-        <p>200 à 300ml d'eau froide ou tiède. Mélangez 10 secondes. Le glucomannane se dissout pour agir.</p>
+        <h3>{% if request.locale.iso_code == 'en' %}Mix into water{% else %}Mélangez dans l'eau{% endif %}</h3>
+        <p>{% if request.locale.iso_code == 'en' %}200 to 300ml of cold or warm water. Stir for 10 seconds. Glucomannan dissolves and gets to work.{% else %}200 à 300ml d'eau froide ou tiède. Mélangez 10 secondes. Le glucomannane se dissout pour agir.{% endif %}</p>
       </div>
       <div class="how-step">
-        <div class="how-step-num">Étape 03</div>
+        <div class="how-step-num">{% if request.locale.iso_code == 'en' %}Step 03{% else %}Étape 03{% endif %}</div>
         <div class="how-step-photo">
-          <img src="{{ 'etape_3.jpg' | asset_url }}" alt="Boire Uburn — 4h de satiété" loading="lazy">
+          <img src="{{ 'etape_3.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'en' %}Drink UBurn — up to 4-hour satiety{% else %}Boire Uburn — 4h de satiété{% endif %}" loading="lazy">
         </div>
-        <h3>Profitez de 4h</h3>
-        <p>Idéalement 30min avant le repas ou à 16h avant les fringales. Satiété durable, sans caféine.</p>
+        <h3>{% if request.locale.iso_code == 'en' %}Enjoy up to 4 hours*{% else %}Profitez de 4h{% endif %}</h3>
+        <p>{% if request.locale.iso_code == 'en' %}Ideally 30min before a meal, or at 4PM before cravings hit. Lasting satiety, caffeine-free.{% else %}Idéalement 30min avant le repas ou à 16h avant les fringales. Satiété durable, sans caféine.{% endif %}</p>
       </div>
     </div>
   </div>
@@ -811,30 +701,30 @@ a{color:inherit;text-decoration:none}
 <section class="science">
   <div class="science-inner">
     <div class="science-text">
-      <div class="section-label reveal">La science</div>
-      <h2 class="section-title reveal rd1">Pas un effet<br><em>de mode.</em></h2>
-      <p class="reveal rd2">Le glucomannane est <strong>le seul ingrédient au monde</strong> dont l'allégation "contrôle de l'appétit" est officiellement validée par l'Autorité Européenne de Sécurité des Aliments.</p>
-      <p class="reveal rd3">Cette validation est la même norme scientifique que celle utilisée pour les médicaments. Elle repose sur des études cliniques contrôlées, pas sur des témoignages.</p>
+      <div class="section-label reveal">{% if request.locale.iso_code == 'en' %}The science{% else %}La science{% endif %}</div>
+      <h2 class="section-title reveal rd1">{% if request.locale.iso_code == 'en' %}Not a<br><em>trend.</em>{% else %}Pas un effet<br><em>de mode.</em>{% endif %}</h2>
+      <p class="reveal rd2">{% if request.locale.iso_code == 'en' %}Glucomannan is <strong>the only ingredient in the world</strong> whose "cravings control" claim is officially research-backed* by the European Food Safety Authority.{% else %}Le glucomannane est <strong>le seul ingrédient au monde</strong> dont l'allégation "contrôle de l'appétit" est officiellement validée par l'Autorité Européenne de Sécurité des Aliments.{% endif %}</p>
+      <p class="reveal rd3">{% if request.locale.iso_code == 'en' %}This validation follows the same scientific standard used for medications. It rests on controlled clinical studies, not testimonials.{% else %}Cette validation est la même norme scientifique que celle utilisée pour les médicaments. Elle repose sur des études cliniques contrôlées, pas sur des témoignages.{% endif %}</p>
       <div class="science-certif reveal rd3">
         <div class="science-certif-icon">🏛️</div>
         <div>
-          <div class="science-certif-text">Allégation officielle EFSA</div>
-          <div class="science-certif-sub">Règlement CE 432/2012 · ID 3120</div>
+          <div class="science-certif-text">{% if request.locale.iso_code == 'en' %}Official EFSA claim{% else %}Allégation officielle EFSA{% endif %}</div>
+          <div class="science-certif-sub">{% if request.locale.iso_code == 'en' %}EC Regulation 432/2012 · ID 3120{% else %}Règlement CE 432/2012 · ID 3120{% endif %}</div>
         </div>
       </div>
     </div>
     <div class="science-stats reveal rd2">
       <div class="sci-stat">
         <div class="sci-val">3<span>g</span></div>
-        <div class="sci-lbl">Dose minimale efficace de glucomannane validée par l'EFSA par prise — Uburn en contient exactement 3g</div>
+        <div class="sci-lbl">{% if request.locale.iso_code == 'en' %}Research-backed* minimum effective dose of glucomannan per serving — UBurn contains exactly 3g{% else %}Dose minimale efficace de glucomannane validée par l'EFSA par prise — Uburn en contient exactement 3g{% endif %}</div>
       </div>
       <div class="sci-stat">
         <div class="sci-val">4<span>h</span></div>
-        <div class="sci-lbl">Durée de satiété durable dans le cadre d'un régime hypocalorique, selon les études cliniques (conditions : 3 prises/jour avec eau)</div>
+        <div class="sci-lbl">{% if request.locale.iso_code == 'en' %}Up to 4-hour satiety* within a calorie-controlled diet, per clinical studies (conditions: 3 servings/day with water){% else %}Durée de satiété durable dans le cadre d'un régime hypocalorique, selon les études cliniques (conditions : 3 prises/jour avec eau){% endif %}</div>
       </div>
       <div class="sci-stat">
         <div class="sci-val">30<span>kcal</span></div>
-        <div class="sci-lbl">Seulement 30 kcal par dose — moins qu'un biscuit, plus de 4h d'effet sur l'appétit</div>
+        <div class="sci-lbl">{% if request.locale.iso_code == 'en' %}Only 30 kcal per serving — less than a cookie, more than 4 hours of cravings control{% else %}Seulement 30 kcal par dose — moins qu'un biscuit, plus de 4h d'effet sur l'appétit{% endif %}</div>
       </div>
     </div>
   </div>
@@ -843,26 +733,26 @@ a{color:inherit;text-decoration:none}
 <!-- BEFORE / AFTER — obligatoire sur chaque page -->
 <section class="ba-section">
   <div class="ba-inner">
-    <div class="section-label reveal">Résultat réel</div>
-    <h2 class="section-title reveal rd1">Ce qui change.<br><em>Pas les nôtres.</em></h2>
-    <p class="reveal rd2" style="margin-top:16px;font-size:16px;color:var(--body);max-width:52ch">Marie a commencé Uburn sans changer son alimentation. Juste une dose, chaque après-midi à 15h.</p>
+    <div class="section-label reveal">{% if request.locale.iso_code == 'en' %}Real result{% else %}Résultat réel{% endif %}</div>
+    <h2 class="section-title reveal rd1">{% if request.locale.iso_code == 'en' %}What changes.<br><em>Not who you are.</em>{% else %}Ce qui change.<br><em>Pas les nôtres.</em>{% endif %}</h2>
+    <p class="reveal rd2" style="margin-top:16px;font-size:16px;color:var(--body);max-width:52ch">{% if request.locale.iso_code == 'en' %}Marie started UBurn without changing her diet. Just one scoop, every afternoon at 3PM.{% else %}Marie a commencé Uburn sans changer son alimentation. Juste une dose, chaque après-midi à 15h.{% endif %}</p>
 
     <div class="ba-card reveal rd2">
       <div class="ba-col ba-before">
-        <div class="ba-label">Avant Uburn</div>
-        <div class="ba-week">Semaine 1</div>
+        <div class="ba-label">{% if request.locale.iso_code == 'en' %}Before UBurn{% else %}Avant Uburn{% endif %}</div>
+        <div class="ba-week">{% if request.locale.iso_code == 'en' %}Week 1{% else %}Semaine 1{% endif %}</div>
         <div class="ba-items">
-          <div class="ba-item">Fringales incontrôlables à 16h — placard ouvert, biscuits, chocolat</div>
-          <div class="ba-item">Culpabilité après chaque craquage, frustration le soir</div>
-          <div class="ba-item">Dîner trop copieux pour compenser la faim accumulée</div>
-          <div class="ba-item">Fatigue après les repas, digestion difficile</div>
-          <div class="ba-item">Sentiment d'échec récurrent malgré la "bonne volonté"</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Uncontrollable cravings at 4PM — pantry open, cookies, chocolate{% else %}Fringales incontrôlables à 16h — placard ouvert, biscuits, chocolat{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Guilt after every slip-up, frustration in the evening{% else %}Culpabilité après chaque craquage, frustration le soir{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Oversized dinner to make up for accumulated hunger{% else %}Dîner trop copieux pour compenser la faim accumulée{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Post-meal fatigue, difficult digestion{% else %}Fatigue après les repas, digestion difficile{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Recurring sense of failure despite "good intentions"{% else %}Sentiment d'échec récurrent malgré la "bonne volonté"{% endif %}</div>
         </div>
         <div class="ba-profile">
           <div class="ba-avatar">M</div>
           <div>
             <div class="ba-name">Marie D.</div>
-            <div class="ba-meta">42 ans · Paris 11e</div>
+            <div class="ba-meta">{% if request.locale.iso_code == 'en' %}42 · Paris 11e{% else %}42 ans · Paris 11e{% endif %}</div>
           </div>
         </div>
       </div>
@@ -870,35 +760,35 @@ a{color:inherit;text-decoration:none}
         <div class="ba-divider-arrow">→</div>
       </div>
       <div class="ba-col ba-after">
-        <div class="ba-label">Après 4 semaines</div>
-        <div class="ba-week">Semaine 4</div>
+        <div class="ba-label">{% if request.locale.iso_code == 'en' %}After 4 weeks{% else %}Après 4 semaines{% endif %}</div>
+        <div class="ba-week">{% if request.locale.iso_code == 'en' %}Week 4{% else %}Semaine 4{% endif %}</div>
         <div class="ba-items">
-          <div class="ba-item">Plus de fringale à 16h — elle oublie même d'ouvrir le placard</div>
-          <div class="ba-item">Dîner naturellement plus léger, sans effort de volonté</div>
-          <div class="ba-item">Digestion fluide, ventre moins gonflé dès la 2e semaine</div>
-          <div class="ba-item">Énergie stable l'après-midi — plus de coup de pompe à 15h</div>
-          <div class="ba-item">Perte de 2,8 kg sur 4 semaines sans régime particulier</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}No more cravings at 4PM — she even forgets to open the pantry{% else %}Plus de fringale à 16h — elle oublie même d'ouvrir le placard{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Naturally lighter dinner, no willpower required{% else %}Dîner naturellement plus léger, sans effort de volonté{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Smooth digestion, less bloating by week 2{% else %}Digestion fluide, ventre moins gonflé dès la 2e semaine{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Stable afternoon energy — no more 3PM slump{% else %}Énergie stable l'après-midi — plus de coup de pompe à 15h{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Lost 6.2 lbs in 4 weeks with no special diet*{% else %}Perte de 2,8 kg sur 4 semaines sans régime particulier{% endif %}</div>
         </div>
         <div class="ba-profile">
           <div class="ba-avatar" style="background:var(--purple-wash)">M</div>
           <div>
-            <div class="ba-name">Marie D. — Clientes vérifiée</div>
-            <div class="ba-meta">Après 28 jours · Résultats individuels</div>
+            <div class="ba-name">{% if request.locale.iso_code == 'en' %}Marie D. — Verified customer{% else %}Marie D. — Clientes vérifiée{% endif %}</div>
+            <div class="ba-meta">{% if request.locale.iso_code == 'en' %}After 28 days · Individual results{% else %}Après 28 jours · Résultats individuels{% endif %}</div>
             <div class="ba-stars">★★★★★</div>
           </div>
         </div>
       </div>
     </div>
-    <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:20px;line-height:1.6">Les résultats varient selon les individus. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g en 3 doses avec 1-2 verres d'eau avant les repas.</p>
+    <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:20px;line-height:1.6">{% if request.locale.iso_code == 'en' %}*Individual results may vary. Glucomannan contributes to cravings control within a calorie-controlled diet (research-backed*, EFSA ID 3120). Conditions: 3g in 3 servings with 1-2 glasses of water before meals.{% else %}Les résultats varient selon les individus. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g en 3 doses avec 1-2 verres d'eau avant les repas.{% endif %}</p>
   </div>
 </section>
 
 <!-- PLANTATION DIVIDER -->
 <div class="plantation">
-  <img src="{{ 'Ingredient_banner_Desktop.png' | asset_url }}" alt="Champs — sourcing naturel Uburn" loading="lazy">
+  <img src="{{ 'Ingredient_banner_Desktop.png' | asset_url }}" alt="{% if request.locale.iso_code == 'en' %}Fields — UBurn natural sourcing{% else %}Champs — sourcing naturel Uburn{% endif %}" loading="lazy">
   <div class="plantation-text">
-    <h2 class="reveal">La nature<br>a <em>déjà fait</em><br>le travail.</h2>
-    <p class="reveal rd1">Nous avons juste eu l'intelligence de l'écouter.</p>
+    <h2 class="reveal">{% if request.locale.iso_code == 'en' %}Nature<br>already <em>did</em><br>the work.{% else %}La nature<br>a <em>déjà fait</em><br>le travail.{% endif %}</h2>
+    <p class="reveal rd1">{% if request.locale.iso_code == 'en' %}We just had the sense to listen.{% else %}Nous avons juste eu l'intelligence de l'écouter.{% endif %}</p>
   </div>
 </div>
 
@@ -907,41 +797,41 @@ a{color:inherit;text-decoration:none}
   <div class="valeurs-inner">
     <div class="valeurs-header">
       <div>
-        <div class="section-label reveal">Nos engagements</div>
-        <h2 class="section-title reveal rd1">Ce qu'on ne<br>transige <em>jamais.</em></h2>
+        <div class="section-label reveal">{% if request.locale.iso_code == 'en' %}Our commitments{% else %}Nos engagements{% endif %}</div>
+        <h2 class="section-title reveal rd1">{% if request.locale.iso_code == 'en' %}What we never<br><em>compromise on.</em>{% else %}Ce qu'on ne<br>transige <em>jamais.</em>{% endif %}</h2>
       </div>
-      <p class="reveal rd2">Chaque décision chez Uburn est prise avec une question : est-ce que ça sert vraiment nos clientes ? Si non, on ne le fait pas.</p>
+      <p class="reveal rd2">{% if request.locale.iso_code == 'en' %}Every decision at UBurn starts with one question: does it actually serve our customers? If not, we don't do it.{% else %}Chaque décision chez Uburn est prise avec une question : est-ce que ça sert vraiment nos clientes ? Si non, on ne le fait pas.{% endif %}</p>
     </div>
     <div class="valeurs-grid">
       <div class="valeur-item reveal">
         <div class="valeur-icon">🔬</div>
-        <h3>Science d'abord</h3>
-        <p>Aucune allégation sans preuve. Le glucomannane est validé EFSA — le standard le plus élevé en Europe pour les compléments alimentaires.</p>
+        <h3>{% if request.locale.iso_code == 'en' %}Science first{% else %}Science d'abord{% endif %}</h3>
+        <p>{% if request.locale.iso_code == 'en' %}No claim without evidence. Glucomannan is research-backed* — the highest standard in Europe for dietary supplements.{% else %}Aucune allégation sans preuve. Le glucomannane est validé EFSA — le standard le plus élevé en Europe pour les compléments alimentaires.{% endif %}</p>
       </div>
       <div class="valeur-item reveal rd1">
         <div class="valeur-icon">🌿</div>
-        <h3>Ingrédients traçables</h3>
-        <p>Chaque actif est sélectionné pour sa qualité et son origine. Pas d'additifs, pas de colorants artificiels. La couleur violette vient de l'ube.</p>
+        <h3>{% if request.locale.iso_code == 'en' %}Traceable ingredients{% else %}Ingrédients traçables{% endif %}</h3>
+        <p>{% if request.locale.iso_code == 'en' %}Every active is selected for quality and origin. No additives, no artificial coloring. The purple comes from ube.{% else %}Chaque actif est sélectionné pour sa qualité et son origine. Pas d'additifs, pas de colorants artificiels. La couleur violette vient de l'ube.{% endif %}</p>
       </div>
       <div class="valeur-item reveal rd2">
         <div class="valeur-icon">💬</div>
-        <h3>Transparence totale</h3>
-        <p>Pas d'abonnement flexible. Pas de promesse exagérée. On dit ce que le produit fait — et ce qu'il ne fait pas.</p>
+        <h3>{% if request.locale.iso_code == 'en' %}Full transparency{% else %}Transparence totale{% endif %}</h3>
+        <p>{% if request.locale.iso_code == 'en' %}No rigid subscriptions. No overblown promises. We say what the product does — and what it doesn't.{% else %}Pas d'abonnement flexible. Pas de promesse exagérée. On dit ce que le produit fait — et ce qu'il ne fait pas.{% endif %}</p>
       </div>
       <div class="valeur-item reveal rd1">
         <div class="valeur-icon">🇫🇷</div>
-        <h3>Marque française</h3>
-        <p>Conçu et développé en France, pour les femmes françaises. Avec les standards de qualité et de rigueur qui vont avec.</p>
+        <h3>{% if request.locale.iso_code == 'en' %}French brand{% else %}Marque française{% endif %}</h3>
+        <p>{% if request.locale.iso_code == 'en' %}Designed and developed in France, for women who care. With the quality and rigor standards that come with it.{% else %}Conçu et développé en France, pour les femmes françaises. Avec les standards de qualité et de rigueur qui vont avec.{% endif %}</p>
       </div>
       <div class="valeur-item reveal rd2">
         <div class="valeur-icon">⚡</div>
-        <h3>0% caféine</h3>
-        <p>Se prend matin, midi ou après-midi — sans perturber le sommeil. Parce que les fringales ne respectent pas les horaires.</p>
+        <h3>{% if request.locale.iso_code == 'en' %}Caffeine-free{% else %}0% caféine{% endif %}</h3>
+        <p>{% if request.locale.iso_code == 'en' %}Take it morning, noon, or afternoon — without disrupting sleep. Because cravings don't keep a schedule.{% else %}Se prend matin, midi ou après-midi — sans perturber le sommeil. Parce que les fringales ne respectent pas les horaires.{% endif %}</p>
       </div>
       <div class="valeur-item reveal rd3">
         <div class="valeur-icon">🤝</div>
-        <h3>Satisfait ou remboursé</h3>
-        <p>30 jours pour essayer. Si Uburn ne change rien pour vous, on vous rembourse. Sans discussion, sans formulaire interminable.</p>
+        <h3>{% if request.locale.iso_code == 'en' %}Try it risk-free{% else %}Satisfait ou remboursé{% endif %}</h3>
+        <p>{% if request.locale.iso_code == 'en' %}Reach out if UBurn doesn't work for you — we'll make it right. No interminable forms.{% else %}30 jours pour essayer. Si Uburn ne change rien pour vous, on vous rembourse. Sans discussion, sans formulaire interminable.{% endif %}</p>
       </div>
     </div>
   </div>
@@ -950,18 +840,18 @@ a{color:inherit;text-decoration:none}
 <!-- FINAL CTA -->
 <section class="final-cta">
   <div style="position:relative;z-index:1">
-    <div class="final-cta-label reveal">Commencer maintenant</div>
-    <h2 class="reveal rd1">Rejoignez<br><em>1 500+ femmes.</em></h2>
-    <p class="reveal rd2">Qui ont choisi la biologie plutôt que la culpabilité. Une dose. 4h de tranquillité. C'est tout.</p>
-    <a href="{{ routes.root_url }}products/ube-poudre" class="btn-primary-lg reveal rd2">Commander → dès 34,50 €</a>
+    <div class="final-cta-label reveal">{% if request.locale.iso_code == 'en' %}Start now{% else %}Commencer maintenant{% endif %}</div>
+    <h2 class="reveal rd1">{% if request.locale.iso_code == 'en' %}Join<br><em>1,500+ women.</em>{% else %}Rejoignez<br><em>1 500+ femmes.</em>{% endif %}</h2>
+    <p class="reveal rd2">{% if request.locale.iso_code == 'en' %}Who chose biology over guilt. One scoop. Up to 4 hours of satiety.* That's it.{% else %}Qui ont choisi la biologie plutôt que la culpabilité. Une dose. 4h de tranquillité. C'est tout.{% endif %}</p>
+    <a href="{{ routes.root_url }}products/ube-poudre" class="btn-primary-lg reveal rd2">{% if request.locale.iso_code == 'en' %}Shop now → from $36.99{% else %}Commander → dès 34,50 €{% endif %}</a>
     <div class="final-guarantees reveal rd3">
-      <div class="final-g">Livraison offerte en France</div>
-      <div class="final-g">Annulable à tout moment</div>
-      <div class="final-g">Satisfait ou remboursé 30j</div>
+      <div class="final-g">{% if request.locale.iso_code == 'en' %}Free U.S. shipping{% else %}Livraison offerte en France{% endif %}</div>
+      <div class="final-g">{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</div>
+      <div class="final-g">{% if request.locale.iso_code == 'en' %}Subscribe & save 10%{% else %}Satisfait ou remboursé 30j{% endif %}</div>
     </div>
+    {% if request.locale.iso_code == 'en' %}<p style="text-align:center;font-size:11px;color:rgba(255,255,255,0.5);margin-top:20px;line-height:1.5;">*Individual results may vary. UBurn is a dietary supplement, not a medication. Not intended to diagnose, treat, cure, or prevent any disease.</p>{% endif %}
   </div>
 </section>
-{%- endif -%}
 
 <!-- FOOTER -->
 {% render 'ub-footer' %}

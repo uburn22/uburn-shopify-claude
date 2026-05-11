@@ -89,157 +89,79 @@ main#main{padding:0 !important}
 </style>
 {% render 'ub-nav' %}
 
-{%- assign _is_en = false -%}
-{%- if request.locale.iso_code contains 'en' -%}{%- assign _is_en = true -%}{%- endif -%}
-
-{%- if _is_en -%}
 <section class="faq-hero">
-  <div class="section-label reveal" style="justify-content:center">Frequently asked questions</div>
-  <h1 class="reveal rd1">Everything you want<br><em>to know.</em></h1>
-  <p class="reveal rd2">Clear answers, no jargon. If your question isn't here, just email us.</p>
+  <div class="section-label reveal" style="justify-content:center">{% if request.locale.iso_code == 'en' %}Frequently asked questions{% else %}Questions fréquentes{% endif %}</div>
+  <h1 class="reveal rd1">{% if request.locale.iso_code == 'en' %}Everything you want<br><em>to know.</em>{% else %}Toutes vos questions.<br><em>Vraiment.</em>{% endif %}</h1>
+  <p class="reveal rd2">{% if request.locale.iso_code == 'en' %}Clear answers, no jargon. If your question isn't here, just email us.{% else %}Des réponses claires, sans jargon. Si votre question n'est pas ici, écrivez-nous.{% endif %}</p>
 </section>
 
 <div class="faq-body">
   <div class="faq-group reveal">
-    <div class="faq-group-title">The product</div>
+    <div class="faq-group-title">{% if request.locale.iso_code == 'en' %}The product{% else %}Le produit{% endif %}</div>
     <div class="faq-item">
-      <div class="faq-q">What exactly is UBurn?</div>
-      <div class="faq-a"><div class="faq-a-inner">UBurn is a plant-based powdered drink mix made with <strong>konjac glucomannan</strong>, purple ube, coconut MCT, L-Carnitine, ginger, and acacia fiber. It calms cravings naturally as part of a balanced diet.*</div></div>
+      <div class="faq-q">{% if request.locale.iso_code == 'en' %}What exactly is UBurn?{% else %}C'est quoi exactement Uburn ?{% endif %}</div>
+      <div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}UBurn is a plant-based powdered drink mix made with <strong>konjac glucomannan</strong>, purple ube, coconut MCT, L-Carnitine, ginger, and acacia fiber. It supports natural satiety as part of a balanced diet.*{% else %}Uburn est un complément alimentaire en poudre à base de <strong>glucomannane de konjac</strong>, d'ubé violet, de MCT de coco, de L-Carnitine, de gingembre et de fibre d'acacia. Il contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120).{% endif %}</div></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Is there caffeine in UBurn?</div>
-      <div class="faq-a"><div class="faq-a-inner">No — <strong>zero caffeine</strong>. UBurn can be taken any time of day, including in the evening, without disrupting your sleep.</div></div>
+      <div class="faq-q">{% if request.locale.iso_code == 'en' %}Is there caffeine in UBurn?{% else %}Y a-t-il de la caféine dans Uburn ?{% endif %}</div>
+      <div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}No — <strong>caffeine-free</strong>. UBurn can be taken any time of day, including in the evening, without disrupting your sleep. It's one of our core differences vs. stimulant-based solutions.{% else %}Non, <strong>zéro caféine</strong>. Uburn peut être pris à n'importe quelle heure, y compris le soir, sans perturber le sommeil. C'est l'une de nos différences fondamentales avec les solutions stimulantes du marché.{% endif %}</div></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">How many calories per scoop?</div>
-      <div class="faq-a"><div class="faq-a-inner"><strong>30 calories</strong> per scoop. No added sugar, no artificial sweeteners.</div></div>
+      <div class="faq-q">{% if request.locale.iso_code == 'en' %}How many calories per scoop?{% else %}Combien de calories par dose ?{% endif %}</div>
+      <div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}<strong>30 calories</strong> per scoop. No added sugar, no artificial sweeteners. Compatible with most diets.{% else %}<strong>30 kcal</strong> par dose. Aucun sucre ajouté, aucun édulcorant artificiel. Compatible avec tous les régimes alimentaires.{% endif %}</div></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Is UBurn vegan?</div>
-      <div class="faq-a"><div class="faq-a-inner">Yes, UBurn is <strong>100% plant-based</strong>. All ingredients are vegan.</div></div>
+      <div class="faq-q">{% if request.locale.iso_code == 'en' %}Is UBurn vegan?{% else %}Uburn est-il adapté aux végans ?{% endif %}</div>
+      <div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}Yes, UBurn is <strong>100% plant-based</strong>. All ingredients are vegan.{% else %}Oui, Uburn est <strong>100% vegan</strong>. Tous les ingrédients sont d'origine végétale.{% endif %}</div></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Any allergens?</div>
-      <div class="faq-a"><div class="faq-a-inner">UBurn is produced in a facility that handles <strong>dairy, gluten, soy, and tree nuts</strong>. Please consult your doctor if you have a known allergy.</div></div>
-    </div>
-  </div>
-
-  <div class="faq-group reveal rd1">
-    <div class="faq-group-title">How to use</div>
-    <div class="faq-item">
-      <div class="faq-q">How do I take UBurn?</div>
-      <div class="faq-a"><div class="faq-a-inner">Mix <strong>1 scoop (8g) in 8-10 oz of water</strong>, milk, or plant-based milk. Drink 30 minutes before a meal or whenever cravings hit (typically around 4PM).</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Can I take it in the evening?</div>
-      <div class="faq-a"><div class="faq-a-inner">Yes — <strong>no problem at all</strong>. Zero caffeine means UBurn can be taken any time, including before dinner. Many customers see best results when taken before dinner.*</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">How quickly will I see results?</div>
-      <div class="faq-a"><div class="faq-a-inner">The fullness effect is <strong>immediate from the first scoop</strong>. Most customers report a noticeable shift in cravings and routine after <strong>7 to 14 days</strong> of consistent use.*</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Can I mix it with something other than water?</div>
-      <div class="faq-a"><div class="faq-a-inner">Yes, with milk, plant-based milk, or a smoothie. Avoid sugary juices which work against the natural effect on blood sugar.</div></div>
-    </div>
-  </div>
-
-  <div class="faq-group reveal rd2">
-    <div class="faq-group-title">Order & shipping</div>
-    <div class="faq-item">
-      <div class="faq-q">Is shipping really free?</div>
-      <div class="faq-a"><div class="faq-a-inner">Yes — <strong>free U.S. shipping</strong> on orders $40+. Typically delivered in 2-4 business days after dispatch.</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Is subscription required?</div>
-      <div class="faq-a"><div class="faq-a-inner">No. You can choose <strong>one-time purchase</strong> OR <strong>Subscribe & Save 10%</strong> with monthly delivery (cancel, skip, or pause anytime). No commitment.</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">What's your refund policy?</div>
-      <div class="faq-a"><div class="faq-a-inner">Contact us at hello@uburn.co within 30 days of your first order for refund support. We process refunds within 5 business days.</div></div>
-    </div>
-  </div>
-
-  <div style="text-align:center;padding:40px 0 20px">
-    <p style="font-size:16px;color:var(--body);margin-bottom:24px">Don't see your question?</p>
-    <a href="/pages/contact" class="btn-main">Contact us</a>
-  </div>
-  <p style="text-align:center;font-size:11px;color:var(--muted);margin-top:24px;line-height:1.5;">*Individual results may vary. UBurn is a dietary supplement, not a medication. Not intended to diagnose, treat, cure, or prevent any disease.</p>
-</div>
-{%- else -%}
-<section class="faq-hero">
-  <div class="section-label reveal" style="justify-content:center">Questions fréquentes</div>
-  <h1 class="reveal rd1">Toutes vos questions.<br><em>Vraiment.</em></h1>
-  <p class="reveal rd2">Des réponses claires, sans jargon. Si votre question n'est pas ici, écrivez-nous.</p>
-</section>
-
-<div class="faq-body">
-  <div class="faq-group reveal">
-    <div class="faq-group-title">Le produit</div>
-    <div class="faq-item">
-      <div class="faq-q">C'est quoi exactement Uburn ?</div>
-      <div class="faq-a"><div class="faq-a-inner">Uburn est un complément alimentaire en poudre à base de <strong>glucomannane de konjac</strong>, d'ubé violet, de MCT de coco, de L-Carnitine, de gingembre et de fibre d'acacia. Il contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120).</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Y a-t-il de la caféine dans Uburn ?</div>
-      <div class="faq-a"><div class="faq-a-inner">Non, <strong>zéro caféine</strong>. Uburn peut être pris à n'importe quelle heure, y compris le soir, sans perturber le sommeil. C'est l'une de nos différences fondamentales avec les solutions stimulantes du marché.</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Combien de calories par dose ?</div>
-      <div class="faq-a"><div class="faq-a-inner"><strong>30 kcal</strong> par dose. Aucun sucre ajouté, aucun édulcorant artificiel. Compatible avec tous les régimes alimentaires.</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Uburn est-il adapté aux végans ?</div>
-      <div class="faq-a"><div class="faq-a-inner">Oui, Uburn est <strong>100% vegan</strong>. Tous les ingrédients sont d'origine végétale.</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Est-ce qu'il y a des allergènes ?</div>
-      <div class="faq-a"><div class="faq-a-inner">Uburn est fabriqué dans un atelier manipulant des produits à base de <strong>lait, gluten, soja et fruits à coque</strong>. Consultez votre médecin en cas d'allergie connue.</div></div>
+      <div class="faq-q">{% if request.locale.iso_code == 'en' %}Any allergens?{% else %}Est-ce qu'il y a des allergènes ?{% endif %}</div>
+      <div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}UBurn is produced in a facility that handles <strong>dairy, gluten, soy, and tree nuts</strong>. Please consult your doctor if you have a known allergy.{% else %}Uburn est fabriqué dans un atelier manipulant des produits à base de <strong>lait, gluten, soja et fruits à coque</strong>. Consultez votre médecin en cas d'allergie connue.{% endif %}</div></div>
     </div>
   </div>
 
   <div class="faq-group reveal rd1">
-    <div class="faq-group-title">Utilisation</div>
+    <div class="faq-group-title">{% if request.locale.iso_code == 'en' %}How to use{% else %}Utilisation{% endif %}</div>
     <div class="faq-item">
-      <div class="faq-q">Comment prendre Uburn ?</div>
-      <div class="faq-a"><div class="faq-a-inner">Mélangez <strong>1 dose (8g) dans 200-300 ml d'eau</strong>, 30 minutes avant un repas ou à l'heure de vos fringales habituelles (souvent 15-16h). L'allégation EFSA nécessite 3g de glucomannane avec 1-2 verres d'eau.</div></div>
+      <div class="faq-q">{% if request.locale.iso_code == 'en' %}How do I take UBurn?{% else %}Comment prendre Uburn ?{% endif %}</div>
+      <div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}Mix <strong>1 scoop (8g) in 8-10 oz of water</strong>, 30 minutes before a meal or whenever cravings hit (typically around 4PM). The research-backed* protocol requires 3g of glucomannan with 1-2 glasses of water.{% else %}Mélangez <strong>1 dose (8g) dans 200-300 ml d'eau</strong>, 30 minutes avant un repas ou à l'heure de vos fringales habituelles (souvent 15-16h). L'allégation EFSA nécessite 3g de glucomannane avec 1-2 verres d'eau.{% endif %}</div></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Peut-on le prendre le soir ?</div>
-      <div class="faq-a"><div class="faq-a-inner">Oui — <strong>sans aucun problème</strong>. L'absence de caféine permet une prise à toute heure, y compris le soir avant le dîner. C'est même souvent là où les résultats sont les plus spectaculaires.</div></div>
+      <div class="faq-q">{% if request.locale.iso_code == 'en' %}Can I take it in the evening?{% else %}Peut-on le prendre le soir ?{% endif %}</div>
+      <div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}Yes — <strong>no problem at all</strong>. Caffeine-free means UBurn can be taken any time, including before dinner. Many customers report best results when taken before dinner.*{% else %}Oui — <strong>sans aucun problème</strong>. L'absence de caféine permet une prise à toute heure, y compris le soir avant le dîner. C'est même souvent là où les résultats sont les plus spectaculaires.{% endif %}</div></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Combien de temps avant de voir des résultats ?</div>
-      <div class="faq-a"><div class="faq-a-inner">L'effet sur la satiété est <strong>immédiat dès la première prise</strong>. Les effets sur le poids et la digestion se font généralement sentir après <strong>7 à 14 jours</strong> d'utilisation régulière.</div></div>
+      <div class="faq-q">{% if request.locale.iso_code == 'en' %}How quickly will I see results?{% else %}Combien de temps avant de voir des résultats ?{% endif %}</div>
+      <div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}The fullness effect is <strong>immediate from the first scoop</strong>. Most customers report a noticeable shift in cravings and routine after <strong>7 to 14 days</strong> of consistent use.*{% else %}L'effet sur la satiété est <strong>immédiat dès la première prise</strong>. Les effets sur le poids et la digestion se font généralement sentir après <strong>7 à 14 jours</strong> d'utilisation régulière.{% endif %}</div></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Peut-on le mélanger avec autre chose qu'eau ?</div>
-      <div class="faq-a"><div class="faq-a-inner">Oui, avec du lait végétal ou un smoothie. Évitez les jus sucrés qui annuleraient en partie l'effet sur la glycémie. L'eau reste la meilleure option pour activer le glucomannane.</div></div>
+      <div class="faq-q">{% if request.locale.iso_code == 'en' %}Can I mix it with something other than water?{% else %}Peut-on le mélanger avec autre chose qu'eau ?{% endif %}</div>
+      <div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}Yes, with plant-based milk or a smoothie. Avoid sugary juices which work against the natural effect on blood sugar. Water remains the best option to activate glucomannan.{% else %}Oui, avec du lait végétal ou un smoothie. Évitez les jus sucrés qui annuleraient en partie l'effet sur la glycémie. L'eau reste la meilleure option pour activer le glucomannane.{% endif %}</div></div>
     </div>
   </div>
 
   <div class="faq-group reveal rd2">
-    <div class="faq-group-title">Commande & livraison</div>
+    <div class="faq-group-title">{% if request.locale.iso_code == 'en' %}Order & shipping{% else %}Commande & livraison{% endif %}</div>
     <div class="faq-item">
-      <div class="faq-q">La livraison est-elle vraiment offerte ?</div>
-      <div class="faq-a"><div class="faq-a-inner">Oui, <strong>livraison offerte</strong> en France métropolitaine sans minimum d'achat. Délai : 2 à 4 jours ouvrés.</div></div>
+      <div class="faq-q">{% if request.locale.iso_code == 'en' %}Is shipping really free?{% else %}La livraison est-elle vraiment offerte ?{% endif %}</div>
+      <div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}Yes — <strong>free U.S. shipping</strong> on orders $40+. Typically delivered in 2-4 business days after dispatch.{% else %}Oui, <strong>livraison offerte</strong> en France métropolitaine sans minimum d'achat. Délai : 2 à 4 jours ouvrés.{% endif %}</div></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Y a-t-il un abonnement flexible ?</div>
-      <div class="faq-a"><div class="faq-a-inner">Oui. Tu peux choisir un achat unique OU un abonnement avec -10% (annulable, sautable ou en pause à tout moment).</div></div>
+      <div class="faq-q">{% if request.locale.iso_code == 'en' %}Is subscription required?{% else %}Y a-t-il un abonnement flexible ?{% endif %}</div>
+      <div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}No. You can choose <strong>one-time purchase</strong> OR <strong>Subscribe & Save 10%</strong> with monthly delivery (cancel, skip, or pause anytime). No commitment.{% else %}Oui. Tu peux choisir un achat unique OU un abonnement avec -10% (annulable, sautable ou en pause à tout moment).{% endif %}</div></div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Quelle est la politique de remboursement ?</div>
-      <div class="faq-a"><div class="faq-a-inner">Contactez-nous à hello@uburn.co et nous traitons le remboursement sous 5 jours ouvrés.</div></div>
+      <div class="faq-q">{% if request.locale.iso_code == 'en' %}What's your refund policy?{% else %}Quelle est la politique de remboursement ?{% endif %}</div>
+      <div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}Contact us at hello@uburn.co within 30 days of your first order for refund support. We process refunds within 5 business days.{% else %}Contactez-nous à hello@uburn.co et nous traitons le remboursement sous 5 jours ouvrés.{% endif %}</div></div>
     </div>
   </div>
 
   <div style="text-align:center;padding:40px 0 20px">
-    <p style="font-size:16px;color:var(--body);margin-bottom:24px">Votre question n'est pas ici ?</p>
-    <a href="/pages/contact" class="btn-main">Nous contacter</a>
+    <p style="font-size:16px;color:var(--body);margin-bottom:24px">{% if request.locale.iso_code == 'en' %}Don't see your question?{% else %}Votre question n'est pas ici ?{% endif %}</p>
+    <a href="/pages/contact" class="btn-main">{% if request.locale.iso_code == 'en' %}Contact us{% else %}Nous contacter{% endif %}</a>
   </div>
+  <p style="text-align:center;font-size:11px;color:var(--muted);margin-top:24px;line-height:1.5;">{% if request.locale.iso_code == 'en' %}*Individual results may vary. UBurn is a dietary supplement, not a medication. Not intended to diagnose, treat, cure, or prevent any disease.{% else %}*Les résultats varient selon les individus. Uburn est un complément alimentaire, pas un médicament.{% endif %}</p>
 </div>
-{%- endif -%}
 
 <script>
 document.querySelectorAll('.faq-q').forEach(q=>{
@@ -254,40 +176,40 @@ document.querySelectorAll('.faq-q').forEach(q=>{
 
 <section class="ba-section">
   <div class="ba-inner">
-    <div class="section-label reveal">Résultat réel</div>
-    <h2 class="section-title reveal rd1">Ce qui change.<br><em>Pas les nôtres.</em></h2>
+    <div class="section-label reveal">{% if request.locale.iso_code == 'en' %}Real result{% else %}Résultat réel{% endif %}</div>
+    <h2 class="section-title reveal rd1">{% if request.locale.iso_code == 'en' %}What changes.<br><em>Not the rules.</em>{% else %}Ce qui change.<br><em>Pas les nôtres.</em>{% endif %}</h2>
     <div class="ba-card reveal rd2">
       <div class="ba-col ba-before">
-        <div class="ba-label">Avant Uburn</div>
-        <div class="ba-week">Semaine 1</div>
+        <div class="ba-label">{% if request.locale.iso_code == 'en' %}Before UBurn{% else %}Avant Uburn{% endif %}</div>
+        <div class="ba-week">{% if request.locale.iso_code == 'en' %}Week 1{% else %}Semaine 1{% endif %}</div>
         <div class="ba-items">
-          <div class="ba-item">Fringales incontrôlables à 16h — placard ouvert quotidiennement</div>
-          <div class="ba-item">Culpabilité après chaque craquage, frustration chronique</div>
-          <div class="ba-item">Dîner trop copieux pour compenser la faim accumulée</div>
-          <div class="ba-item">Fatigue l'après-midi, digestion difficile</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Uncontrollable 4PM cravings — pantry open daily{% else %}Fringales incontrôlables à 16h — placard ouvert quotidiennement{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Guilt after every slip-up, chronic frustration{% else %}Culpabilité après chaque craquage, frustration chronique{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Dinner too heavy to make up for accumulated hunger{% else %}Dîner trop copieux pour compenser la faim accumulée{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Afternoon fatigue, difficult digestion{% else %}Fatigue l'après-midi, digestion difficile{% endif %}</div>
         </div>
         <div class="ba-profile">
-          <div class="ba-avatar">M</div>
-          <div><div class="ba-name">Marie D.</div><div class="ba-meta">42 ans · Paris 11e</div></div>
+          <div class="ba-avatar">{% if request.locale.iso_code == 'en' %}S{% else %}M{% endif %}</div>
+          <div><div class="ba-name">{% if request.locale.iso_code == 'en' %}Sarah D.{% else %}Marie D.{% endif %}</div><div class="ba-meta">{% if request.locale.iso_code == 'en' %}42 yrs · Brooklyn, NY{% else %}42 ans · Paris 11e{% endif %}</div></div>
         </div>
       </div>
       <div class="ba-divider"><div class="ba-divider-arrow">→</div></div>
       <div class="ba-col ba-after">
-        <div class="ba-label">Après 4 semaines</div>
-        <div class="ba-week">Semaine 4</div>
+        <div class="ba-label">{% if request.locale.iso_code == 'en' %}After 4 weeks{% else %}Après 4 semaines{% endif %}</div>
+        <div class="ba-week">{% if request.locale.iso_code == 'en' %}Week 4{% else %}Semaine 4{% endif %}</div>
         <div class="ba-items">
-          <div class="ba-item">Plus de fringale à 16h — elle oublie même d'ouvrir le placard</div>
-          <div class="ba-item">Dîner naturellement plus léger, sans effort de volonté</div>
-          <div class="ba-item">Digestion fluide, ventre moins gonflé dès la 2e semaine</div>
-          <div class="ba-item">Perte de 2,8 kg sur 4 semaines sans régime particulier</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}No more 4PM cravings — she even forgets to open the pantry{% else %}Plus de fringale à 16h — elle oublie même d'ouvrir le placard{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Naturally lighter dinner, no willpower needed{% else %}Dîner naturellement plus léger, sans effort de volonté{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Smooth digestion, less bloating from week 2{% else %}Digestion fluide, ventre moins gonflé dès la 2e semaine{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}6 lbs released over 4 weeks with no specific diet*{% else %}Perte de 2,8 kg sur 4 semaines sans régime particulier{% endif %}</div>
         </div>
         <div class="ba-profile">
-          <div class="ba-avatar" style="background:var(--purple-wash)">M</div>
-          <div><div class="ba-name">Marie D. — Cliente vérifiée</div><div class="ba-meta">Après 28 jours · Résultats individuels</div><div class="ba-stars">★★★★★</div></div>
+          <div class="ba-avatar" style="background:var(--purple-wash)">{% if request.locale.iso_code == 'en' %}S{% else %}M{% endif %}</div>
+          <div><div class="ba-name">{% if request.locale.iso_code == 'en' %}Sarah D. — Verified purchase{% else %}Marie D. — Cliente vérifiée{% endif %}</div><div class="ba-meta">{% if request.locale.iso_code == 'en' %}After 28 days · Individual results{% else %}Après 28 jours · Résultats individuels{% endif %}</div><div class="ba-stars">★★★★★</div></div>
         </div>
       </div>
     </div>
-    <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6">Les résultats varient selon les individus. Glucomannane — EFSA ID 3120. Conditions : 3g/jour avec eau avant les repas.</p>
+    <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6">{% if request.locale.iso_code == 'en' %}Individual results may vary. Glucomannan — FDA dietary fiber*. Use: 3g/day with water before meals.{% else %}Les résultats varient selon les individus. Glucomannane — EFSA ID 3120. Conditions : 3g/jour avec eau avant les repas.{% endif %}</p>
   </div>
 </section>
 {% render 'ub-footer' %}

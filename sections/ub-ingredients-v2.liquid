@@ -107,15 +107,11 @@ main#main{padding:0 !important}
 </style>
 {% render 'ub-nav' %}
 
-{%- assign _is_en = false -%}
-{%- if request.locale.iso_code contains 'en' -%}{%- assign _is_en = true -%}{%- endif -%}
-
-{%- if _is_en -%}
 <section class="ing-hero">
   <div style="position:relative;z-index:1;max-width:700px">
-    <div class="section-label reveal">The formula</div>
-    <h1 class="reveal rd1">6 plant actives.<br><em>One purpose.</em></h1>
-    <p class="reveal rd2">Each ingredient is selected for how they work together. Fullness, energy, digestion — all at once.*</p>
+    <div class="section-label reveal">{% if request.locale.iso_code == 'en' %}The formula{% else %}La formule{% endif %}</div>
+    <h1 class="reveal rd1">{% if request.locale.iso_code == 'en' %}6 plant actives.<br><em>One purpose.</em>{% else %}6 actifs.<br><em>Un seul objectif.</em>{% endif %}</h1>
+    <p class="reveal rd2">{% if request.locale.iso_code == 'en' %}Each ingredient is selected for how they work together. Satiety, energy, digestion — all at once.*{% else %}Chaque ingrédient est sélectionné pour sa complémentarité. Ensemble, ils agissent sur la faim, l'énergie et la digestion — simultanément.{% endif %}</p>
   </div>
 </section>
 
@@ -125,50 +121,50 @@ main#main{padding:0 !important}
 
       <div class="ing-card featured reveal">
         <div class="ing-icon">🟣</div>
-        <div class="ing-name">Konjac · Glucomannan</div>
+        <div class="ing-name">{% if request.locale.iso_code == 'en' %}Konjac · Glucomannan{% else %}Konjac · Glucomannane{% endif %}</div>
         <div class="ing-latin">Amorphophallus konjac</div>
-        <div class="ing-desc">The hero ingredient. 3g per daily serving — the exact dose backed by EFSA research for supporting natural satiety as part of a balanced diet. The only ingredient in this category officially recognized in Europe.</div>
-        <span class="ing-tag">EFSA ID 3120 · 3g validated dose</span>
+        <div class="ing-desc">{% if request.locale.iso_code == 'en' %}The hero ingredient. 3g per daily serving — the research-backed* dose supporting natural satiety as part of a balanced diet. The only ingredient in this category officially recognized as an FDA dietary fiber*.{% else %}L'actif principal. 3g par dose — la dose exacte validée par l'EFSA pour contribuer au contrôle de l'appétit dans le cadre d'un régime hypocalorique. Le seul ingrédient de cette catégorie officiellement reconnu en Europe.{% endif %}</div>
+        <span class="ing-tag">{% if request.locale.iso_code == 'en' %}FDA dietary fiber* · 3g validated dose{% else %}EFSA ID 3120 · Dose validée 3g{% endif %}</span>
       </div>
 
       <div class="ing-card reveal rd1">
         <div class="ing-icon">🌿</div>
-        <div class="ing-name">Ube · Purple yam</div>
-        <div class="ing-latin">Dioscorea alata · Southeast Asia</div>
-        <div class="ing-desc">Our signature ingredient. Rich in anthocyanins — powerful antioxidants that protect your cells. The reason UBurn is naturally purple. No artificial coloring.</div>
-        <span class="ing-tag">Natural antioxidants</span>
+        <div class="ing-name">{% if request.locale.iso_code == 'en' %}Ube · Purple yam{% else %}Ubé · Igname violet{% endif %}</div>
+        <div class="ing-latin">{% if request.locale.iso_code == 'en' %}Dioscorea alata · Southeast Asia{% else %}Dioscorea alata · Asie du Sud-Est{% endif %}</div>
+        <div class="ing-desc">{% if request.locale.iso_code == 'en' %}Our signature ingredient. Rich in anthocyanins — powerful antioxidants that protect your cells. The reason UBurn is naturally purple. No artificial coloring.{% else %}L'ingrédient signature. Riche en anthocyanes, des antioxydants puissants qui protègent les cellules. Responsable de la couleur violette naturelle — aucun colorant artificiel.{% endif %}</div>
+        <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Natural antioxidants{% else %}Antioxydants naturels{% endif %}</span>
       </div>
 
       <div class="ing-card reveal rd2">
         <div class="ing-icon">🥥</div>
-        <div class="ing-name">Coconut MCT</div>
-        <div class="ing-latin">Medium-chain triglycerides</div>
-        <div class="ing-desc">Fast, stable energy within 15 minutes. MCTs are metabolized directly by your liver — no insulin spike, no afternoon crash.</div>
-        <span class="ing-tag">Stable energy</span>
+        <div class="ing-name">{% if request.locale.iso_code == 'en' %}Coconut MCT{% else %}MCT · Coco{% endif %}</div>
+        <div class="ing-latin">{% if request.locale.iso_code == 'en' %}Medium-chain triglycerides{% else %}Acides gras à chaîne moyenne{% endif %}</div>
+        <div class="ing-desc">{% if request.locale.iso_code == 'en' %}Fast, stable energy within 15 minutes. MCTs are metabolized directly by your liver — no insulin spike, no afternoon crash.{% else %}Énergie rapide et stable dès 15 minutes après la prise. Les MCT sont métabolisés directement par le foie — sans pic d'insuline, sans crash de l'après-midi.{% endif %}</div>
+        <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Stable energy{% else %}Énergie stable{% endif %}</span>
       </div>
 
       <div class="ing-card reveal">
         <div class="ing-icon">⚡</div>
         <div class="ing-name">L-Carnitine</div>
-        <div class="ing-latin">Natural amino acid</div>
-        <div class="ing-desc">Helps your body use fatty acids as energy. Supports natural metabolism — works alongside konjac for a complete experience.*</div>
-        <span class="ing-tag">Active metabolism</span>
+        <div class="ing-latin">{% if request.locale.iso_code == 'en' %}Natural amino acid{% else %}Acide aminé · Naturel{% endif %}</div>
+        <div class="ing-desc">{% if request.locale.iso_code == 'en' %}Helps your body use fatty acids as energy. Supports natural metabolism — works alongside konjac for a complete experience.*{% else %}Contribue à l'utilisation des acides gras comme source d'énergie. Favorise le métabolisme lipidique — complémentaire au glucomannane pour une action complète.{% endif %}</div>
+        <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Active metabolism{% else %}Métabolisme actif{% endif %}</span>
       </div>
 
       <div class="ing-card reveal rd1">
         <div class="ing-icon">🫚</div>
-        <div class="ing-name">Purple ginger</div>
+        <div class="ing-name">{% if request.locale.iso_code == 'en' %}Purple ginger{% else %}Gingembre violet{% endif %}</div>
         <div class="ing-latin">Zingiber zerumbet</div>
-        <div class="ing-desc">Supports digestion and reduces digestive discomfort. Natural anti-inflammatory properties. Enhances konjac's action on transit.</div>
-        <span class="ing-tag">Digestive comfort</span>
+        <div class="ing-desc">{% if request.locale.iso_code == 'en' %}Supports digestion and reduces digestive discomfort. Natural anti-inflammatory properties. Enhances konjac's action on transit.{% else %}Soutient la digestion et réduit l'inconfort digestif. Propriétés anti-inflammatoires naturelles. Renforce l'action du glucomannane sur le transit.{% endif %}</div>
+        <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Digestive comfort{% else %}Confort digestif{% endif %}</span>
       </div>
 
       <div class="ing-card reveal rd2">
         <div class="ing-icon">🌾</div>
-        <div class="ing-name">Acacia fiber</div>
-        <div class="ing-latin">Acacia senegal · Prebiotic</div>
-        <div class="ing-desc">Natural prebiotic that feeds the good bacteria in your gut microbiome. Supports balanced digestion and long-term gut health.</div>
-        <span class="ing-tag">Balanced microbiome</span>
+        <div class="ing-name">{% if request.locale.iso_code == 'en' %}Acacia fiber{% else %}Fibre d'acacia{% endif %}</div>
+        <div class="ing-latin">{% if request.locale.iso_code == 'en' %}Acacia senegal · Prebiotic{% else %}Acacia senegal · Prébiotique{% endif %}</div>
+        <div class="ing-desc">{% if request.locale.iso_code == 'en' %}Natural prebiotic that feeds the good bacteria in your gut microbiome. Supports balanced digestion and long-term gut health.{% else %}Prébiotique naturel qui nourrit les bonnes bactéries du microbiote intestinal. Contribue à une digestion équilibrée et à la santé intestinale sur le long terme.{% endif %}</div>
+        <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Balanced microbiome{% else %}Microbiote équilibré{% endif %}</span>
       </div>
 
     </div>
@@ -180,169 +176,52 @@ main#main{padding:0 !important}
     <div class="efsa-badge reveal">
       <div class="efsa-badge-icon">🏛️</div>
       <div>
-        <div class="efsa-badge-text">EFSA-backed fiber</div>
-        <div class="efsa-badge-sub">EU Regulation 432/2012 · ID 3120</div>
+        <div class="efsa-badge-text">{% if request.locale.iso_code == 'en' %}Research-backed fiber*{% else %}Allégation officielle EFSA{% endif %}</div>
+        <div class="efsa-badge-sub">{% if request.locale.iso_code == 'en' %}FDA dietary fiber* · Reference ID 3120{% else %}Règlement CE 432/2012 · ID 3120{% endif %}</div>
       </div>
     </div>
-    <p class="efsa-desc reveal rd1">Konjac glucomannan is the only ingredient in its category whose "supports satiety in the context of an energy-restricted diet" claim is officially recognized by the European Food Safety Authority. Conditions: 3g daily across 3 servings with 1-2 glasses of water before meals, as part of a balanced diet.</p>
+    <p class="efsa-desc reveal rd1">{% if request.locale.iso_code == 'en' %}Konjac glucomannan is the only ingredient in its category whose "supports satiety as part of a calorie-controlled diet" claim is research-backed* by European food safety authorities. Recommended use: 3g daily across 3 servings with 1-2 glasses of water before meals, as part of a balanced diet.{% else %}Le glucomannane est l'unique ingrédient dont l'allégation "contrôle de l'appétit" est officiellement validée par l'Autorité Européenne de Sécurité des Aliments. Conditions : 3g en 3 doses avec 1-2 verres d'eau avant les repas, dans le cadre d'un régime hypocalorique.{% endif %}</p>
   </div>
 </div>
 
 <section class="ba-section">
   <div class="ba-inner">
-    <div class="section-label reveal">Real customer experience</div>
-    <h2 class="section-title reveal rd1">What changes.<br><em>In her own words.*</em></h2>
+    <div class="section-label reveal">{% if request.locale.iso_code == 'en' %}Real customer experience{% else %}Résultat réel{% endif %}</div>
+    <h2 class="section-title reveal rd1">{% if request.locale.iso_code == 'en' %}What changes.<br><em>In her own words.*</em>{% else %}Ce qui change.<br><em>Pas les nôtres.</em>{% endif %}</h2>
     <div class="ba-card reveal rd2">
       <div class="ba-col ba-before">
-        <div class="ba-label">Before UBurn</div>
-        <div class="ba-week">Week 1</div>
+        <div class="ba-label">{% if request.locale.iso_code == 'en' %}Before UBurn{% else %}Avant Uburn{% endif %}</div>
+        <div class="ba-week">{% if request.locale.iso_code == 'en' %}Week 1{% else %}Semaine 1{% endif %}</div>
         <div class="ba-items">
-          <div class="ba-item">4PM cravings every single day — pantry open by mid-afternoon</div>
-          <div class="ba-item">Guilt after every snack, chronic frustration</div>
-          <div class="ba-item">Big dinners to compensate for skipped meals</div>
-          <div class="ba-item">Afternoon fatigue, digestive discomfort</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}4PM cravings every single day — pantry open by mid-afternoon{% else %}Fringales incontrôlables à 16h — placard ouvert quotidiennement{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Guilt after every snack, chronic frustration{% else %}Culpabilité après chaque craquage, frustration chronique{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Big dinners to compensate for skipped meals{% else %}Dîner trop copieux pour compenser la faim accumulée{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Afternoon fatigue, digestive discomfort{% else %}Fatigue l'après-midi, digestion difficile{% endif %}</div>
         </div>
         <div class="ba-profile">
-          <div class="ba-avatar">A</div>
-          <div><div class="ba-name">Ashley K.</div><div class="ba-meta">38 · Phoenix, AZ</div></div>
+          <div class="ba-avatar">{% if request.locale.iso_code == 'en' %}A{% else %}M{% endif %}</div>
+          <div><div class="ba-name">{% if request.locale.iso_code == 'en' %}Ashley K.{% else %}Marie D.{% endif %}</div><div class="ba-meta">{% if request.locale.iso_code == 'en' %}38 · Phoenix, AZ{% else %}42 ans · Paris 11e{% endif %}</div></div>
         </div>
       </div>
       <div class="ba-divider"><div class="ba-divider-arrow">→</div></div>
       <div class="ba-col ba-after">
-        <div class="ba-label">After 4 weeks*</div>
-        <div class="ba-week">Week 4</div>
+        <div class="ba-label">{% if request.locale.iso_code == 'en' %}After 4 weeks*{% else %}Après 4 semaines{% endif %}</div>
+        <div class="ba-week">{% if request.locale.iso_code == 'en' %}Week 4{% else %}Semaine 4{% endif %}</div>
         <div class="ba-items">
-          <div class="ba-item">4PM cravings quieter — she forgets the pantry exists</div>
-          <div class="ba-item">Dinner naturally lighter, no willpower required</div>
-          <div class="ba-item">Smoother digestion, less bloating from week 2</div>
-          <div class="ba-item">Calmer mood, better overall energy</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}4PM cravings quieter — she forgets the pantry exists{% else %}Plus de fringale à 16h — elle oublie même d'ouvrir le placard{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Dinner naturally lighter, no willpower required{% else %}Dîner naturellement plus léger, sans effort de volonté{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Smoother digestion, less bloating from week 2{% else %}Digestion fluide, ventre moins gonflé dès la 2e semaine{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Calmer mood, better overall energy{% else %}Sensation d'équilibre sur 4 semaines{% endif %}</div>
         </div>
         <div class="ba-profile">
-          <div class="ba-avatar" style="background:var(--purple-wash)">A</div>
-          <div><div class="ba-name">Ashley K. — Verified customer</div><div class="ba-meta">After 28 days · Individual results*</div><div class="ba-stars">★★★★★</div></div>
+          <div class="ba-avatar" style="background:var(--purple-wash)">{% if request.locale.iso_code == 'en' %}A{% else %}M{% endif %}</div>
+          <div><div class="ba-name">{% if request.locale.iso_code == 'en' %}Ashley K. — Verified purchase{% else %}Marie D. — Cliente vérifiée{% endif %}</div><div class="ba-meta">{% if request.locale.iso_code == 'en' %}After 28 days · Individual results*{% else %}Après 28 jours · Résultats individuels{% endif %}</div><div class="ba-stars">★★★★★</div></div>
         </div>
       </div>
     </div>
-    <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6">*Individual results may vary. UBurn is a dietary supplement, not a medication. Glucomannan — EFSA ID 3120. Conditions: 3g/day with water before meals.</p>
+    <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6">{% if request.locale.iso_code == 'en' %}*Individual results may vary. UBurn is a dietary supplement, not a medication. Glucomannan — FDA dietary fiber*. Use: 3g/day with water before meals.{% else %}Les résultats varient selon les individus. Glucomannane — EFSA ID 3120. Conditions : 3g/jour avec eau avant les repas.{% endif %}</p>
   </div>
 </section>
-{%- else -%}
-<section class="ing-hero">
-  <div style="position:relative;z-index:1;max-width:700px">
-    <div class="section-label reveal">La formule</div>
-    <h1 class="reveal rd1">6 actifs.<br><em>Un seul objectif.</em></h1>
-    <p class="reveal rd2">Chaque ingrédient est sélectionné pour sa complémentarité. Ensemble, ils agissent sur la faim, l'énergie et la digestion — simultanément.</p>
-  </div>
-</section>
-
-<section class="ing-grid-section">
-  <div class="ing-grid-inner">
-    <div class="ing-grid">
-
-      <div class="ing-card featured reveal">
-        <div class="ing-icon">🟣</div>
-        <div class="ing-name">Konjac · Glucomannane</div>
-        <div class="ing-latin">Amorphophallus konjac</div>
-        <div class="ing-desc">L'actif principal. 3g par dose — la dose exacte validée par l'EFSA pour contribuer au contrôle de l'appétit dans le cadre d'un régime hypocalorique. Le seul ingrédient de cette catégorie officiellement reconnu en Europe.</div>
-        <span class="ing-tag">EFSA ID 3120 · Dose validée 3g</span>
-      </div>
-
-      <div class="ing-card reveal rd1">
-        <div class="ing-icon">🌿</div>
-        <div class="ing-name">Ubé · Igname violet</div>
-        <div class="ing-latin">Dioscorea alata · Asie du Sud-Est</div>
-        <div class="ing-desc">L'ingrédient signature. Riche en anthocyanes, des antioxydants puissants qui protègent les cellules. Responsable de la couleur violette naturelle — aucun colorant artificiel.</div>
-        <span class="ing-tag">Antioxydants naturels</span>
-      </div>
-
-      <div class="ing-card reveal rd2">
-        <div class="ing-icon">🥥</div>
-        <div class="ing-name">MCT · Coco</div>
-        <div class="ing-latin">Acides gras à chaîne moyenne</div>
-        <div class="ing-desc">Énergie rapide et stable dès 15 minutes après la prise. Les MCT sont métabolisés directement par le foie — sans pic d'insuline, sans crash de l'après-midi.</div>
-        <span class="ing-tag">Énergie stable</span>
-      </div>
-
-      <div class="ing-card reveal">
-        <div class="ing-icon">⚡</div>
-        <div class="ing-name">L-Carnitine</div>
-        <div class="ing-latin">Acide aminé · Naturel</div>
-        <div class="ing-desc">Contribue à l'utilisation des acides gras comme source d'énergie. Favorise le métabolisme lipidique — complémentaire au glucomannane pour une action complète.</div>
-        <span class="ing-tag">Métabolisme actif</span>
-      </div>
-
-      <div class="ing-card reveal rd1">
-        <div class="ing-icon">🫚</div>
-        <div class="ing-name">Gingembre violet</div>
-        <div class="ing-latin">Zingiber zerumbet</div>
-        <div class="ing-desc">Soutient la digestion et réduit l'inconfort digestif. Propriétés anti-inflammatoires naturelles. Renforce l'action du glucomannane sur le transit.</div>
-        <span class="ing-tag">Confort digestif</span>
-      </div>
-
-      <div class="ing-card reveal rd2">
-        <div class="ing-icon">🌾</div>
-        <div class="ing-name">Fibre d'acacia</div>
-        <div class="ing-latin">Acacia senegal · Prébiotiique</div>
-        <div class="ing-desc">Prébiotique naturel qui nourrit les bonnes bactéries du microbiote intestinal. Contribue à une digestion équilibrée et à la santé intestinale sur le long terme.</div>
-        <span class="ing-tag">Microbiote équilibré</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div class="efsa-banner">
-  <div class="efsa-inner">
-    <div class="efsa-badge reveal">
-      <div class="efsa-badge-icon">🏛️</div>
-      <div>
-        <div class="efsa-badge-text">Allégation officielle EFSA</div>
-        <div class="efsa-badge-sub">Règlement CE 432/2012 · ID 3120</div>
-      </div>
-    </div>
-    <p class="efsa-desc reveal rd1">Le glucomannane est l'unique ingrédient dont l'allégation "contrôle de l'appétit" est officiellement validée par l'Autorité Européenne de Sécurité des Aliments. Conditions : 3g en 3 doses avec 1-2 verres d'eau avant les repas, dans le cadre d'un régime hypocalorique.</p>
-  </div>
-</div>
-
-<section class="ba-section">
-  <div class="ba-inner">
-    <div class="section-label reveal">Résultat réel</div>
-    <h2 class="section-title reveal rd1">Ce qui change.<br><em>Pas les nôtres.</em></h2>
-    <div class="ba-card reveal rd2">
-      <div class="ba-col ba-before">
-        <div class="ba-label">Avant Uburn</div>
-        <div class="ba-week">Semaine 1</div>
-        <div class="ba-items">
-          <div class="ba-item">Fringales incontrôlables à 16h — placard ouvert quotidiennement</div>
-          <div class="ba-item">Culpabilité après chaque craquage, frustration chronique</div>
-          <div class="ba-item">Dîner trop copieux pour compenser la faim accumulée</div>
-          <div class="ba-item">Fatigue l'après-midi, digestion difficile</div>
-        </div>
-        <div class="ba-profile">
-          <div class="ba-avatar">M</div>
-          <div><div class="ba-name">Marie D.</div><div class="ba-meta">42 ans · Paris 11e</div></div>
-        </div>
-      </div>
-      <div class="ba-divider"><div class="ba-divider-arrow">→</div></div>
-      <div class="ba-col ba-after">
-        <div class="ba-label">Après 4 semaines</div>
-        <div class="ba-week">Semaine 4</div>
-        <div class="ba-items">
-          <div class="ba-item">Plus de fringale à 16h — elle oublie même d'ouvrir le placard</div>
-          <div class="ba-item">Dîner naturellement plus léger, sans effort de volonté</div>
-          <div class="ba-item">Digestion fluide, ventre moins gonflé dès la 2e semaine</div>
-          <div class="ba-item">Sensation d'équilibre sur 4 semaines</div>
-        </div>
-        <div class="ba-profile">
-          <div class="ba-avatar" style="background:var(--purple-wash)">M</div>
-          <div><div class="ba-name">Marie D. — Cliente vérifiée</div><div class="ba-meta">Après 28 jours · Résultats individuels</div><div class="ba-stars">★★★★★</div></div>
-        </div>
-      </div>
-    </div>
-    <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6">Les résultats varient selon les individus. Glucomannane — EFSA ID 3120. Conditions : 3g/jour avec eau avant les repas.</p>
-  </div>
-</section>
-{%- endif -%}
 {% render 'ub-footer' %}
 <script>
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0,rootMargin:'0px'});

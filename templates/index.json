@@ -5,5 +5,7 @@
       "settings": {}
     }
   },
-  "order": ["main-uburn-home"]
+  "order": [
+    "main-uburn-home"
+  ]
 }
