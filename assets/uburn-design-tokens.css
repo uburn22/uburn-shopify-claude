@@ -1,0 +1,177 @@
+/* ════════════════════════════════════════════════════════════════
+   UBURN — DESIGN TOKENS GLOBAL
+   Aligns the whole site with the LP look & feel:
+   https://uburn.co/pages/uburn-lp
+
+   Conservative scope:
+   - CSS variables (color palette + easing)
+   - Typography (Red Hat Display titles, Red Hat Text body)
+   - Light global polish (heading rhythm, link color)
+   - Button alignment ON .button--primary ONLY (excludes payment/disabled)
+   - Card-style sections: subtle radius + shadow polish
+
+   Hands off:
+   - PDP V9 (already styled via .pdpv9-* scope)
+   - LP (already styled inline in section file)
+   - Cart/checkout/payment buttons
+   - Shopify form internals
+   - Disabled/aria-disabled states
+   ════════════════════════════════════════════════════════════════ */
+
+/* ─── Fonts ─────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800;900&family=Red+Hat+Text:wght@400;500;600;700&display=swap');
+
+/* ─── Design tokens (scoped to :root, no override of theme variables) ─── */
+:root {
+  --uburn-purple-darkest: #2a1054;
+  --uburn-purple-deep:    #3d1873;
+  --uburn-purple-deep2:   #5b2199;
+  --uburn-purple-main:    #7d3fff;
+  --uburn-purple-mid2:    #9060ff;
+  --uburn-purple-mid:     #a07dff;
+  --uburn-purple-pastel:  #b07de8;
+  --uburn-purple-pale:    #e8dcf5;
+  --uburn-purple-wash:    #f5f0fa;
+  --uburn-cream:          #faf9f7;
+  --uburn-warm:           #f2f0ed;
+  --uburn-dark:           #242220;
+  --uburn-body:           #5a5654;
+  --uburn-muted:          #8a8785;
+  --uburn-grad-hero:      linear-gradient(160deg, #3d1873 0%, #7d3fff 40%, #a07dff 100%);
+  --uburn-grad-btn:       linear-gradient(160deg, #5a2acc 0%, #7d3fff 100%);
+  --uburn-grad-soft:      linear-gradient(145deg, #e8dcf5, #f8f5ff);
+  --uburn-ease:           cubic-bezier(.22, 1, .36, 1);
+  --uburn-shadow-soft:    0 4px 24px rgba(125, 63, 255, .10);
+  --uburn-shadow-card:    0 2px 12px rgba(125, 63, 255, .07);
+  --uburn-shadow-cta:     0 6px 22px rgba(125, 63, 255, .30);
+}
+
+/* ─── Typography baseline ───────────────────────────────────────────
+   Apply globally but with low specificity so theme can override locally.
+   Excludes pages already self-styled (PDP V9, LP) via :not selectors. */
+body {
+  font-family: 'Red Hat Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Red Hat Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+/* ─── Heading rhythm soft (only outside V9/LP scopes) ─────────────── */
+:not(.pdpv9-root):not(.uburn-pdp-v9-section):not(.uburn-homepage-section) > h1 {
+  font-weight: 800;
+}
+:not(.pdpv9-root):not(.uburn-pdp-v9-section):not(.uburn-homepage-section) > h2 {
+  font-weight: 700;
+}
+
+/* ─── Links global ─────────────────────────────────────────────────── */
+a:not([class]) {
+  color: var(--uburn-purple-main);
+  transition: color .2s var(--uburn-ease);
+}
+a:not([class]):hover {
+  color: var(--uburn-purple-deep);
+}
+
+/* ─── Button alignment LP-style — ONLY safe selectors ───────────────
+   Targets:
+   ✓ .button--primary (Sahara/Switch theme primary CTA, NOT inside cart/checkout)
+   ✓ .button--solid (alternative class)
+   Excluded:
+   ✗ disabled state (preserves theme disabled styling)
+   ✗ Shopify express payment buttons
+   ✗ Cart drawer / checkout button
+   ✗ Quantity +/- buttons
+   ✗ Buttons inside .pdpv9-root (PDP V9 has its own scope)
+   ✗ Buttons inside .uburn-homepage-section (LP has its own scope) */
+.button--primary:not([disabled]):not([aria-disabled="true"]):not(.shopify-payment-button__button):not(.cart__checkout):not(.cart-drawer__checkout):not([name="checkout"]),
+.button--solid:not([disabled]):not([aria-disabled="true"]):not(.shopify-payment-button__button) {
+  font-family: 'Red Hat Display', sans-serif;
+  font-weight: 700;
+  letter-spacing: .2px;
+  border-radius: 100px;
+  transition: background .25s var(--uburn-ease), transform .15s var(--uburn-ease), box-shadow .25s var(--uburn-ease);
+}
+
+/* Don't override colors of buttons inside known section scopes */
+.pdpv9-root .button--primary,
+.uburn-homepage-section .button--primary,
+.uburn-pdp-v9-section .button--primary {
+  /* keep their scoped styling */
+  font-family: inherit;
+  border-radius: inherit;
+}
+
+/* Apply purple background only on truly generic primary buttons (theme) */
+body:not(.template-product) .button--primary:not([disabled]):not([aria-disabled="true"]):not(.shopify-payment-button__button):not(.cart__checkout):not([name="checkout"]):not(.cart-drawer__checkout) {
+  background-color: var(--uburn-purple-main);
+  color: #fff;
+  box-shadow: var(--uburn-shadow-cta);
+}
+body:not(.template-product) .button--primary:not([disabled]):not([aria-disabled="true"]):hover {
+  background-color: var(--uburn-purple-deep);
+  transform: translateY(-1px);
+}
+
+/* ─── Cards / sections rounding + spacing soft polish ────────────── */
+/* Soften default sharp edges on theme sections (multi-column, image-with-text-overlay, etc.)
+   without overriding their layout or padding. */
+.shopify-section--multi-column .multi-column__column,
+.shopify-section--image-with-text-overlay .image-with-text-overlay__inner,
+.shopify-section--reading-text .reading-text__inner,
+.shopify-section--rich-text .rich-text__inner {
+  border-radius: 16px;
+}
+
+/* ─── Page heading utility (used by uburn-page-heading.liquid section) ─── */
+.uburn-page-heading {
+  text-align: center;
+  padding: 48px 16px 24px;
+  background: linear-gradient(180deg, #fff 0%, var(--uburn-purple-wash) 100%);
+}
+.uburn-page-heading__h1 {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: clamp(28px, 5.5vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--uburn-dark);
+  line-height: 1.1;
+  margin-bottom: 8px;
+  text-wrap: balance;
+}
+.uburn-page-heading__subtitle {
+  font-size: clamp(14px, 2.4vw, 17px);
+  color: var(--uburn-body);
+  line-height: 1.55;
+  max-width: 640px;
+  margin: 0 auto;
+  font-weight: 500;
+}
+@media (min-width: 900px) {
+  .uburn-page-heading { padding: 72px 32px 36px; }
+}
+
+/* ─── Focus visible global a11y ──────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--uburn-purple-main);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ─── Anti-overflow safety on full body ──────────────────────────── */
+body {
+  overflow-x: hidden;
+}
+
+/* ─── Reduced motion respect ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
