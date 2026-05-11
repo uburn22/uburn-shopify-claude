@@ -234,20 +234,20 @@
             {%- assign _sub_price = current_variant.price | minus: _discount_cents -%}
             <fieldset class="pdpv9-pdp__purchase-mode" role="radiogroup" style="margin:14px 0;border:0;padding:0;">
               <legend style="font-weight:700;font-size:14px;margin-bottom:8px;color:#1a1a1a;">{% if request.locale.iso_code == 'en' %}Purchase option{% else %}Mode d'achat{% endif %}</legend>
-              <label class="pdpv9-pdp__mode pdpv9-pdp__mode--onetime" style="display:flex;gap:10px;padding:12px 14px;border:1.5px solid #E0DCE5;border-radius:10px;cursor:pointer;margin-bottom:8px;align-items:flex-start;">
-                <input type="radio" name="selling_plan" value="" checked style="margin-top:2px;accent-color:#2A1054;">
-                <span style="flex:1;">
-                  <strong style="display:block;font-size:14px;color:#1a1a1a;">{% if request.locale.iso_code == 'en' %}One-time purchase{% else %}Achat unique{% endif %}</strong>
-                  <span style="display:block;font-size:13px;color:#666;margin-top:2px;">{% render 'locale-price', price: current_variant.price %}</span>
-                </span>
-              </label>
-              <label class="pdpv9-pdp__mode pdpv9-pdp__mode--sub" style="display:flex;gap:10px;padding:12px 14px;border:1.5px solid #2A1054;border-radius:10px;cursor:pointer;background:linear-gradient(135deg,#F2F0FA 0%,#FAF9F7 100%);align-items:flex-start;position:relative;">
-                <span style="position:absolute;top:-9px;right:14px;background:#2A1054;color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;letter-spacing:0.3px;">{% if request.locale.iso_code == 'en' %}SAVE {{ _plan_discount_pct }}%{% else %}-{{ _plan_discount_pct }}%{% endif %}</span>
-                <input type="radio" name="selling_plan" value="{{ _plan.id }}" style="margin-top:2px;accent-color:#2A1054;">
+              <label class="pdpv9-pdp__mode pdpv9-pdp__mode--sub" style="display:flex;gap:10px;padding:14px 16px;border:2px solid #2A1054;border-radius:12px;cursor:pointer;background:linear-gradient(135deg,#F2F0FA 0%,#FAF9F7 100%);align-items:flex-start;position:relative;margin-bottom:8px;box-shadow:0 2px 8px rgba(42,16,84,0.08);">
+                <span style="position:absolute;top:-10px;right:14px;background:#2A1054;color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:6px;letter-spacing:0.4px;">MOST POPULAR · SAVE {{ _plan_discount_pct }}%</span>
+                <input type="radio" name="selling_plan" value="{{ _plan.id }}" checked style="margin-top:2px;accent-color:#2A1054;">
                 <span style="flex:1;">
                   <strong style="display:block;font-size:14px;color:#2A1054;">Subscribe & Save {{ _plan_discount_pct }}%</strong>
                   <span style="display:block;font-size:13px;color:#2A1054;font-weight:600;margin-top:2px;">{% render 'locale-price', price: _sub_price %} every 30 days</span>
-                  <span style="display:block;font-size:11px;color:#555;margin-top:4px;">✓ Cancel anytime  ✓ Free shipping  ✓ Bonuses included</span>
+                  <span style="display:block;font-size:11px;color:#555;margin-top:5px;line-height:1.5;">✓ Cancel anytime  ✓ Skip or pause  ✓ Lock in this price<br>✓ Free shipping  ✓ Bonuses included</span>
+                </span>
+              </label>
+              <label class="pdpv9-pdp__mode pdpv9-pdp__mode--onetime" style="display:flex;gap:10px;padding:12px 14px;border:1.5px solid #E0DCE5;border-radius:10px;cursor:pointer;align-items:flex-start;">
+                <input type="radio" name="selling_plan" value="" style="margin-top:2px;accent-color:#2A1054;">
+                <span style="flex:1;">
+                  <strong style="display:block;font-size:14px;color:#1a1a1a;">One-time purchase</strong>
+                  <span style="display:block;font-size:13px;color:#666;margin-top:2px;">{% render 'locale-price', price: current_variant.price %}</span>
                 </span>
               </label>
             </fieldset>
