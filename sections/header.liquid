@@ -200,7 +200,7 @@
                 -%}
 
                 <a href="{{ link.url }}" class="block subheading link-reversed" {% if link.current %}aria-current="page"{% endif %} {% if open_dropdown_menu_in_sidebar and has_dropdown_menu %}aria-expanded="false" aria-controls="menu-dropdown-sidebar" data-link-position="{{ forloop.index }}"{% elsif has_dropdown_menu %}aria-expanded="false" aria-controls="{{ menu_id }}" {% if section.settings.menu_open_trigger == 'hover' %}data-open-on-hover{% endif %}{% endif %}>
-                  {{- link.title -}}
+                  {% render 'translate-menu-link', title: link.title %}
                 </a>
 
                 {%- if has_dropdown_menu and open_dropdown_menu_in_sidebar == false -%}
@@ -212,7 +212,7 @@
 
                           <li>
                             <a href="{{ sub_link.url }}" class="subheading link-faded-reverse" {% if sub_link.current %}aria-current="page"{% endif %} {% if sub_link.levels > 0 %}aria-expanded="false" aria-controls="{{ sub_menu_id }}" {% if section.settings.menu_open_trigger == 'hover' %}data-open-on-hover{% endif %}{% endif %}>
-                              {{- sub_link.title -}}
+                              {% render 'translate-menu-link', title: sub_link.title %}
 
                               {%- if sub_link.levels > 0 -%}
                                 {%- render 'icon' with 'chevron-right', direction_aware: true -%}
@@ -224,7 +224,7 @@
                                 <ul class="unstyled-list">
                                   {%- for sub_sub_link in sub_link.links -%}
                                     <li>
-                                      <a href="{{ sub_sub_link.url }}" class="subheading link-faded-reverse" {% if sub_sub_link.current %}aria-current="page"{% endif %}>{{ sub_sub_link.title }}</a>
+                                      <a href="{{ sub_sub_link.url }}" class="subheading link-faded-reverse" {% if sub_sub_link.current %}aria-current="page"{% endif %}>{% render 'translate-menu-link', title: sub_sub_link.title %}</a>
                                     </li>
                                   {%- endfor -%}
                                 </ul>
