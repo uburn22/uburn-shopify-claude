@@ -89,6 +89,84 @@ main#main{padding:0 !important}
 </style>
 {% render 'ub-nav' %}
 
+{%- assign _is_en = false -%}
+{%- if request.locale.iso_code contains 'en' -%}{%- assign _is_en = true -%}{%- endif -%}
+
+{%- if _is_en -%}
+<section class="faq-hero">
+  <div class="section-label reveal" style="justify-content:center">Frequently asked questions</div>
+  <h1 class="reveal rd1">Everything you want<br><em>to know.</em></h1>
+  <p class="reveal rd2">Clear answers, no jargon. If your question isn't here, just email us.</p>
+</section>
+
+<div class="faq-body">
+  <div class="faq-group reveal">
+    <div class="faq-group-title">The product</div>
+    <div class="faq-item">
+      <div class="faq-q">What exactly is UBurn?</div>
+      <div class="faq-a"><div class="faq-a-inner">UBurn is a plant-based powdered drink mix made with <strong>konjac glucomannan</strong>, purple ube, coconut MCT, L-Carnitine, ginger, and acacia fiber. It calms cravings naturally as part of a balanced diet.*</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is there caffeine in UBurn?</div>
+      <div class="faq-a"><div class="faq-a-inner">No — <strong>zero caffeine</strong>. UBurn can be taken any time of day, including in the evening, without disrupting your sleep.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How many calories per scoop?</div>
+      <div class="faq-a"><div class="faq-a-inner"><strong>30 calories</strong> per scoop. No added sugar, no artificial sweeteners.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is UBurn vegan?</div>
+      <div class="faq-a"><div class="faq-a-inner">Yes, UBurn is <strong>100% plant-based</strong>. All ingredients are vegan.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Any allergens?</div>
+      <div class="faq-a"><div class="faq-a-inner">UBurn is produced in a facility that handles <strong>dairy, gluten, soy, and tree nuts</strong>. Please consult your doctor if you have a known allergy.</div></div>
+    </div>
+  </div>
+
+  <div class="faq-group reveal rd1">
+    <div class="faq-group-title">How to use</div>
+    <div class="faq-item">
+      <div class="faq-q">How do I take UBurn?</div>
+      <div class="faq-a"><div class="faq-a-inner">Mix <strong>1 scoop (8g) in 8-10 oz of water</strong>, milk, or plant-based milk. Drink 30 minutes before a meal or whenever cravings hit (typically around 4PM).</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I take it in the evening?</div>
+      <div class="faq-a"><div class="faq-a-inner">Yes — <strong>no problem at all</strong>. Zero caffeine means UBurn can be taken any time, including before dinner. Many customers see best results when taken before dinner.*</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How quickly will I see results?</div>
+      <div class="faq-a"><div class="faq-a-inner">The fullness effect is <strong>immediate from the first scoop</strong>. Most customers report a noticeable shift in cravings and routine after <strong>7 to 14 days</strong> of consistent use.*</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I mix it with something other than water?</div>
+      <div class="faq-a"><div class="faq-a-inner">Yes, with milk, plant-based milk, or a smoothie. Avoid sugary juices which work against the natural effect on blood sugar.</div></div>
+    </div>
+  </div>
+
+  <div class="faq-group reveal rd2">
+    <div class="faq-group-title">Order & shipping</div>
+    <div class="faq-item">
+      <div class="faq-q">Is shipping really free?</div>
+      <div class="faq-a"><div class="faq-a-inner">Yes — <strong>free U.S. shipping</strong> on orders $40+. Typically delivered in 2-4 business days after dispatch.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is subscription required?</div>
+      <div class="faq-a"><div class="faq-a-inner">No. You can choose <strong>one-time purchase</strong> OR <strong>Subscribe & Save 10%</strong> with monthly delivery (cancel, skip, or pause anytime). No commitment.</div></div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What's your refund policy?</div>
+      <div class="faq-a"><div class="faq-a-inner">Contact us at hello@uburn.co within 30 days of your first order for refund support. We process refunds within 5 business days.</div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:40px 0 20px">
+    <p style="font-size:16px;color:var(--body);margin-bottom:24px">Don't see your question?</p>
+    <a href="/pages/contact" class="btn-main">Contact us</a>
+  </div>
+  <p style="text-align:center;font-size:11px;color:var(--muted);margin-top:24px;line-height:1.5;">*Individual results may vary. UBurn is a dietary supplement, not a medication. Not intended to diagnose, treat, cure, or prevent any disease.</p>
+</div>
+{%- else -%}
 <section class="faq-hero">
   <div class="section-label reveal" style="justify-content:center">Questions fréquentes</div>
   <h1 class="reveal rd1">Toutes vos questions.<br><em>Vraiment.</em></h1>
@@ -148,11 +226,11 @@ main#main{padding:0 !important}
     </div>
     <div class="faq-item">
       <div class="faq-q">Y a-t-il un abonnement flexible ?</div>
-      <div class="faq-a"><div class="faq-a-inner"><strong>Non.</strong> Uburn se commande à l'unité, sans abonnement, sans engagement. Vous achetez ce que vous voulez, quand vous voulez.</div></div>
+      <div class="faq-a"><div class="faq-a-inner">Oui. Tu peux choisir un achat unique OU un abonnement avec -10% (annulable, sautable ou en pause à tout moment).</div></div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Quelle est la politique de remboursement ?</div>
-      <div class="faq-a"><div class="faq-a-inner">Nous proposons une garantie <strong>satisfait ou remboursé 30 jours</strong> sur votre première commande. Contactez-nous à hello@uburn.co et nous traitons le remboursement sous 5 jours ouvrés.</div></div>
+      <div class="faq-a"><div class="faq-a-inner">Contactez-nous à hello@uburn.co et nous traitons le remboursement sous 5 jours ouvrés.</div></div>
     </div>
   </div>
 
@@ -161,6 +239,7 @@ main#main{padding:0 !important}
     <a href="/pages/contact" class="btn-main">Nous contacter</a>
   </div>
 </div>
+{%- endif -%}
 
 <script>
 document.querySelectorAll('.faq-q').forEach(q=>{

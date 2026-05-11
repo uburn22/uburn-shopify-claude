@@ -107,6 +107,126 @@ main#main{padding:0 !important}
 </style>
 {% render 'ub-nav' %}
 
+{%- assign _is_en = false -%}
+{%- if request.locale.iso_code contains 'en' -%}{%- assign _is_en = true -%}{%- endif -%}
+
+{%- if _is_en -%}
+<section class="ing-hero">
+  <div style="position:relative;z-index:1;max-width:700px">
+    <div class="section-label reveal">The formula</div>
+    <h1 class="reveal rd1">6 plant actives.<br><em>One purpose.</em></h1>
+    <p class="reveal rd2">Each ingredient is selected for how they work together. Fullness, energy, digestion — all at once.*</p>
+  </div>
+</section>
+
+<section class="ing-grid-section">
+  <div class="ing-grid-inner">
+    <div class="ing-grid">
+
+      <div class="ing-card featured reveal">
+        <div class="ing-icon">🟣</div>
+        <div class="ing-name">Konjac · Glucomannan</div>
+        <div class="ing-latin">Amorphophallus konjac</div>
+        <div class="ing-desc">The hero ingredient. 3g per daily serving — the exact dose backed by EFSA research for supporting natural satiety as part of a balanced diet. The only ingredient in this category officially recognized in Europe.</div>
+        <span class="ing-tag">EFSA ID 3120 · 3g validated dose</span>
+      </div>
+
+      <div class="ing-card reveal rd1">
+        <div class="ing-icon">🌿</div>
+        <div class="ing-name">Ube · Purple yam</div>
+        <div class="ing-latin">Dioscorea alata · Southeast Asia</div>
+        <div class="ing-desc">Our signature ingredient. Rich in anthocyanins — powerful antioxidants that protect your cells. The reason UBurn is naturally purple. No artificial coloring.</div>
+        <span class="ing-tag">Natural antioxidants</span>
+      </div>
+
+      <div class="ing-card reveal rd2">
+        <div class="ing-icon">🥥</div>
+        <div class="ing-name">Coconut MCT</div>
+        <div class="ing-latin">Medium-chain triglycerides</div>
+        <div class="ing-desc">Fast, stable energy within 15 minutes. MCTs are metabolized directly by your liver — no insulin spike, no afternoon crash.</div>
+        <span class="ing-tag">Stable energy</span>
+      </div>
+
+      <div class="ing-card reveal">
+        <div class="ing-icon">⚡</div>
+        <div class="ing-name">L-Carnitine</div>
+        <div class="ing-latin">Natural amino acid</div>
+        <div class="ing-desc">Helps your body use fatty acids as energy. Supports natural metabolism — works alongside konjac for a complete experience.*</div>
+        <span class="ing-tag">Active metabolism</span>
+      </div>
+
+      <div class="ing-card reveal rd1">
+        <div class="ing-icon">🫚</div>
+        <div class="ing-name">Purple ginger</div>
+        <div class="ing-latin">Zingiber zerumbet</div>
+        <div class="ing-desc">Supports digestion and reduces digestive discomfort. Natural anti-inflammatory properties. Enhances konjac's action on transit.</div>
+        <span class="ing-tag">Digestive comfort</span>
+      </div>
+
+      <div class="ing-card reveal rd2">
+        <div class="ing-icon">🌾</div>
+        <div class="ing-name">Acacia fiber</div>
+        <div class="ing-latin">Acacia senegal · Prebiotic</div>
+        <div class="ing-desc">Natural prebiotic that feeds the good bacteria in your gut microbiome. Supports balanced digestion and long-term gut health.</div>
+        <span class="ing-tag">Balanced microbiome</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="efsa-banner">
+  <div class="efsa-inner">
+    <div class="efsa-badge reveal">
+      <div class="efsa-badge-icon">🏛️</div>
+      <div>
+        <div class="efsa-badge-text">EFSA-backed fiber</div>
+        <div class="efsa-badge-sub">EU Regulation 432/2012 · ID 3120</div>
+      </div>
+    </div>
+    <p class="efsa-desc reveal rd1">Konjac glucomannan is the only ingredient in its category whose "supports satiety in the context of an energy-restricted diet" claim is officially recognized by the European Food Safety Authority. Conditions: 3g daily across 3 servings with 1-2 glasses of water before meals, as part of a balanced diet.</p>
+  </div>
+</div>
+
+<section class="ba-section">
+  <div class="ba-inner">
+    <div class="section-label reveal">Real customer experience</div>
+    <h2 class="section-title reveal rd1">What changes.<br><em>In her own words.*</em></h2>
+    <div class="ba-card reveal rd2">
+      <div class="ba-col ba-before">
+        <div class="ba-label">Before UBurn</div>
+        <div class="ba-week">Week 1</div>
+        <div class="ba-items">
+          <div class="ba-item">4PM cravings every single day — pantry open by mid-afternoon</div>
+          <div class="ba-item">Guilt after every snack, chronic frustration</div>
+          <div class="ba-item">Big dinners to compensate for skipped meals</div>
+          <div class="ba-item">Afternoon fatigue, digestive discomfort</div>
+        </div>
+        <div class="ba-profile">
+          <div class="ba-avatar">A</div>
+          <div><div class="ba-name">Ashley K.</div><div class="ba-meta">38 · Phoenix, AZ</div></div>
+        </div>
+      </div>
+      <div class="ba-divider"><div class="ba-divider-arrow">→</div></div>
+      <div class="ba-col ba-after">
+        <div class="ba-label">After 4 weeks*</div>
+        <div class="ba-week">Week 4</div>
+        <div class="ba-items">
+          <div class="ba-item">4PM cravings quieter — she forgets the pantry exists</div>
+          <div class="ba-item">Dinner naturally lighter, no willpower required</div>
+          <div class="ba-item">Smoother digestion, less bloating from week 2</div>
+          <div class="ba-item">Calmer mood, better overall energy</div>
+        </div>
+        <div class="ba-profile">
+          <div class="ba-avatar" style="background:var(--purple-wash)">A</div>
+          <div><div class="ba-name">Ashley K. — Verified customer</div><div class="ba-meta">After 28 days · Individual results*</div><div class="ba-stars">★★★★★</div></div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6">*Individual results may vary. UBurn is a dietary supplement, not a medication. Glucomannan — EFSA ID 3120. Conditions: 3g/day with water before meals.</p>
+  </div>
+</section>
+{%- else -%}
 <section class="ing-hero">
   <div style="position:relative;z-index:1;max-width:700px">
     <div class="section-label reveal">La formule</div>
@@ -211,7 +331,7 @@ main#main{padding:0 !important}
           <div class="ba-item">Plus de fringale à 16h — elle oublie même d'ouvrir le placard</div>
           <div class="ba-item">Dîner naturellement plus léger, sans effort de volonté</div>
           <div class="ba-item">Digestion fluide, ventre moins gonflé dès la 2e semaine</div>
-          <div class="ba-item">Perte de 2,8 kg sur 4 semaines sans régime particulier</div>
+          <div class="ba-item">Sensation d'équilibre sur 4 semaines</div>
         </div>
         <div class="ba-profile">
           <div class="ba-avatar" style="background:var(--purple-wash)">M</div>
@@ -222,6 +342,7 @@ main#main{padding:0 !important}
     <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6">Les résultats varient selon les individus. Glucomannane — EFSA ID 3120. Conditions : 3g/jour avec eau avant les repas.</p>
   </div>
 </section>
+{%- endif -%}
 {% render 'ub-footer' %}
 <script>
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0,rootMargin:'0px'});

@@ -534,6 +534,116 @@ a{color:inherit;text-decoration:none}
 <!-- NAV -->
 {% render 'ub-nav' %}
 
+{%- assign _is_en = false -%}
+{%- if request.locale.iso_code contains 'en' -%}{%- assign _is_en = true -%}{%- endif -%}
+
+{%- if _is_en -%}
+<!-- ENGLISH VERSION (US market) -->
+<section class="hero-about" id="hero">
+  <div class="hero-photo-col" id="heroPhoto">
+    <img src="{{ 'Histoire_01.jpg' | asset_url }}" alt="Meeting our farmers — ube sourcing in Southeast Asia" loading="eager">
+  </div>
+  <div class="hero-text-col">
+    <div class="hero-eyebrow">Our story</div>
+    <h1>Built on a<br>simple <em>belief.</em></h1>
+    <p class="hero-about-sub">Cravings aren't a willpower problem. They're a biological response. UBurn gives you a biological answer.*</p>
+    <div class="hero-scroll-hint">Scroll to discover</div>
+  </div>
+</section>
+
+<section class="conviction">
+  <div class="conviction-inner">
+    <div class="conviction-text">
+      <div class="section-label reveal">Our philosophy</div>
+      <h2 class="section-title reveal rd1">What most people<br><em>get wrong.</em></h2>
+      <div class="conviction-body reveal rd2">
+        <p>At 4PM, <strong>your blood sugar dips</strong>. Your brain asks for sugar. The pantry opens. It's not a lack of discipline — it's biology.</p>
+        <p>Most solutions bet on guilt or restriction. <strong>UBurn bets on physiology.</strong></p>
+        <p>By supporting the real mechanisms of satiety — with ingredients backed by research — we change the relationship you have with food.*</p>
+      </div>
+      <div class="conviction-pull reveal rd3">
+        Cravings aren't a character flaw. They're a biological signal that deserves a biological answer.*
+      </div>
+    </div>
+    <div class="conviction-visual reveal rd2">
+      <div class="conviction-img-wrap">
+        <img src="{{ 'Mission_M.jpg' | asset_url }}" alt="Ingredient sourcing — field mission">
+      </div>
+      <div class="conviction-badge">
+        <div class="conviction-badge-num">4h</div>
+        <div class="conviction-badge-lbl">Up to 4 hours<br>of fullness*</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sourcing">
+  <div class="sourcing-bg">
+    <img src="{{ 'PLANTATION_UBE.png' | asset_url }}" alt="Konjac plantation — sustainable sourcing">
+  </div>
+  <div class="sourcing-content">
+    <div class="sourcing-text">
+      <div class="section-label reveal">The origin</div>
+      <h2 class="section-title reveal rd1">From farm<br><em>to your glass.</em></h2>
+      <p class="reveal rd2">Each ingredient is selected for its quality and traceability. Konjac — our hero active — is grown in optimal conditions to ensure the glucomannan concentration backed by EFSA research.</p>
+    </div>
+  </div>
+  <div class="sourcing-coords">12°N 108°E · Southeast Asia</div>
+</div>
+
+<section class="ingredients">
+  <div class="ingredients-inner">
+    <div class="ingredients-header">
+      <div>
+        <div class="section-label reveal">The formula</div>
+        <h2 class="section-title reveal rd1">6 plant actives.<br><em>One purpose.</em></h2>
+      </div>
+      <p class="reveal rd2">Each ingredient is selected for how they work together. Fullness, energy, digestion — all at once.*</p>
+    </div>
+
+    <div class="ing-grid">
+      <div class="ing-card ing-card--featured reveal">
+        <div class="ing-photo">
+          <img src="{{ 'Histoire_Moodboard_03.png' | asset_url }}" alt="Ube — purple yam from Southeast Asia" loading="lazy">
+        </div>
+        <div class="ing-body">
+          <div class="ing-origin">Southeast Asia · Dioscorea alata</div>
+          <div class="ing-name">Ube · Purple yam</div>
+          <div class="ing-desc">Our signature ingredient. Rich in anthocyanins — powerful antioxidants. Ube gives UBurn its natural purple color. No artificial coloring.</div>
+          <span class="ing-tag">Natural antioxidants</span>
+        </div>
+      </div>
+
+      <div class="ing-card ing-card--small reveal rd1">
+        <div class="ing-photo" style="min-height:140px">
+          <img src="{{ 'PLANTATION_UBE.png' | asset_url }}" alt="Konjac · Glucomannan EFSA" loading="lazy" style="object-position:center 60%">
+        </div>
+        <div class="ing-body">
+          <div class="ing-origin">Asia · Amorphophallus konjac</div>
+          <div class="ing-name">Konjac · Glucomannan</div>
+          <div class="ing-desc">3g per daily serving. The only fiber officially recognized by EFSA (ID 3120) for supporting satiety.</div>
+          <span class="ing-tag">EFSA ID 3120</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta">
+  <div style="position:relative;z-index:1">
+    <div class="final-cta-label reveal">Start now</div>
+    <h2 class="reveal rd1">Join<br><em>1,500+ women.</em></h2>
+    <p class="reveal rd2">Who chose biology over guilt. One scoop. Up to 4 hours of fullness.* That's it.</p>
+    <a href="{{ routes.root_url }}products/ube-poudre" class="btn-primary-lg reveal rd2">Shop now → from $36.99</a>
+    <div class="final-guarantees reveal rd3">
+      <div class="final-g">Free U.S. shipping</div>
+      <div class="final-g">Cancel anytime</div>
+      <div class="final-g">Subscribe & save 10%</div>
+    </div>
+    <p style="text-align:center;font-size:11px;color:rgba(255,255,255,0.5);margin-top:20px;line-height:1.5;">*Individual results may vary. UBurn is a dietary supplement, not a medication. Not intended to diagnose, treat, cure, or prevent any disease.</p>
+  </div>
+</section>
+{%- else -%}
 <!-- HERO EDITORIAL -->
 <section class="hero-about" id="hero">
   <div class="hero-photo-col" id="heroPhoto">
@@ -851,6 +961,7 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 </section>
+{%- endif -%}
 
 <!-- FOOTER -->
 {% render 'ub-footer' %}
