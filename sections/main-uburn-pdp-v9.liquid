@@ -401,7 +401,7 @@
         {%- endif -%}
 
         {%- comment -%} ATC FORM — native Shopify {%- endcomment -%}
-        <form action="/cart/add" method="post" enctype="multipart/form-data" class="pdpv9-pdp__form" id="pdpv9-pdp-form" novalidate>
+        <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="pdpv9-pdp__form" id="pdpv9-pdp-form" novalidate>
           <input type="hidden" name="form_type" value="product">
           <input type="hidden" name="utf8" value="✓">
 
