@@ -224,7 +224,7 @@ main#main{padding:0 !important}
     <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6">{% if request.locale.iso_code == 'en' %}*Individual results may vary. UBurn is a dietary supplement, not a medication. Glucomannan — FDA dietary fiber*. Use: 3g/day with water before meals.{% else %}Les résultats varient selon les individus. Glucomannane — EFSA ID 3120. Conditions : 3g/jour avec eau avant les repas.{% endif %}</p>
   </div>
 </section>
-{% render 'ub-footer' %}
+{% if request.locale.iso_code != 'en' %}{% render 'ub-footer' %}{% endif %}
 <script>
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:0,rootMargin:'0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
