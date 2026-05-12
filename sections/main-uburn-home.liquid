@@ -30,7 +30,7 @@
       >
     </div>
     <div class="uhome-hero-content">
-      <div class="uhome-hero-eyebrow">Glucomannane · {% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</div>
+      <div class="uhome-hero-eyebrow">{% if request.locale.iso_code == 'en' %}Glucomannan · FDA dietary fiber*{% else %}Glucomannane · EFSA ID 3120{% endif %}</div>
       <h1 class="uhome-hero-title">{% if request.locale.iso_code == 'en' %}4PM.<br><em>Take back<br>control.</em>{% else %}16h.<br><em>Tu reprends<br>le contrôle.</em>{% endif %}</h1>
       <p class="uhome-hero-sub">{% if request.locale.iso_code == 'en' %}The afternoon ritual that keeps you full for 4 hours without snacking. 6 natural active ingredients. Caffeine-free. French brand.{% else %}Le rituel matinal qui te tient 4h sans craquer. 6 actifs naturels. 0% caféine. Marque française.{% endif %}</p>
       <div class="uhome-hero-actions">
@@ -192,22 +192,22 @@
         <div class="uhome-pricing-card" id="uhome-card-dec">
           {% if request.locale.iso_code == 'en' %}<h3>Starter</h3>{% else %}<h3>{% if request.locale.iso_code == 'en' %}Starter{% else %}Découverte{% endif %}</h3>{% endif %}
           <p class="uhome-pricing-desc">{% if request.locale.iso_code == 'en' %}Perfect to try · 90g · 1 dose/day{% else %}Idéal pour tester · 90g · 1 dose/jour{% endif %}</p>
-          <div class="uhome-pricing-price">34,50&nbsp;€</div>
-          <p class="uhome-pricing-per">soit 1,15&nbsp;€/jour</p>
-          <p class="uhome-pricing-dur">30 jours · 1 dose/jour</p>
+          <div class="uhome-pricing-price">{% if request.locale.iso_code == 'en' %}$36.99{% else %}34,50&nbsp;€{% endif %}</div>
+          <p class="uhome-pricing-per">{% if request.locale.iso_code == 'en' %}$1.23/day{% else %}soit 1,15&nbsp;€/jour{% endif %}</p>
+          <p class="uhome-pricing-dur">{% if request.locale.iso_code == 'en' %}30 days · 1 scoop/day{% else %}30 jours · 1 dose/jour{% endif %}</p>
           <a href="/products/ube-poudre?variant=51289200034111" class="uhome-btn uhome-btn-fill" style="width:100%;justify-content:center">
-            Commander →
+            {% if request.locale.iso_code == 'en' %}Order →{% else %}Commander →{% endif %}
           </a>
         </div>
         <div class="uhome-pricing-card uhome-pop" id="uhome-card-max">
           <div class="uhome-pop-badge">{% if request.locale.iso_code == 'en' %}Best value{% else %}Meilleure valeur{% endif %}</div>
-          {% if request.locale.iso_code == 'en' %}<h3>Maximum Pack</h3>{% else %}<h3>{% if request.locale.iso_code == 'en' %}Maximum Pack{% else %}Résultats Maximum{% endif %}</h3>{% endif %}
-          <p class="uhome-pricing-desc">{% if request.locale.iso_code == 'en' %}Best Value{% else %}Le + populaire{% endif %} — 3× plus de résultats</p>
-          <div class="uhome-pricing-price">54,50&nbsp;€ <small><s>69&nbsp;€</s></small></div>
-          <p class="uhome-pricing-per">= 0,61&nbsp;€/jour</p>
-          <p class="uhome-pricing-dur">90 jours · 3 doses/jour</p>
+          <h3>{% if request.locale.iso_code == 'en' %}Maximum Pack{% else %}Résultats Maximum{% endif %}</h3>
+          <p class="uhome-pricing-desc">{% if request.locale.iso_code == 'en' %}Best Value — 3× more results{% else %}Le + populaire — 3× plus de résultats{% endif %}</p>
+          <div class="uhome-pricing-price">{% if request.locale.iso_code == 'en' %}$58.99 <small><s>$74</s></small>{% else %}54,50&nbsp;€ <small><s>69&nbsp;€</s></small>{% endif %}</div>
+          <p class="uhome-pricing-per">{% if request.locale.iso_code == 'en' %}= $0.66/day{% else %}= 0,61&nbsp;€/jour{% endif %}</p>
+          <p class="uhome-pricing-dur">{% if request.locale.iso_code == 'en' %}90 days · 3 scoops/day{% else %}90 jours · 3 doses/jour{% endif %}</p>
           <a href="/products/ube-poudre?variant=51289200066879" class="uhome-btn uhome-btn-fill" style="width:100%;justify-content:center">
-            Commander →
+            {% if request.locale.iso_code == 'en' %}Order →{% else %}Commander →{% endif %}
           </a>
         </div>
       </div>
@@ -459,7 +459,7 @@
       <div class="uhome-faq-list">
         <div class="uhome-faq-item">
           <div class="uhome-faq-q">{% if request.locale.iso_code == 'en' %}How does UBurn work?{% else %}Comment fonctionne UBurn ?{% endif %}</div>
-          <div class="uhome-faq-a">UBurn est formulé autour du glucomannane de konjac, allégation de satiété officiellement validée par l'EFSA (ID&nbsp;3120). Le konjac absorbe l'eau et forme un gel naturel dans l'estomac — vous vous sentez rassasiée naturellement {% if request.locale.iso_code == 'en' %}up to 4 hours{% else %}{% if request.locale.iso_code == 'en' %}up to{% else %}jusqu'à{% endif %} 4h{% endif %}.</div>
+          <div class="uhome-faq-a">{% if request.locale.iso_code == 'en' %}UBurn is formulated around konjac glucomannan, a research-backed* fiber officially recognized by the FDA as a dietary fiber. Konjac absorbs water and forms a natural gel in your stomach — you feel satisfied naturally for up to 4 hours.*{% else %}UBurn est formulé autour du glucomannane de konjac, allégation de satiété officiellement validée par l'EFSA (ID&nbsp;3120). Le konjac absorbe l'eau et forme un gel naturel dans l'estomac — vous vous sentez rassasiée naturellement jusqu'à 4h.{% endif %}</div>
         </div>
         <div class="uhome-faq-item">
           <div class="uhome-faq-q">{% if request.locale.iso_code == 'en' %}How long until I see results?{% else %}En combien de temps voit-on des résultats ?{% endif %}</div>
