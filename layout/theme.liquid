@@ -193,6 +193,7 @@
     <!-- HIDE Shopify Chat widget sitewide (per Charles request 2026-05-12) -->
   <style>
     #ShopifyChat,
+    inbox-online-store-chat,
     .shopify-chat-button,
     .shopify-chat-badge,
     iframe[title*="chat" i],
@@ -202,8 +203,29 @@
     [class*="shopify-messaging"],
     [class*="shopify-chat"],
     .shopify-block[data-app-block-type*="chat"],
-    #shopify-chat { display: none !important; visibility: hidden !important; }
+    #shopify-chat { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
   </style>
+  <script>
+    // Aggressive removal of Shopify Inbox chat element (in case CSS overridden by inline style injection)
+    (function removeChat() {
+      var killChat = function() {
+        var ids = ['ShopifyChat', 'shopify-chat'];
+        var selectors = ['inbox-online-store-chat', '.shopify-chat-button', '[class*="shopify-chat"]', '[class*="shopify-messaging"]'];
+        ids.forEach(function(id) { var el = document.getElementById(id); if (el) el.remove(); });
+        selectors.forEach(function(s) {
+          document.querySelectorAll(s).forEach(function(el) { el.remove(); });
+        });
+      };
+      // Run on DOM ready + every 500ms for 10s (in case Shopify Inbox re-injects)
+      if (document.readyState !== 'loading') killChat();
+      else document.addEventListener('DOMContentLoaded', killChat);
+      var attempts = 0;
+      var interval = setInterval(function() {
+        killChat();
+        if (++attempts > 20) clearInterval(interval);
+      }, 500);
+    })();
+  </script>
 
   {%- if template.name == 'product' -%}
   <style>
