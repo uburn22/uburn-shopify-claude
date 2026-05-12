@@ -2,6 +2,7 @@
 
 <html lang="{{ request.locale.iso_code }}" dir="{% render 'direction' %}">
   <head>
+    <!-- uburn-cache-bust-1778576858 -->
     <meta name="facebook-domain-verification" content="6da9xvsflev0jx0grs4xok5k6fvd06" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=5.0">
@@ -189,13 +190,19 @@
     <x-toast class="toast">
       {% comment %}Container for notification messages; DO NOT DELETE{% endcomment %}
     </x-toast>
-    <!-- FIX checkout-5: hide chat notification badge "1" sitewide -->
+    <!-- HIDE Shopify Chat widget sitewide (per Charles request 2026-05-12) -->
   <style>
+    #ShopifyChat,
+    .shopify-chat-button,
     .shopify-chat-badge,
-    [class*="shopify-chat"] [class*="badge"],
-    [class*="shopify-chat"] [class*="unread"],
-    [class*="shopify-messaging"] [class*="badge"],
-    #ShopifyChat [class*="badge"] { display: none !important; }
+    iframe[title*="chat" i],
+    iframe[title*="Shopify" i],
+    #tidio-chat,
+    .gorgias-chat-container,
+    [class*="shopify-messaging"],
+    [class*="shopify-chat"],
+    .shopify-block[data-app-block-type*="chat"],
+    #shopify-chat { display: none !important; visibility: hidden !important; }
   </style>
 
   {%- if template.name == 'product' -%}
