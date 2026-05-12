@@ -788,9 +788,20 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<!-- PLANTATION DIVIDER -->
+<!-- PLANTATION DIVIDER (EN: no background image, cream background with dark text) -->
+<style>
+{% if request.locale.iso_code == 'en' %}
+.plantation{background:var(--cream);height:auto;min-height:0;padding:100px 80px;display:flex;align-items:center;justify-content:center}
+.plantation img{display:none}
+.plantation-text{position:static;max-width:720px;text-align:center;padding:0}
+.plantation-text h2{color:var(--dark)}
+.plantation-text h2 em{color:var(--purple-main)}
+.plantation-text p{color:var(--body);margin:16px auto 0}
+@media(max-width:720px){.plantation{padding:64px 24px}}
+{% endif %}
+</style>
 <div class="plantation">
-  <img src="{{ 'Ingredient_banner_Desktop.png' | asset_url }}" alt="{% if request.locale.iso_code == 'en' %}Fields — UBurn natural sourcing{% else %}Champs — sourcing naturel Uburn{% endif %}" loading="lazy">
+  {% if request.locale.iso_code != 'en' %}<img src="{{ 'Ingredient_banner_Desktop.png' | asset_url }}" alt="Champs — sourcing naturel Uburn" loading="lazy">{% endif %}
   <div class="plantation-text">
     <h2 class="reveal">{% if request.locale.iso_code == 'en' %}Nature<br>already <em>did</em><br>the work.{% else %}La nature<br>a <em>déjà fait</em><br>le travail.{% endif %}</h2>
     <p class="reveal rd1">{% if request.locale.iso_code == 'en' %}We just had the sense to listen.{% else %}Nous avons juste eu l'intelligence de l'écouter.{% endif %}</p>
@@ -858,8 +869,8 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<!-- FOOTER -->
-{% render 'ub-footer' %}
+<!-- FOOTER (FR only, EN uses default Shopify footer) -->
+{% if request.locale.iso_code != 'en' %}{% render 'ub-footer' %}{% endif %}
 
 <script>
 // Hero parallax
