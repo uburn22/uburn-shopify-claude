@@ -553,6 +553,14 @@
 </div>{%- comment -%} /uhome-root {%- endcomment -%}
 
 <script>
+// IMMEDIATE FALLBACK — force all reveal elements visible (bypass cache lag on opacity:0 CSS)
+(function() {
+  var els = document.querySelectorAll('.uhome-reveal, .uhome-stagger > *, .uhome-stagger-scale > *');
+  for (var i = 0; i < els.length; i++) {
+    els[i].style.opacity = '1';
+    els[i].style.transform = 'none';
+  }
+})();
 (function() {
   'use strict';
 
