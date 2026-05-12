@@ -11,6 +11,10 @@
   .uhome-root h1, .uhome-root h2, .uhome-root h3, .uhome-root h4 {
     font-family: 'Red Hat Display', sans-serif; letter-spacing: -0.02em;
   }
+  /* FORCE content visible — override .uhome-reveal opacity:0 default (CDN cache fix) */
+  .uhome-reveal,
+  .uhome-stagger > *,
+  .uhome-stagger-scale > * { opacity: 1 !important; transform: none !important; }
 </style>
 
 <div class="uhome-root">
