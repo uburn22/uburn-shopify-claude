@@ -635,29 +635,25 @@
       <div class="pdpv9-stories__rail" tabindex="0">
         <article class="pdpv9-stories__card" data-stories-card="1">
           <div class="pdpv9-stories__media">
-            <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-latte-prep.mp4' | asset_url }}" type="video/mp4"></video>
-            <button class="pdpv9-stories__play" {% if request.locale.iso_code == 'en' %}aria-label="Play Ashley's video"{% else %}aria-label="Lecture vidéo Marie"{% endif %} type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
+            <img src="{{ 'uburn-reviewer-brooklyn.jpg' | asset_url }}" {% if request.locale.iso_code == 'en' %}alt="Sarah J., 32, Brooklyn — using UBurn in her afternoon ritual"{% else %}alt="Sarah J., 32, Brooklyn — UBurn dans son rituel après-midi"{% endif %} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Sarah J., 32{% else %}Marie, 42 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Brooklyn, NY{% else %}· Paris{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"My afternoon ritual. No more 4PM cravings."{% else %}"Ma routine matin. Plus de fringale 16h."{% endif %}</span></div>
         </article>
         <article class="pdpv9-stories__card" data-stories-card="2">
           <div class="pdpv9-stories__media">
-            <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-lifestyle.mp4' | asset_url }}" type="video/mp4"></video>
-            <button class="pdpv9-stories__play" {% if request.locale.iso_code == 'en' %}aria-label="Play Jennifer's video"{% else %}aria-label="Lecture vidéo Sophie"{% endif %} type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
+            <img src="{{ 'uburn-reviewer-jennifer.jpg' | asset_url }}" {% if request.locale.iso_code == 'en' %}alt="Jennifer M., 38, Miami — UBurn customer 3 months in"{% else %}alt="Jennifer M., 38, Miami — cliente UBurn 3 mois"{% endif %} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Jennifer M., 38{% else %}Sophie, 38 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Miami, FL{% else %}· Lyon{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"3 months in. Calmer. More stable."{% else %}"3 mois après. Plus calme. Plus stable."{% endif %}</span></div>
         </article>
         <article class="pdpv9-stories__card" data-stories-card="3">
           <div class="pdpv9-stories__media">
-            <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-product-hero.mp4' | asset_url }}" type="video/mp4"></video>
-            <button class="pdpv9-stories__play" {% if request.locale.iso_code == 'en' %}aria-label="Play Rachel's video"{% else %}aria-label="Lecture vidéo Laurence"{% endif %} type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
+            <img src="{{ 'uburn-reviewer-rachel.jpg' | asset_url }}" {% if request.locale.iso_code == 'en' %}alt="Rachel B., 47, Denver — UBurn taste reviewer"{% else %}alt="Rachel B., 47, Denver — testeuse goût UBurn"{% endif %} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Rachel B., 47{% else %}Laurence, 47 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Denver, CO{% else %}· Marseille{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"Vanilla-hazelnut taste. Nothing chemical."{% else %}"Goût vanille noisette. Pas chimique."{% endif %}</span></div>
         </article>
         <article class="pdpv9-stories__card" data-stories-card="4">
           <div class="pdpv9-stories__media">
-            <video preload="auto" autoplay muted loop playsinline><source src="{{ 'uburn-stories-sport.mp4' | asset_url }}" type="video/mp4"></video>
-            <button class="pdpv9-stories__play" {% if request.locale.iso_code == 'en' %}aria-label="Play Megan's video"{% else %}aria-label="Lecture vidéo Camille"{% endif %} type="button"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 3v14l13-7L5 3z" fill="currentColor"/></svg></button>
+            <img src="{{ 'uburn-reviewer-ashley.jpg' | asset_url }}" {% if request.locale.iso_code == 'en' %}alt="Megan T., 39, Austin — pre-workout UBurn user"{% else %}alt="Megan T., 39, Austin — utilisatrice UBurn pré-sport"{% endif %} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Megan T., 39{% else %}Camille, 39 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Austin, TX{% else %}· Bordeaux{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"Before workouts. Stim-free."{% else %}"Avant le sport. Sans excitant."{% endif %}</span></div>
         </article>
