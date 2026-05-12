@@ -222,6 +222,13 @@ main#main{padding:0 !important}
       </div>
     </div>
     <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6">{% if request.locale.iso_code == 'en' %}*Individual results may vary. UBurn is a dietary supplement, not a medication. Glucomannan — FDA dietary fiber*. Use: 3g/day with water before meals.{% else %}Les résultats varient selon les individus. Glucomannane — EFSA ID 3120. Conditions : 3g/jour avec eau avant les repas.{% endif %}</p>
+
+    <!-- CTA to PDP -->
+    <div style="text-align:center;margin-top:48px;padding:48px 24px;background:var(--cream);border-radius:24px">
+      <h3 style="font-family:'Red Hat Display',sans-serif;font-size:clamp(22px,3vw,32px);font-weight:800;color:var(--dark);letter-spacing:-0.02em;margin-bottom:12px">{% if request.locale.iso_code == 'en' %}Ready to try UBurn?{% else %}Prêt à essayer UBurn ?{% endif %}</h3>
+      <p style="font-size:15px;color:var(--body);margin-bottom:24px;max-width:48ch;margin-left:auto;margin-right:auto">{% if request.locale.iso_code == 'en' %}6 plant actives. One scoop. Up to 4 hours of satiety.*{% else %}6 actifs naturels. Une dose. 4h de satiété durable.{% endif %}</p>
+      <a href="/products/ube-poudre" class="btn-main">{% if request.locale.iso_code == 'en' %}Shop UBurn — from $36.99{% else %}Commander — dès 34,50 €{% endif %}</a>
+    </div>
   </div>
 </section>
 {% if request.locale.iso_code != 'en' %}{% render 'ub-footer' %}{% endif %}
