@@ -308,7 +308,7 @@
         </div>
       </div>
       <div class="uhome-reveal uhome-rd2">
-        <span class="uhome-section-label">À l'origine</span>
+        <span class="uhome-section-label">{% if request.locale.iso_code == 'en' %}The origin{% else %}À l'origine{% endif %}</span>
         <h2 class="uhome-section-title">{% if request.locale.iso_code == 'en' %}Ube comes from here.<br><em>Not a lab.</em>{% else %}L'ubé vient de là.<br><em>Pas d'un laboratoire.</em>{% endif %}</h2>
         <p style="font-size:16px;line-height:1.75;color:var(--uhome-body);margin-bottom:28px;max-width:52ch">{% if request.locale.iso_code == 'en' %}Ube from Southeast Asia. Rich soils, off industrial paths. Selected at the source.{% else %}Ube d'Asie du Sud-Est. Sols riches, hors circuits industriels. Sélectionné à la source.{% endif %}</p>
         <div class="uhome-origine-points">
@@ -508,7 +508,7 @@
         <div class="uhome-guar-icon">
           <img src="https://uburn.co/cdn/shop/files/Picto_World.svg" alt="" aria-hidden="true">
         </div>
-        <h4>Formule EFSA</h4>
+        <h4>{% if request.locale.iso_code == 'en' %}Research-backed*{% else %}Formule EFSA{% endif %}</h4>
         <p>{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}Glucomannane ID 3120{% endif %}</p>
       </div>
       <div class="uhome-guar-item">
