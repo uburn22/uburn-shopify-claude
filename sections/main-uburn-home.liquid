@@ -71,7 +71,8 @@
     </div>
   </div>
 
-  {%- comment -%} ══ S3 — PRESS ══ {%- endcomment -%}
+  {%- comment -%} ══ S3 — PRESS (EN: hidden per Charles UX) ══ {%- endcomment -%}
+  {% if request.locale.iso_code != 'en' %}
   <div class="uhome-press uhome-reveal">
     <span class="uhome-press-label">{% if request.locale.iso_code == 'en' %}As seen in{% else %}Ils parlent de nous{% endif %}</span>
     <div class="uhome-press-logos">
@@ -82,6 +83,7 @@
       <div class="uhome-press-logo"><img src="https://uburn.co/cdn/shop/files/ELLE_Magazine_Logo.svg" alt="Elle" style="height:18px;width:auto;opacity:0.4;filter:grayscale(1)" loading="lazy"></div>
     </div>
   </div>
+  {% endif %}
 
   {%- comment -%} ══ S4 — EXPERT ══ {%- endcomment -%}
   <section class="uhome-expert">
@@ -105,7 +107,8 @@
     </div>
   </section>
 
-  {%- comment -%} ══ S5 — LE RITUEL ══ {%- endcomment -%}
+  {%- comment -%} ══ S5 — LE RITUEL (EN: hidden per Charles UX) ══ {%- endcomment -%}
+  {% if request.locale.iso_code != 'en' %}
   <section class="uhome-rituel">
     <div class="uhome-rituel-inner">
       <div class="uhome-rituel-head uhome-reveal">
@@ -141,6 +144,7 @@
       </div>
     </div>
   </section>
+  {% endif %}
 
   {%- comment -%} ══ S6 — PROBLÈME ══ {%- endcomment -%}
   <section class="uhome-problem">
