@@ -6,10 +6,11 @@
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,500;0,700;0,800;0,900;1,700;1,800&family=Red+Hat+Text:wght@300;400;500;600;700&display=swap'); 
-/* Hide Shopify default header/footer — custom nav rendered inline */
-/* Hide Shopify default header/footer groups — custom nav/footer in section */
+/* Hide Shopify default header/footer — custom nav rendered inline (FR only, EN keeps default) */
+{% if request.locale.iso_code != 'en' %}
 [id^="shopify-section-sections--"] { display: none !important; }
 main#main { padding: 0 !important; }
+{% endif %}
 
 :root {
   --purple-deep: #3d1873;
@@ -531,8 +532,8 @@ a{color:inherit;text-decoration:none}
 
 
 
-<!-- NAV -->
-{% render 'ub-nav' %}
+<!-- NAV (FR only, EN uses default Shopify header) -->
+{% if request.locale.iso_code != 'en' %}{% render 'ub-nav' %}{% endif %}
 
 <!-- HERO EDITORIAL -->
 <section class="hero-about" id="hero">
@@ -574,11 +575,13 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<!-- SOURCING CINEMATIC -->
+<!-- SOURCING CINEMATIC (EN: no background image per Charles request) -->
 <div class="sourcing">
+  {% if request.locale.iso_code != 'en' %}
   <div class="sourcing-bg">
-    <img src="{{ 'PLANTATION_UBE.png' | asset_url }}" alt="{% if request.locale.iso_code == 'en' %}Konjac plantation — sustainable sourcing{% else %}Plantation de konjac — sourcing durable{% endif %}">
+    <img src="{{ 'PLANTATION_UBE.png' | asset_url }}" alt="Plantation de konjac — sourcing durable">
   </div>
+  {% endif %}
   <div class="sourcing-content">
     <div class="sourcing-text">
       <div class="section-label reveal">{% if request.locale.iso_code == 'en' %}The origin{% else %}L'origine{% endif %}</div>
@@ -589,7 +592,8 @@ a{color:inherit;text-decoration:none}
   <div class="sourcing-coords">{% if request.locale.iso_code == 'en' %}12°N 108°E · Southeast Asia{% else %}12°N 108°E · Asie du Sud-Est{% endif %}</div>
 </div>
 
-<!-- INGRÉDIENTS -->
+<!-- INGRÉDIENTS (EN: hidden per Charles request — section duplicates Ingredients page) -->
+{% if request.locale.iso_code != 'en' %}
 <section class="ingredients">
   <div class="ingredients-inner">
     <div class="ingredients-header">
@@ -659,6 +663,7 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 </section>
+{% endif %}
 
 <!-- HOW IT WORKS -->
 <section class="how">
