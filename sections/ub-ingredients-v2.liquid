@@ -9,9 +9,11 @@ body{font-family:'Red Hat Text',sans-serif;background:var(--cream);color:var(--d
 h1,h2,h3,h4{font-family:'Red Hat Display',sans-serif;letter-spacing:-0.02em}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
-/* Hide Shopify default sections */
+/* Hide Shopify default sections (FR only, EN keeps default header) */
+{% if request.locale.iso_code != 'en' %}
 [id^="shopify-section-sections--"]{display:none !important}
 main#main{padding:0 !important}
+{% endif %}
 /* Nav */
 .nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;transition:background 0.4s,padding 0.4s,box-shadow 0.4s;background:rgba(250,249,247,0.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--purple-pale)}
 .nav-logo{font-family:'Red Hat Display',sans-serif;font-weight:900;font-size:22px;color:var(--purple-main);letter-spacing:-0.03em}
@@ -105,7 +107,7 @@ main#main{padding:0 !important}
 @media(max-width:600px){.ing-hero{padding:56px 20px 40px}.ing-grid-section{padding:40px 20px}.ing-grid{grid-template-columns:1fr}.ing-card::after{display:none !important}}
 
 </style>
-{% render 'ub-nav' %}
+{% if request.locale.iso_code != 'en' %}{% render 'ub-nav' %}{% endif %}
 
 <section class="ing-hero">
   <div style="position:relative;z-index:1;max-width:700px">
