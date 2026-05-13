@@ -623,50 +623,58 @@
   </section>
   {%- endif -%}
 
-  {%- comment -%} ─── {% if request.locale.iso_code == 'en' %}STORIES CAROUSEL — humanize before 4PM moment{% else %}STORIES CAROUSEL — humanise avant moment 16h{% endif %} ─── {%- endcomment -%}
-  {{ 'uburn-stories-carousel.css' | asset_url | stylesheet_tag }}
-  <section class="pdpv9-stories" aria-labelledby="pdpv9-stories-title">
-    <div class="pdpv9-stories__inner">
-      <div class="pdpv9-stories__head">
-        <span class="pdpv9-eyebrow">{% if request.locale.iso_code == 'en' %}They use it{% else %}Elles l'utilisent{% endif %}</span>
-        <h2 class="pdpv9-h2" id="pdpv9-stories-title">{% if request.locale.iso_code == 'en' %}The ritual, <span class="pdpv9-h2-accent">in real life.</span>{% else %}Le rituel <span class="pdpv9-h2-accent">en vrai.</span>{% endif %}</h2>
-        <p class="pdpv9-stories__sub">{% if request.locale.iso_code == 'en' %}No ads. Real women. Real routines. Up to 4 hours of natural satiety.*{% else %}Pas de pub. Des femmes. Des routines. 4h de satiété naturelle.{% endif %}</p>
+  {%- comment -%} ─── STORIES MINIMAL — inline styles, no external deps ─── {%- endcomment -%}
+  <style>
+    .pdpv9-stories-mini{padding:48px 20px;background:#FAF9F7}
+    .pdpv9-stories-mini__inner{max-width:1040px;margin:0 auto}
+    .pdpv9-stories-mini__head{text-align:center;margin-bottom:32px}
+    .pdpv9-stories-mini__eyebrow{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6B2FA0;font-weight:600;margin-bottom:8px}
+    .pdpv9-stories-mini__title{font-size:24px;line-height:1.2;font-weight:800;color:#1a0d33;margin:0 0 6px}
+    .pdpv9-stories-mini__sub{font-size:13px;color:#5a4d72;margin:0;max-width:480px;margin:0 auto}
+    .pdpv9-stories-mini__row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:8px}
+    .pdpv9-stories-mini__card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+    .pdpv9-stories-mini__avatar{width:72px;height:72px;border-radius:50%;overflow:hidden;background:#eee;box-shadow:0 2px 8px rgba(42,16,84,.08)}
+    .pdpv9-stories-mini__avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .pdpv9-stories-mini__name{font-size:13px;font-weight:700;color:#1a0d33;line-height:1.3}
+    .pdpv9-stories-mini__loc{font-size:11px;color:#7a6b8c;display:block;font-weight:500;margin-top:2px}
+    .pdpv9-stories-mini__quote{font-size:12px;line-height:1.4;color:#3d2960;font-style:italic;margin:0;max-width:180px}
+    @media (max-width:640px){
+      .pdpv9-stories-mini{padding:36px 16px}
+      .pdpv9-stories-mini__row{grid-template-columns:repeat(2,1fr);gap:24px 16px}
+      .pdpv9-stories-mini__title{font-size:20px}
+    }
+  </style>
+  <section class="pdpv9-stories-mini" aria-labelledby="pdpv9-stories-title">
+    <div class="pdpv9-stories-mini__inner">
+      <div class="pdpv9-stories-mini__head">
+        <span class="pdpv9-stories-mini__eyebrow">{% if request.locale.iso_code == 'en' %}They use it{% else %}Elles l'utilisent{% endif %}</span>
+        <h2 class="pdpv9-stories-mini__title" id="pdpv9-stories-title">{% if request.locale.iso_code == 'en' %}The ritual, in real life.{% else %}Le rituel en vrai.{% endif %}</h2>
+        <p class="pdpv9-stories-mini__sub">{% if request.locale.iso_code == 'en' %}Real women. Real routines.{% else %}Des femmes. Des routines.{% endif %}</p>
       </div>
-      <div class="pdpv9-stories__rail" tabindex="0">
-        <article class="pdpv9-stories__card" data-stories-card="1">
-          <div class="pdpv9-stories__media">
-            <img src="{{ 'uburn-reviewer-brooklyn.jpg' | asset_url }}" {% if request.locale.iso_code == 'en' %}alt="Sarah J., 32, Brooklyn — using UBurn in her afternoon ritual"{% else %}alt="Sarah J., 32, Brooklyn — UBurn dans son rituel après-midi"{% endif %} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Sarah J., 32{% else %}Marie, 42 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Brooklyn, NY{% else %}· Paris{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"My afternoon ritual. No more 4PM cravings."{% else %}"Ma routine matin. Plus de fringale 16h."{% endif %}</span></div>
-        </article>
-        <article class="pdpv9-stories__card" data-stories-card="2">
-          <div class="pdpv9-stories__media">
-            <img src="{{ 'uburn-reviewer-jennifer.jpg' | asset_url }}" {% if request.locale.iso_code == 'en' %}alt="Jennifer M., 38, Miami — UBurn customer 3 months in"{% else %}alt="Jennifer M., 38, Miami — cliente UBurn 3 mois"{% endif %} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Jennifer M., 38{% else %}Sophie, 38 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Miami, FL{% else %}· Lyon{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"3 months in. Calmer. More stable."{% else %}"3 mois après. Plus calme. Plus stable."{% endif %}</span></div>
-        </article>
-        <article class="pdpv9-stories__card" data-stories-card="3">
-          <div class="pdpv9-stories__media">
-            <img src="{{ 'uburn-reviewer-rachel.jpg' | asset_url }}" {% if request.locale.iso_code == 'en' %}alt="Rachel B., 47, Denver — UBurn taste reviewer"{% else %}alt="Rachel B., 47, Denver — testeuse goût UBurn"{% endif %} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Rachel B., 47{% else %}Laurence, 47 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Denver, CO{% else %}· Marseille{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"Vanilla-hazelnut taste. Nothing chemical."{% else %}"Goût vanille noisette. Pas chimique."{% endif %}</span></div>
-        </article>
-        <article class="pdpv9-stories__card" data-stories-card="4">
-          <div class="pdpv9-stories__media">
-            <img src="{{ 'uburn-reviewer-ashley.jpg' | asset_url }}" {% if request.locale.iso_code == 'en' %}alt="Megan T., 39, Austin — pre-workout UBurn user"{% else %}alt="Megan T., 39, Austin — utilisatrice UBurn pré-sport"{% endif %} loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div class="pdpv9-stories__caption"><strong>{% if request.locale.iso_code == 'en' %}Megan T., 39{% else %}Camille, 39 ans{% endif %}</strong> {% if request.locale.iso_code == 'en' %}· Austin, TX{% else %}· Bordeaux{% endif %}<br><span>{% if request.locale.iso_code == 'en' %}"Before workouts. Stim-free."{% else %}"Avant le sport. Sans excitant."{% endif %}</span></div>
-        </article>
-      </div>
-      <div class="pdpv9-stories__dots">
-        <button class="pdpv9-stories__dot is-active" data-stories-dot="0"></button>
-        <button class="pdpv9-stories__dot" data-stories-dot="1"></button>
-        <button class="pdpv9-stories__dot" data-stories-dot="2"></button>
-        <button class="pdpv9-stories__dot" data-stories-dot="3"></button>
+      <div class="pdpv9-stories-mini__row">
+        <div class="pdpv9-stories-mini__card">
+          <div class="pdpv9-stories-mini__avatar"><img src="{{ 'uburn-reviewer-brooklyn.jpg' | asset_url }}" alt="" loading="lazy" decoding="async"></div>
+          <div class="pdpv9-stories-mini__name">{% if request.locale.iso_code == 'en' %}Sarah J., 32<span class="pdpv9-stories-mini__loc">Brooklyn, NY</span>{% else %}Marie, 42<span class="pdpv9-stories-mini__loc">Paris</span>{% endif %}</div>
+          <p class="pdpv9-stories-mini__quote">{% if request.locale.iso_code == 'en' %}"No more 4PM cravings."{% else %}"Plus de fringale 16h."{% endif %}</p>
+        </div>
+        <div class="pdpv9-stories-mini__card">
+          <div class="pdpv9-stories-mini__avatar"><img src="{{ 'uburn-reviewer-jennifer.jpg' | asset_url }}" alt="" loading="lazy" decoding="async"></div>
+          <div class="pdpv9-stories-mini__name">{% if request.locale.iso_code == 'en' %}Jennifer M., 38<span class="pdpv9-stories-mini__loc">Miami, FL</span>{% else %}Sophie, 38<span class="pdpv9-stories-mini__loc">Lyon</span>{% endif %}</div>
+          <p class="pdpv9-stories-mini__quote">{% if request.locale.iso_code == 'en' %}"Calmer. More stable."{% else %}"Plus calme. Plus stable."{% endif %}</p>
+        </div>
+        <div class="pdpv9-stories-mini__card">
+          <div class="pdpv9-stories-mini__avatar"><img src="{{ 'uburn-reviewer-rachel.jpg' | asset_url }}" alt="" loading="lazy" decoding="async"></div>
+          <div class="pdpv9-stories-mini__name">{% if request.locale.iso_code == 'en' %}Rachel B., 47<span class="pdpv9-stories-mini__loc">Denver, CO</span>{% else %}Laurence, 47<span class="pdpv9-stories-mini__loc">Marseille</span>{% endif %}</div>
+          <p class="pdpv9-stories-mini__quote">{% if request.locale.iso_code == 'en' %}"Vanilla taste. Nothing chemical."{% else %}"Goût vanille. Pas chimique."{% endif %}</p>
+        </div>
+        <div class="pdpv9-stories-mini__card">
+          <div class="pdpv9-stories-mini__avatar"><img src="{{ 'uburn-reviewer-ashley.jpg' | asset_url }}" alt="" loading="lazy" decoding="async"></div>
+          <div class="pdpv9-stories-mini__name">{% if request.locale.iso_code == 'en' %}Megan T., 39<span class="pdpv9-stories-mini__loc">Austin, TX</span>{% else %}Camille, 39<span class="pdpv9-stories-mini__loc">Bordeaux</span>{% endif %}</div>
+          <p class="pdpv9-stories-mini__quote">{% if request.locale.iso_code == 'en' %}"Before workouts. Stim-free."{% else %}"Avant le sport. Sans excitant."{% endif %}</p>
+        </div>
       </div>
     </div>
   </section>
-  {{ 'uburn-stories-carousel.js' | asset_url | script_tag }}
 
   {%- comment -%} ─── EN-only: MADE IN LYON section ─── {%- endcomment -%}
   {% if request.locale.iso_code == 'en' %}
