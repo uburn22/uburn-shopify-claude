@@ -1,0 +1,71 @@
+<!-- GUARANTEE BAR -->
+<div class="guar-bar">
+  <div class="guar-grid">
+    <div class="guar-item">
+      <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_World.svg" alt="" width="48" height="48" loading="lazy"></div>
+      <h4>{% if request.locale.iso_code == 'en' %}Research-backed*{% else %}Formule EFSA{% endif %}</h4><p>{% if request.locale.iso_code == 'en' %}Konjac glucomannan{% else %}Glucomannane ID 3120{% endif %}</p>
+    </div>
+    <div class="guar-item">
+      <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_Fast_shipping.svg" alt="" width="48" height="48" loading="lazy"></div>
+      <h4>{% if request.locale.iso_code == 'en' %}Free shipping{% else %}Livraison gratuite{% endif %}</h4><p>{% if request.locale.iso_code == 'en' %}On orders $40+{% else %}En France{% endif %}</p>
+    </div>
+    <div class="guar-item">
+      <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_secure_payment.svg" alt="" width="48" height="48" loading="lazy"></div>
+      <h4>{% if request.locale.iso_code == 'en' %}Secure payment{% else %}Paiement sécurisé{% endif %}</h4><p>{% if request.locale.iso_code == 'en' %}SSL encrypted{% else %}100% sécurisé{% endif %}</p>
+    </div>
+    <div class="guar-item">
+      <div class="guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_customer.svg" alt="" width="48" height="48" loading="lazy"></div>
+      <h4>{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</h4><p>{% if request.locale.iso_code == 'en' %}Order whenever you want{% else %}Commandez quand vous voulez{% endif %}</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn" loading="lazy" width="120" height="24">
+        <p>{% if request.locale.iso_code == 'en' %}Take back control of your diet with a 100% natural, French-formulated drink with research-backed konjac fiber.{% else %}Reprenez le contrôle de votre alimentation avec une formule 100% naturelle, validée EFSA. Marque française.{% endif %}</p>
+        <div class="footer-contact">hello@uburn.co</div>
+      </div>
+      <div class="footer-col">
+        <h4>{% if request.locale.iso_code == 'en' %}Product{% else %}Produit{% endif %}</h4>
+        <a href="/products/ube-poudre">{% if request.locale.iso_code == 'en' %}Ube Powder{% else %}Ube Poudre{% endif %}</a>
+        <a href="/pages/ingredients">{% if request.locale.iso_code == 'en' %}Ingredients{% else %}Ingrédients{% endif %}</a>
+        <a href="/collections/all">{% if request.locale.iso_code == 'en' %}Shop{% else %}Boutique{% endif %}</a>
+        <a href="/#avis">{% if request.locale.iso_code == 'en' %}Reviews{% else %}Avis clients{% endif %}</a>
+      </div>
+      <div class="footer-col">
+        <h4>{% if request.locale.iso_code == 'en' %}Support{% else %}Support{% endif %}</h4>
+        <a href="{% if request.locale.iso_code == 'en' %}/pages/faq-us-en{% else %}/pages/faq{% endif %}">FAQ</a>
+        <a href="/pages/contact">Contact</a>
+        <a href="/policies/shipping-policy">{% if request.locale.iso_code == 'en' %}Shipping{% else %}Livraison{% endif %}</a>
+        <a href="/policies/privacy-policy">{% if request.locale.iso_code == 'en' %}Privacy{% else %}Confidentialité{% endif %}</a>
+      </div>
+      <div class="footer-col">
+        <h4>{% if request.locale.iso_code == 'en' %}Company{% else %}Entreprise{% endif %}</h4>
+        <a href="{% if request.locale.iso_code == 'en' %}/pages/about-us-en{% else %}/pages/notre-histoire{% endif %}">{% if request.locale.iso_code == 'en' %}About{% else %}À propos{% endif %}</a>
+        <a href="/policies/terms-of-service">{% if request.locale.iso_code == 'en' %}Terms{% else %}CGV{% endif %}</a>
+        <a href="/policies/legal-notice">{% if request.locale.iso_code == 'en' %}Legal notice{% else %}Mentions légales{% endif %}</a>
+        <a href="/pages/contact">{% if request.locale.iso_code == 'en' %}Press{% else %}Presse{% endif %}</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; {{ 'now' | date: '%Y' }} UBurn. {% if request.locale.iso_code == 'en' %}All rights reserved.{% else %}Tous droits réservés.{% endif %}</p>
+      <div class="footer-legal">
+        <a href="/policies/terms-of-service">{% if request.locale.iso_code == 'en' %}Terms{% else %}CGV{% endif %}</a>
+        <a href="/policies/privacy-policy">{% if request.locale.iso_code == 'en' %}Privacy{% else %}Confidentialité{% endif %}</a>
+        <a href="/policies/legal-notice">{% if request.locale.iso_code == 'en' %}Legal notice{% else %}Mentions légales{% endif %}</a>
+      </div>
+    </div>
+    <div class="footer-disc">
+      <p>{% if request.locale.iso_code == 'en' %}Dietary supplement containing konjac glucomannan. Glucomannan supports satiety as part of a healthy lifestyle.* Recommended use: 3g/day in 3 doses of 1g with 1-2 large glasses of water before meals. Not a substitute for a balanced diet. Not recommended during pregnancy or breastfeeding. *These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.{% else %}Complément alimentaire à base de glucomannane. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120). Conditions : 3g/jour en 3 doses de 1g avec 1-2 verres d'eau avant les repas. Ne se substitue pas à une alimentation variée et équilibrée. Déconseillé pendant la grossesse et l'allaitement.{% endif %}</p>
+    </div>
+  </div>
+</footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-mobile-cta">
+  <a href="/products/ube-poudre?variant=51289200066879">{% if request.locale.iso_code == 'en' %}Start my pack — from $35{% else %}Commencer ma cure — dès 34,50€{% endif %}</a>
+</div>

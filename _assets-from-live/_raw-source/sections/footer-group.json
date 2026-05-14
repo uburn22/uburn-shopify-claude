@@ -1,0 +1,72 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "title": "À propos",
+            "content": "<p>UBURN, marque profondément enracinée dans la conviction que la beauté commence par l'équilibre naturel du corps.</p>",
+            "enable_follow_on_shop": true
+          }
+        },
+        "links_wXbnq3": {
+          "type": "links",
+          "settings": {
+            "menu": "menu-footer",
+            "collapse_on_mobile": true,
+            "show_menu_title": false,
+            "menu_title": ""
+          }
+        },
+        "newsletter": {
+          "type": "newsletter",
+          "settings": {
+            "title": "Newsletter",
+            "content": "<p>Inscrivez-vous à notre newsletter pour recevoir nos offres exclusives.</p>",
+            "disclaimer_text": "<p>En vous inscrivant à notre newsletter vous acceptez nos conditions sur la politique de confidentialité.</p>"
+          }
+        },
+        "scrolling_logo_fgKani": {
+          "type": "scrolling_logo",
+          "settings": {
+            "layout": "full_width",
+            "image": "shopify://shop_images/LOGO.png",
+            "image_width": 30,
+            "mobile_image_width": 65
+          }
+        }
+      },
+      "block_order": [
+        "text",
+        "links_wXbnq3",
+        "newsletter",
+        "scrolling_logo_fgKani"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "show_social_media": true,
+        "show_payment_icons": true,
+        "show_country_selector": false,
+        "show_country_name": true,
+        "show_country_flag": true,
+        "show_locale_selector": true
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

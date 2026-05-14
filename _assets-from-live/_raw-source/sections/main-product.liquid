@@ -1,0 +1,2355 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700;800&family=Red+Hat+Text:wght@400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+<style>
+  :root{
+    --ub-purple-deep:#3d1873;--ub-purple-main:#6b2fa0;--ub-purple-mid:#8b47c5;
+    --ub-purple-light:#b07de8;--ub-purple-pale:#e8dcf5;--ub-purple-wash:#f5f0fa;
+    --ub-cream:#faf9f7;--ub-dark:#242220;--ub-body:#5a5654;--ub-muted:#8a8785;
+    --ub-grad:linear-gradient(160deg,#3d1873 0%,#6b2fa0 40%,#8b47c5 100%);
+  }
+
+  /* Apply brand fonts to product info */
+  .product-info .product-title,
+  .product-info h1,
+  .product-info h2,
+  .product-info .h1,
+  .product-info .h2 {
+    font-family: 'Red Hat Display', sans-serif !important;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: #242220;
+  }
+  .product-info,
+  .product-info p,
+  .product-info span,
+  .product-info label {
+    font-family: 'Red Hat Text', sans-serif;
+  }
+
+  /* Bonus block */
+  .uburn-bonus-block {
+    margin-top: 16px;
+    background: var(--ub-purple-wash);
+    border: 1px solid var(--ub-purple-pale);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .uburn-bonus-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ub-purple-main);
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    margin-bottom: 8px;
+    font-family: 'Red Hat Text', sans-serif;
+  }
+  .uburn-bonus-items {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .uburn-bonus-items span {
+    font-size: 12.5px;
+    color: #242220;
+    font-weight: 500;
+    line-height: 1.4;
+    font-family: 'Red Hat Text', sans-serif;
+  }
+  .uburn-bonus-items em {
+    color: #8a8785;
+    font-style: normal;
+    font-size: 11px;
+  }
+  .uburn-bonus-total {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--ub-purple-pale);
+    font-size: 12.5px;
+    color: #5a5654;
+    font-family: 'Red Hat Text', sans-serif;
+  }
+  .uburn-bonus-total strong {
+    color: var(--ub-purple-deep);
+    font-weight: 800;
+  }
+
+  {%- if section.settings.allow_transparent_header and section.settings.transparent_header_use_primary_colors -%}
+    {%- comment -%}
+    When this setting is enabled, we use the transparent header, but we force the header to use the primary colors and primary logo.
+    {%- endcomment -%}
+
+    .header {
+      --header-show-transparent-logo: 0 !important;
+      --header-transparent-header-text-color: initial;
+    }
+  {%- endif -%}
+
+  {%- if section.settings.allow_transparent_header == false and section.settings.add_top_spacing -%}
+    #shopify-section-{{ section.id }} .product {
+      padding-block-start: min(1.75rem, var(--container-gutter));
+    }
+  {%- endif -%}
+
+  /* Mobile hero — above the fold for paid traffic */
+  .uburn-mobile-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, var(--ub-purple-wash) 0%, var(--ub-purple-pale) 100%);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    max-height: 60px;
+    overflow: hidden;
+  }
+  .uburn-hero-promise {
+    font-size: 15px;
+    font-weight: 700;
+    color: #3d1873;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .uburn-hero-details {
+    font-size: 11px;
+    color: #6b2fa0;
+    margin: 0;
+  }
+  @media screen and (min-width: 700px) {
+    .uburn-mobile-hero { display: none; }
+  }
+
+  /* FIX 3 — Trust bar above the fold */
+  .uburn-trust-bar {
+    background: var(--ub-purple-wash);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+  }
+  .uburn-trust-bar span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ub-body);
+    white-space: nowrap;
+    padding: 0;
+  }
+  .uburn-trust-bar span + span {
+    border-left: none;
+  }
+
+  /* Accordion science */
+  .uburn-science-accordion {
+    margin-top: 12px;
+    border: 1px solid #e0dce6;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .uburn-science-accordion summary {
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #f9f7fc;
+    list-style: none;
+  }
+  .uburn-science-accordion summary::-webkit-details-marker { display: none; }
+  .uburn-science-accordion summary::after {
+    content: '+';
+    float: right;
+    font-size: 18px;
+    color: #6b2fa0;
+  }
+  .uburn-science-accordion[open] summary::after { content: '−'; }
+  .uburn-science-steps {
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .uburn-science-step {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .uburn-step-icon {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #6b2fa0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* Emoji step icons (no background) */
+  .uburn-step-icon--emoji {
+    background: none;
+    font-size: 20px;
+    width: 26px;
+    height: 26px;
+  }
+
+  /* FIX 4 — FAQ section */
+  .uburn-faq-section {
+    margin-top: 16px;
+  }
+  .uburn-faq-heading {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 8px 0;
+  }
+  .uburn-faq-section .uburn-science-accordion {
+    margin-top: 0;
+    border-radius: 0;
+    border-bottom: none;
+  }
+  .uburn-faq-section .uburn-science-accordion:first-of-type {
+    border-radius: 8px 8px 0 0;
+  }
+  .uburn-faq-section .uburn-science-accordion:last-of-type {
+    border-radius: 0 0 8px 8px;
+    border-bottom: 1px solid #e0dce6;
+  }
+  .uburn-faq-answer {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #444;
+    margin: 0;
+  }
+
+  /* TASK 3 — Antioxidant note */
+  .uburn-antioxidant-note {
+    font-size: 12px;
+    color: #888;
+    font-style: italic;
+    margin: 6px 0 0 0;
+  }
+
+  /* TASK 3 — Prix comparison */
+  .uburn-price-comparison {
+    font-size: 12px;
+    color: #16a34a;
+    font-weight: 600;
+    margin: 4px 0 0 0;
+  }
+
+  .uburn-no-subscription {
+    font-size: 11px;
+    color: #6b7280;
+    text-align: center;
+    margin: 8px 0 0 0;
+  }
+
+
+  /* Sticky ATC bottom padding on mobile */
+  @media screen and (max-width: 699px) {
+    .shopify-section--main-product { padding-bottom: 60px; }
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} {
+      --product-grid: auto / minmax(0, {{ section.settings.product_media_size | divided_by: 100.0 }}fr) minmax(0, {{ 100.0 | minus: section.settings.product_media_size | divided_by: 100.0 }}fr);
+    }
+  }
+</style>
+
+<div class="color-scheme color-scheme--{{ section.settings.color_scheme.id }}" {% if section.settings.allow_transparent_header and product.media.size > 0 %}allow-transparent-header{% endif %}>
+  <div class="container">
+    {%- capture product_form_id -%}product-form-main-{{ product.id }}-{{ section.id }}{%- endcapture -%}
+
+    <product-rerender id="product-info-{{ product.id }}-{{ section.id }}" observe-form="{{ product_form_id }}" allow-partial-rerender>
+      <div class="product">
+        <!-- Mobile hero banner for paid traffic — above the fold -->
+        <div class="uburn-mobile-hero sm:hidden">
+          <p class="uburn-hero-promise">Satiété longue durée · 30 kcal</p>
+          <p class="uburn-hero-details">1500+ femmes l'utilisent · À partir de €1,15/jour</p>
+        </div>
+
+        <!-- Trust bar — 4 badges horizontal -->
+        <div class="uburn-trust-bar">
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b2fa0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg> Ingrédients conformes EFSA</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b2fa0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg> 100% Végétal</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b2fa0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg> 0% caféine</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b2fa0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg> Livraison offerte</span>
+        </div>
+
+        {%- if product.media.size > 0 -%}
+          {%- render 'product-gallery',
+              product: product,
+              product_form_id: product_form_id,
+              desktop_layout: section.settings.desktop_media_layout,
+              desktop_carousel_controls: section.settings.desktop_carousel_controls,
+              mobile_controls: section.settings.mobile_controls,
+              enable_media_autoplay: section.settings.enable_media_autoplay,
+              enable_video_looping: section.settings.enable_video_looping,
+              enable_image_zoom: section.settings.enable_image_zoom,
+              max_image_zoom_level: section.settings.max_image_zoom_level
+          -%}
+        {%- endif -%}
+
+        {%- render 'product-info',
+            product: product,
+            product_form_id: product_form_id,
+            content_alignment: section.settings.content_alignment,
+            context: 'main_product'
+        -%}
+
+      </div>
+    </product-rerender>
+  </div>
+</div>
+
+{%- render 'product-sticky-add-to-cart', product: product, product_form_id: product_form_id -%}
+{%- render 'product-quick-buy', product: product -%}
+
+<!-- ===== LP-STYLE BELOW FOLD ===== -->
+<style>
+  .pd-wrap{font-family:'Red Hat Text',sans-serif;color:var(--ub-body)}
+  .pd-wrap *{box-sizing:border-box}
+  .pd-section{padding:80px 40px}
+  .pd-section-inner{max-width:1100px;margin:0 auto}
+  .pd-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;color:var(--ub-purple-main);margin-bottom:14px}
+  .pd-title{font-family:'Red Hat Display',sans-serif;font-size:clamp(24px,3vw,38px);font-weight:700;color:var(--ub-dark);line-height:1.15;margin-bottom:16px}
+  .pd-title .pd-accent{color:var(--ub-purple-mid)}
+  .pd-cream{background:var(--ub-cream)}
+
+  /* Marquee */
+  .pd-marquee{padding:12px 0;overflow:hidden;border-top:1px solid rgba(0,0,0,.06);border-bottom:1px solid rgba(0,0,0,.06)}
+  .pd-marquee-track{display:flex;gap:40px;animation:pd-slide 25s linear infinite;width:max-content}
+  .pd-marquee-item{white-space:nowrap;font-size:12.5px;font-weight:600;color:var(--ub-muted);text-transform:uppercase;letter-spacing:1.2px;display:flex;align-items:center;gap:10px}
+  .pd-marquee-dot{width:5px;height:5px;border-radius:50%;background:var(--ub-purple-light)}
+  @keyframes pd-slide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+  /* How it works */
+  .pd-how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px;text-align:center;align-items:start}
+  .pd-how-photo{width:100%;aspect-ratio:1/1;border-radius:20px;overflow:hidden;margin-bottom:16px;background:var(--ub-purple-wash)}
+  .pd-how-photo img{width:100%;height:100%;object-fit:cover}
+  .pd-how-num{width:52px;height:52px;margin:0 auto 16px;border-radius:50%;background:var(--ub-purple-wash);display:flex;align-items:center;justify-content:center;font-family:'Red Hat Display',sans-serif;font-size:18px;font-weight:700;color:var(--ub-purple-main)}
+  .pd-how-step h4{font-family:'Red Hat Display',sans-serif;font-size:16px;font-weight:700;color:var(--ub-dark);margin-bottom:8px}
+  .pd-how-step p{font-size:14px;color:var(--ub-muted);line-height:1.55;max-width:260px;margin:0 auto}
+
+  /* Ingredients */
+  .pd-ingr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+  .pd-ingr-card{background:#fff;border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:.3s}
+  .pd-ingr-card:hover{box-shadow:0 8px 28px rgba(0,0,0,.06);transform:translateY(-2px)}
+  .pd-ingr-img{width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--ub-cream)}
+  .pd-ingr-img img{width:100%;height:100%;object-fit:cover}
+  .pd-ingr-body{padding:20px}
+  .pd-ingr-body h4{font-family:'Red Hat Display',sans-serif;font-size:15px;font-weight:700;color:var(--ub-dark);margin-bottom:6px}
+  .pd-ingr-body p{font-size:13px;color:var(--ub-muted);line-height:1.55}
+
+  /* Testimonials */
+  .pd-testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+  .pd-testi-card{background:var(--ub-cream);border-radius:20px;padding:32px;border:1px solid rgba(0,0,0,.04)}
+  .pd-testi-stars{color:var(--ub-purple-main);font-size:14px;margin-bottom:14px;letter-spacing:2px}
+  .pd-testi-text{font-size:14.5px;color:var(--ub-body);line-height:1.65;margin-bottom:20px}
+  .pd-testi-verified{font-size:11.5px;color:var(--ub-purple-main);font-weight:600;margin-bottom:18px;display:flex;align-items:center;gap:4px}
+  .pd-testi-author{display:flex;align-items:center;gap:12px}
+  .pd-testi-avatar{width:36px;height:36px;border-radius:50%;background:var(--ub-purple-wash);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--ub-purple-main);font-size:15px;font-family:'Red Hat Display',sans-serif;flex-shrink:0}
+  .pd-testi-name{font-size:14px;font-weight:600;color:var(--ub-dark)}
+  .pd-testi-role{font-size:12px;color:var(--ub-muted)}
+
+  /* FAQ */
+  .pd-faq-list{margin-top:40px}
+  .pd-faq-item{border-bottom:1px solid rgba(0,0,0,.07)}
+  .pd-faq-q{padding:20px 0;font-size:15px;font-weight:600;color:var(--ub-dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;user-select:none;font-family:'Red Hat Text',sans-serif}
+  .pd-faq-q::after{content:'+';font-size:22px;color:var(--ub-purple-main);flex-shrink:0;transition:.2s;line-height:1}
+  .pd-faq-item.open .pd-faq-q::after{content:'−'}
+  .pd-faq-a{max-height:0;overflow:hidden;font-size:14px;line-height:1.7;color:var(--ub-body);transition:max-height .3s ease,padding .3s ease}
+  .pd-faq-item.open .pd-faq-a{max-height:300px;padding-bottom:20px}
+
+  /* Guarantee bar */
+  .pd-guar-bar{padding:48px 40px;border-top:1px solid rgba(0,0,0,.06)}
+  .pd-guar-grid{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:32px;text-align:center}
+  .pd-guar-icon{width:44px;height:44px;margin:0 auto 12px}
+  .pd-guar-icon img{width:100%;height:100%;object-fit:contain}
+  .pd-guar-item h4{font-family:'Red Hat Display',sans-serif;font-size:14px;font-weight:700;color:var(--ub-dark);margin-bottom:4px}
+  .pd-guar-item p{font-size:12.5px;color:var(--ub-muted)}
+
+  /* CTA */
+  .pd-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:100px;font-family:'Red Hat Text',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:.3s;border:none;background:var(--ub-purple-main);color:#fff;text-decoration:none}
+  .pd-btn:hover{background:var(--ub-purple-deep);transform:translateY(-1px);box-shadow:0 6px 20px rgba(107,47,160,.3)}
+
+  /* Responsive */
+  @media(max-width:768px){
+    .pd-section{padding:60px 20px}
+    .pd-how-grid{grid-template-columns:1fr;gap:32px}
+    .pd-ingr-grid{grid-template-columns:repeat(2,1fr)}
+    .pd-testi-grid{grid-template-columns:1fr}
+    .pd-guar-grid{grid-template-columns:repeat(2,1fr);gap:24px}
+  }
+  @media(max-width:480px){
+    .pd-ingr-grid{grid-template-columns:1fr}
+  }
+</style>
+
+<div class="pd-wrap">
+
+  <!-- MARQUEE -->
+  <div class="pd-marquee">
+    <div class="pd-marquee-track">
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>Livraison offerte</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>EFSA ID 3120</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>100% Naturel</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>0% Caféine</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>Marque française</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>Annulable à tout moment</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>1500+ clientes</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>30 kcal/dose</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>Livraison offerte</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>EFSA ID 3120</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>100% Naturel</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>0% Caféine</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>Marque française</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>Annulable à tout moment</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>1500+ clientes</div>
+      <div class="pd-marquee-item"><span class="pd-marquee-dot"></span>30 kcal/dose</div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="pd-section">
+    <div class="pd-section-inner">
+      <div class="pd-label" style="text-align:center">Mode d'emploi</div>
+      <h2 class="pd-title" style="text-align:center">3 gestes. <span class="pd-accent">4h de résultat.</span></h2>
+      <div class="pd-how-grid">
+        <div class="pd-how-step">
+          <div class="pd-how-photo">
+            <img src="https://uburn.co/cdn/shop/files/etape_1.jpg?v=1763147054&width=600&format=webp" alt="Mélangez UBurn dans un verre d'eau" loading="lazy" decoding="async" width="600" height="600">
+          </div>
+          <div class="pd-how-num">01</div>
+          <h4>Mélangez</h4>
+          <p>Une dose dans un grand verre d'eau <strong>OU</strong> de lait végétal</p>
+        </div>
+        <div class="pd-how-step">
+          <div class="pd-how-photo">
+            <img src="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=600&format=webp" alt="Le konjac forme un gel naturel" loading="lazy" decoding="async" width="600" height="600">
+          </div>
+          <div class="pd-how-num">02</div>
+          <h4>Le gel se forme</h4>
+          <p>Le konjac gonfle dans votre estomac et coupe la faim naturellement</p>
+        </div>
+        <div class="pd-how-step">
+          <div class="pd-how-photo">
+            <img src="https://uburn.co/cdn/shop/files/etape_3.jpg?v=1763147054&width=600&format=webp" alt="4h sans fringales" loading="lazy" decoding="async" width="600" height="600">
+          </div>
+          <div class="pd-how-num">03</div>
+          <h4>4h sans fringales</h4>
+          <p>Votre estomac est calmé, naturellement</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INGREDIENTS -->
+  <section class="pd-section pd-cream" id="pd-ingredients">
+    <div class="pd-section-inner">
+      <div class="pd-label">Ingrédients</div>
+      <h2 class="pd-title">Des actifs naturels <span class="pd-accent">hautement sélectionnés</span></h2>
+      <div class="pd-ingr-grid">
+        <div class="pd-ingr-card">
+          <div class="pd-ingr-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1749644803&width=500&format=webp" alt="Ubé violet" loading="lazy" decoding="async" width="500" height="375"></div>
+          <div class="pd-ingr-body"><h4>Ubé violet</h4><p>Antioxydants naturels</p></div>
+        </div>
+        <div class="pd-ingr-card">
+          <div class="pd-ingr-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1749644803&width=500&format=webp" alt="Konjac" loading="lazy" decoding="async" width="500" height="375"></div>
+          <div class="pd-ingr-body"><h4>Konjac</h4><p>Satiété durable · EFSA ID 3120</p></div>
+        </div>
+        <div class="pd-ingr-card">
+          <div class="pd-ingr-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1749644803&width=500&format=webp" alt="Fibre d'acacia" loading="lazy" decoding="async" width="500" height="375"></div>
+          <div class="pd-ingr-body"><h4>Acacia</h4><p>Prébiotique digestif</p></div>
+        </div>
+        <div class="pd-ingr-card">
+          <div class="pd-ingr-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1749644803&width=500&format=webp" alt="MCT de coco" loading="lazy" decoding="async" width="500" height="375"></div>
+          <div class="pd-ingr-body"><h4>MCT coco</h4><p>Énergie stable</p></div>
+        </div>
+        <div class="pd-ingr-card">
+          <div class="pd-ingr-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1749644803&width=500&format=webp" alt="Gingembre" loading="lazy" decoding="async" width="500" height="375"></div>
+          <div class="pd-ingr-body"><h4>Gingembre</h4><p>Digestion + métabolisme</p></div>
+        </div>
+        <div class="pd-ingr-card">
+          <div class="pd-ingr-img"><img src="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1749644803&width=500&format=webp" alt="L-Carnitine" loading="lazy" decoding="async" width="500" height="375"></div>
+          <div class="pd-ingr-body"><h4>L-Carnitine</h4><p>Métabolisme des graisses</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="pd-section" id="pd-avis">
+    <div class="pd-section-inner" style="text-align:center">
+      <h2 class="pd-title">Elles racontent <span class="pd-accent">leurs résultats.</span></h2>
+      <div class="pd-testi-grid" style="text-align:left">
+        <div class="pd-testi-card">
+          <div class="pd-testi-stars">★★★★★</div>
+          <p class="pd-testi-text">"Je ne pense plus au placard à 16h. Ça me soulage vraiment au quotidien."</p>
+          <div class="pd-testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Achat vérifié</div>
+          <div class="pd-testi-author">
+            <div class="pd-testi-avatar">M</div>
+            <div><div class="pd-testi-name">Marion L.</div><div class="pd-testi-role">28 ans, Lyon</div></div>
+          </div>
+        </div>
+        <div class="pd-testi-card">
+          <div class="pd-testi-stars">★★★★★</div>
+          <p class="pd-testi-text">"Pour 0,61€ par jour, y'a pas de risque. Et ça marche. Mon 2e pot en cours."</p>
+          <div class="pd-testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Achat vérifié</div>
+          <div class="pd-testi-author">
+            <div class="pd-testi-avatar">S</div>
+            <div><div class="pd-testi-name">Sophie</div><div class="pd-testi-role">Bordeaux</div></div>
+          </div>
+        </div>
+        <div class="pd-testi-card">
+          <div class="pd-testi-stars">★★★★★</div>
+          <p class="pd-testi-text">"Mes collègues m'ont demandé mon secret. Le goût est top et je ne grignote plus le soir."</p>
+          <div class="pd-testi-verified"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Achat vérifié</div>
+          <div class="pd-testi-author">
+            <div class="pd-testi-avatar">N</div>
+            <div><div class="pd-testi-name">Nathalie</div><div class="pd-testi-role">Toulouse</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:40px">
+        <a href="https://uburn.co/cart/51289200066879:1?checkout" class="pd-btn">Commencer ma cure →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="pd-section pd-cream" id="pd-faq">
+    <div class="pd-section-inner" style="max-width:720px">
+      <h2 class="pd-title">Questions <span class="pd-accent">fréquentes.</span></h2>
+      <div class="pd-faq-list">
+        <div class="pd-faq-item">
+          <div class="pd-faq-q">Comment fonctionne UBurn ?</div>
+          <div class="pd-faq-a">UBurn est formulé autour du glucomannane de konjac, dont l'allégation de satiété est officiellement validée par l'EFSA (ID 3120). Mélangez une dose dans un grand verre d'eau fraîche ou de votre lait végétal préféré. Le konjac forme un gel naturel dans l'estomac — vous vous sentez rassasiée naturellement.</div>
+        </div>
+        <div class="pd-faq-item">
+          <div class="pd-faq-q">En combien de temps voit-on des résultats ?</div>
+          <div class="pd-faq-a">La plupart des clientes ressentent l'effet satiété dès la première prise. Pour des résultats visibles sur le contrôle des fringales : 7 à 14 jours en utilisation régulière.</div>
+        </div>
+        <div class="pd-faq-item">
+          <div class="pd-faq-q">L'abonnement est-il obligatoire ?</div>
+          <div class="pd-faq-a">Tu peux choisir un achat unique OU un abonnement avec -10% (annulable, sautable ou en pause à tout moment). Aucune obligation.</div>
+        </div>
+        <div class="pd-faq-item">
+          <div class="pd-faq-q">C'est compatible le soir ? Sans caféine ?</div>
+          <div class="pd-faq-a">Oui. Uburn ne contient pas de caféine. Vous pouvez le prendre à n'importe quelle heure, même le soir, sans perturber votre sommeil.</div>
+        </div>
+        <div class="pd-faq-item">
+          <div class="pd-faq-q">Avec de l'eau ou avec du lait ?</div>
+          <div class="pd-faq-a">Les deux fonctionnent parfaitement. Avec de l'eau froide, boisson légère et rafraîchissante. Avec un lait végétal (amande, avoine, coco...), texture crémeuse et saveur noisette-vanille encore plus prononcée.</div>
+        </div>
+        <div class="pd-faq-item">
+          <div class="pd-faq-q">Y a-t-il des contre-indications ?</div>
+          <div class="pd-faq-a">UBurn est déconseillé pendant la grossesse et l'allaitement. En cas de traitement médical, consultez votre médecin avant utilisation. Complément alimentaire — ne se substitue pas à une alimentation variée et équilibrée.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUARANTEE BAR -->
+  <div class="pd-guar-bar">
+    <div class="pd-guar-grid">
+      <div class="pd-guar-item">
+        <div class="pd-guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_World.svg" alt="" loading="lazy"></div>
+        <h4>Formule EFSA</h4><p>Glucomannane ID 3120</p>
+      </div>
+      <div class="pd-guar-item">
+        <div class="pd-guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_Fast_shipping.svg" alt="" loading="lazy"></div>
+        <h4>Livraison gratuite</h4><p>En France</p>
+      </div>
+      <div class="pd-guar-item">
+        <div class="pd-guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_secure_payment.svg" alt="" loading="lazy"></div>
+        <h4>Paiement sécurisé</h4><p>100% sécurisé</p>
+      </div>
+      <div class="pd-guar-item">
+        <div class="pd-guar-icon"><img src="https://uburn.co/cdn/shop/files/Picto_customer.svg" alt="" loading="lazy"></div>
+        <h4>Annulable à tout moment</h4><p>Commandez quand vous voulez</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.pd-faq-q').forEach(function(q){
+    q.addEventListener('click',function(){
+      var item=this.closest('.pd-faq-item');
+      var isOpen=item.classList.contains('open');
+      document.querySelectorAll('.pd-faq-item.open').forEach(function(el){el.classList.remove('open');});
+      if(!isOpen)item.classList.add('open');
+    });
+  });
+</script>
+
+<script>
+  // We save the product ID in local storage to be eventually used for recently viewed section
+  try {
+    let recentlyViewedProducts = JSON.parse(localStorage.getItem('theme:recently-viewed-products') || '[]');
+
+    recentlyViewedProducts = recentlyViewedProducts.filter(item => item !== {{ product.id }}); // Delete product to remove to the start
+    recentlyViewedProducts.unshift({{ product.id }}); // Add at the start
+
+    localStorage.setItem('theme:recently-viewed-products', JSON.stringify(recentlyViewedProducts));
+  } catch (e) {
+    // Safari in private mode does not allow setting item, we silently fail
+  }
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main_product.name",
+  "class": "shopify-section--main-product",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_transparent_header",
+      "label": "t:global.section.allow_transparent_header",
+      "info": "t:sections.main_product.allow_transparent_header_info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_header_use_primary_colors",
+      "label": "t:global.section.transparent_header_use_primary_colors",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "add_top_spacing",
+      "label": "t:sections.main_product.add_top_spacing",
+      "default": true,
+      "visible_if": "{{ section.settings.allow_transparent_header == false }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sticky_add_to_cart",
+      "label": "t:sections.main_product.show_sticky_add_to_cart",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "product_media_size",
+      "label": "t:sections.main_product.product_media_size",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "text_alignment",
+      "id": "content_alignment",
+      "label": "t:global.text.alignment"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main_product.media_category",
+      "info": "t:sections.main_product.media_category_info"
+    },
+    {
+      "type": "select",
+      "id": "desktop_media_layout",
+      "label": "t:sections.main_product.desktop_media_layout",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.main_product.desktop_media_layout_options.grid"
+        },
+        {
+          "value": "grid_half",
+          "label": "t:sections.main_product.desktop_media_layout_options.grid_half"
+        },
+        {
+          "value": "grid_half_highlight_first",
+          "label": "t:sections.main_product.desktop_media_layout_options.grid_half_highlight_first"
+        },
+        {
+          "value": "carousel",
+          "label": "t:sections.main_product.desktop_media_layout_options.carousel"
+        }
+      ],
+      "default": "carousel"
+    },
+    {
+      "type": "select",
+      "id": "desktop_carousel_controls",
+      "label": "t:sections.main_product.desktop_carousel_controls",
+      "options": [
+        {
+          "value": "lines",
+          "label": "t:sections.main_product.desktop_carousel_controls_options.lines"
+        },
+        {
+          "value": "dots",
+          "label": "t:sections.main_product.desktop_carousel_controls_options.dots"
+        },
+        {
+          "value": "numbers",
+          "label": "t:sections.main_product.desktop_carousel_controls_options.numbers"
+        },
+        {
+          "value": "thumbnails_under",
+          "label": "t:sections.main_product.desktop_carousel_controls_options.thumbnails_under"
+        },
+        {
+          "value": "thumbnails_over",
+          "label": "t:sections.main_product.desktop_carousel_controls_options.thumbnails_over"
+        }
+      ],
+      "default": "lines"
+    },
+    {
+      "type": "select",
+      "id": "mobile_controls",
+      "label": "t:sections.main_product.mobile_controls",
+      "options": [
+        {
+          "value": "lines",
+          "label": "t:sections.main_product.mobile_controls_options.lines"
+        },
+        {
+          "value": "dots",
+          "label": "t:sections.main_product.mobile_controls_options.dots"
+        },
+        {
+          "value": "numbers",
+          "label": "t:sections.main_product.mobile_controls_options.numbers"
+        },
+        {
+          "value": "thumbnails",
+          "label": "t:sections.main_product.mobile_controls_options.thumbnails"
+        },
+        {
+          "value": "none",
+          "label": "t:sections.main_product.mobile_controls_options.none"
+        }
+      ],
+      "default": "lines"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_media_autoplay",
+      "label": "t:sections.main_product.enable_media_autoplay",
+      "info": "t:sections.main_product.enable_media_autoplay_info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "label": "t:sections.main_product.enable_video_looping",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main_product.image_zoom_category",
+      "info": "t:sections.main_product.image_zoom_category_info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_image_zoom",
+      "label": "t:sections.main_product.image_zoom_enable",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "max_image_zoom_level",
+      "min": 1,
+      "max": 4,
+      "step": 0.5,
+      "label": "t:sections.main_product.image_zoom_max_level",
+      "default": 3
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "vendor",
+      "name": "t:sections.main_product.blocks.vendor.name",
+      "limit": 1
+    },
+    {
+      "type": "title",
+      "name": "t:sections.main_product.blocks.title.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "label": "t:global.text.size",
+          "options": [
+            {
+              "value": "h1",
+              "label": "XX-Large"
+            },
+            {
+              "value": "h2",
+              "label": "X-Large"
+            },
+            {
+              "value": "h3",
+              "label": "Large"
+            },
+            {
+              "value": "h4",
+              "label": "Medium"
+            },
+            {
+              "value": "h5",
+              "label": "Small"
+            },
+            {
+              "value": "h6",
+              "label": "X-Small"
+            },
+            {
+              "value": "h7",
+              "label": "XX-Small"
+            }
+          ],
+          "default": "h3"
+        }
+      ]
+    },
+    {
+      "type": "sku",
+      "name": "t:sections.main_product.blocks.sku.name",
+      "limit": 1
+    },
+    {
+      "type": "badges",
+      "name": "t:sections.main_product.blocks.badges.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main_product.blocks.badges.instructions"
+        }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "t:sections.main_product.blocks.price.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_taxes_notice",
+          "label": "t:sections.main_product.blocks.price.show_taxes_notice",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "t:sections.main_product.blocks.rating.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main_product.blocks.rating.instructions"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_empty",
+          "label": "t:sections.main_product.blocks.rating.show_if_no_reviews",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "payment_terms",
+      "name": "t:sections.main_product.blocks.payment_terms.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main_product.blocks.payment_terms.instructions"
+        }
+      ]
+    },
+    {
+      "type": "separator",
+      "name": "t:sections.main_product.blocks.separator.name"
+    },
+    {
+      "type": "description",
+      "name": "t:sections.main_product.blocks.description.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "collapse_content",
+          "label": "t:sections.main_product.blocks.description.collapse_content",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "uppercase_title",
+          "label": "t:sections.main_product.blocks.collapsible_text.uppercase_title",
+          "default": false,
+          "visible_if": "{{ block.settings.collapse_content }}"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "t:global.icons.icon",
+          "info": "t:global.icons.custom_icon_info",
+          "visible_if": "{{ block.settings.collapse_content }}"
+        }
+      ]
+    },
+    {
+      "type": "variant_picker",
+      "name": "t:sections.main_product.blocks.variant_picker.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "hide_sold_out_variants",
+          "label": "t:sections.main_product.blocks.variant_picker.hide_sold_out_variants",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "separate_options",
+          "label": "t:sections.main_product.blocks.variant_picker.separate_options",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "selector_style",
+          "label": "t:sections.main_product.blocks.variant_picker.selector_style",
+          "options": [
+            {
+              "value": "block",
+              "label": "t:sections.main_product.blocks.variant_picker.selector_style_options.block"
+            },
+            {
+              "value": "dropdown",
+              "label": "t:sections.main_product.blocks.variant_picker.selector_style_options.dropdown"
+            }
+          ],
+          "default": "block"
+        },
+        {
+          "type": "select",
+          "id": "swatch_selector_style",
+          "label": "t:sections.main_product.blocks.variant_picker.swatch_selector_style",
+          "info": "t:sections.main_product.blocks.variant_picker.swatch_selector_style_info",
+          "options": [
+            {
+              "value": "swatch",
+              "label": "t:sections.main_product.blocks.variant_picker.swatch_selector_style_options.swatch"
+            },
+            {
+              "value": "block_swatch",
+              "label": "t:sections.main_product.blocks.variant_picker.swatch_selector_style_options.block_swatch"
+            },
+            {
+              "value": "none",
+              "label": "t:sections.main_product.blocks.variant_picker.swatch_selector_style_options.none"
+            }
+          ],
+          "default": "swatch"
+        },
+        {
+          "type": "select",
+          "id": "swatch_selector_size",
+          "label": "t:sections.main_product.blocks.variant_picker.swatch_selector_size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "t:sections.main_product.blocks.variant_picker.swatch_selector_size_options.small"
+            },
+            {
+              "value": "lg",
+              "label": "t:sections.main_product.blocks.variant_picker.swatch_selector_size_options.large"
+            }
+          ],
+          "default": "lg",
+          "visible_if": "{{ block.settings.swatch_selector_style == 'swatch' }}"
+        },
+        {
+          "type": "select",
+          "id": "block_selector_style",
+          "label": "t:sections.main_product.blocks.variant_picker.block_selector_style",
+          "options": [
+            {
+              "value": "outline",
+              "label": "t:sections.main_product.blocks.variant_picker.block_selector_style_options.outline"
+            },
+            {
+              "value": "fill",
+              "label": "t:sections.main_product.blocks.variant_picker.block_selector_style_options.fill"
+            }
+          ],
+          "default": "outline"
+        },
+        {
+          "type": "text",
+          "id": "variant_image_options",
+          "label": "t:sections.main_product.blocks.variant_picker.variant_image_options",
+          "info": "t:sections.main_product.blocks.variant_picker.variant_image_options_info"
+        },
+        {
+          "type": "page",
+          "id": "size_chart_page",
+          "label": "t:sections.main_product.blocks.variant_picker.size_chart_page",
+          "info": "t:sections.main_product.blocks.variant_picker.size_chart_page_info"
+        }
+      ]
+    },
+    {
+      "type": "product_variations",
+      "name": "t:sections.main_product.blocks.product_variations.name",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main_product.blocks.product_variations.instructions"
+        },
+        {
+          "type": "text",
+          "id": "option_name",
+          "label": "t:sections.main_product.blocks.product_variations.option_name",
+          "placeholder": "t:sections.main_product.blocks.product_variations.option_name_placeholder"
+        },
+        {
+          "type": "text",
+          "id": "option_value_metafield",
+          "label": "t:sections.main_product.blocks.product_variations.option_value_metafield",
+          "info": "t:sections.main_product.blocks.product_variations.option_value_metafield_info"
+        },
+        {
+          "type": "product_list",
+          "id": "products",
+          "label": "t:sections.main_product.blocks.product_variations.product_list",
+          "info": "t:sections.main_product.blocks.product_variations.product_list_info"
+        },
+        {
+          "type": "select",
+          "id": "selector_style",
+          "label": "t:sections.main_product.blocks.variant_picker.selector_style",
+          "options": [
+            {
+              "value": "block",
+              "label": "t:sections.main_product.blocks.variant_picker.selector_style_options.block"
+            },
+            {
+              "value": "block_swatch",
+              "label": "t:sections.main_product.blocks.variant_picker.swatch_selector_style_options.block_swatch"
+            },
+            {
+              "value": "swatch",
+              "label": "t:sections.main_product.blocks.variant_picker.swatch_selector_style_options.swatch"
+            },
+            {
+              "value": "variant_image",
+              "label": "t:sections.main_product.blocks.variant_picker.selector_style_options.variant_image"
+            }
+          ],
+          "default": "swatch"
+        },
+        {
+          "type": "select",
+          "id": "swatch_selector_size",
+          "label": "t:sections.main_product.blocks.variant_picker.swatch_selector_size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "t:sections.main_product.blocks.variant_picker.swatch_selector_size_options.small"
+            },
+            {
+              "value": "lg",
+              "label": "t:sections.main_product.blocks.variant_picker.swatch_selector_size_options.large"
+            }
+          ],
+          "default": "lg"
+        }
+      ]
+    },
+    {
+      "type": "line_item_property",
+      "name": "t:sections.main_product.blocks.line_item_property.name",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main_product.blocks.line_item_property.line_item_info"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "t:sections.main_product.blocks.line_item_property.line_item_label",
+          "default": "Your label"
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "label": "t:sections.main_product.blocks.line_item_property.line_item_type",
+          "options": [
+            {
+              "value": "text",
+              "label": "t:sections.main_product.blocks.line_item_property.line_item_type_options.text"
+            },
+            {
+              "value": "checkbox",
+              "label": "t:sections.main_product.blocks.line_item_property.line_item_type_options.checkbox"
+            },
+            {
+              "value": "dropdown",
+              "label": "t:sections.main_product.blocks.line_item_property.line_item_type_options.dropdown"
+            }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "t:sections.main_product.blocks.line_item_property.required",
+          "info": "t:sections.main_product.blocks.line_item_property.required_info",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main_product.blocks.line_item_property.text_type_category",
+          "visible_if": "{{ block.settings.type == 'text' }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "allow_long_text",
+          "label": "t:sections.main_product.blocks.line_item_property.text_type_allow_long_text",
+          "default": false,
+          "visible_if": "{{ block.settings.type == 'text' }}"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "t:sections.main_product.blocks.line_item_property.text_placeholder",
+          "visible_if": "{{ block.settings.type == 'text' }}"
+        },
+        {
+          "type": "number",
+          "id": "max_length",
+          "label": "t:sections.main_product.blocks.line_item_property.text_type_max_length",
+          "visible_if": "{{ block.settings.type == 'text' }}"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main_product.blocks.line_item_property.checkbox_type_category",
+          "visible_if": "{{ block.settings.type == 'checkbox' }}"
+        },
+        {
+          "type": "text",
+          "id": "checkbox_value",
+          "label": "t:sections.main_product.blocks.line_item_property.checkbox_value",
+          "info": "t:sections.main_product.blocks.line_item_property.checkbox_value_info",
+          "default": "Yes",
+          "visible_if": "{{ block.settings.type == 'checkbox' }}"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main_product.blocks.line_item_property.dropdown_type_category",
+          "visible_if": "{{ block.settings.type == 'dropdown' }}"
+        },
+        {
+          "type": "text",
+          "id": "select_values",
+          "label": "t:sections.main_product.blocks.line_item_property.dropdown_values",
+          "info": "t:sections.main_product.blocks.line_item_property.dropdown_values_info",
+          "default": "Value 1,Value 2,Value 3",
+          "visible_if": "{{ block.settings.type == 'dropdown' }}"
+        }
+      ]
+    },
+    {
+      "type": "inventory",
+      "name": "t:sections.main_product.blocks.inventory.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_in_stock_quantity",
+          "label": "t:sections.main_product.blocks.inventory.show_in_stock_quantity",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "low_inventory_threshold",
+          "label": "t:sections.main_product.blocks.inventory.low_inventory_threshold",
+          "info": "t:sections.main_product.blocks.inventory.low_inventory_threshold_info",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 0
+        },
+        {
+          "type": "checkbox",
+          "id": "show_progress_bar",
+          "label": "t:sections.main_product.blocks.inventory.show_progress_bar",
+          "default": true
+        },
+        {
+          "type": "number",
+          "id": "progress_bar_max_value",
+          "label": "t:sections.main_product.blocks.inventory.progress_bar_max_value",
+          "info": "t:sections.main_product.blocks.inventory.progress_bar_max_value_info",
+          "default": 50
+        }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "t:sections.main_product.blocks.buy_buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_payment_button",
+          "label": "t:sections.main_product.blocks.buy_buttons.show_payment_button",
+          "info": "t:sections.main_product.blocks.buy_buttons.show_payment_button_info",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_gift_card_recipient",
+          "label": "t:sections.main_product.blocks.buy_buttons.show_gift_card_recipient",
+          "info": "t:sections.main_product.blocks.buy_buttons.show_gift_card_recipient_info",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main_product.blocks.buy_buttons.quantity_category"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_quantity_selector",
+          "label": "t:sections.main_product.blocks.buy_buttons.show_quantity_selector",
+          "info": "t:sections.main_product.blocks.buy_buttons.show_quantity_selector_info",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "add_quantity_selector_spacing",
+          "label": "t:sections.main_product.blocks.buy_buttons.add_quantity_selector_spacing",
+          "info": "t:sections.main_product.blocks.buy_buttons.add_quantity_selector_spacing_info",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "t:global.colors.category"
+        },
+        {
+          "type": "select",
+          "id": "atc_button_style",
+          "label": "t:global.text.button_style",
+          "options": [
+            {
+              "value": "outline",
+              "label": "t:global.text.button_style_options.outline"
+            },
+            {
+              "value": "solid",
+              "label": "t:global.text.button_style_options.solid"
+            }
+          ],
+          "default": "solid"
+        },
+        {
+          "type": "color",
+          "id": "atc_button_background",
+          "label": "t:sections.main_product.blocks.buy_buttons.add_to_cart_background"
+        },
+        {
+          "type": "color",
+          "id": "atc_button_text_color",
+          "label": "t:sections.main_product.blocks.buy_buttons.add_to_cart_text_color"
+        },
+        {
+          "type": "color",
+          "id": "payment_button_background",
+          "label": "t:sections.main_product.blocks.buy_buttons.payment_button_background"
+        },
+        {
+          "type": "color",
+          "id": "payment_button_text_color",
+          "label": "t:sections.main_product.blocks.buy_buttons.payment_button_text_color"
+        }
+      ]
+    },
+    {
+      "type": "volume_pricing",
+      "name": "t:sections.main_product.blocks.volume_pricing.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main_product.blocks.volume_pricing.instructions"
+        }
+      ]
+    },
+    {
+      "type": "pickup_availability",
+      "name": "t:sections.main_product.blocks.pickup_availability.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main_product.blocks.pickup_availability.instructions"
+        }
+      ]
+    },
+    {
+      "type": "complementary_products",
+      "name": "t:sections.main_product.blocks.complementary_products.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main_product.blocks.complementary_products.instructions"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "t:global.text.heading",
+          "default": "Pairs well with"
+        },
+        {
+          "type": "range",
+          "id": "products_count",
+          "label": "t:sections.main_product.blocks.complementary_products.products_count",
+          "min": 1,
+          "max": 10,
+          "default": 10
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.main_product.blocks.text.name",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:global.text.content",
+          "default": "<p>Share some content to your customers about your products.</p>"
+        }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "t:sections.main_product.blocks.collapsible_text.name",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "t:global.text.title",
+          "default": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:global.text.content",
+          "default": "<p>Share some content to your customers about your products.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "uppercase_title",
+          "label": "t:sections.main_product.blocks.collapsible_text.uppercase_title",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:global.icons.icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:global.icons.icon_options.none"
+            },
+            {
+              "value": "picto-heart",
+              "label": "t:global.icons.icon_options.heart",
+              "group": "t:global.icons.icon_options.shopping_and_products_category"
+            },
+            {
+              "value": "picto-star",
+              "label": "t:global.icons.icon_options.star",
+              "group": "t:global.icons.icon_options.shopping_and_products_category"
+            },
+            {
+              "value": "picto-like",
+              "label": "t:global.icons.icon_options.like",
+              "group": "t:global.icons.icon_options.shopping_and_products_category"
+            },
+            {
+              "value": "picto-sparkle",
+              "label": "t:global.icons.icon_options.sparkle",
+              "group": "t:global.icons.icon_options.shopping_and_products_category"
+            },
+            {
+              "value": "picto-store",
+              "label": "t:global.icons.icon_options.store",
+              "group": "t:global.icons.icon_options.shopping_and_products_category"
+            },
+            {
+              "value": "picto-price-tag",
+              "label": "t:global.icons.icon_options.price_tag",
+              "group": "t:global.icons.icon_options.shopping_and_products_category"
+            },
+            {
+              "value": "picto-discount-coupon",
+              "label": "t:global.icons.icon_options.discount_coupon",
+              "group": "t:global.icons.icon_options.shopping_and_products_category"
+            },
+            {
+              "value": "picto-discount-badge",
+              "label": "t:global.icons.icon_options.discount_badge",
+              "group": "t:global.icons.icon_options.shopping_and_products_category"
+            },
+            {
+              "value": "picto-ticket-star",
+              "label": "t:global.icons.icon_options.ticket_star",
+              "group": "t:global.icons.icon_options.shopping_and_products_category"
+            },
+            {
+              "value": "picto-gift-card",
+              "label": "t:global.icons.icon_options.gift_card",
+              "group": "t:global.icons.icon_options.shopping_and_products_category"
+            },
+            {
+              "value": "picto-happy",
+              "label": "t:global.icons.icon_options.happy",
+              "group": "t:global.icons.icon_options.shopping_and_products_category"
+            },
+            {
+              "value": "picto-checked",
+              "label": "t:global.icons.icon_options.checked",
+              "group": "t:global.icons.icon_options.shopping_and_products_category"
+            },
+            {
+              "value": "picto-gift-box",
+              "label": "t:global.icons.icon_options.gift_box",
+              "group": "t:global.icons.icon_options.shopping_and_products_category"
+            },
+            {
+              "value": "picto-credit-card",
+              "label": "t:global.icons.icon_options.credit_card",
+              "group": "t:global.icons.icon_options.payments_category"
+            },
+            {
+              "value": "picto-wallet",
+              "label": "t:global.icons.icon_options.wallet",
+              "group": "t:global.icons.icon_options.payments_category"
+            },
+            {
+              "value": "picto-secure",
+              "label": "t:global.icons.icon_options.secure",
+              "group": "t:global.icons.icon_options.payments_category"
+            },
+            {
+              "value": "picto-refund",
+              "label": "t:global.icons.icon_options.refund",
+              "group": "t:global.icons.icon_options.payments_category"
+            },
+            {
+              "value": "picto-invoice",
+              "label": "t:global.icons.icon_options.invoice",
+              "group": "t:global.icons.icon_options.payments_category"
+            },
+            {
+              "value": "picto-loyalty-points",
+              "label": "t:global.icons.icon_options.loyalty_points",
+              "group": "t:global.icons.icon_options.payments_category"
+            },
+            {
+              "value": "picto-location-pin",
+              "label": "t:global.icons.icon_options.location_pin",
+              "group": "t:global.icons.icon_options.shipping_and_delivery_category"
+            },
+            {
+              "value": "picto-truck",
+              "label": "t:global.icons.icon_options.truck",
+              "group": "t:global.icons.icon_options.shipping_and_delivery_category"
+            },
+            {
+              "value": "picto-express-delivery",
+              "label": "t:global.icons.icon_options.express_delivery",
+              "group": "t:global.icons.icon_options.shipping_and_delivery_category"
+            },
+            {
+              "value": "picto-package",
+              "label": "t:global.icons.icon_options.package",
+              "group": "t:global.icons.icon_options.shipping_and_delivery_category"
+            },
+            {
+              "value": "picto-shipping-protection",
+              "label": "t:global.icons.icon_options.shipping_protection",
+              "group": "t:global.icons.icon_options.shipping_and_delivery_category"
+            },
+            {
+              "value": "picto-return-box",
+              "label": "t:global.icons.icon_options.return_box",
+              "group": "t:global.icons.icon_options.shipping_and_delivery_category"
+            },
+            {
+              "value": "picto-return",
+              "label": "t:global.icons.icon_options.return",
+              "group": "t:global.icons.icon_options.shipping_and_delivery_category"
+            },
+            {
+              "value": "picto-fragile",
+              "label": "t:global.icons.icon_options.fragile",
+              "group": "t:global.icons.icon_options.shipping_and_delivery_category"
+            },
+            {
+              "value": "picto-warehouse",
+              "label": "t:global.icons.icon_options.warehouse",
+              "group": "t:global.icons.icon_options.shipping_and_delivery_category"
+            },
+            {
+              "value": "picto-analytics-graph",
+              "label": "t:global.icons.icon_options.analytics_graph",
+              "group": "t:global.icons.icon_options.marketing_category"
+            },
+            {
+              "value": "picto-social-media",
+              "label": "t:global.icons.icon_options.social_media",
+              "group": "t:global.icons.icon_options.marketing_category"
+            },
+            {
+              "value": "picto-magnifying-glass",
+              "label": "t:global.icons.icon_options.magnifying_glass",
+              "group": "t:global.icons.icon_options.marketing_category"
+            },
+            {
+              "value": "picto-trending",
+              "label": "t:global.icons.icon_options.trending",
+              "group": "t:global.icons.icon_options.marketing_category"
+            },
+            {
+              "value": "picto-megaphone",
+              "label": "t:global.icons.icon_options.megaphone",
+              "group": "t:global.icons.icon_options.marketing_category"
+            },
+            {
+              "value": "picto-recycle",
+              "label": "t:global.icons.icon_options.recycle",
+              "group": "t:global.icons.icon_options.nature_and_ecology_category"
+            },
+            {
+              "value": "picto-leaf",
+              "label": "t:global.icons.icon_options.leaf",
+              "group": "t:global.icons.icon_options.nature_and_ecology_category"
+            },
+            {
+              "value": "picto-tree",
+              "label": "t:global.icons.icon_options.tree",
+              "group": "t:global.icons.icon_options.nature_and_ecology_category"
+            },
+            {
+              "value": "picto-science",
+              "label": "t:global.icons.icon_options.science",
+              "group": "t:global.icons.icon_options.nature_and_ecology_category"
+            },
+            {
+              "value": "picto-earth",
+              "label": "t:global.icons.icon_options.earth",
+              "group": "t:global.icons.icon_options.nature_and_ecology_category"
+            },
+            {
+              "value": "picto-sun",
+              "label": "t:global.icons.icon_options.sun",
+              "group": "t:global.icons.icon_options.nature_and_ecology_category"
+            },
+            {
+              "value": "picto-summit",
+              "label": "t:global.icons.icon_options.summit",
+              "group": "t:global.icons.icon_options.nature_and_ecology_category"
+            },
+            {
+              "value": "picto-feather",
+              "label": "t:global.icons.icon_options.feather",
+              "group": "t:global.icons.icon_options.nature_and_ecology_category"
+            },
+            {
+              "value": "picto-drop-of-water",
+              "label": "t:global.icons.icon_options.drop_of_water",
+              "group": "t:global.icons.icon_options.nature_and_ecology_category"
+            },
+            {
+              "value": "picto-email",
+              "label": "t:global.icons.icon_options.email",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-inbox",
+              "label": "t:global.icons.icon_options.inbox",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-plane",
+              "label": "t:global.icons.icon_options.plane",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-mobile-phone",
+              "label": "t:global.icons.icon_options.mobile_phone",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-phone",
+              "label": "t:global.icons.icon_options.phone",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-chat",
+              "label": "t:global.icons.icon_options.chat",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-customer-support",
+              "label": "t:global.icons.icon_options.customer_support",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-comment",
+              "label": "t:global.icons.icon_options.comment",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-date",
+              "label": "t:global.icons.icon_options.date",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-info",
+              "label": "t:global.icons.icon_options.info",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-text",
+              "label": "t:global.icons.icon_options.text",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-ai-spark",
+              "label": "t:global.icons.icon_options.ai_spark",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-user",
+              "label": "t:global.icons.icon_options.user",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-news",
+              "label": "t:global.icons.icon_options.news",
+              "group": "t:global.icons.icon_options.communication_category"
+            },
+            {
+              "value": "picto-glasses",
+              "label": "t:global.icons.icon_options.glasses",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-craft",
+              "label": "t:global.icons.icon_options.craft",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-compass",
+              "label": "t:global.icons.icon_options.compass",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-asterisk",
+              "label": "t:global.icons.icon_options.asterisk",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-microscope",
+              "label": "t:global.icons.icon_options.microscope",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-weight",
+              "label": "t:global.icons.icon_options.weight",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-pyramide",
+              "label": "t:global.icons.icon_options.pyramide",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-sports",
+              "label": "t:global.icons.icon_options.sports",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-wrap",
+              "label": "t:global.icons.icon_options.wrap",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-expand",
+              "label": "t:global.icons.icon_options.expand",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-measure",
+              "label": "t:global.icons.icon_options.measure",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-cut",
+              "label": "t:global.icons.icon_options.cut",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-furniture",
+              "label": "t:global.icons.icon_options.furniture",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-music",
+              "label": "t:global.icons.icon_options.music",
+              "group": "t:global.icons.icon_options.objects_category"
+            },
+            {
+              "value": "picto-drink",
+              "label": "t:global.icons.icon_options.drink",
+              "group": "t:global.icons.icon_options.food_and_drink_category"
+            },
+            {
+              "value": "picto-burger",
+              "label": "t:global.icons.icon_options.burger",
+              "group": "t:global.icons.icon_options.food_and_drink_category"
+            },
+            {
+              "value": "picto-pizza",
+              "label": "t:global.icons.icon_options.pizza",
+              "group": "t:global.icons.icon_options.food_and_drink_category"
+            },
+            {
+              "value": "picto-fork-knife",
+              "label": "t:global.icons.icon_options.fork_knife",
+              "group": "t:global.icons.icon_options.food_and_drink_category"
+            },
+            {
+              "value": "picto-chef",
+              "label": "t:global.icons.icon_options.chef",
+              "group": "t:global.icons.icon_options.food_and_drink_category"
+            },
+          ],
+          "default": "none"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "t:global.icons.custom_icon",
+          "info": "t:global.icons.custom_icon_info"
+        },
+        {
+          "type": "page",
+          "id": "page",
+          "label": "t:sections.main_product.blocks.collapsible_text.page",
+          "info": "t:sections.main_product.blocks.collapsible_text.page_info"
+        }
+      ]
+    },
+    {
+      "type": "offers",
+      "name": "t:sections.main_product.blocks.offers.name",
+      "settings": [
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "t:sections.main_product.blocks.offers.layout",
+          "info": "t:sections.main_product.blocks.offers.layout_info",
+          "options": [
+            {
+              "value": "carousel",
+              "label": "t:sections.main_product.blocks.offers.layout_options.carousel"
+            },
+            {
+              "value": "stacked",
+              "label": "t:sections.main_product.blocks.offers.layout_options.stacked"
+            },
+            {
+              "value": "split",
+              "label": "t:sections.main_product.blocks.offers.layout_options.split"
+            }
+          ],
+          "default": "stacked"
+        },
+        {
+          "type": "select",
+          "id": "icon_position",
+          "label": "t:sections.main_product.blocks.offers.icon_position",
+          "options": [
+            {
+              "value": "stacked",
+              "label": "t:sections.main_product.blocks.offers.icon_position_options.stacked"
+            },
+            {
+              "value": "inline",
+              "label": "t:sections.main_product.blocks.offers.icon_position_options.inline"
+            }
+          ],
+          "default": "stacked"
+        },
+        {
+          "type": "text_alignment",
+          "id": "text_alignment",
+          "label": "t:global.text.alignment"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main_product.blocks.offers.offer_1_category"
+        },
+        {
+          "type": "image_picker",
+          "id": "offer_1_icon",
+          "label": "t:global.icons.icon",
+          "info": "t:global.icons.custom_icon_info"
+        },
+        {
+          "type": "range",
+          "id": "offer_1_icon_width",
+          "label": "t:global.icons.icon_width",
+          "min": 16,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "inline_richtext",
+          "id": "offer_1_subheading",
+          "label": "t:global.text.subheading",
+          "default": "Shipping"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "offer_1_content",
+          "label": "t:global.text.content",
+          "default": "Write information about your shipping rates."
+        },
+        {
+          "type": "color",
+          "id": "offer_1_background",
+          "label": "t:global.colors.background",
+          "default": "#f9f9f9"
+        },
+        {
+          "type": "color",
+          "id": "offer_1_text_color",
+          "label": "t:global.colors.text",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main_product.blocks.offers.offer_2_category"
+        },
+        {
+          "type": "image_picker",
+          "id": "offer_2_icon",
+          "label": "t:global.icons.icon",
+          "info": "t:global.icons.custom_icon_info"
+        },
+        {
+          "type": "range",
+          "id": "offer_2_icon_width",
+          "label": "t:global.icons.icon_width",
+          "min": 16,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "inline_richtext",
+          "id": "offer_2_subheading",
+          "label": "t:global.text.subheading"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "offer_2_content",
+          "label": "t:global.text.content"
+        },
+        {
+          "type": "color",
+          "id": "offer_2_background",
+          "label": "t:global.colors.background",
+          "default": "#f9f9f9"
+        },
+        {
+          "type": "color",
+          "id": "offer_2_text_color",
+          "label": "t:global.colors.text",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main_product.blocks.offers.offer_3_category"
+        },
+        {
+          "type": "image_picker",
+          "id": "offer_3_icon",
+          "label": "t:global.icons.icon",
+          "info": "t:global.icons.custom_icon_info"
+        },
+        {
+          "type": "range",
+          "id": "offer_3_icon_width",
+          "label": "t:global.icons.icon_width",
+          "min": 16,
+          "max": 48,
+          "step": 2,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "inline_richtext",
+          "id": "offer_3_subheading",
+          "label": "t:global.text.subheading"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "offer_3_content",
+          "label": "t:global.text.content"
+        },
+        {
+          "type": "color",
+          "id": "offer_3_background",
+          "label": "t:global.colors.background",
+          "default": "#f9f9f9"
+        },
+        {
+          "type": "color",
+          "id": "offer_3_text_color",
+          "label": "t:global.colors.text",
+          "default": "#000000"
+        }
+      ]
+    },
+    {
+      "type": "countdown",
+      "name": "t:sections.main_product.blocks.countdown.name",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "t:global.text.text",
+          "default": "Hurry up! Sale ends in"
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "t:global.colors.background",
+          "default": "#f9f9f9"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "t:global.colors.text",
+          "default": "#000000"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.countdown_timer.timer_category",
+          "info": "t:sections.countdown_timer.timezone_information"
+        },
+        {
+          "type": "text",
+          "id": "expiration_date",
+          "label": "t:sections.countdown_timer.expiration_date",
+          "placeholder": "Eg. 2025-12-25 12:00",
+          "info": "t:sections.countdown_timer.expiration_date_info"
+        },
+        {
+          "type": "select",
+          "id": "expiration_behavior",
+          "label": "t:sections.countdown_timer.expiration_behavior",
+          "options": [
+            {
+              "value": "hide",
+              "label": "t:sections.countdown_timer.expiration_behavior_options.hide"
+            },
+            {
+              "value": "leave",
+              "label": "t:sections.countdown_timer.expiration_behavior_options.leave"
+            }
+          ],
+          "default": "leave"
+        }
+      ]
+    },
+    {
+      "type": "icons_with_text",
+      "name": "t:sections.main_product.blocks.icons_with_text.name",
+      "settings": [
+        {
+          "type": "range",
+          "min": 1,
+          "max": 3,
+          "id": "items_per_row",
+          "label": "t:sections.main_product.blocks.icons_with_text.items_per_row",
+          "info": "t:sections.main_product.blocks.icons_with_text.items_per_row_info",
+          "default": 1
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main_product.blocks.icons_with_text.icon_1_category"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_1",
+          "label": "t:global.icons.icon"
+        },
+        {
+          "type": "range",
+          "id": "icon_1_width",
+          "min": 8,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "t:global.icons.icon_width",
+          "default": 24
+        },
+        {
+          "type": "inline_richtext",
+          "id": "icon_1_text",
+          "label": "t:global.text.text"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main_product.blocks.icons_with_text.icon_2_category"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_2",
+          "label": "t:global.icons.icon"
+        },
+        {
+          "type": "range",
+          "id": "icon_2_width",
+          "min": 8,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "t:global.icons.icon_width",
+          "default": 24
+        },
+        {
+          "type": "inline_richtext",
+          "id": "icon_2_text",
+          "label": "t:global.text.text"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main_product.blocks.icons_with_text.icon_3_category"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_3",
+          "label": "t:global.icons.icon"
+        },
+        {
+          "type": "range",
+          "id": "icon_3_width",
+          "min": 8,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "t:global.icons.icon_width",
+          "default": 24
+        },
+        {
+          "type": "inline_richtext",
+          "id": "icon_3_text",
+          "label": "t:global.text.text"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main_product.blocks.icons_with_text.icon_4_category"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_4",
+          "label": "t:global.icons.icon"
+        },
+        {
+          "type": "range",
+          "id": "icon_4_width",
+          "min": 8,
+          "max": 64,
+          "step": 2,
+          "unit": "px",
+          "label": "t:global.icons.icon_width",
+          "default": 24
+        },
+        {
+          "type": "inline_richtext",
+          "id": "icon_4_text",
+          "label": "t:global.text.text"
+        }
+      ]
+    },
+    {
+      "type": "liquid",
+      "name": "t:sections.main_product.blocks.liquid.name",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "liquid",
+          "label": "t:global.code.liquid",
+          "info": "t:global.code.liquid_info"
+        }
+      ]
+    },
+    {
+      "type": "modal",
+      "name": "t:sections.main_product.blocks.modal.name",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main_product.blocks.modal.instructions"
+        },
+        {
+          "type": "select",
+          "id": "dialog_type",
+          "label": "t:sections.main_product.blocks.modal.dialog_type",
+          "options": [
+            {
+              "value": "modal",
+              "label": "t:sections.main_product.blocks.modal.dialog_type_options.modal"
+            },
+            {
+              "value": "drawer",
+              "label": "t:sections.main_product.blocks.modal.dialog_type_options.drawer"
+            }
+          ],
+          "default": "modal"
+        },
+        {
+          "type": "header",
+          "content": "Button"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "button_title",
+          "label": "t:global.text.button_text",
+          "default": "Button title"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "t:global.text.style",
+          "options": [
+            {
+              "value": "outline",
+              "label": "t:global.text.button_style_options.outline"
+            },
+            {
+              "value": "solid",
+              "label": "t:global.text.button_style_options.solid"
+            },
+            {
+              "value": "link",
+              "label": "t:global.text.button_style_options.link"
+            }
+          ],
+          "default": "solid"
+        },
+        {
+          "type": "checkbox",
+          "id": "stretch_button",
+          "label": "t:sections.main_product.blocks.button.stretch"
+        },
+        {
+          "type": "color",
+          "id": "button_background",
+          "label": "t:global.colors.background"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "t:global.colors.text"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main_product.blocks.modal.content_category"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "modal_title",
+          "label": "t:sections.main_product.blocks.modal.modal_title",
+          "default": "Modal title"
+        },
+        {
+          "type": "richtext",
+          "id": "modal_content",
+          "label": "t:sections.main_product.blocks.modal.modal_content",
+          "default": "<p>Write some content that will appear in a modal</p>"
+        },
+        {
+          "type": "select",
+          "id": "modal_size",
+          "label": "t:global.sizes.size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "t:global.sizes.small"
+            },
+            {
+              "value": "lg",
+              "label": "t:global.sizes.large"
+            }
+          ],
+          "default": "sm"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "t:sections.main_product.blocks.image.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:global.image.image"
+        },
+        {
+          "type": "text_alignment",
+          "id": "alignment",
+          "label": "t:global.image.alignment"
+        },
+        {
+          "type": "radio",
+          "id": "width_mode",
+          "label": "t:global.image.width",
+          "options": [
+            {
+              "value": "full_width",
+              "label": "t:global.image.width_options.full_width"
+            },
+            {
+              "value": "custom",
+              "label": "t:global.image.width_options.custom"
+            }
+          ],
+          "default": "custom"
+        },
+        {
+          "type": "range",
+          "id": "max_width",
+          "min": 100,
+          "max": 600,
+          "step": 10,
+          "unit": "px",
+          "label": "t:global.image.maximum_width",
+          "default": 300
+        },
+        {
+          "type": "range",
+          "id": "mobile_max_width",
+          "min": 100,
+          "max": 600,
+          "step": 10,
+          "unit": "px",
+          "label": "t:global.image.mobile_maximum_width",
+          "default": 200
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "t:sections.main_product.blocks.button.name",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main_product.blocks.button.instructions"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.main_product.blocks.button.link"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.main_product.blocks.button.text",
+          "default": "Button"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "t:global.text.button_style",
+          "options": [
+            {
+              "value": "outline",
+              "label": "t:global.text.button_style_options.outline"
+            },
+            {
+              "value": "solid",
+              "label": "t:global.text.button_style_options.solid"
+            }
+          ],
+          "default": "solid"
+        },
+        {
+          "type": "checkbox",
+          "id": "stretch",
+          "label": "t:sections.main_product.blocks.button.stretch"
+        },
+        {
+          "type": "color",
+          "id": "background",
+          "label": "t:global.colors.background"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "t:global.colors.text"
+        }
+      ]
+    },
+    {
+      "type": "share_buttons",
+      "name": "t:sections.main_product.blocks.share_buttons.name",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main_product.blocks.share_buttons.instructions"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

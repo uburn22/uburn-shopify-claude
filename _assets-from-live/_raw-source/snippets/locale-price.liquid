@@ -1,0 +1,29 @@
+{%- comment -%}
+  locale-price.liquid — renders price in $USD (EN) or €EUR (FR).
+
+  Usage: {% render 'locale-price', price: variant.price %}
+
+  USD pricing (EN): psychological pricing ending in .99, hardcoded per
+  known variant price in cents. EUR base prices stored in Shopify:
+    Starter   €34,50 = 3450 cents → $36.99 base · $32.99 sub (10% off → 3105 cents)
+    Maximum   €54,50 = 5450 cents → $58.99 base · $52.99 sub (10% off → 4905 cents)
+  Fallback: EUR cents × 1.08 → USD whole dollars.
+
+  EUR (FR): standard {{ price | money }} formatting.
+
+  Note: Shopify charges in EUR at checkout. USD is informational display.
+{%- endcomment -%}
+{%- if request.locale.iso_code == 'en' -%}
+  {%- case price -%}
+    {%- when 3450 -%}$36.99
+    {%- when 5450 -%}$58.99
+    {%- when 3105 -%}$32.99
+    {%- when 4905 -%}$52.99
+    {%- else -%}
+      {%- assign _usd_cents = price | times: 108 | divided_by: 100 -%}
+      {%- assign _usd = _usd_cents | divided_by: 100.0 | round -%}
+      ${{ _usd }}
+  {%- endcase -%}
+{%- else -%}
+  {{ price | money }}
+{%- endif -%}

@@ -36,7 +36,7 @@ Use the **brief's US testimonials** (Ashley K, Jennifer M, Rachel R) with verifi
 - `/images/testimonials/reviewer-brooklyn.jpg` — Brooklyn (location-tagged, maybe Sarah D.?)
 - `/images/testimonials/reviewer-la.jpg` — LA (location-tagged)
 
-⚠️ Brief mentioned "Megan T." testimonial — **no photo asset found** for Megan. Either drop or add manually.
+~~Brief mentioned "Megan T." testimonial — no photo asset found.~~ **DECISION 2026-05-14 : DROPPED. 3 testimonials (Ashley K · Jennifer M · Rachel R) suffice.**
 
 ## Recommended honest claim for social-counter section
 > "Loved by [real_count] women across America — Verified Loox reviews · ★ [real_rating]/5"

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" dir="{% render 'direction' %}">
+  <head>
+    <meta name="facebook-domain-verification" content="6da9xvsflev0jx0grs4xok5k6fvd06" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=5.0">
+
+    <title>UBurn — Reprends le contrôle à 16h | -10% avec UBE10</title>
+
+    <meta name="description" content="Le crash de 16h est physiologique. UBurn favorise une satiété naturelle 4h. 30 kcal · 0% caféine · 100% végétal · Marque française. -10% avec le code UBE10.">
+
+    <meta property="og:title" content="UBurn — Reprends le contrôle à 16h">
+    <meta property="og:description" content="Ingrédients conformes EFSA · 30 kcal · 0% caféine · 4h de satiété. Formule ube + konjac. Marque française. -10% avec UBE10.">
+    <meta property="og:type" content="product">
+    <meta property="og:url" content="https://uburn.co/pages/uburn-lp">
+    <meta property="og:image" content="https://uburn.co/cdn/shop/files/Uburn_Listing_ecom_1.jpg?v=1772700007&width=1200">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="UBurn — Reprends le contrôle à 16h">
+    <meta name="twitter:description" content="Ingrédients conformes EFSA · 30 kcal · 0% caféine · 4h de satiété. -10% avec UBE10.">
+    <meta name="twitter:image" content="https://uburn.co/cdn/shop/files/Uburn_Listing_ecom_1.jpg?v=1772700007&width=1200">
+
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 96 }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180 }}">
+    {%- endif -%}
+
+    {%- render 'social-meta-tags' -%}
+
+    {{ content_for_header }}
+  </head>
+
+  <!-- ===== CONSENT MODE V2 — CNIL ===== -->
+  <script>
+    // Meta Pixel : revoke par défaut jusqu'au consentement
+    window._ubConsent = (function(){
+      var KEY = 'ub_consent_v1';
+      var stored = localStorage.getItem(KEY);
+      return {
+        status: stored, // 'granted' | 'denied' | null
+        grant: function(){
+          localStorage.setItem(KEY,'granted');
+          this.status='granted';
+          if(typeof fbq!=='undefined') fbq('consent','grant');
+          document.getElementById('ub-consent-banner') && (document.getElementById('ub-consent-banner').style.display='none');
+        },
+        deny: function(){
+          localStorage.setItem(KEY,'denied');
+          this.status='denied';
+          if(typeof fbq!=='undefined') fbq('consent','revoke');
+          document.getElementById('ub-consent-banner') && (document.getElementById('ub-consent-banner').style.display='none');
+        }
+      };
+    })();
+    // Bloquer le Pixel si pas encore consenti
+    if(window._ubConsent.status !== 'granted'){
+      window.fbq = window.fbq || function(){
+        (window._fbq=window._fbq||[]).push(arguments);
+        // Queue les appels fbq — seront rejoués après grant
+      };
+    }
+  </script>
+
+  <body style="margin:0;padding:0;">
+
+    <!-- CNIL Banner -->
+    <div id="ub-consent-banner" style="{% if request.locale.iso_code == 'fr' or true %}display:flex{% else %}display:none{% endif %};position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#fff;border-top:2px solid #e8dcf5;padding:14px 24px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:-apple-system,sans-serif;box-shadow:0 -4px 24px rgba(0,0,0,.08);">
+      <p style="margin:0;font-size:13px;color:#333;max-width:640px;line-height:1.5;">
+        🍪 {% if request.locale.iso_code == 'en' %}We use cookies to measure ad performance and improve your experience. We never sell your data.{% else %}Nous utilisons des cookies pour mesurer la performance de nos publicités et améliorer votre expérience. Vos données ne sont jamais revendues.{% endif %}
+        <a href="{% if request.locale.iso_code == 'en' %}/policies/privacy-policy{% else %}/pages/confidentialite{% endif %}" style="color:#6b2fa0;text-decoration:underline;margin-left:4px;">{% if request.locale.iso_code == 'en' %}Learn more{% else %}En savoir plus{% endif %}</a>
+      </p>
+      <div style="display:flex;gap:10px;flex-shrink:0;">
+        <button onclick="window._ubConsent.deny()" style="padding:9px 18px;border-radius:100px;border:1.5px solid #e8dcf5;background:#fff;font-size:13px;font-weight:600;color:#5a5654;cursor:pointer;">{% if request.locale.iso_code == 'en' %}Decline{% else %}Refuser{% endif %}</button>
+        <button onclick="window._ubConsent.grant()" style="padding:9px 20px;border-radius:100px;border:none;background:#6b2fa0;color:#fff;font-size:13px;font-weight:600;cursor:pointer;">{% if request.locale.iso_code == 'en' %}Accept{% else %}Accepter{% endif %}</button>
+      </div>
+    </div>
+    <script>
+      // Masquer la bannière si déjà décidé
+      (function(){
+        var b = document.getElementById('ub-consent-banner');
+        if(!b) return;
+        var s = localStorage.getItem('ub_consent_v1');
+        if(s === 'granted' || s === 'denied') b.style.display = 'none';
+        // Si granted : activer le vrai Pixel
+        if(s === 'granted' && typeof fbq !== 'undefined') fbq('consent','grant');
+      })();
+    </script>
+
+    <main>
+      {{ content_for_layout }}
+    </main>
+  </body>
+</html>
