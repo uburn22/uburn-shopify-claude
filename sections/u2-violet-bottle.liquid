@@ -1,0 +1,174 @@
+{%- comment -%}
+  UBurn V2 — The Violet Bottle merch teaser
+{%- endcomment -%}
+<style>
+  .u2-vbtl {
+    background: linear-gradient(160deg, var(--u2-plum-deep) 0%, var(--u2-iris-deep) 50%, var(--u2-plum-black) 100%);
+    color: var(--u2-bone);
+    padding: var(--u2-space-section) 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .u2-vbtl::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(40% 35% at 18% 22%, rgba(184,157,217,0.32), transparent 70%),
+      radial-gradient(45% 40% at 82% 78%, rgba(139,111,191,0.32), transparent 70%);
+    pointer-events: none;
+  }
+  .u2-vbtl__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  @media (min-width: 1024px) { .u2-vbtl__inner { grid-template-columns: 1fr 1fr; gap: 80px; } }
+
+  .u2-vbtl__media {
+    aspect-ratio: 1/1;
+    max-width: 460px;
+    margin: 0 auto;
+    width: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(184,157,217,0.3) 0%, transparent 65%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .u2-vbtl__svg {
+    width: 70%;
+    height: auto;
+    filter: drop-shadow(0 40px 80px rgba(26,15,46,0.55));
+  }
+
+  .u2-vbtl__copy .u2-section-eyebrow { color: var(--u2-lavender); }
+  .u2-vbtl__copy .u2-section-eyebrow::before { background: var(--u2-lavender); }
+  .u2-vbtl__title {
+    font-family: var(--u2-sans);
+    font-size: clamp(40px,7vw,72px);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--u2-bone);
+    margin: 12px 0 18px;
+  }
+  .u2-vbtl__title em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-lavender); }
+  .u2-vbtl__sub {
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(248,244,238,0.85);
+    max-width: 48ch;
+    margin: 0 0 28px;
+  }
+  .u2-vbtl__perks {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .u2-vbtl__perk {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(232,220,239,0.08);
+    border: 1px solid rgba(184,157,217,0.22);
+    border-radius: 14px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: var(--u2-bone);
+  }
+  .u2-vbtl__perk-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: rgba(184,157,217,0.25);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+  .u2-vbtl__perk strong { font-weight: 700; color: var(--u2-lavender); }
+  .u2-vbtl__scarcity {
+    margin-top: 18px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--u2-lavender);
+    opacity: 0.85;
+  }
+</style>
+<section class="u2-root u2-vbtl" aria-label="The Violet Bottle">
+  <div class="u2-vbtl__inner">
+    <div class="u2-vbtl__media u2-reveal">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', alt: 'UBurn Violet Bottle', class: 'u2-vbtl__svg' }}
+      {%- else -%}
+        <svg class="u2-vbtl__svg" viewBox="0 0 220 320" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="bottleG" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#E8DCEF"/>
+              <stop offset="35%" stop-color="#B89DD9"/>
+              <stop offset="70%" stop-color="#6B4E9E"/>
+              <stop offset="100%" stop-color="#2A1B3D"/>
+            </linearGradient>
+            <linearGradient id="bottleHighlight" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.35)"/>
+              <stop offset="40%" stop-color="rgba(255,255,255,0)"/>
+            </linearGradient>
+          </defs>
+          <!-- Cap -->
+          <rect x="80" y="18" width="60" height="28" rx="4" fill="#1A0F2E"/>
+          <rect x="86" y="46" width="48" height="12" rx="2" fill="#3D2659"/>
+          <!-- Neck + body -->
+          <path d="M90 58 L90 90 Q90 108 75 115 Q50 128 50 165 L50 270 Q50 300 80 300 L140 300 Q170 300 170 270 L170 165 Q170 128 145 115 Q130 108 130 90 L130 58 Z" fill="url(#bottleG)" stroke="rgba(26,15,46,0.4)" stroke-width="2"/>
+          <!-- Highlight -->
+          <path d="M65 130 L65 270 Q65 285 80 285 L100 285 L100 130 Q90 122 80 122 Q70 122 65 130 Z" fill="url(#bottleHighlight)" opacity="0.6"/>
+          <!-- UB monogram -->
+          <text x="110" y="225" text-anchor="middle" font-family="Helvetica Neue, Helvetica, Inter, system-ui, sans-serif" font-style="italic" font-weight="900" font-size="74" fill="rgba(248,244,238,0.95)" letter-spacing="-3">UB</text>
+          <!-- Capacity -->
+          <text x="110" y="275" text-anchor="middle" font-family="Helvetica Neue, Helvetica, sans-serif" font-weight="500" font-size="11" letter-spacing="3" fill="rgba(248,244,238,0.75)">500 ML</text>
+        </svg>
+      {%- endif -%}
+    </div>
+    <div class="u2-vbtl__copy u2-reveal delay-1">
+      <span class="u2-section-eyebrow">— the signature object</span>
+      <h2 class="u2-vbtl__title">The Violet <em>Bottle.</em></h2>
+      <p class="u2-vbtl__sub">Glass bottle. UB monogram. 500 ml. The vessel of the violet ritual. Shake it. Sip it. Carry it.</p>
+      <ul class="u2-vbtl__perks">
+        <li class="u2-vbtl__perk">
+          <span class="u2-vbtl__perk-icon">🎁</span>
+          <span><strong>Free</strong> with Subscribe &amp; Save (–10% + bottle included)</span>
+        </li>
+        <li class="u2-vbtl__perk">
+          <span class="u2-vbtl__perk-icon">🎁</span>
+          <span><strong>Free</strong> with Maximum Pack (90 days · best value)</span>
+        </li>
+        <li class="u2-vbtl__perk">
+          <span class="u2-vbtl__perk-icon">💎</span>
+          <span><strong>$29</strong> standalone · limited drops</span>
+        </li>
+      </ul>
+      {% render 'u2-cta-primary', text: 'claim yours', link: '/products/ube-poudre?variant=51289200034111#subscribe', on_dark: true %}
+      <p class="u2-vbtl__scarcity">only 500 bottles · first season</p>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Violet Bottle",
+  "tag": "section",
+  "class": "shopify-section--u2-vbtl",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Bottle photo (optional)" }
+  ],
+  "presets": [ { "name": "U2 Violet Bottle" } ]
+}
+{% endschema %}

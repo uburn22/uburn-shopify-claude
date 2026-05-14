@@ -221,7 +221,7 @@
     </nav>
 
     <div class="u2-header__actions">
-      <a class="u2-header__cta" href="/products/{{ section.settings.product_handle | default: 'ube-poudre' }}">order</a>
+      <a class="u2-header__cta" href="/products/{{ section.settings.product_handle | default: 'ube-poudre' }}">start the ritual</a>
       <a class="u2-header__icon-btn" href="/cart" aria-label="Cart">
         {% render 'u2-icon', name: 'cart', size: 20 %}
         {% if cart.item_count > 0 %}<span class="u2-header__cart-count">{{ cart.item_count }}</span>{% endif %}

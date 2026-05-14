@@ -1,0 +1,183 @@
+{%- comment -%}
+  UBurn V2 — Three Ways To Drink (Hot latte · Iced latte · With water)
+{%- endcomment -%}
+<style>
+  .u2-3ways { background: var(--u2-bone); padding: var(--u2-space-section) 20px; }
+  .u2-3ways__inner { max-width: 1280px; margin: 0 auto; }
+  .u2-3ways__head { text-align: center; margin-bottom: 48px; }
+  .u2-3ways__head h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(34px,5.5vw,52px);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    color: var(--u2-plum-black);
+    margin: 12px 0 12px;
+  }
+  .u2-3ways__head h2 em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-iris); }
+  .u2-3ways__head p { font-size: 15px; line-height: 1.55; color: #3A2E4A; max-width: 50ch; margin: 12px auto 0; }
+  .u2-3ways__grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+  @media (min-width: 768px) { .u2-3ways__grid { grid-template-columns: repeat(3,1fr); gap: 28px; } }
+  .u2-3ways__card {
+    background: white;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid rgba(107,78,158,0.08);
+    transition: transform 0.35s var(--u2-ease-smooth), box-shadow 0.35s var(--u2-ease-smooth);
+    display: flex;
+    flex-direction: column;
+  }
+  .u2-3ways__card:hover { transform: translateY(-6px); box-shadow: 0 24px 50px -22px rgba(58,31,89,0.22); }
+  .u2-3ways__media {
+    aspect-ratio: 4/3;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .u2-3ways__media--hot { background: linear-gradient(135deg, var(--u2-champagne) 0%, var(--u2-lavender) 60%, var(--u2-plum) 100%); }
+  .u2-3ways__media--iced { background: linear-gradient(160deg, var(--u2-lavender-soft) 0%, var(--u2-lavender) 50%, var(--u2-iris) 100%); }
+  .u2-3ways__media--water { background: linear-gradient(180deg, var(--u2-bone) 0%, var(--u2-lavender-soft) 50%, var(--u2-iris) 100%); }
+  .u2-3ways__svg { width: 56%; max-width: 220px; color: rgba(248,244,238,0.92); filter: drop-shadow(0 14px 26px rgba(26,15,46,0.25)); }
+  .u2-3ways__tag-img {
+    position: absolute;
+    bottom: 14px; left: 14px;
+    background: rgba(248,244,238,0.92);
+    backdrop-filter: blur(8px);
+    color: var(--u2-plum-black);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .u2-3ways__body { padding: 28px 26px; flex: 1; display: flex; flex-direction: column; gap: 12px; }
+  .u2-3ways__num {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 32px;
+    color: var(--u2-iris);
+    line-height: 1;
+  }
+  .u2-3ways__title {
+    font-family: var(--u2-sans);
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.025em;
+    margin: 0;
+  }
+  .u2-3ways__desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #3A2E4A;
+    margin: 0;
+  }
+  .u2-3ways__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+  }
+  .u2-3ways__chip {
+    background: var(--u2-lavender-soft);
+    color: var(--u2-iris-deep);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 5px 11px;
+    border-radius: 999px;
+  }
+</style>
+<section class="u2-root u2-3ways" aria-label="Three ways to drink">
+  <div class="u2-3ways__inner">
+    <div class="u2-3ways__head u2-reveal">
+      <span class="u2-section-eyebrow">— how you drink it</span>
+      <h2>Three ways. <em>One ritual.</em></h2>
+      <p>Hot, iced, or shaken with water. Your violet moment, your way.</p>
+    </div>
+    <div class="u2-3ways__grid">
+      <article class="u2-3ways__card u2-reveal delay-1">
+        <div class="u2-3ways__media u2-3ways__media--hot">
+          <svg class="u2-3ways__svg" viewBox="0 0 200 180" fill="none" aria-hidden="true">
+            <path d="M75 25 Q70 20 75 12 M95 25 Q90 20 95 12 M115 25 Q110 20 115 12" stroke="rgba(248,244,238,0.7)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M50 50 L150 50 L145 150 Q145 165 125 165 L75 165 Q55 165 55 150 Z" fill="rgba(248,244,238,0.95)" stroke="rgba(26,15,46,0.15)" stroke-width="2"/>
+            <path d="M150 75 Q175 80 175 110 Q175 140 150 145" fill="none" stroke="rgba(248,244,238,0.85)" stroke-width="5" stroke-linecap="round"/>
+            <ellipse cx="100" cy="60" rx="46" ry="8" fill="#8B6FBF"/>
+            <circle cx="88" cy="58" r="2.5" fill="rgba(248,244,238,0.6)"/>
+            <circle cx="108" cy="60" r="2" fill="rgba(248,244,238,0.5)"/>
+          </svg>
+          <span class="u2-3ways__tag-img">📍 hot latte · TBD</span>
+        </div>
+        <div class="u2-3ways__body">
+          <div class="u2-3ways__num">01</div>
+          <h3 class="u2-3ways__title">Hot latte</h3>
+          <p class="u2-3ways__desc">Frothy, comforting, vanilla–hazelnut. Your morning cozy moment under 30 calories.</p>
+          <div class="u2-3ways__tags">
+            <span class="u2-3ways__chip">cozy</span>
+            <span class="u2-3ways__chip">indulgent</span>
+            <span class="u2-3ways__chip">morning</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="u2-3ways__card u2-reveal delay-2">
+        <div class="u2-3ways__media u2-3ways__media--iced">
+          <svg class="u2-3ways__svg" viewBox="0 0 180 200" fill="none" aria-hidden="true">
+            <path d="M55 35 L125 35 L118 175 Q118 188 100 188 Q82 188 82 188 L60 188 Q62 188 62 175 Z" fill="rgba(248,244,238,0.92)" stroke="rgba(26,15,46,0.15)" stroke-width="2"/>
+            <path d="M62 80 L118 80 L114 175 Q114 184 100 184 L86 184 Q66 184 66 175 Z" fill="#8B6FBF"/>
+            <rect x="75" y="95" width="14" height="14" rx="2" fill="rgba(248,244,238,0.7)" transform="rotate(10 82 102)"/>
+            <rect x="92" y="115" width="12" height="12" rx="2" fill="rgba(248,244,238,0.65)" transform="rotate(-15 98 121)"/>
+            <rect x="80" y="135" width="11" height="11" rx="2" fill="rgba(248,244,238,0.6)" transform="rotate(8 85 140)"/>
+            <line x1="100" y1="20" x2="105" y2="100" stroke="rgba(248,244,238,0.85)" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+          <span class="u2-3ways__tag-img">📍 iced latte · TBD</span>
+        </div>
+        <div class="u2-3ways__body">
+          <div class="u2-3ways__num">02</div>
+          <h3 class="u2-3ways__title">Iced latte</h3>
+          <p class="u2-3ways__desc">The aesthetic afternoon ritual. Mix with cold milk or oat milk for a creamy violet treat.</p>
+          <div class="u2-3ways__tags">
+            <span class="u2-3ways__chip">aesthetic</span>
+            <span class="u2-3ways__chip">refreshing</span>
+            <span class="u2-3ways__chip">4 pm</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="u2-3ways__card u2-reveal delay-3">
+        <div class="u2-3ways__media u2-3ways__media--water">
+          <svg class="u2-3ways__svg" viewBox="0 0 200 240" fill="none" aria-hidden="true">
+            <rect x="80" y="18" width="40" height="20" rx="3" fill="rgba(26,15,46,0.85)"/>
+            <rect x="84" y="38" width="32" height="8" rx="2" fill="rgba(26,15,46,0.55)"/>
+            <path d="M88 46 L88 70 Q88 85 76 90 Q56 100 56 130 L56 210 Q56 230 80 230 L120 230 Q144 230 144 210 L144 130 Q144 100 124 90 Q112 85 112 70 L112 46 Z" fill="rgba(248,244,238,0.92)" stroke="rgba(26,15,46,0.18)" stroke-width="2"/>
+            <text x="100" y="170" text-anchor="middle" font-family="Helvetica" font-style="italic" font-weight="900" font-size="42" fill="#6B4E9E">UB</text>
+            <text x="100" y="218" text-anchor="middle" font-family="Helvetica" font-weight="500" font-size="9" letter-spacing="2" fill="rgba(26,15,46,0.5)">500 ML</text>
+          </svg>
+          <span class="u2-3ways__tag-img">📍 with water · TBD</span>
+        </div>
+        <div class="u2-3ways__body">
+          <div class="u2-3ways__num">03</div>
+          <h3 class="u2-3ways__title">With water</h3>
+          <p class="u2-3ways__desc">The functional version. Shake in the violet bottle. On-the-go daily satiety.</p>
+          <div class="u2-3ways__tags">
+            <span class="u2-3ways__chip">on-the-go</span>
+            <span class="u2-3ways__chip">functional</span>
+            <span class="u2-3ways__chip">shake</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Three Ways",
+  "tag": "section",
+  "class": "shopify-section--u2-3ways",
+  "settings": [],
+  "presets": [ { "name": "U2 Three Ways" } ]
+}
+{% endschema %}

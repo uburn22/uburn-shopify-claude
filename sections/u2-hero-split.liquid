@@ -1,0 +1,268 @@
+{%- comment -%}
+  UBurn V2 — Hero Double-Face Split (Indulgent / Functional)
+  Positioning: "The violet matcha. Functional like a shake. Indulgent like a latte."
+{%- endcomment -%}
+{%- liquid
+  assign hp = section.settings.product
+  if hp == blank
+    assign hp = all_products['ube-poudre']
+  endif
+  assign min_price = hp.price_min | default: hp.price
+  assign display_price = min_price | money_without_trailing_zeros
+  assign sub_price = min_price | times: 90 | divided_by: 100
+  assign sub_display = sub_price | money_without_trailing_zeros
+  assign variant_id = section.settings.variant_id | default: '51289200034111'
+  assign cta_link = hp.url
+  if variant_id != blank
+    assign cta_link = hp.url | append: '?variant=' | append: variant_id
+  endif
+-%}
+<style>
+  .u2-herospl { background: var(--u2-cream); padding: 0 0 56px; }
+  .u2-herospl__split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "left right";
+    gap: 0;
+    position: relative;
+    isolation: isolate;
+  }
+  .u2-herospl__side {
+    aspect-ratio: 4/5;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+  }
+  @media (min-width: 768px) {
+    .u2-herospl__side { aspect-ratio: 16/12; min-height: 520px; }
+  }
+  @media (min-width: 1024px) {
+    .u2-herospl__side { aspect-ratio: 16/14; min-height: 620px; }
+  }
+  .u2-herospl__left {
+    grid-area: left;
+    background: linear-gradient(160deg, var(--u2-champagne) 0%, var(--u2-lavender) 55%, var(--u2-plum) 100%);
+  }
+  .u2-herospl__right {
+    grid-area: right;
+    background: linear-gradient(200deg, var(--u2-lavender-soft) 0%, var(--u2-iris) 55%, var(--u2-plum-deep) 100%);
+  }
+  .u2-herospl__label {
+    position: absolute;
+    top: 24px;
+    font-family: var(--u2-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--u2-bone);
+    background: rgba(26, 15, 46, 0.4);
+    backdrop-filter: blur(6px);
+    padding: 6px 14px;
+    border-radius: 999px;
+    z-index: 3;
+  }
+  .u2-herospl__left .u2-herospl__label { left: 24px; }
+  .u2-herospl__right .u2-herospl__label { right: 24px; }
+  .u2-herospl__art {
+    width: 60%;
+    max-width: 320px;
+    aspect-ratio: 4/5;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 30px 60px rgba(26, 15, 46, 0.35));
+  }
+  .u2-herospl__or {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    background: var(--u2-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 26px;
+    color: var(--u2-iris);
+    box-shadow: 0 18px 40px -10px rgba(26, 15, 46, 0.4);
+  }
+  @media (min-width: 1024px) {
+    .u2-herospl__or { width: 120px; height: 120px; font-size: 36px; }
+  }
+  .u2-herospl__tag {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(248, 244, 238, 0.92);
+    backdrop-filter: blur(10px);
+    color: var(--u2-plum-black);
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    z-index: 5;
+    white-space: nowrap;
+  }
+
+  /* Copy block */
+  .u2-herospl__copy {
+    max-width: 1080px;
+    margin: 48px auto 0;
+    padding: 0 20px;
+    text-align: center;
+  }
+  .u2-herospl__copy h1 {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(34px, 6vw, 60px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--u2-plum-black);
+    margin: 16px 0 16px;
+  }
+  .u2-herospl__copy h1 strong {
+    font-family: var(--u2-sans);
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+  .u2-herospl__copy p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #3A2E4A;
+    max-width: 60ch;
+    margin: 0 auto 14px;
+  }
+  .u2-herospl__priceline {
+    font-size: 14px;
+    color: var(--u2-plum);
+    margin: 6px 0 18px;
+  }
+  .u2-herospl__priceline strong { color: var(--u2-plum-black); font-size: 17px; font-weight: 700; }
+  .u2-herospl__trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  /* SVG placeholders */
+  .u2-svg-mug, .u2-svg-bottle {
+    width: 100%; height: 100%;
+    color: rgba(248, 244, 238, 0.92);
+  }
+</style>
+
+<section class="u2-root u2-herospl" aria-label="Hero — UBurn the violet matcha">
+  <div class="u2-herospl__split" data-u2-sticky-trigger>
+    <div class="u2-herospl__side u2-herospl__left u2-reveal">
+      <span class="u2-herospl__label">indulgent</span>
+      <div class="u2-herospl__art">
+        {%- if section.settings.image_left != blank -%}
+          {{ section.settings.image_left | image_url: width: 800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: 'Hot violet latte', width: section.settings.image_left.width, height: section.settings.image_left.height }}
+        {%- else -%}
+          <svg class="u2-svg-mug" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="mugGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(248,244,238,0.95)"/>
+                <stop offset="100%" stop-color="rgba(232,220,239,0.85)"/>
+              </linearGradient>
+              <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#8B6FBF"/>
+                <stop offset="100%" stop-color="#5A3D80"/>
+              </linearGradient>
+            </defs>
+            <!-- Steam -->
+            <path d="M80 30 Q70 20 80 10 M100 30 Q90 20 100 10 M120 30 Q110 20 120 10" stroke="rgba(248,244,238,0.6)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <!-- Mug body -->
+            <path d="M50 60 L150 60 L145 200 Q145 220 120 220 L80 220 Q55 220 55 200 Z" fill="url(#mugGrad)" stroke="rgba(26,15,46,0.15)" stroke-width="2"/>
+            <!-- Handle -->
+            <path d="M150 90 Q180 95 180 130 Q180 165 150 170" fill="none" stroke="rgba(248,244,238,0.85)" stroke-width="6" stroke-linecap="round"/>
+            <!-- Liquid surface -->
+            <ellipse cx="100" cy="75" rx="48" ry="9" fill="url(#liquidGrad)"/>
+            <!-- Foam dots -->
+            <circle cx="86" cy="72" r="3" fill="rgba(248,244,238,0.6)"/>
+            <circle cx="106" cy="76" r="2" fill="rgba(248,244,238,0.5)"/>
+            <circle cx="114" cy="71" r="2.5" fill="rgba(248,244,238,0.55)"/>
+          </svg>
+        {%- endif -%}
+      </div>
+      <span class="u2-herospl__tag">hot latte · vanilla–hazelnut</span>
+    </div>
+
+    <div class="u2-herospl__or" aria-hidden="true"><em>or</em></div>
+
+    <div class="u2-herospl__side u2-herospl__right u2-reveal delay-1">
+      <span class="u2-herospl__label">functional</span>
+      <div class="u2-herospl__art">
+        {%- if section.settings.image_right != blank -%}
+          {{ section.settings.image_right | image_url: width: 800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: 'Violet shake in UB bottle', width: section.settings.image_right.width, height: section.settings.image_right.height }}
+        {%- else -%}
+          <svg class="u2-svg-bottle" viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="btlGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="rgba(248,244,238,0.95)"/>
+                <stop offset="40%" stop-color="rgba(184,157,217,0.75)"/>
+                <stop offset="100%" stop-color="rgba(107,78,158,0.85)"/>
+              </linearGradient>
+            </defs>
+            <!-- Bottle cap -->
+            <rect x="78" y="20" width="44" height="22" rx="3" fill="rgba(26,15,46,0.85)"/>
+            <rect x="82" y="42" width="36" height="10" rx="2" fill="rgba(26,15,46,0.55)"/>
+            <!-- Bottle neck -->
+            <path d="M88 52 L88 80 Q88 95 75 100 L70 105 Q50 115 50 145 L50 240 Q50 265 75 265 L125 265 Q150 265 150 240 L150 145 Q150 115 130 105 L125 100 Q112 95 112 80 L112 52 Z" fill="url(#btlGrad)" stroke="rgba(26,15,46,0.2)" stroke-width="2"/>
+            <!-- UB monogram -->
+            <text x="100" y="195" text-anchor="middle" font-family="Helvetica" font-style="italic" font-weight="900" font-size="50" fill="rgba(248,244,238,0.95)">UB</text>
+            <!-- Capacity -->
+            <text x="100" y="245" text-anchor="middle" font-family="Helvetica" font-weight="500" font-size="10" letter-spacing="2" fill="rgba(248,244,238,0.7)">500 ML</text>
+          </svg>
+        {%- endif -%}
+      </div>
+      <span class="u2-herospl__tag">with water · on-the-go</span>
+    </div>
+  </div>
+
+  <div class="u2-herospl__copy">
+    <span class="u2-section-eyebrow" style="justify-content:center;">est. 2024 · the violet matcha</span>
+    <h1><strong>Functional</strong> like a shake. <em>Indulgent</em> like a latte.</h1>
+    <p>The violet matcha. Plant-based satiety. 30 calories. Mix with water, oat milk, or hot frothed milk — your moment, your way.</p>
+    <p class="u2-herospl__priceline">from <strong>{{ display_price }}</strong> · {{ sub_display }}/mo with subscribe &amp; save · free us shipping</p>
+    {% render 'u2-cta-primary', text: 'start the ritual', link: cta_link %}
+    <div class="u2-herospl__trust">
+      {% render 'u2-trust-pill', icon: 'check', text: 'EFSA-backed' %}
+      {% render 'u2-trust-pill', icon: 'leaf', text: 'Caffeine-free' %}
+      {% render 'u2-trust-pill', icon: 'flask', text: 'Third-party lab tested' %}
+      {% render 'u2-trust-pill', icon: 'globe', text: 'Crafted in France' %}
+    </div>
+  </div>
+</section>
+
+{% render 'u2-sticky-atc', product: hp, cta_link: cta_link, cta_text: 'start the ritual' %}
+
+{% schema %}
+{
+  "name": "U2 Hero Split",
+  "tag": "section",
+  "class": "shopify-section--u2-herospl",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "variant_id", "label": "Variant ID", "default": "51289200034111" },
+    { "type": "image_picker", "id": "image_left", "label": "Indulgent (hot mug)" },
+    { "type": "image_picker", "id": "image_right", "label": "Functional (shake bottle)" }
+  ],
+  "presets": [ { "name": "U2 Hero Split" } ]
+}
+{% endschema %}
