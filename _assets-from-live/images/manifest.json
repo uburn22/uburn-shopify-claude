@@ -1,0 +1,767 @@
+{
+  "generated_at": "2026-05-14",
+  "extracted_from_theme": "185967575359 (US-OPTIMIZATION-DRAFT-2026-05-09) LIVE — READ ONLY",
+  "sources": {
+    "theme": "theme /assets/ folder",
+    "cdn": "Shopify Files CDN referenced in section liquid"
+  },
+  "image_count_total": 66,
+  "image_size_mb_total": 72.99,
+  "by_category": {
+    "brand": [
+      "logo-uburn-violet.png"
+    ],
+    "product": [
+      "product-pack-listing.jpg",
+      "product-scoop.png",
+      "product-quality-control.jpg",
+      "product-page-shot-7.jpg",
+      "product-page-shot-4.jpg",
+      "product-page-shot-3.jpg",
+      "product-page-shot-2.jpg"
+    ],
+    "hero": [
+      "hero-product-focus-1.jpg",
+      "hero-product-focus-2.jpg",
+      "hero-background-fin.jpg",
+      "hero-lifestyle-laptop-glass.jpg",
+      "hero-drink-isolated.jpg",
+      "hero-latte-01.jpg",
+      "hero-latte-02.jpg",
+      "hero-latte-mobile-02.jpg",
+      "hero-latte-mobile-03.jpg",
+      "hero-latte-mobile-04.jpg"
+    ],
+    "ingredient": [
+      "ingredient-acacia.jpg",
+      "ingredient-coconut-mct.jpg",
+      "ingredient-purple-ginger.jpg",
+      "ingredient-konjac-glucomannan.jpg",
+      "ingredient-l-carnitine.jpg",
+      "ingredient-ube-purple-yam.jpg"
+    ],
+    "lifestyle": [
+      "atelier-france-manufacturing.jpg",
+      "lifestyle-brooklyn.jpg"
+    ],
+    "ritual": [
+      "ritual-step-1-pour.jpg",
+      "ritual-step-2-mix.jpg",
+      "ritual-step-3-sip.jpg",
+      "ritual-v2-step-1-melangez.jpg",
+      "ritual-v2-step-2-buvez.jpg"
+    ],
+    "testimonials": [
+      "reviewer-ashley.jpg",
+      "reviewer-jennifer.jpg",
+      "reviewer-rachel.jpg",
+      "reviewer-brooklyn.jpg",
+      "reviewer-la.jpg"
+    ],
+    "origin": [
+      "origin-story-01.jpg",
+      "origin-moodboard-02.png",
+      "origin-moodboard-03.png",
+      "origin-moodboard-04.png",
+      "origin-moodboard-01.jpg",
+      "plantation-ube-png.png",
+      "plantation-ube-jpg.jpg",
+      "plantation-field-wide.jpg",
+      "field-wide.jpg",
+      "mission-desktop.jpg",
+      "mission-mobile.jpg",
+      "ingredient-banner-desktop.png"
+    ],
+    "press": [
+      "press-brut.png",
+      "press-elle.svg",
+      "press-vogue.png",
+      "press-tf1.png",
+      "press-femme-actuelle.png"
+    ],
+    "trust-icons": [
+      "icon-world.svg",
+      "icon-fast-shipping.svg",
+      "icon-secure-payment.svg",
+      "icon-customer-service.svg"
+    ],
+    "founder-archive": [
+      "founder-mariana-portrait.jpg",
+      "expert-dr-claire-dubois-ai.png",
+      "ai-generated-portrait-02.png"
+    ],
+    "before-after": [
+      "after-calm.jpg",
+      "before-stress.jpg"
+    ],
+    "extras": [
+      "placeholder-blank.png",
+      "uncategorized-hash.jpg",
+      "whatsapp-2026-04-17-1246.jpg",
+      "whatsapp-2026-04-17-1303.jpg"
+    ]
+  },
+  "missing": [],
+  "manifest": [
+    {
+      "category": "brand",
+      "renamed": "logo-uburn-violet.png",
+      "label": "UBurn wordmark logo (plum violet, italic bold)",
+      "source_file": "LOGO_Violet.png",
+      "source": "cdn",
+      "width": 5911,
+      "height": 1681,
+      "size_kb": 140.9
+    },
+    {
+      "category": "product",
+      "renamed": "product-pack-listing.jpg",
+      "label": "UBurn pack ecom listing primary",
+      "source_file": "Uburn_Listing_ecom_1.jpg",
+      "source": "cdn",
+      "width": 2000,
+      "height": 2500,
+      "size_kb": 262.6
+    },
+    {
+      "category": "product",
+      "renamed": "product-scoop.png",
+      "label": "UBurn measuring scoop",
+      "source_file": "Uburn_Scoop.png",
+      "source": "cdn",
+      "width": 1080,
+      "height": 1350,
+      "size_kb": 675.8
+    },
+    {
+      "category": "product",
+      "renamed": "product-quality-control.jpg",
+      "label": "Quality control still life",
+      "source_file": "03_CONTROLE.jpg",
+      "source": "cdn",
+      "width": 1024,
+      "height": 1024,
+      "size_kb": 153.2
+    },
+    {
+      "category": "product",
+      "renamed": "product-page-shot-7.jpg",
+      "label": "Product page photo #7",
+      "source_file": "PRODUCTPAGE_0000_7.jpg",
+      "source": "cdn",
+      "width": 2400,
+      "height": 3000,
+      "size_kb": 455.9
+    },
+    {
+      "category": "product",
+      "renamed": "product-page-shot-4.jpg",
+      "label": "Product page photo #4",
+      "source_file": "PRODUCTPAGE_0003_4.jpg",
+      "source": "cdn",
+      "width": 2400,
+      "height": 3000,
+      "size_kb": 1011.6
+    },
+    {
+      "category": "product",
+      "renamed": "product-page-shot-3.jpg",
+      "label": "Product page photo #3",
+      "source_file": "PRODUCTPAGE_0004_3.jpg",
+      "source": "cdn",
+      "width": 2400,
+      "height": 3000,
+      "size_kb": 152.6
+    },
+    {
+      "category": "product",
+      "renamed": "product-page-shot-2.jpg",
+      "label": "Product page photo #2",
+      "source_file": "PRODUCT_PAGE_0005_2_1.jpg",
+      "source": "cdn",
+      "width": 2400,
+      "height": 3000,
+      "size_kb": 391.2
+    },
+    {
+      "category": "hero",
+      "renamed": "hero-product-focus-1.jpg",
+      "label": "Hero focus product (woman holding glass) — current live hero",
+      "source_file": "focus_product_1_3dab8125-eab7-4b9d-a33f-e28cdd57aa67.jpg",
+      "source": "cdn",
+      "width": 736,
+      "height": 890,
+      "size_kb": 91.6
+    },
+    {
+      "category": "hero",
+      "renamed": "hero-product-focus-2.jpg",
+      "label": "Hero focus product variation #2",
+      "source_file": "focus_product_2.jpg",
+      "source": "cdn",
+      "width": 1600,
+      "height": 1600,
+      "size_kb": 161.5
+    },
+    {
+      "category": "hero",
+      "renamed": "hero-background-fin.jpg",
+      "label": "Background hero ambient",
+      "source_file": "FOND_FIN.jpg",
+      "source": "cdn",
+      "width": 3200,
+      "height": 1600,
+      "size_kb": 851.0
+    },
+    {
+      "category": "hero",
+      "renamed": "hero-lifestyle-laptop-glass.jpg",
+      "label": "Woman with glass + laptop (4PM ritual moment)",
+      "source_file": "uburn-hero-product.jpg",
+      "source": "theme",
+      "width": 1600,
+      "height": 1600,
+      "size_kb": 290.1
+    },
+    {
+      "category": "hero",
+      "renamed": "hero-drink-isolated.jpg",
+      "label": "Drink isolated hero",
+      "source_file": "uburn_hero_drink.jpg",
+      "source": "theme",
+      "width": 1600,
+      "height": 1600,
+      "size_kb": 281.9
+    },
+    {
+      "category": "hero",
+      "renamed": "hero-latte-01.jpg",
+      "label": "Latte hero composition #1",
+      "source_file": "latte_hero_01.jpg",
+      "source": "theme",
+      "width": 2400,
+      "height": 1800,
+      "size_kb": 2285.6
+    },
+    {
+      "category": "hero",
+      "renamed": "hero-latte-02.jpg",
+      "label": "Latte hero composition #2",
+      "source_file": "latte_hero_02.jpg",
+      "source": "theme",
+      "width": 2400,
+      "height": 1800,
+      "size_kb": 1997.2
+    },
+    {
+      "category": "hero",
+      "renamed": "hero-latte-mobile-02.jpg",
+      "label": "Latte hero mobile #2",
+      "source_file": "latte_hero_m02.jpg",
+      "source": "theme",
+      "width": 1500,
+      "height": 1500,
+      "size_kb": 790.1
+    },
+    {
+      "category": "hero",
+      "renamed": "hero-latte-mobile-03.jpg",
+      "label": "Latte hero mobile #3",
+      "source_file": "latte_hero_m03.jpg",
+      "source": "theme",
+      "width": 1500,
+      "height": 1500,
+      "size_kb": 981.9
+    },
+    {
+      "category": "hero",
+      "renamed": "hero-latte-mobile-04.jpg",
+      "label": "Latte hero mobile #4",
+      "source_file": "latte_hero_m04.jpg",
+      "source": "theme",
+      "width": 1500,
+      "height": 1500,
+      "size_kb": 994.3
+    },
+    {
+      "category": "ingredient",
+      "renamed": "ingredient-acacia.jpg",
+      "label": "Acacia fiber ingredient close-up",
+      "source_file": "Ingredient_Acacia.jpg",
+      "source": "cdn",
+      "width": 2400,
+      "height": 1800,
+      "size_kb": 995.7
+    },
+    {
+      "category": "ingredient",
+      "renamed": "ingredient-coconut-mct.jpg",
+      "label": "Coconut MCT ingredient close-up",
+      "source_file": "Ingredient_Coco.jpg",
+      "source": "cdn",
+      "width": 2400,
+      "height": 1800,
+      "size_kb": 681.9
+    },
+    {
+      "category": "ingredient",
+      "renamed": "ingredient-purple-ginger.jpg",
+      "label": "Purple ginger ingredient close-up",
+      "source_file": "Ingredient_Gingembre.jpg",
+      "source": "cdn",
+      "width": 2400,
+      "height": 1800,
+      "size_kb": 775.0
+    },
+    {
+      "category": "ingredient",
+      "renamed": "ingredient-konjac-glucomannan.jpg",
+      "label": "Konjac glucomannan ingredient close-up (HERO)",
+      "source_file": "Ingredient_Glucomannane.jpg",
+      "source": "cdn",
+      "width": 2400,
+      "height": 1800,
+      "size_kb": 755.2
+    },
+    {
+      "category": "ingredient",
+      "renamed": "ingredient-l-carnitine.jpg",
+      "label": "L-carnitine ingredient close-up",
+      "source_file": "Ingredient_L-carnitine_tartrate.jpg",
+      "source": "cdn",
+      "width": 2400,
+      "height": 1800,
+      "size_kb": 730.0
+    },
+    {
+      "category": "ingredient",
+      "renamed": "ingredient-ube-purple-yam.jpg",
+      "label": "Ube purple yam ingredient close-up",
+      "source_file": "Ingredient_Ube.jpg",
+      "source": "cdn",
+      "width": 2400,
+      "height": 1800,
+      "size_kb": 965.4
+    },
+    {
+      "category": "lifestyle",
+      "renamed": "atelier-france-manufacturing.jpg",
+      "label": "Atelier France manufacturing — crafted in France",
+      "source_file": "uburn-lab-manufacturing.jpg",
+      "source": "theme",
+      "width": 1600,
+      "height": 1194,
+      "size_kb": 315.6
+    },
+    {
+      "category": "lifestyle",
+      "renamed": "lifestyle-brooklyn.jpg",
+      "label": "Lifestyle Brooklyn ambient",
+      "source_file": "uburn-lifestyle-brooklyn.jpg",
+      "source": "theme",
+      "width": 1194,
+      "height": 1600,
+      "size_kb": 320.4
+    },
+    {
+      "category": "ritual",
+      "renamed": "ritual-step-1-pour.jpg",
+      "label": "Ritual step 1 — pour the powder",
+      "source_file": "etape_1.jpg",
+      "source": "theme",
+      "width": 1874,
+      "height": 1874,
+      "size_kb": 3003.9
+    },
+    {
+      "category": "ritual",
+      "renamed": "ritual-step-2-mix.jpg",
+      "label": "Ritual step 2 — mix the drink",
+      "source_file": "etape_2.jpg",
+      "source": "theme",
+      "width": 1876,
+      "height": 1876,
+      "size_kb": 2681.6
+    },
+    {
+      "category": "ritual",
+      "renamed": "ritual-step-3-sip.jpg",
+      "label": "Ritual step 3 — sip & experience",
+      "source_file": "etape_3.jpg",
+      "source": "theme",
+      "width": 1872,
+      "height": 1872,
+      "size_kb": 2923.1
+    },
+    {
+      "category": "ritual",
+      "renamed": "ritual-v2-step-1-melangez.jpg",
+      "label": "Ritual v2 step 1 — melangez (mix) — refreshed visual",
+      "source_file": "Imnt_site_step01_melangez_v2_1777326239.jpg",
+      "source": "cdn",
+      "width": 1024,
+      "height": 1024,
+      "size_kb": 149.9
+    },
+    {
+      "category": "ritual",
+      "renamed": "ritual-v2-step-2-buvez.jpg",
+      "label": "Ritual v2 step 2 — buvez (drink) — refreshed visual",
+      "source_file": "Imnt_site_step02_buvez_v2_1777326260.jpg",
+      "source": "cdn",
+      "width": 1024,
+      "height": 1024,
+      "size_kb": 128.9
+    },
+    {
+      "category": "testimonials",
+      "renamed": "reviewer-ashley.jpg",
+      "label": "Reviewer Ashley K. — Phoenix AZ (Week 1/4 testimonial)",
+      "source_file": "uburn-reviewer-ashley.jpg",
+      "source": "theme",
+      "width": 1200,
+      "height": 1200,
+      "size_kb": 227.7
+    },
+    {
+      "category": "testimonials",
+      "renamed": "reviewer-jennifer.jpg",
+      "label": "Reviewer Jennifer M. — Miami FL",
+      "source_file": "uburn-reviewer-jennifer.jpg",
+      "source": "theme",
+      "width": 1200,
+      "height": 1200,
+      "size_kb": 328.1
+    },
+    {
+      "category": "testimonials",
+      "renamed": "reviewer-rachel.jpg",
+      "label": "Reviewer Rachel R. — Denver CO",
+      "source_file": "uburn-reviewer-rachel.jpg",
+      "source": "theme",
+      "width": 1200,
+      "height": 1200,
+      "size_kb": 313.5
+    },
+    {
+      "category": "testimonials",
+      "renamed": "reviewer-brooklyn.jpg",
+      "label": "Reviewer Brooklyn (location-tagged)",
+      "source_file": "uburn-reviewer-brooklyn.jpg",
+      "source": "theme",
+      "width": 1600,
+      "height": 1600,
+      "size_kb": 684.8
+    },
+    {
+      "category": "testimonials",
+      "renamed": "reviewer-la.jpg",
+      "label": "Reviewer LA (location-tagged)",
+      "source_file": "uburn-reviewer-la.jpg",
+      "source": "theme",
+      "width": 1600,
+      "height": 1600,
+      "size_kb": 722.8
+    },
+    {
+      "category": "origin",
+      "renamed": "origin-story-01.jpg",
+      "label": "Origin story — ube from Southeast Asia",
+      "source_file": "Histoire_01.jpg",
+      "source": "theme",
+      "width": 2400,
+      "height": 1800,
+      "size_kb": 2285.6
+    },
+    {
+      "category": "origin",
+      "renamed": "origin-moodboard-02.png",
+      "label": "Origin moodboard #2",
+      "source_file": "Histoire_Moodboard_02.png",
+      "source": "theme",
+      "width": 1280,
+      "height": 10901,
+      "size_kb": 4031.0
+    },
+    {
+      "category": "origin",
+      "renamed": "origin-moodboard-03.png",
+      "label": "Origin moodboard #3",
+      "source_file": "Histoire_Moodboard_03.png",
+      "source": "theme",
+      "width": 1280,
+      "height": 10901,
+      "size_kb": 4031.0
+    },
+    {
+      "category": "origin",
+      "renamed": "origin-moodboard-04.png",
+      "label": "Origin moodboard #4",
+      "source_file": "Histoire_Moodboard_04.png",
+      "source": "theme",
+      "width": 1280,
+      "height": 10901,
+      "size_kb": 4031.0
+    },
+    {
+      "category": "origin",
+      "renamed": "origin-moodboard-01.jpg",
+      "label": "Origin moodboard #1 (CDN version)",
+      "source_file": "Histoire_Moodboard_01.jpg",
+      "source": "cdn",
+      "width": 1500,
+      "height": 1500,
+      "size_kb": 349.8
+    },
+    {
+      "category": "origin",
+      "renamed": "plantation-ube-png.png",
+      "label": "Ube plantation (PNG version, large)",
+      "source_file": "PLANTATION_UBE.png",
+      "source": "theme",
+      "width": 1280,
+      "height": 10901,
+      "size_kb": 4031.0
+    },
+    {
+      "category": "origin",
+      "renamed": "plantation-ube-jpg.jpg",
+      "label": "Ube plantation (JPG version, CDN)",
+      "source_file": "PLANTATION_UBE.jpg",
+      "source": "cdn",
+      "width": 3200,
+      "height": 1600,
+      "size_kb": 1883.6
+    },
+    {
+      "category": "origin",
+      "renamed": "plantation-field-wide.jpg",
+      "label": "Plantation field wide shot",
+      "source_file": "plantation.jpg",
+      "source": "theme",
+      "width": 3200,
+      "height": 1600,
+      "size_kb": 3359.5
+    },
+    {
+      "category": "origin",
+      "renamed": "field-wide.jpg",
+      "label": "Field wide shot",
+      "source_file": "field.jpg",
+      "source": "theme",
+      "width": 3200,
+      "height": 1600,
+      "size_kb": 2253.4
+    },
+    {
+      "category": "origin",
+      "renamed": "mission-desktop.jpg",
+      "label": "Mission section desktop",
+      "source_file": "Mission.jpg",
+      "source": "theme",
+      "width": 1300,
+      "height": 1500,
+      "size_kb": 1855.0
+    },
+    {
+      "category": "origin",
+      "renamed": "mission-mobile.jpg",
+      "label": "Mission section mobile",
+      "source_file": "Mission_M.jpg",
+      "source": "theme",
+      "width": 1300,
+      "height": 1500,
+      "size_kb": 1855.0
+    },
+    {
+      "category": "origin",
+      "renamed": "ingredient-banner-desktop.png",
+      "label": "Ingredient banner desktop wide",
+      "source_file": "Ingredient_banner_Desktop.png",
+      "source": "theme",
+      "width": 1280,
+      "height": 10901,
+      "size_kb": 4031.0
+    },
+    {
+      "category": "press",
+      "renamed": "press-brut.png",
+      "label": "Brut media logo (archive)",
+      "source_file": "Brut_logo_svg.png",
+      "source": "cdn",
+      "width": 200,
+      "height": 72,
+      "size_kb": 4.0
+    },
+    {
+      "category": "press",
+      "renamed": "press-elle.svg",
+      "label": "ELLE magazine logo (archive)",
+      "source_file": "ELLE_Magazine_Logo.svg",
+      "source": "cdn",
+      "width": null,
+      "height": null,
+      "size_kb": 1.9
+    },
+    {
+      "category": "press",
+      "renamed": "press-vogue.png",
+      "label": "VOGUE logo (archive)",
+      "source_file": "VOGUE_revista_-_logo.png",
+      "source": "cdn",
+      "width": 240,
+      "height": 62,
+      "size_kb": 6.3
+    },
+    {
+      "category": "press",
+      "renamed": "press-tf1.png",
+      "label": "TF1 logo (archive)",
+      "source_file": "TF1_1989-1990.png",
+      "source": "cdn",
+      "width": 200,
+      "height": 79,
+      "size_kb": 3.1
+    },
+    {
+      "category": "press",
+      "renamed": "press-femme-actuelle.png",
+      "label": "Femme Actuelle logo (archive)",
+      "source_file": "logo-femmeactuelle-copie_cb5c498d-5470-4a4d-83fc-7b16c264a030.png",
+      "source": "cdn",
+      "width": 200,
+      "height": 113,
+      "size_kb": 10.1
+    },
+    {
+      "category": "trust-icons",
+      "renamed": "icon-world.svg",
+      "label": "Pictogram: world (research-backed FDA)",
+      "source_file": "Picto_World.svg",
+      "source": "cdn",
+      "width": null,
+      "height": null,
+      "size_kb": 3.5
+    },
+    {
+      "category": "trust-icons",
+      "renamed": "icon-fast-shipping.svg",
+      "label": "Pictogram: free shipping",
+      "source_file": "Picto_Fast_shipping.svg",
+      "source": "cdn",
+      "width": null,
+      "height": null,
+      "size_kb": 4.8
+    },
+    {
+      "category": "trust-icons",
+      "renamed": "icon-secure-payment.svg",
+      "label": "Pictogram: secure checkout",
+      "source_file": "Picto_secure_payment.svg",
+      "source": "cdn",
+      "width": null,
+      "height": null,
+      "size_kb": 2.5
+    },
+    {
+      "category": "trust-icons",
+      "renamed": "icon-customer-service.svg",
+      "label": "Pictogram: customer service / cancel anytime",
+      "source_file": "Picto_customer.svg",
+      "source": "cdn",
+      "width": null,
+      "height": null,
+      "size_kb": 4.5
+    },
+    {
+      "category": "founder-archive",
+      "renamed": "founder-mariana-portrait.jpg",
+      "label": "Founder portrait Mariana — NOT for V2 use, archive only",
+      "source_file": "uburn-founder-mariana.jpg",
+      "source": "theme",
+      "width": 1194,
+      "height": 1600,
+      "size_kb": 340.8
+    },
+    {
+      "category": "founder-archive",
+      "renamed": "expert-dr-claire-dubois-ai.png",
+      "label": "Dr Claire Dubois portrait (AI-generated via Gemini) — fictional nutritionist",
+      "source_file": "Gemini_Generated_Image_gjm16fgjm16fgjm1.png",
+      "source": "cdn",
+      "width": 2808,
+      "height": 1536,
+      "size_kb": 5865.9
+    },
+    {
+      "category": "founder-archive",
+      "renamed": "ai-generated-portrait-02.png",
+      "label": "Second AI-generated portrait — unidentified use",
+      "source_file": "Gemini_Generated_Image_j56t4sj56t4sj56t.png",
+      "source": "cdn",
+      "width": 1824,
+      "height": 2336,
+      "size_kb": 4820.2
+    },
+    {
+      "category": "before-after",
+      "renamed": "after-calm.jpg",
+      "label": "After: calm afternoon (Week 4)",
+      "source_file": "uburn-after-calm.jpg",
+      "source": "theme",
+      "width": 1400,
+      "height": 1400,
+      "size_kb": 319.0
+    },
+    {
+      "category": "before-after",
+      "renamed": "before-stress.jpg",
+      "label": "Before: stressed afternoon",
+      "source_file": "uburn-before-stress.jpg",
+      "source": "theme",
+      "width": 1400,
+      "height": 1400,
+      "size_kb": 314.9
+    },
+    {
+      "category": "extras",
+      "renamed": "placeholder-blank.png",
+      "label": "Blank placeholder pixel",
+      "source_file": "0x0.png",
+      "source": "cdn",
+      "width": 300,
+      "height": 86,
+      "size_kb": 6.0
+    },
+    {
+      "category": "extras",
+      "renamed": "uncategorized-hash.jpg",
+      "label": "Hash-named image, source unclear",
+      "source_file": "f9e98b558abe22aa8524279d4bcc494e.jpg",
+      "source": "cdn",
+      "width": 1200,
+      "height": 1200,
+      "size_kb": 88.3
+    },
+    {
+      "category": "extras",
+      "renamed": "whatsapp-2026-04-17-1246.jpg",
+      "label": "WhatsApp screenshot 2026-04-17 — likely UGC testimonial",
+      "source_file": "WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg",
+      "source": "cdn",
+      "width": 1600,
+      "height": 1087,
+      "size_kb": 166.3
+    },
+    {
+      "category": "extras",
+      "renamed": "whatsapp-2026-04-17-1303.jpg",
+      "label": "WhatsApp screenshot 2026-04-17 — likely UGC testimonial",
+      "source_file": "WhatsApp_Image_2026-04-17_at_13.03.02.jpg",
+      "source": "cdn",
+      "width": 904,
+      "height": 1226,
+      "size_kb": 112.1
+    }
+  ]
+}
