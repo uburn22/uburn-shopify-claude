@@ -1,0 +1,17 @@
+{%- comment -%}
+  UBurn V2 sticky ATC (renders bottom-fixed CTA, JS toggles is-visible on scroll past trigger)
+  Usage: {% render 'u2-sticky-atc', product: product, cta_text: 'start my pack' %}
+{%- endcomment -%}
+{%- liquid
+  if product == blank
+    assign product = all_products['ube-poudre']
+  endif
+  assign min_price = product.price_min | default: product.price
+  assign display_price = min_price | money_without_trailing_zeros
+  assign cta_text = cta_text | default: 'start my pack'
+  assign cta_link = cta_link | default: product.url
+-%}
+<div class="u2-sticky-atc" data-u2-sticky>
+  <div class="u2-sticky-atc__label">UBurn · from {{ display_price }}</div>
+  <a class="u2-sticky-atc__cta" href="{{ cta_link }}">{{ cta_text }} →</a>
+</div>

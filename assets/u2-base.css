@@ -1,0 +1,129 @@
+/* ============================================================================
+   UBurn V2 — Design System Tokens
+   Source of truth for palette, typography, easing, spacing.
+   Loaded globally via layout/theme.liquid.
+   ============================================================================ */
+
+:root {
+  /* Palette — calibrated on UBurn packaging */
+  --u2-iris: #6B4E9E;
+  --u2-iris-bright: #8B6FBF;
+  --u2-iris-deep: #5A3D80;
+  --u2-lavender: #B89DD9;
+  --u2-lavender-soft: #E8DCEF;
+  --u2-plum: #3D2659;
+  --u2-plum-deep: #2A1B3D;
+  --u2-plum-black: #1A0F2E;
+  --u2-bone: #F8F4EE;
+  --u2-cream: #FAF6F0;
+  --u2-warm-white: #FDFAF5;
+  --u2-silver: #C0BCB6;
+  --u2-soft-black: #1A1A1A;
+
+  /* Typography */
+  --u2-serif: "Times New Roman", "GT Sectra", Georgia, serif;
+  --u2-sans: "Helvetica Neue", "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Easing */
+  --u2-ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --u2-ease-liquid: cubic-bezier(0.65, 0, 0.35, 1);
+  --u2-ease-snap: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Durations */
+  --u2-duration-fast: 300ms;
+  --u2-duration-medium: 400ms;
+  --u2-duration-slow: 700ms;
+  --u2-duration-hero: 1200ms;
+
+  /* Spacing scale */
+  --u2-space-xs: 8px;
+  --u2-space-sm: 12px;
+  --u2-space-md: 16px;
+  --u2-space-lg: 24px;
+  --u2-space-xl: 40px;
+  --u2-space-2xl: 60px;
+  --u2-space-3xl: 80px;
+  --u2-space-section: 70px;
+}
+
+@media (min-width: 768px) {
+  :root { --u2-space-section: 100px; }
+}
+
+/* ============================================================================
+   Body / globals (scope to .u2-root to avoid Dawn collision)
+   ============================================================================ */
+
+.u2-root,
+.u2-root * {
+  box-sizing: border-box;
+}
+
+.u2-root {
+  font-family: var(--u2-sans);
+  color: var(--u2-soft-black);
+  background: var(--u2-cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.55;
+}
+
+.u2-root img,
+.u2-root svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.u2-root a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.u2-root a:hover {
+  color: var(--u2-iris);
+}
+
+/* Container utility */
+.u2-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  .u2-container { padding: 0 32px; }
+}
+
+@media (min-width: 1024px) {
+  .u2-container { padding: 0 48px; }
+}
+
+/* Section spacing */
+.u2-section {
+  padding: var(--u2-space-section) 0;
+}
+
+/* Visually hidden (accessible) */
+.u2-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .u2-root *,
+  .u2-root *::before,
+  .u2-root *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

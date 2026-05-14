@@ -1,0 +1,45 @@
+{%- comment -%}
+  UBurn V2 — Announcement bar
+{%- endcomment -%}
+<style>
+  .u2-announce {
+    background: var(--u2-plum-black);
+    color: var(--u2-bone);
+    text-align: center;
+    padding: 10px 20px;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  .u2-announce a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+</style>
+<div class="u2-root u2-announce" role="region" aria-label="Announcement">
+  {{ section.settings.text }}
+</div>
+
+{% schema %}
+{
+  "name": "U2 Announcement bar",
+  "tag": "section",
+  "class": "shopify-section--u2-announce",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement text",
+      "default": "Free U.S. shipping on orders $40+ · Cancel anytime"
+    }
+  ],
+  "presets": [
+    { "name": "U2 Announcement bar" }
+  ]
+}
+{% endschema %}

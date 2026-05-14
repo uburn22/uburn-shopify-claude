@@ -1,0 +1,11 @@
+{%- comment -%}
+  UBurn V2 logo wordmark
+  Renders the "UBurn" italic bold typographic logo OR uploaded SVG/PNG if available
+  Usage: {% render 'u2-logo-wordmark', size: 24, color: 'plum-black' %}
+{%- endcomment -%}
+{%- liquid
+  assign size = size | default: 24
+  assign color = color | default: 'plum-black'
+  assign color_var = '--u2-' | append: color
+-%}
+<span class="u2-logo-wordmark" style="font-size:{{ size }}px;color:var({{ color_var }});">UBurn</span>

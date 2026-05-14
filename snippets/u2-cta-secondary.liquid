@@ -1,0 +1,8 @@
+{%- comment -%}
+  UBurn V2 CTA secondary (outline)
+  Usage: {% render 'u2-cta-secondary', text: 'learn more', link: '/pages/the-science' %}
+{%- endcomment -%}
+<a href="{{ link | default: '#' }}" class="u2-cta u2-cta--secondary" aria-label="{{ text | escape }}">
+  <span>{{ text }}</span>
+  <span class="u2-cta__arrow" aria-hidden="true">→</span>
+</a>
