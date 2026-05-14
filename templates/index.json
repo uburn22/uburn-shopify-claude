@@ -40,6 +40,19 @@
         "cta_link": "/products/ube-poudre?variant=51289200034111"
       }
     },
+    "trust_band": {
+      "type": "trust-band-v2",
+      "blocks": {
+        "item_1": { "type": "trust_item", "settings": { "text": "Research-backed", "icon": "check" } },
+        "item_2": { "type": "trust_item", "settings": { "text": "100% plant-based", "icon": "leaf" } },
+        "item_3": { "type": "trust_item", "settings": { "text": "Cancel anytime", "icon": "sparkle" } },
+        "item_4": { "type": "trust_item", "settings": { "text": "Free U.S. shipping", "icon": "truck" } }
+      },
+      "block_order": ["item_1", "item_2", "item_3", "item_4"],
+      "settings": {
+        "bg_color": "#E8DCEF"
+      }
+    },
     "home-2026": {
       "type": "home-uburn-2026",
       "settings": {}
@@ -47,6 +60,7 @@
   },
   "order": [
     "hero_v2",
+    "trust_band",
     "home-2026"
   ]
 }
