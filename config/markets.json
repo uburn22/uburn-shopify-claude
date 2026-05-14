@@ -8,13 +8,9 @@
  * ------------------------------------------------------------
  */
 {
-  "sections": {
-    "home-2026": {
-      "type": "home-uburn-2026",
-      "settings": {}
+  "markets": {
+    "united-states": {
+      "parent": "@default"
     }
-  },
-  "order": [
-    "home-2026"
-  ]
+  }
 }
