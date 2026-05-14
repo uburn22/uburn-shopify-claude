@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "u2-rv": { "type": "u2-reviews", "settings": {} }
+  },
+  "order": ["u2-rv"]
+}

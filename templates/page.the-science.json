@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "u2-sci": { "type": "u2-science", "settings": {} }
+  },
+  "order": ["u2-sci"]
+}

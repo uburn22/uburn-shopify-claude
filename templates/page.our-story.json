@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "u2-story": { "type": "u2-our-story", "settings": {} }
+  },
+  "order": ["u2-story"]
+}

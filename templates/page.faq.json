@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "u2-fq": { "type": "u2-faq-page", "settings": {} }
+  },
+  "order": ["u2-fq"]
+}

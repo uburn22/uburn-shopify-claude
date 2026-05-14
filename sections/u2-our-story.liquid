@@ -1,0 +1,170 @@
+{%- comment -%}
+  UBurn V2 — Our Story page (heritage France, no founder section per Charles decision)
+{%- endcomment -%}
+<style>
+  .u2-story-hero {
+    background: linear-gradient(180deg, var(--u2-bone) 0%, var(--u2-lavender-soft) 100%);
+    padding: 120px 20px 80px;
+    text-align: center;
+  }
+  .u2-story-hero__inner { max-width: 720px; margin: 0 auto; }
+  .u2-story-hero h1 {
+    font-family: var(--u2-sans);
+    font-size: clamp(40px,7vw,72px);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--u2-plum-black);
+    margin: 16px 0 16px;
+  }
+  .u2-story-hero h1 em {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--u2-iris);
+  }
+  .u2-story-hero p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #3A2E4A;
+    max-width: 50ch;
+    margin: 0 auto;
+  }
+
+  .u2-story-heritage { padding: var(--u2-space-section) 20px; background: white; }
+  .u2-story-heritage__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  @media (min-width: 1024px) { .u2-story-heritage__inner { grid-template-columns: 1.1fr 1fr; gap: 80px; } }
+  .u2-story-heritage__media {
+    aspect-ratio: 4/5;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(58,31,89,0.3);
+  }
+  .u2-story-heritage__media img { width:100%; height:100%; object-fit: cover; }
+  .u2-story-heritage h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(32px,5vw,46px);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--u2-plum-black);
+    margin: 16px 0 18px;
+  }
+  .u2-story-heritage h2 em {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--u2-iris);
+  }
+  .u2-story-heritage p {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #3A2E4A;
+    margin: 0 0 16px;
+    max-width: 56ch;
+  }
+
+  .u2-story-mission {
+    background: var(--u2-plum-black);
+    color: var(--u2-bone);
+    padding: var(--u2-space-section) 20px;
+    text-align: center;
+  }
+  .u2-story-mission__inner { max-width: 760px; margin: 0 auto; }
+  .u2-story-mission .u2-section-eyebrow { color: var(--u2-lavender); }
+  .u2-story-mission .u2-section-eyebrow::before { background: var(--u2-lavender); }
+  .u2-story-mission h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(34px,5.5vw,52px);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--u2-bone);
+    margin: 12px 0 24px;
+    line-height: 1.05;
+  }
+  .u2-story-mission h2 em {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--u2-lavender);
+  }
+  .u2-story-mission p {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.6;
+    color: rgba(248,244,238,0.85);
+    margin: 0;
+  }
+
+  .u2-story-cta {
+    background: var(--u2-cream);
+    padding: var(--u2-space-section) 20px;
+    text-align: center;
+  }
+  .u2-story-cta h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(28px,4.5vw,40px);
+    font-weight: 800;
+    color: var(--u2-plum-black);
+    margin: 0 0 24px;
+    letter-spacing: -0.025em;
+  }
+  .u2-story-cta h2 em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-iris); }
+</style>
+
+<div class="u2-root">
+
+  <section class="u2-story-hero u2-reveal">
+    <div class="u2-story-hero__inner">
+      <span class="u2-section-eyebrow">— since 2024 · paris</span>
+      <h1>A French <em>story.</em></h1>
+      <p>Born in a small Paris atelier. Built around one fiber the European Food Safety Authority recognized. Made for the women who want a calmer 4 PM — without restriction, without stimulants.</p>
+    </div>
+  </section>
+
+  <section class="u2-story-heritage">
+    <div class="u2-story-heritage__inner">
+      <div class="u2-story-heritage__media u2-reveal">
+        <img src="{{ 'u2-atelier-france.jpg' | asset_url }}" alt="UBurn atelier in France" loading="lazy" width="1200" height="1500">
+      </div>
+      <div class="u2-reveal delay-1">
+        <span class="u2-section-eyebrow">— heritage</span>
+        <h2>Made in France. <em>Built with care.</em></h2>
+        <p>UBurn is crafted in a small French laboratory. Every batch goes through third-party purity testing before shipping. The packaging is plant-based and recyclable.</p>
+        <p>The choice of konjac glucomannan was not arbitrary. It is the only fiber the European Food Safety Authority has officially recognized for satiety support (EU Regulation 432/2012, ID 3120). 3g per day, with water, before a meal. The protocol is simple — the formula is precise.</p>
+        <p>We chose ube — the purple yam from East Asia — for its natural color (no artificial dyes), its mild flavor, and its antioxidant profile. The result is the violet drink you sip at four.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="u2-story-mission">
+    <div class="u2-story-mission__inner u2-reveal">
+      <span class="u2-section-eyebrow">— why we made this</span>
+      <h2>Because <em>willpower isn't enough.</em></h2>
+      <p>The 4 PM crash is biological. It deserves a biological answer. UBurn gives you one — without restriction, without stimulants, without compromise.</p>
+    </div>
+  </section>
+
+  <section class="u2-story-cta u2-reveal">
+    <h2>Ready to <em>start?</em></h2>
+    {% render 'u2-cta-primary', text: 'start my pack', link: '/products/ube-poudre?variant=51289200034111' %}
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "U2 Our Story page",
+  "tag": "section",
+  "class": "shopify-section--u2-story",
+  "settings": [],
+  "presets": [ { "name": "U2 Our Story page" } ]
+}
+{% endschema %}

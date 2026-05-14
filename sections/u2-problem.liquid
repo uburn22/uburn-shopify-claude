@@ -1,0 +1,99 @@
+{%- comment -%}
+  UBurn V2 — Problem section "It's biological" (3 cards emotional hook)
+  Migrated from live S6 PROBLÈME
+{%- endcomment -%}
+<style>
+  .u2-problem { background: var(--u2-bone); padding: var(--u2-space-section) 20px; }
+  .u2-problem__inner { max-width: 1180px; margin: 0 auto; }
+  .u2-problem__head { text-align: center; margin-bottom: 48px; }
+  .u2-problem__head h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(34px,5.5vw,52px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--u2-plum-black);
+    margin: 12px 0 0;
+  }
+  .u2-problem__head h2 em {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--u2-iris);
+  }
+  .u2-problem__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 768px) { .u2-problem__grid { grid-template-columns: repeat(3,1fr); gap: 24px; } }
+  .u2-problem__card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 24px;
+    border: 1px solid rgba(107,78,158,0.08);
+    transition: transform 0.35s var(--u2-ease-smooth), border-color 0.35s var(--u2-ease-smooth);
+  }
+  .u2-problem__card:hover { transform: translateY(-4px); border-color: rgba(107,78,158,0.25); }
+  .u2-problem__num {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 48px;
+    color: var(--u2-iris);
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .u2-problem__title {
+    font-family: var(--u2-sans);
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.015em;
+    margin: 0 0 8px;
+  }
+  .u2-problem__sub {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #3A2E4A;
+    margin: 0;
+  }
+</style>
+<section class="u2-root u2-problem" aria-label="It's biological">
+  <div class="u2-problem__inner">
+    <div class="u2-problem__head u2-reveal">
+      <span class="u2-section-eyebrow">{{ section.settings.eyebrow | default: '— it\'s not a willpower problem' }}</span>
+      <h2>{{ section.settings.title_pre | default: 'It\'s' }} <em>{{ section.settings.title_em | default: 'biological.' }}</em></h2>
+    </div>
+    <div class="u2-problem__grid">
+      <article class="u2-problem__card u2-reveal delay-1">
+        <div class="u2-problem__num">4 PM</div>
+        <h3 class="u2-problem__title">The pantry calls you</h3>
+        <p class="u2-problem__sub">Blood sugar crashing. It's physiology — not a character flaw.</p>
+      </article>
+      <article class="u2-problem__card u2-reveal delay-2">
+        <div class="u2-problem__num">8 PM</div>
+        <h3 class="u2-problem__title">In front of the fridge</h3>
+        <p class="u2-problem__sub">Fatigue lowers your guard. Morning intentions fade one by one.</p>
+      </article>
+      <article class="u2-problem__card u2-reveal delay-3">
+        <div class="u2-problem__num">→</div>
+        <h3 class="u2-problem__title">Willpower isn't enough</h3>
+        <p class="u2-problem__sub">It's a biological response. It calls for a biological answer.</p>
+      </article>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Problem (Biological)",
+  "tag": "section",
+  "class": "shopify-section--u2-problem",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "— it's not a willpower problem" },
+    { "type": "text", "id": "title_pre", "label": "Title — start", "default": "It's" },
+    { "type": "text", "id": "title_em", "label": "Title — italic emphasis", "default": "biological." }
+  ],
+  "presets": [ { "name": "U2 Problem" } ]
+}
+{% endschema %}

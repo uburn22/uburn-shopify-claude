@@ -1,6 +1,6 @@
 {
   "sections": {
-    "u2-home": {
+    "hero-block": {
       "type": "u2-homepage",
       "settings": {
         "product": "ube-poudre",
@@ -12,7 +12,21 @@
         "hero_sub": "A violet wellness ritual. Plant-based satiety. 30 calories. Crafted in France.",
         "hero_cta": "start my pack"
       }
-    }
+    },
+    "marquee": { "type": "u2-marquee", "settings": {} },
+    "problem": { "type": "u2-problem", "settings": {} },
+    "pricing": { "type": "u2-pricing-cards", "settings": { "product": "ube-poudre", "show_bonus": true } },
+    "stats": { "type": "u2-stats", "settings": {} },
+    "compare": { "type": "u2-comparison", "settings": {} },
+    "guarantee": { "type": "u2-guarantee-bar", "settings": {} }
   },
-  "order": ["u2-home"]
+  "order": [
+    "hero-block",
+    "marquee",
+    "problem",
+    "pricing",
+    "stats",
+    "compare",
+    "guarantee"
+  ]
 }
