@@ -1,0 +1,48 @@
+{%- comment -%}
+  UBurn V2 — Final CTA (atomic)
+{%- endcomment -%}
+{%- liquid
+  assign hp = section.settings.product
+  if hp == blank
+    assign hp = all_products['ube-poudre']
+  endif
+  assign variant_id = section.settings.variant_id | default: '51289200034111'
+  assign cta_link = hp.url | append: '?variant=' | append: variant_id
+-%}
+<style>
+  .u2-final { background: linear-gradient(135deg, var(--u2-plum-deep) 0%, var(--u2-iris-deep) 100%); color: var(--u2-warm-white); padding: calc(var(--u2-space-section) + 24px) 20px; text-align: center; position: relative; overflow: hidden; }
+  .u2-final::before { content: ''; position: absolute; inset: 0; background: radial-gradient(40% 35% at 15% 20%, rgba(184,157,217,0.35), transparent 70%), radial-gradient(45% 40% at 85% 80%, rgba(139,111,191,0.35), transparent 70%); pointer-events: none; }
+  .u2-final__inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+  .u2-final__eyebrow { color: var(--u2-lavender); margin-bottom: 16px; }
+  .u2-final__eyebrow::before { background: var(--u2-lavender); }
+  .u2-final__title { font-family: var(--u2-sans); font-size: clamp(40px,7vw,72px); font-weight: 800; line-height: 1.02; letter-spacing: -0.03em; color: var(--u2-warm-white); margin: 0 0 16px; }
+  .u2-final__title em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-lavender); }
+  .u2-final__sub { font-size: 17px; line-height: 1.55; color: rgba(255,255,255,0.85); max-width: 44ch; margin: 0 auto 36px; }
+  .u2-final__meta { margin-top: 24px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--u2-lavender); opacity: 0.9; }
+</style>
+<section class="u2-root u2-final" aria-label="Start your ritual">
+  <div class="u2-final__inner u2-reveal">
+    <span class="u2-section-eyebrow u2-final__eyebrow">{{ section.settings.eyebrow | default: '— begin your ritual' }}</span>
+    <h2 class="u2-final__title">{{ section.settings.title_pre | default: 'The violet hour' }} <em>{{ section.settings.title_em | default: 'begins at four.' }}</em></h2>
+    <p class="u2-final__sub">{{ section.settings.sub | default: 'Cold water. One scoop. 30 seconds. The afternoon ritual designed to keep you satisfied for hours.*' }}</p>
+    {% render 'u2-cta-primary', text: section.settings.cta | default: 'start my pack — from $34.50', link: cta_link, on_dark: true %}
+    <p class="u2-final__meta">Cancel anytime · 100% plant-based · Research-backed*</p>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Final CTA",
+  "tag": "section",
+  "class": "shopify-section--u2-final",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "variant_id", "label": "Variant ID", "default": "51289200034111" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "— begin your ritual" },
+    { "type": "text", "id": "title_pre", "label": "Title start", "default": "The violet hour" },
+    { "type": "text", "id": "title_em", "label": "Title italic", "default": "begins at four." },
+    { "type": "textarea", "id": "sub", "label": "Sub", "default": "Cold water. One scoop. 30 seconds. The afternoon ritual designed to keep you satisfied for hours.*" },
+    { "type": "text", "id": "cta", "label": "CTA", "default": "start my pack — from $34.50" }
+  ],
+  "presets": [ { "name": "U2 Final CTA" } ]
+}
+{% endschema %}

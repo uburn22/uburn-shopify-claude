@@ -1,0 +1,37 @@
+{%- comment -%}
+  UBurn V2 — Newsletter "The 4 PM letter" (atomic)
+{%- endcomment -%}
+<style>
+  .u2-news { background: var(--u2-bone); padding: var(--u2-space-section) 20px; text-align: center; }
+  .u2-news__inner { max-width: 600px; margin: 0 auto; }
+  .u2-news__title { font-family: var(--u2-sans); font-size: clamp(28px,4.5vw,40px); font-weight: 800; line-height: 1.1; letter-spacing: -0.025em; color: var(--u2-plum-black); margin: 12px 0 12px; }
+  .u2-news__title em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-iris); }
+  .u2-news__sub { font-size: 15px; color: #3A2E4A; line-height: 1.55; margin: 0 0 28px; }
+  .u2-news__form { display: flex; gap: 8px; max-width: 460px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+  .u2-news__input { flex: 1; min-width: 240px; padding: 14px 18px; border: 1.5px solid rgba(107,78,158,0.2); border-radius: 999px; background: white; font-family: var(--u2-sans); font-size: 14px; color: var(--u2-plum-black); }
+  .u2-news__input:focus { outline: 2px solid var(--u2-iris); outline-offset: 2px; border-color: var(--u2-iris); }
+  .u2-news__privacy { font-size: 11px; color: #7a7585; margin-top: 16px; }
+  .u2-news__privacy a { color: var(--u2-iris); text-decoration: underline; }
+</style>
+<section class="u2-root u2-news" aria-label="Newsletter">
+  <div class="u2-news__inner u2-reveal">
+    <span class="u2-section-eyebrow">— the 4 pm letter</span>
+    <h2 class="u2-news__title">One image. <em>Three lines.</em> Delivered at 4 PM.</h2>
+    <p class="u2-news__sub">A quiet moment in your inbox. No promo spam. Cancel anytime.</p>
+    {% form 'customer', class: 'u2-news__form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <input type="email" name="contact[email]" class="u2-news__input" placeholder="your email" required aria-label="Email">
+      <button type="submit" class="u2-cta"><span>subscribe</span><span class="u2-cta__arrow" aria-hidden="true">→</span></button>
+    {% endform %}
+    <p class="u2-news__privacy">By subscribing you accept our <a href="/pages/privacy-policy-us-en">privacy policy</a>. We never share your email.</p>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Newsletter",
+  "tag": "section",
+  "class": "shopify-section--u2-news",
+  "settings": [],
+  "presets": [ { "name": "U2 Newsletter" } ]
+}
+{% endschema %}

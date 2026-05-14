@@ -1,0 +1,81 @@
+{%- comment -%}
+  UBurn V2 — Before/After Ashley K Week 1 vs Week 4 (atomic)
+{%- endcomment -%}
+<style>
+  .u2-ba { background: var(--u2-cream); padding: var(--u2-space-section) 20px; }
+  .u2-ba__inner { max-width: 1100px; margin: 0 auto; }
+  .u2-ba__head { text-align: center; margin-bottom: 48px; }
+  .u2-ba__head h2 { font-family: var(--u2-sans); font-size: clamp(34px,5.5vw,48px); font-weight: 800; letter-spacing: -0.025em; color: var(--u2-plum-black); margin: 12px 0 0; }
+  .u2-ba__head h2 em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-iris); }
+  .u2-ba__card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(58,31,89,0.18); display: grid; grid-template-columns: 1fr; grid-template-rows: auto 56px auto; }
+  @media (min-width: 768px) { .u2-ba__card { grid-template-columns: 1fr 56px 1fr; grid-template-rows: 1fr; } }
+  .u2-ba__col { padding: 36px 32px; }
+  .u2-ba__col--before { background: var(--u2-bone); }
+  .u2-ba__col--after { background: white; }
+  .u2-ba__divider { background: var(--u2-lavender-soft); display: flex; align-items: center; justify-content: center; }
+  .u2-ba__divider-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--u2-iris); color: white; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .u2-ba__pill { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; padding: 6px 14px; border-radius: 999px; margin-bottom: 12px; }
+  .u2-ba__pill--before { background: rgba(192,188,182,0.25); color: #5A5A5A; }
+  .u2-ba__pill--after { background: rgba(107,78,158,0.15); color: var(--u2-iris); }
+  .u2-ba__week { font-family: var(--u2-sans); font-size: 24px; font-weight: 800; color: var(--u2-plum-black); letter-spacing: -0.025em; margin: 0 0 16px; }
+  .u2-ba__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .u2-ba__list li { font-size: 14px; line-height: 1.5; color: #3A2E4A; padding-left: 18px; position: relative; }
+  .u2-ba__list li::before { content: ''; position: absolute; left: 0; top: 8px; width: 7px; height: 7px; border-radius: 50%; background: rgba(184,157,217,0.5); }
+  .u2-ba__col--after .u2-ba__list li::before { background: var(--u2-iris); }
+  .u2-ba__profile { display: flex; align-items: center; gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(107,78,158,0.15); }
+  .u2-ba__avatar { width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: var(--u2-lavender-soft); }
+  .u2-ba__avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .u2-ba__name { font-size: 14px; font-weight: 700; color: var(--u2-plum-black); }
+  .u2-ba__meta { font-size: 12px; color: #7a7585; margin-top: 1px; }
+  .u2-ba__disclaimer { text-align: center; margin-top: 24px; font-size: 11px; color: #7a7585; max-width: 60ch; margin-left: auto; margin-right: auto; line-height: 1.6; }
+</style>
+<section class="u2-root u2-ba" aria-label="What changes after 4 weeks">
+  <div class="u2-ba__inner">
+    <div class="u2-ba__head u2-reveal">
+      <span class="u2-section-eyebrow">— in her own words</span>
+      <h2>What changes. <em>After 4 weeks.</em></h2>
+    </div>
+    <div class="u2-ba__card u2-reveal delay-1">
+      <div class="u2-ba__col u2-ba__col--before">
+        <span class="u2-ba__pill u2-ba__pill--before">Before UBurn</span>
+        <div class="u2-ba__week">Week 1</div>
+        <ul class="u2-ba__list">
+          <li>Uncontrollable 4 PM cravings — pantry open daily</li>
+          <li>Cookies, chocolate, sometimes worse</li>
+          <li>Guilt after every slip-up, chronic frustration</li>
+          <li>Dinner too heavy to make up for accumulated hunger</li>
+          <li>Afternoon fatigue, difficult digestion</li>
+        </ul>
+      </div>
+      <div class="u2-ba__divider"><span class="u2-ba__divider-icon">→</span></div>
+      <div class="u2-ba__col u2-ba__col--after">
+        <span class="u2-ba__pill u2-ba__pill--after">After 4 weeks</span>
+        <div class="u2-ba__week">Week 4</div>
+        <ul class="u2-ba__list">
+          <li>No more 4 PM cravings — she forgets the pantry exists</li>
+          <li>Naturally lighter dinner, no willpower needed</li>
+          <li>Calmer afternoons, smoother digestion from week 2*</li>
+          <li>Mood feels calmer, no afternoon crash</li>
+          <li>The ritual settled in naturally — feels like self-care</li>
+        </ul>
+        <div class="u2-ba__profile">
+          <div class="u2-ba__avatar"><img src="{{ 'u2-rev-ashley.jpg' | asset_url }}" alt="Ashley K." loading="lazy" width="100" height="100"></div>
+          <div>
+            <div class="u2-ba__name">Ashley K. — Phoenix, AZ</div>
+            <div class="u2-ba__meta">After 28 days · ★★★★★ Verified purchase</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="u2-ba__disclaimer">*Individual results may vary. Glucomannan — EFSA ID 3120. Use: 3g/day with water before meals. These statements have not been evaluated by the FDA.</p>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Before/After Weeks",
+  "tag": "section",
+  "class": "shopify-section--u2-ba",
+  "settings": [],
+  "presets": [ { "name": "U2 Before/After Weeks" } ]
+}
+{% endschema %}

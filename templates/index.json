@@ -1,32 +1,49 @@
 {
   "sections": {
-    "hero-block": {
-      "type": "u2-homepage",
+    "hero": {
+      "type": "u2-hero",
       "settings": {
         "product": "ube-poudre",
         "variant_id": "51289200034111",
-        "hero_eyebrow": "the violet hour · est. 2024",
-        "hero_headline_pre": "Crush the",
-        "hero_headline_em": "4 PM",
-        "hero_headline_post": "crash.",
-        "hero_sub": "A violet wellness ritual. Plant-based satiety. 30 calories. Crafted in France.",
-        "hero_cta": "start my pack"
+        "eyebrow": "the violet hour · est. 2024",
+        "headline_pre": "Crush the",
+        "headline_em": "4 PM",
+        "headline_post": "crash.",
+        "sub": "A violet wellness ritual. Plant-based satiety. 30 calories. Crafted in France.",
+        "cta": "start my pack"
       }
     },
+    "trust-band": { "type": "u2-trust-band", "settings": {} },
     "marquee": { "type": "u2-marquee", "settings": {} },
     "problem": { "type": "u2-problem", "settings": {} },
-    "pricing": { "type": "u2-pricing-cards", "settings": { "product": "ube-poudre", "show_bonus": true } },
+    "formula": { "type": "u2-formula-grid", "settings": {} },
+    "efsa": { "type": "u2-efsa-block", "settings": {} },
     "stats": { "type": "u2-stats", "settings": {} },
+    "pricing": { "type": "u2-pricing-cards", "settings": { "product": "ube-poudre", "show_bonus": true } },
     "compare": { "type": "u2-comparison", "settings": {} },
-    "guarantee": { "type": "u2-guarantee-bar", "settings": {} }
+    "before-after": { "type": "u2-before-after", "settings": {} },
+    "craft": { "type": "u2-craft", "settings": {} },
+    "guarantee": { "type": "u2-guarantee-bar", "settings": {} },
+    "final-cta": {
+      "type": "u2-final-cta",
+      "settings": { "product": "ube-poudre", "variant_id": "51289200034111" }
+    },
+    "newsletter": { "type": "u2-newsletter", "settings": {} }
   },
   "order": [
-    "hero-block",
+    "hero",
+    "trust-band",
     "marquee",
     "problem",
-    "pricing",
+    "formula",
+    "efsa",
     "stats",
+    "pricing",
     "compare",
-    "guarantee"
+    "before-after",
+    "craft",
+    "guarantee",
+    "final-cta",
+    "newsletter"
   ]
 }

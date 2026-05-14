@@ -527,16 +527,28 @@
           {%- endfor -%}
           {%- liquid
             assign sub_variant = product.variants | last
-            assign sub_price = sub_variant.price | times: 85 | divided_by: 100
+            assign sub_plan = null
+            for spg in product.selling_plan_groups
+              for sp in spg.selling_plans
+                assign sub_plan = sp
+                break
+              endfor
+              if sub_plan != null
+                break
+              endif
+            endfor
+            assign sub_price = sub_variant.price | times: 90 | divided_by: 100
           -%}
+          {%- if sub_plan -%}
           <label class="u2-pdp-variant u2-pdp-variant--subscribe">
-            <input type="radio" name="id" value="{{ sub_variant.id }}" data-u2-subscribe="1">
+            <input type="radio" name="id" value="{{ sub_variant.id }}" data-u2-subscribe="1" data-u2-selling-plan="{{ sub_plan.id }}">
             <div class="u2-pdp-variant__body">
-              <div class="u2-pdp-variant__title">Subscribe &amp; Save <span class="u2-pdp-variant__badge u2-pdp-variant__badge--sub">−15% · most flexible</span></div>
+              <div class="u2-pdp-variant__title">Subscribe &amp; Save <span class="u2-pdp-variant__badge u2-pdp-variant__badge--sub">−10% · most flexible</span></div>
               <div class="u2-pdp-variant__sub">Auto-refill every 30 days · Free shipping always · Cancel anytime</div>
             </div>
             <div class="u2-pdp-variant__price">{{ sub_price | money_without_trailing_zeros }}<span class="u2-pdp-variant__per">/mo</span></div>
           </label>
+          {%- endif -%}
         </div>
         <div class="u2-pdp-sub-benefits" data-u2-sub-benefits hidden>
           <p class="u2-pdp-sub-benefits__title">Your subscription includes</p>
@@ -704,16 +716,24 @@
       r.addEventListener('change', function(){
         if(priceEl && variantPrices[r.value]) priceEl.textContent = variantPrices[r.value];
         if(subBenefits) subBenefits.hidden = !r.dataset.u2Subscribe;
-        // Add hidden property to form so subscription orders are tagged
-        var existing = form.querySelector('input[name="properties[Subscribe]"]');
-        if(r.dataset.u2Subscribe){
-          if(!existing){
-            var p = document.createElement('input');
-            p.type = 'hidden'; p.name = 'properties[Subscribe]'; p.value = 'Yes (15% off auto-refill)';
-            form.appendChild(p);
+        // Real Shopify Subscriptions: add hidden selling_plan input
+        var existingPlan = form.querySelector('input[name="selling_plan"]');
+        if(r.dataset.u2Subscribe && r.dataset.u2SellingPlan){
+          if(!existingPlan){
+            existingPlan = document.createElement('input');
+            existingPlan.type = 'hidden';
+            existingPlan.name = 'selling_plan';
+            form.appendChild(existingPlan);
           }
-        } else if(existing){
-          existing.remove();
+          existingPlan.value = r.dataset.u2SellingPlan;
+          // Update displayed ATC price to subscription price
+          if(priceEl){
+            var basePrice = variantPrices[r.value] || priceEl.textContent;
+            // Display already discounted via selling_plan at checkout
+            priceEl.textContent = basePrice;
+          }
+        } else if(existingPlan){
+          existingPlan.remove();
         }
       });
     });
