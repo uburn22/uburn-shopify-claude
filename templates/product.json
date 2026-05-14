@@ -1,9 +1,18 @@
 {
   "sections": {
-    "u2-pdp": {
-      "type": "u2-pdp",
-      "settings": {}
-    }
+    "u2-pdp": { "type": "u2-pdp", "settings": {} },
+    "u2-quiz": { "type": "u2-pdp-ritual-quiz", "settings": {} },
+    "u2-precision": { "type": "u2-pdp-precision", "settings": {} },
+    "u2-workday": { "type": "u2-pdp-before-after-workday", "settings": {} },
+    "u2-compare": { "type": "u2-comparison", "settings": {} },
+    "u2-scit": { "type": "u2-pdp-science-teaser", "settings": {} }
   },
-  "order": ["u2-pdp"]
+  "order": [
+    "u2-pdp",
+    "u2-quiz",
+    "u2-workday",
+    "u2-precision",
+    "u2-compare",
+    "u2-scit"
+  ]
 }

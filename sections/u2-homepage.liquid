@@ -199,8 +199,8 @@
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  @media (min-width: 640px) { .u2-formula__grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 1024px) { .u2-formula__grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 640px) { .u2-formula__grid { grid-template-columns: 1fr 1fr; gap: 24px; } }
+  @media (min-width: 1024px) { .u2-formula__grid { grid-template-columns: repeat(3, 1fr); gap: 28px; } }
   .u2-formula__card {
     background: rgba(232,220,239,0.05);
     backdrop-filter: blur(10px);
@@ -213,12 +213,9 @@
   .u2-formula__card--hero {
     background: linear-gradient(160deg, var(--u2-iris-deep) 0%, var(--u2-iris) 60%, var(--u2-iris-bright) 100%);
     border-color: transparent;
-    grid-row: span 2;
   }
-  @media (max-width: 1023px) {
-    .u2-formula__card--hero { grid-row: span 1; grid-column: span 2; }
-    @media (max-width: 639px) { .u2-formula__card--hero { grid-column: span 1; } }
-  }
+  @media (min-width: 640px) { .u2-formula__card--hero { grid-column: span 2; } }
+  @media (min-width: 1024px) { .u2-formula__card--hero { grid-column: span 1; grid-row: span 2; } }
   .u2-formula__img {
     width: 100%;
     aspect-ratio: 1/1;

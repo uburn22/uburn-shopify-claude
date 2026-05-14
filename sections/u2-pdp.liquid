@@ -178,6 +178,58 @@
     margin-left: 8px;
   }
 
+  /* SUBSCRIBE variant accent */
+  .u2-pdp-variant--subscribe {
+    border-color: rgba(107,78,158,0.3);
+  }
+  .u2-pdp-variant--subscribe:has(input:checked) {
+    border-color: var(--u2-iris);
+    background: linear-gradient(135deg, rgba(232,220,239,0.6), white);
+  }
+  .u2-pdp-variant__badge--sub {
+    background: var(--u2-iris-deep) !important;
+  }
+  .u2-pdp-variant__per {
+    font-size: 12px;
+    color: #7a7585;
+    font-weight: 500;
+    margin-left: 2px;
+  }
+  .u2-pdp-sub-benefits {
+    background: var(--u2-lavender-soft);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-top: -2px;
+  }
+  .u2-pdp-sub-benefits[hidden] { display: none; }
+  .u2-pdp-sub-benefits__title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--u2-iris);
+    margin: 0 0 10px;
+  }
+  .u2-pdp-sub-benefits ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .u2-pdp-sub-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-sub-benefits li svg {
+    color: var(--u2-iris);
+    flex-shrink: 0;
+  }
+
   /* PRIMARY ATC CTA */
   .u2-pdp-atc {
     display: flex;
@@ -463,16 +515,37 @@
         <div class="u2-pdp-variants" role="radiogroup" aria-label="Choose your pack">
           {%- for v in product.variants -%}
             <label class="u2-pdp-variant">
-              <input type="radio" name="id" value="{{ v.id }}" {% if forloop.first %}checked{% endif %}>
+              <input type="radio" name="id" value="{{ v.id }}">
               <div class="u2-pdp-variant__body">
                 <div class="u2-pdp-variant__title">
-                  {{ v.title | split: '|' | first | strip }}{% if forloop.last %} <span class="u2-pdp-variant__badge">Best value</span>{% endif %}
+                  {{ v.title | split: '|' | first | strip }}{% if forloop.last %} <span class="u2-pdp-variant__badge">Best value · −33%</span>{% endif %}
                 </div>
-                <div class="u2-pdp-variant__sub">{{ v.title | split: '|' | last | strip }} · {% if forloop.first %}Best for first-timers · 30 days{% else %}90 days · −33% per scoop{% endif %}</div>
+                <div class="u2-pdp-variant__sub">{{ v.title | split: '|' | last | strip }} · {% if forloop.first %}Best for first-timers · 30 days{% else %}90 days · save −33% per scoop{% endif %}</div>
               </div>
               <div class="u2-pdp-variant__price">{{ v.price | money_without_trailing_zeros }}</div>
             </label>
           {%- endfor -%}
+          {%- liquid
+            assign sub_variant = product.variants | last
+            assign sub_price = sub_variant.price | times: 85 | divided_by: 100
+          -%}
+          <label class="u2-pdp-variant u2-pdp-variant--subscribe">
+            <input type="radio" name="id" value="{{ sub_variant.id }}" data-u2-subscribe="1">
+            <div class="u2-pdp-variant__body">
+              <div class="u2-pdp-variant__title">Subscribe &amp; Save <span class="u2-pdp-variant__badge u2-pdp-variant__badge--sub">−15% · most flexible</span></div>
+              <div class="u2-pdp-variant__sub">Auto-refill every 30 days · Free shipping always · Cancel anytime</div>
+            </div>
+            <div class="u2-pdp-variant__price">{{ sub_price | money_without_trailing_zeros }}<span class="u2-pdp-variant__per">/mo</span></div>
+          </label>
+        </div>
+        <div class="u2-pdp-sub-benefits" data-u2-sub-benefits hidden>
+          <p class="u2-pdp-sub-benefits__title">Your subscription includes</p>
+          <ul>
+            <li>{% render 'u2-icon', name: 'check', size: 14 %} Free U.S. shipping on every refill</li>
+            <li>{% render 'u2-icon', name: 'check', size: 14 %} Auto-refills every 30 days (skip / pause anytime)</li>
+            <li>{% render 'u2-icon', name: 'check', size: 14 %} Cancel anytime — no commitment</li>
+            <li>{% render 'u2-icon', name: 'check', size: 14 %} Welcome offer included on first refill</li>
+          </ul>
         </div>
 
         <div class="u2-pdp-atc">
@@ -494,31 +567,31 @@
     </div>
   </div>
 
-  {%- comment -%} RITUAL 30 SECONDS {%- endcomment -%}
+  {%- comment -%} RITUAL — Pour / Stir / Breathe (editorial version) {%- endcomment -%}
   <section class="u2-pdp-ritual" aria-label="The 30-second ritual">
     <div class="u2-pdp-ritual__inner">
       <div class="u2-pdp-ritual__head u2-reveal">
-        <span class="u2-section-eyebrow">— your 30-second ritual</span>
-        <h2>Three steps. <em>One moment of you.</em></h2>
+        <span class="u2-section-eyebrow">— the 30-second ritual</span>
+        <h2>30 seconds. <em>One moment of clarity.</em></h2>
       </div>
       <div class="u2-pdp-ritual__grid">
         <div class="u2-pdp-ritual__step u2-reveal delay-1">
           <div class="u2-pdp-ritual__img"><img src="{{ 'u2-ritual-step1.jpg' | asset_url }}" alt="Pour" loading="lazy" width="800" height="1000"></div>
           <div class="u2-pdp-ritual__num">01</div>
-          <h3 class="u2-pdp-ritual__title">Pour one scoop</h3>
-          <p class="u2-pdp-ritual__desc">8g of violet powder. The morning ritual takes 30 seconds. No prep, no machine.</p>
+          <h3 class="u2-pdp-ritual__title">Pour</h3>
+          <p class="u2-pdp-ritual__desc">Open the sachet. Watch the violet powder cascade into cold water — 8 oz, no machine, no prep.</p>
         </div>
         <div class="u2-pdp-ritual__step u2-reveal delay-2">
-          <div class="u2-pdp-ritual__img"><img src="{{ 'u2-ritual-step2.jpg' | asset_url }}" alt="Mix" loading="lazy" width="800" height="1000"></div>
+          <div class="u2-pdp-ritual__img"><img src="{{ 'u2-ritual-step2.jpg' | asset_url }}" alt="Stir" loading="lazy" width="800" height="1000"></div>
           <div class="u2-pdp-ritual__num">02</div>
-          <h3 class="u2-pdp-ritual__title">Mix with cold water</h3>
-          <p class="u2-pdp-ritual__desc">8–10 oz cold water or plant-based milk. Stir for 10 seconds. Glucomannan activates with liquid.</p>
+          <h3 class="u2-pdp-ritual__title">Stir</h3>
+          <p class="u2-pdp-ritual__desc">Slow rotation. Watch the powder dissolve into liquid amethyst. Thirty seconds of meditation.</p>
         </div>
         <div class="u2-pdp-ritual__step u2-reveal delay-3">
-          <div class="u2-pdp-ritual__img"><img src="{{ 'u2-ritual-step3.jpg' | asset_url }}" alt="Sip" loading="lazy" width="800" height="1000"></div>
+          <div class="u2-pdp-ritual__img"><img src="{{ 'u2-ritual-step3.jpg' | asset_url }}" alt="Breathe" loading="lazy" width="800" height="1000"></div>
           <div class="u2-pdp-ritual__num">03</div>
-          <h3 class="u2-pdp-ritual__title">Sip slowly</h3>
-          <p class="u2-pdp-ritual__desc">Drink 30 minutes before your meal or when 4 PM cravings hit. Feel full for up to 4 hours.*</p>
+          <h3 class="u2-pdp-ritual__title">Breathe</h3>
+          <p class="u2-pdp-ritual__desc">Three deep breaths before the first sip. Eyes closed. Presence. Up to 4 hours of satiety follows.*</p>
         </div>
       </div>
     </div>
@@ -626,9 +699,22 @@
     var radios = form.querySelectorAll('input[type=radio][name=id]');
     var priceEl = document.getElementById('u2-atc-price');
     var variantPrices = { {%- for v in product.variants -%}'{{ v.id }}': '{{ v.price | money_without_trailing_zeros }}'{% unless forloop.last %},{% endunless %}{%- endfor -%} };
+    var subBenefits = document.querySelector('[data-u2-sub-benefits]');
     radios.forEach(function(r){
       r.addEventListener('change', function(){
         if(priceEl && variantPrices[r.value]) priceEl.textContent = variantPrices[r.value];
+        if(subBenefits) subBenefits.hidden = !r.dataset.u2Subscribe;
+        // Add hidden property to form so subscription orders are tagged
+        var existing = form.querySelector('input[name="properties[Subscribe]"]');
+        if(r.dataset.u2Subscribe){
+          if(!existing){
+            var p = document.createElement('input');
+            p.type = 'hidden'; p.name = 'properties[Subscribe]'; p.value = 'Yes (15% off auto-refill)';
+            form.appendChild(p);
+          }
+        } else if(existing){
+          existing.remove();
+        }
       });
     });
     // Thumbnail click → swap main image (visual only)
