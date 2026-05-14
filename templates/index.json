@@ -9,12 +9,44 @@
  */
 {
   "sections": {
+    "hero_v2": {
+      "type": "hero-product-v2",
+      "blocks": {
+        "pill_1": {
+          "type": "trust_pill",
+          "settings": { "text": "EFSA-backed", "icon": "check" }
+        },
+        "pill_2": {
+          "type": "trust_pill",
+          "settings": { "text": "Caffeine-free", "icon": "leaf" }
+        },
+        "pill_3": {
+          "type": "trust_pill",
+          "settings": { "text": "Third-party lab tested", "icon": "flask" }
+        }
+      },
+      "block_order": ["pill_1", "pill_2", "pill_3"],
+      "settings": {
+        "product": "ube-poudre",
+        "eyebrow_text": "the violet hour · est. 2024",
+        "headline_pre": "Crush the",
+        "headline_emphasis": "4 PM",
+        "headline_post": "crash.",
+        "sub_headline": "a violet wellness ritual. plant-based satiety. 30 calories. crafted in france.",
+        "show_price": true,
+        "price_prefix": "from",
+        "price_suffix": "free us shipping",
+        "cta_text": "start my pack",
+        "cta_link": "/products/ube-poudre?variant=51289200034111"
+      }
+    },
     "home-2026": {
       "type": "home-uburn-2026",
       "settings": {}
     }
   },
   "order": [
+    "hero_v2",
     "home-2026"
   ]
 }

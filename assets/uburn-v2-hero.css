@@ -1,0 +1,302 @@
+/* ============================================================================
+   UBurn V2 — Hero Product section
+   Mobile-first. Targets LCP < 2.5s on 4G.
+   ============================================================================ */
+
+.u2-hero {
+  position: relative;
+  background: var(--u2-cream);
+  padding: 32px 20px 48px;
+  overflow: hidden;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  isolation: isolate;
+}
+
+.u2-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 75% 35%, rgba(139, 111, 191, 0.18), transparent 70%),
+    radial-gradient(50% 40% at 20% 80%, rgba(184, 157, 217, 0.15), transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.u2-hero__grid {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+/* TEXT BLOCK */
+.u2-hero__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  order: 1;
+}
+
+.u2-hero__eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--u2-iris);
+  margin: 0;
+}
+
+.u2-hero__headline {
+  font-family: var(--u2-sans);
+  font-weight: 800;
+  font-size: clamp(40px, 11vw, 56px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: var(--u2-plum-black);
+  margin: 0;
+}
+
+.u2-hero__headline em {
+  font-family: var(--u2-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--u2-iris);
+}
+
+.u2-hero__sub {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #3A2E4A;
+  max-width: 32ch;
+  margin: 4px 0 0;
+}
+
+.u2-hero__priceline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  font-size: 14px;
+  color: var(--u2-plum);
+  margin: 6px 0 2px;
+}
+
+.u2-hero__price {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--u2-plum-black);
+  letter-spacing: -0.01em;
+}
+
+.u2-hero__price-prefix {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  color: var(--u2-iris);
+}
+
+.u2-hero__price-divider {
+  opacity: 0.4;
+}
+
+/* CTA */
+.u2-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--u2-plum-black);
+  color: var(--u2-warm-white);
+  font-family: var(--u2-sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  text-decoration: none;
+  padding: 18px 30px;
+  border-radius: 999px;
+  border: 1.5px solid var(--u2-plum-black);
+  cursor: pointer;
+  transition: transform 0.25s var(--u2-ease-smooth),
+              background 0.25s var(--u2-ease-smooth),
+              box-shadow 0.25s var(--u2-ease-smooth);
+  box-shadow: 0 8px 24px -8px rgba(26, 15, 46, 0.4);
+  width: 100%;
+  max-width: 360px;
+  margin-top: 6px;
+}
+
+.u2-hero__cta:hover {
+  background: var(--u2-iris);
+  border-color: var(--u2-iris);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -8px rgba(107, 78, 158, 0.5);
+}
+
+.u2-hero__cta:focus-visible {
+  outline: 2px solid var(--u2-iris-bright);
+  outline-offset: 3px;
+}
+
+.u2-hero__cta-arrow {
+  display: inline-block;
+  transition: transform 0.25s var(--u2-ease-smooth);
+}
+
+.u2-hero__cta:hover .u2-hero__cta-arrow {
+  transform: translateX(4px);
+}
+
+/* TRUST PILLS */
+.u2-hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  list-style: none;
+  padding: 0;
+}
+
+.u2-hero__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(107, 78, 158, 0.18);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--u2-plum);
+}
+
+.u2-hero__pill svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  color: var(--u2-iris);
+}
+
+/* IMAGE BLOCK */
+.u2-hero__media {
+  position: relative;
+  order: 2;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.u2-hero__media::before {
+  content: "";
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(184, 157, 217, 0.45), rgba(184, 157, 217, 0) 65%);
+  filter: blur(20px);
+  z-index: 0;
+}
+
+.u2-hero__image-wrap {
+  position: relative;
+  z-index: 1;
+  width: 92%;
+  max-width: 520px;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow:
+    0 30px 60px -30px rgba(58, 31, 89, 0.45),
+    0 18px 36px -18px rgba(58, 31, 89, 0.25);
+  animation: u2-hero-float 8s ease-in-out infinite alternate;
+}
+
+.u2-hero__image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@keyframes u2-hero-float {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-10px); }
+}
+
+/* TABLET ≥ 640px */
+@media (min-width: 640px) {
+  .u2-hero {
+    padding: 48px 32px 64px;
+  }
+  .u2-hero__headline {
+    font-size: clamp(48px, 8vw, 68px);
+  }
+  .u2-hero__sub {
+    font-size: 16px;
+  }
+  .u2-hero__cta {
+    width: auto;
+    align-self: flex-start;
+  }
+}
+
+/* DESKTOP ≥ 1024px */
+@media (min-width: 1024px) {
+  .u2-hero {
+    padding: 64px 56px 80px;
+    min-height: 92vh;
+  }
+  .u2-hero__grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 64px;
+  }
+  .u2-hero__copy {
+    order: 1;
+    gap: 22px;
+  }
+  .u2-hero__media {
+    order: 2;
+    aspect-ratio: 4 / 5;
+  }
+  .u2-hero__image-wrap {
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 4 / 5;
+  }
+  .u2-hero__headline {
+    font-size: clamp(64px, 5.5vw, 88px);
+  }
+  .u2-hero__sub {
+    font-size: 17px;
+    max-width: 38ch;
+  }
+}
+
+/* Wide desktop ≥ 1280px */
+@media (min-width: 1280px) {
+  .u2-hero {
+    padding: 80px 64px 96px;
+  }
+  .u2-hero__headline {
+    font-size: clamp(72px, 5.4vw, 96px);
+  }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .u2-hero__image-wrap {
+    animation: none;
+  }
+}
