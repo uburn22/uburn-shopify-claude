@@ -44,7 +44,7 @@
 </style>
 <section class="u2-root u2-marquee-section" aria-label="Trust marquee">
   <div class="u2-marquee-track" aria-hidden="true">
-    {%- assign items = section.settings.items | default: 'Research-backed fiber · Caffeine-free · 30 calories per scoop · Free U.S. shipping $40+ · Cancel anytime · Lasting 4-hour satiety · 6 plant actives · Crafted in France · Third-party lab tested' | split: ' · ' -%}
+    {%- assign items = section.settings.items | default: 'Research-backed fiber · Caffeine-free · 30 calories per scoop · Free U.S. shipping $40+ · Cancel anytime · Lasting 4-hour satiety · 6 plant actives · French heritage · Third-party lab tested' | split: ' · ' -%}
     {%- for pass in (1..2) -%}
       {%- for item in items -%}
         <span class="u2-marquee-item">{{ item }}</span>
@@ -58,7 +58,7 @@
   "tag": "section",
   "class": "shopify-section--u2-marquee",
   "settings": [
-    { "type": "text", "id": "items", "label": "Items (· separated)", "default": "Research-backed fiber · Caffeine-free · 30 calories per scoop · Free U.S. shipping $40+ · Cancel anytime · Lasting 4-hour satiety · 6 plant actives · Crafted in France · Third-party lab tested" }
+    { "type": "text", "id": "items", "label": "Items (· separated)", "default": "Research-backed fiber · Caffeine-free · 30 calories per scoop · Free U.S. shipping $40+ · Cancel anytime · Lasting 4-hour satiety · 6 plant actives · French heritage · Third-party lab tested" }
   ],
   "presets": [ { "name": "U2 Marquee" } ]
 }
