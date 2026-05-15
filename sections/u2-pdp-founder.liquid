@@ -97,7 +97,7 @@
       {% if section.settings.portrait %}
         <img src="{{ section.settings.portrait | image_url: width: 800 }}" alt="{{ section.settings.signature | default: 'Founder portrait' | escape }}" loading="lazy" decoding="async" width="800" height="1067">
       {% else %}
-        <span class="u2-pdp-founder__placeholder" aria-hidden="true">M</span>
+        <img src="{{ 'uburn-us-about-10-brand-story-portrait-a.png' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Portrait de la fondatrice UBurn tenant sa tasse de rituel violet{% else %}UBurn founder portrait holding her violet ritual cup{% endif %}" loading="lazy" decoding="async" width="880" height="1168" style="width:100%;height:100%;object-fit:cover;">
       {% endif %}
     </div>
   </div>

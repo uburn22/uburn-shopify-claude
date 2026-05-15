@@ -100,7 +100,7 @@
       {% if section.settings.image %}
         <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.image.alt | default: 'UBurn purple drink' | escape }}" loading="lazy" decoding="async" width="1200" height="1200">
       {% else %}
-        <span class="u2-pdp-taste__art" aria-hidden="true">U</span>
+        <img src="{{ 'uburn-us-pdp-09-texture-mix-action-a.png' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Lait crémeux versé dans un verre, mélange violet en mouvement{% else %}Creamy milk pouring into a glass, violet swirl in motion{% endif %}" loading="lazy" decoding="async" width="1024" height="1024" style="width:100%;height:100%;object-fit:cover;">
       {% endif %}
     </div>
     <div class="u2-pdp-taste__copy">

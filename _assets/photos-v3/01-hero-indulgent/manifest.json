@@ -1,0 +1,89 @@
+{
+  "photo_id": "01-hero-indulgent",
+  "slot": "Homepage / section u2-hero-split / side LEFT (INDULGENT)",
+  "theme_target": "uburn-us-premium-v2 #186066567487",
+  "generated_at_utc": "2026-05-15T08:21:00Z",
+  "engine": {
+    "provider": "higgsfield",
+    "model": "gpt_image_2",
+    "internal_model": "videotape-alpha",
+    "aspect_ratio": "3:4",
+    "quality": "high",
+    "resolution": "1k",
+    "source_dimensions": "880x1168"
+  },
+  "post_processing": {
+    "tool": "ImageMagick 7.1.2-19",
+    "crop": "center-crop 880x1100 (4:5 portrait)",
+    "metadata": "stripped",
+    "jpg_quality": 85,
+    "webp_quality": 85,
+    "webp_method": 6
+  },
+  "final_dimensions": "880x1100",
+  "below_target_resolution_note": "Brief target was 1080x1350. Source generated at 1k = 880x1168 (memory project_higgsfield_dtc_ads_quirks flagged 2k as risky for dtc-ads — generic gpt_image_2 likely supports 2k safely). If a variant is validated, re-generate the winner at --resolution 2k (≈1760x2336) and crop to 4:5 for hero-grade fidelity. Current files are validation-grade.",
+  "base_prompt_principles": {
+    "subject": "single cream-colored ceramic mug, steaming blue-violet matcha latte, foam rosette latte art, 3 steam wisps",
+    "color_lock": "iris violet (NOT pink, NOT rose, NOT magenta)",
+    "surface": "soft cream linen with natural wrinkles",
+    "background": "blurred warm cream and champagne, shallow DOF, subtle green leaf accent",
+    "lighting": "golden hour window light from left, Portra 400 film grain, 3500K, soft shadows",
+    "references": ["Rhode Skin", "Moon Juice", "Maison Matcha", "Sofia Coppola natural-light film"],
+    "negations": ["no text", "no logo", "no labels", "no product packaging", "no ring light", "no flash", "no pure black", "no pure white", "no cold blues/greens (except small leaf)", "no pink", "no rose"]
+  },
+  "variants": {
+    "A": {
+      "delta": "Mug center-composed at 60% of frame, 3/4 angle slightly above eye level, foam rosette prominent and central",
+      "source_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3ByhW8sOZ8tPEBLrxkMPpsD08TP/hf_20260515_081755_3f575e60-cba7-43c1-ba01-5c3d554684c5.png",
+      "job_id": "3f575e60-cba7-43c1-ba01-5c3d554684c5",
+      "files": {
+        "jpg": "01-hero-indulgent-A.jpg (103 KB)",
+        "webp": "01-hero-indulgent-A.webp (60 KB)",
+        "source_png": "_source/01-hero-indulgent-A-source.png (2.0 MB)"
+      },
+      "visual_notes": "Smooth clean cream ceramic mug. Lavender/dusty purple liquid — slightly desaturated vs brand target. Classic 3/4 editorial pose. Simple linen + small green leaf upper-left. Three clean steam wisps."
+    },
+    "B": {
+      "delta": "Near-overhead 60° angle from vertical, foam rosette fully exposed from above, mug fills 55% of frame, slightly off-center",
+      "source_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3ByhW8sOZ8tPEBLrxkMPpsD08TP/hf_20260515_081755_13d01697-ece7-4ff6-92cd-cfbefd21c5cd.png",
+      "job_id": "13d01697-ece7-4ff6-92cd-cfbefd21c5cd",
+      "files": {
+        "jpg": "01-hero-indulgent-B.jpg (127 KB)",
+        "webp": "01-hero-indulgent-B.webp (77 KB)",
+        "source_png": "_source/01-hero-indulgent-B-source.png (2.3 MB)"
+      },
+      "visual_notes": "Speckled stoneware mug (artisanal). STRONGEST iris-violet saturation of the three — closest to brand #6B4E9E. Top-down rosette dramatic and fully readable. Golden hour warmth, foliage upper-left in background. Most 'want-to-drink' composition."
+    },
+    "C": {
+      "delta": "Mug in upper third at 50% of frame, 3/4 angle, generous cream linen in foreground with natural folds, wider editorial lifestyle crop",
+      "source_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3ByhW8sOZ8tPEBLrxkMPpsD08TP/hf_20260515_081755_0669b77e-912a-4a3e-8063-c31b9fc83e17.png",
+      "job_id": "0669b77e-912a-4a3e-8063-c31b9fc83e17",
+      "files": {
+        "jpg": "01-hero-indulgent-C.jpg (134 KB)",
+        "webp": "01-hero-indulgent-C.webp (89 KB)",
+        "source_png": "_source/01-hero-indulgent-C-source.png (2.3 MB)"
+      },
+      "visual_notes": "Speckled stoneware mug. Lighter lavender liquid — slightly less saturated than B. Rich draped linen in foreground (most fabric texture of the three). Plant foliage upper-right is more present than brief's 'subtle leaf accent' but stays in background. Most lifestyle/storytelling feel of the three."
+    }
+  },
+  "claude_recommendation": {
+    "pick": "B",
+    "reasons": [
+      "Color: B has the strongest iris-violet saturation, closest to brand #6B4E9E. A and C are slightly dusty/lavender. On a hero meant to communicate 'The Violet Matcha' to cold US traffic, color signal must read instantly.",
+      "Drink desire / CRO: Overhead latte-art rosette is the modern Pinterest-tested hero pose for hot drinks. Strongest 'I want this in my hand' trigger of the three.",
+      "Editorial signal: Rhode / Moon Juice / Maison Matcha all use overhead for product heroes. Reads more contemporary than the 3/4 of A.",
+      "Real estate efficiency: Hero-split LEFT has limited width — overhead fills the slot with product, not environment.",
+      "Mood: Golden hour + speckled stoneware = artisanal premium without going rustic-cluttered."
+    ],
+    "honorable_mention": "Variant A is the cleanest brand-perfection match (smooth ceramic, minimalist Rhode-Skin feel). Pick A only if Charles wants polished-minimalist over color-saturation/drink-desire.",
+    "do_not_pick": "C — plant foliage is too present for a hero slot meant to break the 'wellness = privation' objection. The drink should dominate, not the environment."
+  },
+  "next_step": "STOP. Await Charles validation: 'VALIDATED photo 1 variant [A/B/C]'. On validation, optionally re-gen at 2k for hero-grade resolution (1760x2200 cropped), then integrate into sections/u2-hero-split.liquid replacing the SVG mug placeholder on side LEFT. Push to dev theme uburn-us-premium-v2 #186066567487. Live theme #185967575359 UNTOUCHED.",
+  "blocking_rules_respected": [
+    "Live theme #185967575359 not modified",
+    "One photo at a time, no integration before Charles validation",
+    "Engine locked to gpt_image_2 (feedback_creative_engine_lock)",
+    "Color trick applied: 'blue-violet NOT pink' (project_higgsfield_gpt_image_2)",
+    "1k high used (avoided 2k 502 quirk)"
+  ]
+}

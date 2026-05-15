@@ -381,5 +381,135 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    {%- comment -%} ═══ U2 FAILSAFE HAMBURGER DRAWER (self-injected) ═══ {%- endcomment -%}
+    <style>
+      #u2-failsafe-drawer {
+        position: fixed; inset: 0; z-index: 999;
+        background: rgba(26,15,46,0.65);
+        backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        opacity: 0; visibility: hidden;
+        transition: opacity 0.35s ease, visibility 0s 0.35s linear;
+      }
+      #u2-failsafe-drawer.is-open { opacity: 1; visibility: visible; transition-delay: 0s; }
+      #u2-failsafe-drawer .u2-fsd__panel {
+        position: absolute; top: 0; bottom: 0; left: 0;
+        width: 88%; max-width: 440px;
+        background: #F8F4EE;
+        padding: 28px 32px;
+        transform: translateX(-100%);
+        transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+        display: flex; flex-direction: column;
+        gap: 28px; overflow-y: auto;
+        box-shadow: 8px 0 60px rgba(26,15,46,0.18);
+      }
+      #u2-failsafe-drawer.is-open .u2-fsd__panel { transform: translateX(0); }
+      .u2-fsd__head {
+        display: flex; align-items: center; justify-content: space-between;
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgba(107,78,158,0.15);
+      }
+      .u2-fsd__logo {
+        font-family: Helvetica, sans-serif; font-style: italic;
+        font-weight: 900; font-size: 22px; color: #1A0F2E;
+        letter-spacing: -0.02em; text-decoration: none;
+      }
+      .u2-fsd__close {
+        width: 40px; height: 40px; border-radius: 50%;
+        border: 0; background: transparent; cursor: pointer;
+        font-size: 22px; line-height: 1; color: #1A0F2E;
+      }
+      .u2-fsd__close:hover { background: rgba(107,78,158,0.08); }
+      .u2-fsd__nav { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+      .u2-fsd__nav a {
+        display: block; padding: 10px 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 32px; font-weight: 400; line-height: 1.1;
+        letter-spacing: -0.02em; color: #1A0F2E;
+        text-decoration: none;
+        transition: color 0.2s ease, transform 0.2s ease;
+      }
+      .u2-fsd__nav a:hover { color: #6B4E9E; transform: translateX(4px); }
+      .u2-fsd__cta {
+        display: inline-flex; align-items: center; justify-content: center;
+        background: #1A0F2E; color: #F8F4EE;
+        padding: 16px 28px; border-radius: 999px;
+        font-family: Helvetica, sans-serif; font-size: 14px;
+        font-weight: 700; letter-spacing: 0.06em;
+        text-transform: lowercase; text-decoration: none;
+        margin-top: 12px;
+      }
+      .u2-fsd__footer {
+        margin-top: auto; padding-top: 24px;
+        border-top: 1px solid rgba(107,78,158,0.15);
+        display: flex; flex-direction: column; gap: 14px;
+      }
+      .u2-fsd__social { display: flex; gap: 12px; }
+      .u2-fsd__social a {
+        width: 38px; height: 38px; border-radius: 50%;
+        background: rgba(107,78,158,0.08);
+        display: inline-flex; align-items: center; justify-content: center;
+        color: #1A0F2E; text-decoration: none;
+      }
+      .u2-fsd__social a:hover { background: #6B4E9E; color: white; }
+      .u2-fsd__contact { font-family: Helvetica, sans-serif; font-size: 13px; color: #4A3A60; text-decoration: none; }
+      .u2-fsd__legal { font-family: Helvetica, sans-serif; font-size: 11px; color: #8A7AA0; letter-spacing: 0.04em; }
+    </style>
+
+    <div id="u2-failsafe-drawer" aria-hidden="true">
+      <div class="u2-fsd__panel" role="dialog" aria-label="Site navigation" aria-modal="true">
+        <div class="u2-fsd__head">
+          <a href="/" class="u2-fsd__logo" aria-label="UBurn — Home">UBurn</a>
+          <button type="button" class="u2-fsd__close" data-u2-fsd-close aria-label="Close menu">×</button>
+        </div>
+        <nav aria-label="Primary navigation">
+          <ul class="u2-fsd__nav">
+            <li><a href="/products/ube-poudre">Shop the ritual</a></li>
+            <li><a href="/pages/the-science">The science</a></li>
+            <li><a href="/pages/our-story">Our story</a></li>
+            <li><a href="/pages/reviews">Reviews</a></li>
+            <li><a href="/pages/faq">FAQ</a></li>
+            <li><a href="/pages/contact">Contact</a></li>
+          </ul>
+        </nav>
+        <a class="u2-fsd__cta" href="/products/ube-poudre">order — from $34.50</a>
+        <div class="u2-fsd__footer">
+          <div class="u2-fsd__social" aria-label="Follow us">
+            <a href="https://instagram.com/uburn.co" aria-label="Instagram" rel="noopener" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
+            </a>
+            <a href="https://tiktok.com/@uburn.co" aria-label="TikTok" rel="noopener" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.84-.1z"/></svg>
+            </a>
+          </div>
+          <a class="u2-fsd__contact" href="mailto:hello@uburn.co">✉ hello@uburn.co</a>
+          <div class="u2-fsd__legal">© {{ 'now' | date: '%Y' }} UBurn · French brand · Made for the U.S.</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    (function(){
+      var drawer = document.getElementById('u2-failsafe-drawer');
+      if (!drawer) return;
+      function open(){ drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden','false'); document.documentElement.style.overflow='hidden'; }
+      function close(){ drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden','true'); document.documentElement.style.overflow=''; }
+      // Bind to ANY menu trigger (legacy + custom)
+      document.addEventListener('click', function(e){
+        var t = e.target.closest('[data-u2-drawer-trigger], [data-menu-drawer-trigger], .u2-header__menu-btn, button[aria-label="Open menu"], button[aria-label="Menu"], .menu-drawer__open-button');
+        if (t) {
+          e.preventDefault();
+          e.stopPropagation();
+          open();
+          return;
+        }
+        // Close button or backdrop
+        if (e.target.closest('[data-u2-fsd-close]') || e.target === drawer) {
+          close();
+        }
+      }, true);
+      document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+    })();
+    </script>
   </body>
 </html>

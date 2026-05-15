@@ -101,15 +101,7 @@
     <div class="u2-3ways__grid">
       <article class="u2-3ways__card u2-reveal delay-1">
         <div class="u2-3ways__media u2-3ways__media--hot">
-          <svg class="u2-3ways__svg" viewBox="0 0 200 180" fill="none" aria-hidden="true">
-            <path d="M75 25 Q70 20 75 12 M95 25 Q90 20 95 12 M115 25 Q110 20 115 12" stroke="rgba(248,244,238,0.7)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-            <path d="M50 50 L150 50 L145 150 Q145 165 125 165 L75 165 Q55 165 55 150 Z" fill="rgba(248,244,238,0.95)" stroke="rgba(26,15,46,0.15)" stroke-width="2"/>
-            <path d="M150 75 Q175 80 175 110 Q175 140 150 145" fill="none" stroke="rgba(248,244,238,0.85)" stroke-width="5" stroke-linecap="round"/>
-            <ellipse cx="100" cy="60" rx="46" ry="8" fill="#8B6FBF"/>
-            <circle cx="88" cy="58" r="2.5" fill="rgba(248,244,238,0.6)"/>
-            <circle cx="108" cy="60" r="2" fill="rgba(248,244,238,0.5)"/>
-          </svg>
-          <span class="u2-3ways__tag-img">📍 hot latte · TBD</span>
+          <img src="{{ 'uburn-us-homepage-01-hot-latte-hero-a.png' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Latte ube violet chaud servi en tasse blanche{% else %}Hot violet ube latte in a white ceramic mug{% endif %}" loading="lazy" decoding="async" width="880" height="1168" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <div class="u2-3ways__body">
           <div class="u2-3ways__num">01</div>
@@ -125,15 +117,7 @@
 
       <article class="u2-3ways__card u2-reveal delay-2">
         <div class="u2-3ways__media u2-3ways__media--iced">
-          <svg class="u2-3ways__svg" viewBox="0 0 180 200" fill="none" aria-hidden="true">
-            <path d="M55 35 L125 35 L118 175 Q118 188 100 188 Q82 188 82 188 L60 188 Q62 188 62 175 Z" fill="rgba(248,244,238,0.92)" stroke="rgba(26,15,46,0.15)" stroke-width="2"/>
-            <path d="M62 80 L118 80 L114 175 Q114 184 100 184 L86 184 Q66 184 66 175 Z" fill="#8B6FBF"/>
-            <rect x="75" y="95" width="14" height="14" rx="2" fill="rgba(248,244,238,0.7)" transform="rotate(10 82 102)"/>
-            <rect x="92" y="115" width="12" height="12" rx="2" fill="rgba(248,244,238,0.65)" transform="rotate(-15 98 121)"/>
-            <rect x="80" y="135" width="11" height="11" rx="2" fill="rgba(248,244,238,0.6)" transform="rotate(8 85 140)"/>
-            <line x1="100" y1="20" x2="105" y2="100" stroke="rgba(248,244,238,0.85)" stroke-width="4" stroke-linecap="round"/>
-          </svg>
-          <span class="u2-3ways__tag-img">📍 iced latte · TBD</span>
+          <img src="{{ 'uburn-us-homepage-02-iced-ritual-a.png' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Latte ube violet glacé dans un grand verre sur marbre{% else %}Iced violet ube latte in a tall glass on marble{% endif %}" loading="lazy" decoding="async" width="880" height="1168" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <div class="u2-3ways__body">
           <div class="u2-3ways__num">02</div>

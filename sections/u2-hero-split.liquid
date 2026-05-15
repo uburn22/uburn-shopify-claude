@@ -172,32 +172,9 @@
       <span class="u2-herospl__label">indulgent</span>
       <div class="u2-herospl__art">
         {%- if section.settings.image_left != blank -%}
-          {{ section.settings.image_left | image_url: width: 800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: 'Hot violet latte', width: section.settings.image_left.width, height: section.settings.image_left.height }}
+          {{ section.settings.image_left | image_url: width: 800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: 'Hot violet ube latte in a white ceramic mug', width: section.settings.image_left.width, height: section.settings.image_left.height }}
         {%- else -%}
-          <svg class="u2-svg-mug" viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <linearGradient id="mugGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgba(248,244,238,0.95)"/>
-                <stop offset="100%" stop-color="rgba(232,220,239,0.85)"/>
-              </linearGradient>
-              <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#8B6FBF"/>
-                <stop offset="100%" stop-color="#5A3D80"/>
-              </linearGradient>
-            </defs>
-            <!-- Steam -->
-            <path d="M80 30 Q70 20 80 10 M100 30 Q90 20 100 10 M120 30 Q110 20 120 10" stroke="rgba(248,244,238,0.6)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-            <!-- Mug body -->
-            <path d="M50 60 L150 60 L145 200 Q145 220 120 220 L80 220 Q55 220 55 200 Z" fill="url(#mugGrad)" stroke="rgba(26,15,46,0.15)" stroke-width="2"/>
-            <!-- Handle -->
-            <path d="M150 90 Q180 95 180 130 Q180 165 150 170" fill="none" stroke="rgba(248,244,238,0.85)" stroke-width="6" stroke-linecap="round"/>
-            <!-- Liquid surface -->
-            <ellipse cx="100" cy="75" rx="48" ry="9" fill="url(#liquidGrad)"/>
-            <!-- Foam dots -->
-            <circle cx="86" cy="72" r="3" fill="rgba(248,244,238,0.6)"/>
-            <circle cx="106" cy="76" r="2" fill="rgba(248,244,238,0.5)"/>
-            <circle cx="114" cy="71" r="2.5" fill="rgba(248,244,238,0.55)"/>
-          </svg>
+          <img class="u2-herospl__photo" src="{{ 'uburn-us-homepage-01-hot-latte-hero-a.png' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Latte ube violet servi dans une tasse en céramique blanche, lumière du matin{% else %}Hot violet ube latte in a white ceramic mug, morning light{% endif %}" loading="eager" fetchpriority="high" width="880" height="1168" style="width:100%;height:100%;object-fit:cover;border-radius:24px;display:block;">
         {%- endif -%}
       </div>
       <span class="u2-herospl__tag">hot latte · vanilla–hazelnut</span>
