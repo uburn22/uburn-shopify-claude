@@ -1,0 +1,196 @@
+{%- comment -%}
+  UBurn V2 — PDP Reviews (3 detailed cards)
+{%- endcomment -%}
+<style>
+  .u2-pdp-reviews { padding: 80px 20px; background: var(--u2-cream); }
+  .u2-pdp-reviews__inner { max-width: 1200px; margin: 0 auto; }
+  .u2-pdp-reviews__head { text-align: center; margin-bottom: 48px; max-width: 720px; margin-left: auto; margin-right: auto; }
+  .u2-pdp-reviews__eyebrow {
+    display: inline-block;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--u2-iris);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .u2-pdp-reviews__title {
+    font-family: var(--u2-serif);
+    font-size: 40px;
+    line-height: 1.1;
+    font-weight: 400;
+    color: var(--u2-plum-black);
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+  .u2-pdp-reviews__title em { font-style: italic; color: var(--u2-iris); }
+  .u2-pdp-reviews__sub {
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    color: var(--u2-plum);
+    margin: 0;
+  }
+  .u2-pdp-reviews__stars {
+    display: inline-flex;
+    gap: 4px;
+    font-size: 18px;
+    color: #f59e0b;
+    letter-spacing: 1px;
+    margin-top: 12px;
+  }
+  .u2-pdp-reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .u2-pdp-review-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 24px rgba(42, 16, 84, 0.08);
+    border: 1px solid rgba(107, 78, 158, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .u2-pdp-review-card__stars { font-size: 16px; color: #f59e0b; letter-spacing: 1.5px; }
+  .u2-pdp-review-card__text {
+    font-family: var(--u2-serif);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--u2-plum-black);
+    margin: 0;
+    font-style: italic;
+  }
+  .u2-pdp-review-card__verified {
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--u2-green);
+    font-weight: 700;
+  }
+  .u2-pdp-review-card__author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid rgba(107, 78, 158, 0.08);
+  }
+  .u2-pdp-review-card__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(107, 78, 158, 0.12);
+    color: var(--u2-iris);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--u2-serif);
+    font-size: 18px;
+    overflow: hidden;
+  }
+  .u2-pdp-review-card__avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .u2-pdp-review-card__name {
+    font-family: var(--u2-sans);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-review-card__role {
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    color: var(--u2-mauve);
+    margin-top: 2px;
+  }
+  .u2-pdp-reviews__disc {
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    color: var(--u2-mauve);
+    text-align: center;
+    margin: 24px auto 0;
+    max-width: 640px;
+    line-height: 1.6;
+  }
+  @media (max-width: 900px) {
+    .u2-pdp-reviews { padding: 60px 16px; }
+    .u2-pdp-reviews__grid { grid-template-columns: 1fr; }
+    .u2-pdp-reviews__title { font-size: 30px; }
+  }
+</style>
+<section class="u2-root u2-pdp-reviews" aria-labelledby="u2-pdp-reviews-title">
+  <div class="u2-pdp-reviews__inner">
+    <div class="u2-pdp-reviews__head">
+      <span class="u2-pdp-reviews__eyebrow">{{ section.settings.eyebrow | default: 'They share' }}</span>
+      <h2 class="u2-pdp-reviews__title" id="u2-pdp-reviews-title">{{ section.settings.title | default: 'They added UBURN <em>to their routine.</em>' }}</h2>
+      <p class="u2-pdp-reviews__sub">{{ section.settings.subtitle | default: 'Simple routines. Real moments.' }}</p>
+      <div class="u2-pdp-reviews__stars" aria-label="4.7 out of 5 stars">★★★★★</div>
+    </div>
+    <div class="u2-pdp-reviews__grid">
+      {% for block in section.blocks %}
+        <article class="u2-pdp-review-card" {{ block.shopify_attributes }}>
+          <div class="u2-pdp-review-card__stars" aria-label="5 stars">★★★★★</div>
+          <p class="u2-pdp-review-card__text">"{{ block.settings.text }}"</p>
+          <div class="u2-pdp-review-card__verified">✓ Verified purchase</div>
+          <div class="u2-pdp-review-card__author">
+            <div class="u2-pdp-review-card__avatar">
+              {% if block.settings.avatar %}
+                <img src="{{ block.settings.avatar | image_url: width: 100 }}" alt="{{ block.settings.name | escape }}" loading="lazy" decoding="async" width="44" height="44">
+              {% else %}
+                {{ block.settings.name | slice: 0, 1 }}
+              {% endif %}
+            </div>
+            <div>
+              <div class="u2-pdp-review-card__name">{{ block.settings.name }}</div>
+              <div class="u2-pdp-review-card__role">{{ block.settings.role }}</div>
+            </div>
+          </div>
+        </article>
+      {% else %}
+        <article class="u2-pdp-review-card"><div class="u2-pdp-review-card__stars">★★★★★</div><p class="u2-pdp-review-card__text">"I tried so many things that made me feel weird or jittery. UBurn is the first that just feels like a calm afternoon ritual."</p><div class="u2-pdp-review-card__verified">✓ Verified purchase</div><div class="u2-pdp-review-card__author"><div class="u2-pdp-review-card__avatar">S</div><div><div class="u2-pdp-review-card__name">Sarah J.</div><div class="u2-pdp-review-card__role">32 · Brooklyn, NY</div></div></div></article>
+        <article class="u2-pdp-review-card"><div class="u2-pdp-review-card__stars">★★★★★</div><p class="u2-pdp-review-card__text">"The purple drink has become my afternoon ritual. My pantry stays closed — and I actually look forward to 4pm now."</p><div class="u2-pdp-review-card__verified">✓ Verified purchase</div><div class="u2-pdp-review-card__author"><div class="u2-pdp-review-card__avatar">J</div><div><div class="u2-pdp-review-card__name">Jennifer M.</div><div class="u2-pdp-review-card__role">38 · Miami, FL</div></div></div></article>
+        <article class="u2-pdp-review-card"><div class="u2-pdp-review-card__stars">★★★★★</div><p class="u2-pdp-review-card__text">"I love that it's caffeine-free. It's become my little afternoon ritual — vanilla notes, no chemical aftertaste."</p><div class="u2-pdp-review-card__verified">✓ Verified purchase</div><div class="u2-pdp-review-card__author"><div class="u2-pdp-review-card__avatar">R</div><div><div class="u2-pdp-review-card__name">Rachel B.</div><div class="u2-pdp-review-card__role">29 · Denver, CO</div></div></div></article>
+      {% endfor %}
+    </div>
+    {% if section.settings.show_disclaimer %}
+      <p class="u2-pdp-reviews__disc">Testimonials reflect individual experiences. Individual results vary. These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+    {% endif %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 PDP Reviews",
+  "tag": "section",
+  "class": "shopify-section--u2",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "They share" },
+    { "type": "text", "id": "title", "label": "Title (em supported)", "default": "They added UBURN <em>to their routine.</em>" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Simple routines. Real moments." },
+    { "type": "checkbox", "id": "show_disclaimer", "label": "Show FDA disclaimer", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Review text" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "role", "label": "Age + location" },
+        { "type": "image_picker", "id": "avatar", "label": "Avatar (optional)" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "U2 PDP Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "text": "I tried so many things that made me feel weird or jittery. UBurn is the first that just feels like a calm afternoon ritual.", "name": "Sarah J.", "role": "32 · Brooklyn, NY" } },
+        { "type": "review", "settings": { "text": "The purple drink has become my afternoon ritual. My pantry stays closed — and I actually look forward to 4pm now.", "name": "Jennifer M.", "role": "38 · Miami, FL" } },
+        { "type": "review", "settings": { "text": "I love that it's caffeine-free. It's become my little afternoon ritual — vanilla notes, no chemical aftertaste.", "name": "Rachel B.", "role": "29 · Denver, CO" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

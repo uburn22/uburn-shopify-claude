@@ -1,0 +1,145 @@
+{%- comment -%}
+  UBurn V2 — PDP FAQ accordion (10 questions)
+{%- endcomment -%}
+<style>
+  .u2-pdp-faq { padding: 80px 20px; background: var(--u2-cream-deep); }
+  .u2-pdp-faq__inner { max-width: 880px; margin: 0 auto; }
+  .u2-pdp-faq__head { text-align: center; margin-bottom: 40px; }
+  .u2-pdp-faq__eyebrow {
+    display: inline-block;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--u2-iris);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .u2-pdp-faq__title {
+    font-family: var(--u2-serif);
+    font-size: 40px;
+    line-height: 1.1;
+    font-weight: 400;
+    color: var(--u2-plum-black);
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+  .u2-pdp-faq__title em { font-style: italic; color: var(--u2-iris); }
+  .u2-pdp-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .u2-pdp-faq-item {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid rgba(107, 78, 158, 0.1);
+    overflow: hidden;
+    transition: box-shadow 0.2s var(--u2-ease-smooth);
+  }
+  .u2-pdp-faq-item[open] {
+    box-shadow: 0 8px 24px rgba(42, 16, 84, 0.08);
+  }
+  .u2-pdp-faq-item summary {
+    padding: 22px 24px;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-faq-item summary::-webkit-details-marker { display: none; }
+  .u2-pdp-faq-item summary::after {
+    content: '+';
+    font-family: var(--u2-sans);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--u2-iris);
+    line-height: 1;
+    flex-shrink: 0;
+    transition: transform 0.25s var(--u2-ease-smooth);
+  }
+  .u2-pdp-faq-item[open] summary::after { content: '−'; }
+  .u2-pdp-faq-item__body {
+    padding: 0 24px 22px;
+  }
+  .u2-pdp-faq-item__body p {
+    margin: 0;
+    font-family: var(--u2-sans);
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--u2-plum);
+  }
+  @media (max-width: 640px) {
+    .u2-pdp-faq { padding: 60px 16px; }
+    .u2-pdp-faq__title { font-size: 28px; }
+    .u2-pdp-faq-item summary { font-size: 14px; padding: 18px 20px; }
+    .u2-pdp-faq-item__body { padding: 0 20px 20px; }
+  }
+</style>
+<section class="u2-root u2-pdp-faq" aria-labelledby="u2-pdp-faq-title">
+  <div class="u2-pdp-faq__inner">
+    <div class="u2-pdp-faq__head">
+      <span class="u2-pdp-faq__eyebrow">{{ section.settings.eyebrow | default: 'Frequently asked questions' }}</span>
+      <h2 class="u2-pdp-faq__title" id="u2-pdp-faq-title">{{ section.settings.title | default: 'Everything you want to know <em>before ordering.</em>' }}</h2>
+    </div>
+    <div class="u2-pdp-faq__list">
+      {% for block in section.blocks %}
+        <details class="u2-pdp-faq-item" {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question }}</summary>
+          <div class="u2-pdp-faq-item__body"><p>{{ block.settings.answer }}</p></div>
+        </details>
+      {% else %}
+        <details class="u2-pdp-faq-item"><summary>What does UBurn taste like?</summary><div class="u2-pdp-faq-item__body"><p>A smooth vanilla-hazelnut taste, naturally purple, with no chemical aftertaste. Designed to make you come back for more.</p></div></details>
+        <details class="u2-pdp-faq-item"><summary>How do I use it?</summary><div class="u2-pdp-faq-item__body"><p>Mix one scoop in 8-10 oz of water, milk, or plant-based milk. Stir, wait a few seconds for the texture to form, and drink. Ready in under a minute.</p></div></details>
+        <details class="u2-pdp-faq-item"><summary>Water or milk, which is better?</summary><div class="u2-pdp-faq-item__body"><p>Water for a light, refreshing version. Milk, almond milk, or oat milk for a smoother, creamier texture. Both work — it is a matter of taste.</p></div></details>
+        <details class="u2-pdp-faq-item"><summary>When should I take UBurn?</summary><div class="u2-pdp-faq-item__body"><p>Take it before a meal or when cravings arise, for example around 4PM. For glucomannan, the recommended use is 3 doses of 1g per day before meals, with adequate water.</p></div></details>
+        <details class="u2-pdp-faq-item"><summary>Does UBurn contain caffeine?</summary><div class="u2-pdp-faq-item__body"><p>No, UBurn is caffeine-free. Drink it in the afternoon or evening without disrupting sleep.</p></div></details>
+        <details class="u2-pdp-faq-item"><summary>How long does a routine last?</summary><div class="u2-pdp-faq-item__body"><p>Starter 90g: about 30 days at 1 scoop/day. Maximum Pack 270g: about 30 days at 3 scoops/day. You choose the pace that suits you.</p></div></details>
+        <details class="u2-pdp-faq-item"><summary>How long is delivery?</summary><div class="u2-pdp-faq-item__body"><p>Ships from France. Free U.S. shipping on orders $40+, typically delivered in 2-4 business days after shipping.</p></div></details>
+        <details class="u2-pdp-faq-item"><summary>Can I start with the Starter pack?</summary><div class="u2-pdp-faq-item__body"><p>Yes — it is actually the recommended format to try the UBurn routine before moving on to the Maximum Pack if you want the best price per scoop.</p></div></details>
+        <details class="u2-pdp-faq-item"><summary>Is it compatible with a diet?</summary><div class="u2-pdp-faq-item__body"><p>Yes, UBurn can fit into a balanced diet and a healthy lifestyle. It is not a miracle solution — just a routine that helps with cravings.*</p></div></details>
+        <details class="u2-pdp-faq-item"><summary>Is it safe during pregnancy or breastfeeding?</summary><div class="u2-pdp-faq-item__body"><p>As a precaution, UBurn is not recommended during pregnancy or breastfeeding.</p></div></details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 PDP FAQ",
+  "tag": "section",
+  "class": "shopify-section--u2",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Frequently asked questions" },
+    { "type": "text", "id": "title", "label": "Title (em supported)", "default": "Everything you want to know <em>before ordering.</em>" }
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "textarea", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "U2 PDP FAQ",
+      "blocks": [
+        { "type": "qa", "settings": { "question": "What does UBurn taste like?", "answer": "A smooth vanilla-hazelnut taste, naturally purple, with no chemical aftertaste. Designed to make you come back for more." } },
+        { "type": "qa", "settings": { "question": "How do I use it?", "answer": "Mix one scoop in 8-10 oz of water, milk, or plant-based milk. Stir, wait a few seconds for the texture to form, and drink. Ready in under a minute." } },
+        { "type": "qa", "settings": { "question": "Does UBurn contain caffeine?", "answer": "No, UBurn is caffeine-free. Drink it in the afternoon or evening without disrupting sleep." } },
+        { "type": "qa", "settings": { "question": "How long does a routine last?", "answer": "Starter 90g: about 30 days at 1 scoop/day. Maximum Pack 270g: about 30 days at 3 scoops/day. You choose the pace that suits you." } },
+        { "type": "qa", "settings": { "question": "How long is delivery?", "answer": "Ships from France. Free U.S. shipping on orders $40+, typically delivered in 2-4 business days after shipping." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

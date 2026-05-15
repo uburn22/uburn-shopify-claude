@@ -1,0 +1,126 @@
+{%- comment -%}
+  UBurn V2 — PDP "Why UBURN is different" — 6 differentiator cards
+{%- endcomment -%}
+<style>
+  .u2-pdp-diff { padding: 80px 20px; background: var(--u2-cream-deep); }
+  .u2-pdp-diff__inner { max-width: 1200px; margin: 0 auto; }
+  .u2-pdp-diff__head { text-align: center; margin-bottom: 48px; }
+  .u2-pdp-diff__eyebrow {
+    display: inline-block;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--u2-iris);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .u2-pdp-diff__title {
+    font-family: var(--u2-serif);
+    font-size: 44px;
+    line-height: 1.05;
+    font-weight: 400;
+    color: var(--u2-plum-black);
+    margin: 0;
+    letter-spacing: -0.025em;
+  }
+  .u2-pdp-diff__title em { font-style: italic; color: var(--u2-iris); }
+  .u2-pdp-diff__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .u2-pdp-diff-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 20px rgba(42, 16, 84, 0.06);
+    border: 1px solid rgba(107, 78, 158, 0.08);
+    transition: transform 0.3s var(--u2-ease-smooth), box-shadow 0.3s var(--u2-ease-smooth);
+  }
+  .u2-pdp-diff-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(42, 16, 84, 0.12);
+  }
+  .u2-pdp-diff-card__title {
+    font-family: var(--u2-serif);
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--u2-iris-deep);
+    margin: 0 0 8px;
+    letter-spacing: -0.015em;
+  }
+  .u2-pdp-diff-card__copy {
+    font-family: var(--u2-sans);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--u2-plum);
+    margin: 0;
+  }
+  @media (max-width: 900px) {
+    .u2-pdp-diff { padding: 60px 16px; }
+    .u2-pdp-diff__grid { grid-template-columns: repeat(2, 1fr); }
+    .u2-pdp-diff__title { font-size: 32px; }
+  }
+  @media (max-width: 560px) {
+    .u2-pdp-diff__grid { grid-template-columns: 1fr; }
+  }
+</style>
+<section class="u2-root u2-pdp-diff" aria-labelledby="u2-pdp-diff-title">
+  <div class="u2-pdp-diff__inner">
+    <div class="u2-pdp-diff__head">
+      <span class="u2-pdp-diff__eyebrow">{{ section.settings.eyebrow | default: 'What makes UBurn different' }}</span>
+      <h2 class="u2-pdp-diff__title" id="u2-pdp-diff-title">{{ section.settings.title | default: 'Why UBURN <em>is different.</em>' }}</h2>
+    </div>
+    <div class="u2-pdp-diff__grid">
+      {% for block in section.blocks %}
+        <article class="u2-pdp-diff-card" {{ block.shopify_attributes }}>
+          <h3 class="u2-pdp-diff-card__title">{{ block.settings.title }}</h3>
+          <p class="u2-pdp-diff-card__copy">{{ block.settings.copy }}</p>
+        </article>
+      {% else %}
+        <article class="u2-pdp-diff-card"><h3 class="u2-pdp-diff-card__title">Caffeine-free</h3><p class="u2-pdp-diff-card__copy">A gentle routine, no stimulant effect.</p></article>
+        <article class="u2-pdp-diff-card"><h3 class="u2-pdp-diff-card__title">30 kcal per scoop</h3><p class="u2-pdp-diff-card__copy">A light ritual that fits easily into your day.</p></article>
+        <article class="u2-pdp-diff-card"><h3 class="u2-pdp-diff-card__title">No added sugar</h3><p class="u2-pdp-diff-card__copy">An indulgent alternative to sugary snacks.</p></article>
+        <article class="u2-pdp-diff-card"><h3 class="u2-pdp-diff-card__title">Vanilla &amp; hazelnut notes</h3><p class="u2-pdp-diff-card__copy">A smooth, natural taste designed to make you come back for more.</p></article>
+        <article class="u2-pdp-diff-card"><h3 class="u2-pdp-diff-card__title">Cancel anytime</h3><p class="u2-pdp-diff-card__copy">Flexible subscription or one-time — your choice, no commitment.</p></article>
+        <article class="u2-pdp-diff-card"><h3 class="u2-pdp-diff-card__title">Ready in 30 seconds</h3><p class="u2-pdp-diff-card__copy">Just mix with water, milk, or plant-based milk.</p></article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 PDP Differentiators",
+  "tag": "section",
+  "class": "shopify-section--u2",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "What makes UBurn different" },
+    { "type": "text", "id": "title", "label": "Title (em supported)", "default": "Why UBURN <em>is different.</em>" }
+  ],
+  "blocks": [
+    {
+      "type": "diff",
+      "name": "Differentiator",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "copy", "label": "Copy" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "U2 PDP Differentiators",
+      "blocks": [
+        { "type": "diff", "settings": { "title": "Caffeine-free", "copy": "A gentle routine, no stimulant effect." } },
+        { "type": "diff", "settings": { "title": "30 kcal per scoop", "copy": "A light ritual that fits easily into your day." } },
+        { "type": "diff", "settings": { "title": "No added sugar", "copy": "An indulgent alternative to sugary snacks." } },
+        { "type": "diff", "settings": { "title": "Vanilla & hazelnut notes", "copy": "A smooth, natural taste designed to make you come back for more." } },
+        { "type": "diff", "settings": { "title": "Cancel anytime", "copy": "Flexible subscription or one-time — your choice, no commitment." } },
+        { "type": "diff", "settings": { "title": "Ready in 30 seconds", "copy": "Just mix with water, milk, or plant-based milk." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
