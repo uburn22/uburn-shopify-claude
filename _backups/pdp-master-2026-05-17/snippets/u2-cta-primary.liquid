@@ -1,0 +1,17 @@
+{%- comment -%}
+  UBurn V2 CTA primary
+  Usage: {% render 'u2-cta-primary', text: 'start my pack', link: '/products/x', full_width: true %}
+{%- endcomment -%}
+{%- liquid
+  assign cls = 'u2-cta'
+  if full_width
+    assign cls = cls | append: ' u2-cta--full'
+  endif
+  if on_dark
+    assign cls = cls | append: ' u2-cta--on-dark'
+  endif
+-%}
+<a href="{{ link | default: '#' }}" class="{{ cls }}" aria-label="{{ text | escape }}">
+  <span>{{ text }}</span>
+  <span class="u2-cta__arrow" aria-hidden="true">→</span>
+</a>

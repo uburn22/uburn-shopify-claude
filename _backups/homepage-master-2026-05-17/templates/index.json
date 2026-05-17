@@ -1,0 +1,100 @@
+{
+  "sections": {
+    "hero": {
+      "type": "u2-hero-split",
+      "settings": {
+        "product": "ube-poudre",
+        "variant_id": "51289200034111"
+      }
+    },
+    "trust-band": {
+      "type": "u2-trust-band",
+      "settings": {}
+    },
+    "three-ways": {
+      "type": "u2-three-ways",
+      "settings": {}
+    },
+    "marquee": {
+      "type": "u2-marquee",
+      "settings": {}
+    },
+    "problem": {
+      "type": "u2-problem",
+      "settings": {}
+    },
+    "formula": {
+      "type": "u2-formula-grid",
+      "settings": {}
+    },
+    "efsa": {
+      "type": "u2-efsa-block",
+      "settings": {}
+    },
+    "stats": {
+      "type": "u2-stats",
+      "settings": {}
+    },
+    "violet-bottle": {
+      "type": "u2-violet-bottle",
+      "settings": {}
+    },
+    "pricing": {
+      "type": "u2-pricing-cards",
+      "settings": {
+        "product": "ube-poudre",
+        "show_bonus": true
+      }
+    },
+    "compare": {
+      "type": "u2-comparison",
+      "settings": {}
+    },
+    "before-after": {
+      "type": "u2-before-after",
+      "settings": {}
+    },
+    "craft": {
+      "type": "u2-craft",
+      "settings": {}
+    },
+    "guarantee": {
+      "type": "u2-guarantee-bar",
+      "settings": {}
+    },
+    "final-cta": {
+      "type": "u2-final-cta",
+      "settings": {
+        "product": "ube-poudre",
+        "variant_id": "51289200034111"
+      }
+    },
+    "newsletter": {
+      "type": "u2-newsletter",
+      "settings": {}
+    },
+    "moodboard": {
+      "type": "u2-moodboard",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "trust-band",
+    "three-ways",
+    "marquee",
+    "problem",
+    "formula",
+    "efsa",
+    "stats",
+    "violet-bottle",
+    "pricing",
+    "compare",
+    "before-after",
+    "craft",
+    "moodboard",
+    "guarantee",
+    "final-cta",
+    "newsletter"
+  ]
+}

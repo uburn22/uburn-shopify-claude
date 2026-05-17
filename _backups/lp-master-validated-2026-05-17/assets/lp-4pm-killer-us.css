@@ -1,0 +1,318 @@
+/* ============================================================================
+   UBurn LP "4pm Killer US" — full styles
+   Mobile-first 430px max-width, palette iris/lavender/plum/bone
+   Created 2026-05-17
+   ============================================================================ */
+
+/* ----- Reset + base ----- */
+.lp4 *, .lp4 *::before, .lp4 *::after { margin: 0; padding: 0; box-sizing: border-box; }
+.lp4 { font-family: 'Red Hat Text', system-ui, -apple-system, sans-serif; color: #2A1B3D; background: #F8F4EE; line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.lp4 a { color: inherit; text-decoration: none; }
+.lp4 img { max-width: 100%; display: block; }
+.lp4 ul, .lp4 ol { list-style: none; }
+.lp4 button { font-family: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+/* ----- Tokens ----- */
+.lp4 {
+  --iris: #6B4E9E;
+  --iris-bright: #8B6FBF;
+  --iris-deep: #5A3D80;
+  --lavender: #B89DD9;
+  --lavender-soft: #E8DCEF;
+  --plum: #3D2659;
+  --plum-deep: #2A1B3D;
+  --plum-black: #1A0F2E;
+  --bone: #F8F4EE;
+  --cream: #FAF6F0;
+  --champagne: #F5E6D3;
+  --text-body: #3A2E4A;
+  --text-muted: #7a7585;
+  --serif: "Times New Roman", "Times", Georgia, serif;
+  --sans: 'Red Hat Text', system-ui, -apple-system, sans-serif;
+  --shell: 430px;
+  --gutter: 20px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ----- Shell (mobile-first 430px) ----- */
+.lp4__shell { width: 100%; max-width: var(--shell); margin: 0 auto; padding: 0 var(--gutter); }
+.lp4__shell--full { padding: 0; max-width: var(--shell); margin: 0 auto; }
+
+@media (min-width: 768px) {
+  .lp4 { max-width: var(--shell); margin: 0 auto; box-shadow: 0 0 40px rgba(42, 27, 61, 0.06); }
+}
+
+/* ----- Typography ----- */
+.lp4__eyebrow { font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--iris); font-weight: 600; }
+.lp4__h1 { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 44px; line-height: 1.02; letter-spacing: -0.02em; color: var(--plum-deep); }
+.lp4__h1 em { font-style: italic; color: var(--iris); font-weight: 400; }
+.lp4__h2 { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 30px; line-height: 1.08; letter-spacing: -0.015em; color: var(--plum-deep); }
+.lp4__h2 em { font-style: italic; color: var(--iris); font-weight: 400; }
+.lp4__h3 { font-family: var(--sans); font-size: 17px; font-weight: 700; color: var(--plum-deep); letter-spacing: -0.005em; }
+.lp4__body { font-size: 15px; line-height: 1.65; color: var(--text-body); }
+.lp4__caption { font-size: 12px; color: var(--text-muted); letter-spacing: 0.04em; }
+
+/* ----- CTA buttons ----- */
+.lp4__cta { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 18px 24px; background: var(--plum-deep); color: var(--bone); font-family: var(--sans); font-size: 14px; font-weight: 700; letter-spacing: 0.22em; text-transform: lowercase; border-radius: 4px; border: 1px solid var(--plum-deep); transition: background 0.4s var(--ease), transform 0.4s var(--ease), box-shadow 0.4s var(--ease); position: relative; overflow: hidden; box-shadow: 0 8px 24px -10px rgba(26, 15, 46, 0.45); }
+.lp4__cta::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%); pointer-events: none; }
+.lp4__cta:hover { background: var(--iris); border-color: var(--iris); transform: translateY(-2px); box-shadow: 0 14px 32px -10px rgba(107, 78, 158, 0.55); }
+.lp4__cta:active { transform: translateY(0); }
+.lp4__cta--secondary { background: transparent; color: var(--plum-deep); border-color: var(--plum-deep); box-shadow: none; }
+.lp4__cta--secondary:hover { background: var(--plum-deep); color: var(--bone); }
+
+.lp4__arrow { display: inline-block; transition: transform 0.3s var(--ease); }
+.lp4__cta:hover .lp4__arrow { transform: translateX(5px); }
+
+/* ============================================================================
+   01. ANNOUNCE BAR
+   ============================================================================ */
+.lp4-announce { background: var(--plum-black); color: var(--bone); text-align: center; padding: 10px 16px; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+.lp4-announce__flag { display: inline-block; margin-right: 6px; font-size: 12px; }
+
+/* ============================================================================
+   02. NAV STICKY
+   ============================================================================ */
+.lp4-nav { position: sticky; top: 0; z-index: 50; background: var(--bone); padding: 12px var(--gutter); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(107, 78, 158, 0.08); }
+.lp4-nav__logo { font-family: var(--sans); font-style: italic; font-weight: 900; font-size: 22px; letter-spacing: -0.02em; color: var(--plum-deep); }
+.lp4-nav__rating { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-body); }
+.lp4-nav__stars { color: var(--iris); letter-spacing: 0.1em; font-size: 11px; }
+
+/* ============================================================================
+   03. HERO
+   ============================================================================ */
+.lp4-hero { padding: 32px var(--gutter) 28px; background: linear-gradient(180deg, var(--bone) 0%, var(--lavender-soft) 100%); position: relative; overflow: hidden; }
+.lp4-hero__eyebrow { display: block; margin-bottom: 14px; }
+.lp4-hero__h1 { margin-bottom: 16px; font-size: 42px; }
+.lp4-hero__sub { font-size: 15px; line-height: 1.6; color: var(--text-body); margin-bottom: 24px; max-width: 32ch; }
+.lp4-hero__price-row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+.lp4-hero__price-from { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+.lp4-hero__price-amt { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 24px; color: var(--plum-deep); }
+.lp4-hero__price-meta { font-size: 11px; color: var(--text-muted); letter-spacing: 0.04em; }
+.lp4-hero__bottle { width: 100%; max-width: 280px; margin: 28px auto 24px; display: block; }
+.lp4-hero__cta { margin-bottom: 18px; }
+.lp4-hero__pay { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 8px; background: rgba(255, 255, 255, 0.5); border-radius: 8px; margin-top: 8px; flex-wrap: wrap; }
+.lp4-hero__pay-icon { height: 18px; opacity: 0.7; }
+.lp4-hero__pay-icon img { height: 100%; width: auto; }
+.lp4-hero__pay-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase; width: 100%; text-align: center; margin-bottom: 4px; opacity: 0.7; }
+.lp4-hero__trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 12px; margin-top: 16px; }
+.lp4-hero__trust span { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--plum); font-weight: 600; }
+.lp4-hero__trust span::before { content: '✦'; margin-right: 4px; color: var(--iris); opacity: 0.6; }
+
+/* ============================================================================
+   04. USP STRIP (4 cells)
+   ============================================================================ */
+.lp4-usp { background: var(--bone); padding: 24px var(--gutter); }
+.lp4-usp__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid rgba(107, 78, 158, 0.12); border-bottom: 1px solid rgba(107, 78, 158, 0.12); }
+.lp4-usp__cell { text-align: center; padding: 18px 6px; border-right: 1px solid rgba(107, 78, 158, 0.08); }
+.lp4-usp__cell:last-child { border-right: 0; }
+.lp4-usp__num { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 28px; color: var(--iris); line-height: 1; margin-bottom: 6px; }
+.lp4-usp__label { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); line-height: 1.3; font-weight: 600; }
+
+/* ============================================================================
+   05. FOUNDER CARD
+   ============================================================================ */
+.lp4-founder { padding: 40px var(--gutter); background: var(--cream); }
+.lp4-founder__card { background: var(--bone); border-radius: 8px; padding: 28px 24px; border: 1px solid rgba(107, 78, 158, 0.1); position: relative; }
+.lp4-founder__card::before { content: '“'; position: absolute; top: 6px; left: 18px; font-family: var(--serif); font-size: 64px; color: var(--lavender); line-height: 1; opacity: 0.5; }
+.lp4-founder__photo { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--lavender), var(--iris)); display: flex; align-items: center; justify-content: center; color: var(--bone); font-family: var(--serif); font-style: italic; font-size: 24px; margin-bottom: 14px; }
+.lp4-founder__quote { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 19px; line-height: 1.45; color: var(--plum-deep); margin-bottom: 18px; }
+.lp4-founder__name { font-size: 13px; font-weight: 700; color: var(--plum-deep); }
+.lp4-founder__role { font-size: 11px; color: var(--text-muted); letter-spacing: 0.04em; }
+
+/* ============================================================================
+   06. SAME SCRIPT (3 cards)
+   ============================================================================ */
+.lp4-script { padding: 48px var(--gutter) 40px; background: var(--bone); }
+.lp4-script__head { text-align: center; margin-bottom: 30px; }
+.lp4-script__h2 { margin-top: 10px; font-size: 28px; }
+.lp4-script__cards { display: flex; flex-direction: column; gap: 14px; }
+.lp4-script__card { background: var(--cream); border-radius: 6px; padding: 20px 22px; border-left: 3px solid var(--iris); }
+.lp4-script__time { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 22px; color: var(--iris-deep); display: block; margin-bottom: 6px; }
+.lp4-script__title { font-size: 15px; font-weight: 700; color: var(--plum-deep); margin-bottom: 4px; }
+.lp4-script__text { font-size: 13px; color: var(--text-body); line-height: 1.55; }
+
+/* ============================================================================
+   07. 3 GESTES
+   ============================================================================ */
+.lp4-gestes { padding: 48px var(--gutter); background: var(--lavender-soft); }
+.lp4-gestes__head { text-align: center; margin-bottom: 32px; }
+.lp4-gestes__h2 { margin-top: 10px; }
+.lp4-gestes__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 24px; }
+.lp4-gestes__step { text-align: center; }
+.lp4-gestes__circle { width: 64px; height: 64px; border-radius: 50%; background: var(--bone); display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; box-shadow: 0 6px 20px -8px rgba(42, 27, 61, 0.2); }
+.lp4-gestes__circle svg { width: 28px; height: 28px; color: var(--iris); }
+.lp4-gestes__num { font-family: var(--serif); font-style: italic; font-size: 16px; color: var(--iris); display: block; margin-bottom: 4px; }
+.lp4-gestes__lbl { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--plum); font-weight: 600; }
+.lp4-gestes__result { background: var(--plum-deep); color: var(--bone); padding: 18px 22px; border-radius: 6px; text-align: center; }
+.lp4-gestes__result-eyebrow { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7; margin-bottom: 6px; }
+.lp4-gestes__result-text { font-family: var(--serif); font-style: italic; font-size: 19px; font-weight: 300; }
+
+/* ============================================================================
+   08. INGREDIENTS TABLE (6 actives)
+   ============================================================================ */
+.lp4-ingred { padding: 48px var(--gutter); background: var(--bone); }
+.lp4-ingred__head { text-align: center; margin-bottom: 28px; }
+.lp4-ingred__h2 { margin-top: 10px; }
+.lp4-ingred__list { display: flex; flex-direction: column; gap: 0; border-top: 1px solid rgba(107, 78, 158, 0.12); }
+.lp4-ingred__row { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; padding: 16px 0; border-bottom: 1px solid rgba(107, 78, 158, 0.12); align-items: start; }
+.lp4-ingred__name { font-size: 14px; font-weight: 700; color: var(--plum-deep); }
+.lp4-ingred__dose { font-size: 12px; color: var(--iris); font-weight: 600; letter-spacing: 0.04em; white-space: nowrap; }
+.lp4-ingred__role { grid-column: 1 / -1; font-size: 12px; color: var(--text-body); line-height: 1.5; margin-top: 4px; }
+.lp4-ingred__badge { display: inline-block; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; background: var(--lavender-soft); color: var(--iris-deep); margin-left: 6px; font-weight: 600; }
+.lp4-ingred__foot { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 16px; line-height: 1.5; max-width: 36ch; margin-left: auto; margin-right: auto; }
+
+/* ============================================================================
+   09. STATS
+   ============================================================================ */
+.lp4-stats { padding: 48px var(--gutter); background: var(--lavender-soft); text-align: center; }
+.lp4-stats__head { margin-bottom: 28px; }
+.lp4-stats__h2 { margin-top: 10px; }
+.lp4-stats__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 24px; }
+.lp4-stats__cell { background: var(--bone); border-radius: 6px; padding: 18px 6px; }
+.lp4-stats__num { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 30px; color: var(--iris); line-height: 1; margin-bottom: 4px; }
+.lp4-stats__lbl { font-size: 10px; letter-spacing: 0.1em; line-height: 1.3; color: var(--text-body); padding: 0 4px; }
+.lp4-stats__rating { display: flex; flex-direction: column; align-items: center; gap: 4px; margin-top: 8px; }
+.lp4-stats__rating-num { font-family: var(--serif); font-style: italic; font-size: 22px; color: var(--plum-deep); }
+.lp4-stats__rating-stars { color: var(--iris); letter-spacing: 0.15em; font-size: 12px; }
+.lp4-stats__rating-meta { font-size: 11px; color: var(--text-muted); }
+.lp4-stats__disclaimer { font-size: 10px; color: var(--text-muted); margin-top: 18px; line-height: 1.5; max-width: 36ch; margin-left: auto; margin-right: auto; }
+
+/* ============================================================================
+   10. PRESS BAR
+   ============================================================================ */
+.lp4-press { padding: 24px var(--gutter); background: var(--bone); }
+.lp4-press__label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); text-align: center; margin-bottom: 14px; }
+.lp4-press__grid { display: flex; align-items: center; justify-content: space-around; gap: 16px; flex-wrap: wrap; opacity: 0.65; }
+.lp4-press__logo { font-family: var(--serif); font-weight: 400; font-style: italic; font-size: 18px; color: var(--plum-deep); letter-spacing: 0.02em; }
+.lp4-press__logo--brut { font-family: var(--sans); font-weight: 900; font-style: normal; letter-spacing: 0.06em; font-size: 16px; }
+.lp4-press__logo--tf1 { font-family: var(--sans); font-weight: 800; font-style: normal; font-size: 15px; letter-spacing: 0.04em; }
+
+/* ============================================================================
+   11. TESTIMONIALS
+   ============================================================================ */
+.lp4-test { padding: 48px var(--gutter); background: var(--cream); }
+.lp4-test__head { text-align: center; margin-bottom: 28px; }
+.lp4-test__h2 { margin-top: 10px; }
+.lp4-test__cards { display: flex; flex-direction: column; gap: 12px; }
+.lp4-test__card { background: var(--bone); border-radius: 6px; padding: 20px 22px; border: 1px solid rgba(107, 78, 158, 0.1); }
+.lp4-test__stars { color: var(--iris); font-size: 12px; letter-spacing: 0.15em; margin-bottom: 8px; }
+.lp4-test__title { font-size: 14px; font-weight: 700; color: var(--plum-deep); margin-bottom: 6px; }
+.lp4-test__body { font-size: 13px; color: var(--text-body); line-height: 1.55; margin-bottom: 12px; }
+.lp4-test__meta { display: flex; align-items: center; gap: 8px; padding-top: 10px; border-top: 1px solid rgba(107, 78, 158, 0.08); }
+.lp4-test__avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--lavender), var(--iris)); color: var(--bone); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-style: italic; font-size: 13px; flex-shrink: 0; }
+.lp4-test__name { font-size: 12px; font-weight: 700; color: var(--plum-deep); }
+.lp4-test__city { font-size: 11px; color: var(--text-muted); }
+.lp4-test__days { font-size: 10px; color: var(--iris); margin-left: auto; letter-spacing: 0.08em; }
+.lp4-test__verified { font-size: 9px; color: var(--text-muted); margin-top: 16px; text-align: center; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* ============================================================================
+   12. OFFER
+   ============================================================================ */
+.lp4-offer { padding: 48px var(--gutter); background: var(--bone); }
+.lp4-offer__head { text-align: center; margin-bottom: 30px; }
+.lp4-offer__h2 { margin-top: 10px; }
+.lp4-offer__sub { font-size: 13px; color: var(--text-muted); margin-top: 10px; }
+.lp4-offer__cards { display: flex; flex-direction: column; gap: 14px; margin-bottom: 22px; }
+.lp4-offer__card { background: var(--cream); border: 1.5px solid rgba(107, 78, 158, 0.15); border-radius: 6px; padding: 22px 22px 24px; position: relative; }
+.lp4-offer__card--pop { background: var(--plum-deep); color: var(--bone); border-color: var(--plum-deep); }
+.lp4-offer__card--pop .lp4-offer__name { color: var(--bone); }
+.lp4-offer__card--pop .lp4-offer__meta { color: rgba(248, 244, 238, 0.7); }
+.lp4-offer__card--pop .lp4-offer__price { color: var(--bone); }
+.lp4-offer__card--pop .lp4-offer__per { color: var(--lavender); }
+.lp4-offer__card--pop .lp4-offer__free { color: var(--lavender); }
+.lp4-offer__badge { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--iris); color: var(--bone); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; font-weight: 700; white-space: nowrap; }
+.lp4-offer__name { font-size: 18px; font-weight: 700; color: var(--plum-deep); margin-bottom: 4px; }
+.lp4-offer__meta { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
+.lp4-offer__price-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.lp4-offer__price { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 32px; color: var(--plum-deep); }
+.lp4-offer__compare { font-size: 14px; color: var(--text-muted); text-decoration: line-through; opacity: 0.6; }
+.lp4-offer__save { font-size: 11px; color: var(--iris); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+.lp4-offer__per { font-size: 11px; color: var(--iris); font-weight: 600; letter-spacing: 0.04em; margin-bottom: 12px; }
+.lp4-offer__free { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--iris); margin-bottom: 14px; font-weight: 600; }
+.lp4-offer__free::before { content: '✦'; }
+.lp4-offer__cta { width: 100%; }
+.lp4-offer__card--pop .lp4-offer__cta { background: var(--bone); color: var(--plum-deep); border-color: var(--bone); }
+.lp4-offer__card--pop .lp4-offer__cta:hover { background: var(--lavender); border-color: var(--lavender); }
+.lp4-offer__fx { font-size: 10px; color: var(--text-muted); text-align: center; margin-top: 8px; line-height: 1.5; padding: 8px 12px; background: var(--lavender-soft); border-radius: 4px; }
+
+/* ============================================================================
+   13. SHIPPING STRIP
+   ============================================================================ */
+.lp4-ship { padding: 24px var(--gutter); background: var(--lavender-soft); }
+.lp4-ship__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.lp4-ship__cell { text-align: center; padding: 12px 8px; }
+.lp4-ship__icon { font-size: 18px; color: var(--iris); margin-bottom: 4px; }
+.lp4-ship__title { font-size: 11px; font-weight: 700; color: var(--plum-deep); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; }
+.lp4-ship__sub { font-size: 10px; color: var(--text-muted); }
+
+/* ============================================================================
+   14. FAQ
+   ============================================================================ */
+.lp4-faq { padding: 48px var(--gutter); background: var(--bone); }
+.lp4-faq__head { text-align: center; margin-bottom: 24px; }
+.lp4-faq__h2 { margin-top: 10px; }
+.lp4-faq__list { display: flex; flex-direction: column; }
+.lp4-faq__item { border-bottom: 1px solid rgba(107, 78, 158, 0.12); }
+.lp4-faq__q { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 18px 0; text-align: left; font-size: 14px; font-weight: 700; color: var(--plum-deep); }
+.lp4-faq__icon { width: 14px; height: 14px; transition: transform 0.3s var(--ease); flex-shrink: 0; margin-left: 12px; color: var(--iris); }
+.lp4-faq__item[open] .lp4-faq__icon { transform: rotate(45deg); }
+.lp4-faq__a { padding: 0 0 18px; font-size: 13px; color: var(--text-body); line-height: 1.6; }
+
+/* ============================================================================
+   15. FINAL CTA
+   ============================================================================ */
+.lp4-final { padding: 56px var(--gutter); background: linear-gradient(180deg, var(--plum-deep) 0%, var(--iris-deep) 100%); color: var(--bone); text-align: center; }
+.lp4-final__h2 { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 32px; line-height: 1.1; color: var(--bone); margin-bottom: 14px; }
+.lp4-final__h2 em { color: var(--lavender); font-style: italic; }
+.lp4-final__sub { font-size: 14px; opacity: 0.85; margin-bottom: 24px; }
+.lp4-final__cta { background: var(--bone); color: var(--plum-deep); border-color: var(--bone); }
+.lp4-final__cta:hover { background: var(--lavender); border-color: var(--lavender); color: var(--plum-deep); }
+.lp4-final__pay { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 18px; opacity: 0.6; }
+
+/* ============================================================================
+   16. FOOTER MINIMAL
+   ============================================================================ */
+.lp4-footer { padding: 32px var(--gutter); background: var(--plum-black); color: var(--bone); text-align: center; font-size: 11px; }
+.lp4-footer__logo { font-family: var(--sans); font-style: italic; font-weight: 900; font-size: 18px; margin-bottom: 14px; }
+.lp4-footer__disclaimer { font-size: 10px; line-height: 1.6; opacity: 0.55; margin-bottom: 12px; max-width: 36ch; margin-left: auto; margin-right: auto; }
+.lp4-footer__copy { font-size: 10px; opacity: 0.4; margin-top: 8px; }
+
+/* ============================================================================
+   STICKY ATC
+   ============================================================================ */
+.lp4-sticky { position: fixed; bottom: 0; left: 0; right: 0; z-index: 60; background: var(--bone); border-top: 1px solid rgba(107, 78, 158, 0.12); padding: 10px 16px; transform: translateY(100%); opacity: 0; transition: transform 0.5s var(--ease), opacity 0.5s var(--ease); pointer-events: none; }
+.lp4-sticky.is-visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.lp4-sticky__inner { display: flex; align-items: center; gap: 10px; max-width: var(--shell); margin: 0 auto; }
+.lp4-sticky__info { flex: 1; min-width: 0; }
+.lp4-sticky__name { font-size: 12px; font-weight: 700; color: var(--plum-deep); line-height: 1.2; }
+.lp4-sticky__price { font-size: 11px; color: var(--text-muted); }
+.lp4-sticky__cta { padding: 12px 18px; font-size: 12px; letter-spacing: 0.18em; flex-shrink: 0; width: auto; }
+
+/* ============================================================================
+   LIVE PROOF POPUP
+   ============================================================================ */
+.lp4-proof { position: fixed; bottom: 80px; left: 16px; z-index: 55; background: var(--bone); border-radius: 8px; padding: 12px 14px 12px 12px; box-shadow: 0 12px 32px -8px rgba(42, 27, 61, 0.25); max-width: 260px; opacity: 0; transform: translateX(-110%); transition: transform 0.5s var(--ease), opacity 0.5s var(--ease); display: flex; align-items: center; gap: 10px; border: 1px solid rgba(107, 78, 158, 0.08); }
+.lp4-proof.is-visible { opacity: 1; transform: translateX(0); }
+.lp4-proof__avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--lavender), var(--iris)); color: var(--bone); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-style: italic; font-size: 14px; flex-shrink: 0; }
+.lp4-proof__body { flex: 1; min-width: 0; }
+.lp4-proof__text { font-size: 11px; color: var(--plum-deep); line-height: 1.4; }
+.lp4-proof__name { font-weight: 700; }
+.lp4-proof__time { font-size: 9px; color: var(--text-muted); margin-top: 2px; letter-spacing: 0.06em; }
+.lp4-proof__close { position: absolute; top: 4px; right: 4px; width: 18px; height: 18px; border-radius: 50%; color: var(--text-muted); font-size: 14px; line-height: 1; display: flex; align-items: center; justify-content: center; }
+.lp4-proof__close:hover { color: var(--plum-deep); }
+
+@media (max-width: 380px) {
+  .lp4-hero__h1 { font-size: 36px; }
+  .lp4-script__h2, .lp4-gestes__h2, .lp4-ingred__h2, .lp4-stats__h2, .lp4-test__h2, .lp4-offer__h2 { font-size: 26px; }
+  .lp4-proof { max-width: 220px; }
+}
+
+/* ============================================================================
+   REVEAL ANIMATIONS
+   ============================================================================ */
+.lp4-reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+.lp4-reveal.is-in { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lp4-reveal, .lp4-sticky, .lp4-proof, .lp4__cta { transition: none !important; transform: none !important; opacity: 1 !important; }
+}

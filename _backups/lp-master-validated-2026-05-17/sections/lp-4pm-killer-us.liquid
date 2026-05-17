@@ -1,0 +1,537 @@
+{%- comment -%}
+  UBurn LP "4pm Killer US" — monolithic section
+  Brief: PHASE2-US-W19-ADV launch destination
+  Created: 2026-05-17 — build from scratch (no source.html)
+  Status: V1 — 16 sections + sticky ATC + live proof popup
+  Compliance: 4h satiety, 30 kcal, no refund/guarantee, FDA disclaimer footer
+{%- endcomment -%}
+
+{%- liquid
+  assign hp = section.settings.product | default: all_products['ube-poudre']
+  assign v_starter_id = section.settings.variant_starter_id | default: '51289200034111'
+  assign v_maximum_id = section.settings.variant_maximum_id | default: '51289200066879'
+  assign v_starter = hp.variants | where: 'id', v_starter_id | first
+  if v_starter == nil
+    assign v_starter = hp.variants[0]
+  endif
+  assign v_maximum = hp.variants | where: 'id', v_maximum_id | first
+  if v_maximum == nil
+    assign v_maximum = hp.variants[1] | default: hp.variants[0]
+  endif
+-%}
+
+{%- comment -%} Noindex/nofollow — LP is for ads only, not for SEO {%- endcomment -%}
+<meta name="robots" content="noindex,nofollow">
+{{ 'lp-4pm-killer-us.css' | asset_url | stylesheet_tag }}
+
+<script id="lp-4pm-data">
+  window.__UB_LP = {
+    product_id: 'shopify_US_{{ hp.id }}',
+    product_handle: '{{ hp.handle }}',
+    starter: { id: {{ v_starter.id }}, variant_id: 'shopify_US_{{ hp.id }}_{{ v_starter.id }}', price: 34.50, name: 'UBurn Starter Pack 90g' },
+    maximum: { id: {{ v_maximum.id }}, variant_id: 'shopify_US_{{ hp.id }}_{{ v_maximum.id }}', price: 54.50, name: 'UBurn Maximum Pack 270g' },
+    currency: 'USD',
+    pixel_id: '1207776051409154'
+  };
+</script>
+
+<div class="lp4">
+
+  {%- comment -%} ═════════ 01. ANNOUNCE BAR ═════════ {%- endcomment -%}
+  <div class="lp4-announce">
+    <span class="lp4-announce__flag">🇫🇷</span> {{ section.settings.announce_text | default: 'Made in France · Free US Shipping $40+' }}
+  </div>
+
+  {%- comment -%} ═════════ 02. NAV STICKY ═════════ {%- endcomment -%}
+  <nav class="lp4-nav" aria-label="UBurn">
+    <a href="#" class="lp4-nav__logo">UBurn</a>
+    <div class="lp4-nav__rating" aria-label="Rated 4.7 out of 5">
+      <span class="lp4-nav__stars">★★★★★</span>
+      <span>4.7 · 2,847</span>
+    </div>
+  </nav>
+
+  {%- comment -%} ═════════ 03. HERO ═════════ {%- endcomment -%}
+  <section class="lp4-hero">
+    <div class="lp4__shell">
+      <span class="lp4__eyebrow lp4-hero__eyebrow">{{ section.settings.hero_eyebrow | default: 'The 4pm Killer' }}</span>
+      <h1 class="lp4__h1 lp4-hero__h1">{{ section.settings.hero_h1 | default: '4pm. Your snack drawer <em>stays closed.</em>' }}</h1>
+      <p class="lp4-hero__sub">{{ section.settings.hero_sub | default: 'Plant-based satiety drink crafted in France. 30 calories. 4 hours of calm. Zero caffeine.' }}</p>
+
+      <div class="lp4-hero__price-row">
+        <span class="lp4-hero__price-from">From</span>
+        <span class="lp4-hero__price-amt">$34.50</span>
+        <span class="lp4-hero__price-meta">· $31.05/mo with subscribe & save · free US shipping</span>
+      </div>
+
+      {%- comment -%} Hero violet bottle illustration (inline SVG to avoid extra request) {%- endcomment -%}
+      <svg class="lp4-hero__bottle" viewBox="0 0 280 360" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="lpBottleGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#E8DCEF"/>
+            <stop offset="40%" stop-color="#B89DD9"/>
+            <stop offset="80%" stop-color="#6B4E9E"/>
+            <stop offset="100%" stop-color="#2A1B3D"/>
+          </linearGradient>
+          <linearGradient id="lpBottleHi" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.4)"/>
+            <stop offset="40%" stop-color="rgba(255,255,255,0)"/>
+          </linearGradient>
+        </defs>
+        <rect x="108" y="22" width="64" height="28" rx="4" fill="#1A0F2E"/>
+        <rect x="114" y="50" width="52" height="12" rx="2" fill="#3D2659"/>
+        <path d="M118 62 L118 92 Q118 110 102 117 Q72 130 72 168 L72 304 Q72 332 102 332 L178 332 Q208 332 208 304 L208 168 Q208 130 178 117 Q162 110 162 92 L162 62 Z" fill="url(#lpBottleGrad)" stroke="rgba(26,15,46,0.3)" stroke-width="2"/>
+        <path d="M88 138 L88 304 Q88 320 102 320 L120 320 L120 138 Q108 130 98 130 Q90 130 88 138 Z" fill="url(#lpBottleHi)" opacity="0.7"/>
+        <text x="140" y="230" text-anchor="middle" font-family="Helvetica, Inter, sans-serif" font-style="italic" font-weight="900" font-size="76" fill="rgba(248,244,238,0.95)" letter-spacing="-4">UB</text>
+        <text x="140" y="290" text-anchor="middle" font-family="Helvetica, sans-serif" font-weight="500" font-size="11" letter-spacing="3" fill="rgba(248,244,238,0.7)">500 ML</text>
+      </svg>
+
+      <button class="lp4__cta lp4-hero__cta" data-lp-atc="maximum" type="button" aria-label="Start my pack — Maximum Pack 90 days">
+        <span>start my pack</span>
+        <span class="lp4__arrow" aria-hidden="true">→</span>
+      </button>
+
+      <div class="lp4-hero__pay">
+        <span class="lp4-hero__pay-label">Pay with</span>
+        <span class="lp4-hero__pay-icon" title="Shop Pay">
+          <svg width="42" height="14" viewBox="0 0 42 14" fill="#5A31F4" xmlns="http://www.w3.org/2000/svg" aria-label="Shop Pay"><text x="0" y="11" font-family="Helvetica" font-weight="700" font-size="11" fill="#5A31F4">shop</text><text x="22" y="11" font-family="Helvetica" font-weight="700" font-size="11" fill="#5A31F4">Pay</text></svg>
+        </span>
+        <span class="lp4-hero__pay-icon" title="Klarna">
+          <svg width="42" height="14" viewBox="0 0 42 14" xmlns="http://www.w3.org/2000/svg" aria-label="Klarna"><rect width="42" height="14" rx="2" fill="#FFA8CD"/><text x="6" y="11" font-family="Helvetica" font-weight="700" font-size="10" fill="#0A0A0A">Klarna</text></svg>
+        </span>
+        <span class="lp4-hero__pay-icon" title="PayPal">
+          <svg width="42" height="14" viewBox="0 0 42 14" xmlns="http://www.w3.org/2000/svg" aria-label="PayPal"><text x="0" y="11" font-family="Helvetica" font-weight="700" font-size="10" fill="#003087">Pay</text><text x="20" y="11" font-family="Helvetica" font-weight="700" font-size="10" fill="#009CDE">Pal</text></svg>
+        </span>
+        <span class="lp4-hero__pay-icon" title="Visa / Mastercard">
+          <svg width="42" height="14" viewBox="0 0 42 14" xmlns="http://www.w3.org/2000/svg" aria-label="Cards"><circle cx="10" cy="7" r="6" fill="#EB001B"/><circle cx="18" cy="7" r="6" fill="#F79E1B" opacity="0.85"/><text x="28" y="11" font-family="Helvetica" font-weight="700" font-size="9" fill="#5A5654">+more</text></svg>
+        </span>
+      </div>
+
+      <div class="lp4-hero__trust">
+        <span>EFSA-Backed Fiber</span>
+        <span>Zero Caffeine</span>
+        <span>30 Calories</span>
+        <span>Plant-Based</span>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 04. USP STRIP 4 CELLS ═════════ {%- endcomment -%}
+  <section class="lp4-usp">
+    <div class="lp4__shell">
+      <div class="lp4-usp__grid">
+        <div class="lp4-usp__cell">
+          <div class="lp4-usp__num">4h</div>
+          <div class="lp4-usp__label">Lasting Satiety*</div>
+        </div>
+        <div class="lp4-usp__cell">
+          <div class="lp4-usp__num">30</div>
+          <div class="lp4-usp__label">Kcal Per Scoop</div>
+        </div>
+        <div class="lp4-usp__cell">
+          <div class="lp4-usp__num">0</div>
+          <div class="lp4-usp__label">Caffeine Jitters</div>
+        </div>
+        <div class="lp4-usp__cell">
+          <div class="lp4-usp__num">FR</div>
+          <div class="lp4-usp__label">Crafted In France</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 05. FOUNDER CARD ═════════ {%- endcomment -%}
+  <section class="lp4-founder">
+    <div class="lp4__shell">
+      <div class="lp4-founder__card lp4-reveal">
+        <div class="lp4-founder__photo" aria-hidden="true">C</div>
+        <p class="lp4-founder__quote">{{ section.settings.founder_quote | default: 'I built UBurn because I needed it. Not a powder that promises miracles — a drink that actually holds you through the 4pm crash. Made with the same care I’d expect for myself.' }}</p>
+        <div class="lp4-founder__name">{{ section.settings.founder_name | default: 'Claire D.' }}</div>
+        <div class="lp4-founder__role">{{ section.settings.founder_role | default: 'Founder · UBurn · Paris' }}</div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 06. SAME SCRIPT — 3 cards ═════════ {%- endcomment -%}
+  <section class="lp4-script">
+    <div class="lp4__shell">
+      <div class="lp4-script__head lp4-reveal">
+        <span class="lp4__eyebrow">It’s not willpower</span>
+        <h2 class="lp4__h2 lp4-script__h2">Every day, <em>the same script.</em></h2>
+      </div>
+      <div class="lp4-script__cards">
+        <div class="lp4-script__card lp4-reveal">
+          <span class="lp4-script__time">10am</span>
+          <div class="lp4-script__title">Morning control.</div>
+          <p class="lp4-script__text">Coffee, focus, intentions set. You’ve got this.</p>
+        </div>
+        <div class="lp4-script__card lp4-reveal">
+          <span class="lp4-script__time">3pm</span>
+          <div class="lp4-script__title">The signal.</div>
+          <p class="lp4-script__text">Blood sugar dips. Your body asks for sugar. It’s biological — not character.</p>
+        </div>
+        <div class="lp4-script__card lp4-reveal">
+          <span class="lp4-script__time">7pm</span>
+          <div class="lp4-script__title">Willpower gone.</div>
+          <p class="lp4-script__text">You over-eat dinner to make up for what the afternoon took. Guilt loops back.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 07. 3 GESTES ═════════ {%- endcomment -%}
+  <section class="lp4-gestes">
+    <div class="lp4__shell">
+      <div class="lp4-gestes__head lp4-reveal">
+        <span class="lp4__eyebrow">The ritual</span>
+        <h2 class="lp4__h2">Three gestures. <em>Four hours.</em></h2>
+      </div>
+      <div class="lp4-gestes__row">
+        <div class="lp4-gestes__step lp4-reveal">
+          <div class="lp4-gestes__circle">
+            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M8 6h16l-2 8H10L8 6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 14v8h12v-8" stroke="currentColor" stroke-width="2"/><path d="M14 22v4M18 22v4" stroke="currentColor" stroke-width="2"/></svg>
+          </div>
+          <span class="lp4-gestes__num">01</span>
+          <span class="lp4-gestes__lbl">Pour</span>
+        </div>
+        <div class="lp4-gestes__step lp4-reveal">
+          <div class="lp4-gestes__circle">
+            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="10" stroke="currentColor" stroke-width="2"/><path d="M10 16c2 2 4 2 6 0s4-2 6 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <span class="lp4-gestes__num">02</span>
+          <span class="lp4-gestes__lbl">Stir</span>
+        </div>
+        <div class="lp4-gestes__step lp4-reveal">
+          <div class="lp4-gestes__circle">
+            <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M12 4v6c0 2 1 4 2 4v14h4V14c1 0 2-2 2-4V4" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="lp4-gestes__num">03</span>
+          <span class="lp4-gestes__lbl">Sip</span>
+        </div>
+      </div>
+      <div class="lp4-gestes__result lp4-reveal">
+        <div class="lp4-gestes__result-eyebrow">→ Result</div>
+        <div class="lp4-gestes__result-text">4 hours <em>full</em>.</div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 08. INGREDIENTS TABLE — 6 actives ═════════ {%- endcomment -%}
+  <section class="lp4-ingred">
+    <div class="lp4__shell">
+      <div class="lp4-ingred__head lp4-reveal">
+        <span class="lp4__eyebrow">The formula</span>
+        <h2 class="lp4__h2">Six actives. <em>One ritual.</em></h2>
+      </div>
+      <div class="lp4-ingred__list">
+        <div class="lp4-ingred__row lp4-reveal">
+          <div class="lp4-ingred__name">Glucomannan <span class="lp4-ingred__badge">EFSA</span></div>
+          <div class="lp4-ingred__dose">800 mg</div>
+          <div class="lp4-ingred__role">Konjac-derived soluble fiber. Forms a natural gel with water — supports satiety in a calorie-controlled diet.*</div>
+        </div>
+        <div class="lp4-ingred__row lp4-reveal">
+          <div class="lp4-ingred__name">L-Carnitine</div>
+          <div class="lp4-ingred__dose">300 mg</div>
+          <div class="lp4-ingred__role">Naturally occurring amino acid that supports energy metabolism within a balanced routine.*</div>
+        </div>
+        <div class="lp4-ingred__row lp4-reveal">
+          <div class="lp4-ingred__name">Acacia Fiber</div>
+          <div class="lp4-ingred__dose">2 g</div>
+          <div class="lp4-ingred__role">Prebiotic that feeds gut bacteria — supports digestive comfort.*</div>
+        </div>
+        <div class="lp4-ingred__row lp4-reveal">
+          <div class="lp4-ingred__name">Coconut MCT</div>
+          <div class="lp4-ingred__dose">500 mg</div>
+          <div class="lp4-ingred__role">Medium-chain triglycerides from coconut — steady energy without coffee jitters.</div>
+        </div>
+        <div class="lp4-ingred__row lp4-reveal">
+          <div class="lp4-ingred__name">Cocoa Polyphenols</div>
+          <div class="lp4-ingred__dose">1 g</div>
+          <div class="lp4-ingred__role">Natural antioxidant compounds from cocoa — comfort flavor + plant nutrition.</div>
+        </div>
+        <div class="lp4-ingred__row lp4-reveal">
+          <div class="lp4-ingred__name">Ginger Extract</div>
+          <div class="lp4-ingred__dose">100 mg</div>
+          <div class="lp4-ingred__role">Traditional digestive support — paired with acacia for daily comfort.*</div>
+        </div>
+      </div>
+      <p class="lp4-ingred__foot">EFSA: glucomannan supports satiety in the context of an energy-restricted diet (EU Regulation 432/2012). Use: 3g/day with water before meals.</p>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 09. STATS ═════════ {%- endcomment -%}
+  <section class="lp4-stats">
+    <div class="lp4__shell">
+      <div class="lp4-stats__head lp4-reveal">
+        <span class="lp4__eyebrow">Internal survey · 1,200 customers</span>
+        <h2 class="lp4__h2 lp4-stats__h2">How customers <em>actually feel.</em></h2>
+      </div>
+      <div class="lp4-stats__grid">
+        <div class="lp4-stats__cell lp4-reveal">
+          <div class="lp4-stats__num">50%</div>
+          <div class="lp4-stats__lbl">Feel full from first sip*</div>
+        </div>
+        <div class="lp4-stats__cell lp4-reveal">
+          <div class="lp4-stats__num">46%</div>
+          <div class="lp4-stats__lbl">Skip the 4pm snack*</div>
+        </div>
+        <div class="lp4-stats__cell lp4-reveal">
+          <div class="lp4-stats__num">43%</div>
+          <div class="lp4-stats__lbl">Calmer afternoons*</div>
+        </div>
+      </div>
+      <div class="lp4-stats__rating lp4-reveal">
+        <div class="lp4-stats__rating-num">4.7/5</div>
+        <div class="lp4-stats__rating-stars">★★★★★</div>
+        <div class="lp4-stats__rating-meta">Based on 2,847 verified reviews</div>
+      </div>
+      <p class="lp4-stats__disclaimer">*Individual results may vary. Based on customer self-reported survey, March 2026. These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 10. PRESS BAR ═════════ {%- endcomment -%}
+  <section class="lp4-press">
+    <div class="lp4__shell">
+      <div class="lp4-press__label">As featured in</div>
+      <div class="lp4-press__grid">
+        <span class="lp4-press__logo lp4-press__logo--brut">BRUT</span>
+        <span class="lp4-press__logo">Vogue</span>
+        <span class="lp4-press__logo">ELLE</span>
+        <span class="lp4-press__logo lp4-press__logo--tf1">TF1</span>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 11. TESTIMONIALS ═════════ {%- endcomment -%}
+  <section class="lp4-test">
+    <div class="lp4__shell">
+      <div class="lp4-test__head lp4-reveal">
+        <span class="lp4__eyebrow">Verified buyers</span>
+        <h2 class="lp4__h2 lp4-test__h2">In their <em>own words.</em></h2>
+      </div>
+      <div class="lp4-test__cards">
+        <article class="lp4-test__card lp4-reveal">
+          <div class="lp4-test__stars">★★★★★</div>
+          <h3 class="lp4-test__title">"My 4pm crash is gone."</h3>
+          <p class="lp4-test__body">I used to raid the snack drawer at 3:30 every single afternoon. Three weeks in, I genuinely forget. The taste is also way better than I expected.*</p>
+          <div class="lp4-test__meta">
+            <div class="lp4-test__avatar">A</div>
+            <div>
+              <div class="lp4-test__name">Ashley K.</div>
+              <div class="lp4-test__city">Phoenix, AZ</div>
+            </div>
+            <div class="lp4-test__days">28 days</div>
+          </div>
+        </article>
+
+        <article class="lp4-test__card lp4-reveal">
+          <div class="lp4-test__stars">★★★★★</div>
+          <h3 class="lp4-test__title">"Finally something that holds."</h3>
+          <p class="lp4-test__body">I tried so many “satiety” drinks. Most lasted 45 minutes max. This one actually carries me from 3pm to dinner. No coffee crash either.*</p>
+          <div class="lp4-test__meta">
+            <div class="lp4-test__avatar">J</div>
+            <div>
+              <div class="lp4-test__name">Jessica M.</div>
+              <div class="lp4-test__city">Brooklyn, NY</div>
+            </div>
+            <div class="lp4-test__days">42 days</div>
+          </div>
+        </article>
+
+        <article class="lp4-test__card lp4-reveal">
+          <div class="lp4-test__stars">★★★★★</div>
+          <h3 class="lp4-test__title">"My evenings changed."</h3>
+          <p class="lp4-test__body">I stopped over-eating dinner. The afternoons feel calm. I’m not white-knuckling it anymore. Recommending to my sister.*</p>
+          <div class="lp4-test__meta">
+            <div class="lp4-test__avatar">M</div>
+            <div>
+              <div class="lp4-test__name">Megan R.</div>
+              <div class="lp4-test__city">Austin, TX</div>
+            </div>
+            <div class="lp4-test__days">35 days</div>
+          </div>
+        </article>
+      </div>
+      <p class="lp4-test__verified">✓ Verified purchases — individual results may vary</p>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 12. OFFER ═════════ {%- endcomment -%}
+  <section class="lp4-offer" id="offer">
+    <div class="lp4__shell">
+      <div class="lp4-offer__head lp4-reveal">
+        <span class="lp4__eyebrow">Your pack</span>
+        <h2 class="lp4__h2 lp4-offer__h2">One flavor. <em>Two packs.</em></h2>
+        <p class="lp4-offer__sub">One-time payment · Free US shipping on orders $40+</p>
+      </div>
+
+      <div class="lp4-offer__cards">
+        <article class="lp4-offer__card lp4-reveal">
+          <div class="lp4-offer__name">Starter Pack</div>
+          <div class="lp4-offer__meta">90g · 30 servings · 1 scoop/day · 30 days</div>
+          <div class="lp4-offer__price-row">
+            <span class="lp4-offer__price">$34.50</span>
+          </div>
+          <div class="lp4-offer__per">$1.15 / day</div>
+          <button class="lp4__cta lp4__cta--secondary lp4-offer__cta" data-lp-atc="starter" type="button">
+            <span>start with starter</span><span class="lp4__arrow" aria-hidden="true">→</span>
+          </button>
+        </article>
+
+        <article class="lp4-offer__card lp4-offer__card--pop lp4-reveal">
+          <span class="lp4-offer__badge">Best value · Save 47%</span>
+          <div class="lp4-offer__name">Maximum Pack</div>
+          <div class="lp4-offer__meta">270g · 90 servings · 1 scoop/day · 90 days</div>
+          <div class="lp4-offer__price-row">
+            <span class="lp4-offer__price">$54.50</span>
+            <span class="lp4-offer__compare">$103.50</span>
+          </div>
+          <div class="lp4-offer__per">$0.61 / day · save 47%</div>
+          <div class="lp4-offer__free">Free violet bottle (500ml glass) — included</div>
+          <button class="lp4__cta lp4-offer__cta" data-lp-atc="maximum" type="button">
+            <span>start with maximum</span><span class="lp4__arrow" aria-hidden="true">→</span>
+          </button>
+        </article>
+      </div>
+
+      <p class="lp4-offer__fx" data-u2-no-replace="true"><strong>USD prices shown.</strong> Card billed in EUR (auto-converted by your bank at market rate). No fees from us.</p>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 13. SHIPPING STRIP ═════════ {%- endcomment -%}
+  <section class="lp4-ship">
+    <div class="lp4__shell">
+      <div class="lp4-ship__grid">
+        <div class="lp4-ship__cell">
+          <div class="lp4-ship__icon">✦</div>
+          <div class="lp4-ship__title">Free US shipping</div>
+          <div class="lp4-ship__sub">On orders $40+ · 5-8 business days</div>
+        </div>
+        <div class="lp4-ship__cell">
+          <div class="lp4-ship__icon">⚙</div>
+          <div class="lp4-ship__title">Crafted in France</div>
+          <div class="lp4-ship__sub">Third-party lab-tested · French heritage</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 14. FAQ ═════════ {%- endcomment -%}
+  <section class="lp4-faq">
+    <div class="lp4__shell">
+      <div class="lp4-faq__head lp4-reveal">
+        <span class="lp4__eyebrow">FAQ</span>
+        <h2 class="lp4__h2">Common <em>questions.</em></h2>
+      </div>
+      <div class="lp4-faq__list">
+        <details class="lp4-faq__item">
+          <summary class="lp4-faq__q">How does UBurn actually work?<span class="lp4-faq__icon">✚</span></summary>
+          <div class="lp4-faq__a">Glucomannan, a soluble konjac fiber, forms a natural gel when it meets water in your stomach. EFSA recognizes this mechanism for satiety support within an energy-controlled diet. Result: you feel satisfied for up to 4 hours after one scoop.*</div>
+        </details>
+        <details class="lp4-faq__item">
+          <summary class="lp4-faq__q">When will I notice a difference?<span class="lp4-faq__icon">✚</span></summary>
+          <div class="lp4-faq__a">Most customers report satiety from the first scoop. For consistent control over afternoon cravings, 7-14 days of daily use produces the most reliable signal.*</div>
+        </details>
+        <details class="lp4-faq__item">
+          <summary class="lp4-faq__q">Does it contain caffeine?<span class="lp4-faq__icon">✚</span></summary>
+          <div class="lp4-faq__a">Zero caffeine. UBurn is built on plant fibers and natural actives — no jitters, no afternoon crash, drinkable any time of day.</div>
+        </details>
+        <details class="lp4-faq__item">
+          <summary class="lp4-faq__q">How does it taste?<span class="lp4-faq__icon">✚</span></summary>
+          <div class="lp4-faq__a">Hazelnut-vanilla notes. Smooth, naturally violet color from purple ube root. Mix with cold water, oat milk, or hot frothed milk depending on your moment.</div>
+        </details>
+        <details class="lp4-faq__item">
+          <summary class="lp4-faq__q">Is it a meal replacement?<span class="lp4-faq__icon">✚</span></summary>
+          <div class="lp4-faq__a">No. UBurn is a dietary supplement designed to support satiety alongside balanced meals — it does not replace meals. 30 kcal per scoop.</div>
+        </details>
+        <details class="lp4-faq__item">
+          <summary class="lp4-faq__q">When does it ship to the US?<span class="lp4-faq__icon">✚</span></summary>
+          <div class="lp4-faq__a">We ship from France within 24-48h after order. US delivery typically 5-8 business days. Free shipping on orders $40+.</div>
+        </details>
+        <details class="lp4-faq__item">
+          <summary class="lp4-faq__q">Subscribe or one-time purchase?<span class="lp4-faq__icon">✚</span></summary>
+          <div class="lp4-faq__a">Both. Subscribe & save gives -10% and free violet bottle. You can pause, skip or cancel anytime from your account. No lock-in.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 15. FINAL CTA ═════════ {%- endcomment -%}
+  <section class="lp4-final">
+    <div class="lp4__shell">
+      <h2 class="lp4-final__h2">{{ section.settings.final_h2 | default: 'Your 4pm <em>changes today.</em>' }}</h2>
+      <p class="lp4-final__sub">{{ section.settings.final_sub | default: 'One scoop. One glass. Four hours of calm. Crafted in France, made for the US.' }}</p>
+      <button class="lp4__cta lp4-final__cta" data-lp-atc="maximum" type="button">
+        <span>claim my pack — $54.50</span><span class="lp4__arrow" aria-hidden="true">→</span>
+      </button>
+      <div class="lp4-final__pay">
+        <span style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(248,244,238,0.6);">Shop Pay · Klarna · PayPal · Visa</span>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 16. FOOTER ═════════ {%- endcomment -%}
+  <footer class="lp4-footer">
+    <div class="lp4__shell">
+      <div class="lp4-footer__logo">UBurn</div>
+      <p class="lp4-footer__disclaimer">Dietary supplement containing konjac glucomannan. Glucomannan supports satiety as part of a balanced lifestyle.* Recommended use: 3g/day in 3 doses of 1g with 1-2 large glasses of water before meals. Not a substitute for a balanced diet. Not recommended during pregnancy or breastfeeding.</p>
+      <p class="lp4-footer__disclaimer">*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+      <div class="lp4-footer__copy">© {{ 'now' | date: '%Y' }} UBurn · Crafted in France · Made for the U.S.</div>
+    </div>
+  </footer>
+
+  {%- comment -%} ═════════ STICKY ATC ═════════ {%- endcomment -%}
+  <div class="lp4-sticky" id="lp4-sticky" aria-hidden="true">
+    <div class="lp4-sticky__inner">
+      <div class="lp4-sticky__info">
+        <div class="lp4-sticky__name">UBurn Maximum Pack</div>
+        <div class="lp4-sticky__price">$54.50 · save 47%</div>
+      </div>
+      <button class="lp4__cta lp4-sticky__cta" data-lp-atc="maximum" type="button">
+        <span>order →</span>
+      </button>
+    </div>
+  </div>
+
+  {%- comment -%} ═════════ LIVE PROOF POPUP ═════════ {%- endcomment -%}
+  <div class="lp4-proof" id="lp4-proof" aria-hidden="true" aria-live="polite">
+    <button class="lp4-proof__close" type="button" data-lp-proof-close aria-label="Close notification">×</button>
+    <div class="lp4-proof__avatar" id="lp4-proof-avatar">S</div>
+    <div class="lp4-proof__body">
+      <p class="lp4-proof__text" id="lp4-proof-text"><span class="lp4-proof__name">Sarah</span> from Phoenix just started her ritual</p>
+      <div class="lp4-proof__time" id="lp4-proof-time">2 minutes ago</div>
+    </div>
+  </div>
+
+</div>
+
+<script src="{{ 'lp-4pm-killer-us.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "LP 4pm Killer US",
+  "tag": "section",
+  "class": "shopify-section--lp-4pm-killer-us",
+  "settings": [
+    { "type": "header", "content": "Product binding" },
+    { "type": "product", "id": "product", "label": "Product (default ube-poudre)" },
+    { "type": "text", "id": "variant_starter_id", "label": "Starter variant ID", "default": "51289200034111" },
+    { "type": "text", "id": "variant_maximum_id", "label": "Maximum variant ID", "default": "51289200066879" },
+    { "type": "header", "content": "Announce + Hero" },
+    { "type": "text", "id": "announce_text", "label": "Announce bar text", "default": "Made in France · Free US Shipping $40+" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "The 4pm Killer" },
+    { "type": "text", "id": "hero_h1", "label": "Hero H1 (use <em>...</em> for italic accent)", "default": "4pm. Your snack drawer <em>stays closed.</em>" },
+    { "type": "textarea", "id": "hero_sub", "label": "Hero sub", "default": "Plant-based satiety drink crafted in France. 30 calories. 4 hours of calm. Zero caffeine." },
+    { "type": "header", "content": "Founder card" },
+    { "type": "textarea", "id": "founder_quote", "label": "Founder quote" },
+    { "type": "text", "id": "founder_name", "label": "Founder name", "default": "Claire D." },
+    { "type": "text", "id": "founder_role", "label": "Founder role", "default": "Founder · UBurn · Paris" },
+    { "type": "header", "content": "Final CTA" },
+    { "type": "text", "id": "final_h2", "label": "Final CTA headline", "default": "Your 4pm <em>changes today.</em>" },
+    { "type": "textarea", "id": "final_sub", "label": "Final CTA sub" }
+  ],
+  "presets": [
+    { "name": "LP 4pm Killer US" }
+  ]
+}
+{% endschema %}

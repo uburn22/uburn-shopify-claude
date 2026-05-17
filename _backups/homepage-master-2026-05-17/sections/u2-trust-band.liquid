@@ -1,0 +1,30 @@
+{%- comment -%}
+  UBurn V2 — Trust Band (atomic, atomic split from u2-homepage)
+{%- endcomment -%}
+<style>
+  .u2-trustband { background: var(--u2-lavender-soft); padding: 18px 16px; }
+  .u2-trustband__inner { max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 28px; align-items: center; }
+  .u2-trustband__sep { width: 1px; height: 12px; background: rgba(107,78,158,0.25); }
+  @media (min-width: 768px) { .u2-trustband { padding: 22px 24px; } }
+  @media (max-width: 640px) { .u2-trustband__sep { display: none; } }
+</style>
+<section class="u2-root u2-trustband" aria-label="Trust">
+  <div class="u2-trustband__inner">
+    {% render 'u2-trust-pill', icon: 'check', text: 'Research-backed' %}
+    <span class="u2-trustband__sep" aria-hidden="true"></span>
+    {% render 'u2-trust-pill', icon: 'leaf', text: '100% plant-based' %}
+    <span class="u2-trustband__sep" aria-hidden="true"></span>
+    {% render 'u2-trust-pill', icon: 'sparkle', text: 'Cancel anytime' %}
+    <span class="u2-trustband__sep" aria-hidden="true"></span>
+    {% render 'u2-trust-pill', icon: 'truck', text: 'Free U.S. shipping' %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Trust Band",
+  "tag": "section",
+  "class": "shopify-section--u2-trustband",
+  "settings": [],
+  "presets": [ { "name": "U2 Trust Band" } ]
+}
+{% endschema %}

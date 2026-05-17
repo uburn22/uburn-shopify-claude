@@ -104,6 +104,10 @@
                 </small>
               </div>
             {%- else -%}
+              {%- comment -%} rev 2026-05-17 — USD/EUR transparency disclaimer (Shopify Payments unavailable UAE) {%- endcomment -%}
+              <p class="u2-cart-fx-disclaimer" style="text-align:center;font-size:12px;line-height:1.5;color:var(--u2-text-muted,#7a7585);margin:8px 0 14px;padding:10px 14px;background:var(--u2-lavender-soft,#E8DCEF);border-radius:6px;letter-spacing:0.01em;">
+                <strong style="color:var(--u2-plum-deep,#2A1B3D);">USD prices shown.</strong> Card billed in EUR (auto-converted by your bank at current exchange rate). <span style="opacity:0.85;">No additional fees from us.</span>
+              </p>
               <div class="cart__ctas" {{ block.shopify_attributes }}>
                 <button
                   type="submit"

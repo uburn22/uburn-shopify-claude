@@ -1,0 +1,66 @@
+{%- comment -%}
+  UBurn V2 — PDP press/trust badges band
+  Replaces old pdpv9-press section. EFSA-backed kept; FDA dietary fiber removed (compliance).
+{%- endcomment -%}
+<style>
+  .u2-pdp-press {
+    padding: 32px 20px;
+    background: var(--u2-cream);
+    border-top: 1px solid rgba(107, 78, 158, 0.08);
+    border-bottom: 1px solid rgba(107, 78, 158, 0.08);
+  }
+  .u2-pdp-press__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .u2-pdp-press__logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 28px 36px;
+  }
+  .u2-pdp-press__logo {
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--u2-plum);
+    text-transform: uppercase;
+    opacity: 0.85;
+    white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .u2-pdp-press { padding: 24px 16px; }
+    .u2-pdp-press__logos { gap: 16px 22px; }
+    .u2-pdp-press__logo { font-size: 10px; letter-spacing: 0.14em; }
+  }
+</style>
+<section class="u2-root u2-pdp-press" aria-label="Trust signals">
+  <div class="u2-pdp-press__inner">
+    <div class="u2-pdp-press__logos">
+      <span class="u2-pdp-press__logo">{{ section.settings.badge_1 | default: 'Plant-based' }}</span>
+      <span class="u2-pdp-press__logo">{{ section.settings.badge_2 | default: 'Caffeine-free' }}</span>
+      <span class="u2-pdp-press__logo">{{ section.settings.badge_3 | default: 'Gluten-free' }}</span>
+      <span class="u2-pdp-press__logo">{{ section.settings.badge_4 | default: 'Non-GMO' }}</span>
+      <span class="u2-pdp-press__logo">{{ section.settings.badge_5 | default: 'EFSA-backed fiber' }}</span>
+      <span class="u2-pdp-press__logo">{{ section.settings.badge_6 | default: 'EU lab-tested' }}</span>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 PDP Press",
+  "tag": "section",
+  "class": "shopify-section--u2",
+  "settings": [
+    { "type": "text", "id": "badge_1", "label": "Badge 1", "default": "Plant-based" },
+    { "type": "text", "id": "badge_2", "label": "Badge 2", "default": "Caffeine-free" },
+    { "type": "text", "id": "badge_3", "label": "Badge 3", "default": "Gluten-free" },
+    { "type": "text", "id": "badge_4", "label": "Badge 4", "default": "Non-GMO" },
+    { "type": "text", "id": "badge_5", "label": "Badge 5", "default": "EFSA-backed fiber" },
+    { "type": "text", "id": "badge_6", "label": "Badge 6", "default": "EU lab-tested" }
+  ],
+  "presets": [{ "name": "U2 PDP Press" }]
+}
+{% endschema %}

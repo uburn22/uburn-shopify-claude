@@ -1,0 +1,61 @@
+{%- comment -%}
+  UBurn V2 — Announcement bar (rotating marquee, 4 messages)
+{%- endcomment -%}
+<style>
+  .u2-announce {
+    background: var(--u2-plum-black);
+    color: var(--u2-bone);
+    padding: 10px 0;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    overflow: hidden;
+  }
+  .u2-announce__track {
+    display: inline-flex;
+    align-items: center;
+    gap: 48px;
+    white-space: nowrap;
+    animation: u2-an-scroll 30s linear infinite;
+    padding-right: 48px;
+  }
+  .u2-announce__track:hover { animation-play-state: paused; }
+  .u2-announce__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .u2-announce__item::after { content: '·'; opacity: 0.4; }
+  .u2-announce__item:last-child::after { content: none; }
+  @keyframes u2-an-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .u2-announce__track { animation: none; flex-wrap: wrap; white-space: normal; justify-content: center; }
+  }
+</style>
+<div class="u2-root u2-announce" role="region" aria-label="Announcements">
+  <div class="u2-announce__track" aria-hidden="true">
+    {%- assign messages = section.settings.messages | default: 'Free U.S. shipping on orders $40+|Cancel anytime · No commitment|French heritage · Loved in the U.S.|FREE Violet Bottle with Subscribe & Save' | split: '|' -%}
+    {%- for pass in (1..2) -%}
+      {%- for m in messages -%}
+        <span class="u2-announce__item">{{ m | strip }}</span>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "U2 Announcement bar",
+  "tag": "section",
+  "class": "shopify-section--u2-announce",
+  "settings": [
+    { "type": "text", "id": "messages", "label": "Messages (| separated)", "default": "Free U.S. shipping on orders $40+|Cancel anytime · No commitment|French heritage · Loved in the U.S.|FREE Violet Bottle with Subscribe & Save" }
+  ],
+  "presets": [ { "name": "U2 Announcement bar" } ]
+}
+{% endschema %}

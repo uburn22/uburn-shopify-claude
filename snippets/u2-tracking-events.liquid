@@ -1,0 +1,128 @@
+{%- comment -%}
+  UBurn V2 — Meta Pixel + GA4 conversion events (theme-level)
+  Wires: ViewContent (PDP) · AddToCart (form submit + fetch intercept) · InitiateCheckout (checkout click)
+  Purchase event: wire via Shopify Customer Events admin (theme can't reach thank_you).
+  Forces USD currency for all events. Event_id deterministic for CAPI dedup readiness.
+{%- endcomment -%}
+<script id="u2-tracking-events">
+(function(){
+  function ready(cb){ if (typeof window.fbq === 'function' || typeof window.gtag === 'function') return cb(); setTimeout(function(){ ready(cb); }, 200); }
+  ready(function(){
+
+  function eventId(prefix){ return prefix + '_' + Date.now() + '_' + Math.random().toString(36).slice(2,11); }
+  var PRICE_MAP = {
+    '51289200034111': { usd: 36.99, name: 'UBurn Starter Pack 90g' },
+    '51289200066879': { usd: 58.99, name: 'UBurn Maximum Pack 270g' }
+  };
+  function priceFor(v){ return (PRICE_MAP[String(v)] || {}).usd || 36.99; }
+  function nameFor(v){ return (PRICE_MAP[String(v)] || {}).name || 'UBurn product'; }
+
+  // 1. ViewContent
+  {% if template contains 'product' %}
+    var pdpVariant = {{ product.selected_or_first_available_variant.id | json }};
+    if (window.fbq) {
+      window.fbq('track', 'ViewContent', {
+        content_ids: [String(pdpVariant)],
+        content_name: nameFor(pdpVariant),
+        content_type: 'product',
+        value: priceFor(pdpVariant), currency: 'USD'
+      }, { eventID: eventId('vc') });
+    }
+    if (window.gtag) {
+      window.gtag('event', 'view_item', {
+        currency: 'USD', value: priceFor(pdpVariant),
+        items: [{ item_id: String(pdpVariant), item_name: nameFor(pdpVariant), price: priceFor(pdpVariant), quantity: 1 }]
+      });
+    }
+  {% endif %}
+
+  // 2. AddToCart
+  function trackATC(variantId, qty){
+    qty = qty || 1;
+    var value = priceFor(variantId) * qty;
+    if (window.fbq) {
+      window.fbq('track', 'AddToCart', {
+        content_ids: [String(variantId)],
+        content_name: nameFor(variantId),
+        content_type: 'product',
+        value: value, currency: 'USD'
+      }, { eventID: eventId('atc') });
+    }
+    if (window.gtag) {
+      window.gtag('event', 'add_to_cart', {
+        currency: 'USD', value: value,
+        items: [{ item_id: String(variantId), item_name: nameFor(variantId), price: priceFor(variantId), quantity: qty }]
+      });
+    }
+  }
+
+  document.addEventListener('submit', function(e){
+    var form = e.target;
+    if (!form || !form.action || form.action.indexOf('/cart/add') === -1) return;
+    var v = form.querySelector('input[name="id"]:checked') || form.querySelector('input[name="id"][type="hidden"]') || form.querySelector('input[name="id"]');
+    var q = form.querySelector('input[name="quantity"]');
+    if (v && v.value) trackATC(v.value, q ? parseInt(q.value, 10) || 1 : 1);
+  }, true);
+
+  var of = window.fetch;
+  if (of) {
+    window.fetch = function(){
+      var args = arguments;
+      var url = typeof args[0] === 'string' ? args[0] : (args[0] && args[0].url) || '';
+      if (url.indexOf('/cart/add') !== -1) {
+        try {
+          var body = args[1] && args[1].body;
+          if (body instanceof FormData) {
+            var v = body.get('id'), q = parseInt(body.get('quantity') || '1', 10);
+            if (v) trackATC(v, q);
+          } else if (typeof body === 'string') {
+            try {
+              var p = JSON.parse(body);
+              if (p.id) trackATC(p.id, p.quantity || 1);
+              else if (p.items) p.items.forEach(function(it){ trackATC(it.id, it.quantity || 1); });
+            } catch(_) {}
+          }
+        } catch(_) {}
+      }
+      return of.apply(this, args);
+    };
+  }
+
+  // 3. InitiateCheckout
+  function trackIC(){
+    fetch('/cart.js').then(function(r){ return r.json(); }).then(function(cart){
+      if (!cart.items || !cart.items.length) return;
+      var contents = cart.items.map(function(it){ return { id: String(it.variant_id || it.id), quantity: it.quantity, item_price: priceFor(it.variant_id || it.id) }; });
+      var contentIds = contents.map(function(c){ return c.id; });
+      var totalValue = contents.reduce(function(a, c){ return a + c.item_price * c.quantity; }, 0);
+      if (window.fbq) {
+        window.fbq('track', 'InitiateCheckout', {
+          content_ids: contentIds,
+          contents: contents.map(function(c){ return { id: c.id, quantity: c.quantity }; }),
+          num_items: cart.item_count, value: totalValue, currency: 'USD'
+        }, { eventID: eventId('ic') });
+      }
+      if (window.gtag) {
+        window.gtag('event', 'begin_checkout', {
+          currency: 'USD', value: totalValue,
+          items: contents.map(function(c){ return { item_id: c.id, price: c.item_price, quantity: c.quantity }; })
+        });
+      }
+    }).catch(function(){});
+  }
+
+  document.addEventListener('click', function(e){
+    var t = e.target;
+    if (!t) return;
+    var btn = t.closest('button[name="checkout"], a[href*="/checkouts/"], a.u2-cdrawer__checkout, [data-u2-checkout]');
+    if (btn) trackIC();
+  }, true);
+
+  document.addEventListener('submit', function(e){
+    var btn = e.submitter || document.activeElement;
+    if (btn && btn.name === 'checkout') trackIC();
+  }, true);
+
+  });
+})();
+</script>

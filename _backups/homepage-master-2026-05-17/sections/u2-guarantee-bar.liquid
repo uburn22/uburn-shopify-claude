@@ -1,0 +1,79 @@
+{%- comment -%}
+  UBurn V2 — Guarantee bar (4 trust icons grid)
+  Compliance-safe: no "30-day money-back" claim, uses "easy returns support"
+{%- endcomment -%}
+<style>
+  .u2-guarantee { background: var(--u2-lavender-soft); padding: var(--u2-space-section) 20px; }
+  .u2-guarantee__inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 20px;
+  }
+  @media (min-width: 768px) { .u2-guarantee__inner { grid-template-columns: repeat(4,1fr); gap: 28px; } }
+  .u2-guarantee__item {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 22px;
+    text-align: center;
+    border: 1px solid rgba(107,78,158,0.08);
+    transition: transform 0.3s var(--u2-ease-smooth);
+  }
+  .u2-guarantee__item:hover { transform: translateY(-4px); }
+  .u2-guarantee__icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--u2-lavender-soft);
+    color: var(--u2-iris);
+    margin: 0 auto 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .u2-guarantee__title {
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+    margin: 0 0 4px;
+  }
+  .u2-guarantee__sub {
+    font-size: 12px;
+    color: #5a5a5a;
+    margin: 0;
+  }
+</style>
+<section class="u2-root u2-guarantee" aria-label="Guarantees">
+  <div class="u2-guarantee__inner">
+    <div class="u2-guarantee__item u2-reveal delay-1">
+      <div class="u2-guarantee__icon">{% render 'u2-icon', name: 'globe', size: 28 %}</div>
+      <h3 class="u2-guarantee__title">Research-backed</h3>
+      <p class="u2-guarantee__sub">EFSA-recognized fiber*</p>
+    </div>
+    <div class="u2-guarantee__item u2-reveal delay-2">
+      <div class="u2-guarantee__icon">{% render 'u2-icon', name: 'truck', size: 28 %}</div>
+      <h3 class="u2-guarantee__title">Free shipping</h3>
+      <p class="u2-guarantee__sub">On U.S. orders $40+</p>
+    </div>
+    <div class="u2-guarantee__item u2-reveal delay-3">
+      <div class="u2-guarantee__icon">{% render 'u2-icon', name: 'lock', size: 26 %}</div>
+      <h3 class="u2-guarantee__title">Secure checkout</h3>
+      <p class="u2-guarantee__sub">Visa · MC · Apple · Shop Pay</p>
+    </div>
+    <div class="u2-guarantee__item u2-reveal delay-3">
+      <div class="u2-guarantee__icon">{% render 'u2-icon', name: 'sparkle', size: 26 %}</div>
+      <h3 class="u2-guarantee__title">Cancel anytime</h3>
+      <p class="u2-guarantee__sub">Easy returns support</p>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Guarantee bar",
+  "tag": "section",
+  "class": "shopify-section--u2-guarantee",
+  "settings": [],
+  "presets": [ { "name": "U2 Guarantee bar" } ]
+}
+{% endschema %}

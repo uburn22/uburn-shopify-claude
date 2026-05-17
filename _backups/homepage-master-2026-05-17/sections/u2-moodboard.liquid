@@ -1,0 +1,168 @@
+{%- comment -%}
+  UBurn V2 — Moodboard (Origin → Craft → Ritual → Founder)
+  Editorial 6-image grid celebrating the violet universe.
+  Added 2026-05-17 — uses stock from _assets-from-live + new batch.
+{%- endcomment -%}
+<style>
+  .u2-moodboard {
+    background: linear-gradient(180deg, var(--u2-cream) 0%, var(--u2-bone) 100%);
+    padding: var(--u2-space-section) 20px;
+  }
+  .u2-moodboard__inner { max-width: 1280px; margin: 0 auto; }
+  .u2-moodboard__head {
+    text-align: center;
+    margin-bottom: 56px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .u2-moodboard__head h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(34px, 5.5vw, 52px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--u2-plum-black);
+    margin: 12px 0 16px;
+  }
+  .u2-moodboard__head h2 em {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--u2-iris);
+  }
+  .u2-moodboard__head p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--u2-text-body);
+    margin: 0;
+  }
+  .u2-moodboard__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  @media (min-width: 720px) {
+    .u2-moodboard__grid {
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: 220px;
+      gap: 16px;
+    }
+  }
+  @media (min-width: 1024px) {
+    .u2-moodboard__grid { grid-auto-rows: 280px; gap: 20px; }
+  }
+  .u2-moodboard__tile {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    isolation: isolate;
+    background: var(--u2-lavender-soft);
+    aspect-ratio: 4/5;
+  }
+  @media (min-width: 720px) {
+    .u2-moodboard__tile { aspect-ratio: auto; }
+    .u2-moodboard__tile--wide { grid-column: span 4; grid-row: span 1; }
+    .u2-moodboard__tile--tall { grid-column: span 2; grid-row: span 2; }
+    .u2-moodboard__tile--reg { grid-column: span 2; grid-row: span 1; }
+  }
+  .u2-moodboard__tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s var(--u2-ease-smooth);
+  }
+  .u2-moodboard__tile:hover img {
+    transform: scale(1.035);
+  }
+  .u2-moodboard__tile::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(26,15,46,0) 50%, rgba(26,15,46,0.72) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .u2-moodboard__cap {
+    position: absolute;
+    left: 22px;
+    bottom: 18px;
+    right: 22px;
+    z-index: 2;
+    color: var(--u2-bone);
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    line-height: 1.35;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  }
+  .u2-moodboard__cap strong {
+    display: block;
+    font-family: var(--u2-sans);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--u2-lavender);
+    margin-bottom: 4px;
+  }
+  @media (max-width: 640px) {
+    .u2-moodboard__cap { font-size: 14px; left: 16px; bottom: 14px; right: 16px; }
+    .u2-moodboard__cap strong { font-size: 10px; }
+  }
+</style>
+
+<section class="u2-root u2-moodboard" aria-label="The Violet Universe — moodboard">
+  <div class="u2-moodboard__inner">
+    <div class="u2-moodboard__head u2-reveal">
+      <span class="u2-section-eyebrow" style="justify-content:center;">— the violet universe</span>
+      <h2>Field to <em>frame.</em></h2>
+      <p>From the purple roots of the Philippines to a small French atelier. Six chapters of the violet ritual, captured in light.</p>
+    </div>
+
+    <div class="u2-moodboard__grid">
+      <figure class="u2-moodboard__tile u2-moodboard__tile--wide u2-reveal delay-1">
+        <img src="{{ 'u2-moodboard-1-origin-field.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Champ violet à perte de vue, origine de l'ube{% else %}Wide violet field — where the ube root grows{% endif %}" loading="lazy" decoding="async" width="1600" height="900">
+        <figcaption class="u2-moodboard__cap"><strong>origin · ch. 01</strong>where the violet root grows</figcaption>
+      </figure>
+
+      <figure class="u2-moodboard__tile u2-moodboard__tile--tall u2-reveal delay-2">
+        <img src="{{ 'u2-moodboard-5-founder.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Portrait de la fondatrice UBurn{% else %}UBurn founder portrait{% endif %}" loading="lazy" decoding="async" width="1600" height="2000">
+        <figcaption class="u2-moodboard__cap"><strong>founder · ch. 02</strong>the woman who started it</figcaption>
+      </figure>
+
+      <figure class="u2-moodboard__tile u2-moodboard__tile--reg u2-reveal delay-3">
+        <img src="{{ 'u2-moodboard-2-craft-atelier.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Atelier français, fabrication artisanale UBurn{% else %}French atelier — small-batch craft{% endif %}" loading="lazy" decoding="async" width="1600" height="1067">
+        <figcaption class="u2-moodboard__cap"><strong>craft · ch. 03</strong>made in france</figcaption>
+      </figure>
+
+      <figure class="u2-moodboard__tile u2-moodboard__tile--reg u2-reveal delay-4">
+        <img src="{{ 'u2-moodboard-6-origin-ube.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Igname violette ube, racine brute{% else %}Raw purple ube root — close-up texture{% endif %}" loading="lazy" decoding="async" width="1600" height="1067">
+        <figcaption class="u2-moodboard__cap"><strong>matter · ch. 04</strong>the purple yam</figcaption>
+      </figure>
+
+      <figure class="u2-moodboard__tile u2-moodboard__tile--reg u2-reveal delay-5">
+        <img src="{{ 'u2-moodboard-3-mood-violet.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Mood violet — composition éditoriale{% else %}Violet mood — editorial composition{% endif %}" loading="lazy" decoding="async" width="1600" height="2000">
+        <figcaption class="u2-moodboard__cap"><strong>mood · ch. 05</strong>color is a feeling</figcaption>
+      </figure>
+
+      <figure class="u2-moodboard__tile u2-moodboard__tile--reg u2-reveal delay-6">
+        <img src="{{ 'u2-moodboard-4-product-latte.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Latte violet servi, moment de présence{% else %}Violet latte poured — a present moment{% endif %}" loading="lazy" decoding="async" width="1600" height="1067">
+        <figcaption class="u2-moodboard__cap"><strong>ritual · ch. 06</strong>your daily moment</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "U2 Moodboard",
+  "tag": "section",
+  "class": "shopify-section--u2-moodboard",
+  "settings": [],
+  "presets": [ { "name": "U2 Moodboard" } ]
+}
+{% endschema %}

@@ -15,7 +15,7 @@
     margin: 12px 0 12px;
   }
   .u2-3ways__head h2 em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-iris); }
-  .u2-3ways__head p { font-size: 15px; line-height: 1.55; color: #3A2E4A; max-width: 50ch; margin: 12px auto 0; }
+  .u2-3ways__head p { font-size: 15px; line-height: 1.55; color: var(--u2-text-body); max-width: 50ch; margin: 12px auto 0; }
   .u2-3ways__grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
   @media (min-width: 768px) { .u2-3ways__grid { grid-template-columns: repeat(3,1fr); gap: 28px; } }
   .u2-3ways__card {
@@ -29,7 +29,7 @@
   }
   .u2-3ways__card:hover { transform: translateY(-6px); box-shadow: 0 24px 50px -22px rgba(58,31,89,0.22); }
   .u2-3ways__media {
-    aspect-ratio: 4/3;
+    aspect-ratio: 1/1;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -73,7 +73,7 @@
   .u2-3ways__desc {
     font-size: 14px;
     line-height: 1.55;
-    color: #3A2E4A;
+    color: var(--u2-text-body);
     margin: 0;
   }
   .u2-3ways__tags {
@@ -101,7 +101,7 @@
     <div class="u2-3ways__grid">
       <article class="u2-3ways__card u2-reveal delay-1">
         <div class="u2-3ways__media u2-3ways__media--hot">
-          <img src="{{ 'uburn-us-homepage-01-hot-latte-hero-a.png' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Latte ube violet chaud servi en tasse blanche{% else %}Hot violet ube latte in a white ceramic mug{% endif %}" loading="lazy" decoding="async" width="880" height="1168" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <img src="{{ 'uburn-us-homepage-01-hot-latte-hero-a.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Latte ube violet chaud servi en tasse blanche{% else %}Hot violet ube latte in a white ceramic mug{% endif %}" loading="lazy" decoding="async" width="880" height="1168" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <div class="u2-3ways__body">
           <div class="u2-3ways__num">01</div>
@@ -117,7 +117,8 @@
 
       <article class="u2-3ways__card u2-reveal delay-2">
         <div class="u2-3ways__media u2-3ways__media--iced">
-          <img src="{{ 'uburn-us-homepage-02-iced-ritual-a.png' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Latte ube violet glacé dans un grand verre sur marbre{% else %}Iced violet ube latte in a tall glass on marble{% endif %}" loading="lazy" decoding="async" width="880" height="1168" style="width:100%;height:100%;object-fit:cover;display:block;">
+          {%- comment -%} rev 2026-05-15-1815 iced re-crop 3:4 packshot-preserved {%- endcomment -%}
+          <img src="{{ 'uburn-us-homepage-02-iced-ritual-c.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Femme servant un latte ube violet glacé à côté du sachet UBurn dans une cuisine parisienne{% else %}Woman serving an iced violet ube latte beside the UBurn pouch in a Parisian kitchen{% endif %}" loading="lazy" decoding="async" width="1050" height="1400" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block;">
         </div>
         <div class="u2-3ways__body">
           <div class="u2-3ways__num">02</div>
@@ -133,14 +134,7 @@
 
       <article class="u2-3ways__card u2-reveal delay-3">
         <div class="u2-3ways__media u2-3ways__media--water">
-          <svg class="u2-3ways__svg" viewBox="0 0 200 240" fill="none" aria-hidden="true">
-            <rect x="80" y="18" width="40" height="20" rx="3" fill="rgba(26,15,46,0.85)"/>
-            <rect x="84" y="38" width="32" height="8" rx="2" fill="rgba(26,15,46,0.55)"/>
-            <path d="M88 46 L88 70 Q88 85 76 90 Q56 100 56 130 L56 210 Q56 230 80 230 L120 230 Q144 230 144 210 L144 130 Q144 100 124 90 Q112 85 112 70 L112 46 Z" fill="rgba(248,244,238,0.92)" stroke="rgba(26,15,46,0.18)" stroke-width="2"/>
-            <text x="100" y="170" text-anchor="middle" font-family="Helvetica" font-style="italic" font-weight="900" font-size="42" fill="#6B4E9E">UB</text>
-            <text x="100" y="218" text-anchor="middle" font-family="Helvetica" font-weight="500" font-size="9" letter-spacing="2" fill="rgba(26,15,46,0.5)">500 ML</text>
-          </svg>
-          <span class="u2-3ways__tag-img">📍 with water · TBD</span>
+          <img src="{{ 'uburn-us-pdp-step-1-mix.png' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Poudre violette UBurn versée dans un verre d'eau sur plan de travail{% else %}UBurn violet powder poured into a glass of water on a countertop{% endif %}" loading="lazy" decoding="async" width="1024" height="1024" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <div class="u2-3ways__body">
           <div class="u2-3ways__num">03</div>
