@@ -1,0 +1,160 @@
+{%- comment -%}
+  UBurn V2 — Contact page with native Shopify contact form
+{%- endcomment -%}
+<style>
+  .u2-contact-hero {
+    background: var(--u2-bone);
+    padding: 120px 20px 60px;
+    text-align: center;
+  }
+  .u2-contact-hero__inner { max-width: 720px; margin: 0 auto; }
+  .u2-contact-hero h1 {
+    font-family: var(--u2-sans);
+    font-size: clamp(40px,7vw,64px);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    color: var(--u2-plum-black);
+    margin: 16px 0 16px;
+  }
+  .u2-contact-hero h1 em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-iris); }
+  .u2-contact-hero p { font-size: 16px; line-height: 1.6; color: var(--u2-text-body); margin: 0 0 16px; }
+  .u2-contact-hero a { color: var(--u2-iris); text-decoration: underline; }
+
+  .u2-contact-body { padding: 48px 20px var(--u2-space-section); }
+  .u2-contact-body__inner { max-width: 640px; margin: 0 auto; }
+  .u2-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: white;
+    border-radius: 20px;
+    padding: 36px 28px;
+    box-shadow: 0 22px 50px -20px rgba(58,31,89,0.12);
+  }
+  .u2-contact-field { display: flex; flex-direction: column; gap: 6px; }
+  .u2-contact-field label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--u2-plum);
+  }
+  .u2-contact-field input,
+  .u2-contact-field textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1.5px solid rgba(107,78,158,0.18);
+    border-radius: 12px;
+    background: var(--u2-warm-white);
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    color: var(--u2-plum-black);
+  }
+  .u2-contact-field input:focus,
+  .u2-contact-field textarea:focus {
+    outline: 2px solid var(--u2-iris);
+    outline-offset: 1px;
+    border-color: var(--u2-iris);
+  }
+  .u2-contact-field textarea { min-height: 140px; resize: vertical; }
+  .u2-contact-quick {
+    margin-top: 48px;
+    text-align: center;
+  }
+  .u2-contact-quick h3 {
+    font-family: var(--u2-sans);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+    margin: 0 0 16px;
+  }
+  .u2-contact-quick__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .u2-contact-quick__link {
+    background: var(--u2-lavender-soft);
+    color: var(--u2-iris-deep);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .u2-contact-quick__link:hover { background: var(--u2-iris); color: white; }
+</style>
+
+<div class="u2-root">
+  <section class="u2-contact-hero u2-reveal">
+    <div class="u2-contact-hero__inner">
+      <span class="u2-section-eyebrow">— we're here</span>
+      <h1>Talk <em>to us.</em></h1>
+      <p>Questions about your order, the formula, or anything else.<br>We answer within 2 business days.</p>
+      <p>Or email us directly : <a href="mailto:hello@uburn.co">hello@uburn.co</a></p>
+    </div>
+  </section>
+
+  <section class="u2-contact-body">
+    <div class="u2-contact-body__inner u2-reveal delay-1">
+      {%- form 'contact', class: 'u2-contact-form' -%}
+        {%- if form.posted_successfully? -%}
+          <p style="background:rgba(107,78,158,0.1);padding:16px;border-radius:12px;color:var(--u2-iris-deep);font-weight:600;">Thanks. We'll get back to you within 2 business days.</p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <p style="background:#fee;padding:16px;border-radius:12px;color:#a00;">{{ form.errors | default_errors }}</p>
+        {%- endif -%}
+        <div class="u2-contact-field">
+          <label for="cf-name">Name</label>
+          <input type="text" id="cf-name" name="contact[name]" required>
+        </div>
+        <div class="u2-contact-field">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="contact[email]" required>
+        </div>
+        <div class="u2-contact-field">
+          <label for="cf-subject">Subject</label>
+          <input type="text" id="cf-subject" name="contact[subject]">
+        </div>
+        <div class="u2-contact-field">
+          <label for="cf-body">Message</label>
+          <textarea id="cf-body" name="contact[body]" required></textarea>
+        </div>
+        <div>
+          {% render 'u2-cta-primary', text: 'send message', link: '#', full_width: true %}
+        </div>
+        <button type="submit" style="position:absolute;left:-9999px">submit</button>
+      {%- endform -%}
+
+      <div class="u2-contact-quick">
+        <h3>Quick answers</h3>
+        <div class="u2-contact-quick__links">
+          <a class="u2-contact-quick__link" href="/pages/faq">FAQ</a>
+          <a class="u2-contact-quick__link" href="/pages/the-science">The science</a>
+          <a class="u2-contact-quick__link" href="/pages/shipping">Shipping</a>
+          <a class="u2-contact-quick__link" href="/pages/returns">Returns</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  document.querySelector('.u2-cta')?.addEventListener('click', function(e){
+    e.preventDefault();
+    document.querySelector('.u2-contact-form')?.requestSubmit();
+  });
+</script>
+
+{% schema %}
+{
+  "name": "U2 Contact page",
+  "tag": "section",
+  "class": "shopify-section--u2-contact",
+  "settings": [],
+  "presets": [ { "name": "U2 Contact page" } ]
+}
+{% endschema %}

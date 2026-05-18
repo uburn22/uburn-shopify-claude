@@ -1,0 +1,549 @@
+/* ============================================================================
+   UBurn V2 — Component atoms
+   pill-tag, cta-primary, cta-secondary, trust-pill, section-eyebrow,
+   accordion-item, review-stars, sticky-atc, etc.
+   ============================================================================ */
+
+/* PILL TAG */
+.u2-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(107, 78, 158, 0.18);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--u2-plum);
+}
+
+.u2-pill svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  color: var(--u2-iris);
+}
+
+.u2-pill--hero {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(107, 78, 158, 0.25);
+}
+
+.u2-pill--dark {
+  background: rgba(232, 220, 239, 0.15);
+  border-color: rgba(184, 157, 217, 0.3);
+  color: var(--u2-bone);
+}
+
+/* TRUST PILL — alias of pill with icon */
+.u2-trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--u2-plum);
+  white-space: nowrap;
+}
+.u2-trust-pill svg {
+  width: 14px;
+  height: 14px;
+  color: var(--u2-iris);
+  flex-shrink: 0;
+}
+
+/* CTA PRIMARY — Editorial sharp, plum-deep base (Luxury polish 2026-05-15) */
+.u2-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--u2-plum-deep);
+  color: var(--u2-bone);
+  font-family: var(--u2-sans);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: lowercase;
+  text-decoration: none;
+  padding: 20px 36px;
+  border-radius: 4px;
+  border: 1px solid var(--u2-plum-deep);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--u2-duration-medium) var(--u2-ease-luxe),
+              background var(--u2-duration-medium) var(--u2-ease-luxe),
+              border-color var(--u2-duration-medium) var(--u2-ease-luxe),
+              box-shadow var(--u2-duration-medium) var(--u2-ease-luxe),
+              color var(--u2-duration-medium) var(--u2-ease-luxe);
+  box-shadow: 0 8px 24px -10px rgba(26, 15, 46, 0.45);
+}
+/* Subtle inset highlight (editorial chrome feel) */
+.u2-cta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.u2-cta:hover {
+  background: var(--u2-iris);
+  border-color: var(--u2-iris);
+  color: var(--u2-bone);
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 14px 32px -10px rgba(107, 78, 158, 0.55);
+}
+
+.u2-cta:active {
+  transform: translateY(0) scale(0.995);
+  transition-duration: 120ms;
+}
+
+.u2-cta:focus-visible {
+  outline: 2px solid var(--u2-iris-bright);
+  outline-offset: 3px;
+}
+
+.u2-cta--full { width: 100%; max-width: 360px; }
+
+.u2-cta__arrow {
+  display: inline-block;
+  transition: transform var(--u2-duration-fast) var(--u2-ease-luxe);
+}
+
+.u2-cta:hover .u2-cta__arrow { transform: translateX(5px); }
+
+/* CTA SECONDARY (outline editorial) */
+.u2-cta--secondary {
+  background: transparent;
+  color: var(--u2-plum-deep);
+  border-color: var(--u2-plum-deep);
+  box-shadow: none;
+}
+
+.u2-cta--secondary:hover {
+  background: var(--u2-plum-deep);
+  color: var(--u2-bone);
+}
+
+/* CTA on dark bg (light pill on plum-black sections) */
+.u2-cta--on-dark {
+  background: var(--u2-bone);
+  color: var(--u2-plum-deep);
+  border-color: var(--u2-bone);
+}
+
+.u2-cta--on-dark::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(26, 15, 46, 0.08) 50%, transparent 100%);
+}
+
+.u2-cta--on-dark:hover {
+  background: var(--u2-iris-bright);
+  border-color: var(--u2-iris-bright);
+  color: var(--u2-bone);
+}
+
+/* ACCORDION ITEM */
+.u2-accordion__item {
+  border-bottom: 1px solid rgba(107, 78, 158, 0.15);
+}
+
+.u2-accordion__q {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  font-family: var(--u2-sans);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--u2-plum-black);
+  padding: 22px 56px 22px 0;
+  cursor: pointer;
+  position: relative;
+  letter-spacing: -0.01em;
+  display: block;
+}
+.u2-accordion__q::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: var(--u2-iris);
+  transition: transform 0.3s var(--u2-ease-smooth);
+}
+.u2-accordion__item.is-open .u2-accordion__q::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+.u2-accordion__a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--u2-ease-smooth);
+}
+.u2-accordion__item.is-open .u2-accordion__a {
+  max-height: 800px;
+}
+.u2-accordion__a-inner {
+  padding: 0 0 24px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--u2-text-body);
+  max-width: 70ch;
+}
+
+/* REVIEW STARS */
+.u2-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #F5B400;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  line-height: 1;
+}
+.u2-stars__rating {
+  margin-left: 6px;
+  color: var(--u2-plum-black);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* STICKY ATC */
+.u2-sticky-atc {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 90;
+  background: rgba(26, 15, 46, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: var(--u2-warm-white);
+  border-radius: 999px;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 16px 40px -16px rgba(26, 15, 46, 0.5);
+  transform: translateY(120%);
+  opacity: 0;
+  transition: transform 0.4s var(--u2-ease-smooth),
+              opacity 0.4s var(--u2-ease-smooth);
+  pointer-events: none;
+}
+
+.u2-sticky-atc.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.u2-sticky-atc__label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  flex: 1;
+}
+
+.u2-sticky-atc__cta {
+  background: var(--u2-iris);
+  color: white;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .u2-sticky-atc {
+    left: auto;
+    right: 20px;
+    bottom: 20px;
+    max-width: 380px;
+  }
+}
+
+/* SECTION EYEBROW with separator */
+.u2-section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--u2-iris);
+  margin-bottom: 16px;
+}
+.u2-section-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+}
+
+/* ============================================================================
+   PREMIUM POLISH — 2026-05-15 — subtle motion layer
+   Respects prefers-reduced-motion. No structural changes. CTA spec-overrides.
+   ============================================================================ */
+
+/* CTA explicit color overrides (defense-in-depth vs .u2-root a cascade) */
+.u2-root a.u2-cta,
+.u2-root a.u2-cta:visited,
+.u2-root a.u2-cta:hover,
+.u2-root button.u2-cta { color: #ffffff; }
+
+.u2-root a.u2-cta--secondary,
+.u2-root a.u2-cta--secondary:visited { color: var(--u2-plum-black); }
+.u2-root a.u2-cta--secondary:hover { color: var(--u2-warm-white); }
+
+.u2-root a.u2-cta--on-dark,
+.u2-root a.u2-cta--on-dark:visited { color: var(--u2-plum-black); }
+.u2-root a.u2-cta--on-dark:hover { color: #ffffff; }
+
+/* Pricing cards micro-lift on hover (cinematic ease-luxe) */
+.u2-pricing__card {
+  transition: transform var(--u2-duration-slow) var(--u2-ease-luxe),
+              box-shadow var(--u2-duration-slow) var(--u2-ease-luxe);
+}
+.u2-pricing__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 50px -22px rgba(58, 31, 89, 0.18);
+}
+.u2-pricing__card--pop:hover {
+  box-shadow: 0 28px 60px -22px rgba(26, 15, 46, 0.28);
+}
+
+/* Three-ways cards: smoother image lift on hover */
+.u2-3ways__card { transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+.u2-3ways__media img { transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+.u2-3ways__card:hover .u2-3ways__media img { transform: scale(1.04); }
+
+/* Hero photo soft zoom on hover (subtle, desktop only) */
+@media (min-width: 768px) {
+  .u2-herospl__art { overflow: hidden; border-radius: 24px; }
+  .u2-herospl__photo,
+  .u2-herospl__art img {
+    transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+  .u2-herospl__side:hover .u2-herospl__photo,
+  .u2-herospl__side:hover .u2-herospl__art img {
+    transform: scale(1.025);
+  }
+}
+
+/* Reveal-on-scroll fallback (in case JS not yet active) */
+.u2-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.u2-reveal.is-in,
+.u2-reveal.is-visible,
+.no-js .u2-reveal { opacity: 1; transform: none; }
+
+/* Trust pills + chips subtle hover */
+.u2-3ways__chip { transition: background 0.2s ease, transform 0.2s ease; }
+.u2-3ways__chip:hover { background: rgba(184, 157, 217, 0.4); transform: translateY(-1px); }
+
+/* Premium soft glow on Maximum/popular pricing card */
+.u2-pricing__card--pop {
+  position: relative;
+  isolation: isolate;
+}
+.u2-pricing__card--pop::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(184, 157, 217, 0.0) 0%, rgba(139, 111, 191, 0.18) 50%, rgba(184, 157, 217, 0.0) 100%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+.u2-pricing__card--pop:hover::before { opacity: 1; }
+
+/* ============================================================================
+   LUXURY POLISH ITER 5 — 2026-05-15 — editorial refinements
+   ============================================================================ */
+
+/* Eyebrow accent — luxury caps */
+.u2-section-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--u2-iris);
+  font-weight: 500;
+}
+
+/* Smooth scroll global */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Selection color luxury */
+.u2-root ::selection { background: var(--u2-lavender-soft); color: var(--u2-plum-deep); }
+
+/* Image base — soft loading */
+.u2-root img { transition: opacity var(--u2-duration-fast) var(--u2-ease-smooth); }
+.u2-root img[loading="lazy"]:not([src]) { opacity: 0; }
+
+/* Trust pills hover micro */
+.u2-trust-pill { transition: color var(--u2-duration-fast) var(--u2-ease-luxe); }
+.u2-trust-pill:hover { color: var(--u2-iris-deep); }
+
+/* Pricing card editorial border on focus-within */
+.u2-pricing__card { transition: transform var(--u2-duration-slow) var(--u2-ease-luxe), box-shadow var(--u2-duration-slow) var(--u2-ease-luxe), border-color var(--u2-duration-medium) var(--u2-ease-luxe); }
+.u2-pricing__card:focus-within { border-color: var(--u2-iris-bright); }
+
+/* Three-ways cards: smooth shadow expansion + subtle border on hover */
+.u2-3ways__card:hover { box-shadow: 0 28px 56px -24px rgba(58, 31, 89, 0.22); }
+
+/* Hero priceline subtle entrance */
+.u2-herospl__priceline strong { transition: color var(--u2-duration-medium) var(--u2-ease-luxe); }
+
+/* Form inputs editorial focus */
+.u2-root input[type="text"],
+.u2-root input[type="email"],
+.u2-root input[type="tel"],
+.u2-root textarea {
+  border-radius: 4px;
+  transition: border-color var(--u2-duration-medium) var(--u2-ease-luxe),
+              box-shadow var(--u2-duration-medium) var(--u2-ease-luxe);
+}
+.u2-root input:focus,
+.u2-root textarea:focus {
+  outline: none;
+  border-color: var(--u2-iris);
+  box-shadow: 0 0 0 3px rgba(107, 78, 158, 0.12);
+}
+
+/* Sticky ATC entry animation */
+.u2-sticky-atc, [data-u2-sticky] {
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.5s var(--u2-ease-luxe), opacity 0.5s var(--u2-ease-luxe);
+}
+.u2-sticky-atc.is-visible, [data-u2-sticky].is-visible,
+.u2-sticky-atc.is-in, [data-u2-sticky].is-in { transform: translateY(0); opacity: 1; }
+
+/* Hero parallax subtle (desktop only) — gentle scale on scroll */
+@media (min-width: 1024px) {
+  .u2-herospl__photo { will-change: transform; }
+}
+
+/* ============================================================================
+   MOBILE EPURATION 2026-05-16 — tighter density, larger touch targets, cleaner
+   ============================================================================ */
+@media (max-width: 640px) {
+  /* Section padding lighter on mobile */
+  .u2-root section[class*="u2-"] { --u2-space-section: 64px; }
+
+  /* Hero priceline cleaner */
+  .u2-herospl__priceline { font-size: 12px; }
+  .u2-herospl__priceline strong { font-size: 19px; }
+
+  /* Pricing cards: tighter padding, larger price text */
+  .u2-pricing__card { padding: 22px 18px; border-radius: 6px; }
+  .u2-pricing__price { font-size: 30px; }
+  .u2-pricing__price small { font-size: 14px; }
+  .u2-pricing__name { font-size: 19px; }
+  .u2-pricing__sub { font-size: 12px; opacity: 0.7; }
+  .u2-pricing__dur { font-size: 11px; opacity: 0.65; }
+  .u2-pricing__per { font-size: 12px; }
+  .u2-pricing__badge { font-size: 9px; padding: 4px 10px; letter-spacing: 0.16em; }
+  .u2-pricing__cta { padding: 16px 18px; font-size: 12px; letter-spacing: 0.2em; }
+
+  /* Pricing bonus stack — hide value tags on mobile (keep names only) */
+  .u2-pricing__bonus { padding: 22px 16px; }
+  .u2-pricing__bonus h3 { font-size: 17px; }
+  .u2-pricing__bonus-name { font-size: 13px; }
+  .u2-pricing__bonus-tag { font-size: 10px; opacity: 0.7; }
+  .u2-pricing__total { font-size: 12px; }
+
+  /* PDP buybox: tighter info */
+  .u2-pdp-bullets li { font-size: 14px; }
+  .u2-pdp-variant__name { font-size: 14px; }
+  .u2-pdp-variant__meta { font-size: 11px; opacity: 0.7; }
+  .u2-pdp-variant__tag { font-size: 10px; }
+  .u2-pdp-variant__price { font-size: 22px; }
+  .u2-pdp-variant__perday { font-size: 11px; opacity: 0.7; }
+  .u2-pdp-mode__title { font-size: 14px; }
+  .u2-pdp-mode__meta { font-size: 11px; opacity: 0.7; }
+  .u2-pdp-mode__bonuses-title { font-size: 13px; }
+  .u2-pdp-mode__bonuses-list li { font-size: 12px; }
+  .u2-pdp-mode__bonuses-list li em { display: none; }  /* hide ($value) on mobile */
+  .u2-pdp-mode__final { font-size: 18px; }
+  .u2-pdp-mode__strike { font-size: 13px; opacity: 0.6; }
+  .u2-pdp-atc { padding: 18px; font-size: 14px; letter-spacing: 0.18em; }
+  .u2-pdp-atc__price { font-size: 14px; }
+
+  /* PDP final-cta secondary footer footnotes lighter */
+  .u2-pdp-foryou__list li { font-size: 14px; }
+  .u2-pdp-foryou__trust { font-size: 13px; }
+
+  /* Formula pillars: 2 col → 1 col but smaller text */
+  .u2-pdp-formula-pill__name { font-size: 13px; }
+  .u2-pdp-formula-pill__role { font-size: 11px; opacity: 0.8; }
+
+  /* Comparison table tighter */
+  .u2-comparison th, .u2-comparison td { padding: 8px 6px; font-size: 12px; }
+
+  /* Three-ways cards lighter chip row */
+  .u2-3ways__chip { font-size: 10px; padding: 4px 8px; }
+  .u2-3ways__title { font-size: 21px; }
+  .u2-3ways__desc { font-size: 13px; }
+
+  /* Violet bottle perks: hide $X value, keep title only */
+  .u2-vbtl__perk-value { display: none; }
+
+  /* Trust band marquee tighter */
+  .u2-trustband__inner { gap: 8px 14px; }
+  .u2-trust-pill { font-size: 10px; letter-spacing: 0.1em; }
+
+  /* Sticky ATC mobile: tighter */
+  .u2-sticky-atc, [data-u2-pdp-sticky] { padding: 12px 16px; }
+}
+
+/* Respect prefers-reduced-motion — disable all the above animations */
+@media (prefers-reduced-motion: reduce) {
+  .u2-cta,
+  .u2-cta__arrow,
+  .u2-pricing__card,
+  .u2-3ways__card,
+  .u2-3ways__media img,
+  .u2-herospl__photo,
+  .u2-herospl__art img,
+  .u2-reveal,
+  .u2-3ways__chip,
+  .u2-pricing__card--pop::before,
+  .u2-sticky-atc, [data-u2-sticky],
+  .u2-trust-pill {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .u2-reveal { opacity: 1 !important; }
+  .u2-sticky-atc.is-visible, [data-u2-sticky].is-visible { transform: none !important; }
+}

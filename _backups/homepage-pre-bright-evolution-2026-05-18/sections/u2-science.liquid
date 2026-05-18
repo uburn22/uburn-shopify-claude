@@ -1,0 +1,367 @@
+{%- comment -%}
+  UBurn V2 — Science page (P1 SEO + PDP link target)
+  EU Regulation 432/2012 EFSA · konjac glucomannan deep dive
+{%- endcomment -%}
+<style>
+  .u2-sci { background: var(--u2-cream); }
+  .u2-sci-hero {
+    background: linear-gradient(160deg, var(--u2-plum-deep), var(--u2-iris-deep) 60%, var(--u2-iris));
+    color: var(--u2-warm-white);
+    padding: 120px 20px 80px;
+    text-align: center;
+  }
+  .u2-sci-hero__inner { max-width: 820px; margin: 0 auto; }
+  .u2-sci-hero h1 {
+    font-family: var(--u2-sans);
+    font-size: clamp(40px,7vw,72px);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--u2-warm-white);
+    margin: 16px 0 16px;
+  }
+  .u2-sci-hero h1 em {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--u2-lavender);
+  }
+  .u2-sci-hero p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.85);
+    max-width: 56ch;
+    margin: 0 auto;
+  }
+  .u2-sci-hero .u2-section-eyebrow { color: var(--u2-lavender); }
+  .u2-sci-hero .u2-section-eyebrow::before { background: var(--u2-lavender); }
+
+  .u2-sci-how { padding: var(--u2-space-section) 20px; background: white; }
+  .u2-sci-how__inner { max-width: 1180px; margin: 0 auto; }
+  .u2-sci-how__head { text-align: center; margin-bottom: 56px; }
+  .u2-sci-how__head h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(32px,5vw,46px);
+    font-weight: 800;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.025em;
+    margin: 12px 0 0;
+  }
+  .u2-sci-how__head h2 em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-iris); }
+  .u2-sci-how__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  @media (min-width: 768px) { .u2-sci-how__grid { grid-template-columns: repeat(3,1fr); gap: 32px; } }
+  .u2-sci-how__card {
+    background: var(--u2-bone);
+    border-radius: 20px;
+    padding: 36px 28px;
+    text-align: center;
+  }
+  .u2-sci-how__num {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 64px;
+    color: var(--u2-iris);
+    line-height: 1;
+    margin-bottom: 18px;
+  }
+  .u2-sci-how__title {
+    font-family: var(--u2-sans);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+    margin: 0 0 12px;
+  }
+  .u2-sci-how__desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--u2-text-body);
+  }
+
+  .u2-sci-pillars { padding: var(--u2-space-section) 20px; background: var(--u2-plum-black); color: var(--u2-bone); }
+  .u2-sci-pillars__inner { max-width: 1180px; margin: 0 auto; }
+  .u2-sci-pillars__head { text-align: center; margin-bottom: 48px; }
+  .u2-sci-pillars__head .u2-section-eyebrow { color: var(--u2-lavender); }
+  .u2-sci-pillars__head .u2-section-eyebrow::before { background: var(--u2-lavender); }
+  .u2-sci-pillars__head h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(32px,5vw,46px);
+    font-weight: 800;
+    color: var(--u2-bone);
+    letter-spacing: -0.025em;
+    margin: 12px 0 0;
+  }
+  .u2-sci-pillars__head h2 em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-lavender); }
+  .u2-sci-pillars__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 768px) { .u2-sci-pillars__grid { grid-template-columns: repeat(2,1fr); gap: 28px; } }
+  @media (min-width: 1024px) { .u2-sci-pillars__grid { grid-template-columns: repeat(4,1fr); } }
+  .u2-sci-pillars__card {
+    background: rgba(232,220,239,0.06);
+    border: 1px solid rgba(184,157,217,0.18);
+    border-radius: 16px;
+    padding: 28px 22px;
+  }
+  .u2-sci-pillars__card-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--u2-iris);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .u2-sci-pillars__card-title {
+    font-family: var(--u2-sans);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--u2-bone);
+    margin: 0 0 8px;
+  }
+  .u2-sci-pillars__card-desc {
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(248,244,238,0.7);
+  }
+
+  .u2-sci-efsa { padding: var(--u2-space-section) 20px; background: var(--u2-lavender-soft); }
+  .u2-sci-efsa__inner { max-width: 880px; margin: 0 auto; }
+  .u2-sci-efsa__card {
+    background: white;
+    border-radius: 24px;
+    padding: 48px 36px;
+    box-shadow: 0 22px 50px -20px rgba(58,31,89,0.18);
+  }
+  .u2-sci-efsa__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--u2-iris);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .u2-sci-efsa h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(28px,4vw,40px);
+    font-weight: 800;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.025em;
+    margin: 0 0 18px;
+  }
+  .u2-sci-efsa__quote {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--u2-iris-deep);
+    margin: 0 0 18px;
+    padding-left: 18px;
+    border-left: 3px solid var(--u2-iris);
+  }
+  .u2-sci-efsa p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--u2-text-body);
+    margin: 0 0 14px;
+  }
+  .u2-sci-efsa ul {
+    list-style: none;
+    margin: 18px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .u2-sci-efsa li {
+    padding-left: 26px;
+    position: relative;
+    font-size: 14px;
+    color: var(--u2-plum-black);
+  }
+  .u2-sci-efsa li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--u2-iris);
+    font-weight: 700;
+  }
+
+  .u2-sci-disc { padding: 56px 20px; background: var(--u2-bone); }
+  .u2-sci-disc__inner {
+    max-width: 880px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(107,78,158,0.15);
+    padding-top: 36px;
+  }
+  .u2-sci-disc h3 {
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--u2-plum);
+    margin: 0 0 14px;
+  }
+  .u2-sci-disc p {
+    font-size: 12px;
+    line-height: 1.7;
+    color: #6a657a;
+    margin: 0 0 10px;
+  }
+
+  .u2-sci-cta {
+    background: linear-gradient(135deg, var(--u2-plum-deep), var(--u2-iris-deep));
+    color: var(--u2-warm-white);
+    padding: 80px 20px;
+    text-align: center;
+  }
+  .u2-sci-cta h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(28px,4.5vw,42px);
+    font-weight: 800;
+    color: var(--u2-warm-white);
+    margin: 0 0 12px;
+    letter-spacing: -0.025em;
+  }
+  .u2-sci-cta h2 em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-lavender); }
+  .u2-sci-cta p { font-size: 16px; color: rgba(255,255,255,0.85); max-width: 50ch; margin: 0 auto 28px; }
+</style>
+
+<div class="u2-root u2-sci">
+
+  <section class="u2-sci-hero" aria-label="The science behind UBurn">
+    <div class="u2-sci-hero__inner">
+      <span class="u2-section-eyebrow">— the science behind uburn</span>
+      <h1>The science behind <em>UBurn.</em></h1>
+      <p>UBurn is built around <strong>konjac glucomannan</strong> — the only soluble fiber officially recognized by the European Food Safety Authority for supporting satiety. Five additional plant actives round out the formula. Caffeine-free, 30 calories, plant-based, French heritage.</p>
+    </div>
+  </section>
+
+  <section class="u2-sci-how" aria-label="How it works">
+    <div class="u2-sci-how__inner">
+      <div class="u2-sci-how__head u2-reveal">
+        <span class="u2-section-eyebrow">— how it works</span>
+        <h2>How UBurn helps you <em>stay calm at four.*</em></h2>
+      </div>
+      <div class="u2-sci-how__grid">
+        <div class="u2-sci-how__card u2-reveal delay-1">
+          <div class="u2-sci-how__num">01</div>
+          <h3 class="u2-sci-how__title">You feel</h3>
+          <p class="u2-sci-how__desc">The afternoon arrives. Blood sugar dips. Cravings start. Instead of reaching for cookies, you pour one scoop into cold water.</p>
+        </div>
+        <div class="u2-sci-how__card u2-reveal delay-2">
+          <div class="u2-sci-how__num">02</div>
+          <h3 class="u2-sci-how__title">Glucomannan absorbs water</h3>
+          <p class="u2-sci-how__desc">Konjac glucomannan is a soluble fiber that absorbs water and forms a viscous gel in the stomach — the mechanism EFSA recognized for satiety support.</p>
+        </div>
+        <div class="u2-sci-how__card u2-reveal delay-3">
+          <div class="u2-sci-how__num">03</div>
+          <h3 class="u2-sci-how__title">You ask for less</h3>
+          <p class="u2-sci-how__desc">Satiety is signaled naturally. You make it to dinner without raiding the pantry. No willpower required — just physiology.*</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="u2-sci-pillars" aria-label="Science pillars">
+    <div class="u2-sci-pillars__inner">
+      <div class="u2-sci-pillars__head u2-reveal">
+        <span class="u2-section-eyebrow">— the four pillars</span>
+        <h2>What makes UBurn <em>different.</em></h2>
+      </div>
+      <div class="u2-sci-pillars__grid">
+        <article class="u2-sci-pillars__card u2-reveal delay-1">
+          <div class="u2-sci-pillars__card-icon">{% render 'u2-icon', name: 'leaf', size: 22 %}</div>
+          <h3 class="u2-sci-pillars__card-title">Fills naturally</h3>
+          <p class="u2-sci-pillars__card-desc">Konjac glucomannan absorbs ~50× its weight in water. A natural gel forms — no synthetic suppressants.*</p>
+        </article>
+        <article class="u2-sci-pillars__card u2-reveal delay-2">
+          <div class="u2-sci-pillars__card-icon">{% render 'u2-icon', name: 'sparkle', size: 20 %}</div>
+          <h3 class="u2-sci-pillars__card-title">Slows sugar release</h3>
+          <p class="u2-sci-pillars__card-desc">The gel slows gastric emptying — gentler post-meal blood sugar response as part of a balanced diet.*</p>
+        </article>
+        <article class="u2-sci-pillars__card u2-reveal delay-3">
+          <div class="u2-sci-pillars__card-icon">{% render 'u2-icon', name: 'globe', size: 22 %}</div>
+          <h3 class="u2-sci-pillars__card-title">100% plant fiber</h3>
+          <p class="u2-sci-pillars__card-desc">Konjac is a perennial plant root from East Asia. Caffeine-free. Vegan. Gluten-free formula.</p>
+        </article>
+        <article class="u2-sci-pillars__card u2-reveal delay-3">
+          <div class="u2-sci-pillars__card-icon">{% render 'u2-icon', name: 'flask', size: 20 %}</div>
+          <h3 class="u2-sci-pillars__card-title">Third-party lab tested</h3>
+          <p class="u2-sci-pillars__card-desc">Every batch tested for purity, heavy metals, and microbial safety. Crafted with French heritage since 2024.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="u2-sci-efsa" aria-label="EFSA approval detail">
+    <div class="u2-sci-efsa__inner">
+      <div class="u2-sci-efsa__card u2-reveal">
+        <span class="u2-sci-efsa__badge">{% render 'u2-icon', name: 'check', size: 12 %} EFSA-recognized</span>
+        <h2>The only fiber with this approval.</h2>
+        <p class="u2-sci-efsa__quote">"Konjac glucomannan contributes to the maintenance of normal blood cholesterol levels and to the reduction of body weight in the context of an energy-restricted diet."</p>
+        <p>The European Food Safety Authority (EFSA) — Europe's equivalent of an FDA-style scientific review body — recognized konjac glucomannan for satiety support under <strong>EU Regulation 432/2012 · ID 3120</strong>. The recognition requires a specific protocol :</p>
+        <ul>
+          <li>3 grams per day, divided in 3 servings of 1g each</li>
+          <li>Taken with 1–2 large glasses of water</li>
+          <li>Before meals</li>
+          <li>In the context of an energy-restricted diet</li>
+        </ul>
+        <p style="margin-top: 18px;">UBurn delivers <strong>3g of glucomannan per scoop</strong>, designed to be consumed once daily with water 30 minutes before your most challenging eating moment (typically 4 PM).</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="u2-sci-disc" aria-label="FDA disclaimer">
+    <div class="u2-sci-disc__inner">
+      <h3>FDA Disclaimer</h3>
+      <p>UBurn is a dietary supplement containing konjac glucomannan. Glucomannan supports satiety as part of a healthy lifestyle.* Recommended use : 3g/day in 3 doses of 1g with 1–2 large glasses of water before meals. Not a substitute for a balanced diet. Not recommended during pregnancy or breastfeeding.</p>
+      <p>*These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary.</p>
+    </div>
+  </section>
+
+  <section class="u2-sci-cta" aria-label="Start ritual">
+    <h2>Ready to start <em>your ritual?</em></h2>
+    <p>Cold water. One scoop. 30 seconds. The afternoon you've been hoping for.</p>
+    {% render 'u2-cta-primary', text: 'start my pack', link: '/products/ube-poudre?variant=51289200034111', on_dark: true %}
+  </section>
+
+</div>
+
+{%- comment -%} JSON-LD Article schema {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "The Science Behind UBurn — Konjac Glucomannan & Satiety",
+  "description": "How konjac glucomannan supports satiety, EFSA recognition, and the UBurn formula explained.",
+  "author": { "@type": "Organization", "name": "UBurn" },
+  "publisher": { "@type": "Organization", "name": "UBurn", "logo": { "@type": "ImageObject", "url": "{{ 'u2-logo-violet.png' | asset_url }}" } },
+  "datePublished": "2026-05-15",
+  "image": "{{ 'u2-hero-lifestyle.jpg' | asset_url }}"
+}
+</script>
+
+{% schema %}
+{
+  "name": "U2 Science page",
+  "tag": "section",
+  "class": "shopify-section--u2-science",
+  "settings": [],
+  "presets": [ { "name": "U2 Science page" } ]
+}
+{% endschema %}

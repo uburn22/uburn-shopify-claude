@@ -1,0 +1,28 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "u2-announce": {
+      "type": "u2-announcement-bar",
+      "settings": {
+        "text": "Free U.S. shipping on orders $40+ · Cancel anytime"
+      }
+    },
+    "u2-hdr": {
+      "type": "u2-header",
+      "settings": {
+        "product_handle": "ube-poudre"
+      }
+    }
+  },
+  "order": ["u2-announce", "u2-hdr"]
+}

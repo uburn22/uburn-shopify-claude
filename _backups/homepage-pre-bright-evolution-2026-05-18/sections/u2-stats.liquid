@@ -1,0 +1,131 @@
+{%- comment -%}
+  UBurn V2 — Stats section (big percentages, social proof without count)
+  Migrated from live S8 STATS
+{%- endcomment -%}
+<style>
+  .u2-stats { background: var(--u2-plum-black); color: var(--u2-bone); padding: var(--u2-space-section) 20px; }
+  .u2-stats__inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+  @media (min-width: 1024px) { .u2-stats__inner { grid-template-columns: 1fr 1.1fr; gap: 80px; } }
+  .u2-stats__visual {
+    aspect-ratio: 4/5;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, var(--u2-iris-deep), var(--u2-plum-deep));
+  }
+  .u2-stats__visual img { width:100%; height:100%; object-fit: cover; opacity: 0.85; }
+  .u2-stats__visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(26,15,46,0.6));
+  }
+  .u2-stats__caption {
+    position: absolute;
+    left: 20px; bottom: 20px;
+    color: var(--u2-bone);
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-size: 17px;
+    z-index: 2;
+    max-width: 80%;
+  }
+  .u2-stats__head .u2-section-eyebrow { color: var(--u2-lavender); }
+  .u2-stats__head .u2-section-eyebrow::before { background: var(--u2-lavender); }
+  .u2-stats__head h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(34px,6vw,52px);
+    font-weight: 800;
+    color: var(--u2-bone);
+    letter-spacing: -0.025em;
+    line-height: 1.04;
+    margin: 12px 0 32px;
+  }
+  .u2-stats__head h2 em {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--u2-lavender);
+  }
+  .u2-stats__big {
+    margin-bottom: 28px;
+  }
+  .u2-stats__big-val {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(72px,12vw,128px);
+    color: var(--u2-lavender);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .u2-stats__big-label {
+    font-size: 14px;
+    color: rgba(248,244,238,0.85);
+    margin: 4px 0 0;
+    max-width: 36ch;
+  }
+  .u2-stats__list { display: flex; flex-direction: column; gap: 18px; }
+  .u2-stats__row { display: flex; align-items: baseline; gap: 18px; }
+  .u2-stats__row-val {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 38px;
+    color: var(--u2-lavender);
+    min-width: 90px;
+    letter-spacing: -0.02em;
+  }
+  .u2-stats__row-lbl {
+    font-size: 14px;
+    color: rgba(248,244,238,0.7);
+    line-height: 1.4;
+  }
+  .u2-stats__disc {
+    margin-top: 32px;
+    font-size: 11px;
+    color: rgba(248,244,238,0.5);
+    line-height: 1.6;
+    max-width: 56ch;
+  }
+</style>
+<section class="u2-root u2-stats" aria-label="Stats">
+  <div class="u2-stats__inner">
+    <div class="u2-stats__visual u2-reveal">
+      <img src="{{ 'u2-after-calm.jpg' | asset_url }}" alt="UBurn customer feedback" loading="lazy" width="800" height="1000">
+      <span class="u2-stats__caption">Stable afternoons. No crash. Caffeine-free.</span>
+    </div>
+    <div class="u2-reveal delay-1 u2-stats__head">
+      <span class="u2-section-eyebrow">— internal survey results</span>
+      <h2>How women <em>actually feel.</em></h2>
+      <div class="u2-stats__big">
+        <div class="u2-stats__big-val">95%</div>
+        <p class="u2-stats__big-label">feel satiety from the very first sip*</p>
+      </div>
+      <div class="u2-stats__list">
+        <div class="u2-stats__row">
+          <span class="u2-stats__row-val">87%</span>
+          <span class="u2-stats__row-lbl">less evening snacking</span>
+        </div>
+        <div class="u2-stats__row">
+          <span class="u2-stats__row-val">82%</span>
+          <span class="u2-stats__row-lbl">calmer eating rhythm</span>
+        </div>
+        <div class="u2-stats__row">
+          <span class="u2-stats__row-val">4.7/5</span>
+          <span class="u2-stats__row-lbl">verified rating</span>
+        </div>
+      </div>
+      <p class="u2-stats__disc">*Based on internal customer survey. Individual results may vary. These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Stats",
+  "tag": "section",
+  "class": "shopify-section--u2-stats",
+  "settings": [],
+  "presets": [ { "name": "U2 Stats" } ]
+}
+{% endschema %}

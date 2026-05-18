@@ -1,0 +1,8 @@
+{%- comment -%}
+  UBurn V2 trust pill
+  Usage: {% render 'u2-trust-pill', icon: 'check', text: 'EFSA-backed' %}
+{%- endcomment -%}
+<span class="u2-trust-pill">
+  {% render 'u2-icon', name: icon, size: 14 %}
+  <span>{{ text }}</span>
+</span>

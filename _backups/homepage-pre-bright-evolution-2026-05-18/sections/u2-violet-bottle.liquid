@@ -1,0 +1,160 @@
+{%- comment -%}
+  UBurn V2 — The Violet Bottle merch teaser
+{%- endcomment -%}
+<style>
+  .u2-vbtl {
+    background: linear-gradient(160deg, var(--u2-plum-deep) 0%, var(--u2-iris-deep) 50%, var(--u2-plum-black) 100%);
+    color: var(--u2-bone);
+    padding: var(--u2-space-section) 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .u2-vbtl::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(40% 35% at 18% 22%, rgba(184,157,217,0.32), transparent 70%),
+      radial-gradient(45% 40% at 82% 78%, rgba(139,111,191,0.32), transparent 70%);
+    pointer-events: none;
+  }
+  .u2-vbtl__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  @media (min-width: 1024px) { .u2-vbtl__inner { grid-template-columns: 1fr 1fr; gap: 80px; } }
+
+  .u2-vbtl__media {
+    aspect-ratio: 1/1;
+    max-width: 460px;
+    margin: 0 auto;
+    width: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(184,157,217,0.3) 0%, transparent 65%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .u2-vbtl__svg {
+    width: 70%;
+    height: auto;
+    filter: drop-shadow(0 40px 80px rgba(26,15,46,0.55));
+  }
+  .u2-vbtl__photo {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    border-radius: 6px;
+    filter: drop-shadow(0 30px 60px rgba(26,15,46,0.45));
+    background: var(--u2-cream);
+  }
+  @media (min-width: 1024px) { .u2-vbtl__photo { max-width: 620px; } }
+
+  .u2-vbtl__copy .u2-section-eyebrow { color: var(--u2-lavender); }
+  .u2-vbtl__copy .u2-section-eyebrow::before { background: var(--u2-lavender); }
+  .u2-vbtl__title {
+    font-family: var(--u2-sans);
+    font-size: clamp(40px,7vw,72px);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--u2-bone);
+    margin: 12px 0 18px;
+  }
+  .u2-vbtl__title em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-lavender); }
+  .u2-vbtl__sub {
+    font-size: 17px;
+    line-height: 1.6;
+    color: rgba(248,244,238,0.85);
+    max-width: 48ch;
+    margin: 0 0 28px;
+  }
+  .u2-vbtl__perks {
+    list-style: none;
+    margin: 0 0 28px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .u2-vbtl__perk {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(232,220,239,0.08);
+    border: 1px solid rgba(184,157,217,0.22);
+    border-radius: 14px;
+    padding: 14px 18px;
+    font-size: 14px;
+    color: var(--u2-bone);
+  }
+  .u2-vbtl__perk-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: rgba(184,157,217,0.25);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 16px;
+  }
+  .u2-vbtl__perk strong { font-weight: 700; color: var(--u2-lavender); }
+  .u2-vbtl__scarcity {
+    margin-top: 18px;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--u2-lavender);
+    opacity: 0.85;
+  }
+</style>
+<section class="u2-root u2-vbtl" aria-label="The Violet Bottle">
+  <div class="u2-vbtl__inner">
+    <div class="u2-vbtl__media u2-reveal">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1120 | image_tag: loading: 'lazy', alt: 'UBurn Violet Bottle — real glass 500ml with violet drink', class: 'u2-vbtl__photo' }}
+      {%- else -%}
+        {%- comment -%} rev 2026-05-16 — real bottle photo (ube/MCT/konjac ingredients callouts) replaces SVG fallback {%- endcomment -%}
+        <img class="u2-vbtl__photo" src="{{ 'uburn-us-violet-bottle-ingredients-a.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Vraie bouteille en verre UBurn 500ml, formule ubé bio + MCT coco + konjac{% else %}Real glass UBurn 500ml bottle with key ingredients: organic ube, coconut MCT, konjac{% endif %}" loading="lazy" decoding="async" width="1120" height="1400">
+      {%- endif -%}
+    </div>
+    <div class="u2-vbtl__copy u2-reveal delay-1">
+      <span class="u2-section-eyebrow">— the signature object</span>
+      <h2 class="u2-vbtl__title">The Violet <em>Bottle.</em></h2>
+      <p class="u2-vbtl__sub">Glass bottle. UB monogram. 500 ml. The vessel of the violet ritual. Shake it. Sip it. Carry it.</p>
+      <ul class="u2-vbtl__perks">
+        <li class="u2-vbtl__perk">
+          <span class="u2-vbtl__perk-icon">🎁</span>
+          <span><strong>Free</strong> with Subscribe &amp; Save (–10% + bottle included)</span>
+        </li>
+        <li class="u2-vbtl__perk">
+          <span class="u2-vbtl__perk-icon">🎁</span>
+          <span><strong>Free</strong> with Maximum Pack (90 days · best value)</span>
+        </li>
+        <li class="u2-vbtl__perk">
+          <span class="u2-vbtl__perk-icon">💎</span>
+          <span><strong>$29</strong> standalone · limited drops</span>
+        </li>
+      </ul>
+      {% render 'u2-cta-primary', text: 'claim yours', link: '/products/ube-poudre?variant=51289200034111#subscribe', on_dark: true %}
+      <p class="u2-vbtl__scarcity">only 500 bottles · first season</p>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Violet Bottle",
+  "tag": "section",
+  "class": "shopify-section--u2-vbtl",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Bottle photo (optional)" }
+  ],
+  "presets": [ { "name": "U2 Violet Bottle" } ]
+}
+{% endschema %}

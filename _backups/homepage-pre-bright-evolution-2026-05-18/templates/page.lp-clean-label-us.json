@@ -1,0 +1,85 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme",
+  "sections": {
+    "hero": {
+      "type": "u2-hero-split",
+      "settings": {
+        "product": "ube-poudre",
+        "variant_id": "51289200034111",
+        "eyebrow": "crafted, not formulated",
+        "h1": "Six plants. <em>That's it.</em>",
+        "sub": "EFSA-backed konjac. French atelier. Zero maltodextrin. Zero fillers. Read every word on the label.",
+        "priceline": "from <strong>$36.99</strong> · $33.29/mo subscribe &amp; save · 6 plant actives · free us shipping",
+        "cta_text": "drink the label",
+        "cta_sub": "1 click · six plants delivered · subscribe · cancel anytime",
+        "image_left_filename": "lp-hero-clean-label.jpg",
+        "image_left_alt": "Editorial flat lay of ube purple yam, konjac slices, ginger root, violet powder bowl, dried vanilla pods on cream linen",
+        "label_left": "real",
+        "tag_left": "six plants · zero fillers",
+        "label_right": "functional",
+        "tag_right": "with water · on-the-go"
+      }
+    },
+    "trust-band": { "type": "u2-trust-band", "settings": {} },
+    "three-ways": { "type": "u2-three-ways", "settings": {} },
+    "marquee": { "type": "u2-marquee", "settings": {} },
+    "problem": {
+      "type": "u2-problem",
+      "settings": {
+        "banner_filename": "u2-problem-banner-lifestyle.jpg",
+        "banner_caption": "the supplement aisle has a problem.",
+        "eyebrow": "why most wellness fails",
+        "title_pre": "Why most labels",
+        "title_em": "don't work.",
+        "card_1_num": "Aisle 7",
+        "card_1_title": "The wall of gummies.",
+        "card_1_sub": "Sugar-coated bears. Fourteen ingredients you can't pronounce. Built to taste like candy, not work.",
+        "card_2_num": "Label check",
+        "card_2_title": "Maltodextrin first.",
+        "card_2_sub": "Filler before active. Bulk first, biology second. Every label tells the same story.",
+        "card_3_num": "→",
+        "card_3_title": "Different by design.",
+        "card_3_sub": "Real konjac. Real ube. Six plant actives. Crafted, not formulated."
+      }
+    },
+    "formula": { "type": "u2-formula-grid", "settings": {} },
+    "efsa": { "type": "u2-efsa-block", "settings": {} },
+    "stats": { "type": "u2-stats", "settings": {} },
+    "violet-bottle": { "type": "u2-violet-bottle", "settings": {} },
+    "pricing": { "type": "u2-pricing-cards", "settings": { "product": "ube-poudre", "show_bonus": true } },
+    "compare": { "type": "u2-comparison", "settings": {} },
+    "before-after": { "type": "u2-before-after", "settings": {} },
+    "craft": { "type": "u2-craft", "settings": {} },
+    "moodboard": { "type": "u2-moodboard", "settings": {} },
+    "guarantee": { "type": "u2-guarantee-bar", "settings": {} },
+    "final-cta": {
+      "type": "u2-final-cta",
+      "settings": {
+        "product": "ube-poudre",
+        "variant_id": "51289200034111",
+        "eyebrow": "— drink the label",
+        "title_pre": "Six plants.",
+        "title_em": "One ritual.",
+        "sub": "Crafted in France. Backed by EFSA (ID 3120). Read every word on the label.*",
+        "cta": "drink the label — $33.29/mo"
+      }
+    },
+    "newsletter": { "type": "u2-newsletter", "settings": {} },
+    "live_proof": { "type": "u2-live-proof", "settings": {} }
+  },
+  "order": [
+    "hero", "trust-band", "three-ways", "marquee", "problem",
+    "formula", "efsa", "stats", "violet-bottle", "pricing",
+    "compare", "before-after", "craft", "moodboard",
+    "guarantee", "final-cta", "newsletter", "live_proof"
+  ]
+}

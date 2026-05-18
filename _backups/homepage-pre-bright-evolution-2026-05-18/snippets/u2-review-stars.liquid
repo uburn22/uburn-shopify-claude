@@ -1,0 +1,11 @@
+{%- comment -%}
+  UBurn V2 review stars (no count per Charles strategy 2026-05-14)
+  Usage: {% render 'u2-review-stars', rating: 4.7 %}
+{%- endcomment -%}
+{%- liquid
+  assign rating = rating | default: 4.7
+-%}
+<span class="u2-stars" aria-label="{{ rating }} out of 5 stars">
+  <span aria-hidden="true">★★★★★</span>
+  <span class="u2-stars__rating">{{ rating }}/5</span>
+</span>

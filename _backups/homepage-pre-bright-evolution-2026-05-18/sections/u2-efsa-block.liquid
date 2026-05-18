@@ -1,0 +1,30 @@
+{%- comment -%}
+  UBurn V2 — EFSA Authority block (atomic)
+{%- endcomment -%}
+<style>
+  .u2-efsa { background: var(--u2-lavender-soft); padding: var(--u2-space-section) 20px; }
+  .u2-efsa__inner { max-width: 760px; margin: 0 auto; text-align: center; }
+  .u2-efsa__badge { display: inline-flex; align-items: center; gap: 8px; background: white; color: var(--u2-iris); padding: 8px 18px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 24px; box-shadow: 0 2px 12px rgba(107,78,158,0.12); }
+  .u2-efsa__title { font-family: var(--u2-sans); font-size: clamp(32px,5vw,44px); font-weight: 800; letter-spacing: -0.025em; color: var(--u2-plum-black); margin: 0 0 8px; }
+  .u2-efsa__sub { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--u2-iris); margin: 0 0 32px; }
+  .u2-efsa__quote { font-family: var(--u2-serif); font-style: italic; font-size: clamp(22px,3.5vw,28px); line-height: 1.4; color: var(--u2-plum-black); max-width: 30ch; margin: 0 auto 24px; }
+  .u2-efsa__attribution { font-size: 13px; color: var(--u2-plum); line-height: 1.6; max-width: 46ch; margin: 0 auto; }
+</style>
+<section class="u2-root u2-efsa" aria-label="EFSA-backed">
+  <div class="u2-efsa__inner u2-reveal">
+    <div class="u2-efsa__badge">{% render 'u2-icon', name: 'check', size: 14 %} EFSA-backed fiber</div>
+    <h2 class="u2-efsa__title">A fiber recognized by Europe's food safety authority.</h2>
+    <p class="u2-efsa__sub">EU Regulation 432/2012 · ID 3120</p>
+    <p class="u2-efsa__quote">"Konjac glucomannan supports satiety in the context of an energy-restricted diet"</p>
+    <p class="u2-efsa__attribution">Required dose: 3g per day with 1–2 large glasses of water before meals.*</p>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 EFSA Block",
+  "tag": "section",
+  "class": "shopify-section--u2-efsa",
+  "settings": [],
+  "presets": [ { "name": "U2 EFSA Block" } ]
+}
+{% endschema %}

@@ -1,0 +1,122 @@
+{%- comment -%}
+  UBurn V2 — PDP Final CTA — closing call to action
+{%- endcomment -%}
+<style>
+  .u2-pdp-finalcta {
+    padding: 96px 20px;
+    background: linear-gradient(135deg, var(--u2-iris) 0%, var(--u2-plum-black) 100%);
+    color: var(--u2-cream);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .u2-pdp-finalcta::before,
+  .u2-pdp-finalcta::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .u2-pdp-finalcta::before {
+    width: 380px; height: 380px; top: -100px; left: -100px;
+  }
+  .u2-pdp-finalcta::after {
+    width: 480px; height: 480px; bottom: -160px; right: -120px;
+  }
+  .u2-pdp-finalcta__inner {
+    max-width: 720px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .u2-pdp-finalcta__eyebrow {
+    display: inline-block;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(248, 244, 238, 0.7);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .u2-pdp-finalcta__title {
+    font-family: var(--u2-serif);
+    font-size: 52px;
+    line-height: 1.02;
+    font-weight: 400;
+    color: var(--u2-cream);
+    margin: 0 0 18px;
+    letter-spacing: -0.025em;
+  }
+  .u2-pdp-finalcta__title em { font-style: italic; color: var(--u2-lavender-soft); }
+  .u2-pdp-finalcta__lead {
+    font-family: var(--u2-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(248, 244, 238, 0.85);
+    margin: 0 auto 36px;
+    max-width: 480px;
+  }
+  .u2-pdp-finalcta__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--u2-cream);
+    color: var(--u2-plum-black);
+    padding: 18px 40px;
+    border-radius: 999px;
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: lowercase;
+    text-decoration: none;
+    transition: transform 0.2s var(--u2-ease-smooth), box-shadow 0.2s var(--u2-ease-smooth);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  }
+  .u2-pdp-finalcta__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.24);
+  }
+  .u2-pdp-finalcta__sub {
+    margin-top: 18px;
+    font-family: var(--u2-sans);
+    font-size: 12.5px;
+    color: rgba(248, 244, 238, 0.75);
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 640px) {
+    .u2-pdp-finalcta { padding: 72px 20px; }
+    .u2-pdp-finalcta__title { font-size: 36px; }
+    .u2-pdp-finalcta__btn { padding: 16px 32px; font-size: 14px; }
+  }
+</style>
+<section class="u2-root u2-pdp-finalcta" aria-labelledby="u2-pdp-finalcta-title">
+  <div class="u2-pdp-finalcta__inner">
+    <span class="u2-pdp-finalcta__eyebrow">{{ section.settings.eyebrow | default: 'Ready?' }}</span>
+    <h2 class="u2-pdp-finalcta__title" id="u2-pdp-finalcta-title">{{ section.settings.title | default: 'Ready to build <em>your UBurn ritual?</em>' }}</h2>
+    <p class="u2-pdp-finalcta__lead">{{ section.settings.lead | default: 'A violet wellness ritual. Plant-based satiety. 30 calories. Caffeine-free. French heritage.' }}</p>
+    <a href="{{ section.settings.cta_link | default: '#u2-pdp-form' }}" class="u2-pdp-finalcta__btn">
+      {{ section.settings.cta_text | default: 'start my routine' }}
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <p class="u2-pdp-finalcta__sub">{{ section.settings.sub | default: 'Free U.S. shipping · Cancel anytime · Subscribe & save 10%' }}</p>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 PDP Final CTA",
+  "tag": "section",
+  "class": "shopify-section--u2",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Ready?" },
+    { "type": "text", "id": "title", "label": "Title (em supported)", "default": "Ready to build <em>your UBurn ritual?</em>" },
+    { "type": "textarea", "id": "lead", "label": "Lead" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "start my routine" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" },
+    { "type": "text", "id": "sub", "label": "Subline", "default": "Free U.S. shipping · Cancel anytime · Subscribe & save 10%" }
+  ],
+  "presets": [{ "name": "U2 PDP Final CTA" }]
+}
+{% endschema %}

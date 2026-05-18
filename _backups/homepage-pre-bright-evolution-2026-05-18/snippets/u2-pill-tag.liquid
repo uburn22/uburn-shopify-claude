@@ -1,0 +1,15 @@
+{%- comment -%}
+  UBurn V2 pill tag
+  Usage: {% render 'u2-pill-tag', text: 'New' %}
+  Variants: variant: 'hero' | 'dark'
+{%- endcomment -%}
+{%- liquid
+  assign cls = 'u2-pill'
+  if variant == 'hero'
+    assign cls = cls | append: ' u2-pill--hero'
+  endif
+  if variant == 'dark'
+    assign cls = cls | append: ' u2-pill--dark'
+  endif
+-%}
+<span class="{{ cls }}">{% if icon %}{% render 'u2-icon', name: icon, size: 12 %}{% endif %}<span>{{ text }}</span></span>

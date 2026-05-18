@@ -1,0 +1,130 @@
+{%- comment -%}
+  UBurn V2 — Formula grid (atomic) — 6 plant actives
+  Redesign 2026-05-17: real ingredient photos, boosted card contrast.
+  Buy block removed (consolidated in u2-pricing-cards — single conversion moment).
+{%- endcomment -%}
+<style>
+  .u2-formula { background: var(--u2-plum-black); color: var(--u2-bone); padding: var(--u2-space-section) 20px; }
+  .u2-formula__inner { max-width: 1280px; margin: 0 auto; }
+  .u2-formula__head { text-align: center; margin-bottom: 48px; }
+  .u2-formula__head h2 { font-family: var(--u2-sans); font-size: clamp(34px,6vw,52px); font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; color: var(--u2-bone); margin: 12px 0 12px; }
+  .u2-formula__head h2 em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-lavender); }
+  .u2-formula__head .u2-section-eyebrow { color: var(--u2-lavender); }
+  .u2-formula__head .u2-section-eyebrow::before { background: var(--u2-lavender); }
+  .u2-formula__head p { font-size: 15px; color: rgba(248,244,238,0.78); max-width: 52ch; margin: 12px auto 0; }
+  .u2-formula__grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 640px) { .u2-formula__grid { grid-template-columns: 1fr 1fr; gap: 22px; } }
+  @media (min-width: 1024px) { .u2-formula__grid { grid-template-columns: repeat(3,1fr); gap: 26px; } }
+  /* High-contrast cards on dark bg */
+  .u2-formula__card {
+    background: linear-gradient(165deg, #2a1a4a 0%, #1f1238 100%);
+    border: 1px solid rgba(184,157,217,0.35);
+    border-radius: 20px;
+    padding: 0;
+    overflow: hidden;
+    transition: transform .35s var(--u2-ease-smooth), border-color .35s var(--u2-ease-smooth), box-shadow .35s var(--u2-ease-smooth);
+  }
+  .u2-formula__card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(184,157,217,0.6);
+    box-shadow: 0 18px 38px -12px rgba(107,78,158,0.45);
+  }
+  .u2-formula__card--hero {
+    background: linear-gradient(160deg, var(--u2-iris-bright) 0%, var(--u2-iris) 55%, var(--u2-iris-deep) 100%);
+    border-color: rgba(255,255,255,0.25);
+  }
+  @media (min-width: 640px) { .u2-formula__card--hero { grid-column: span 2; } }
+  @media (min-width: 1024px) { .u2-formula__card--hero { grid-column: span 1; grid-row: span 2; } }
+  .u2-formula__img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    background: var(--u2-plum-deep);
+    margin: 0;
+  }
+  .u2-formula__img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s var(--u2-ease-smooth); }
+  .u2-formula__card:hover .u2-formula__img img { transform: scale(1.04); }
+  .u2-formula__card--hero .u2-formula__img { aspect-ratio: 4/5; }
+  .u2-formula__body { padding: 24px 22px 26px; }
+  .u2-formula__name { font-family: var(--u2-sans); font-size: 21px; font-weight: 700; color: #ffffff; letter-spacing: -0.01em; margin: 0 0 4px; }
+  .u2-formula__latin { font-family: var(--u2-serif); font-style: italic; font-size: 13px; color: var(--u2-lavender); margin: 0 0 12px; }
+  .u2-formula__card--hero .u2-formula__latin { color: rgba(255,255,255,0.78); }
+  .u2-formula__desc { font-size: 14px; line-height: 1.55; color: rgba(248,244,238,0.88); margin: 0 0 14px; }
+  .u2-formula__card--hero .u2-formula__desc { color: #ffffff; }
+  .u2-formula__tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--u2-lavender); background: rgba(184,157,217,0.12); border: 1px solid rgba(184,157,217,0.45); border-radius: 999px; padding: 6px 12px; }
+  .u2-formula__card--hero .u2-formula__tag { color: #ffffff; background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.5); }
+</style>
+<section class="u2-root u2-formula" aria-label="The formula — 6 plant actives">
+  <div class="u2-formula__inner">
+    <div class="u2-formula__head u2-reveal">
+      <span class="u2-section-eyebrow">— the formula</span>
+      <h2>6 plant actives. <em>One purpose.</em></h2>
+      <p>Konjac glucomannan at the center. Five synergistic plant actives around it. No fillers, no fluff.</p>
+    </div>
+    <div class="u2-formula__grid">
+      <article class="u2-formula__card u2-formula__card--hero u2-reveal delay-1">
+        <div class="u2-formula__img"><img src="{{ 'u2-ing-konjac.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Racine de konjac, source du glucomannane (fibre EFSA){% else %}Konjac root — source of glucomannan (EFSA-recognized fiber){% endif %}" loading="lazy" decoding="async" width="1024" height="1024"></div>
+        <div class="u2-formula__body">
+          <h3 class="u2-formula__name">Konjac · Glucomannan</h3>
+          <p class="u2-formula__latin">amorphophallus konjac</p>
+          <p class="u2-formula__desc">EFSA-recognized soluble fiber. Forms a natural gel in your stomach — you feel satisfied for up to 4 hours.* Required dose: 3g/day with water before meals.</p>
+          <span class="u2-formula__tag">EFSA ID 3120 · 3g/scoop</span>
+        </div>
+      </article>
+      <article class="u2-formula__card u2-reveal delay-2">
+        <div class="u2-formula__img"><img src="{{ 'u2-ing-ube.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Igname violette ube, racine au pigment naturel{% else %}Ube purple yam — natural violet pigment root{% endif %}" loading="lazy" decoding="async" width="1024" height="1024"></div>
+        <div class="u2-formula__body">
+          <h3 class="u2-formula__name">Ube · Purple yam</h3>
+          <p class="u2-formula__latin">dioscorea alata · southeast asia</p>
+          <p class="u2-formula__desc">The purple root that gives UBurn its signature color. Naturally rich in anthocyanins — no artificial coloring.</p>
+          <span class="u2-formula__tag">Antioxidants</span>
+        </div>
+      </article>
+      <article class="u2-formula__card u2-reveal delay-3">
+        <div class="u2-formula__img"><img src="{{ 'u2-ing-mct.jpg' | asset_url }}" alt="Coconut MCT" loading="lazy" width="800" height="800"></div>
+        <div class="u2-formula__body">
+          <h3 class="u2-formula__name">Coconut MCT</h3>
+          <p class="u2-formula__latin">medium-chain triglycerides</p>
+          <p class="u2-formula__desc">Coconut-derived MCTs. Steady energy without spikes or crashes. Caffeine-free.</p>
+          <span class="u2-formula__tag">Caffeine-free</span>
+        </div>
+      </article>
+      <article class="u2-formula__card u2-reveal delay-1">
+        <div class="u2-formula__img"><img src="{{ 'u2-ing-carnitine.jpg' | asset_url }}" alt="L-Carnitine" loading="lazy" width="800" height="800"></div>
+        <div class="u2-formula__body">
+          <h3 class="u2-formula__name">L-Carnitine</h3>
+          <p class="u2-formula__latin">natural amino acid · 400mg</p>
+          <p class="u2-formula__desc">Supports an active metabolism as part of a balanced routine.*</p>
+          <span class="u2-formula__tag">400mg / serving</span>
+        </div>
+      </article>
+      <article class="u2-formula__card u2-reveal delay-2">
+        <div class="u2-formula__img"><img src="{{ 'u2-ing-ginger.jpg' | asset_url }}" alt="Purple ginger" loading="lazy" width="800" height="800"></div>
+        <div class="u2-formula__body">
+          <h3 class="u2-formula__name">Purple ginger</h3>
+          <p class="u2-formula__latin">zingiber zerumbet</p>
+          <p class="u2-formula__desc">Organic ginger root for daily digestive comfort.</p>
+          <span class="u2-formula__tag">Digestive comfort</span>
+        </div>
+      </article>
+      <article class="u2-formula__card u2-reveal delay-3">
+        <div class="u2-formula__img"><img src="{{ 'u2-ing-acacia.jpg' | asset_url }}" alt="Acacia fiber" loading="lazy" width="800" height="800"></div>
+        <div class="u2-formula__body">
+          <h3 class="u2-formula__name">Acacia fiber</h3>
+          <p class="u2-formula__latin">acacia senegal · prebiotic</p>
+          <p class="u2-formula__desc">Prebiotic fiber that feeds the good bacteria in your gut.*</p>
+          <span class="u2-formula__tag">Prebiotic</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Formula Grid",
+  "tag": "section",
+  "class": "shopify-section--u2-formula",
+  "settings": [],
+  "presets": [ { "name": "U2 Formula Grid" } ]
+}
+{% endschema %}

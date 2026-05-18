@@ -1,0 +1,85 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme",
+  "sections": {
+    "hero": {
+      "type": "u2-hero-split",
+      "settings": {
+        "product": "ube-poudre",
+        "variant_id": "51289200034111",
+        "eyebrow": "the violet matcha",
+        "h1": "Hot. Iced. <em>Or in your bag.</em>",
+        "sub": "The matcha you actually look forward to. Zero caffeine. Thirty calories. Four hours of presence.",
+        "priceline": "from <strong>$36.99</strong> · $33.29/mo subscribe &amp; save · 3 ways · free us shipping",
+        "cta_text": "start my violet",
+        "cta_sub": "1 click · your daily violet · subscribe · cancel anytime",
+        "image_left_filename": "lp-hero-violet-matcha.jpg",
+        "image_left_alt": "Hands cradling a ceramic mug of steaming violet matcha latte with foam rosette",
+        "label_left": "ritual",
+        "tag_left": "hot latte · foam art · zero caffeine",
+        "label_right": "functional",
+        "tag_right": "with water · on-the-go"
+      }
+    },
+    "trust-band": { "type": "u2-trust-band", "settings": {} },
+    "three-ways": { "type": "u2-three-ways", "settings": {} },
+    "marquee": { "type": "u2-marquee", "settings": {} },
+    "problem": {
+      "type": "u2-problem",
+      "settings": {
+        "banner_filename": "u2-problem-banner-lifestyle.jpg",
+        "banner_caption": "the matcha you actually look forward to.",
+        "eyebrow": "why violet, not green",
+        "title_pre": "The ritual you",
+        "title_em": "actually want.",
+        "card_1_num": "7 AM",
+        "card_1_title": "Matcha. Again.",
+        "card_1_sub": "Same green powder. Same bitter notes. The morning ritual you stopped loving.",
+        "card_2_num": "10 AM",
+        "card_2_title": "$7 latte run.",
+        "card_2_sub": "Caffeine wears off before the meeting starts. The crash arrives by noon.",
+        "card_3_num": "3 PM",
+        "card_3_title": "Crash.",
+        "card_3_sub": "The wellness drink that doesn't actually carry you into the afternoon you're trying to win."
+      }
+    },
+    "formula": { "type": "u2-formula-grid", "settings": {} },
+    "efsa": { "type": "u2-efsa-block", "settings": {} },
+    "stats": { "type": "u2-stats", "settings": {} },
+    "violet-bottle": { "type": "u2-violet-bottle", "settings": {} },
+    "pricing": { "type": "u2-pricing-cards", "settings": { "product": "ube-poudre", "show_bonus": true } },
+    "compare": { "type": "u2-comparison", "settings": {} },
+    "before-after": { "type": "u2-before-after", "settings": {} },
+    "craft": { "type": "u2-craft", "settings": {} },
+    "moodboard": { "type": "u2-moodboard", "settings": {} },
+    "guarantee": { "type": "u2-guarantee-bar", "settings": {} },
+    "final-cta": {
+      "type": "u2-final-cta",
+      "settings": {
+        "product": "ube-poudre",
+        "variant_id": "51289200034111",
+        "eyebrow": "— your daily violet",
+        "title_pre": "The violet ritual",
+        "title_em": "starts now.",
+        "sub": "Hot, iced, or shaken.* Same scoop, three rituals. Your moment, your way.",
+        "cta": "start my violet — $33.29/mo"
+      }
+    },
+    "newsletter": { "type": "u2-newsletter", "settings": {} },
+    "live_proof": { "type": "u2-live-proof", "settings": {} }
+  },
+  "order": [
+    "hero", "trust-band", "three-ways", "marquee", "problem",
+    "formula", "efsa", "stats", "violet-bottle", "pricing",
+    "compare", "before-after", "craft", "moodboard",
+    "guarantee", "final-cta", "newsletter", "live_proof"
+  ]
+}

@@ -1,0 +1,126 @@
+{%- comment -%}
+  UBurn V2 — FAQ standalone page (12 questions in 3 categories)
+{%- endcomment -%}
+<style>
+  .u2-faqp-hero {
+    background: var(--u2-cream);
+    padding: 120px 20px 60px;
+    text-align: center;
+  }
+  .u2-faqp-hero h1 {
+    font-family: var(--u2-sans);
+    font-size: clamp(40px,7vw,72px);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--u2-plum-black);
+    margin: 16px 0 16px;
+  }
+  .u2-faqp-hero h1 em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-iris); }
+  .u2-faqp-hero p { font-size: 16px; color: var(--u2-text-body); max-width: 50ch; margin: 0 auto; }
+
+  .u2-faqp-body { padding: 32px 20px var(--u2-space-section); background: white; }
+  .u2-faqp-body__inner { max-width: 820px; margin: 0 auto; }
+  .u2-faqp-group { margin-bottom: 48px; }
+  .u2-faqp-group__title {
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--u2-iris);
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+    border-bottom: 2px solid var(--u2-lavender-soft);
+  }
+
+  .u2-faqp-cta {
+    background: var(--u2-lavender-soft);
+    padding: 56px 20px;
+    text-align: center;
+  }
+  .u2-faqp-cta h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(24px,4vw,32px);
+    font-weight: 800;
+    color: var(--u2-plum-black);
+    margin: 0 0 18px;
+    letter-spacing: -0.02em;
+  }
+  .u2-faqp-cta p { font-size: 15px; color: var(--u2-text-body); margin: 0 0 22px; }
+</style>
+
+<div class="u2-root">
+  <section class="u2-faqp-hero u2-reveal">
+    <span class="u2-section-eyebrow">— frequently asked</span>
+    <h1>Everything <em>you want to know.</em></h1>
+    <p>Clear answers, no jargon. If your question isn't here, email <a href="mailto:hello@uburn.co" style="color:var(--u2-iris);text-decoration:underline;">hello@uburn.co</a>.</p>
+  </section>
+
+  <section class="u2-faqp-body">
+    <div class="u2-faqp-body__inner u2-reveal delay-1">
+
+      <div class="u2-faqp-group">
+        <div class="u2-faqp-group__title">The product</div>
+        <div class="u2-accordion">
+          {% render 'u2-accordion-item', question: 'What exactly is UBurn?', answer: 'A plant-based powdered drink mix made with <strong>konjac glucomannan</strong>, purple ube, coconut MCT, L-Carnitine, ginger, and acacia fiber. It supports natural satiety as part of a balanced diet.*' %}
+          {% render 'u2-accordion-item', question: 'Is there caffeine in UBurn?', answer: 'No — <strong>caffeine-free</strong>. UBurn can be taken any time of day, including in the evening, without disrupting your sleep.' %}
+          {% render 'u2-accordion-item', question: 'How many calories per scoop?', answer: '<strong>30 calories</strong> per scoop. No added sugar, no artificial sweeteners. Compatible with most diets.' %}
+          {% render 'u2-accordion-item', question: 'Is UBurn vegan?', answer: 'Yes, UBurn is <strong>100% plant-based</strong>. All ingredients are vegan.' %}
+          {% render 'u2-accordion-item', question: 'Any allergens?', answer: 'UBurn is produced in a facility that handles <strong>dairy, gluten, soy, and tree nuts</strong>. Please consult your doctor if you have a known allergy.' %}
+        </div>
+      </div>
+
+      <div class="u2-faqp-group">
+        <div class="u2-faqp-group__title">How to use</div>
+        <div class="u2-accordion">
+          {% render 'u2-accordion-item', question: 'How do I take UBurn?', answer: 'Mix <strong>1 scoop (8g) in 8–10 oz of water</strong>, 30 minutes before a meal or whenever cravings hit (typically around 4 PM). The research-backed protocol requires 3g of glucomannan with 1–2 glasses of water.' %}
+          {% render 'u2-accordion-item', question: 'Can I take it in the evening?', answer: 'Yes — <strong>no problem at all</strong>. Caffeine-free means UBurn can be taken any time, including before dinner.' %}
+          {% render 'u2-accordion-item', question: 'How quickly will I see results?', answer: 'The fullness effect is <strong>immediate from the first scoop</strong>. Most customers report a noticeable shift in cravings after <strong>7 to 14 days</strong> of consistent use.*' %}
+          {% render 'u2-accordion-item', question: 'Can I mix it with something other than water?', answer: 'Yes, with plant-based milk or a smoothie. Avoid sugary juices which work against the natural effect on blood sugar. Water remains the best option to activate glucomannan.' %}
+        </div>
+      </div>
+
+      <div class="u2-faqp-group">
+        <div class="u2-faqp-group__title">Order &amp; shipping</div>
+        <div class="u2-accordion">
+          {% render 'u2-accordion-item', question: 'Is shipping really free?', answer: 'Yes — <strong>free U.S. shipping</strong> on orders $40+. Typically delivered in 2–4 business days after dispatch.' %}
+          {% render 'u2-accordion-item', question: 'Is subscription required?', answer: 'No. You can choose <strong>one-time purchase</strong> OR <strong>Subscribe &amp; Save 10%</strong> with monthly delivery (cancel, skip, or pause anytime). No commitment.' %}
+          {% render 'u2-accordion-item', question: "What's your refund policy?", answer: 'Contact us at hello@uburn.co within 30 days of your first order for refund support. We process refunds within 5 business days.' %}
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="u2-faqp-cta u2-reveal">
+    <h2>Don't see your question?</h2>
+    <p>Email us — we answer within 2 business days.</p>
+    {% render 'u2-cta-primary', text: 'contact us', link: '/pages/contact' %}
+  </section>
+</div>
+
+{%- comment -%} FAQ schema {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "What exactly is UBurn?", "acceptedAnswer": { "@type": "Answer", "text": "A plant-based powdered drink mix made with konjac glucomannan, purple ube, coconut MCT, L-Carnitine, ginger, and acacia fiber. It supports natural satiety as part of a balanced diet." } },
+    { "@type": "Question", "name": "Is there caffeine in UBurn?", "acceptedAnswer": { "@type": "Answer", "text": "No, caffeine-free. UBurn can be taken any time of day, including in the evening, without disrupting your sleep." } },
+    { "@type": "Question", "name": "How many calories per scoop?", "acceptedAnswer": { "@type": "Answer", "text": "30 calories per scoop. No added sugar, no artificial sweeteners." } },
+    { "@type": "Question", "name": "Is shipping really free?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, free U.S. shipping on orders $40+. Typically delivered in 2–4 business days." } },
+    { "@type": "Question", "name": "Is subscription required?", "acceptedAnswer": { "@type": "Answer", "text": "No. One-time purchase OR Subscribe & Save 10% with monthly delivery (cancel, skip, or pause anytime)." } }
+  ]
+}
+</script>
+
+{% schema %}
+{
+  "name": "U2 FAQ page",
+  "tag": "section",
+  "class": "shopify-section--u2-faq-page",
+  "settings": [],
+  "presets": [ { "name": "U2 FAQ page" } ]
+}
+{% endschema %}

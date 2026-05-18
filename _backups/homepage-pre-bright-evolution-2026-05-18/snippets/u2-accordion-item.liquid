@@ -1,0 +1,10 @@
+{%- comment -%}
+  UBurn V2 accordion item
+  Usage: {% render 'u2-accordion-item', question: 'How does UBurn work?', answer: 'UBurn is formulated...' %}
+{%- endcomment -%}
+<div class="u2-accordion__item">
+  <button type="button" class="u2-accordion__q" aria-expanded="false">{{ question }}</button>
+  <div class="u2-accordion__a">
+    <div class="u2-accordion__a-inner">{{ answer }}</div>
+  </div>
+</div>

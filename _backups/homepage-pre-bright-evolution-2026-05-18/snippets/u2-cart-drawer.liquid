@@ -1,0 +1,395 @@
+{%- comment -%}
+  UBurn V2 — Cart drawer (glassmorphism + free shipping bar)
+  Triggered by .u2-header__icon-btn[href="/cart"] click
+{%- endcomment -%}
+{%- liquid
+  assign threshold_cents = 4000
+  assign progress_pct = cart.total_price | times: 100 | divided_by: threshold_cents
+  if progress_pct > 100
+    assign progress_pct = 100
+  endif
+  assign remaining_cents = threshold_cents | minus: cart.total_price
+  if remaining_cents < 0
+    assign remaining_cents = 0
+  endif
+-%}
+<style>
+  .u2-cdrawer {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s var(--u2-ease-smooth), visibility 0s 0.3s linear;
+  }
+  .u2-cdrawer.is-open {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+  }
+  .u2-cdrawer__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 15, 46, 0.55);
+    backdrop-filter: blur(6px);
+  }
+  .u2-cdrawer__panel {
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 100%;
+    max-width: 480px;
+    background: rgba(248, 244, 238, 0.97);
+    backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: -10px 0 40px rgba(26, 15, 46, 0.15);
+    border-left: 1px solid rgba(184, 157, 217, 0.25);
+    transform: translateX(100%);
+    transition: transform 0.4s var(--u2-ease-liquid);
+    display: flex;
+    flex-direction: column;
+  }
+  .u2-cdrawer.is-open .u2-cdrawer__panel { transform: translateX(0); }
+  .u2-cdrawer__header {
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(107, 78, 158, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .u2-cdrawer__title {
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--u2-plum-black);
+    margin: 0;
+  }
+  .u2-cdrawer__close {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--u2-plum-black);
+    transition: background 0.2s;
+  }
+  .u2-cdrawer__close:hover { background: rgba(107, 78, 158, 0.1); }
+
+  .u2-cdrawer__shipping {
+    padding: 16px 22px;
+    background: rgba(232, 220, 239, 0.5);
+    border-bottom: 1px solid rgba(107, 78, 158, 0.1);
+  }
+  .u2-cdrawer__ship-text {
+    font-size: 12px;
+    color: var(--u2-plum-black);
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+  .u2-cdrawer__ship-text strong { color: var(--u2-iris-deep); font-weight: 700; }
+  .u2-cdrawer__ship-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(184, 157, 217, 0.3);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .u2-cdrawer__ship-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--u2-iris-bright), var(--u2-iris));
+    border-radius: 999px;
+    transition: width 0.5s var(--u2-ease-smooth);
+  }
+
+  .u2-cdrawer__items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 22px;
+  }
+  .u2-cdrawer__empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #7a7585;
+  }
+  .u2-cdrawer__empty p { margin: 0 0 18px; font-size: 14px; }
+
+  .u2-cdrawer__item {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(107, 78, 158, 0.1);
+    align-items: center;
+  }
+  .u2-cdrawer__item:last-child { border-bottom: 0; }
+  .u2-cdrawer__thumb {
+    width: 72px; height: 72px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--u2-lavender-soft);
+  }
+  .u2-cdrawer__thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .u2-cdrawer__body { min-width: 0; }
+  .u2-cdrawer__name {
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+    margin: 0 0 2px;
+    line-height: 1.3;
+  }
+  .u2-cdrawer__variant {
+    font-size: 11px;
+    color: #7a7585;
+    margin: 0 0 6px;
+  }
+  .u2-cdrawer__sub-badge {
+    display: inline-block;
+    background: var(--u2-iris);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    margin-bottom: 6px;
+  }
+  .u2-cdrawer__qty {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(107, 78, 158, 0.2);
+    border-radius: 999px;
+    overflow: hidden;
+    background: white;
+  }
+  .u2-cdrawer__qty button {
+    width: 26px; height: 26px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: var(--u2-plum-black);
+    font-size: 14px;
+    line-height: 1;
+  }
+  .u2-cdrawer__qty button:hover { color: var(--u2-iris); }
+  .u2-cdrawer__qty span {
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 22px;
+    text-align: center;
+  }
+  .u2-cdrawer__right { text-align: right; }
+  .u2-cdrawer__price {
+    font-family: var(--u2-sans);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+    margin: 0 0 6px;
+  }
+  .u2-cdrawer__remove {
+    background: transparent;
+    border: 0;
+    color: #7a7585;
+    font-size: 11px;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .u2-cdrawer__remove:hover { color: var(--u2-iris); }
+
+  .u2-cdrawer__footer {
+    padding: 20px 22px 24px;
+    border-top: 1px solid rgba(107, 78, 158, 0.12);
+    background: rgba(248, 244, 238, 0.6);
+  }
+  .u2-cdrawer__subtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    color: var(--u2-plum-black);
+  }
+  .u2-cdrawer__subtotal strong {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .u2-cdrawer__note {
+    font-size: 11px;
+    color: #7a7585;
+    margin: 0 0 16px;
+  }
+  .u2-cdrawer__checkout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: var(--u2-plum-black);
+    color: var(--u2-warm-white);
+    padding: 16px 24px;
+    border: 1.5px solid var(--u2-plum-black);
+    border-radius: 999px;
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .u2-cdrawer__checkout:hover { background: var(--u2-iris); border-color: var(--u2-iris); transform: translateY(-1px); }
+  .u2-cdrawer__continue {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--u2-iris);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    width: 100%;
+  }
+</style>
+
+<div class="u2-root u2-cdrawer" data-u2-cdrawer aria-hidden="true">
+  <div class="u2-cdrawer__overlay" data-u2-cdrawer-close></div>
+  <aside class="u2-cdrawer__panel" role="dialog" aria-label="Cart">
+    <header class="u2-cdrawer__header">
+      <h2 class="u2-cdrawer__title">Your bag · <span data-u2-cart-count>{{ cart.item_count }}</span> {% if cart.item_count == 1 %}item{% else %}items{% endif %}</h2>
+      <button class="u2-cdrawer__close" type="button" data-u2-cdrawer-close aria-label="Close">{% render 'u2-icon', name: 'close', size: 20 %}</button>
+    </header>
+
+    <div class="u2-cdrawer__shipping">
+      {%- if cart.total_price >= threshold_cents -%}
+        <p class="u2-cdrawer__ship-text"><strong>✓ Free U.S. shipping unlocked.</strong></p>
+      {%- else -%}
+        {%- comment -%} rev 2026-05-16 — USD hardcoded display: shop currency EUR but show $X format {%- endcomment -%}
+        {%- assign remaining_dollars = remaining_cents | divided_by: 100.0 -%}
+        <p class="u2-cdrawer__ship-text">Add <strong>${{ remaining_dollars | round: 2 }}</strong> to unlock free shipping</p>
+      {%- endif -%}
+      <div class="u2-cdrawer__ship-bar"><div class="u2-cdrawer__ship-fill" style="width: {{ progress_pct }}%"></div></div>
+    </div>
+
+    <div class="u2-cdrawer__items">
+      {%- if cart.item_count == 0 -%}
+        <div class="u2-cdrawer__empty">
+          <p>Your bag is empty.</p>
+          <a class="u2-cta" href="/products/ube-poudre"><span>start my pack</span><span class="u2-cta__arrow" aria-hidden="true">→</span></a>
+        </div>
+      {%- else -%}
+        {%- for item in cart.items -%}
+          <div class="u2-cdrawer__item" data-key="{{ item.key }}">
+            <div class="u2-cdrawer__thumb">
+              {%- if item.image -%}
+                {{ item.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: item.title, width: 144, height: 144 }}
+              {%- endif -%}
+            </div>
+            <div class="u2-cdrawer__body">
+              {%- if item.selling_plan_allocation != blank -%}
+                <span class="u2-cdrawer__sub-badge">Subscription</span>
+              {%- endif -%}
+              <h3 class="u2-cdrawer__name">{{ item.product.title }}</h3>
+              <p class="u2-cdrawer__variant">{{ item.variant.title | split: '|' | first | strip }}</p>
+              <div class="u2-cdrawer__qty">
+                <button type="button" data-u2-qty="-1" aria-label="Decrease">−</button>
+                <span data-u2-qty-value>{{ item.quantity }}</span>
+                <button type="button" data-u2-qty="+1" aria-label="Increase">+</button>
+              </div>
+            </div>
+            <div class="u2-cdrawer__right">
+              <p class="u2-cdrawer__price">{{ item.final_line_price | money_without_trailing_zeros }}</p>
+              <button type="button" class="u2-cdrawer__remove" data-u2-remove>Remove</button>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <footer class="u2-cdrawer__footer">
+        <div class="u2-cdrawer__subtotal">
+          <span>Subtotal</span>
+          <strong>{{ cart.total_price | money_without_trailing_zeros }}</strong>
+        </div>
+        <p class="u2-cdrawer__note">Shipping &amp; taxes calculated at checkout.</p>
+        {%- comment -%} rev 2026-05-17 — USD/EUR transparency disclaimer (Shopify Payments unavailable UAE) {%- endcomment -%}
+        <p class="u2-cdrawer__fx-disclaimer" style="font-size:11px;line-height:1.45;color:var(--u2-text-muted);margin:8px 0 12px;padding:8px 12px;background:var(--u2-lavender-soft);border-radius:6px;text-align:center;">
+          <strong style="color:var(--u2-plum-deep);">USD prices shown.</strong> Card billed in EUR (auto-converted by your bank). <span style="opacity:0.85;">No fees from us.</span>
+        </p>
+        <a class="u2-cdrawer__checkout" href="/checkout">Checkout — {{ cart.total_price | money_without_trailing_zeros }}</a>
+        <button type="button" class="u2-cdrawer__continue" data-u2-cdrawer-close>Continue shopping</button>
+      </footer>
+    {%- endif -%}
+  </aside>
+</div>
+
+<script>
+(function(){
+  var drawer = document.querySelector('[data-u2-cdrawer]');
+  if(!drawer) return;
+  var trigger = document.querySelector('.u2-header__icon-btn[href="/cart"]');
+  function open(){ drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function close(){ drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  if(trigger){
+    trigger.addEventListener('click', function(e){
+      e.preventDefault();
+      open();
+    });
+  }
+  drawer.querySelectorAll('[data-u2-cdrawer-close]').forEach(function(b){ b.addEventListener('click', close); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+  // Open after add to cart success
+  document.addEventListener('submit', function(e){
+    var form = e.target;
+    if(form && form.action && form.action.indexOf('/cart/add') > -1){
+      // Let Shopify process, then open drawer
+      setTimeout(function(){ fetchAndUpdate(); }, 300);
+    }
+  });
+  function fetchAndUpdate(){
+    fetch('/?section_id=u2-header').then(function(r){ return r.text(); }).then(function(html){
+      // For now just open the drawer; full re-render would be more complex
+      open();
+    });
+  }
+  // qty + / -
+  drawer.querySelectorAll('[data-u2-qty]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var item = b.closest('.u2-cdrawer__item');
+      var key = item.dataset.key;
+      var valEl = item.querySelector('[data-u2-qty-value]');
+      var cur = parseInt(valEl.textContent, 10) || 1;
+      var next = cur + parseInt(b.dataset.u2Qty, 10);
+      if(next < 0) next = 0;
+      fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: key, quantity: next })
+      }).then(function(r){ return r.json(); }).then(function(d){
+        window.location.reload();
+      });
+    });
+  });
+  // remove
+  drawer.querySelectorAll('[data-u2-remove]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var item = b.closest('.u2-cdrawer__item');
+      var key = item.dataset.key;
+      fetch('/cart/change.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: key, quantity: 0 })
+      }).then(function(){ window.location.reload(); });
+    });
+  });
+})();
+</script>

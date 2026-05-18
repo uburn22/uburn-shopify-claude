@@ -1,0 +1,985 @@
+{%- comment -%}
+  UBurn V2 — PDP HERO (split L/R, Subscribe&Save + One-time cards, $200 bonus stack inline)
+  Conversion-optimized purchase panel mirroring old main-uburn-pdp-v9.liquid pattern.
+{%- endcomment -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign featured = product.featured_image
+  for img in product.images
+    assign s = img.src | downcase
+    if s contains 'productpage_0000' or s contains 'uburn_listing'
+      assign featured = img
+      break
+    endif
+  endfor
+  assign rating = product.metafields.loox.avg_rating | default: product.metafields.reviews.rating.value.rating | default: 4.7 | round: 1
+
+  assign starter_variant = product.variants | first
+  assign max_variant = product.variants | last
+
+  assign sub_plan = null
+  assign sub_discount_pct = 10
+  for spg in product.selling_plan_groups
+    for sp in spg.selling_plans
+      assign sub_plan = sp
+      break
+    endfor
+    if sub_plan
+      break
+    endif
+  endfor
+  if sub_plan and sub_plan.price_adjustments.size > 0
+    assign first_adj = sub_plan.price_adjustments | first
+    if first_adj.value_type == 'percentage'
+      assign sub_discount_pct = first_adj.value
+    endif
+  endif
+
+  assign current_sub_disc = current_variant.price | times: sub_discount_pct | divided_by: 100
+  assign current_sub_price = current_variant.price | minus: current_sub_disc
+-%}
+
+<style>
+  .u2-pdp { background: var(--u2-cream); padding-bottom: 40px; }
+
+  /* TRUST BAND */
+  .u2-trustband { background: var(--u2-lavender-soft); padding: 14px 16px; }
+  .u2-trustband__inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 10px 28px; align-items: center;
+  }
+
+  /* MAIN SPLIT */
+  .u2-pdp-main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .u2-pdp-main {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 56px;
+      padding: 40px 32px 60px;
+      align-items: start;
+    }
+  }
+
+  /* LEFT — Gallery */
+  .u2-pdp-gallery {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  @media (min-width: 1024px) {
+    .u2-pdp-gallery { position: sticky; top: 96px; }
+  }
+  .u2-pdp-gallery__slides {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    border-radius: 24px;
+    aspect-ratio: 1 / 1;
+    background: var(--u2-lavender-soft);
+    box-shadow: 0 30px 60px -30px rgba(58,31,89,0.22);
+  }
+  .u2-pdp-gallery__slides::-webkit-scrollbar { display: none; }
+  .u2-pdp-gallery__slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+  .u2-pdp-gallery__slide img,
+  .u2-pdp-gallery__slide video {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .u2-pdp-gallery__thumbs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 2px 0;
+  }
+  .u2-pdp-gallery__thumbs::-webkit-scrollbar { display: none; }
+  .u2-pdp-gallery__thumb {
+    flex: 0 0 72px;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background: var(--u2-bone);
+    transition: border-color 0.2s var(--u2-ease-smooth);
+  }
+  .u2-pdp-gallery__thumb:hover,
+  .u2-pdp-gallery__thumb.is-active { border-color: var(--u2-iris); }
+  .u2-pdp-gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* RIGHT — Purchase panel */
+  .u2-pdp-info {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .u2-pdp-info__eyebrow-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .u2-pdp-info__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(107, 78, 158, 0.1);
+    color: var(--u2-iris-deep);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .u2-pdp-info__eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--u2-iris);
+  }
+  .u2-pdp-info__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--u2-cream-deep);
+    color: var(--u2-plum);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(107, 78, 158, 0.12);
+  }
+  .u2-pdp-info__h1 {
+    font-family: var(--u2-serif);
+    font-size: clamp(38px, 6vw, 56px);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--u2-plum-black);
+    margin: 4px 0 0;
+  }
+  .u2-pdp-info__h1 em {
+    font-style: italic;
+    color: var(--u2-iris);
+  }
+  .u2-pdp-info__sub {
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--u2-plum);
+    margin: 0;
+  }
+  .u2-pdp-info__rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--u2-sans);
+    font-size: 14px;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-info__stars {
+    color: #f5a623;
+    letter-spacing: 1px;
+    font-size: 16px;
+  }
+  .u2-pdp-info__rating-num { font-weight: 700; }
+  .u2-pdp-info__rating-label { color: var(--u2-mauve); font-size: 13px; }
+
+  .u2-pdp-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .u2-pdp-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-bullets__check {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--u2-iris);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  /* Price */
+  .u2-pdp-price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .u2-pdp-price__prefix {
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    color: var(--u2-mauve);
+    font-weight: 500;
+  }
+  .u2-pdp-price__amount {
+    font-family: var(--u2-serif);
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.02em;
+  }
+  .u2-pdp-price__compare {
+    font-family: var(--u2-sans);
+    font-size: 16px;
+    color: var(--u2-mauve);
+    text-decoration: line-through;
+  }
+  .u2-pdp-price__currency-note {
+    font-size: 11px;
+    color: var(--u2-mauve);
+    margin: 2px 0 0;
+    line-height: 1.4;
+  }
+
+  /* Variant picker — 2 cards side by side */
+  .u2-pdp-variants {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 12px 0 0;
+  }
+  .u2-pdp-variant {
+    position: relative;
+    border: 2px solid rgba(107, 78, 158, 0.18);
+    border-radius: 16px;
+    padding: 16px 14px 14px;
+    background: var(--u2-cream);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: border-color 0.2s var(--u2-ease-smooth), box-shadow 0.2s var(--u2-ease-smooth);
+  }
+  .u2-pdp-variant input { position: absolute; opacity: 0; pointer-events: none; }
+  .u2-pdp-variant:hover { border-color: rgba(107, 78, 158, 0.4); }
+  .u2-pdp-variant--selected,
+  .u2-pdp-variant:has(input:checked) {
+    border-color: var(--u2-iris);
+    box-shadow: 0 0 0 4px rgba(107, 78, 158, 0.1);
+  }
+  .u2-pdp-variant__badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--u2-iris);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-family: var(--u2-sans);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .u2-pdp-variant__name {
+    font-family: var(--u2-serif);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.01em;
+  }
+  .u2-pdp-variant__tag {
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    color: var(--u2-iris-deep);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .u2-pdp-variant__meta {
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    color: var(--u2-mauve);
+  }
+  .u2-pdp-variant__price-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .u2-pdp-variant__price {
+    font-family: var(--u2-sans);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-variant__perday {
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    color: var(--u2-iris);
+    font-weight: 600;
+  }
+
+  /* Subscribe & Save / One-time cards */
+  .u2-pdp-purchase-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 4px 0 0;
+  }
+  .u2-pdp-mode {
+    position: relative;
+    border: 2px solid rgba(107, 78, 158, 0.18);
+    border-radius: 16px;
+    padding: 18px 18px 16px;
+    background: var(--u2-cream);
+    cursor: pointer;
+    display: flex;
+    gap: 14px;
+    transition: border-color 0.2s var(--u2-ease-smooth), box-shadow 0.2s var(--u2-ease-smooth);
+  }
+  .u2-pdp-mode input { position: absolute; opacity: 0; pointer-events: none; }
+  .u2-pdp-mode__radio {
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(107, 78, 158, 0.4);
+    margin-top: 2px;
+    background: white;
+    position: relative;
+    transition: border-color 0.2s var(--u2-ease-smooth);
+  }
+  .u2-pdp-mode:has(input:checked) {
+    border-color: var(--u2-iris);
+    box-shadow: 0 0 0 4px rgba(107, 78, 158, 0.08);
+  }
+  .u2-pdp-mode:has(input:checked) .u2-pdp-mode__radio { border-color: var(--u2-iris); }
+  .u2-pdp-mode:has(input:checked) .u2-pdp-mode__radio::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--u2-iris);
+  }
+  .u2-pdp-mode__body { flex: 1; min-width: 0; }
+  .u2-pdp-mode__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .u2-pdp-mode__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .u2-pdp-mode__title {
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-mode__tag {
+    background: var(--u2-green);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-family: var(--u2-sans);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+  .u2-pdp-mode__price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .u2-pdp-mode__strike {
+    color: var(--u2-mauve);
+    font-size: 13px;
+    font-family: var(--u2-sans);
+    text-decoration: line-through;
+  }
+  .u2-pdp-mode__final {
+    font-family: var(--u2-sans);
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-mode__meta {
+    display: block;
+    margin-top: 4px;
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    color: var(--u2-plum);
+    line-height: 1.5;
+  }
+  .u2-pdp-mode__bonuses {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(107, 78, 158, 0.12);
+  }
+  .u2-pdp-mode__bonuses-title {
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--u2-iris-deep);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .u2-pdp-mode__bonuses-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .u2-pdp-mode__bonuses-list li {
+    font-family: var(--u2-sans);
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--u2-plum-black);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .u2-pdp-mode__bonus-icon { flex-shrink: 0; }
+  .u2-pdp-mode__bonuses-list em {
+    font-style: normal;
+    color: var(--u2-mauve);
+    font-size: 11.5px;
+  }
+
+  /* Quantity */
+  .u2-pdp-qty {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 4px 0 0;
+  }
+  .u2-pdp-qty__label {
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-qty__input {
+    width: 60px;
+    padding: 8px 10px;
+    border: 1px solid rgba(107, 78, 158, 0.2);
+    border-radius: 8px;
+    font-family: var(--u2-sans);
+    font-size: 14px;
+    text-align: center;
+    background: var(--u2-cream);
+  }
+
+  /* ATC button */
+  .u2-pdp-atc {
+    background: var(--u2-plum-black);
+    color: white;
+    padding: 18px 24px;
+    border-radius: 14px;
+    border: 0;
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 6px;
+    transition: background 0.2s var(--u2-ease-smooth), transform 0.1s var(--u2-ease-smooth);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .u2-pdp-atc:hover { background: var(--u2-iris-deep); }
+  .u2-pdp-atc:active { transform: translateY(1px); }
+  .u2-pdp-atc[disabled] { background: #888; cursor: not-allowed; }
+  .u2-pdp-atc__price { font-weight: 800; }
+
+  .u2-pdp-atc-trust {
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    color: var(--u2-plum);
+    text-align: center;
+    margin: 4px 0 0;
+    letter-spacing: 0.02em;
+  }
+
+  /* Reassurance icons */
+  .u2-pdp-reassurance {
+    list-style: none;
+    padding: 14px 0 0;
+    margin: 4px 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 16px;
+    border-top: 1px solid rgba(107, 78, 158, 0.1);
+  }
+  .u2-pdp-reassurance li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--u2-sans);
+    font-size: 12.5px;
+    color: var(--u2-plum);
+  }
+  .u2-pdp-reassurance svg { color: var(--u2-iris); flex-shrink: 0; }
+
+  /* Trust strip */
+  .u2-pdp-trust-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 14px;
+    margin-top: 12px;
+    border-top: 1px solid rgba(107, 78, 158, 0.1);
+  }
+  .u2-pdp-trust-strip__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--u2-cream-deep);
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-family: var(--u2-sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--u2-plum);
+  }
+
+  /* Mobile sticky CTA */
+  .u2-pdp-sticky-cta {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(107, 78, 158, 0.12);
+    z-index: 80;
+    transform: translateY(100%);
+    transition: transform 0.3s var(--u2-ease-smooth);
+  }
+  .u2-pdp-sticky-cta.is-visible { transform: translateY(0); }
+  .u2-pdp-sticky-cta__btn {
+    background: var(--u2-plum-black);
+    color: white;
+    border: 0;
+    border-radius: 12px;
+    padding: 14px;
+    width: 100%;
+    font-family: var(--u2-sans);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  @media (min-width: 1024px) {
+    .u2-pdp-sticky-cta { display: none; }
+  }
+</style>
+
+<div class="u2-root u2-pdp">
+
+  {%- comment -%} TRUST BAND {%- endcomment -%}
+  <section class="u2-trustband" aria-label="Trust">
+    <div class="u2-trustband__inner">
+      {% render 'u2-trust-pill', icon: 'check', text: 'Research-backed*' %}
+      {% render 'u2-trust-pill', icon: 'leaf', text: '100% plant-based' %}
+      {% render 'u2-trust-pill', icon: 'sparkle', text: 'Cancel anytime' %}
+      {% render 'u2-trust-pill', icon: 'truck', text: 'Free U.S. shipping $40+' %}
+    </div>
+  </section>
+
+  {%- comment -%} MAIN SPLIT — Gallery (left) + Purchase panel (right) {%- endcomment -%}
+  <div class="u2-pdp-main">
+
+    {%- comment -%} LEFT — Gallery {%- endcomment -%}
+    <div class="u2-pdp-gallery">
+      <div class="u2-pdp-gallery__slides" id="u2-pdp-slides" role="region" aria-label="Product gallery" tabindex="0">
+        {%- if product.media.size > 0 -%}
+          {%- for media in product.media -%}
+            <div class="u2-pdp-gallery__slide" id="u2-slide-{{ forloop.index }}">
+              {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                {{ media | media_tag: image_size: '1200x', autoplay: false, loop: false, controls: true, preload: 'metadata' }}
+              {%- else -%}
+                <img src="{{ media | image_url: width: 1200 }}" alt="{{ media.alt | default: product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" {% if forloop.first %}fetchpriority="high"{% endif %} decoding="async" width="1200" height="1200">
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        {%- elsif featured -%}
+          <div class="u2-pdp-gallery__slide">
+            <img src="{{ featured | image_url: width: 1200 }}" alt="{{ product.title | escape }}" loading="eager" fetchpriority="high" decoding="async" width="1200" height="1200">
+          </div>
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+      <div class="u2-pdp-gallery__thumbs" role="tablist" aria-label="Gallery thumbnails">
+        {%- for media in product.media -%}
+          <a href="#u2-slide-{{ forloop.index }}" class="u2-pdp-gallery__thumb {% if forloop.first %}is-active{% endif %}" aria-label="Image {{ forloop.index }}">
+            <img src="{{ media | image_url: width: 160 }}" alt="" loading="lazy" decoding="async" width="160" height="160">
+          </a>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} RIGHT — Purchase panel {%- endcomment -%}
+    <div class="u2-pdp-info">
+
+      <div class="u2-pdp-info__eyebrow-row">
+        <span class="u2-pdp-info__eyebrow">Now in the U.S. · Limited launch stock</span>
+        <span class="u2-pdp-info__pill">
+          {% render 'u2-icon', name: 'leaf', size: 13 %} Formulated with ube, konjac &amp; coconut MCT
+        </span>
+      </div>
+
+      <h1 class="u2-pdp-info__h1">{{ section.settings.title | default: 'Crush the <em>4 PM</em> crash.*' }}</h1>
+
+      <p class="u2-pdp-info__sub">{{ section.settings.subtitle | default: 'A violet wellness ritual. Plant-based satiety. 30 calories. Caffeine-free. French heritage.' }}</p>
+
+      <div class="u2-pdp-info__rating" aria-label="{{ rating }} out of 5 stars">
+        <span class="u2-pdp-info__stars" aria-hidden="true">★★★★★</span>
+        <span class="u2-pdp-info__rating-num">{{ rating }}/5</span>
+        <span class="u2-pdp-info__rating-label">· Verified reviews</span>
+      </div>
+
+      <ul class="u2-pdp-bullets" aria-label="Key benefits">
+        <li><span class="u2-pdp-bullets__check" aria-hidden="true">✓</span> Stops the 4PM crash*</li>
+        <li><span class="u2-pdp-bullets__check" aria-hidden="true">✓</span> Stays full for hours*</li>
+        <li><span class="u2-pdp-bullets__check" aria-hidden="true">✓</span> Zero caffeine. Zero jitters.</li>
+      </ul>
+
+      <div class="u2-pdp-price">
+        <span class="u2-pdp-price__prefix" id="u2-pdp-price-prefix">From </span>
+        {%- comment -%} rev 2026-05-16 — USD hardcoded ($36.99 Starter) {%- endcomment -%}
+        <span class="u2-pdp-price__amount" id="u2-pdp-price">$36.99</span>
+      </div>
+
+      <form method="post" action="{{ routes.cart_add_url }}" id="u2-pdp-form" enctype="multipart/form-data" novalidate>
+        <input type="hidden" name="form_type" value="product">
+        <input type="hidden" name="utf8" value="✓">
+
+        {%- comment -%} VARIANT PICKER — 2 cards {%- endcomment -%}
+        {%- if product.variants.size > 1 -%}
+        <fieldset class="u2-pdp-variants" role="radiogroup" aria-label="Pick your pack" style="border:0;padding:0;margin:12px 0 0;">
+          {%- for v in product.variants -%}
+            {%- liquid
+              assign vmeta = '90g · 30 days'
+              assign vunit = '$1.23/day'
+              assign vtag = 'Try the ritual'
+              if forloop.index == 2
+                assign vmeta = '270g · 90 days'
+                assign vunit = '$0.66/scoop'
+                assign vtag = 'Best price per scoop'
+              endif
+            -%}
+            {%- liquid
+              comment
+                rev 2026-05-16 — USD hardcoded ($36.99/$58.99) — data-vprice in USD cents so JS recalc subscribe correctly (3699×0.9=3329=$33.29)
+              endcomment
+              assign vprice_usd = '$36.99'
+              assign vprice_usd_cents = 3699
+              if forloop.index == 2
+                assign vprice_usd = '$58.99'
+                assign vprice_usd_cents = 5899
+              endif
+            -%}
+            <label class="u2-pdp-variant{% if v.id == current_variant.id %} u2-pdp-variant--selected{% endif %}{% unless v.available %} u2-pdp-variant--sold{% endunless %}">
+              <input type="radio" name="id" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %} data-vprice="{{ vprice_usd_cents }}" data-vprice-money="{{ vprice_usd }}" data-vidx="{{ forloop.index }}">
+              {%- if forloop.index == 2 -%}<span class="u2-pdp-variant__badge">Best Value</span>{%- endif -%}
+              <span class="u2-pdp-variant__name">{{ v.title | split: ' | ' | first | replace: ' ⭐', '' }}</span>
+              <span class="u2-pdp-variant__tag">{{ vtag }}</span>
+              <span class="u2-pdp-variant__meta">{{ vmeta }}</span>
+              <span class="u2-pdp-variant__price-row">
+                <span class="u2-pdp-variant__price">{{ vprice_usd }}</span>
+                <span class="u2-pdp-variant__perday">{{ vunit }}</span>
+              </span>
+            </label>
+          {%- endfor -%}
+        </fieldset>
+        {%- else -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+        {%- endif -%}
+
+        {%- comment -%} SUBSCRIBE & SAVE / ONE-TIME — only if selling plan exists {%- endcomment -%}
+        {%- if sub_plan -%}
+        <div class="u2-pdp-purchase-mode" role="radiogroup" aria-label="Purchase option">
+
+          <label class="u2-pdp-mode u2-pdp-mode--sub" data-discount-pct="{{ sub_discount_pct }}">
+            <input type="radio" name="selling_plan" value="{{ sub_plan.id }}" checked>
+            <span class="u2-pdp-mode__radio" aria-hidden="true"></span>
+            <span class="u2-pdp-mode__body">
+              <span class="u2-pdp-mode__header">
+                <span class="u2-pdp-mode__title-wrap">
+                  <span class="u2-pdp-mode__title">Subscribe &amp; Save</span>
+                  <span class="u2-pdp-mode__tag">SAVE {{ sub_discount_pct }}%</span>
+                </span>
+                <span class="u2-pdp-mode__price">
+                  {%- comment -%} rev 2026-05-16 — USD hardcoded subscribe ($33.29 Starter / $53.09 Maximum) JS will update on variant change {%- endcomment -%}
+                  <s class="u2-pdp-mode__strike" id="u2-sub-strike">$36.99</s>
+                  <span class="u2-pdp-mode__final" id="u2-sub-final">$33.29</span>
+                </span>
+              </span>
+              <span class="u2-pdp-mode__meta">Ships every 30 days · Cancel, skip, or pause anytime · Free U.S. shipping always</span>
+              <div class="u2-pdp-mode__bonuses">
+                <div class="u2-pdp-mode__bonuses-title">🎁 Includes $250 in free bonuses</div>
+                <ul class="u2-pdp-mode__bonuses-list">
+                  <li><span class="u2-pdp-mode__bonus-icon" aria-hidden="true">📖</span> 30-day "Reset your 4 PM" e-book <em>($50 value)</em></li>
+                  <li><span class="u2-pdp-mode__bonus-icon" aria-hidden="true">👯</span> Private UBurn Collective group <em>($45)</em></li>
+                  <li><span class="u2-pdp-mode__bonus-icon" aria-hidden="true">🎟️</span> Online UBurn community events <em>($55)</em></li>
+                  <li><span class="u2-pdp-mode__bonus-icon" aria-hidden="true">💬</span> WhatsApp nutrition support · 30 days <em>($50)</em></li>
+                  <li><span class="u2-pdp-mode__bonus-icon" aria-hidden="true">💎</span> <strong>Free Violet Bottle</strong> · 500ml glass · UB monogram <em>($29 value)</em></li>
+                </ul>
+              </div>
+            </span>
+          </label>
+
+          <label class="u2-pdp-mode u2-pdp-mode--onetime">
+            <input type="radio" name="selling_plan" value="">
+            <span class="u2-pdp-mode__radio" aria-hidden="true"></span>
+            <span class="u2-pdp-mode__body">
+              <span class="u2-pdp-mode__header">
+                <span class="u2-pdp-mode__title">One-time purchase</span>
+                <span class="u2-pdp-mode__price">
+                  <span class="u2-pdp-mode__final" id="u2-onetime-final">$36.99</span>
+                </span>
+              </span>
+              <span class="u2-pdp-mode__meta">No bonuses · No commitment</span>
+            </span>
+          </label>
+        </div>
+        {%- endif -%}
+
+        {%- comment -%} QUANTITY {%- endcomment -%}
+        <div class="u2-pdp-qty">
+          <label for="u2-pdp-qty" class="u2-pdp-qty__label">Quantity</label>
+          <input id="u2-pdp-qty" type="number" name="quantity" value="1" min="1" max="10" inputmode="numeric" class="u2-pdp-qty__input" aria-label="Quantity">
+        </div>
+
+        {%- comment -%} ATC BUTTON {%- endcomment -%}
+        <button type="submit" name="add" class="u2-pdp-atc"{% unless current_variant.available %} disabled{% endunless %}>
+          {%- if current_variant.available -%}
+            <span id="u2-atc-text">Start my routine</span>
+            <span class="u2-pdp-atc__price" id="u2-atc-price">— $36.99</span>
+          {%- else -%}
+            Sold out
+          {%- endif -%}
+        </button>
+      </form>
+
+      <p class="u2-pdp-atc-trust">Free U.S. shipping · Secure checkout · Bonuses included</p>
+
+      {%- comment -%} REASSURANCE ICONS {%- endcomment -%}
+      <ul class="u2-pdp-reassurance">
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h13l3 4v6h-3"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>
+          Free U.S. shipping
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Secure checkout
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Ships from France
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Customer support
+        </li>
+      </ul>
+
+      {%- comment -%} TRUST STRIP {%- endcomment -%}
+      <div class="u2-pdp-trust-strip">
+        <span class="u2-pdp-trust-strip__item">{% render 'u2-icon', name: 'leaf', size: 13 %} Plant-based</span>
+        <span class="u2-pdp-trust-strip__item">{% render 'u2-icon', name: 'check', size: 13 %} Caffeine-free</span>
+        <span class="u2-pdp-trust-strip__item">{% render 'u2-icon', name: 'flask', size: 13 %} Third-party lab tested</span>
+        <span class="u2-pdp-trust-strip__item">{% render 'u2-icon', name: 'shield', size: 13 %} EFSA-backed fiber</span>
+        <span class="u2-pdp-trust-strip__item">{% render 'u2-icon', name: 'sparkle', size: 13 %} Non-GMO</span>
+        <span class="u2-pdp-trust-strip__item">{% render 'u2-icon', name: 'globe', size: 13 %} French brand</span>
+      </div>
+
+    </div>
+  </div>
+
+  {%- comment -%} STICKY MOBILE CTA {%- endcomment -%}
+  <div class="u2-pdp-sticky-cta" data-u2-pdp-sticky aria-hidden="true">
+    <button type="submit" form="u2-pdp-form" class="u2-pdp-sticky-cta__btn">
+      Add to cart — <span id="u2-sticky-price">$36.99</span>
+    </button>
+  </div>
+
+</div>
+
+{%- comment -%} PRODUCT SCHEMA JSON-LD {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "image": {{ featured | image_url: width: 1200 | json }},
+  "description": {{ product.description | strip_html | json }},
+  "brand": { "@type": "Brand", "name": "UBurn" },
+  "sku": {{ current_variant.sku | json }},
+  "offers": {
+    "@type": "Offer",
+    "url": {{ shop.url | append: product.url | json }},
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "price": {{ current_variant.price | divided_by: 100.0 | json }},
+    "availability": "{% if current_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": {{ rating | json }},
+    "reviewCount": 28
+  }
+}
+</script>
+
+<script>
+(function(){
+  var form = document.getElementById('u2-pdp-form');
+  if(!form) return;
+
+  var priceEl = document.getElementById('u2-pdp-price');
+  var pricePrefix = document.getElementById('u2-pdp-price-prefix');
+  var atcPriceEl = document.getElementById('u2-atc-price');
+  var atcTextEl = document.getElementById('u2-atc-text');
+  var stickyPrice = document.getElementById('u2-sticky-price');
+  var subStrike = document.getElementById('u2-sub-strike');
+  var subFinal = document.getElementById('u2-sub-final');
+  var onetimeFinal = document.getElementById('u2-onetime-final');
+  var subRadio = form.querySelector('.u2-pdp-mode--sub input');
+  var oneTimeRadio = form.querySelector('.u2-pdp-mode--onetime input');
+  var subLabel = form.querySelector('.u2-pdp-mode--sub');
+  var discPct = subLabel ? parseInt(subLabel.getAttribute('data-discount-pct') || '10', 10) : 10;
+
+  function fmt(cents){
+    var n = parseInt(cents, 10);
+    if(isNaN(n)) return '';
+    var dollars = (n / 100);
+    // EN locale: no trailing zeros
+    if(dollars === Math.floor(dollars)) return '$' + dollars;
+    return '$' + dollars.toFixed(2).replace(/0$/,'');
+  }
+
+  function updateOnVariant(){
+    var checked = form.querySelector('input[name="id"]:checked');
+    if(!checked) return;
+    var priceCents = parseInt(checked.getAttribute('data-vprice'), 10);
+    var priceMoney = checked.getAttribute('data-vprice-money');
+    var subCents = isNaN(priceCents) ? 0 : Math.round(priceCents * (100 - discPct) / 100);
+    var subMoney = fmt(subCents);
+    var isSubMode = subRadio && subRadio.checked;
+    var activeMoney = isSubMode ? subMoney : priceMoney;
+
+    // Main price (always shows variant base — "From $X")
+    if(priceEl) priceEl.textContent = priceMoney;
+    // Remove "From " prefix after first variant click
+    if(pricePrefix) pricePrefix.textContent = '';
+    // ATC button price
+    if(atcPriceEl) atcPriceEl.textContent = '— ' + activeMoney;
+    if(atcTextEl) atcTextEl.textContent = isSubMode ? 'Subscribe & start' : 'Start my routine';
+    if(stickyPrice) stickyPrice.textContent = activeMoney;
+    // Sub card prices
+    if(subStrike) subStrike.textContent = priceMoney;
+    if(subFinal) subFinal.textContent = subMoney;
+    if(onetimeFinal) onetimeFinal.textContent = priceMoney;
+  }
+
+  form.querySelectorAll('input[name="id"]').forEach(function(r){
+    r.addEventListener('change', updateOnVariant);
+  });
+  if(subRadio) subRadio.addEventListener('change', updateOnVariant);
+  if(oneTimeRadio) oneTimeRadio.addEventListener('change', updateOnVariant);
+
+  // Initial sync
+  updateOnVariant();
+
+  // Thumb click → scroll to slide (CSS scroll-snap handles the rest)
+  document.querySelectorAll('.u2-pdp-gallery__thumb').forEach(function(t){
+    t.addEventListener('click', function(e){
+      e.preventDefault();
+      var href = t.getAttribute('href');
+      var slide = document.querySelector(href);
+      if(slide){
+        document.querySelectorAll('.u2-pdp-gallery__thumb').forEach(function(o){ o.classList.remove('is-active'); });
+        t.classList.add('is-active');
+        slide.scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+      }
+    });
+  });
+
+  // Sticky mobile CTA — show when main ATC scrolls out of view
+  var stickyCta = document.querySelector('[data-u2-pdp-sticky]');
+  var mainAtc = form.querySelector('.u2-pdp-atc');
+  if(stickyCta && mainAtc && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          stickyCta.classList.remove('is-visible');
+          stickyCta.setAttribute('aria-hidden', 'true');
+        } else {
+          stickyCta.classList.add('is-visible');
+          stickyCta.setAttribute('aria-hidden', 'false');
+        }
+      });
+    }, { rootMargin: '0px 0px -40% 0px' });
+    io.observe(mainAtc);
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "U2 PDP",
+  "tag": "section",
+  "class": "shopify-section--u2-pdp",
+  "settings": [
+    { "type": "text", "id": "title", "label": "H1 title (em supported)", "default": "Crush the <em>4 PM</em> crash.*" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle" }
+  ],
+  "presets": [{ "name": "U2 PDP" }]
+}
+{% endschema %}

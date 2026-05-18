@@ -1,0 +1,112 @@
+{%- comment -%}
+  UBurn V2 — PDP Safety / "Before you start" accordion
+{%- endcomment -%}
+<style>
+  .u2-pdp-safety { padding: 48px 20px; background: var(--u2-cream); }
+  .u2-pdp-safety__inner { max-width: 880px; margin: 0 auto; }
+  .u2-pdp-safety__acc {
+    background: rgba(107, 78, 158, 0.05);
+    border-radius: 16px;
+    padding: 20px 28px;
+    border: 1px solid rgba(107, 78, 158, 0.1);
+  }
+  .u2-pdp-safety__acc summary {
+    font-family: var(--u2-sans);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--u2-iris-deep);
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .u2-pdp-safety__acc summary::after {
+    content: '+';
+    font-size: 22px;
+    line-height: 1;
+    transition: transform 0.2s var(--u2-ease-smooth);
+  }
+  .u2-pdp-safety__acc[open] summary::after { content: '−'; }
+  .u2-pdp-safety__body {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(107, 78, 158, 0.12);
+  }
+  .u2-pdp-safety__body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .u2-pdp-safety__body li {
+    font-family: var(--u2-sans);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--u2-plum);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .u2-pdp-safety__body li::before {
+    content: '·';
+    color: var(--u2-iris);
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 1;
+    margin-top: 2px;
+  }
+</style>
+<section class="u2-root u2-pdp-safety" aria-label="Safety information">
+  <div class="u2-pdp-safety__inner">
+    <details class="u2-pdp-safety__acc">
+      <summary>{{ section.settings.title | default: 'Before you start' }}</summary>
+      <div class="u2-pdp-safety__body">
+        <ul>
+          {% for block in section.blocks %}
+            <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+          {% else %}
+            <li>Dietary supplement, not a medication.</li>
+            <li>Not a substitute for a balanced diet.</li>
+            <li>Drink with adequate water.</li>
+            <li>Not recommended during pregnancy or breastfeeding.</li>
+            <li>Consult a healthcare professional if you are under medical treatment.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 PDP Safety",
+  "tag": "section",
+  "class": "shopify-section--u2",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Before you start" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Safety item",
+      "settings": [{ "type": "text", "id": "text", "label": "Text" }]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "U2 PDP Safety",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Dietary supplement, not a medication." } },
+        { "type": "item", "settings": { "text": "Not a substitute for a balanced diet." } },
+        { "type": "item", "settings": { "text": "Drink with adequate water." } },
+        { "type": "item", "settings": { "text": "Not recommended during pregnancy or breastfeeding." } },
+        { "type": "item", "settings": { "text": "Consult a healthcare professional if you are under medical treatment." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,45 @@
+{%- comment -%}
+  UBurn V2 sticky ATC — direct-to-checkout form bottom-fixed bar.
+  JS in u2-theme.js toggles is-visible on scroll past [data-u2-sticky-trigger].
+  Rev 2026-05-17 — converted anchor link → /cart/add form for 1-click checkout.
+
+  Usage:
+    {% render 'u2-sticky-atc', product: product, cta_text: 'start the ritual' %}
+{%- endcomment -%}
+{%- liquid
+  if product == blank
+    assign product = all_products['ube-poudre']
+  endif
+  comment
+    USD hardcoded (Shopify Markets USD admin pending)
+  endcomment
+  assign sub_price = '$33.29'
+  assign cta_text = cta_text | default: 'start the ritual'
+  assign sticky_variant_id = product.variants[0].id
+
+  assign sticky_sub_plan = null
+  for spg in product.selling_plan_groups
+    for sp in spg.selling_plans
+      assign sticky_sub_plan = sp
+      break
+    endfor
+    if sticky_sub_plan != null
+      break
+    endif
+  endfor
+-%}
+<div class="u2-sticky-atc" data-u2-sticky>
+  <form action="/cart/add" method="post" class="u2-sticky-atc__form" style="display:flex;align-items:center;gap:14px;width:100%;margin:0;">
+    <input type="hidden" name="id" value="{{ sticky_variant_id }}">
+    <input type="hidden" name="quantity" value="1">
+    <input type="hidden" name="return_to" value="/checkout">
+    {%- if sticky_sub_plan -%}
+    <input type="hidden" name="selling_plan" value="{{ sticky_sub_plan.id }}">
+    {%- endif -%}
+    <div class="u2-sticky-atc__label" style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;">
+      <span style="font-family:var(--u2-sans);font-size:13px;font-weight:700;color:var(--u2-bone);letter-spacing:0.01em;line-height:1.1;">UBurn · Subscribe &amp; save</span>
+      <span style="font-size:11px;color:rgba(248,244,238,0.72);letter-spacing:0.04em;">{{ sub_price }}/mo · save 10% · cancel anytime</span>
+    </div>
+    <button type="submit" class="u2-sticky-atc__cta" style="border:0;cursor:pointer;font-family:var(--u2-sans);">{{ cta_text }} →</button>
+  </form>
+</div>

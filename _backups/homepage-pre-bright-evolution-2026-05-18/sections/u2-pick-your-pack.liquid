@@ -1,0 +1,515 @@
+{%- comment -%}
+  UBurn V2 — PDP Pick Your Pack
+  Tier 1: Size selector (Starter / Maximum)
+  Tier 2: Subscribe vs One-time radio
+  Bonus stack reveal on Subscribe ($250 in 5 bonuses incl. Violet Bottle)
+  Wires real Shopify Subscriptions selling_plan
+{%- endcomment -%}
+{%- liquid
+  assign v1 = product.variants[0]
+  assign v2 = product.variants[1] | default: v1
+  assign sub_plan = null
+  for spg in product.selling_plan_groups
+    for sp in spg.selling_plans
+      assign sub_plan = sp
+      break
+    endfor
+    if sub_plan != null
+      break
+    endif
+  endfor
+-%}
+<style>
+  .u2-pyp { background: var(--u2-cream); padding: 40px 20px 20px; }
+  .u2-pyp__inner { max-width: 720px; margin: 0 auto; }
+  .u2-pyp__label {
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--u2-iris);
+    margin: 0 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .u2-pyp__label::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: currentColor;
+  }
+
+  /* Tier 1 — Size selector */
+  .u2-pyp__sizes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .u2-pyp__size {
+    position: relative;
+    background: white;
+    border: 2px solid rgba(107,78,158,0.18);
+    border-radius: 18px;
+    padding: 18px 16px;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  }
+  .u2-pyp__size input { position: absolute; opacity: 0; pointer-events: none; }
+  .u2-pyp__size:has(input:checked) {
+    border-color: var(--u2-iris);
+    background: linear-gradient(135deg, rgba(232,220,239,0.5), white);
+  }
+  .u2-pyp__size-name {
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.015em;
+    margin: 0 0 4px;
+  }
+  .u2-pyp__size-meta {
+    font-size: 11px;
+    color: var(--u2-text-muted);
+    margin: 0 0 12px;
+  }
+  .u2-pyp__size-price {
+    font-family: var(--u2-sans);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.02em;
+    margin: 0 0 2px;
+  }
+  .u2-pyp__size-per {
+    font-size: 11px;
+    color: var(--u2-iris);
+    font-weight: 600;
+  }
+  .u2-pyp__size-badge {
+    position: absolute;
+    top: -10px;
+    right: 14px;
+    background: var(--u2-iris);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 999px;
+  }
+
+  /* Tier 2 — Subscribe vs One-time */
+  .u2-pyp__types {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .u2-pyp__type {
+    position: relative;
+    background: white;
+    border: 2px solid rgba(107,78,158,0.18);
+    border-radius: 18px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .u2-pyp__type input { position: absolute; opacity: 0; pointer-events: none; }
+  .u2-pyp__type:has(input:checked) {
+    border-color: var(--u2-iris);
+    background: linear-gradient(135deg, rgba(232,220,239,0.55), white);
+  }
+  .u2-pyp__type-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .u2-pyp__type-radio {
+    width: 22px; height: 22px;
+    border: 2px solid rgba(107,78,158,0.35);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .u2-pyp__type:has(input:checked) .u2-pyp__type-radio {
+    border-color: var(--u2-iris);
+    background: var(--u2-iris);
+    box-shadow: inset 0 0 0 4px white;
+  }
+  .u2-pyp__type-body { flex: 1; min-width: 0; }
+  .u2-pyp__type-title {
+    font-family: var(--u2-sans);
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.01em;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .u2-pyp__type-save-pill {
+    background: var(--u2-iris);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 999px;
+  }
+  .u2-pyp__type-sub {
+    font-size: 12px;
+    color: var(--u2-text-muted);
+    line-height: 1.45;
+    margin: 0;
+  }
+  .u2-pyp__type-price {
+    text-align: right;
+    font-family: var(--u2-sans);
+    font-weight: 800;
+    color: var(--u2-plum-black);
+  }
+  .u2-pyp__type-price strong {
+    font-size: 20px;
+    letter-spacing: -0.02em;
+  }
+  .u2-pyp__type-price del {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #b7b3bd;
+    text-decoration: line-through;
+    margin-bottom: 2px;
+  }
+
+  /* Bonus stack */
+  .u2-pyp__bonus {
+    margin-top: 12px;
+    background: linear-gradient(135deg, var(--u2-lavender-soft), white);
+    border-radius: 14px;
+    padding: 18px 18px;
+    border: 1px solid rgba(107,78,158,0.15);
+  }
+  .u2-pyp__bonus[hidden] { display: none; }
+  .u2-pyp__bonus-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .u2-pyp__bonus-head h4 {
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--u2-iris-deep);
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .u2-pyp__bonus-total {
+    margin-left: auto;
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--u2-iris);
+  }
+  .u2-pyp__bonus-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .u2-pyp__bonus-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    border-radius: 10px;
+    padding: 10px 14px;
+    border: 1px solid rgba(107,78,158,0.06);
+  }
+  .u2-pyp__bonus-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .u2-pyp__bonus-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--u2-plum-black);
+    flex: 1;
+    min-width: 0;
+  }
+  .u2-pyp__bonus-name strong { color: var(--u2-iris); font-weight: 700; }
+  .u2-pyp__bonus-value {
+    font-size: 11px;
+    color: var(--u2-iris);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .u2-pyp__bonus-new {
+    display: inline-block;
+    background: var(--u2-iris);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 999px;
+    margin-right: 6px;
+  }
+
+  /* Quantity */
+  .u2-pyp__qty {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 24px 0 12px;
+  }
+  .u2-pyp__qty-label {
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--u2-plum);
+  }
+  .u2-pyp__qty-input {
+    display: inline-flex;
+    align-items: center;
+    border: 1.5px solid rgba(107,78,158,0.2);
+    border-radius: 999px;
+    background: white;
+    overflow: hidden;
+  }
+  .u2-pyp__qty-input button {
+    width: 36px; height: 36px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--u2-plum-black);
+  }
+  .u2-pyp__qty-input button:hover { color: var(--u2-iris); }
+  .u2-pyp__qty-input input {
+    width: 40px;
+    border: 0;
+    text-align: center;
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+    background: transparent;
+  }
+  .u2-pyp__qty-input input::-webkit-inner-spin-button { display: none; }
+</style>
+
+<section class="u2-root u2-pyp" aria-label="Pick your pack">
+  <div class="u2-pyp__inner">
+    <h3 class="u2-pyp__label">Pick your pack</h3>
+
+    <div class="u2-pyp__sizes" role="radiogroup" aria-label="Pack size">
+      {%- comment -%} rev 2026-05-16 — USD hardcoded {%- endcomment -%}
+      <label class="u2-pyp__size">
+        <input type="radio" name="id" value="{{ v1.id }}" checked data-u2-variant="starter" data-u2-price-cents="3699" data-u2-price-display="$36.99">
+        <div class="u2-pyp__size-name">Starter Pack</div>
+        <p class="u2-pyp__size-meta">90 g · 30 days · 1 scoop / day</p>
+        <p class="u2-pyp__size-price">$36.99</p>
+        <span class="u2-pyp__size-per">$1.23 / day</span>
+      </label>
+      <label class="u2-pyp__size">
+        <input type="radio" name="id" value="{{ v2.id }}" data-u2-variant="maximum" data-u2-price-cents="5899" data-u2-price-display="$58.99">
+        <span class="u2-pyp__size-badge">Best value</span>
+        <div class="u2-pyp__size-name">Maximum Pack</div>
+        <p class="u2-pyp__size-meta">270 g · 90 days · 1 scoop / day</p>
+        <p class="u2-pyp__size-price">$58.99</p>
+        <span class="u2-pyp__size-per">$0.66 / day</span>
+      </label>
+    </div>
+
+    <div class="u2-pyp__types" role="radiogroup" aria-label="Purchase type">
+      {%- if sub_plan -%}
+      <label class="u2-pyp__type">
+        <input type="radio" name="purchase_type" value="subscribe" checked data-u2-purchase="subscribe" data-u2-selling-plan="{{ sub_plan.id }}">
+        <div class="u2-pyp__type-row">
+          <div class="u2-pyp__type-radio" aria-hidden="true"></div>
+          <div class="u2-pyp__type-body">
+            <div class="u2-pyp__type-title">Subscribe &amp; Save <span class="u2-pyp__type-save-pill">save 10%</span></div>
+            <p class="u2-pyp__type-sub">Ships every 30 days · Cancel, skip or pause anytime</p>
+          </div>
+          <div class="u2-pyp__type-price">
+            <del data-u2-price-original>$36.99</del>
+            <strong data-u2-price-sub>$33.29</strong>
+          </div>
+        </div>
+      </label>
+      {%- endif -%}
+      <label class="u2-pyp__type">
+        <input type="radio" name="purchase_type" value="onetime"{% unless sub_plan %} checked{% endunless %} data-u2-purchase="onetime">
+        <div class="u2-pyp__type-row">
+          <div class="u2-pyp__type-radio" aria-hidden="true"></div>
+          <div class="u2-pyp__type-body">
+            <div class="u2-pyp__type-title">One-time purchase</div>
+            <p class="u2-pyp__type-sub">No bonuses · No commitment</p>
+          </div>
+          <div class="u2-pyp__type-price">
+            <strong data-u2-price-onetime>$36.99</strong>
+          </div>
+        </div>
+      </label>
+    </div>
+
+    {%- if sub_plan -%}
+    <div class="u2-pyp__bonus" data-u2-bonus>
+      <div class="u2-pyp__bonus-head">
+        <span style="font-size:20px;">🎁</span>
+        <h4>Includes <span style="font-family:var(--u2-serif);font-style:italic;font-weight:400;">$250 in free bonuses</span></h4>
+        <span class="u2-pyp__bonus-total">value $250</span>
+      </div>
+      <ul class="u2-pyp__bonus-list">
+        <li class="u2-pyp__bonus-item">
+          <span class="u2-pyp__bonus-icon">📖</span>
+          <span class="u2-pyp__bonus-name">30-day "Reset your 4 PM" e-book</span>
+          <span class="u2-pyp__bonus-value">$50 value</span>
+        </li>
+        <li class="u2-pyp__bonus-item">
+          <span class="u2-pyp__bonus-icon">👯</span>
+          <span class="u2-pyp__bonus-name">Private UBurn Collective group</span>
+          <span class="u2-pyp__bonus-value">$45 value</span>
+        </li>
+        <li class="u2-pyp__bonus-item">
+          <span class="u2-pyp__bonus-icon">📣</span>
+          <span class="u2-pyp__bonus-name">Online UBurn community events</span>
+          <span class="u2-pyp__bonus-value">$55 value</span>
+        </li>
+        <li class="u2-pyp__bonus-item">
+          <span class="u2-pyp__bonus-icon">💬</span>
+          <span class="u2-pyp__bonus-name">WhatsApp nutrition support — 30 days</span>
+          <span class="u2-pyp__bonus-value">$50 value</span>
+        </li>
+        <li class="u2-pyp__bonus-item">
+          <span class="u2-pyp__bonus-icon">💎</span>
+          <span class="u2-pyp__bonus-name"><span class="u2-pyp__bonus-new">NEW</span><strong>Free Violet Bottle</strong> · 500 ml glass · UB monogram</span>
+          <span class="u2-pyp__bonus-value">$29 value</span>
+        </li>
+      </ul>
+    </div>
+    {%- endif -%}
+
+    <div class="u2-pyp__qty">
+      <span class="u2-pyp__qty-label">Quantity</span>
+      <div class="u2-pyp__qty-input">
+        <button type="button" data-u2-qty-step="-1" aria-label="Decrease">−</button>
+        <input type="number" name="quantity" value="1" min="1" data-u2-qty>
+        <button type="button" data-u2-qty-step="+1" aria-label="Increase">+</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var root = document.querySelector('.u2-pyp');
+  if(!root) return;
+  var form = root.closest('form#u2-pdp-form') || document.getElementById('u2-pdp-form');
+  if(!form) return;
+
+  var sizeInputs = root.querySelectorAll('input[name="id"]');
+  var typeInputs = root.querySelectorAll('input[name="purchase_type"]');
+  var bonus = root.querySelector('[data-u2-bonus]');
+  var priceOriginal = root.querySelector('[data-u2-price-original]');
+  var priceSub = root.querySelector('[data-u2-price-sub]');
+  var priceOnetime = root.querySelector('[data-u2-price-onetime]');
+  var atcPriceEl = document.getElementById('u2-atc-price');
+  var atcLabelEl = document.querySelector('.u2-pdp-atc__btn');
+
+  var variantData = { {%- for v in product.variants -%}'{{ v.id }}': {{ v.price }}{% unless forloop.last %},{% endunless %}{%- endfor -%} };
+  function fmt(cents){
+    var d = (cents/100); return '$' + d.toFixed(2).replace(/\.00$/, '');
+  }
+
+  function update(){
+    var sizeId = root.querySelector('input[name="id"]:checked')?.value;
+    var typeEl = root.querySelector('input[name="purchase_type"]:checked');
+    var price = variantData[sizeId] || 0;
+    if(priceOriginal) priceOriginal.textContent = fmt(price);
+    if(priceSub) priceSub.textContent = fmt(price * 0.9);
+    if(priceOnetime) priceOnetime.textContent = fmt(price);
+
+    var isSubscribe = typeEl && typeEl.dataset.u2Purchase === 'subscribe';
+    if(bonus) bonus.hidden = !isSubscribe;
+
+    // Manage hidden selling_plan input on form
+    var existingPlan = form.querySelector('input[name="selling_plan"]');
+    if(isSubscribe && typeEl.dataset.u2SellingPlan){
+      if(!existingPlan){
+        existingPlan = document.createElement('input');
+        existingPlan.type = 'hidden';
+        existingPlan.name = 'selling_plan';
+        form.appendChild(existingPlan);
+      }
+      existingPlan.value = typeEl.dataset.u2SellingPlan;
+    } else if(existingPlan){
+      existingPlan.remove();
+    }
+
+    // Update ATC button label + price
+    var displayPrice = isSubscribe ? price * 0.9 : price;
+    if(atcPriceEl) atcPriceEl.textContent = fmt(displayPrice);
+    if(atcLabelEl){
+      var lblText = isSubscribe ? 'Start my subscription — ' : 'Add to cart — ';
+      var span = atcLabelEl.querySelector('#u2-atc-price');
+      if(span){
+        // Find any text node and update
+        var textNodes = Array.from(atcLabelEl.childNodes).filter(function(n){ return n.nodeType === 3; });
+        textNodes.forEach(function(t){
+          if(/Add to bag|Add to cart|Start my subscription/.test(t.textContent)){
+            t.textContent = lblText;
+          }
+        });
+        if(textNodes.length === 0){
+          // Reconstruct: prepend a text node before the span
+          atcLabelEl.insertBefore(document.createTextNode(lblText), span);
+        }
+      }
+    }
+  }
+
+  sizeInputs.forEach(function(r){ r.addEventListener('change', update); });
+  typeInputs.forEach(function(r){ r.addEventListener('change', update); });
+
+  // Quantity steppers
+  var qtyInput = root.querySelector('[data-u2-qty]');
+  root.querySelectorAll('[data-u2-qty-step]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var v = parseInt(qtyInput.value, 10) || 1;
+      v = Math.max(1, v + parseInt(b.dataset.u2QtyStep, 10));
+      qtyInput.value = v;
+    });
+  });
+
+  update();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "U2 Pick Your Pack",
+  "tag": "section",
+  "class": "shopify-section--u2-pyp",
+  "settings": [],
+  "presets": [ { "name": "U2 Pick Your Pack" } ]
+}
+{% endschema %}
