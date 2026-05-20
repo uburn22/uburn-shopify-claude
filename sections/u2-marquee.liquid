@@ -1,0 +1,65 @@
+{%- comment -%}
+  UBurn V2 — Marquee scrolling trust band
+  Replaces live S2 marquee with compliance-fixed copy
+{%- endcomment -%}
+<style>
+  .u2-marquee-section {
+    background: var(--u2-plum-black);
+    color: var(--u2-bone);
+    overflow: hidden;
+    padding: 14px 0;
+    border-top: 1px solid rgba(184,157,217,0.12);
+    border-bottom: 1px solid rgba(184,157,217,0.12);
+  }
+  .u2-marquee-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 36px;
+    white-space: nowrap;
+    animation: u2-mq-scroll 40s linear infinite;
+    padding-right: 36px;
+  }
+  .u2-marquee-item {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--u2-lavender);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .u2-marquee-item::after {
+    content: '·';
+    color: rgba(184,157,217,0.4);
+    margin-left: 12px;
+  }
+  @keyframes u2-mq-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .u2-marquee-track { animation: none; flex-wrap: wrap; white-space: normal; justify-content: center; }
+  }
+</style>
+<section class="u2-root u2-marquee-section" aria-label="Trust marquee">
+  <div class="u2-marquee-track" aria-hidden="true">
+    {%- assign items = section.settings.items | default: 'Research-backed fiber · Caffeine-free · 30 calories per scoop · Free U.S. shipping $40+ · Cancel anytime · Lasting 4-hour satiety · 6 plant actives · French heritage · Third-party lab tested' | split: ' · ' -%}
+    {%- for pass in (1..2) -%}
+      {%- for item in items -%}
+        <span class="u2-marquee-item">{{ item }}</span>
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Marquee",
+  "tag": "section",
+  "class": "shopify-section--u2-marquee",
+  "settings": [
+    { "type": "text", "id": "items", "label": "Items (· separated)", "default": "Research-backed fiber · Caffeine-free · 30 calories per scoop · Free U.S. shipping $40+ · Cancel anytime · Lasting 4-hour satiety · 6 plant actives · French heritage · Third-party lab tested" }
+  ],
+  "presets": [ { "name": "U2 Marquee" } ]
+}
+{% endschema %}

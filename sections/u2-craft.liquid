@@ -1,0 +1,46 @@
+{%- comment -%}
+  UBurn V2 — Craft section (French brand atelier) — atomic
+{%- endcomment -%}
+<style>
+  .u2-craft { background: linear-gradient(180deg, var(--u2-bone) 0%, var(--u2-lavender-soft) 100%); padding: var(--u2-space-section) 20px; }
+  .u2-craft__inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+  @media (min-width: 1024px) { .u2-craft__inner { grid-template-columns: 1fr 1fr; gap: 80px; } }
+  .u2-craft__media { aspect-ratio: 4/5; border-radius: 24px; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(58,31,89,0.3); position: relative; }
+  .u2-craft__media img { width: 100%; height: 100%; object-fit: cover; }
+  .u2-craft__tag { position: absolute; bottom: 18px; left: 18px; background: rgba(248,244,238,0.92); backdrop-filter: blur(10px); color: var(--u2-plum-black); padding: 8px 16px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+  .u2-craft__title { font-family: var(--u2-sans); font-size: clamp(34px,5vw,48px); font-weight: 800; line-height: 1.05; letter-spacing: -0.025em; color: var(--u2-plum-black); margin: 16px 0 16px; }
+  .u2-craft__title em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-iris); }
+  .u2-craft__body { font-size: 16px; line-height: 1.65; color: var(--u2-text-body); max-width: 44ch; margin: 0 0 36px; }
+  .u2-craft__features { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+  .u2-craft__feature { background: white; border-radius: 12px; padding: 18px; text-align: center; }
+  .u2-craft__feature-num { font-family: var(--u2-serif); font-style: italic; font-weight: 400; font-size: 32px; color: var(--u2-iris); line-height: 1; margin-bottom: 4px; }
+  .u2-craft__feature-label { font-size: 12px; font-weight: 500; letter-spacing: 0.04em; color: var(--u2-plum); line-height: 1.3; }
+</style>
+<section class="u2-root u2-craft" aria-label="French heritage">
+  <div class="u2-craft__inner">
+    <div class="u2-craft__media u2-reveal">
+      <img src="{{ 'uburn-us-homepage-05-morning-ritual-lifestyle-a.png' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Femme préparant son rituel violet du matin dans une cuisine baignée de lumière{% else %}Woman preparing her morning violet ritual in a light-filled kitchen{% endif %}" loading="lazy" decoding="async" width="880" height="1168">
+      <span class="u2-craft__tag">french heritage · since 2024</span>
+    </div>
+    <div class="u2-reveal delay-1">
+      <span class="u2-section-eyebrow">— european standard</span>
+      <h2 class="u2-craft__title">Made with <em>precision.</em> Tested for purity.</h2>
+      <p class="u2-craft__body">From a small French laboratory, every batch is third-party tested for purity before crossing the Atlantic. Packed in recyclable materials. Crafted with French heritage since 2024.</p>
+      <div class="u2-craft__features">
+        <div class="u2-craft__feature"><div class="u2-craft__feature-num">100%</div><div class="u2-craft__feature-label">plant-based formula</div></div>
+        <div class="u2-craft__feature"><div class="u2-craft__feature-num">3rd</div><div class="u2-craft__feature-label">party lab tested</div></div>
+        <div class="u2-craft__feature"><div class="u2-craft__feature-num">0</div><div class="u2-craft__feature-label">artificial coloring</div></div>
+        <div class="u2-craft__feature"><div class="u2-craft__feature-num">FR</div><div class="u2-craft__feature-label">french brand</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Craft France",
+  "tag": "section",
+  "class": "shopify-section--u2-craft",
+  "settings": [],
+  "presets": [ { "name": "U2 Craft France" } ]
+}
+{% endschema %}

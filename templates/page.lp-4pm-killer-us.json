@@ -1,0 +1,10 @@
+{
+  "layout": "theme",
+  "sections": {
+    "main": {
+      "type": "lp-4pm-killer-us",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
