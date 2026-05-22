@@ -1,0 +1,95 @@
+{% comment %}
+  Section : Séparateur réglable
+{% endcomment %}
+
+<div
+  class="custom-separator-wrapper"
+  style="
+    margin-top: {{ section.settings.spacing_top }}px;
+    margin-bottom: {{ section.settings.spacing_bottom }}px;
+  "
+>
+  <div
+    class="custom-separator-line"
+    style="
+      max-width: {{ section.settings.width }}%;
+      margin: 0 auto;
+      border-bottom: {{ section.settings.thickness }}px {{ section.settings.line_style }} {{ section.settings.color }};
+    "
+  ></div>
+</div>
+
+{% schema %}
+{
+  "name": "Séparateur réglable",
+  "settings": [
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Couleur du trait",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "thickness",
+      "label": "Épaisseur du trait (px)",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "width",
+      "label": "Largeur du trait (%)",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "line_style",
+      "label": "Style du trait",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Plein"
+        },
+        {
+          "value": "dashed",
+          "label": "Pointillé"
+        },
+        {
+          "value": "dotted",
+          "label": "Points"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "range",
+      "id": "spacing_top",
+      "label": "Marge au-dessus (px)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "spacing_bottom",
+      "label": "Marge en-dessous (px)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Séparateur réglable"
+    }
+  ]
+}
+{% endschema %}

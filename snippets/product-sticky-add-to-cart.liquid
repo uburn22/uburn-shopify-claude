@@ -1,0 +1,179 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+PRODUCT STICKY ADD TO CART
+----------------------------------------------------------------------------------------------------------------------
+
+This component is used to render the sticky add to cart.
+
+********************************************
+Supported variables
+********************************************
+
+* product: the product to render
+* product_form_id: the main product form
+* section: the section is implicitly available. Here, the section is always a "product" template section, so you can
+           access all the information from the section
+{%- endcomment -%}
+
+{%- if product.available and section.settings.show_sticky_add_to_cart -%}
+  <product-sticky-add-to-cart class="product-sticky-add-to-cart color-scheme color-scheme--{{ settings.default_color_scheme.id }}" main-product-form="{{ product_form_id }}">
+    <product-rerender id="product-sticky-add-to-cart-{{ product.id }}-{{ section.id }}" observe-form="{{ product_form_id }}">
+      <div class="h-stack gap-6 sm-max:hidden">
+        {%- assign image = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+
+        {%- if image != blank -%}
+          {{- image | image_url: width: image.width | image_tag: loading: 'lazy', widths: '70,140,210,280', class: 'constrained-image', style: '--image-max-width: 70px' -}}
+        {%- endif -%}
+
+        <div class="v-stack gap-0.5">
+          <span class="subheading">{{ product.title }}</span>
+
+          {%- unless product.has_only_default_variant -%}
+            <span class="subheading text-subdued">{{ product.selected_or_first_available_variant.title }}</span>
+          {%- endunless -%}
+
+          {%- render 'price-list', variant: product.selected_or_first_available_variant, context: 'line_item' -%}
+        </div>
+      </div>
+
+      {%- liquid
+        if product.selected_or_first_available_variant.available
+          assign button_label = 'product.general.add_to_cart_button' | t
+          assign disabled = false
+        else
+          assign button_label = 'product.general.sold_out_button' | t
+          assign disabled = true
+        endif
+
+        render 'button', type: 'submit', form: product_form_id, content: button_label, disabled: disabled, style: 'outline', class: 'sm-max:hidden'
+        render 'button', type: 'submit', form: product_form_id, content: button_label, disabled: disabled, style: 'solid', class: 'sm:hidden'
+      -%}
+    </product-rerender>
+  </product-sticky-add-to-cart>
+{%- endif -%}
+
+{%- if product.available -%}
+  <!-- Mobile instant sticky ATC — visible from page load, reactive to variant -->
+  <div class="uburn-sticky-atc">
+    <div class="uburn-sticky-atc__inner">
+      <div class="uburn-sticky-atc__info">
+        <span class="uburn-sticky-atc__title">{{ product.title | truncate: 20 }}</span>
+        <span class="uburn-sticky-atc__price" data-sticky-price>{{ product.selected_or_first_available_variant.price | money }}</span>
+      </div>
+      <button type="submit" form="{{ product_form_id }}" class="uburn-sticky-atc__btn">Ajouter au panier &rarr;</button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var priceEl = document.querySelector('[data-sticky-price]');
+      if (!priceEl) return;
+      var form = document.getElementById('{{ product_form_id }}');
+      if (!form) return;
+
+      var variants = {{ product.variants | json }};
+      var moneyFormat = {{ shop.money_format | json }};
+
+      function formatMoney(cents) {
+        var amount = (cents / 100).toFixed(2).replace('.', ',');
+        return moneyFormat.replace(/\{\{\s*amount\s*\}\}/, amount)
+                          .replace(/\{\{\s*amount_with_comma_separator\s*\}\}/, amount)
+                          .replace(/\{\{\s*amount_no_decimals\s*\}\}/, Math.round(cents / 100));
+      }
+
+      function updateStickyPrice() {
+        var idInput = form.querySelector('[name="id"]');
+        if (!idInput) return;
+        var selectedId = parseInt(idInput.value);
+        for (var i = 0; i < variants.length; i++) {
+          if (variants[i].id === selectedId) {
+            priceEl.textContent = formatMoney(variants[i].price);
+            break;
+          }
+        }
+      }
+
+      form.addEventListener('change', updateStickyPrice);
+      new MutationObserver(updateStickyPrice).observe(form, { subtree: true, attributes: true, childList: true });
+    })();
+  </script>
+
+  <style>
+    .uburn-sticky-atc {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background: #fff;
+      border-top: 1px solid #ede5ff;
+      padding: 10px 16px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
+      box-sizing: border-box;
+      box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    .uburn-sticky-atc__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .uburn-sticky-atc__info {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      min-width: 0;
+    }
+    .uburn-sticky-atc__title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #374151;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .uburn-sticky-atc__price {
+      font-size: 15px;
+      font-weight: 800;
+      color: #8b5cf6;
+    }
+    .uburn-sticky-atc__btn {
+      flex-shrink: 0;
+      background: #8b5cf6;
+      color: #fff;
+      border: none;
+      border-radius: 99px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+      transition: background 0.15s;
+    }
+    .uburn-sticky-atc__btn:active {
+      background: #7c3aed;
+    }
+    @media screen and (min-width: 700px) {
+      .uburn-sticky-atc { display: none; }
+    }
+
+    /* FIX 4 — Push chat widget above sticky ATC on mobile */
+    @media screen and (max-width: 699px) {
+      #ShopifyChat,
+      .shopify-chat-button,
+      iframe[title*="chat"],
+      iframe[title*="Chat"],
+      iframe[title*="Shopify"],
+      #tidio-chat,
+      .gorgias-chat-container,
+      [class*="shopify-messaging"],
+      .shopify-block[data-app-block-type*="chat"] {
+        bottom: 70px !important;
+      }
+    }
+  </style>
+{%- endif -%}

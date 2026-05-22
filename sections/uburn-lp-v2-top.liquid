@@ -1,0 +1,227 @@
+{%- comment -%}
+  UBurn LP V2 — Violet Matcha · aligned on PDP DA (u2-* tokens)
+  Rev 2026-05-19 v3 — drop Bloom Fraunces, adopt Times serif + Helvetica Neue from u2-base.css
+{%- endcomment -%}
+{%- liquid
+  assign hp = section.settings.product
+  if hp == blank
+    assign hp = all_products['ube-poudre']
+  endif
+  assign v_starter = hp.variants[0]
+  assign v_maximum = hp.variants[1] | default: hp.variants[0]
+  assign sub_plan = null
+  for spg in hp.selling_plan_groups
+    for sp in spg.selling_plans
+      assign sub_plan = sp
+      break
+    endfor
+    if sub_plan != null
+      break
+    endif
+  endfor
+-%}
+
+<meta name="robots" content="noindex,nofollow">
+{{ 'uburn-lp-v2.css' | asset_url | stylesheet_tag }}
+
+<script id="uburn-lp-v2-data">
+  window.__UBLP2 = {
+    product_id: {{ hp.id }},
+    starter: { id: {{ v_starter.id }}, price_one: 3699, price_sub: 3329, label: 'Starter — 90g · 30 servings' },
+    maximum: { id: {{ v_maximum.id }}, price_one: 5899, price_sub: 5309, label: 'Maximum — 270g · 90 servings' },
+    {%- if sub_plan -%}
+    selling_plan_id: {{ sub_plan.id }},
+    {%- else -%}
+    selling_plan_id: null,
+    {%- endif -%}
+    currency: 'USD',
+    cart_add_url: '/cart/add.js'
+  };
+</script>
+
+<div class="u2-root ublp2">
+
+  {%- comment -%} ═════════ 01. HERO ═════════ {%- endcomment -%}
+  <section class="ublp2-hero u2-section">
+    <div class="ublp2-hero__inner">
+      <span class="ublp2-hero__sticker">{{ section.settings.hero_sticker | default: 'The 4PM ritual · New in the U.S.' }}</span>
+      <h1 class="ublp2-hero__h1">{{ section.settings.hero_h1 | default: 'The violet ritual for your <em>4PM cravings.</em>' }}</h1>
+      <p class="ublp2-hero__sub">{{ section.settings.hero_sub | default: 'A creamy purple drink made with konjac fiber to help you feel satisfied through the critical part of your afternoon.' }}</p>
+
+      <ul class="ublp2-hero__trust" aria-label="Product benefits">
+        <li>{{ section.settings.trust_bullet_1 | default: 'Zero caffeine' }}</li>
+        <li>{{ section.settings.trust_bullet_2 | default: '30 calories' }}</li>
+        <li>{{ section.settings.trust_bullet_3 | default: 'Plant-based' }}</li>
+        <li>{{ section.settings.trust_bullet_4 | default: 'French-born' }}</li>
+      </ul>
+
+      <div class="ublp2-hero__rating">
+        <span class="ublp2-hero__stars" aria-hidden="true">★★★★★</span>
+        <span class="ublp2-hero__rating-num">4.7</span>
+        <span class="ublp2-hero__rating-text">· 2,847+ customers</span>
+      </div>
+
+      <div class="ublp2-hero__visual">
+        <span class="ublp2-hero__badge">EFSA-backed konjac</span>
+        {%- liquid
+          assign _hero_src = section.settings.hero_image_url
+          if _hero_src == blank
+            assign _hero_src = 'lp-hero-en-clean.jpg' | asset_url
+          endif
+        -%}
+        <img src="{{ _hero_src }}"
+             alt="{{ section.settings.hero_image_alt | default: 'UBurn pouch with violet ube drink swirl — the 4PM ritual' }}"
+             loading="eager" fetchpriority="high" width="900" height="1170">
+      </div>
+
+      <button class="u2-cta u2-cta--full ublp2-hero__cta" data-ublp2-scroll="#ublp2-offer" type="button">
+        <span>{{ section.settings.hero_cta | default: 'Start the ritual — from $33.29' }}</span>
+        <span class="u2-cta__arrow" aria-hidden="true">→</span>
+      </button>
+      <p class="ublp2-hero__cta-sub">Free U.S. shipping · Cancel anytime · Secure checkout</p>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 02. TRUST STRIP ═════════ {%- endcomment -%}
+  <section class="ublp2-trust">
+    <div class="ublp2-trust__inner">
+      <span class="ublp2-trust__item">{{ section.settings.trust_1 | default: '0% caffeine' }}</span>
+      <span class="ublp2-trust__sep"></span>
+      <span class="ublp2-trust__item">{{ section.settings.trust_2 | default: 'EFSA-backed fiber' }}</span>
+      <span class="ublp2-trust__sep"></span>
+      <span class="ublp2-trust__item">{{ section.settings.trust_3 | default: '30 calories' }}</span>
+      <span class="ublp2-trust__sep"></span>
+      <span class="ublp2-trust__item">{{ section.settings.trust_4 | default: 'Free U.S. shipping' }}</span>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 03. 4PM AFTERNOON REWRITTEN ═════════ {%- endcomment -%}
+  <section class="ublp2-crash u2-section">
+    <div class="ublp2-crash__inner">
+      <span class="ublp2-eyebrow">— your afternoon, rewritten</span>
+      <h2 class="ublp2-h2">Your 4PM. <em>Rewritten.</em></h2>
+
+      <div class="ublp2-crash__grid">
+        <div class="ublp2-crash__card ublp2-crash__card--before">
+          <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-pdp-before-stressed-desk.png"
+               alt="Stressed woman at desk — the 4PM cycle before UBurn"
+               loading="lazy" decoding="async" width="1400" height="1400">
+          <div class="ublp2-crash__label">Before 4PM</div>
+          <p class="ublp2-crash__text">Snack drawer. Second coffee. Energy dip.</p>
+        </div>
+        <div class="ublp2-crash__card ublp2-crash__card--after">
+          <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-pdp-after-calm-desk.png"
+               alt="Calm woman sipping violet UBurn ritual at her desk"
+               loading="lazy" decoding="async" width="1400" height="1400">
+          <div class="ublp2-crash__label">After 4PM</div>
+          <p class="ublp2-crash__text">One scoop. Creamy violet ritual. A calmer afternoon.</p>
+        </div>
+      </div>
+      <p class="ublp2-disc">*Individual results may vary.</p>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 03b. COMPARISON TABLE ═════════ {%- endcomment -%}
+  <section class="ublp2-compare u2-section">
+    <div class="ublp2-compare__inner">
+      <span class="ublp2-eyebrow">— what makes us different</span>
+      <h2 class="ublp2-h2">UBurn vs traditional <em>solutions.</em></h2>
+
+      <div class="ublp2-compare__table-wrap">
+        <table class="ublp2-compare__table">
+          <thead>
+            <tr>
+              <th class="ublp2-compare__th ublp2-compare__th--row"></th>
+              <th class="ublp2-compare__th ublp2-compare__th--brand">UBurn</th>
+              <th class="ublp2-compare__th">Diet snacks</th>
+              <th class="ublp2-compare__th">Caffeine drinks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="ublp2-compare__row-label">EFSA-recognized fiber</th>
+              <td class="ublp2-compare__cell ublp2-compare__cell--brand"><span class="ublp2-compare__yes">✓</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__no">—</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__no">—</span></td>
+            </tr>
+            <tr>
+              <th class="ublp2-compare__row-label">Caffeine-free</th>
+              <td class="ublp2-compare__cell ublp2-compare__cell--brand"><span class="ublp2-compare__yes">✓</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__yes">✓</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__no">—</span></td>
+            </tr>
+            <tr>
+              <th class="ublp2-compare__row-label">4-hour satiety*</th>
+              <td class="ublp2-compare__cell ublp2-compare__cell--brand"><span class="ublp2-compare__yes">✓</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__no">—</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__no">—</span></td>
+            </tr>
+            <tr>
+              <th class="ublp2-compare__row-label">Calories per serving</th>
+              <td class="ublp2-compare__cell ublp2-compare__cell--brand"><span class="ublp2-compare__val">30 kcal</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__val">100–200 kcal</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__val">0–50 kcal</span></td>
+            </tr>
+            <tr>
+              <th class="ublp2-compare__row-label">No spikes or crashes</th>
+              <td class="ublp2-compare__cell ublp2-compare__cell--brand"><span class="ublp2-compare__yes">✓</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__no">—</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__no">—</span></td>
+            </tr>
+            <tr>
+              <th class="ublp2-compare__row-label">100% plant-based</th>
+              <td class="ublp2-compare__cell ublp2-compare__cell--brand"><span class="ublp2-compare__yes">✓</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__val">varies</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__val">varies</span></td>
+            </tr>
+            <tr>
+              <th class="ublp2-compare__row-label">French heritage</th>
+              <td class="ublp2-compare__cell ublp2-compare__cell--brand"><span class="ublp2-compare__yes">✓</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__no">—</span></td>
+              <td class="ublp2-compare__cell"><span class="ublp2-compare__no">—</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ublp2-disc">*EFSA Regulation 432/2012 · ID 3120 · 3g/day with water before meals. Comparison ranges based on category averages. Individual products may vary.</p>
+    </div>
+  </section>
+
+</div>
+
+{%- comment -%} CRO triggers — synced with PDP (welcome10 popup + sticky ATC + tracking) {%- endcomment -%}
+{% render 'u2-email-popup' %}
+{% render 'u2-sticky-atc', product: hp, cta_text: 'Start the ritual' %}
+{% render 'u2-tracking-events' %}
+
+<script src="{{ 'uburn-lp-v2.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "UBurn LP V2 Top",
+  "tag": "section",
+  "class": "shopify-section--uburn-lp-v2",
+  "settings": [
+    { "type": "header", "content": "Product binding" },
+    { "type": "product", "id": "product", "label": "Product (default ube-poudre)" },
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_sticker", "label": "Hero sticker", "default": "The 4PM ritual · New in the U.S." },
+    { "type": "textarea", "id": "hero_h1", "label": "Hero H1 (use <em>...</em>)", "default": "The violet ritual for your <em>4PM cravings.</em>" },
+    { "type": "textarea", "id": "hero_sub", "label": "Hero sub", "default": "A creamy purple drink made with konjac fiber to help you feel satisfied through the critical part of your afternoon." },
+    { "type": "text", "id": "hero_cta", "label": "Hero CTA", "default": "Start the ritual — from $33.29" },
+    { "type": "text", "id": "hero_image_url", "label": "Hero image URL (override)", "info": "Default = pack + violet drink swirl (magnific)" },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt" },
+    { "type": "header", "content": "Hero trust bullets (4)" },
+    { "type": "text", "id": "trust_bullet_1", "label": "Bullet 1", "default": "Zero caffeine" },
+    { "type": "text", "id": "trust_bullet_2", "label": "Bullet 2", "default": "30 calories" },
+    { "type": "text", "id": "trust_bullet_3", "label": "Bullet 3", "default": "Plant-based" },
+    { "type": "text", "id": "trust_bullet_4", "label": "Bullet 4", "default": "French-born" },
+    { "type": "header", "content": "Trust strip (4 items)" },
+    { "type": "text", "id": "trust_1", "label": "Trust 1", "default": "0% caffeine" },
+    { "type": "text", "id": "trust_2", "label": "Trust 2", "default": "EFSA-backed fiber" },
+    { "type": "text", "id": "trust_3", "label": "Trust 3", "default": "30 calories" },
+    { "type": "text", "id": "trust_4", "label": "Trust 4", "default": "Free U.S. shipping" }
+  ],
+  "presets": [ { "name": "UBurn LP V2 Top" } ]
+}
+{% endschema %}

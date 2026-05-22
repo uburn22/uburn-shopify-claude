@@ -31,12 +31,19 @@
       break
     endif
   endfor
+
+  comment
+    UTM tagging — onsite click from LP to checkout (rev 2026-05-21)
+    utm_campaign = page handle (e.g., lp-violet-matcha-us)
+  endcomment
+  assign _utm_campaign = page.handle | default: template.suffix | default: 'lp-uburn-us'
+  assign _return_to = '/checkout?utm_source=lp&utm_medium=onsite&utm_campaign=' | append: _utm_campaign | append: '&utm_content=sticky-atc'
 -%}
 <div class="u2-sticky-atc" data-u2-sticky>
   <form action="/cart/add" method="post" class="u2-sticky-atc__form" style="display:flex;align-items:center;gap:14px;width:100%;margin:0;">
     <input type="hidden" name="id" value="{{ sticky_variant_id }}">
     <input type="hidden" name="quantity" value="1">
-    <input type="hidden" name="return_to" value="/checkout">
+    <input type="hidden" name="return_to" value="{{ _return_to }}">
     {%- if sticky_sub_plan -%}
     <input type="hidden" name="selling_plan" value="{{ sticky_sub_plan.id }}">
     {%- endif -%}

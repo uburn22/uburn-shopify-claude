@@ -1,18 +1,72 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+/*
+ * ------------------------------------------------------------
+ * UBurn LP MASTER TEMPLATE — angle: 4PM Cravings (Violet Matcha)
+ * Lock 2026-05-21 — workflow base for future angle LPs.
+ * To clone for new angle:
+ *   1. cp page.lp-violet-matcha-us.json page.lp-<angle>-us.json
+ *   2. Override settings: hero_sticker / hero_h1 / hero_sub / hero_cta / hero_image_url / hero_image_alt
+ *      + week-changes attr_name / attr_city + craft / final-cta optional overrides
+ *   3. Create Shopify Page (Admin) with handle + template_suffix matching
+ *   4. Push live + cache bust (delete/recreate page)
+ * ------------------------------------------------------------
+ */
 {
   "layout": "theme",
   "sections": {
-    "lp-v2": {
-      "type": "uburn-lp-v2",
+    "lp-top": {
+      "type": "uburn-lp-v2-top",
       "settings": {
         "product": "ube-poudre",
-        "hero_h1": "The violet matcha. <em>Zero caffeine.</em> All ritual.",
-        "hero_sub": "Trade the 3 PM coffee for a plant-based purple drink. EFSA-backed konjac fiber. 30 calories. Made in France.",
+        "hero_sticker": "The 4PM ritual · New in the U.S.",
+        "hero_h1": "The violet ritual for your <em>4PM cravings.</em>",
+        "hero_sub": "A creamy purple drink made with konjac fiber to help you feel satisfied through the critical part of your afternoon.",
+        "hero_cta": "Start the ritual — from $33.29",
+        "hero_image_url": "https://uburn.co/cdn/shop/files/magnific_i-want-img1-to-be-in-4k-f_3001183035.png",
+        "hero_image_alt": "UBurn lavender pouch + violet ube latte swirl in a tall glass — the 4PM ritual",
+        "trust_bullet_1": "Zero caffeine",
+        "trust_bullet_2": "30 calories",
+        "trust_bullet_3": "Plant-based",
+        "trust_bullet_4": "French-born",
         "trust_1": "0% caffeine",
         "trust_2": "EFSA-backed fiber",
         "trust_3": "30 calories",
-        "trust_4": "Made in France"
+        "trust_4": "Free U.S. shipping"
       }
-    }
+    },
+    "pricing": {
+      "type": "u2-pricing-cards",
+      "settings": { "product": "ube-poudre", "show_bonus": true }
+    },
+    "lp-bottom": {
+      "type": "uburn-lp-v2-bottom",
+      "settings": { "product": "ube-poudre" }
+    },
+    "week-changes": {
+      "type": "u2-week-changes",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "— in her own words",
+        "title_pre": "What changes.",
+        "title_em": "After 4 weeks.",
+        "attr_name": "Ashley K.",
+        "attr_city": "Phoenix, AZ",
+        "attr_when": "After 28 days"
+      }
+    },
+    "craft": { "type": "u2-craft", "settings": {} },
+    "guarantee": { "type": "u2-guarantee-bar", "settings": {} },
+    "quiz": { "type": "u2-pdp-ritual-quiz", "settings": {} },
+    "newsletter": { "type": "u2-newsletter", "settings": {} },
+    "live-proof": { "type": "u2-live-proof", "disabled": true, "settings": {} }
   },
-  "order": ["lp-v2"]
+  "order": ["lp-top", "pricing", "lp-bottom", "week-changes", "craft", "guarantee", "quiz", "newsletter", "live-proof"]
 }

@@ -1,0 +1,60 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+/*
+ * ------------------------------------------------------------
+ * UBurn LP — Angle: RITUAL VIOLET (stress eating / aesthetic 4PM)
+ * Cloned from LP MASTER (page.lp-violet-matcha-us.json) on 2026-05-21.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme",
+  "sections": {
+    "lp-top": {
+      "type": "uburn-lp-v2-top",
+      "settings": {
+        "product": "ube-poudre",
+        "hero_sticker": "The violet ritual · For women who deserve a slow 4PM",
+        "hero_h1": "Romanticize your <em>4PM.</em>",
+        "hero_sub": "You're not hungry at 4 PM — you're tired. UBurn replaces the snack with one scoop of plant-based ube and konjac. Glucomannan plant fiber for up to 4 hours of fullness.",
+        "hero_cta": "Begin the ritual — from $33.29",
+        "hero_image_url": "https://uburn.co/cdn/shop/files/magnific_i-want-img1-to-be-in-4k-f_3001183035.png",
+        "hero_image_alt": "UBurn lavender pouch + violet ube swirl in tall glass — the slow 4PM ritual",
+        "trust_bullet_1": "Zero caffeine",
+        "trust_bullet_2": "30 calories",
+        "trust_bullet_3": "Plant-based",
+        "trust_bullet_4": "French-born",
+        "trust_1": "0% caffeine",
+        "trust_2": "EFSA-backed fiber",
+        "trust_3": "30 calories",
+        "trust_4": "Free U.S. shipping"
+      }
+    },
+    "pricing": { "type": "u2-pricing-cards", "settings": { "product": "ube-poudre", "show_bonus": true } },
+    "lp-bottom": { "type": "uburn-lp-v2-bottom", "settings": { "product": "ube-poudre" } },
+    "week-changes": {
+      "type": "u2-week-changes",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "— in her own words",
+        "title_pre": "What changes.",
+        "title_em": "After 4 weeks.",
+        "attr_name": "Ashley K.",
+        "attr_city": "Phoenix, AZ",
+        "attr_when": "After 28 days"
+      }
+    },
+    "craft": { "type": "u2-craft", "settings": {} },
+    "guarantee": { "type": "u2-guarantee-bar", "settings": {} },
+    "quiz": { "type": "u2-pdp-ritual-quiz", "settings": {} },
+    "newsletter": { "type": "u2-newsletter", "settings": {} },
+    "live-proof": { "type": "u2-live-proof", "disabled": true, "settings": {} }
+  },
+  "order": ["lp-top", "pricing", "lp-bottom", "week-changes", "craft", "guarantee", "quiz", "newsletter", "live-proof"]
+}

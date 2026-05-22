@@ -299,13 +299,13 @@
   </div>
 
   <div class="u2-herospl__copy">
-    <span class="u2-section-eyebrow" style="justify-content:center;">{{ section.settings.eyebrow | default: 'the violet ritual' }}</span>
+    <span class="u2-section-eyebrow" style="justify-content:center;">{{ section.settings.eyebrow | default: 'est. 2024 · the violet matcha' }}</span>
     <h1>{{ section.settings.h1 | default: '<strong>Functional</strong> like a shake. <em>Indulgent</em> like a latte.' }}</h1>
-    <p>{{ section.settings.sub | default: 'Plant-based satiety. 30 calories. Your daily violet moment.' }}</p>
+    <p>{{ section.settings.sub | default: 'The violet matcha. Plant-based satiety. 30 calories. Mix with water, oat milk, or hot frothed milk — your moment, your way.' }}</p>
     {%- if section.settings.priceline != blank -%}
       <p class="u2-herospl__priceline">{{ section.settings.priceline }}</p>
     {%- else -%}
-      <p class="u2-herospl__priceline">{{ sub_display }}/mo · subscribe &amp; save · free us shipping</p>
+      <p class="u2-herospl__priceline">from <strong>{{ display_price }}</strong> · {{ sub_display }}/mo with subscribe &amp; save · free us shipping</p>
     {%- endif -%}
 
     <span class="u2-herospl__rating" aria-label="Rated 4.7 out of 5 by 2,847 customers">
@@ -325,12 +325,13 @@
         <span>{{ section.settings.cta_text | default: 'start the ritual' }} — {{ sub_display }}</span>
         <span class="u2-cta__arrow" aria-hidden="true">→</span>
       </button>
-      <span class="u2-herospl__buy-sub">{{ section.settings.cta_sub | default: 'subscribe · cancel anytime' }}</span>
+      <span class="u2-herospl__buy-sub">{{ section.settings.cta_sub | default: '1 click · checkout direct · subscribe · cancel anytime' }}</span>
     </form>
 
     <div class="u2-herospl__trust">
       {% render 'u2-trust-pill', icon: 'check', text: 'EFSA-backed' %}
       {% render 'u2-trust-pill', icon: 'leaf', text: 'Caffeine-free' %}
+      {% render 'u2-trust-pill', icon: 'flask', text: 'Third-party lab tested' %}
       {% render 'u2-trust-pill', icon: 'globe', text: 'French heritage' %}
     </div>
   </div>

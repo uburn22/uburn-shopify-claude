@@ -44,9 +44,16 @@
   {%- comment -%} ═════════ 01. HERO ═════════ {%- endcomment -%}
   <section class="ublp2-hero u2-section">
     <div class="ublp2-hero__inner">
-      <span class="ublp2-hero__sticker">New in the U.S.</span>
-      <h1 class="ublp2-hero__h1">{{ section.settings.hero_h1 | default: 'End your 4 PM crash.' }}</h1>
-      <p class="ublp2-hero__sub">{{ section.settings.hero_sub | default: 'The violet matcha. Plant-based satiety. 30 calories. Caffeine-free. Crafted in France.' }}</p>
+      <span class="ublp2-hero__sticker">{{ section.settings.hero_sticker | default: 'The 4PM ritual · New in the U.S.' }}</span>
+      <h1 class="ublp2-hero__h1">{{ section.settings.hero_h1 | default: 'The violet ritual for your <em>4PM cravings.</em>' }}</h1>
+      <p class="ublp2-hero__sub">{{ section.settings.hero_sub | default: 'A creamy purple drink made with konjac fiber to help you feel satisfied through the critical part of your afternoon.' }}</p>
+
+      <ul class="ublp2-hero__trust" aria-label="Product benefits">
+        <li>{{ section.settings.trust_bullet_1 | default: 'Zero caffeine' }}</li>
+        <li>{{ section.settings.trust_bullet_2 | default: '30 calories' }}</li>
+        <li>{{ section.settings.trust_bullet_3 | default: 'Plant-based' }}</li>
+        <li>{{ section.settings.trust_bullet_4 | default: 'French-born' }}</li>
+      </ul>
 
       <div class="ublp2-hero__rating">
         <span class="ublp2-hero__stars" aria-hidden="true">★★★★★</span>
@@ -57,28 +64,28 @@
       <div class="ublp2-hero__visual">
         <span class="ublp2-hero__badge">EFSA-backed konjac</span>
         <img src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-05-19_at_11.47.42.jpg"
-             alt="UBurn lavender pouch beside tall glass of violet ube latte"
+             alt="Woman with UBurn lavender pouch — the 4PM violet ritual"
              loading="eager" fetchpriority="high" width="1024" height="1024">
       </div>
 
       <button class="u2-cta u2-cta--full ublp2-hero__cta" data-ublp2-scroll="#ublp2-offer" type="button">
-        <span>start the ritual — from $33.29/mo</span>
+        <span>{{ section.settings.hero_cta | default: 'Start the ritual — from $33.29' }}</span>
         <span class="u2-cta__arrow" aria-hidden="true">→</span>
       </button>
-      <p class="ublp2-hero__cta-sub">subscribe · cancel anytime · free U.S. shipping</p>
+      <p class="ublp2-hero__cta-sub">Free U.S. shipping · Cancel anytime · Secure checkout</p>
     </div>
   </section>
 
   {%- comment -%} ═════════ 02. TRUST STRIP ═════════ {%- endcomment -%}
   <section class="ublp2-trust">
     <div class="ublp2-trust__inner">
-      <span class="ublp2-trust__item">{{ section.settings.trust_1 | default: 'EFSA-backed fiber' }}</span>
+      <span class="ublp2-trust__item">{{ section.settings.trust_1 | default: '0% caffeine' }}</span>
       <span class="ublp2-trust__sep"></span>
-      <span class="ublp2-trust__item">{{ section.settings.trust_2 | default: '0% caffeine' }}</span>
+      <span class="ublp2-trust__item">{{ section.settings.trust_2 | default: 'EFSA-backed fiber' }}</span>
       <span class="ublp2-trust__sep"></span>
       <span class="ublp2-trust__item">{{ section.settings.trust_3 | default: '30 calories' }}</span>
       <span class="ublp2-trust__sep"></span>
-      <span class="ublp2-trust__item">{{ section.settings.trust_4 | default: 'Made in France' }}</span>
+      <span class="ublp2-trust__item">{{ section.settings.trust_4 | default: 'Free U.S. shipping' }}</span>
     </div>
   </section>
 
@@ -86,22 +93,22 @@
   <section class="ublp2-crash u2-section">
     <div class="ublp2-crash__inner">
       <span class="ublp2-eyebrow">— your afternoon, rewritten</span>
-      <h2 class="ublp2-h2">Your 4 PM. <em>Rewritten.</em></h2>
+      <h2 class="ublp2-h2">Your 4PM. <em>Rewritten.</em></h2>
 
       <div class="ublp2-crash__grid">
         <div class="ublp2-crash__card ublp2-crash__card--before">
           <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-pdp-before-stressed-desk.png"
-               alt="Stressed woman at desk, snack drawer open — before UBurn"
+               alt="Stressed woman at desk — the 4PM cycle before UBurn"
                loading="lazy" decoding="async" width="1400" height="1400">
-          <div class="ublp2-crash__label">Before · 4 PM</div>
-          <p class="ublp2-crash__text">Blood sugar dip. Snack drawer raid. Guilt loop.</p>
+          <div class="ublp2-crash__label">Before 4PM</div>
+          <p class="ublp2-crash__text">Snack drawer. Second coffee. Energy dip.</p>
         </div>
         <div class="ublp2-crash__card ublp2-crash__card--after">
           <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-pdp-after-calm-desk.png"
-               alt="Calm woman at desk sipping violet UBurn ritual — after"
+               alt="Calm woman sipping violet UBurn ritual at her desk"
                loading="lazy" decoding="async" width="1400" height="1400">
-          <div class="ublp2-crash__label">After · 4 PM</div>
-          <p class="ublp2-crash__text">One scoop. Four hours of calm.* Snack drawer closed.</p>
+          <div class="ublp2-crash__label">After 4PM</div>
+          <p class="ublp2-crash__text">One scoop. Creamy violet ritual. A calmer afternoon.</p>
         </div>
       </div>
       <p class="ublp2-disc">*Individual results may vary.</p>
@@ -174,68 +181,86 @@
     </div>
   </section>
 
-  {%- comment -%} ═════════ 04. PRODUCT / OFFER ═════════ {%- endcomment -%}
+  {%- comment -%} ═════════ 04. PRODUCT / OFFER (refonte 2026-05-21 v2 — homepage canonical UX) ═════════ {%- endcomment -%}
   <section class="ublp2-offer u2-section" id="ublp2-offer">
     <div class="ublp2-offer__inner">
       <span class="ublp2-eyebrow">— your ritual</span>
-      <h2 class="ublp2-h2">Pick your <em>pack.</em></h2>
+      <h2 class="ublp2-h2">One flavor. <em>Two packs.</em></h2>
+      <p class="ublp2-offer__sub">Subscribe &amp; save 10% · free U.S. shipping on $40+</p>
 
       <div class="ublp2-offer__product">
         <img src="https://uburn.co/cdn/shop/files/magnific_i-want-img1-to-be-in-4k-f_3001183035.png"
-             alt="UBurn lavender pouch beside violet ube latte swirl in tall glass with spoon of purple powder"
+             alt="UBurn — Plant-based satiety drink with violet ube latte"
              loading="lazy" decoding="async" width="900" height="1170">
+        <p class="ublp2-offer__product-label">UBurn — Plant-based satiety drink</p>
       </div>
 
       <div class="ublp2-offer__packs" role="radiogroup" aria-label="Pack size">
+        {%- comment -%} ───── STARTER ───── {%- endcomment -%}
         <label class="ublp2-pack" data-ublp2-pack="starter">
           <input type="radio" name="ublp2-pack" value="starter" data-ublp2-input="pack">
           <span class="ublp2-pack__inner">
             <span class="ublp2-pack__title">Starter</span>
-            <span class="ublp2-pack__meta">90g · 30 days · 1 scoop daily</span>
+            <span class="ublp2-pack__meta">30 days · 1 scoop daily</span>
+
+            <span class="ublp2-pack__mode" role="radiogroup" aria-label="Starter — purchase type">
+              <button type="button" class="ublp2-mode" data-ublp2-mode="subscribe" data-ublp2-pack-mode="starter" aria-pressed="true">subscribe<span class="ublp2-mode__tag">−10%</span></button>
+              <button type="button" class="ublp2-mode" data-ublp2-mode="onetime" data-ublp2-pack-mode="starter" aria-pressed="false">one-time</button>
+            </span>
+
             <span class="ublp2-pack__price-row">
               <span class="ublp2-pack__price-final" data-ublp2-pack-price="starter">$33.29</span>
               <span class="ublp2-pack__price-strike">$36.99</span>
             </span>
+
+            <span class="ublp2-pack__per">$1.11 / scoop · ships every 30 days</span>
+            <span class="ublp2-pack__quantity">90 g · 30 scoops</span>
+
+            <button class="u2-cta u2-cta--full ublp2-pack__cta" data-ublp2-atc-pack="starter" type="button">
+              <span>checkout — Starter</span>
+              <span class="u2-cta__arrow" aria-hidden="true">→</span>
+            </button>
+            <span class="ublp2-pack__assurance">free shipping $40+ · cancel anytime</span>
           </span>
         </label>
+
+        {%- comment -%} ───── MAXIMUM ───── {%- endcomment -%}
         <label class="ublp2-pack ublp2-pack--pop" data-ublp2-pack="maximum">
           <input type="radio" name="ublp2-pack" value="maximum" data-ublp2-input="pack" checked>
           <span class="ublp2-pack__badge">Best value · faster results</span>
           <span class="ublp2-pack__inner">
             <span class="ublp2-pack__title">Maximum</span>
-            <span class="ublp2-pack__meta">270g · 30 days · 3 scoops daily · 4 free bonuses</span>
+            <span class="ublp2-pack__meta">30 days · 3 scoops daily · 4 free bonuses</span>
+
+            <span class="ublp2-pack__mode" role="radiogroup" aria-label="Maximum — purchase type">
+              <button type="button" class="ublp2-mode" data-ublp2-mode="subscribe" data-ublp2-pack-mode="maximum" aria-pressed="true">subscribe<span class="ublp2-mode__tag">−10%</span></button>
+              <button type="button" class="ublp2-mode" data-ublp2-mode="onetime" data-ublp2-pack-mode="maximum" aria-pressed="false">one-time</button>
+            </span>
+
             <span class="ublp2-pack__price-row">
               <span class="ublp2-pack__price-final" data-ublp2-pack-price="maximum">$53.09</span>
               <span class="ublp2-pack__price-strike">$110.97</span>
             </span>
+
+            <span class="ublp2-pack__per">$0.59 / scoop · ships every 30 days</span>
+            <span class="ublp2-pack__quantity">270 g · 90 scoops · save 47% vs. 3 Starters</span>
+
+            <button class="u2-cta u2-cta--full ublp2-pack__cta" data-ublp2-atc-pack="maximum" type="button">
+              <span>checkout — Maximum</span>
+              <span class="u2-cta__arrow" aria-hidden="true">→</span>
+            </button>
+            <span class="ublp2-pack__assurance">free shipping $40+ · cancel anytime</span>
           </span>
         </label>
       </div>
 
-      {%- if sub_plan -%}
-      <div class="ublp2-offer__mode" role="radiogroup" aria-label="Purchase type">
-        <button type="button" class="ublp2-mode" data-ublp2-mode="subscribe" aria-pressed="true">
-          subscribe<span class="ublp2-mode__tag">−10%</span>
-        </button>
-        <button type="button" class="ublp2-mode" data-ublp2-mode="onetime" aria-pressed="false">
-          one-time
-        </button>
-      </div>
-      {%- endif -%}
-
-      <button class="u2-cta u2-cta--full ublp2-offer__cta" data-ublp2-atc type="button">
-        <span data-ublp2-cta-text>add to cart — $53.09</span>
-        <span class="u2-cta__arrow" aria-hidden="true">→</span>
-      </button>
-      <p class="ublp2-offer__assurance">subscribe · cancel anytime · free U.S. shipping</p>
-
       <div class="ublp2-offer__bonus">
         <div class="ublp2-offer__bonus-title">Included with <em>Maximum</em></div>
         <ul class="ublp2-offer__bonus-list">
-          <li><span class="ublp2-offer__bonus-icon" aria-hidden="true">★</span> 30-day reset e-book <em>$50</em></li>
-          <li><span class="ublp2-offer__bonus-icon" aria-hidden="true">★</span> UBurn Collective community <em>$43</em></li>
-          <li><span class="ublp2-offer__bonus-icon" aria-hidden="true">★</span> WhatsApp nutrition coach <em>$50</em></li>
-          <li><span class="ublp2-offer__bonus-icon" aria-hidden="true">★</span> Free U.S. shipping <em>$12</em></li>
+          <li><span class="ublp2-offer__bonus-icon" aria-hidden="true">E</span> 30-day reset e-book <em>$50 value</em></li>
+          <li><span class="ublp2-offer__bonus-icon" aria-hidden="true">C</span> UBurn Collective community <em>$43 value</em></li>
+          <li><span class="ublp2-offer__bonus-icon" aria-hidden="true">N</span> WhatsApp nutrition coach <em>$50 value</em></li>
+          <li><span class="ublp2-offer__bonus-icon" aria-hidden="true">S</span> Free U.S. shipping <em>$12 value</em></li>
         </ul>
         <p class="ublp2-offer__bonus-total"><strong>$214</strong> in extras · you pay <strong data-ublp2-bundle>$53.09</strong></p>
       </div>
@@ -297,7 +322,7 @@
       <div class="ublp2-founder__copy">
         <span class="ublp2-eyebrow">— founder note</span>
         <h2 class="ublp2-h2">Made by a <em>woman</em> for women.</h2>
-        <p class="ublp2-founder__quote">"I built UBurn because I needed it. Not a powder that promises miracles — a drink that actually holds you through the 4 PM crash. Made with the same care I'd expect for myself."</p>
+        <p class="ublp2-founder__quote">"I built UBURN for the moment most diets ignore: the afternoon."</p>
         <div class="ublp2-founder__sig">Mariana · Founder · UBurn · Paris</div>
       </div>
     </div>
@@ -309,24 +334,32 @@
       <span class="ublp2-eyebrow">— FAQ</span>
       <h2 class="ublp2-h2">Common <em>questions.</em></h2>
       <details class="ublp2-faq__item">
-        <summary>How does UBurn actually work?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
-        <div class="ublp2-faq__body">Glucomannan, a soluble konjac fiber, forms a natural gel when it meets water in your stomach. EFSA recognizes this mechanism for satiety support within an energy-controlled diet. Result: you feel satisfied for up to 4 hours after one scoop.*</div>
+        <summary>Does UBURN contain caffeine?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublp2-faq__body">Zero caffeine. UBURN is built on plant fibers and natural actives — no jitters, no afternoon crash, drinkable any time of day.</div>
       </details>
       <details class="ublp2-faq__item">
-        <summary>When will I notice a difference?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
-        <div class="ublp2-faq__body">Most customers report satiety from the first scoop. For consistent control over afternoon cravings, 7–14 days of daily use produces the most reliable signal.*</div>
+        <summary>When should I drink it?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublp2-faq__body">Most people drink it 30 minutes before their afternoon dip — around 3-4 PM. You can also use it in the morning or before a meal. One scoop is enough for up to 4 hours of satiety.*</div>
       </details>
       <details class="ublp2-faq__item">
-        <summary>Does it contain caffeine?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
-        <div class="ublp2-faq__body">Zero caffeine. UBurn is built on plant fibers and natural actives — no jitters, no afternoon crash, drinkable any time of day.</div>
+        <summary>How does konjac work?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublp2-faq__body">Glucomannan — a soluble fiber from the konjac plant — absorbs water in your stomach and forms a natural gel. EFSA recognizes this mechanism for satiety support within an energy-controlled diet (EFSA ID 3120).*</div>
       </details>
       <details class="ublp2-faq__item">
-        <summary>How does it taste?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
-        <div class="ublp2-faq__body">Hazelnut-vanilla notes. Smooth, naturally violet color from purple ube root. Mix with cold water, oat milk, or hot frothed milk depending on your moment.</div>
+        <summary>Is UBURN for weight loss?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublp2-faq__body">No. UBURN is a dietary supplement that supports <strong>satiety</strong>. It doesn't burn fat, replace meals, or treat any condition. It helps you stop snacking on autopilot at 4 PM — the rest is your choices.</div>
+      </details>
+      <details class="ublp2-faq__item">
+        <summary>Can I drink it with milk?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublp2-faq__body">Yes. Cold water keeps it light; cold oat milk turns it into a creamy violet latte; hot frothed milk makes it cozy. The naturally vanilla–hazelnut notes pair with any base.</div>
       </details>
       <details class="ublp2-faq__item">
         <summary>Subscribe or one-time?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
-        <div class="ublp2-faq__body">Both. Subscribe & save gives −10% + free bonuses. You can pause, skip or cancel anytime from your account. No lock-in.</div>
+        <div class="ublp2-faq__body">Both. Subscribe &amp; save gives −10% + free bonuses (30-day ritual guide, recipe guide). Pause, skip or cancel anytime from your account. No lock-in.</div>
+      </details>
+      <details class="ublp2-faq__item">
+        <summary>Is it safe?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublp2-faq__body">UBURN is a food-based supplement (plant fiber + minor actives, no stimulants, no hormones). Glucomannan can affect oral medication absorption — take at least 1 hour apart from any prescription. Not recommended during pregnancy or breastfeeding.</div>
       </details>
     </div>
   </section>
@@ -334,40 +367,33 @@
   {%- comment -%} ═════════ 08. FINAL CTA ═════════ {%- endcomment -%}
   <section class="ublp2-final u2-section">
     <div class="ublp2-final__inner">
-      <img src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-05-19_at_11.47.54.jpg"
-           alt="Two women holding UBurn pouches"
-           loading="lazy" decoding="async" width="1024" height="1024">
+      <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-pdp-after-calm-desk.png"
+           alt="Calm woman with violet UBurn — the 4PM ritual"
+           loading="lazy" decoding="async" width="1400" height="1400">
       <div class="ublp2-final__copy">
-        <span class="ublp2-eyebrow">— start today</span>
-        <h2 class="ublp2-h2">Your 4 PM <em>changes today.</em></h2>
-        <p>One scoop. One glass. Four hours of calm.* Crafted in France, made for the U.S.</p>
+        <span class="ublp2-eyebrow">— begin your ritual</span>
+        <h2 class="ublp2-h2">The violet hour <em>begins at four.</em></h2>
+        <p>Cold water. One scoop. 30 seconds. The afternoon ritual designed to keep you satisfied for hours.*</p>
         <button class="u2-cta u2-cta--full ublp2-final__cta" data-ublp2-scroll="#ublp2-offer" type="button">
-          <span>start my pack — from $33.29/mo</span>
+          <span>start my pack — from $34.50</span>
           <span class="u2-cta__arrow" aria-hidden="true">→</span>
         </button>
-        <p class="ublp2-final__pay">Pay with Shop Pay · Klarna · PayPal · Visa</p>
+        <p class="ublp2-final__pay">Cancel anytime · 100% plant-based · Research-backed*</p>
       </div>
     </div>
   </section>
 
-  {%- comment -%} ═════════ FOOTER MINI ═════════ {%- endcomment -%}
-  <footer class="ublp2-footer">
-    <div class="ublp2-footer__inner">
-      <p>Dietary supplement containing konjac glucomannan. Glucomannan supports satiety as part of a balanced lifestyle.* Recommended use: 3g/day in 3 doses of 1g with 1–2 large glasses of water before meals. Not a substitute for a balanced diet. Not recommended during pregnancy or breastfeeding.</p>
-      <p>*These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
-      <p class="ublp2-footer__copy">© {{ 'now' | date: '%Y' }} UBurn · Crafted in France · Made for the U.S.</p>
-    </div>
-  </footer>
+  {%- comment -%} ═════════ FOOTER MINI — disabled 2026-05-21 (global theme footer used instead) ═════════ {%- endcomment -%}
 
   {%- comment -%} ═════════ STICKY MOBILE CART ═════════ {%- endcomment -%}
   <div class="ublp2-sticky" id="ublp2-sticky" aria-hidden="true">
     <div class="ublp2-sticky__inner">
       <div class="ublp2-sticky__info">
-        <div class="ublp2-sticky__name" data-ublp2-sticky-name>Maximum</div>
-        <div class="ublp2-sticky__price" data-ublp2-sticky-price>$53.09/mo · save 10%</div>
+        <div class="ublp2-sticky__name" data-ublp2-sticky-name>Maximum · 30 days</div>
+        <div class="ublp2-sticky__price" data-ublp2-sticky-price>$53.09 · save 52%</div>
       </div>
       <button class="u2-cta ublp2-sticky__cta" data-ublp2-atc type="button">
-        add to cart →
+        Start my pack →
       </button>
     </div>
   </div>
@@ -385,13 +411,20 @@
     { "type": "header", "content": "Product binding" },
     { "type": "product", "id": "product", "label": "Product (default ube-poudre)" },
     { "type": "header", "content": "Hero" },
-    { "type": "textarea", "id": "hero_h1", "label": "Hero H1 (use <em>...</em>)", "default": "End your 4 PM crash." },
-    { "type": "textarea", "id": "hero_sub", "label": "Hero sub", "default": "The violet matcha. Plant-based satiety. 30 calories. Caffeine-free. Crafted in France." },
+    { "type": "text", "id": "hero_sticker", "label": "Hero sticker", "default": "The 4PM ritual · New in the U.S." },
+    { "type": "textarea", "id": "hero_h1", "label": "Hero H1 (use <em>...</em>)", "default": "The violet ritual for your <em>4PM cravings.</em>" },
+    { "type": "textarea", "id": "hero_sub", "label": "Hero sub", "default": "A creamy purple drink made with konjac fiber to help you feel satisfied through the critical part of your afternoon." },
+    { "type": "text", "id": "hero_cta", "label": "Hero CTA", "default": "Start the ritual — from $33.29" },
+    { "type": "header", "content": "Hero trust bullets (4)" },
+    { "type": "text", "id": "trust_bullet_1", "label": "Bullet 1", "default": "Zero caffeine" },
+    { "type": "text", "id": "trust_bullet_2", "label": "Bullet 2", "default": "30 calories" },
+    { "type": "text", "id": "trust_bullet_3", "label": "Bullet 3", "default": "Plant-based" },
+    { "type": "text", "id": "trust_bullet_4", "label": "Bullet 4", "default": "French-born" },
     { "type": "header", "content": "Trust strip (4 items)" },
-    { "type": "text", "id": "trust_1", "label": "Trust 1", "default": "EFSA-backed fiber" },
-    { "type": "text", "id": "trust_2", "label": "Trust 2", "default": "0% caffeine" },
+    { "type": "text", "id": "trust_1", "label": "Trust 1", "default": "0% caffeine" },
+    { "type": "text", "id": "trust_2", "label": "Trust 2", "default": "EFSA-backed fiber" },
     { "type": "text", "id": "trust_3", "label": "Trust 3", "default": "30 calories" },
-    { "type": "text", "id": "trust_4", "label": "Trust 4", "default": "Made in France" }
+    { "type": "text", "id": "trust_4", "label": "Trust 4", "default": "Free U.S. shipping" }
   ],
   "presets": [ { "name": "UBurn LP V2" } ]
 }

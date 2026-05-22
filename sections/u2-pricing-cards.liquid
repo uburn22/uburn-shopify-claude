@@ -331,6 +331,14 @@
     font-size: 18px;
   }
 </style>
+{%- liquid
+  comment
+    UTM tagging — onsite click from LP pricing cards to checkout (rev 2026-05-21)
+  endcomment
+  assign _utm_campaign = page.handle | default: template.suffix | default: 'lp-uburn-us'
+  assign _starter_return = '/checkout?utm_source=lp&utm_medium=onsite&utm_campaign=' | append: _utm_campaign | append: '&utm_content=pricing-starter'
+  assign _maximum_return = '/checkout?utm_source=lp&utm_medium=onsite&utm_campaign=' | append: _utm_campaign | append: '&utm_content=pricing-maximum'
+-%}
 <section class="u2-root u2-pricing" aria-label="Pricing" data-u2-pricing>
   <div class="u2-pricing__inner">
     <div class="u2-pricing__head u2-reveal">
@@ -366,7 +374,7 @@
         <form action="/cart/add" method="post" class="u2-pricing__form" data-u2-form>
           <input type="hidden" name="id" value="{{ v1.id }}">
           <input type="hidden" name="quantity" value="1">
-          <input type="hidden" name="return_to" value="/checkout">
+          <input type="hidden" name="return_to" value="{{ _starter_return }}">
           {%- if sub_plan -%}
           <input type="hidden" name="selling_plan" value="{{ sub_plan.id }}" data-u2-plan-input>
           {%- endif -%}
@@ -395,7 +403,7 @@
         <form action="/cart/add" method="post" class="u2-pricing__form" data-u2-form>
           <input type="hidden" name="id" value="{{ v2.id }}">
           <input type="hidden" name="quantity" value="1">
-          <input type="hidden" name="return_to" value="/checkout">
+          <input type="hidden" name="return_to" value="{{ _maximum_return }}">
           {%- if sub_plan -%}
           <input type="hidden" name="selling_plan" value="{{ sub_plan.id }}" data-u2-plan-input>
           {%- endif -%}

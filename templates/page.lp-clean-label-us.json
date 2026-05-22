@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "layout": "theme",
   "sections": {
@@ -8,10 +17,9 @@
         "variant_id": "51289200034111",
         "eyebrow": "crafted, not formulated",
         "h1": "Six plants. <em>That's it.</em>",
-        "sub": "EFSA-backed konjac. French atelier. Zero maltodextrin. Zero fillers. Read every word on the label.",
-        "priceline": "from <strong>$36.99</strong> · $33.29/mo subscribe &amp; save · 6 plant actives · free us shipping",
-        "cta_text": "drink the label",
-        "cta_sub": "1 click · six plants delivered · subscribe · cancel anytime",
+        "sub": "EFSA-recognized konjac. French atelier. No maltodextrin, no fillers, no fluff.",
+        "cta_text": "start the ritual",
+        "cta_sub": "1 click · checkout direct · subscribe · cancel anytime",
         "image_left_filename": "lp-hero-clean-label.jpg",
         "image_left_alt": "Editorial flat lay of ube purple yam, konjac slices, ginger root, violet powder bowl, dried vanilla pods on cream linen",
         "label_left": "real",
@@ -60,8 +68,8 @@
         "eyebrow": "— drink the label",
         "title_pre": "Six plants.",
         "title_em": "One ritual.",
-        "sub": "Crafted in France. Backed by EFSA (ID 3120). Read every word on the label.*",
-        "cta": "drink the label — $33.29/mo"
+        "sub": "Crafted in France. Backed by EFSA. Read every word.*",
+        "cta": "start my pack — from $34.50"
       }
     },
     "newsletter": { "type": "u2-newsletter", "settings": {} },

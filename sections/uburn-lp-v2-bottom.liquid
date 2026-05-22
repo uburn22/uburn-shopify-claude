@@ -1,0 +1,172 @@
+{%- comment -%}
+  UBurn LP V2 Bottom — Reviews + Founder + FAQ + Final CTA + Sticky
+  Split 2026-05-21 — pairs with uburn-lp-v2-top, slots after u2-pricing-cards in template composition
+{%- endcomment -%}
+{%- liquid
+  assign hp = section.settings.product
+  if hp == blank
+    assign hp = all_products['ube-poudre']
+  endif
+  assign v_starter = hp.variants[0]
+  assign v_maximum = hp.variants[1] | default: hp.variants[0]
+-%}
+
+{{ 'uburn-lp-v2.css' | asset_url | stylesheet_tag }}
+
+<div class="u2-root ublp2">
+
+  {%- comment -%}
+    ═════════ 05. REVIEWS — gated by section.settings.show_reviews
+    Disabled by default 2026-05-21 (FTC P0 — testimonials inventés, 0 commande US réelle).
+    Re-enable per template via "show_reviews": true once real US reviews collected.
+  ═════════ {%- endcomment -%}
+  {%- if section.settings.show_reviews -%}
+  <section class="ublp2-reviews u2-section">
+    <div class="ublp2-reviews__inner">
+      <span class="ublp2-eyebrow">— in their own words</span>
+      <h2 class="ublp2-h2">Verified <em>buyers.</em></h2>
+      <div class="ublp2-reviews__grid">
+        <article class="ublp2-review">
+          <div class="ublp2-review__stars">★★★★★</div>
+          <h3 class="ublp2-review__title">"My 4 PM crash is gone."</h3>
+          <p class="ublp2-review__body">I used to raid the snack drawer at 3:30 every afternoon. Three weeks in, I forget. The taste is way better than I expected.*</p>
+          <div class="ublp2-review__meta">
+            <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-story-1-sarah-brooklyn.png" alt="Sarah J. — Brooklyn, NY" loading="lazy" width="120" height="120">
+            <div>
+              <div class="ublp2-review__name">Sarah J. <span class="ublp2-review__verified">✓ verified</span></div>
+              <div class="ublp2-review__city">Brooklyn, NY · 28 days</div>
+            </div>
+          </div>
+        </article>
+        <article class="ublp2-review">
+          <div class="ublp2-review__stars">★★★★★</div>
+          <h3 class="ublp2-review__title">"Calmer afternoons. Stable energy."</h3>
+          <p class="ublp2-review__body">I tried so many satiety drinks. Most lasted 45 minutes. This one carries me from 3 PM to dinner. No coffee crash either.*</p>
+          <div class="ublp2-review__meta">
+            <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-story-2-jennifer-miami.png" alt="Jennifer M. — Miami, FL" loading="lazy" width="120" height="120">
+            <div>
+              <div class="ublp2-review__name">Jennifer M. <span class="ublp2-review__verified">✓ verified</span></div>
+              <div class="ublp2-review__city">Miami, FL · 42 days</div>
+            </div>
+          </div>
+        </article>
+        <article class="ublp2-review">
+          <div class="ublp2-review__stars">★★★★★</div>
+          <h3 class="ublp2-review__title">"Vanilla taste. Nothing chemical."</h3>
+          <p class="ublp2-review__body">I read every label. UBurn is the first one I've finished without checking twice. The afternoons feel calm. Recommending to my sister.*</p>
+          <div class="ublp2-review__meta">
+            <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-story-3-rachel-denver.png" alt="Rachel B. — Denver, CO" loading="lazy" width="120" height="120">
+            <div>
+              <div class="ublp2-review__name">Rachel B. <span class="ublp2-review__verified">✓ verified</span></div>
+              <div class="ublp2-review__city">Denver, CO · 35 days</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  {%- endif -%}
+
+  {%- comment -%} ═════════ 06. FOUNDER ═════════ {%- endcomment -%}
+  <section class="ublp2-founder u2-section">
+    <div class="ublp2-founder__inner">
+      <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-about-10-brand-story-portrait-a.png"
+           alt="Mariana — UBurn founder portrait"
+           loading="lazy" decoding="async" width="900" height="1125">
+      <div class="ublp2-founder__copy">
+        <span class="ublp2-eyebrow">— founder note</span>
+        <h2 class="ublp2-h2">Made by a <em>woman</em> for women.</h2>
+        <p class="ublp2-founder__quote">"I built UBURN for the moment most diets ignore: the afternoon."</p>
+        <div class="ublp2-founder__sig">Mariana · Founder · UBurn · Paris</div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 07. FAQ ═════════ {%- endcomment -%}
+  <section class="ublp2-faq u2-section">
+    <div class="ublp2-faq__inner">
+      <span class="ublp2-eyebrow">— FAQ</span>
+      <h2 class="ublp2-h2">Common <em>questions.</em></h2>
+      <details class="ublp2-faq__item">
+        <summary>Does UBURN contain caffeine?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublp2-faq__body">Zero caffeine. UBURN is built on plant fibers and natural actives — no jitters, no afternoon crash, drinkable any time of day.</div>
+      </details>
+      <details class="ublp2-faq__item">
+        <summary>When should I drink it?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublp2-faq__body">Most people drink it 30 minutes before their afternoon dip — around 3-4 PM. You can also use it in the morning or before a meal. One scoop is enough for up to 4 hours of satiety.*</div>
+      </details>
+      <details class="ublp2-faq__item">
+        <summary>How does konjac work?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublp2-faq__body">Glucomannan — a soluble fiber from the konjac plant — absorbs water in your stomach and forms a natural gel. EFSA recognizes this mechanism for satiety support within an energy-controlled diet (EFSA ID 3120).*</div>
+      </details>
+      <details class="ublp2-faq__item">
+        <summary>Is UBURN for weight loss?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublp2-faq__body">No. UBURN is a dietary supplement that supports <strong>satiety</strong>. It doesn't burn fat, replace meals, or treat any condition. It helps you stop snacking on autopilot at 4 PM — the rest is your choices.</div>
+      </details>
+      <details class="ublp2-faq__item">
+        <summary>Can I drink it with milk?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublp2-faq__body">Yes. Cold water keeps it light; cold oat milk turns it into a creamy violet latte; hot frothed milk makes it cozy. The naturally vanilla–hazelnut notes pair with any base.</div>
+      </details>
+      <details class="ublp2-faq__item">
+        <summary>Subscribe or one-time?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublp2-faq__body">Both. Subscribe &amp; save gives −10% + free bonuses (30-day ritual guide, recipe guide). Pause, skip or cancel anytime from your account. No lock-in.</div>
+      </details>
+      <details class="ublp2-faq__item">
+        <summary>Is it safe?<span class="ublp2-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublp2-faq__body">UBURN is a food-based supplement (plant fiber + minor actives, no stimulants, no hormones). Glucomannan can affect oral medication absorption — take at least 1 hour apart from any prescription. Not recommended during pregnancy or breastfeeding.</div>
+      </details>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 08. FINAL CTA ═════════ {%- endcomment -%}
+  <section class="ublp2-final u2-section">
+    <div class="ublp2-final__inner">
+      <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-pdp-after-calm-desk.png"
+           alt="Calm woman with violet UBurn — the 4PM ritual"
+           loading="lazy" decoding="async" width="1400" height="1400">
+      <div class="ublp2-final__copy">
+        <span class="ublp2-eyebrow">— begin your ritual</span>
+        <h2 class="ublp2-h2">The violet hour <em>begins at four.</em></h2>
+        <p>Cold water. One scoop. 30 seconds. The afternoon ritual designed to keep you satisfied for hours.*</p>
+        <button class="u2-cta u2-cta--full ublp2-final__cta" data-ublp2-scroll="#ublp2-offer" type="button">
+          <span>start my pack — from $34.50</span>
+          <span class="u2-cta__arrow" aria-hidden="true">→</span>
+        </button>
+        <p class="ublp2-final__pay">Cancel anytime · 100% plant-based · Research-backed*</p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ FOOTER MINI — disabled 2026-05-21 (global theme footer used instead) ═════════ {%- endcomment -%}
+
+  {%- comment -%} ═════════ STICKY MOBILE CART ═════════ {%- endcomment -%}
+  <div class="ublp2-sticky" id="ublp2-sticky" aria-hidden="true">
+    <div class="ublp2-sticky__inner">
+      <div class="ublp2-sticky__info">
+        <div class="ublp2-sticky__name" data-ublp2-sticky-name>Maximum · 30 days</div>
+        <div class="ublp2-sticky__price" data-ublp2-sticky-price>$53.09 · save 52%</div>
+      </div>
+      <button class="u2-cta ublp2-sticky__cta" data-ublp2-atc type="button">
+        Start my pack →
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script src="{{ 'uburn-lp-v2.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "UBurn LP V2 Bottom",
+  "tag": "section",
+  "class": "shopify-section--uburn-lp-v2",
+  "settings": [
+    { "type": "header", "content": "Product binding" },
+    { "type": "product", "id": "product", "label": "Product (default ube-poudre)" },
+    { "type": "header", "content": "Sections toggles" },
+    { "type": "checkbox", "id": "show_reviews", "label": "Show testimonials block", "default": false, "info": "Disabled 2026-05-21 — re-enable once real US reviews collected (FTC compliance)." }
+  ],
+  "presets": [ { "name": "UBurn LP V2 Bottom" } ]
+}
+{% endschema %}

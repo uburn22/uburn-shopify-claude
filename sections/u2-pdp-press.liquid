@@ -36,7 +36,18 @@
     .u2-pdp-press__logo { font-size: 10px; letter-spacing: 0.14em; }
   }
 </style>
-{%- comment -%} u2-pdp-press section disabled per request 2026-05-19 — placeholder kept so JSON template ref doesn't break {%- endcomment -%}
+<section class="u2-root u2-pdp-press" aria-label="Trust signals">
+  <div class="u2-pdp-press__inner">
+    <div class="u2-pdp-press__logos">
+      <span class="u2-pdp-press__logo">{{ section.settings.badge_1 | default: 'Plant-based' }}</span>
+      <span class="u2-pdp-press__logo">{{ section.settings.badge_2 | default: 'Caffeine-free' }}</span>
+      <span class="u2-pdp-press__logo">{{ section.settings.badge_3 | default: 'Gluten-free' }}</span>
+      <span class="u2-pdp-press__logo">{{ section.settings.badge_4 | default: 'Non-GMO' }}</span>
+      <span class="u2-pdp-press__logo">{{ section.settings.badge_5 | default: 'EFSA-backed fiber' }}</span>
+      <span class="u2-pdp-press__logo">{{ section.settings.badge_6 | default: 'EU lab-tested' }}</span>
+    </div>
+  </div>
+</section>
 {% schema %}
 {
   "name": "U2 PDP Press",

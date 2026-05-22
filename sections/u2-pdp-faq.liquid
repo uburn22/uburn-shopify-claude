@@ -101,7 +101,7 @@
         <details class="u2-pdp-faq-item"><summary>When should I take UBurn?</summary><div class="u2-pdp-faq-item__body"><p>Take it before a meal or when cravings arise, for example around 4PM. For glucomannan, the recommended use is 3 doses of 1g per day before meals, with adequate water.</p></div></details>
         <details class="u2-pdp-faq-item"><summary>Does UBurn contain caffeine?</summary><div class="u2-pdp-faq-item__body"><p>No, UBurn is caffeine-free. Drink it in the afternoon or evening without disrupting sleep.</p></div></details>
         <details class="u2-pdp-faq-item"><summary>How long does a routine last?</summary><div class="u2-pdp-faq-item__body"><p>Starter 90g: about 30 days at 1 scoop/day. Maximum Pack 270g: about 30 days at 3 scoops/day. You choose the pace that suits you.</p></div></details>
-        <details class="u2-pdp-faq-item"><summary>How long is delivery?</summary><div class="u2-pdp-faq-item__body"><p>Free U.S. shipping on orders $40+, typically delivered in 2-4 business days after shipping.</p></div></details>
+        <details class="u2-pdp-faq-item"><summary>How long is delivery?</summary><div class="u2-pdp-faq-item__body"><p>Ships from France. Free U.S. shipping on orders $40+, typically delivered in 2-4 business days after shipping.</p></div></details>
         <details class="u2-pdp-faq-item"><summary>Can I start with the Starter pack?</summary><div class="u2-pdp-faq-item__body"><p>Yes — it is actually the recommended format to try the UBurn routine before moving on to the Maximum Pack if you want the best price per scoop.</p></div></details>
         <details class="u2-pdp-faq-item"><summary>Is it compatible with a diet?</summary><div class="u2-pdp-faq-item__body"><p>Yes, UBurn can fit into a balanced diet and a healthy lifestyle. It is not a miracle solution — just a routine that helps with cravings.*</p></div></details>
         <details class="u2-pdp-faq-item"><summary>Is it safe during pregnancy or breastfeeding?</summary><div class="u2-pdp-faq-item__body"><p>As a precaution, UBurn is not recommended during pregnancy or breastfeeding.</p></div></details>
@@ -109,38 +109,6 @@
     </div>
   </div>
 </section>
-
-{%- comment -%} FAQPage schema for AEO (AI Overviews, ChatGPT, Perplexity, Claude indexing) — 2026-05-20 {%- endcomment -%}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org/",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {%- if section.blocks.size > 0 -%}
-      {%- for block in section.blocks -%}
-      {
-        "@type": "Question",
-        "name": {{ block.settings.question | json }},
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": {{ block.settings.answer | strip_html | json }}
-        }
-      }{%- unless forloop.last -%},{%- endunless -%}
-      {%- endfor -%}
-    {%- else -%}
-      { "@type": "Question", "name": "What does UBurn taste like?", "acceptedAnswer": { "@type": "Answer", "text": "A smooth vanilla-hazelnut taste, naturally purple, with no chemical aftertaste." } },
-      { "@type": "Question", "name": "How do I use UBurn?", "acceptedAnswer": { "@type": "Answer", "text": "Mix one scoop in 8-10 oz of water, milk, or plant-based milk. Stir, wait a few seconds for the texture to form, and drink. Ready in under a minute." } },
-      { "@type": "Question", "name": "Water or milk, which is better?", "acceptedAnswer": { "@type": "Answer", "text": "Water for a light, refreshing version. Milk, almond milk, or oat milk for a smoother, creamier texture. Both work — it is a matter of taste." } },
-      { "@type": "Question", "name": "When should I take UBurn?", "acceptedAnswer": { "@type": "Answer", "text": "Take it before a meal or when cravings arise, for example around 4PM. For glucomannan, the recommended use is 3 doses of 1g per day before meals, with adequate water." } },
-      { "@type": "Question", "name": "Does UBurn contain caffeine?", "acceptedAnswer": { "@type": "Answer", "text": "No, UBurn is caffeine-free. You can drink it in the afternoon or evening without disrupting sleep." } },
-      { "@type": "Question", "name": "How long does a routine last?", "acceptedAnswer": { "@type": "Answer", "text": "Starter 90g lasts about 30 days at 1 scoop per day. Maximum Pack 270g lasts about 30 days at 3 scoops per day." } },
-      { "@type": "Question", "name": "How long does delivery take?", "acceptedAnswer": { "@type": "Answer", "text": "Free U.S. shipping on orders $40+, typically delivered in 2-4 business days." } },
-      { "@type": "Question", "name": "Is UBurn safe during pregnancy or breastfeeding?", "acceptedAnswer": { "@type": "Answer", "text": "As a precaution, UBurn is not recommended during pregnancy or breastfeeding." } }
-    {%- endif -%}
-  ]
-}
-</script>
-
 {% schema %}
 {
   "name": "U2 PDP FAQ",
@@ -169,7 +137,7 @@
         { "type": "qa", "settings": { "question": "How do I use it?", "answer": "Mix one scoop in 8-10 oz of water, milk, or plant-based milk. Stir, wait a few seconds for the texture to form, and drink. Ready in under a minute." } },
         { "type": "qa", "settings": { "question": "Does UBurn contain caffeine?", "answer": "No, UBurn is caffeine-free. Drink it in the afternoon or evening without disrupting sleep." } },
         { "type": "qa", "settings": { "question": "How long does a routine last?", "answer": "Starter 90g: about 30 days at 1 scoop/day. Maximum Pack 270g: about 30 days at 3 scoops/day. You choose the pace that suits you." } },
-        { "type": "qa", "settings": { "question": "How long is delivery?", "answer": "Free U.S. shipping on orders $40+, typically delivered in 2-4 business days after shipping." } }
+        { "type": "qa", "settings": { "question": "How long is delivery?", "answer": "Ships from France. Free U.S. shipping on orders $40+, typically delivered in 2-4 business days after shipping." } }
       ]
     }
   ]

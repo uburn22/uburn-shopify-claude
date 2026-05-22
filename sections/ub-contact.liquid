@@ -1,0 +1,134 @@
+{% render 'ub-styles' %}
+{% render 'ub-nav' %}
+
+<!-- HERO -->
+<section style="background:var(--purple-wash);padding:80px 40px 60px;text-align:center">
+  <p class="section-label">Contact</p>
+  <h1 class="section-title" style="font-size:clamp(32px,4vw,52px);margin-bottom:16px">Une question ? <span class="accent">On répond.</span></h1>
+  <p style="font-size:17px;color:var(--body);max-width:500px;margin:0 auto">Du lundi au vendredi, notre équipe vous répond en moins de 24 heures.</p>
+</section>
+
+<!-- CONTACT CONTENT -->
+<section class="section">
+  <div class="section-inner" style="max-width:900px">
+    <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:start">
+
+      <!-- LEFT: INFO -->
+      <div>
+        <h2 class="section-title" style="font-size:22px;margin-bottom:24px">Nos coordonnées</h2>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div style="display:flex;align-items:flex-start;gap:14px">
+            <div style="width:40px;height:40px;border-radius:10px;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Email</div>
+              <a href="mailto:hello@uburn.co" style="font-size:15px;color:var(--purple-main);font-weight:600">hello@uburn.co</a>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px">
+            <div style="width:40px;height:40px;border-radius:10px;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2H3v16h5l4 4 4-4h5V2z"/><path d="M8 10h8M8 6h8M8 14h4"/></svg>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Réponse garantie</div>
+              <div style="font-size:15px;color:var(--dark);font-weight:500">Sous 24h, du lundi au vendredi</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:14px">
+            <div style="width:40px;height:40px;border-radius:10px;background:var(--purple-wash);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div>
+              <div style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Réseau social</div>
+              <a href="https://www.instagram.com/uburn.co" target="_blank" rel="noopener" style="font-size:15px;color:var(--purple-main);font-weight:600">@uburn.co sur Instagram</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUICK LINKS -->
+        <div style="margin-top:40px;padding:24px;background:var(--cream);border-radius:16px">
+          <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin-bottom:16px">Liens utiles</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a href="/pages/faq" style="font-size:14px;color:var(--body);display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.04)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              Questions fréquentes (FAQ)
+            </a>
+            <a href="/pages/ingredients" style="font-size:14px;color:var(--body);display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.04)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              Nos ingrédients
+            </a>
+            <a href="/policies/shipping-policy" style="font-size:14px;color:var(--body);display:flex;align-items:center;gap:8px;padding:8px 0">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--purple-main)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              Livraison & délais
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: FORM -->
+      <div>
+        <h2 class="section-title" style="font-size:22px;margin-bottom:24px">Envoyez-nous un message</h2>
+        {%- form 'contact' -%}
+          {%- if form.posted_successfully? -%}
+            <div style="background:#D1FAE5;border-radius:12px;padding:20px 24px;color:#065F46;font-size:15px;font-weight:600;margin-bottom:24px">
+              ✓ Message envoyé ! Nous vous répondrons sous 24h.
+            </div>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <div style="background:#FEE2E2;border-radius:12px;padding:16px 20px;color:#991B1B;font-size:14px;margin-bottom:20px">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div>
+              <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px">Votre nom</label>
+              <input type="text" name="contact[name]" value="{{ form.name }}" placeholder="Marie Dupont"
+                style="width:100%;padding:13px 18px;border-radius:100px;border:1.5px solid var(--purple-pale);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;background:#fff">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px">Email <span style="color:#e05">*</span></label>
+              <input type="email" name="contact[email]" value="{{ form.email }}" placeholder="marie@exemple.com" required
+                style="width:100%;padding:13px 18px;border-radius:100px;border:1.5px solid var(--purple-pale);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;background:#fff">
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px">Sujet</label>
+              <select name="contact[subject]" style="width:100%;padding:13px 18px;border-radius:100px;border:1.5px solid var(--purple-pale);font-size:14px;font-family:inherit;outline:none;background:#fff;-webkit-appearance:none;cursor:pointer">
+                <option>Question sur le produit</option>
+                <option>Suivi de commande</option>
+                <option>Problème de livraison</option>
+                <option>Presse / Partenariat</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div>
+              <label style="display:block;font-size:13px;font-weight:600;color:var(--dark);margin-bottom:6px">Message <span style="color:#e05">*</span></label>
+              <textarea name="contact[body]" rows="5" placeholder="Bonjour, je voudrais savoir..." required
+                style="width:100%;padding:14px 18px;border-radius:16px;border:1.5px solid var(--purple-pale);font-size:14px;font-family:inherit;outline:none;transition:border-color .2s;resize:vertical;background:#fff">{{ form.body }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-fill" style="width:100%;justify-content:center;font-size:15px;padding:15px">Envoyer le message →</button>
+            <p style="font-size:11.5px;color:var(--muted);text-align:center">Réponse sous 24h. Données protégées conformément au RGPD.</p>
+          </div>
+        {%- endform -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  input:focus, textarea:focus, select:focus { border-color: var(--purple-main) !important; }
+  @media(max-width:760px) {
+    .section-inner > div[style*="grid-template-columns:1fr 1.2fr"] { grid-template-columns: 1fr !important; gap: 40px !important; }
+  }
+</style>
+
+{% render 'ub-footer' %}
+
+{% schema %}
+{
+  "name": "UBurn Contact",
+  "tag": "section",
+  "settings": []
+}
+{% endschema %}

@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "layout": "theme",
   "sections": {
@@ -8,10 +17,9 @@
         "variant_id": "51289200034111",
         "eyebrow": "when stress eats you",
         "h1": "Your fridge isn't the <em>enemy.</em>",
-        "sub": "Four hours of quiet. No 8pm fridge. No willpower required.",
-        "priceline": "from <strong>$36.99</strong> · $33.29/mo subscribe &amp; save · ships every 30 days · free us shipping",
-        "cta_text": "quiet my evening",
-        "cta_sub": "1 click · 4 hours quiet · subscribe · cancel anytime",
+        "sub": "Plant-based satiety, in your hand. Four hours of calm before the fridge door opens.",
+        "cta_text": "start the ritual",
+        "cta_sub": "1 click · checkout direct · subscribe · cancel anytime",
         "image_left_filename": "lp-hero-stress-eater.jpg",
         "image_left_alt": "Calm woman holding an iced violet ube latte in a warm-lit kitchen at dusk",
         "label_left": "calm",
@@ -60,8 +68,8 @@
         "eyebrow": "— quieter evenings start tonight",
         "title_pre": "Your evenings",
         "title_em": "change tonight.",
-        "sub": "Cold water. One scoop. Four hours of calm.* No 8pm fridge. No willpower required.",
-        "cta": "quiet my evening — $33.29/mo"
+        "sub": "Cold water. One scoop. Four hours of calm. The fridge can wait.*",
+        "cta": "start my pack — from $34.50"
       }
     },
     "newsletter": { "type": "u2-newsletter", "settings": {} },

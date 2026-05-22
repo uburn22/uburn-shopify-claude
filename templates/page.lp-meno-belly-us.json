@@ -1,0 +1,77 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+/*
+ * ------------------------------------------------------------
+ * UBurn LP — Angle: MENO BELLY (women 45-55 perimenopause)
+ * Cloned from LP MASTER (page.lp-violet-matcha-us.json) on 2026-05-21.
+ * Differs ONLY in: hero_sticker / hero_h1 / hero_sub / hero_cta / hero_image_url
+ * + week-changes attribution.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme",
+  "sections": {
+    "lp-top": {
+      "type": "uburn-lp-v2-top",
+      "settings": {
+        "product": "ube-poudre",
+        "hero_sticker": "Peri / menopause support · For women 40+",
+        "hero_h1": "Same diet. <em>New belly.</em>",
+        "hero_sub": "Estrogen drops in your 40s. Your body stores sugar differently — the cravings are real, and they're hormonal. UBurn supports up to 4 hours of fullness with glucomannan (konjac plant fiber).",
+        "hero_cta": "Start the ritual — from $33.29",
+        "hero_image_url": "https://uburn.co/cdn/shop/files/magnific_i-want-img1-to-be-in-4k-f_3001183035.png",
+        "hero_image_alt": "UBurn lavender pouch + violet ube drink — peri/menopause satiety support",
+        "trust_bullet_1": "Zero caffeine",
+        "trust_bullet_2": "30 calories",
+        "trust_bullet_3": "Plant-based",
+        "trust_bullet_4": "French-born",
+        "trust_1": "0% caffeine",
+        "trust_2": "EFSA-backed fiber",
+        "trust_3": "30 calories",
+        "trust_4": "Free U.S. shipping"
+      }
+    },
+    "pricing": { "type": "u2-pricing-cards", "settings": { "product": "ube-poudre", "show_bonus": true } },
+    "lp-bottom": { "type": "uburn-lp-v2-bottom", "settings": { "product": "ube-poudre" } },
+    "week-changes": {
+      "type": "u2-week-changes",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "— in her own words",
+        "title_pre": "What changes.",
+        "title_em": "After 4 weeks.",
+        "before_label": "Before UBurn",
+        "before_week": "Week 1",
+        "before_1": "Sugar cravings hit harder every afternoon — willpower felt useless",
+        "before_2": "Same diet as 5 years ago, but the belly stayed and grew",
+        "before_3": "Chronic 4 PM fatigue, mood swings, frustration",
+        "before_4": "Overeating dinner to compensate, nighttime snacking",
+        "before_5": "Heaviness, bloating, sleep felt restless",
+        "after_label": "After 4 weeks",
+        "after_week": "Week 4",
+        "after_1": "Afternoons feel calm — sugar cravings softened naturally",
+        "after_2": "Lighter dinners feel automatic, no white-knuckling",
+        "after_3": "Smoother digestion from week 2*, gentler bloat",
+        "after_4": "Mood feels more even, no afternoon crash",
+        "after_5": "The violet ritual settled in — feels like self-care, not effort",
+        "attr_name": "Linda R.",
+        "attr_city": "Westchester, NY · age 52",
+        "attr_when": "After 28 days",
+        "disclaimer": "*Individual results may vary. Glucomannan — EFSA ID 3120. Use: 3g/day with water before meals. UBurn supports satiety — it does not treat menopause. These statements have not been evaluated by the FDA."
+      }
+    },
+    "craft": { "type": "u2-craft", "settings": {} },
+    "guarantee": { "type": "u2-guarantee-bar", "settings": {} },
+    "quiz": { "type": "u2-pdp-ritual-quiz", "settings": {} },
+    "newsletter": { "type": "u2-newsletter", "settings": {} },
+    "live-proof": { "type": "u2-live-proof", "disabled": true, "settings": {} }
+  },
+  "order": ["lp-top", "pricing", "lp-bottom", "week-changes", "craft", "guarantee", "quiz", "newsletter", "live-proof"]
+}

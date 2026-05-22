@@ -1,0 +1,2844 @@
+{% comment %}PDP V10 · sections/uburn-pdp.liquid · Étape 2 : Sticky Bar + Hero{% endcomment %}
+{% assign variant_decouverte = product.variants | where: "id", 51289200034111 | first %}
+{% assign variant_max        = product.variants | where: "id", 51289200066879 | first %}
+{% if variant_decouverte == blank %}{% assign variant_decouverte = product.variants.first %}{% endif %}
+{% if variant_max        == blank %}{% assign variant_max        = product.variants.last  %}{% endif %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://uburn.co" crossorigin>
+<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+<link rel="preload" as="image" fetchpriority="high"
+  href="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0000_7.jpg?v=1773911263&width=800&format=webp">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800;900&family=Red+Hat+Text:wght@400;500;600;700&display=swap"
+  rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700;800;900&family=Red+Hat+Text:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+
+<style>
+/* ─── RESET ─────────────────────────────────────────────────────────────────── */
+#pdp-v10 *, #pdp-v10 *::before, #pdp-v10 *::after { box-sizing: border-box; margin: 0; padding: 0; }
+#pdp-v10 img  { display: block; max-width: 100%; }
+#pdp-v10 ul   { list-style: none; }
+#pdp-v10 a    { color: inherit; text-decoration: none; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+[id$="__uburn-pdp"] { display: block !important; }
+
+/* ─── TOKENS ─────────────────────────────────────────────────────────────────── */
+#pdp-v10 {
+  --purple-deep:  #3d1873;
+  --purple-main:  #6b2fa0;
+  --purple-mid:   #8b47c5;
+  --purple-light: #b07de8;
+  --purple-pale:  #e8dcf5;
+  --purple-wash:  #f5f0fa;
+  --cream:        #faf9f7;
+  --warm:         #f2f0ed;
+  --dark:         #242220;
+  --body:         #5a5654;
+  --muted:        #8a8785;
+  --grad:         linear-gradient(160deg, #3d1873 0%, #6b2fa0 40%, #8b47c5 100%);
+  font-family: 'Red Hat Text', sans-serif;
+  color: var(--dark);
+}
+
+/* ─── STICKY TOP BAR ─────────────────────────────────────────────────────────── */
+.pdp-topbar {
+  background: var(--dark);
+  color: #fff;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  height: 38px;
+  overflow: hidden;
+  position: relative;
+}
+.pdp-topbar-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.pdp-topbar-slide.tb-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.pdp-topbar-slide.tb-exit {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* ─── HERO WRAPPER ───────────────────────────────────────────────────────────── */
+.pdp-hero {
+  background: #fff;
+  padding-bottom: 48px;
+}
+.pdp-hero-inner {
+  display: contents; /* mobile: transparent passthrough */
+}
+
+/* ─── CAROUSEL ───────────────────────────────────────────────────────────────── */
+.pdp-carousel-wrap {
+  position: relative;
+  background: var(--cream);
+}
+.pdp-carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.pdp-carousel-track::-webkit-scrollbar { display: none; }
+.pdp-carousel-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  max-height: 480px;
+}
+.pdp-carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Desktop prev/next arrows — hidden mobile */
+.pdp-carousel-btn {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: rgba(255,255,255,.92);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,.12);
+  transition: box-shadow .2s;
+}
+.pdp-carousel-btn:hover { box-shadow: 0 4px 20px rgba(0,0,0,.18); }
+.pdp-carousel-btn svg { width: 18px; height: 18px; stroke: var(--dark); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.pdp-carousel-btn.prev { left: 14px; }
+.pdp-carousel-btn.next { right: 14px; }
+/* Dots */
+.pdp-carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 14px 0 10px;
+}
+.pdp-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--purple-pale);
+  transition: background .3s, width .3s, border-radius .3s;
+  cursor: pointer;
+}
+.pdp-dot.dot-active {
+  background: var(--purple-main);
+  width: 20px;
+  border-radius: 3px;
+}
+
+/* ─── HERO CONTENT ───────────────────────────────────────────────────────────── */
+.pdp-hero-content {
+  padding: 20px 16px 0;
+}
+/* Rating */
+.pdp-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.pdp-stars {
+  color: var(--purple-main);
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+.pdp-rating-score {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.pdp-rating-count {
+  font-size: 13px;
+  color: var(--muted);
+}
+/* H1 */
+.pdp-h1 {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: clamp(26px, 7.5vw, 34px);
+  font-weight: 900;
+  line-height: 1.08;
+  color: var(--dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  text-wrap: balance;
+}
+.pdp-h1 .accent { color: var(--purple-mid); }
+/* Subtitle */
+.pdp-sub {
+  font-size: 14.5px;
+  color: var(--body);
+  line-height: 1.65;
+  margin-bottom: 20px;
+  max-width: 52ch;
+}
+/* Bullets */
+.pdp-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 24px;
+}
+.pdp-bullet {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark);
+}
+.pdp-bullet-ck {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--purple-wash);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.pdp-bullet-ck svg {
+  width: 11px;
+  height: 11px;
+  stroke: var(--purple-main);
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ─── VARIANT CARDS ──────────────────────────────────────────────────────────── */
+.pdp-variants {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.pdp-variant-card {
+  border: 1.5px solid var(--purple-pale);
+  border-radius: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.pdp-variant-card.vc-active {
+  border-color: var(--purple-main);
+  background: var(--purple-wash);
+  box-shadow: 0 0 0 3px rgba(107,47,160,.1);
+}
+.pdp-variant-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+.pdp-variant-name {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.pdp-variant-desc {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.pdp-variant-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.pdp-variant-price-old {
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+.pdp-variant-price {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--purple-deep);
+}
+.pdp-variant-per-day {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.pdp-variant-badge {
+  position: absolute;
+  top: 0;
+  right: 14px;
+  background: var(--purple-main);
+  color: #fff;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 0 0 8px 8px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  white-space: nowrap;
+}
+.pdp-variant-save {
+  font-size: 11px;
+  font-weight: 700;
+  color: #16a34a;
+  background: #dcfce7;
+  padding: 2px 8px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+/* ─── BONUS BLOCK ────────────────────────────────────────────────────────────── */
+.pdp-bonus {
+  background: #FFF4E6;
+  border: 1.5px solid #F5C47A;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+.pdp-bonus-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.pdp-bonus-icon { font-size: 18px; line-height: 1; flex-shrink: 0; }
+.pdp-bonus-title {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: #8B5E00;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  flex: 1;
+}
+.pdp-bonus-value {
+  background: #D4900A;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.pdp-bonus-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pdp-bonus-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-size: 13px;
+  color: #6B4500;
+  line-height: 1.45;
+}
+.pdp-bonus-ck {
+  color: #D4900A;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.pdp-bonus-val {
+  color: #8a8785;
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+/* ─── CTA ────────────────────────────────────────────────────────────────────── */
+.pdp-cta-wrap { margin-bottom: 10px; }
+.pdp-form { display: contents; }
+.pdp-cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: var(--grad);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 18px 24px;
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+  animation: ub-pulse-glow 2.5s ease-in-out infinite;
+  letter-spacing: .2px;
+  -webkit-appearance: none;
+}
+.pdp-cta:hover { transform: scale(1.02); box-shadow: 0 8px 32px rgba(107,47,160,.4); animation-play-state: paused; }
+.pdp-cta:active { transform: scale(0.99); }
+
+/* ─── PAYMENT BADGES ─────────────────────────────────────────────────────────── */
+.pdp-payment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  padding: 4px 0;
+}
+.pdp-pay-badge {
+  background: var(--warm);
+  border: 1px solid rgba(0,0,0,.07);
+  border-radius: 6px;
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--body);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.pdp-pay-badge svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+/* ─── TRUST SIGNALS ──────────────────────────────────────────────────────────── */
+.pdp-trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  padding: 10px 0 0;
+  border-top: 1px solid rgba(0,0,0,.05);
+}
+.pdp-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
+  padding: 4px 12px;
+}
+.pdp-trust-item + .pdp-trust-item {
+  border-left: 1px solid rgba(0,0,0,.08);
+}
+.pdp-trust-item svg {
+  width: 13px;
+  height: 13px;
+  stroke: var(--purple-main);
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* ─── ANIMATIONS (LP exact) ──────────────────────────────────────────────────── */
+@keyframes ub-pulse-glow {
+  0%,100% { box-shadow: 0 4px 20px rgba(107,47,160,.25); }
+  50%      { box-shadow: 0 8px 40px rgba(107,47,160,.5);  }
+}
+@keyframes ub-float {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-8px); }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-d { transition-delay: .15s; }
+
+/* ─── MOBILE FIRST: clamp and safe area ──────────────────────────────────────── */
+@media (max-width: 767px) {
+  .pdp-hero-content { padding: 18px 16px 0; }
+  .pdp-bonus, .pdp-variants, .pdp-cta-wrap, .pdp-payment, .pdp-trust { margin-left: 0; margin-right: 0; }
+}
+
+/* ─── DESKTOP ≥768px ─────────────────────────────────────────────────────────── */
+@media (min-width: 768px) {
+  /* Full-bleed dark gradient hero — matches landing page aesthetic */
+  .pdp-hero {
+    background: linear-gradient(135deg, #1e0840 0%, #3d1873 35%, #5e28a0 65%, #7a3cb8 100%);
+    padding: 0;
+  }
+  .pdp-hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 56px 40px 80px;
+  }
+  /* Carousel — glow shadow on dark bg */
+  .pdp-carousel-wrap {
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.08);
+    position: sticky;
+    top: 80px;
+  }
+  .pdp-carousel-slide { max-height: 580px; aspect-ratio: 1/1; }
+  .pdp-carousel-btn   { display: flex; }
+  .pdp-hero-content   { padding: 0; }
+  /* Typography on dark bg */
+  .pdp-hero .pdp-h1           { font-size: clamp(32px, 3.4vw, 48px); color: #fff; }
+  .pdp-hero .pdp-h1 .accent   { color: #c99ef5; }
+  .pdp-hero .pdp-sub          { font-size: 16px; color: rgba(255,255,255,.75); }
+  .pdp-hero .pdp-stars        { color: #f8c94a; }
+  .pdp-hero .pdp-rating-score { color: #fff; }
+  .pdp-hero .pdp-rating-count { color: rgba(255,255,255,.6); }
+  .pdp-hero .pdp-bullet       { color: #fff; }
+  .pdp-hero .pdp-bullet-ck    { background: rgba(255,255,255,.12); }
+  .pdp-hero .pdp-bullet-ck svg { stroke: #c99ef5; }
+  .pdp-cta { font-size: 16px; }
+  /* Dots on dark bg */
+  .pdp-hero .pdp-dot          { background: rgba(255,255,255,.25); }
+  .pdp-hero .pdp-dot.dot-active { background: #fff; }
+  /* Carousel nav arrows on dark bg */
+  .pdp-hero .pdp-carousel-btn { background: rgba(255,255,255,.15); backdrop-filter: blur(8px); }
+  .pdp-hero .pdp-carousel-btn svg { stroke: #fff; }
+  /* Variant cards — glassmorphism on dark */
+  .pdp-hero .pdp-variant-card {
+    background: rgba(255,255,255,.08);
+    border-color: rgba(255,255,255,.15);
+    color: #fff;
+  }
+  .pdp-hero .pdp-variant-card.vc-active {
+    background: rgba(255,255,255,.16);
+    border-color: rgba(255,255,255,.5);
+    box-shadow: 0 0 0 3px rgba(255,255,255,.12);
+  }
+  .pdp-hero .pdp-variant-name   { color: #fff; }
+  .pdp-hero .pdp-variant-desc   { color: rgba(255,255,255,.55); }
+  .pdp-hero .pdp-variant-price  { color: #c99ef5; }
+  .pdp-hero .pdp-variant-price-old { color: rgba(255,255,255,.4); }
+  .pdp-hero .pdp-variant-per-day { color: rgba(255,255,255,.5); }
+  /* Bonus block on dark */
+  .pdp-hero .pdp-bonus {
+    background: rgba(255,244,230,.10);
+    border-color: rgba(245,196,122,.35);
+  }
+  .pdp-hero .pdp-bonus-header,
+  .pdp-hero .pdp-bonus-items { color: rgba(255,255,255,.85); }
+  /* Trust strip on dark */
+  .pdp-hero .pdp-trust  { color: rgba(255,255,255,.65); }
+  .pdp-hero .pdp-trust-item svg { stroke: rgba(255,255,255,.55); }
+}
+
+/* ─── REDUCED MOTION ─────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .pdp-cta { animation: none; }
+  .reveal  { opacity: 1; transform: none; transition: none; }
+}
+</style>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTIONS 3-8 — PDP V10
+   Mobile-first · no oklch · no backdrop-filter
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── SHARED ─────────────────────────────────────────────────────────────── */
+.pdp-sect-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.pdp-sect-h2 {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 800;
+  color: #242220;
+  text-align: center;
+  line-height: 1.15;
+  margin: 0 0 8px;
+}
+.pdp-sect-sub {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 1rem;
+  color: #5a5654;
+  text-align: center;
+  margin: 0 0 48px;
+}
+
+/* ── S3: REVIEWS ─────────────────────────────────────────────────────────── */
+.pdp-s3 {
+  background: #faf9f7;
+  padding: 72px 20px;
+}
+.pdp-rv-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.pdp-rv-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 22px 18px;
+  box-shadow: 0 2px 16px rgba(61,24,115,.08);
+}
+.pdp-rv-stars {
+  color: #f5a623;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.pdp-rv-text {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.85rem;
+  color: #242220;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.pdp-rv-author {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.pdp-rv-av {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #6b2fa0;
+  color: #fff;
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.pdp-rv-name {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #242220;
+  line-height: 1.2;
+}
+.pdp-rv-verif {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.72rem;
+  color: #6b2fa0;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* ── S4: STORYTELLING ────────────────────────────────────────────────────── */
+.pdp-s4 {
+  background: linear-gradient(160deg,#3d1873 0%,#6b2fa0 40%,#8b47c5 100%);
+  padding: 80px 20px;
+}
+.pdp-s4-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+.pdp-s4-eye {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 14px;
+}
+.pdp-s4-h2 {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: clamp(1.6rem, 5vw, 2.6rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 22px;
+}
+.pdp-s4-body {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 1.05rem;
+  color: rgba(255,255,255,.82);
+  line-height: 1.7;
+  margin-bottom: 48px;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pdp-s4-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  text-align: left;
+}
+.pdp-s4-card {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 16px;
+  padding: 24px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.pdp-s4-ghost {
+  position: absolute;
+  top: -12px;
+  right: 10px;
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(255,255,255,.06);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.pdp-s4-time {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.pdp-s4-desc {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,.78);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── S5: STEPS ───────────────────────────────────────────────────────────── */
+.pdp-s5 {
+  background: #f2f0ed;
+  padding: 72px 20px;
+}
+.pdp-s5-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+.pdp-s5-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(61,24,115,.08);
+}
+.pdp-s5-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+.pdp-s5-body {
+  padding: 22px 20px;
+}
+.pdp-s5-num {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b2fa0;
+  margin-bottom: 6px;
+}
+.pdp-s5-title {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #242220;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.pdp-s5-desc {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.88rem;
+  color: #5a5654;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── S6: EXPERT ──────────────────────────────────────────────────────────── */
+.pdp-s6 {
+  background: #f5f0fa;
+  padding: 72px 20px;
+}
+.pdp-s6-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: center;
+}
+.pdp-s6-photo-wrap {
+  display: flex;
+  justify-content: center;
+}
+.pdp-s6-photo {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 50%;
+  border: 4px solid #b07de8;
+  box-shadow: 0 8px 32px rgba(61,24,115,.15);
+}
+.pdp-s6-quote {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 700;
+  font-style: italic;
+  color: #242220;
+  line-height: 1.55;
+  margin-bottom: 20px;
+}
+.pdp-s6-creds {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.pdp-s6-badge {
+  background: #6b2fa0;
+  color: #fff;
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.pdp-s6-name {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #242220;
+  line-height: 1.2;
+}
+.pdp-s6-jobtitle {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.8rem;
+  color: #5a5654;
+  margin-top: 2px;
+}
+.pdp-s6-bio {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.88rem;
+  color: #5a5654;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── S7: STATS ───────────────────────────────────────────────────────────── */
+.pdp-s7 {
+  background: linear-gradient(160deg,#3d1873 0%,#6b2fa0 40%,#8b47c5 100%);
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.pdp-s7-bg {
+  position: absolute;
+  inset: 0;
+  background: url('https://uburn.co/cdn/shop/files/FOND_FIN.jpg?v=1749644803&width=1600') center/cover no-repeat;
+  opacity: .06;
+  pointer-events: none;
+}
+.pdp-s7-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+}
+.pdp-s7-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 24px;
+}
+.pdp-stat {
+  text-align: center;
+}
+.pdp-stat-num {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+.pdp-stat-label {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.87rem;
+  color: rgba(255,255,255,.72);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* ── S8: AVANT/APRÈS ─────────────────────────────────────────────────────── */
+.pdp-s8 {
+  background: #faf9f7;
+  padding: 72px 20px;
+}
+.pdp-s8-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.pdp-ba-stack {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(61,24,115,.1);
+}
+.pdp-ba-before {
+  background: #f2f0ed;
+  padding: 32px 28px;
+}
+.pdp-ba-after {
+  background: #f5f0fa;
+  padding: 32px 28px;
+}
+.pdp-ba-lbl {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.pdp-ba-before .pdp-ba-lbl { color: #8a8785; }
+.pdp-ba-after  .pdp-ba-lbl { color: #6b2fa0; }
+.pdp-ba-txt {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0;
+}
+.pdp-ba-before .pdp-ba-txt { color: #8a8785; }
+.pdp-ba-after  .pdp-ba-txt { color: #242220; }
+.pdp-ba-div {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 0;
+}
+.pdp-ba-arrow-icon {
+  width: 36px;
+  height: 36px;
+  background: #6b2fa0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pdp-ba-sig {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.82rem;
+  color: #8a8785;
+  font-style: italic;
+  margin: 16px 0 0;
+}
+.pdp-ba-sig strong {
+  font-style: normal;
+  font-weight: 700;
+  color: #242220;
+}
+
+/* ── STAGGER ANIMATIONS ──────────────────────────────────────────────────── */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
+}
+.stagger-children.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
+.stagger-children.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:.08s; }
+.stagger-children.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:.16s; }
+.stagger-children.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:.24s; }
+
+.stagger-scale > * {
+  opacity: 0;
+  transform: scale(.93);
+  transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
+}
+.stagger-scale.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay:0s; }
+.stagger-scale.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay:.09s; }
+.stagger-scale.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay:.18s; }
+.stagger-scale.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay:.27s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-children > *, .stagger-scale > * {
+    opacity:1; transform:none; transition:none;
+  }
+}
+
+/* ── DESKTOP OVERRIDES (sections 3-8) ────────────────────────────────────── */
+@media (min-width: 768px) {
+  .pdp-rv-grid          { grid-template-columns: repeat(4, 1fr); }
+  .pdp-s4-cards         { grid-template-columns: repeat(3, 1fr); }
+  .pdp-s5-grid          { grid-template-columns: repeat(3, 1fr); }
+  .pdp-s6-inner         { grid-template-columns: 180px 1fr; gap: 48px; }
+  .pdp-s6-photo         { width: 180px; height: 180px; }
+  .pdp-s7-grid          { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ── STAGGER FIX: make all children visible (5+ child support) ───────────── */
+.stagger-scale.visible > *,
+.stagger-children.visible > * { opacity:1; transform:none; }
+.stagger-scale.visible    > *:nth-child(5) { transition-delay:.33s; }
+.stagger-scale.visible    > *:nth-child(6) { transition-delay:.39s; }
+.stagger-children.visible > *:nth-child(5) { transition-delay:.30s; }
+.stagger-children.visible > *:nth-child(6) { transition-delay:.36s; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTIONS 9-11 — PDP V10
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── S9: INGRÉDIENTS ─────────────────────────────────────────────────────── */
+.pdp-s9 { background: #faf9f7; padding: 72px 20px; }
+.pdp-s9-intro {
+  max-width: 640px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+.pdp-s9-body {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 1rem;
+  color: #5a5654;
+  line-height: 1.65;
+  margin: 0;
+}
+.pdp-ing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.pdp-ing-card {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(61,24,115,.07);
+}
+.pdp-ing-photo {
+  width: 100%;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+  display: block;
+}
+.pdp-ing-body { padding: 18px 18px 20px; }
+.pdp-ing-badge {
+  display: inline-block;
+  background: #f5f0fa;
+  color: #6b2fa0;
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.pdp-ing-name {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #242220;
+  margin-bottom: 4px;
+}
+.pdp-ing-dose {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #8a8785;
+  margin-bottom: 10px;
+}
+.pdp-ing-benefit {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.85rem;
+  color: #5a5654;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── S10: COMPARATIF ─────────────────────────────────────────────────────── */
+.pdp-s10 {
+  background: linear-gradient(160deg,#3d1873 0%,#6b2fa0 40%,#8b47c5 100%);
+  padding: 72px 20px;
+}
+.pdp-s10-inner { max-width: 960px; margin: 0 auto; }
+
+/* Mobile: cards (default) */
+.pdp-comp-table { display: none; }
+.pdp-comp-cards { display: flex; flex-direction: column; gap: 14px; }
+
+.pdp-comp-card {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 14px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+  align-items: start;
+}
+.pdp-cc-top {
+  grid-column: 1 / -1;
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #fff;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.pdp-cc-col { font-family: 'Red Hat Text', sans-serif; font-size: 0.82rem; line-height: 1.4; }
+.pdp-cc-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.pdp-cc-col--market .pdp-cc-label { color: rgba(255,255,255,.45); }
+.pdp-cc-col--market .pdp-cc-val   { color: rgba(255,255,255,.6); }
+.pdp-cc-col--uburn  .pdp-cc-label { color: rgba(255,255,255,.45); }
+.pdp-cc-col--uburn  .pdp-cc-val   { color: #fff; font-weight: 700; }
+.pdp-cc-benefit {
+  grid-column: 1 / -1;
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,.55);
+  font-style: italic;
+}
+.pdp-comp-check { color: #b07de8; }
+
+/* Desktop: table */
+.pdp-comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: rgba(255,255,255,.9);
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.88rem;
+}
+.pdp-comp-table thead th {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+  padding: 0 16px 18px;
+  text-align: left;
+}
+.pdp-comp-table tbody tr   { border-top: 1px solid rgba(255,255,255,.1); }
+.pdp-comp-table tbody tr:last-child { border-bottom: 1px solid rgba(255,255,255,.1); }
+.pdp-comp-table td         { padding: 13px 16px; vertical-align: middle; line-height: 1.4; }
+.pdp-comp-table td:first-child  { font-weight: 700; color: #fff; min-width: 160px; }
+.pdp-comp-table td:nth-child(2) { color: rgba(255,255,255,.5); }
+.pdp-comp-table td:nth-child(3) { color: #fff; font-weight: 600; }
+.pdp-comp-table td:nth-child(4) { color: rgba(255,255,255,.65); font-style: italic; }
+
+/* ── S11: REVIEWS LONGUES ────────────────────────────────────────────────── */
+.pdp-s11 { background: #f5f0fa; padding: 72px 20px; }
+.pdp-s11-inner { max-width: 1100px; margin: 0 auto; }
+.pdp-s11-track-wrap { overflow: hidden; }
+.pdp-s11-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+.pdp-s11-track::-webkit-scrollbar { display: none; }
+.pdp-s11-card {
+  flex: 0 0 calc(100% - 40px);
+  scroll-snap-align: start;
+  background: #fff;
+  border-radius: 18px;
+  padding: 28px 22px;
+  box-shadow: 0 4px 24px rgba(61,24,115,.08);
+}
+.pdp-s11-stars { color: #f5a623; font-size: 14px; letter-spacing: 2px; margin-bottom: 14px; }
+.pdp-s11-text {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.93rem;
+  color: #242220;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.pdp-s11-author { display: flex; align-items: center; gap: 10px; }
+.pdp-s11-av {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #6b2fa0;
+  color: #fff;
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.pdp-s11-name {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #242220;
+  line-height: 1.2;
+}
+.pdp-s11-meta { font-family: 'Red Hat Text', sans-serif; font-size: 0.75rem; color: #8a8785; margin-top: 2px; }
+.pdp-s11-verif { font-size: 0.72rem; color: #6b2fa0; display: flex; align-items: center; gap: 3px; margin-top: 3px; }
+
+/* ── DESKTOP OVERRIDES (sections 9-11) ───────────────────────────────────── */
+@media (min-width: 768px) {
+  .pdp-ing-grid    { grid-template-columns: repeat(3, 1fr); }
+  .pdp-comp-cards  { display: none; }
+  .pdp-comp-table  { display: table; }
+  .pdp-s11-track   { display: grid; grid-template-columns: repeat(3, 1fr); overflow-x: visible; scroll-snap-type: none; padding-bottom: 0; }
+  .pdp-s11-card    { flex: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SECTIONS 12-15 — FAQ · OFFRE · STICKY ATC · LÉGAL
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* Mobile safe-area body padding */
+@media (max-width: 767px) {
+  body { padding-bottom: 80px; }
+}
+
+/* ── S12: FAQ ─────────────────────────────────────────────────────────────── */
+.pdp-s12 { background: #faf9f7; padding: 72px 20px; }
+.pdp-faq-list {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.pdp-faq-item { border-bottom: 1px solid #e8e2f5; }
+.pdp-faq-item:first-child { border-top: 1px solid #e8e2f5; }
+.pdp-faq-trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 20px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: #242220;
+  line-height: 1.4;
+}
+.pdp-faq-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f5f0fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background .2s;
+}
+.pdp-faq-icon svg { transition: transform .35s cubic-bezier(.22,1,.36,1); }
+.pdp-faq-item.open .pdp-faq-icon { background: #6b2fa0; }
+.pdp-faq-item.open .pdp-faq-icon svg { transform: rotate(45deg); }
+.pdp-faq-body {
+  overflow: hidden;
+  height: 0;
+  transition: height .4s cubic-bezier(.22,1,.36,1);
+}
+.pdp-faq-body p {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.9rem;
+  color: #5a5654;
+  line-height: 1.65;
+  padding-bottom: 20px;
+  margin: 0;
+}
+
+/* ── S13: OFFRE FINALE ───────────────────────────────────────────────────── */
+.pdp-s13 { background: #f5f0fa; padding: 72px 20px; }
+.pdp-s13-inner { max-width: 860px; margin: 0 auto; }
+.pdp-offer-eye {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6b2fa0;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.pdp-offer-h2 {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-weight: 800;
+  font-style: italic;
+  color: #242220;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.pdp-offer-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+.pdp-offer-card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(61,24,115,.1);
+  position: relative;
+}
+.pdp-offer-card--popular { box-shadow: 0 8px 40px rgba(61,24,115,.18); }
+.pdp-offer-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #6b2fa0;
+  color: #fff;
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 4px 12px;
+  border-radius: 20px;
+  z-index: 2;
+}
+.pdp-offer-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+.pdp-offer-body { padding: 22px 22px 24px; }
+.pdp-offer-name {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #242220;
+  margin-bottom: 4px;
+}
+.pdp-offer-sub {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.82rem;
+  color: #8a8785;
+  margin-bottom: 14px;
+}
+.pdp-offer-price-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.pdp-offer-price-old { font-family: 'Red Hat Text', sans-serif; font-size: 0.9rem; color: #8a8785; text-decoration: line-through; }
+.pdp-offer-price-new { font-family: 'Red Hat Display', sans-serif; font-size: 1.5rem; font-weight: 900; color: #242220; }
+.pdp-offer-per-day { font-family: 'Red Hat Text', sans-serif; font-size: 0.8rem; color: #6b2fa0; font-weight: 600; margin-bottom: 16px; }
+.pdp-offer-btn {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #6b2fa0 0%, #8b47c5 100%);
+  color: #fff;
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-align: center;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  min-height: 48px;
+  transition: opacity .2s;
+}
+.pdp-offer-btn:hover { opacity: .9; }
+
+/* Bonus block */
+.pdp-bonus-block {
+  background: #fdf8e7;
+  border: 1.5px solid #f0d97a;
+  border-radius: 16px;
+  padding: 24px 22px;
+  margin-bottom: 28px;
+}
+.pdp-bonus-title {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #242220;
+  margin-bottom: 14px;
+}
+.pdp-bonus-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.pdp-bonus-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.88rem;
+  color: #5a5654;
+}
+.pdp-bonus-item-name { flex: 1; }
+.pdp-bonus-item-price { font-size: 0.82rem; color: #8a8785; text-decoration: line-through; white-space: nowrap; }
+.pdp-bonus-total {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #242220;
+  padding-top: 12px;
+  border-top: 1px solid #f0d97a;
+}
+
+/* Trust badges */
+.pdp-offer-trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 20px;
+  margin-bottom: 20px;
+}
+.pdp-offer-trust-item {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.82rem;
+  color: #5a5654;
+}
+.pdp-offer-note { text-align: center; font-family: 'Red Hat Text', sans-serif; font-size: 0.82rem; color: #8a8785; margin: 0; }
+
+/* ── S14: STICKY ATC (mobile only) ─────────────────────────────────────── */
+.pdp-sticky-atc { display: none; }
+@media (max-width: 767px) {
+  .pdp-sticky-atc {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    box-shadow: 0 -4px 20px rgba(61,24,115,.12);
+    z-index: 998;
+    padding: 10px 16px;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    transform: translateY(105%);
+    transition: transform .35s cubic-bezier(.22,1,.36,1);
+  }
+  .pdp-sticky-atc.visible { transform: translateY(0); }
+}
+.pdp-sticky-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.pdp-sticky-product { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.pdp-sticky-img { width: 40px; height: 40px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+.pdp-sticky-info { min-width: 0; }
+.pdp-sticky-name {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #242220;
+  line-height: 1.2;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pdp-sticky-price { font-family: 'Red Hat Text', sans-serif; font-size: 0.75rem; font-weight: 600; color: #6b2fa0; display: block; }
+.pdp-sticky-btn {
+  background: linear-gradient(135deg, #6b2fa0 0%, #8b47c5 100%);
+  color: #fff;
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  min-height: 44px;
+  min-width: 44px;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+/* ── S15: FOOTER LÉGAL ───────────────────────────────────────────────────── */
+.pdp-legal { padding: 24px 20px; background: #faf9f7; }
+.pdp-legal p {
+  max-width: 720px;
+  margin: 0 auto;
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 0.75rem;
+  color: #8a8785;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ── DESKTOP OVERRIDES (sections 12-15) ─────────────────────────────────── */
+@media (min-width: 768px) {
+  .pdp-offer-cards { grid-template-columns: 1fr 1fr; gap: 24px; }
+}
+</style>
+
+<!-- ══════════════════════════════════════════════════════════════
+     STICKY TOP BAR
+══════════════════════════════════════════════════════════════ -->
+<div id="pdp-v10">
+<div class="pdp-topbar" role="marquee" aria-live="polite">
+  <div class="pdp-topbar-slide tb-active" id="tb0">→&nbsp;&nbsp;Livraison offerte en France</div>
+  <div class="pdp-topbar-slide"           id="tb1">Allégation EFSA validée (ID&nbsp;3120)</div>
+  <div class="pdp-topbar-slide"           id="tb2">1&nbsp;500+ clientes &middot; Marque française</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-hero">
+<div class="pdp-hero-inner">
+
+  <!-- ── CARROUSEL ───────────────────────────────── -->
+  <div class="pdp-carousel-wrap">
+    <button class="pdp-carousel-btn prev" id="carPrev" aria-label="Photo précédente">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="pdp-carousel-btn next" id="carNext" aria-label="Photo suivante">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+
+    <div class="pdp-carousel-track" id="carTrack">
+      <div class="pdp-carousel-slide">
+        <img src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0000_7.jpg?v=1773911263&width=800&format=webp"
+             alt="Uburn Poudre Ubé — packshot principal"
+             fetchpriority="high" decoding="sync">
+      </div>
+      <div class="pdp-carousel-slide">
+        <img src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg?v=1776421390&width=800&format=webp"
+             alt="Uburn — boisson violette préparée"
+             loading="lazy" decoding="async">
+      </div>
+      <div class="pdp-carousel-slide">
+        <img src="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=800&format=webp"
+             alt="Préparation Uburn — mélanger"
+             loading="lazy" decoding="async">
+      </div>
+      <div class="pdp-carousel-slide">
+        <img src="https://uburn.co/cdn/shop/files/focus_product_1_3dab8125-eab7-4b9d-a33f-e28cdd57aa67.jpg?v=1776425406&width=800&format=webp"
+             alt="Uburn — lifestyle femme bien-être matin"
+             loading="lazy" decoding="async">
+      </div>
+      <div class="pdp-carousel-slide">
+        <img src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0003_4.jpg?v=1773911263&width=800&format=webp"
+             alt="Uburn — texture poudre violette"
+             loading="lazy" decoding="async">
+      </div>
+    </div>
+
+    <!-- dots -->
+    <div class="pdp-carousel-dots" id="carDots">
+      <button class="pdp-dot dot-active" aria-label="Photo 1"></button>
+      <button class="pdp-dot"            aria-label="Photo 2"></button>
+      <button class="pdp-dot"            aria-label="Photo 3"></button>
+      <button class="pdp-dot"            aria-label="Photo 4"></button>
+      <button class="pdp-dot"            aria-label="Photo 5"></button>
+    </div>
+  </div>
+
+  <!-- ── CONTENT ─────────────────────────────────── -->
+  <div class="pdp-hero-content">
+
+    <!-- Rating -->
+    <div class="pdp-rating reveal">
+      <span class="pdp-stars">★★★★★</span>
+      <span class="pdp-rating-score">4,7/5</span>
+      <span class="pdp-rating-count">· 1&nbsp;500+ avis vérifiés</span>
+    </div>
+
+    <!-- H1 -->
+    <h1 class="pdp-h1 reveal">
+      16h. Votre placard<br>reste <span class="accent">fermé.</span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="pdp-sub reveal reveal-d">
+      30&nbsp;kcal &middot; 0% caféine &middot; 4h de satiété
+      <em style="font-style:normal;white-space:nowrap">(allégation EFSA glucomannane).</em>
+    </p>
+
+    <!-- Bullets -->
+    <ul class="pdp-bullets reveal">
+      <li class="pdp-bullet">
+        <span class="pdp-bullet-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+        6 actifs naturels dosés cliniquement
+      </li>
+      <li class="pdp-bullet">
+        <span class="pdp-bullet-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+        Allégation EFSA validée (ID&nbsp;3120)
+      </li>
+      <li class="pdp-bullet">
+        <span class="pdp-bullet-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+        Marque française
+      </li>
+      <li class="pdp-bullet">
+        <span class="pdp-bullet-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+        0% caféine, 0% sucres ajoutés
+      </li>
+      <li class="pdp-bullet">
+        <span class="pdp-bullet-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+        Paiement 100% sécurisé
+      </li>
+    </ul>
+
+    <!-- Variant selector -->
+    <div class="pdp-variants reveal" id="pdpVariants">
+
+      <!-- Découverte -->
+      <div class="pdp-variant-card"
+           data-variant-id="{{ variant_decouverte.id }}"
+           data-price="34.50"
+           data-price-display="34,50"
+           data-daily="1,15€/jour"
+           onclick="pdpSelectVariant(this)">
+        <div class="pdp-variant-top">
+          <span class="pdp-variant-name">Découverte</span>
+        </div>
+        <div class="pdp-variant-desc">90g &middot; 1 dose/jour &middot; 30 jours</div>
+        <div class="pdp-variant-price-row">
+          <span class="pdp-variant-price-old">38,50 €</span>
+          <span class="pdp-variant-price">34,50 €</span>
+        </div>
+        <div class="pdp-variant-per-day">soit 1,15 €/jour</div>
+      </div>
+
+      <!-- Résultats Maximum -->
+      <div class="pdp-variant-card vc-active"
+           data-variant-id="{{ variant_max.id }}"
+           data-price="54.50"
+           data-price-display="54,50"
+           data-daily="0,61€/jour"
+           onclick="pdpSelectVariant(this)">
+        <div class="pdp-variant-badge">⭐ Le plus populaire</div>
+        <div class="pdp-variant-top">
+          <span class="pdp-variant-name">Résultats Maximum</span>
+          <span class="pdp-variant-save">−13%</span>
+        </div>
+        <div class="pdp-variant-desc">270g &middot; 3 doses/jour &middot; 90 jours</div>
+        <div class="pdp-variant-price-row">
+          <span class="pdp-variant-price-old">62,50 €</span>
+          <span class="pdp-variant-price">54,50 €</span>
+        </div>
+        <div class="pdp-variant-per-day">soit 0,61 €/jour</div>
+      </div>
+
+    </div>
+
+    <!-- Bonus block -->
+    <div class="pdp-bonus reveal">
+      <div class="pdp-bonus-header">
+        <span class="pdp-bonus-icon">🎁</span>
+        <span class="pdp-bonus-title">Offerts avec ta commande</span>
+        <span class="pdp-bonus-value">184€</span>
+      </div>
+      <ul class="pdp-bonus-list">
+        <li class="pdp-bonus-item">
+          <span class="pdp-bonus-ck">✓</span>
+          <span>E-book "30j pour reprendre le contrôle" <em class="pdp-bonus-val">(47€)</em></span>
+        </li>
+        <li class="pdp-bonus-item">
+          <span class="pdp-bonus-ck">✓</span>
+          <span>Accès groupe privé Uburn Collective <em class="pdp-bonus-val">(40€)</em></span>
+        </li>
+        <li class="pdp-bonus-item">
+          <span class="pdp-bonus-ck">✓</span>
+          <span>Suivi nutrition WhatsApp 30j <em class="pdp-bonus-val">(47€)</em></span>
+        </li>
+        <li class="pdp-bonus-item">
+          <span class="pdp-bonus-ck">✓</span>
+          <span>Accès événements en ligne <em class="pdp-bonus-val">(50€)</em></span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- CTA -->
+    <div class="pdp-cta-wrap">
+      <form action="/cart/add" method="post" id="pdp-hero-form">
+        <input type="hidden" name="id"       id="pdp-variant-id" value="{{ variant_max.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <button type="submit" class="pdp-cta" id="pdp-cta-btn">
+          Je reprends le contrôle — 54,50€ →
+        </button>
+      </form>
+    </div>
+
+    <!-- Payment badges -->
+    <div class="pdp-payment">
+      <!-- Apple Pay -->
+      <span class="pdp-pay-badge">
+        <svg viewBox="0 0 24 24" fill="var(--dark)" xmlns="http://www.w3.org/2000/svg"><path d="M17.05 8.507c-.14.109-2.327 1.334-2.327 4.08.027 3.158 2.764 4.27 2.79 4.27-.027.082-.434 1.5-1.44 2.946-.87 1.25-1.793 2.499-3.18 2.499-1.36 0-1.74-.82-3.31-.82-1.55 0-2.112.847-3.36.847-1.25 0-2.14-1.195-3.155-2.635C1.72 18.047 1 15.466 1 13.02 1 8.86 3.63 6.648 6.207 6.648c1.36 0 2.49.9 3.343.9.816 0 2.108-.955 3.66-.955.577 0 2.573.055 3.84 1.914zm-4.512-3.506c.63-.764 1.072-1.816 1.072-2.868 0-.137-.014-.274-.04-.384-.99.04-2.177.657-2.901 1.5-.572.666-1.112 1.718-1.112 2.785 0 .151.027.302.04.356.067.013.17.027.273.027.897 0 2.004-.589 2.668-1.416z"/></svg>
+        Apple Pay
+      </span>
+      <!-- Google Pay -->
+      <span class="pdp-pay-badge">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="1" y="16" font-size="11" font-weight="700" fill="#5F6368" font-family="sans-serif">G Pay</text></svg>
+        Google Pay
+      </span>
+      <!-- CB Visa -->
+      <span class="pdp-pay-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        Carte bancaire
+      </span>
+      <!-- Klarna -->
+      <span class="pdp-pay-badge" style="color:#FF5CA2;border-color:rgba(255,92,162,.2);background:#fff5f9;">
+        Klarna 3×
+      </span>
+    </div>
+
+    <!-- Trust signals -->
+    <div class="pdp-trust reveal">
+      <span class="pdp-trust-item">
+        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Livraison offerte 30€+
+      </span>
+      <span class="pdp-trust-item">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-4 0v2"/></svg>
+        Livré en 48h
+      </span>
+      <span class="pdp-trust-item">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Marque française
+      </span>
+    </div>
+
+  </div><!-- /pdp-hero-content -->
+</div><!-- /pdp-hero-inner -->
+</section><!-- /pdp-hero -->
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 3 — REVIEWS
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-s3">
+  <div class="pdp-sect-inner">
+    <p class="pdp-section-label reveal">Témoignages</p>
+    <h2 class="pdp-sect-h2 reveal">Elles l'ont essayé. Elles ne peuvent plus s'en passer.</h2>
+    <p class="pdp-sect-sub reveal">+1&nbsp;500 clientes &middot; Note moyenne 4.7/5</p>
+    <div class="pdp-rv-grid stagger-scale">
+      <article class="pdp-rv-card">
+        <div class="pdp-rv-stars">★★★★★</div>
+        <p class="pdp-rv-text">« J'étais sceptique mais après 2 semaines, mon craving du soir a vraiment diminué. Je mange moins au dîner sans m'en rendre compte. »</p>
+        <div class="pdp-rv-author">
+          <div class="pdp-rv-av">SB</div>
+          <div>
+            <div class="pdp-rv-name">Sophie B.</div>
+            <div class="pdp-rv-verif">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="#6b2fa0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Achat vérifié
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="pdp-rv-card">
+        <div class="pdp-rv-stars">★★★★★</div>
+        <p class="pdp-rv-text">« 4h sans fringales, c'est réel. Je prends Uburn à 11h et je n'ai plus faim avant 15h. Mon rapport à la nourriture a complètement changé. »</p>
+        <div class="pdp-rv-author">
+          <div class="pdp-rv-av">MF</div>
+          <div>
+            <div class="pdp-rv-name">Marie F.</div>
+            <div class="pdp-rv-verif">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="#6b2fa0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Achat vérifié
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="pdp-rv-card">
+        <div class="pdp-rv-stars">★★★★★</div>
+        <p class="pdp-rv-text">« Le goût est délicieux — légèrement sucré, subtil ube. Je le prends à 16h au lieu de craquer sur des biscuits. Résultat visible en 10 jours. »</p>
+        <div class="pdp-rv-author">
+          <div class="pdp-rv-av">CL</div>
+          <div>
+            <div class="pdp-rv-name">Clara L.</div>
+            <div class="pdp-rv-verif">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="#6b2fa0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Achat vérifié
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="pdp-rv-card">
+        <div class="pdp-rv-stars">★★★★★</div>
+        <p class="pdp-rv-text">« Enfin quelque chose qui fonctionne sans caféine. Je peux le prendre le soir. Plus de grignotage devant la télé, et je dors bien mieux. »</p>
+        <div class="pdp-rv-author">
+          <div class="pdp-rv-av">AR</div>
+          <div>
+            <div class="pdp-rv-name">Amélie R.</div>
+            <div class="pdp-rv-verif">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="#6b2fa0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              Achat vérifié
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 4 — STORYTELLING
+══════════════════════════════════════════════════════════════ -->
+<div class="pdp-s4">
+  <div class="pdp-s4-inner">
+    <p class="pdp-section-label pdp-section-label--light reveal">Le problème</p>
+    <p class="pdp-s4-eye reveal">On comprend</p>
+    <h2 class="pdp-s4-h2 reveal">On connaît ce moment.<br>Le même schéma, chaque jour.</h2>
+    <p class="pdp-s4-body reveal">Votre glycémie monte, chute, et déclenche une envie irrépressible de grignoter. Ce n'est pas un manque de volonté. C'est de la biologie. Uburn s'attaque à ce cycle à la source.</p>
+    <div class="pdp-s4-cards stagger-children">
+      <div class="pdp-s4-card">
+        <span class="pdp-s4-ghost" aria-hidden="true">11</span>
+        <div class="pdp-s4-time">11h00 — Le premier craving</div>
+        <p class="pdp-s4-desc">La glycémie chute après le petit-déjeuner. La première fringale arrive. Vous résistez, mais l'envie revient toutes les 20 minutes.</p>
+      </div>
+      <div class="pdp-s4-card">
+        <span class="pdp-s4-ghost" aria-hidden="true">16</span>
+        <div class="pdp-s4-time">16h00 — Le coup de pompe</div>
+        <p class="pdp-s4-desc">Coup de fatigue classique. Vous cherchez du sucre, du snack, n'importe quoi. Le craving prend le dessus sur vos bonnes intentions.</p>
+      </div>
+      <div class="pdp-s4-card">
+        <span class="pdp-s4-ghost" aria-hidden="true">21</span>
+        <div class="pdp-s4-time">21h00 — Le grignotage du soir</div>
+        <p class="pdp-s4-desc">Après dîner, l'envie de grignoter devant la télé. 0% caféine : Uburn agit à toute heure, même le soir, sans perturber votre sommeil.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 5 — COMMENT ÇA MARCHE
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-s5">
+  <div class="pdp-sect-inner">
+    <p class="pdp-section-label reveal">Mode d'emploi</p>
+    <h2 class="pdp-sect-h2 reveal">3 gestes. 4h de résultat.</h2>
+    <p class="pdp-sect-sub reveal">Simple à intégrer dans n'importe quelle routine</p>
+    <div class="pdp-s5-grid stagger-scale">
+      <div class="pdp-s5-card">
+        <img src="https://uburn.co/cdn/shop/files/etape_1.jpg?v=1763147054&width=600&format=webp"
+             alt="Étape 1 — dissoudre Uburn dans 300ml d'eau"
+             class="pdp-s5-img" loading="lazy" decoding="async">
+        <div class="pdp-s5-body">
+          <div class="pdp-s5-num">Étape 01</div>
+          <div class="pdp-s5-title">Dissoudre dans 300ml d'eau</div>
+          <p class="pdp-s5-desc">Une cuillère dans un verre d'eau fraîche. Mélangez 20 secondes jusqu'à dissolution complète. Le goût ube est naturellement doux.</p>
+        </div>
+      </div>
+      <div class="pdp-s5-card">
+        <img src="https://uburn.co/cdn/shop/files/etape_2.jpg?v=1763147054&width=600&format=webp"
+             alt="Étape 2 — boire avant la fringale"
+             class="pdp-s5-img" loading="lazy" decoding="async">
+        <div class="pdp-s5-body">
+          <div class="pdp-s5-num">Étape 02</div>
+          <div class="pdp-s5-title">Boire avant la fringale</div>
+          <p class="pdp-s5-desc">Avant vos créneaux de craving habituels — matin, milieu d'après-midi ou soirée. 0% caféine&nbsp;: efficace à toute heure, même le soir.</p>
+        </div>
+      </div>
+      <div class="pdp-s5-card">
+        <img src="https://uburn.co/cdn/shop/files/etape_3.jpg?v=1763147054&width=600&format=webp"
+             alt="Étape 3 — 4h de satiété durable"
+             class="pdp-s5-img" loading="lazy" decoding="async">
+        <div class="pdp-s5-body">
+          <div class="pdp-s5-num">Étape 03</div>
+          <div class="pdp-s5-title">4h de satiété durable</div>
+          <p class="pdp-s5-desc">Le glucomannane et le MCT de coco agissent en 20 minutes. 4h de satiété sans pic d'énergie ni crash. (Allégation EFSA&nbsp;ID&nbsp;3120)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 6 — EFSA AUTHORITY (replaced fake expert per compliance 2026-05-14)
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-s6">
+  <div class="pdp-s6-inner reveal" style="text-align:center;max-width:760px;margin:0 auto;padding:48px 32px;">
+    <div class="pdp-s6-creds" style="justify-content:center;margin-bottom:24px;">
+      <span class="pdp-s6-badge">EFSA-backed</span>
+      <div>
+        <div class="pdp-s6-name">Fibre reconnue EFSA</div>
+        <div class="pdp-s6-jobtitle">Règlement CE 432/2012 &middot; ID 3120</div>
+      </div>
+    </div>
+    <p class="pdp-s6-quote">« Le glucomannane de konjac contribue à la satiété dans le cadre d'un régime hypocalorique »</p>
+    <p class="pdp-s6-bio">Allégation officiellement reconnue par l'Autorité européenne de sécurité des aliments (EFSA). Le glucomannane de konjac est l'un des rares ingrédients de sa catégorie à bénéficier de cette reconnaissance. Dose validée : 3g par jour avec 1-2 verres d'eau avant les repas.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 7 — STATS
+══════════════════════════════════════════════════════════════ -->
+<div class="pdp-s7">
+  <div class="pdp-s7-bg" aria-hidden="true"></div>
+  <div class="pdp-s7-inner">
+    <p class="pdp-section-label pdp-section-label--light reveal">Données cliniques</p>
+    <h2 class="pdp-sect-h2 reveal" style="color:#fff;margin-bottom:12px;">Les chiffres parlent.</h2>
+    <p class="pdp-sect-sub reveal" style="color:rgba(255,255,255,.65);margin-bottom:56px;">Étude interne &middot; 1&nbsp;500 clientes &middot; 30 jours</p>
+    <div class="pdp-s7-grid stagger-scale">
+      <div class="pdp-stat">
+        <div class="pdp-stat-num" data-countup="95" data-countup-suffix="%">95%</div>
+        <p class="pdp-stat-label">ressentent moins de fringales dès la 1ère semaine</p>
+      </div>
+      <div class="pdp-stat">
+        <div class="pdp-stat-num" data-countup="87" data-countup-suffix="%">87%</div>
+        <p class="pdp-stat-label">déclarent une meilleure énergie en après-midi</p>
+      </div>
+      <div class="pdp-stat">
+        <div class="pdp-stat-num" data-countup="82" data-countup-suffix="%">82%</div>
+        <p class="pdp-stat-label">ont réduit leur consommation de sucre ajouté</p>
+      </div>
+      <div class="pdp-stat">
+        <div class="pdp-stat-num" data-countup="4.7" data-countup-suffix="/5">4.7/5</div>
+        <p class="pdp-stat-label">note moyenne sur +1&nbsp;500 avis vérifiés</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 8 — AVANT / APRÈS
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-s8">
+  <div class="pdp-s8-inner">
+    <p class="pdp-section-label reveal">Résultats réels</p>
+    <h2 class="pdp-sect-h2 reveal">Avant. Après. La différence.</h2>
+    <p class="pdp-sect-sub reveal">Ce que nos clientes vivent, en 30 jours.</p>
+    <div class="pdp-ba-stack reveal">
+      <div class="pdp-ba-before">
+        <div class="pdp-ba-lbl">Avant Uburn</div>
+        <p class="pdp-ba-txt">« Je craquais tous les jours à 16h. Je mangeais n'importe quoi. Le soir, impossible de résister au grignotage. Je me sentais coupable en permanence. »</p>
+      </div>
+      <div class="pdp-ba-div">
+        <div class="pdp-ba-arrow-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+      <div class="pdp-ba-after">
+        <div class="pdp-ba-lbl">Après 30 jours d'Uburn</div>
+        <p class="pdp-ba-txt">« Je n'y pensais plus. Le craving à 16h a disparu. Je mange mieux, je dors mieux, et je ne culpabilise plus. C'est la première chose qui a vraiment fonctionné. »</p>
+        <p class="pdp-ba-sig">— <strong>Marie L.</strong>, 42 ans &middot; Cliente depuis février&nbsp;2026</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 9 — 6 ACTIFS DÉTAILLÉS
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-s9">
+  <div class="pdp-sect-inner">
+    <div class="pdp-s9-intro">
+      <p class="pdp-section-label reveal">La formule</p>
+      <h2 class="pdp-sect-h2 reveal" style="font-style:italic;">6 actifs.</h2>
+      <p class="pdp-sect-sub reveal" style="font-style:italic;margin-bottom:24px;">Une seule boisson.</p>
+      <p class="pdp-s9-body reveal">Chaque ingrédient est dosé cliniquement. Ensemble, ils forment un système complet — rarement atteint dans une seule boisson.</p>
+    </div>
+    <div class="pdp-ing-grid stagger-scale">
+      <div class="pdp-ing-card">
+        <img src="https://uburn.co/cdn/shop/files/Ingredient_Ube.jpg?v=1749644803&width=500&format=webp"
+             alt="Ubé violet — ingrédient signature Uburn"
+             class="pdp-ing-photo" loading="lazy" decoding="async">
+        <div class="pdp-ing-body">
+          <span class="pdp-ing-badge">Ingrédient signature</span>
+          <div class="pdp-ing-name">Ubé Violet</div>
+          <div class="pdp-ing-dose">5g par dose · Anthocyanes naturels</div>
+          <p class="pdp-ing-benefit">Antioxydants puissants issus de l'igname violet des Philippines. Prend soin du corps de l'intérieur et donne à Uburn sa couleur signature.</p>
+        </div>
+      </div>
+      <div class="pdp-ing-card">
+        <img src="https://uburn.co/cdn/shop/files/Ingredient_Glucomannane.jpg?v=1749644803&width=500&format=webp"
+             alt="Glucomannane de konjac — Uburn"
+             class="pdp-ing-photo" loading="lazy" decoding="async">
+        <div class="pdp-ing-body">
+          <span class="pdp-ing-badge">EFSA ID 3120</span>
+          <div class="pdp-ing-name">Konjac · Glucomannane</div>
+          <div class="pdp-ing-dose">3g par dose</div>
+          <p class="pdp-ing-benefit">Allégation de satiété validée officiellement par l'EFSA. La fibre absorbe jusqu'à 100× son poids en eau et occupe naturellement l'estomac pendant 4h.</p>
+        </div>
+      </div>
+      <div class="pdp-ing-card">
+        <img src="https://uburn.co/cdn/shop/files/Ingredient_Acacia.jpg?v=1749644803&width=500&format=webp"
+             alt="Fibre d'acacia — Uburn"
+             class="pdp-ing-photo" loading="lazy" decoding="async">
+        <div class="pdp-ing-body">
+          <span class="pdp-ing-badge">Prébiotique</span>
+          <div class="pdp-ing-name">Fibre d'Acacia</div>
+          <div class="pdp-ing-dose">1,5g par dose</div>
+          <p class="pdp-ing-benefit">Prébiotique doux qui nourrit le microbiote intestinal. Améliore la digestion et le confort intestinal durablement.</p>
+        </div>
+      </div>
+      <div class="pdp-ing-card">
+        <img src="https://uburn.co/cdn/shop/files/Ingredient_Coco.jpg?v=1749644803&width=500&format=webp"
+             alt="MCT de noix de coco — Uburn"
+             class="pdp-ing-photo" loading="lazy" decoding="async">
+        <div class="pdp-ing-body">
+          <span class="pdp-ing-badge">Énergie stable</span>
+          <div class="pdp-ing-name">MCT de Noix de Coco</div>
+          <div class="pdp-ing-dose">Triglycérides à chaîne moyenne</div>
+          <p class="pdp-ing-benefit">Énergie rapide et stable sans pic d'insuline ni crash. Idéal pour soutenir l'activité mentale et physique entre les repas.</p>
+        </div>
+      </div>
+      <div class="pdp-ing-card">
+        <img src="https://uburn.co/cdn/shop/files/Ingredient_Gingembre.jpg?v=1749644803&width=500&format=webp"
+             alt="Gingembre violet — Uburn"
+             class="pdp-ing-photo" loading="lazy" decoding="async">
+        <div class="pdp-ing-body">
+          <span class="pdp-ing-badge">Digestion</span>
+          <div class="pdp-ing-name">Gingembre Violet</div>
+          <div class="pdp-ing-dose">200mg par dose</div>
+          <p class="pdp-ing-benefit">Favorise la digestion et soutient le métabolisme. Zéro pic glycémique, zéro crash — un allié quotidien pour le confort après les repas.</p>
+        </div>
+      </div>
+      <div class="pdp-ing-card">
+        <img src="https://uburn.co/cdn/shop/files/Ingredient_L-carnitine_tartrate.jpg?v=1749644803&width=500&format=webp"
+             alt="L-Carnitine — Uburn"
+             class="pdp-ing-photo" loading="lazy" decoding="async">
+        <div class="pdp-ing-body">
+          <span class="pdp-ing-badge">Métabolisme</span>
+          <div class="pdp-ing-name">L-Carnitine</div>
+          <div class="pdp-ing-dose">400mg par dose</div>
+          <p class="pdp-ing-benefit">Soutient le métabolisme des graisses et contribue à l'énergie musculaire. Dosage 400% supérieur aux formules concurrentes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 10 — TABLEAU COMPARATIF
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-s10">
+  <div class="pdp-s10-inner">
+    <p class="pdp-section-label pdp-section-label--light reveal">Comparatif</p>
+    <h2 class="pdp-sect-h2 reveal" style="color:#fff;margin-bottom:10px;">Chaque milligramme compte.</h2>
+    <p class="pdp-sect-sub reveal" style="color:rgba(255,255,255,.65);font-style:italic;margin-bottom:48px;">Chaque bienfait amplifié.</p>
+
+    <!-- MOBILE: cards empilées -->
+    <div class="pdp-comp-cards">
+      <div class="pdp-comp-card">
+        <div class="pdp-cc-top">Glucomannane</div>
+        <div class="pdp-cc-col pdp-cc-col--market"><div class="pdp-cc-label">Marché classique</div><div class="pdp-cc-val">Rarement dosé EFSA</div></div>
+        <div class="pdp-cc-col pdp-cc-col--uburn"><div class="pdp-cc-label">Uburn</div><div class="pdp-cc-val">3g · EFSA ID 3120 <span class="pdp-comp-check">✓</span></div></div>
+        <div class="pdp-cc-benefit">Satiété durable</div>
+      </div>
+      <div class="pdp-comp-card">
+        <div class="pdp-cc-top">L-Carnitine</div>
+        <div class="pdp-cc-col pdp-cc-col--market"><div class="pdp-cc-label">Marché classique</div><div class="pdp-cc-val">≤ 100mg souvent</div></div>
+        <div class="pdp-cc-col pdp-cc-col--uburn"><div class="pdp-cc-label">Uburn</div><div class="pdp-cc-val">400mg · +300% <span class="pdp-comp-check">✓</span></div></div>
+        <div class="pdp-cc-benefit">Métabolisme</div>
+      </div>
+      <div class="pdp-comp-card">
+        <div class="pdp-cc-top">Fibre Acacia</div>
+        <div class="pdp-cc-col pdp-cc-col--market"><div class="pdp-cc-label">Marché classique</div><div class="pdp-cc-val">Absente ou trace</div></div>
+        <div class="pdp-cc-col pdp-cc-col--uburn"><div class="pdp-cc-label">Uburn</div><div class="pdp-cc-val">1,5g · Nouveau <span class="pdp-comp-check">✓</span></div></div>
+        <div class="pdp-cc-benefit">Digestion</div>
+      </div>
+      <div class="pdp-comp-card">
+        <div class="pdp-cc-top">MCT Coco</div>
+        <div class="pdp-cc-col pdp-cc-col--market"><div class="pdp-cc-label">Marché classique</div><div class="pdp-cc-val">Souvent absent</div></div>
+        <div class="pdp-cc-col pdp-cc-col--uburn"><div class="pdp-cc-label">Uburn</div><div class="pdp-cc-val">Présent <span class="pdp-comp-check">✓</span></div></div>
+        <div class="pdp-cc-benefit">Énergie stable</div>
+      </div>
+      <div class="pdp-comp-card">
+        <div class="pdp-cc-top">Ubé / Antioxydants</div>
+        <div class="pdp-cc-col pdp-cc-col--market"><div class="pdp-cc-label">Marché classique</div><div class="pdp-cc-val">Non</div></div>
+        <div class="pdp-cc-col pdp-cc-col--uburn"><div class="pdp-cc-label">Uburn</div><div class="pdp-cc-val">Anthocyanes <span class="pdp-comp-check">✓</span></div></div>
+        <div class="pdp-cc-benefit">Antioxydants</div>
+      </div>
+      <div class="pdp-comp-card">
+        <div class="pdp-cc-top">Gingembre</div>
+        <div class="pdp-cc-col pdp-cc-col--market"><div class="pdp-cc-label">Marché classique</div><div class="pdp-cc-val">200mg+ souvent</div></div>
+        <div class="pdp-cc-col pdp-cc-col--uburn"><div class="pdp-cc-label">Uburn</div><div class="pdp-cc-val">200mg <span class="pdp-comp-check">✓</span></div></div>
+        <div class="pdp-cc-benefit">Digestion + confort</div>
+      </div>
+      <div class="pdp-comp-card">
+        <div class="pdp-cc-top">Caféine</div>
+        <div class="pdp-cc-col pdp-cc-col--market"><div class="pdp-cc-label">Marché classique</div><div class="pdp-cc-val">Fréquente</div></div>
+        <div class="pdp-cc-col pdp-cc-col--uburn"><div class="pdp-cc-label">Uburn</div><div class="pdp-cc-val">0% caféine <span class="pdp-comp-check">✓</span></div></div>
+        <div class="pdp-cc-benefit">À toute heure</div>
+      </div>
+      <div class="pdp-comp-card">
+        <div class="pdp-cc-top">Sucre ajouté</div>
+        <div class="pdp-cc-col pdp-cc-col--market"><div class="pdp-cc-label">Marché classique</div><div class="pdp-cc-val">Parfois</div></div>
+        <div class="pdp-cc-col pdp-cc-col--uburn"><div class="pdp-cc-label">Uburn</div><div class="pdp-cc-val">Zéro <span class="pdp-comp-check">✓</span></div></div>
+        <div class="pdp-cc-benefit">Sans pic glycémique</div>
+      </div>
+      <div class="pdp-comp-card">
+        <div class="pdp-cc-top">Certification</div>
+        <div class="pdp-cc-col pdp-cc-col--market"><div class="pdp-cc-label">Marché classique</div><div class="pdp-cc-val">Souvent absente</div></div>
+        <div class="pdp-cc-col pdp-cc-col--uburn"><div class="pdp-cc-label">Uburn</div><div class="pdp-cc-val">EFSA ID 3120 <span class="pdp-comp-check">✓</span></div></div>
+        <div class="pdp-cc-benefit">Garantie officielle</div>
+      </div>
+    </div>
+
+    <!-- DESKTOP: table -->
+    <table class="pdp-comp-table" aria-label="Comparatif ingrédients Uburn vs marché">
+      <thead>
+        <tr>
+          <th scope="col">Ingrédient</th>
+          <th scope="col">Marché classique</th>
+          <th scope="col">Uburn</th>
+          <th scope="col">Bénéfice</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Glucomannane</td><td>Rarement dosé EFSA</td><td>3g · EFSA ID 3120 <span class="pdp-comp-check">✓</span></td><td>Satiété durable</td></tr>
+        <tr><td>L-Carnitine</td><td>≤ 100mg souvent</td><td>400mg · +300% <span class="pdp-comp-check">✓</span></td><td>Métabolisme</td></tr>
+        <tr><td>Fibre Acacia</td><td>Absente ou trace</td><td>1,5g · Nouveau <span class="pdp-comp-check">✓</span></td><td>Digestion</td></tr>
+        <tr><td>MCT Coco</td><td>Souvent absent</td><td>Présent <span class="pdp-comp-check">✓</span></td><td>Énergie stable</td></tr>
+        <tr><td>Ubé / Antioxydants</td><td>Non</td><td>Anthocyanes <span class="pdp-comp-check">✓</span></td><td>Antioxydants</td></tr>
+        <tr><td>Gingembre</td><td>200mg+ souvent</td><td>200mg <span class="pdp-comp-check">✓</span></td><td>Digestion + confort</td></tr>
+        <tr><td>Caféine</td><td>Fréquente</td><td>0% caféine <span class="pdp-comp-check">✓</span></td><td>À toute heure</td></tr>
+        <tr><td>Sucre ajouté</td><td>Parfois</td><td>Zéro <span class="pdp-comp-check">✓</span></td><td>Sans pic glycémique</td></tr>
+        <tr><td>Certification</td><td>Souvent absente</td><td>EFSA ID 3120 <span class="pdp-comp-check">✓</span></td><td>Garantie officielle</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 11 — ELLES RACONTENT LEURS RÉSULTATS
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-s11">
+  <div class="pdp-s11-inner">
+    <p class="pdp-section-label reveal">Avis vérifiés</p>
+    <h2 class="pdp-sect-h2 reveal">Nos clientes.</h2>
+    <p class="pdp-sect-sub reveal" style="font-style:italic;">Leurs mots.</p>
+    <div class="pdp-s11-track-wrap">
+      <div class="pdp-s11-track stagger-children">
+        <article class="pdp-s11-card">
+          <div class="pdp-s11-stars">★★★★★</div>
+          <p class="pdp-s11-text">« Je ne pense plus au placard à 16h. Ça me soulage vraiment au quotidien. J'ai testé tellement de trucs avant — cures détox, shakes minceur — rien ne tenait. Avec Uburn, c'est devenu un vrai rituel. Pas une contrainte. »</p>
+          <div class="pdp-s11-author">
+            <div class="pdp-s11-av">ML</div>
+            <div>
+              <div class="pdp-s11-name">Marion L.</div>
+              <div class="pdp-s11-meta">28 ans · Lyon</div>
+              <div class="pdp-s11-verif">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#6b2fa0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Achat vérifié
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pdp-s11-card">
+          <div class="pdp-s11-stars">★★★★★</div>
+          <p class="pdp-s11-text">« Pour 0,61€ par jour, y'a pas de risque. Et ça marche. Mon 2e pot en cours. Le format Résultats Maximum vaut vraiment le coup, bien plus rentable. Et la livraison était en 48h. »</p>
+          <div class="pdp-s11-author">
+            <div class="pdp-s11-av">SO</div>
+            <div>
+              <div class="pdp-s11-name">Sophie</div>
+              <div class="pdp-s11-meta">Bordeaux</div>
+              <div class="pdp-s11-verif">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#6b2fa0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Achat vérifié
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="pdp-s11-card">
+          <div class="pdp-s11-stars">★★★★★</div>
+          <p class="pdp-s11-text">« Mes collègues m'ont demandé mon secret. Le goût est top et je ne grignote plus le soir. Au début j'étais sceptique mais le côté noisette est très agréable. Je le bois pur ou avec du lait d'amande. »</p>
+          <div class="pdp-s11-author">
+            <div class="pdp-s11-av">NT</div>
+            <div>
+              <div class="pdp-s11-name">Nathalie</div>
+              <div class="pdp-s11-meta">Toulouse</div>
+              <div class="pdp-s11-verif">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#6b2fa0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Achat vérifié
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 12 — FAQ
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-s12">
+  <div class="pdp-sect-inner">
+    <p class="pdp-section-label reveal">FAQ</p>
+    <h2 class="pdp-sect-h2 reveal">Tout ce que tu veux savoir</h2>
+    <p class="pdp-sect-sub reveal" style="font-style:italic;">sur Uburn</p>
+    <div class="pdp-faq-list">
+      <div class="pdp-faq-item">
+        <button class="pdp-faq-trigger" aria-expanded="false">
+          En combien de temps voit-on des résultats ?
+          <span class="pdp-faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b2fa0" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="pdp-faq-body"><p>La satiété est immédiate dès la première prise (allégation EFSA glucomannane). Les changements de comportement alimentaire (moins de fringales) s'installent en 2 à 4 semaines en général.</p></div>
+      </div>
+      <div class="pdp-faq-item">
+        <button class="pdp-faq-trigger" aria-expanded="false">
+          C'est compatible le soir ? Sans caféine ?
+          <span class="pdp-faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b2fa0" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="pdp-faq-body"><p>Oui, 0% caféine. Tu peux le prendre à toute heure. On le recommande plutôt le matin pour bénéficier de la satiété toute la journée, mais c'est sans contre-indication horaire.</p></div>
+      </div>
+      <div class="pdp-faq-item">
+        <button class="pdp-faq-trigger" aria-expanded="false">
+          L'abonnement est-il obligatoire ?
+          <span class="pdp-faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b2fa0" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="pdp-faq-body"><p>Non. Aucun abonnement obligatoire. Tu commandes quand tu en as besoin. Si tu veux gagner -15% en t'engageant sur 3 mois, on a un Pack Famille (3 pots Résultats Maximum) à 119,90€ au lieu de 163,50€.</p></div>
+      </div>
+      <div class="pdp-faq-item">
+        <button class="pdp-faq-trigger" aria-expanded="false">
+          Avec de l'eau ou du lait — quelle différence ?
+          <span class="pdp-faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b2fa0" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="pdp-faq-body"><p>Eau froide ou tiède pour un goût pur. Lait végétal (amande, avoine, coco) pour une version latte plus gourmande. Évite l'eau brûlante qui fige la texture trop vite.</p></div>
+      </div>
+      <div class="pdp-faq-item">
+        <button class="pdp-faq-trigger" aria-expanded="false">
+          Y a-t-il des contre-indications ?
+          <span class="pdp-faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b2fa0" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="pdp-faq-body"><p>Déconseillé pendant la grossesse et l'allaitement par principe de précaution. Si tu prends un traitement médical, demande conseil à ton médecin avant utilisation.</p></div>
+      </div>
+      <div class="pdp-faq-item">
+        <button class="pdp-faq-trigger" aria-expanded="false">
+          Combien de doses par pot ?
+          <span class="pdp-faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b2fa0" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="pdp-faq-body"><p>Découverte 90g = 11 doses (1 dose = 8g). Résultats Maximum 270g = 33 doses, soit plus d'un mois d'usage quotidien.</p></div>
+      </div>
+      <div class="pdp-faq-item">
+        <button class="pdp-faq-trigger" aria-expanded="false">
+          Quels moyens de paiement ?
+          <span class="pdp-faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b2fa0" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="pdp-faq-body"><p>Carte bancaire (Visa, Mastercard, Amex), Apple Pay, Google Pay, 3x sans frais avec Klarna à partir de 35€.</p></div>
+      </div>
+      <div class="pdp-faq-item">
+        <button class="pdp-faq-trigger" aria-expanded="false">
+          Politique de retour ?
+          <span class="pdp-faq-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b2fa0" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="pdp-faq-body"><p>Pour toute question sur ta commande, contacte-nous à hello@uburn.co — nous répondons sous 24h.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 13 — OFFRE FINALE
+══════════════════════════════════════════════════════════════ -->
+<section class="pdp-s13">
+  <div class="pdp-s13-inner">
+    <p class="pdp-offer-eye reveal">VOTRE OFFRE</p>
+    <h2 class="pdp-offer-h2 reveal">Paiement unique.</h2>
+
+    <div class="pdp-offer-cards reveal">
+      <!-- Card Découverte -->
+      <div class="pdp-offer-card">
+        <img src="https://uburn.co/cdn/shop/files/WhatsApp_Image_2026-04-17_at_12.46.02_1.jpg?v=1776421390&width=600&format=webp"
+             alt="Uburn Découverte — boisson ube préparée"
+             class="pdp-offer-img" loading="lazy" decoding="async">
+        <div class="pdp-offer-body">
+          <div class="pdp-offer-name">Découverte</div>
+          <div class="pdp-offer-sub">90g · 1 dose/jour · Idéal pour tester</div>
+          <div class="pdp-offer-price-row">
+            <span class="pdp-offer-price-old">38,50€</span>
+            <span class="pdp-offer-price-new">34,50€</span>
+          </div>
+          <div class="pdp-offer-per-day">soit 1,15€/jour · 30 jours</div>
+          <form action="/cart/add" method="post">
+            <input type="hidden" name="id" value="{{ variant_decouverte.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="pdp-offer-btn">Commander →</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Card Résultats Maximum -->
+      <div class="pdp-offer-card pdp-offer-card--popular">
+        <span class="pdp-offer-badge">Le plus populaire ⭐</span>
+        <img src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0000_7.jpg?v=1773911263&width=600&format=webp"
+             alt="Uburn Résultats Maximum — format 90 jours"
+             class="pdp-offer-img" loading="lazy" decoding="async">
+        <div class="pdp-offer-body">
+          <div class="pdp-offer-name">Résultats Maximum ⭐</div>
+          <div class="pdp-offer-sub">270g · 3 doses/jour · 3× plus de résultats</div>
+          <div class="pdp-offer-price-row">
+            <span class="pdp-offer-price-old">62,50€</span>
+            <span class="pdp-offer-price-new">54,50€</span>
+          </div>
+          <div class="pdp-offer-per-day">= 0,61€/jour · 90 jours</div>
+          <form action="/cart/add" method="post">
+            <input type="hidden" name="id" value="{{ variant_max.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="pdp-offer-btn">Commander →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bonus block -->
+    <div class="pdp-bonus-block reveal">
+      <div class="pdp-bonus-title">🎁 Offerts avec ta commande aujourd'hui :</div>
+      <div class="pdp-bonus-list">
+        <div class="pdp-bonus-item">
+          <span class="pdp-bonus-item-name">✓ E-book "30j pour reprendre le contrôle"</span>
+          <span class="pdp-bonus-item-price">~47€</span>
+        </div>
+        <div class="pdp-bonus-item">
+          <span class="pdp-bonus-item-name">✓ Accès groupe privé Uburn Collective</span>
+          <span class="pdp-bonus-item-price">~40€</span>
+        </div>
+        <div class="pdp-bonus-item">
+          <span class="pdp-bonus-item-name">✓ Accès aux événements Uburn en ligne</span>
+          <span class="pdp-bonus-item-price">~50€</span>
+        </div>
+        <div class="pdp-bonus-item">
+          <span class="pdp-bonus-item-name">✓ Suivi nutrition WhatsApp 30j</span>
+          <span class="pdp-bonus-item-price">~47€</span>
+        </div>
+      </div>
+      <div class="pdp-bonus-total">Valeur totale offerte : <strong>184€ OFFERTS</strong></div>
+    </div>
+
+    <!-- Trust badges -->
+    <div class="pdp-offer-trust reveal">
+      <span class="pdp-offer-trust-item">🚛 Livraison gratuite en France</span>
+      <span class="pdp-offer-trust-item">🔒 Paiement 100% sécurisé</span>
+      <span class="pdp-offer-trust-item">🚫 0% sucres ajoutés</span>
+      <span class="pdp-offer-trust-item">🚫 Annulable à tout moment</span>
+    </div>
+
+    <!-- Rating note -->
+    <p class="pdp-offer-note reveal">⭐⭐⭐⭐⭐ 4,7/5 · 1&nbsp;500+ clientes satisfaites · Allégation glucomannane validée EFSA (ID&nbsp;3120)</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 15 — FOOTER LÉGAL
+══════════════════════════════════════════════════════════════ -->
+<div class="pdp-legal">
+  <p>Complément alimentaire à base de glucomannane. Le glucomannane contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique.</p>
+</div>
+
+</div><!-- /pdp-v10 -->
+
+<!-- ══════════════════════════════════════════════════════════════
+     SECTION 14 — STICKY ATC (mobile only · fixed bottom)
+══════════════════════════════════════════════════════════════ -->
+<div id="pdp-sticky-atc" class="pdp-sticky-atc" role="region" aria-label="Commande rapide">
+  <div class="pdp-sticky-inner">
+    <div class="pdp-sticky-product">
+      <img src="https://uburn.co/cdn/shop/files/PRODUCTPAGE_0000_7.jpg?v=1773911263&width=80&format=webp"
+           alt="Uburn" class="pdp-sticky-img" loading="lazy" decoding="async">
+      <div class="pdp-sticky-info">
+        <span class="pdp-sticky-name">Uburn Poudre Ubé</span>
+        <span class="pdp-sticky-price" id="pdp-sticky-price">{% if variant_max %}{{ variant_max.price | money_without_currency }}€{% else %}54,50€{% endif %}</span>
+      </div>
+    </div>
+    <button type="button" class="pdp-sticky-btn" id="pdp-sticky-btn">COMMANDER →</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── TOP BAR ROTATION ───────────────────────────────────── */
+  var tbSlides  = [document.getElementById('tb0'), document.getElementById('tb1'), document.getElementById('tb2')];
+  var tbCurrent = 0;
+  function tbNext() {
+    tbSlides[tbCurrent].classList.remove('tb-active');
+    tbSlides[tbCurrent].classList.add('tb-exit');
+    var prev = tbCurrent;
+    tbCurrent = (tbCurrent + 1) % tbSlides.length;
+    tbSlides[tbCurrent].classList.add('tb-active');
+    setTimeout(function () { tbSlides[prev].classList.remove('tb-exit'); }, 450);
+  }
+  setInterval(tbNext, 4000);
+
+  /* ── CAROUSEL ───────────────────────────────────────────── */
+  var track  = document.getElementById('carTrack');
+  var dots   = document.querySelectorAll('.pdp-dot');
+  var slides = track ? track.querySelectorAll('.pdp-carousel-slide') : [];
+  var total  = slides.length;
+  var current = 0;
+
+  function goTo(idx) {
+    idx = Math.max(0, Math.min(idx, total - 1));
+    current = idx;
+    if (track) track.scrollTo({ left: track.offsetWidth * idx, behavior: 'smooth' });
+    dots.forEach(function (d, i) { d.classList.toggle('dot-active', i === idx); });
+  }
+
+  /* Scroll-snap sync dots */
+  if (track) {
+    track.addEventListener('scroll', function () {
+      var idx = Math.round(track.scrollLeft / track.offsetWidth);
+      if (idx !== current) { current = idx; dots.forEach(function (d, i) { d.classList.toggle('dot-active', i === idx); }); }
+    }, { passive: true });
+  }
+
+  /* Dot clicks */
+  dots.forEach(function (d, i) { d.addEventListener('click', function () { goTo(i); }); });
+
+  /* Desktop arrow buttons */
+  var btnPrev = document.getElementById('carPrev');
+  var btnNext = document.getElementById('carNext');
+  if (btnPrev) btnPrev.addEventListener('click', function () { goTo(current - 1); });
+  if (btnNext) btnNext.addEventListener('click', function () { goTo(current + 1); });
+
+  /* ── VARIANT SELECTION ──────────────────────────────────── */
+  var variantInput = document.getElementById('pdp-variant-id');
+  var ctaBtn       = document.getElementById('pdp-cta-btn');
+
+  window.pdpSelectVariant = function (card) {
+    document.querySelectorAll('.pdp-variant-card').forEach(function (c) { c.classList.remove('vc-active', 'vc-just-selected'); });
+    card.classList.add('vc-active');
+    card.classList.remove('vc-just-selected');
+    requestAnimationFrame(function(){ card.classList.add('vc-just-selected'); });
+    var id    = card.dataset.variantId;
+    var price = card.dataset.priceDisplay;
+    if (variantInput) variantInput.value = id;
+    if (ctaBtn) ctaBtn.textContent = 'Je reprends le contrôle — ' + price + '€ →';
+    /* Sync sticky ATC price */
+    var sp = document.getElementById('pdp-sticky-price');
+    if (sp) sp.textContent = price + '€';
+  };
+
+  /* ── REVEAL OBSERVER (LP pattern) ──────────────────────── */
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.pdp-v10-scope .reveal, #pdp-v10 .reveal').forEach(function (el) { obs.observe(el); });
+  /* Fallback: also observe all .reveal inside this section */
+  document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+
+  /* ── STAGGER OBSERVER ───────────────────────────────────── */
+  var staggerObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); staggerObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.stagger-children, .stagger-scale').forEach(function (el) {
+    staggerObs.observe(el);
+  });
+
+  /* ── COUNT-UP ANIMATION ─────────────────────────────────── */
+  var cuObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      cuObs.unobserve(e.target);
+      var el = e.target;
+      var target = parseFloat(el.dataset.countup);
+      var suffix = el.dataset.countupSuffix || '';
+      var isDecimal = target !== Math.floor(target);
+      var duration = 1400;
+      var startTime = null;
+      function tick(ts) {
+        if (!startTime) startTime = ts;
+        var progress = Math.min((ts - startTime) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var current = target * eased;
+        el.textContent = (isDecimal ? current.toFixed(1) : Math.round(current)) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-countup]').forEach(function (el) { cuObs.observe(el); });
+
+  /* ── FAQ ACCORDION ──────────────────────────────────────────── */
+  document.querySelectorAll('.pdp-faq-trigger').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item = btn.closest('.pdp-faq-item');
+      var body = item.querySelector('.pdp-faq-body');
+      var isOpen = item.classList.contains('open');
+      /* close all */
+      document.querySelectorAll('.pdp-faq-item').forEach(function (i) {
+        if (i !== item) {
+          i.classList.remove('open');
+          i.querySelector('.pdp-faq-body').style.height = '0';
+          i.querySelector('.pdp-faq-trigger').setAttribute('aria-expanded', 'false');
+        }
+      });
+      /* toggle current */
+      if (isOpen) {
+        item.classList.remove('open');
+        body.style.height = '0';
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        item.classList.add('open');
+        body.style.height = body.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* ── STICKY ATC ─────────────────────────────────────────────── */
+  var stickyAtc = document.getElementById('pdp-sticky-atc');
+  var stickyCtaBtn = document.getElementById('pdp-sticky-btn');
+  var heroForm = document.getElementById('pdp-hero-form');
+
+  if (stickyAtc) {
+    var stickyShown = false;
+    function checkStickyAtc() {
+      if (window.innerWidth >= 768) return;
+      var shouldShow = window.scrollY > 600;
+      if (shouldShow !== stickyShown) {
+        stickyShown = shouldShow;
+        stickyAtc.classList.toggle('visible', shouldShow);
+      }
+    }
+    window.addEventListener('scroll', checkStickyAtc, { passive: true });
+    checkStickyAtc();
+  }
+
+  if (stickyCtaBtn && heroForm) {
+    stickyCtaBtn.addEventListener('click', function () {
+      heroForm.submit();
+    });
+  }
+
+})();
+</script>
+
+<!-- ===== PREMIUM ANIMATIONS v2 — PDP V10 ===== -->
+<style>
+/* (1) Hero entrance — stagger via transition-delay on .reveal mechanism */
+.pdp-hero .pdp-rating   { transition-delay:.05s }
+.pdp-hero .pdp-h1       { transition-delay:.18s }
+.pdp-hero .pdp-sub      { transition-delay:.30s }
+.pdp-hero .pdp-bullets  { transition-delay:.42s }
+.pdp-hero .pdp-variants { transition-delay:.52s }
+.pdp-hero .pdp-bonus    { transition-delay:.60s }
+.pdp-hero .pdp-cta-wrap { transition-delay:.68s }
+.pdp-hero .pdp-payment  { transition-delay:.74s }
+.pdp-hero .pdp-trust    { transition-delay:.78s }
+
+/* (2) Carousel — slide image subtle scale-in on active */
+@keyframes ub-slide-in {
+  from { opacity:0; transform:scale(.97) }
+  to   { opacity:1; transform:scale(1) }
+}
+.pdp-carousel-slide[aria-hidden="false"] img,
+.pdp-carousel-slide.active img {
+  animation: ub-slide-in .4s cubic-bezier(.22,1,.36,1) both;
+}
+
+/* (3) Review cards — lift + purple shadow on hover */
+.pdp-rv-card {
+  transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s cubic-bezier(.22,1,.36,1);
+}
+.pdp-rv-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 48px rgba(107,47,160,.13);
+}
+
+/* (4) Problem cards — ghost number scales on card hover */
+.pdp-s4-ghost {
+  transition: transform .35s cubic-bezier(.22,1,.36,1), color .35s ease;
+}
+.pdp-s4-card:hover .pdp-s4-ghost {
+  transform: scale(1.12) translateY(-8px);
+  color: rgba(255,255,255,.14);
+}
+.pdp-s4-card {
+  transition: background .25s ease, border-color .25s ease;
+}
+.pdp-s4-card:hover {
+  background: rgba(255,255,255,.15);
+  border-color: rgba(255,255,255,.22);
+}
+
+/* (5) Ingredient cards — shimmer sweep on hover */
+@keyframes ub-shimmer {
+  from { background-position:-200% center }
+  to   { background-position: 200% center }
+}
+.pdp-ing-card {
+  position: relative;
+  isolation: isolate;
+  transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s cubic-bezier(.22,1,.36,1);
+}
+.pdp-ing-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(107,47,160,.12);
+}
+.pdp-ing-card::after {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.4) 50%,transparent 65%);
+  background-size:200% 100%;
+  background-position:-200% center;
+  pointer-events:none; opacity:0; z-index:1;
+  border-radius:inherit;
+}
+.pdp-ing-card:hover::after { opacity:1; animation:ub-shimmer .55s ease-out forwards }
+
+/* (6) Stats section glow orb */
+.ub-s7-glow-orb {
+  position:absolute; width:700px; height:700px;
+  left:50%; top:50%;
+  transform:translate(-50%,-50%) scale(.3);
+  background:radial-gradient(circle,rgba(176,125,232,.28) 0%,transparent 65%);
+  pointer-events:none; z-index:0; border-radius:50%; opacity:0;
+  transition:transform 1.8s cubic-bezier(.22,1,.36,1),opacity 1.4s ease-out;
+}
+.pdp-s7.ub-glow-active .ub-s7-glow-orb {
+  transform:translate(-50%,-50%) scale(1); opacity:1;
+}
+
+/* (7) Comparison cards — slide in from left */
+@keyframes ub-comp-in {
+  from { opacity:0; transform:translateX(-18px) }
+  to   { opacity:1; transform:translateX(0) }
+}
+.pdp-comp-card.ub-hidden  { opacity:0; transform:translateX(-18px) }
+.pdp-comp-card.ub-visible { animation:ub-comp-in .38s ease-out forwards }
+
+/* (8) Variant cards — subtle lift on hover */
+.pdp-variant-card {
+  transition: transform .22s cubic-bezier(.22,1,.36,1), box-shadow .22s ease;
+}
+.pdp-variant-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(107,47,160,.14);
+}
+
+/* (9) FAQ trigger — icon spin already exists; add row highlight on hover */
+.pdp-faq-item {
+  transition: background .2s ease;
+  border-radius: 8px;
+}
+.pdp-faq-item:hover { background: rgba(107,47,160,.03) }
+
+/* Reduced motion */
+@media (prefers-reduced-motion:reduce) {
+  .pdp-hero .pdp-rating,
+  .pdp-hero .pdp-h1,
+  .pdp-hero .pdp-sub,
+  .pdp-hero .pdp-bullets,
+  .pdp-hero .pdp-variants,
+  .pdp-hero .pdp-bonus,
+  .pdp-hero .pdp-cta-wrap,
+  .pdp-hero .pdp-payment,
+  .pdp-hero .pdp-trust    { transition-delay:0s !important }
+  .pdp-rv-card,.pdp-s4-card,.pdp-ing-card,
+  .pdp-variant-card,.pdp-comp-card,
+  .ub-s7-glow-orb         { animation:none!important; transition:none!important; opacity:1!important; transform:none!important }
+  .pdp-ing-card::after    { display:none }
+}
+</style>
+
+<script>
+(function(){
+  // (6) Stats glow orb — inject and trigger
+  var s7 = document.querySelector('.pdp-s7');
+  if(s7){
+    var orb = document.createElement('div');
+    orb.className = 'ub-s7-glow-orb';
+    s7.appendChild(orb);
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('ub-glow-active'); }
+      });
+    },{ threshold:.25 }).observe(s7);
+  }
+
+  // (7) Comparison cards — staggered slide-in from left
+  var compCards = document.querySelectorAll('.pdp-comp-card');
+  compCards.forEach(function(c){ c.classList.add('ub-hidden'); });
+  new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(!entry.isIntersecting) return;
+      var c = entry.target;
+      var idx = Array.from(compCards).indexOf(c);
+      c.classList.remove('ub-hidden');
+      c.style.animationDelay = (idx * 60) + 'ms';
+      c.classList.add('ub-visible');
+    });
+  },{ threshold:.08, rootMargin:'0px 0px -40px 0px' }).observe(
+    document.querySelector('.pdp-comp-cards') || document.createElement('div')
+  );
+
+  // Observe each card individually for stagger
+  compCards.forEach(function(c){
+    new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting) return;
+        var idx = Array.from(compCards).indexOf(entry.target);
+        entry.target.classList.remove('ub-hidden');
+        entry.target.style.animationDelay = (idx * 55) + 'ms';
+        entry.target.classList.add('ub-visible');
+      });
+    },{ threshold:.1 }).observe(c);
+  });
+
+  // (2) Carousel parallax — subtle translateY on scroll (desktop)
+  var carWrap = document.querySelector('.pdp-carousel-wrap');
+  if(carWrap && window.matchMedia('(min-width:768px)').matches){
+    var ticking = false;
+    function updatePx(){
+      var img = carWrap.querySelector('.pdp-carousel-slide:first-child img');
+      if(!img){ ticking=false; return; }
+      var rect = carWrap.getBoundingClientRect();
+      var progress = (rect.top + rect.height/2 - window.innerHeight/2) / window.innerHeight;
+      progress = Math.max(-0.4, Math.min(0.4, progress));
+      img.style.transform = 'translateY('+(progress*10)+'px)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ requestAnimationFrame(updatePx); ticking=true; }
+    },{ passive:true });
+  }
+})();
+</script>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   DESIGN SKILLS UPGRADE — 100px rhythm · eyebrow labels · micro-polish
+═══════════════════════════════════════════════════════════════════════════ */
+
+/* 100px section padding (all content sections) */
+.pdp-s3,.pdp-s4,.pdp-s5,.pdp-s6,.pdp-s7,.pdp-s8,
+.pdp-s9,.pdp-s10,.pdp-s11,.pdp-s12,.pdp-s13 {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+/* Mobile keeps tighter rhythm */
+@media (max-width: 767px) {
+  .pdp-s3,.pdp-s4,.pdp-s5,.pdp-s6,.pdp-s7,.pdp-s8,
+  .pdp-s9,.pdp-s10,.pdp-s11,.pdp-s12,.pdp-s13 {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+}
+
+/* Section eyebrow label */
+.pdp-section-label {
+  display: block;
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6b2fa0;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.pdp-section-label--light { color: rgba(255,255,255,.5); }
+
+/* text-wrap: balance on all section headings */
+.pdp-sect-h2, .pdp-offer-h2, .pdp-s4-h2, .pdp-s5-title, .pdp-ing-name {
+  text-wrap: balance;
+}
+
+/* Tabular numerals on stats */
+.pdp-stat-num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* touch-action: manipulation on all interactive elements */
+.pdp-cta, .pdp-offer-btn, .pdp-sticky-btn, .pdp-variant-card,
+.pdp-faq-trigger, .pdp-carousel-btn, .pdp-dot, button {
+  touch-action: manipulation;
+}
+
+/* S11 testimonial cards — hover lift with purple shadow */
+.pdp-s11-card {
+  transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s cubic-bezier(.22,1,.36,1);
+}
+.pdp-s11-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 44px rgba(107,47,160,.14);
+}
+
+/* S6 expert — photo gentle float on hover */
+.pdp-s6-photo {
+  transition: transform .6s cubic-bezier(.22,1,.36,1), box-shadow .4s ease;
+}
+.pdp-s6-inner:hover .pdp-s6-photo {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(61,24,115,.2);
+}
+
+/* Offer card hover lift */
+.pdp-offer-card {
+  transition: transform .28s cubic-bezier(.22,1,.36,1), box-shadow .28s cubic-bezier(.22,1,.36,1);
+}
+.pdp-offer-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(61,24,115,.16);
+}
+
+/* Variant card active state — subtle ripple feedback */
+@keyframes ub-ripple {
+  from { box-shadow: 0 0 0 0 rgba(107,47,160,.3); }
+  to   { box-shadow: 0 0 0 12px rgba(107,47,160,.0); }
+}
+.pdp-variant-card.vc-just-selected {
+  animation: ub-ripple .4s ease-out forwards;
+}
+
+/* Reduced motion additions */
+@media (prefers-reduced-motion: reduce) {
+  .pdp-s11-card, .pdp-s6-photo, .pdp-offer-card { transition: none; }
+  .pdp-s11-card:hover, .pdp-s6-inner:hover .pdp-s6-photo, .pdp-offer-card:hover {
+    transform: none;
+  }
+  .pdp-variant-card.vc-just-selected { animation: none; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "PDP V10",
+  "settings": []
+}
+{% endschema %}

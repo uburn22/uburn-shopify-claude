@@ -69,17 +69,17 @@
     });
 
     var ctaText = root.querySelector('[data-ublp2-cta-text]');
-    if (ctaText) ctaText.textContent = 'add to cart — ' + priceLabel;
+    if (ctaText) ctaText.textContent = 'Checkout — ' + currentLabel();
 
     var bundle = root.querySelector('[data-ublp2-bundle]');
     if (bundle) bundle.textContent = fmt(price);
 
     var sname = root.querySelector('[data-ublp2-sticky-name]');
     var sprice = root.querySelector('[data-ublp2-sticky-price]');
-    if (sname) sname.textContent = currentLabel();
+    if (sname) sname.textContent = currentLabel() + ' · 30 days';
     if (sprice) sprice.textContent = state.mode === 'subscribe'
       ? priceLabel + ' · save 10%'
-      : priceLabel + ' · one-time';
+      : priceLabel;
   }
 
   // ────── Pack selector ──────
