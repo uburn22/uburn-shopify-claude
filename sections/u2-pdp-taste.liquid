@@ -1,0 +1,140 @@
+{%- comment -%}
+  UBurn V2 — PDP Taste hook (vanilla-hazelnut + chips + secondary CTA)
+{%- endcomment -%}
+<style>
+  .u2-pdp-taste { padding: 80px 20px; background: var(--u2-cream-deep); }
+  .u2-pdp-taste__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .u2-pdp-taste__media {
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(135deg, var(--u2-iris) 0%, var(--u2-plum-black) 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 20px 60px rgba(42, 16, 84, 0.2);
+    position: relative;
+  }
+  .u2-pdp-taste__media img { width: 100%; height: 100%; object-fit: cover; }
+  .u2-pdp-taste__art {
+    color: var(--u2-cream);
+    font-family: var(--u2-serif);
+    font-size: 100px;
+    font-style: italic;
+    opacity: 0.3;
+  }
+  .u2-pdp-taste__copy { max-width: 520px; }
+  .u2-pdp-taste__eyebrow {
+    display: inline-block;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--u2-iris);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .u2-pdp-taste__title {
+    font-family: var(--u2-serif);
+    font-size: 44px;
+    line-height: 1.05;
+    font-weight: 400;
+    color: var(--u2-plum-black);
+    margin: 0 0 20px;
+    letter-spacing: -0.025em;
+  }
+  .u2-pdp-taste__title em { font-style: italic; color: var(--u2-iris); }
+  .u2-pdp-taste__lead {
+    font-family: var(--u2-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--u2-plum);
+    margin: 0 0 24px;
+  }
+  .u2-pdp-taste__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px;
+  }
+  .u2-pdp-taste__chip {
+    background: rgba(107, 78, 158, 0.1);
+    color: var(--u2-iris-deep);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .u2-pdp-taste__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--u2-sans);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--u2-iris-deep);
+    text-decoration: none;
+    border-bottom: 2px solid var(--u2-iris);
+    padding-bottom: 2px;
+    transition: color 0.2s var(--u2-ease-smooth), gap 0.2s var(--u2-ease-smooth);
+  }
+  .u2-pdp-taste__cta:hover { color: var(--u2-iris); gap: 12px; }
+  @media (max-width: 900px) {
+    .u2-pdp-taste { padding: 60px 20px; }
+    .u2-pdp-taste__inner { grid-template-columns: 1fr; gap: 32px; }
+    .u2-pdp-taste__title { font-size: 32px; }
+  }
+</style>
+<section class="u2-root u2-pdp-taste" aria-labelledby="u2-pdp-taste-title">
+  <div class="u2-pdp-taste__inner">
+    <div class="u2-pdp-taste__media">
+      {% if section.settings.image %}
+        <img src="{{ section.settings.image | image_url: width: 1200 }}" alt="{{ section.settings.image.alt | default: 'UBurn purple drink' | escape }}" loading="lazy" decoding="async" width="1200" height="1200">
+      {% else %}
+        <img src="{{ 'uburn-us-pdp-09-texture-mix-action-a.png' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Lait crémeux versé dans un verre, mélange violet en mouvement{% else %}Creamy milk pouring into a glass, violet swirl in motion{% endif %}" loading="lazy" decoding="async" width="1024" height="1024" style="width:100%;height:100%;object-fit:cover;">
+      {% endif %}
+    </div>
+    <div class="u2-pdp-taste__copy">
+      <span class="u2-pdp-taste__eyebrow">{{ section.settings.eyebrow | default: 'The purple ritual' }}</span>
+      <h2 class="u2-pdp-taste__title" id="u2-pdp-taste-title">{{ section.settings.title | default: 'A smooth <em>vanilla-hazelnut taste.</em>' }}</h2>
+      <p class="u2-pdp-taste__lead">{{ section.settings.lead | default: 'Drink with water, milk, or plant-based milk. A smooth texture, a naturally purple color, and a simple routine that fits into your day.' }}</p>
+      <ul class="u2-pdp-taste__chips">
+        <li class="u2-pdp-taste__chip">{{ section.settings.chip_1 | default: 'Water, milk, or plant-based milk' }}</li>
+        <li class="u2-pdp-taste__chip">{{ section.settings.chip_2 | default: 'Caffeine-free' }}</li>
+        <li class="u2-pdp-taste__chip">{{ section.settings.chip_3 | default: 'Ready in under a minute' }}</li>
+      </ul>
+      <a href="{{ section.settings.cta_link | default: '#u2-pdp-form' }}" class="u2-pdp-taste__cta">
+        {{ section.settings.cta_text | default: 'Pick my pack' }}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 PDP Taste",
+  "tag": "section",
+  "class": "shopify-section--u2",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The purple ritual" },
+    { "type": "text", "id": "title", "label": "Title (em supported)", "default": "A smooth <em>vanilla-hazelnut taste.</em>" },
+    { "type": "textarea", "id": "lead", "label": "Lead" },
+    { "type": "image_picker", "id": "image", "label": "Image (optional)" },
+    { "type": "text", "id": "chip_1", "label": "Chip 1", "default": "Water, milk, or plant-based milk" },
+    { "type": "text", "id": "chip_2", "label": "Chip 2", "default": "Caffeine-free" },
+    { "type": "text", "id": "chip_3", "label": "Chip 3", "default": "Ready in under a minute" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Pick my pack" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "presets": [{ "name": "U2 PDP Taste" }]
+}
+{% endschema %}
