@@ -101,8 +101,8 @@
 <section class="u2-root u2-problem" aria-label="It's biological">
   <div class="u2-problem__inner">
     <div class="u2-problem__banner u2-reveal" aria-hidden="false">
-      <img src="{{ 'u2-problem-banner-lifestyle.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Femme entre deux moments de la journée — la fringale arrive{% else %}A woman between two moments of the day — the craving arrives{% endif %}" loading="lazy" decoding="async" width="1600" height="685" style="object-position:center 35%;">
-      <span class="u2-problem__banner-cap">it's not in your head — it's in your blood.</span>
+      <img src="{{ section.settings.banner_filename | default: 'u2-problem-banner-lifestyle.jpg' | asset_url }}" alt="{{ section.settings.banner_alt | default: 'A woman between two moments of the day — the craving arrives' }}" loading="lazy" decoding="async" width="1600" height="685" style="object-position:center 35%;">
+      <span class="u2-problem__banner-cap">{{ section.settings.banner_caption | default: "it's not in your head — it's in your blood." }}</span>
     </div>
     <div class="u2-problem__head u2-reveal">
       <span class="u2-section-eyebrow">{{ section.settings.eyebrow | default: "— it's not a willpower problem" }}</span>
@@ -110,19 +110,19 @@
     </div>
     <div class="u2-problem__grid">
       <article class="u2-problem__card u2-reveal delay-1">
-        <div class="u2-problem__num">4 PM</div>
-        <h3 class="u2-problem__title">The pantry calls you</h3>
-        <p class="u2-problem__sub">Blood sugar crashing. It's physiology — not a character flaw.</p>
+        <div class="u2-problem__num">{{ section.settings.card_1_num | default: '4 PM' }}</div>
+        <h3 class="u2-problem__title">{{ section.settings.card_1_title | default: 'The pantry calls you' }}</h3>
+        <p class="u2-problem__sub">{{ section.settings.card_1_sub | default: "Blood sugar crashing. It's physiology — not a character flaw." }}</p>
       </article>
       <article class="u2-problem__card u2-reveal delay-2">
-        <div class="u2-problem__num">8 PM</div>
-        <h3 class="u2-problem__title">In front of the fridge</h3>
-        <p class="u2-problem__sub">Fatigue lowers your guard. Morning intentions fade one by one.</p>
+        <div class="u2-problem__num">{{ section.settings.card_2_num | default: '8 PM' }}</div>
+        <h3 class="u2-problem__title">{{ section.settings.card_2_title | default: 'In front of the fridge' }}</h3>
+        <p class="u2-problem__sub">{{ section.settings.card_2_sub | default: 'Fatigue lowers your guard. Morning intentions fade one by one.' }}</p>
       </article>
       <article class="u2-problem__card u2-reveal delay-3">
-        <div class="u2-problem__num">→</div>
-        <h3 class="u2-problem__title">Willpower isn't enough</h3>
-        <p class="u2-problem__sub">It's a biological response. It calls for a biological answer.</p>
+        <div class="u2-problem__num">{{ section.settings.card_3_num | default: '→' }}</div>
+        <h3 class="u2-problem__title">{{ section.settings.card_3_title | default: "Willpower isn't enough" }}</h3>
+        <p class="u2-problem__sub">{{ section.settings.card_3_sub | default: "It's a biological response. It calls for a biological answer." }}</p>
       </article>
     </div>
   </div>
@@ -133,9 +133,26 @@
   "tag": "section",
   "class": "shopify-section--u2-problem",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "— it’s not a willpower problem" },
-    { "type": "text", "id": "title_pre", "label": "Title — start", "default": "It’s" },
-    { "type": "text", "id": "title_em", "label": "Title — italic emphasis", "default": "biological." }
+    { "type": "header", "content": "Banner image + caption" },
+    { "type": "text", "id": "banner_filename", "label": "Banner /assets/ filename" },
+    { "type": "text", "id": "banner_alt", "label": "Banner alt text" },
+    { "type": "text", "id": "banner_caption", "label": "Banner caption (italic overlay)" },
+    { "type": "header", "content": "Headline" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "title_pre", "label": "Title start", "default": "It's" },
+    { "type": "text", "id": "title_em", "label": "Title italic emphasis", "default": "biological." },
+    { "type": "header", "content": "Card 1" },
+    { "type": "text", "id": "card_1_num", "label": "Card 1 — number/time" },
+    { "type": "text", "id": "card_1_title", "label": "Card 1 — title" },
+    { "type": "textarea", "id": "card_1_sub", "label": "Card 1 — sub" },
+    { "type": "header", "content": "Card 2" },
+    { "type": "text", "id": "card_2_num", "label": "Card 2 — number/time" },
+    { "type": "text", "id": "card_2_title", "label": "Card 2 — title" },
+    { "type": "textarea", "id": "card_2_sub", "label": "Card 2 — sub" },
+    { "type": "header", "content": "Card 3" },
+    { "type": "text", "id": "card_3_num", "label": "Card 3 — number/time" },
+    { "type": "text", "id": "card_3_title", "label": "Card 3 — title" },
+    { "type": "textarea", "id": "card_3_sub", "label": "Card 3 — sub" }
   ],
   "presets": [ { "name": "U2 Problem" } ]
 }

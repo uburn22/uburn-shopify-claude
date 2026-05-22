@@ -11,9 +11,13 @@
     assign product = all_products['ube-poudre']
   endif
   comment
-    USD hardcoded (Shopify Markets USD admin pending)
+    Dynamic currency via Liquid — respects Shopify Markets (rev 2026-05-20)
   endcomment
-  assign sub_price = '$33.29'
+  assign _v0 = product.variants[0].price
+  assign _sub_discount = 10
+  assign _sub_off = _v0 | times: _sub_discount | divided_by: 100
+  assign _sub_final = _v0 | minus: _sub_off
+  assign sub_price = _sub_final | money_without_trailing_zeros
   assign cta_text = cta_text | default: 'start the ritual'
   assign sticky_variant_id = product.variants[0].id
 

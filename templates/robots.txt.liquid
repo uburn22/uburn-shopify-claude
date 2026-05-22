@@ -1,0 +1,91 @@
+{%- comment -%}
+  UBurn V2 — Custom robots.txt
+  Default Shopify rules + explicit AI crawler permissions + agents.md / llms.txt references
+  Rev 2026-05-20
+{%- endcomment -%}
+# UBurn — Plant-based satiety drink (uburn.co)
+# Agent instructions: https://uburn.co/agents.md
+# AI assistant summary: https://uburn.co/pages/llms
+# UCP discovery: https://uburn.co/.well-known/ucp
+# UCP/MCP endpoint: https://uburn.co/api/ucp/mcp
+# Checkouts require explicit human approval. No scripted automation finalizing payment.
+
+# ── AI assistants & LLM crawlers — explicit allow ──
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: DiffbotBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: Phindbot
+Allow: /
+
+User-agent: Kagibot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# ── Default Shopify rules (preserved) ──
+{% for group in robots.default_groups %}
+  {%- for rule in group.rules -%}
+    {{ rule }}
+  {% endfor -%}
+  {%- if group.sitemap != blank %}
+    {{ group.sitemap }}
+  {%- endif %}
+{% endfor %}

@@ -4,9 +4,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
+    {%- comment -%} Favicons — UBurn "U" mark, white on plum-deep violet — rev 2026-05-20 {%- endcomment -%}
+    <link rel="icon" type="image/x-icon" href="{{ 'favicon.ico' | asset_url }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ 'favicon.ico' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ 'favicon-16x16.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ 'favicon-32x32.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ 'favicon-96x96.png' | asset_url }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ 'android-chrome-192x192.png' | asset_url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ 'apple-touch-icon.png' | asset_url }}">
+    <meta name="msapplication-TileColor" content="#2A1B3D">
+    <meta name="msapplication-TileImage" content="{{ 'android-chrome-192x192.png' | asset_url }}">
+    <meta name="theme-color" content="#2A1B3D">
+
+    {%- comment -%} Shopify admin favicon setting (fallback if Charles uploads a different one in admin) {%- endcomment -%}
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
@@ -15,18 +27,106 @@
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
 
+    {%- comment -%} Perf: preconnect critical third-parties (DNS + TLS warmup) {%- endcomment -%}
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.shopify.com">
+    <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
+    <link rel="dns-prefetch" href="//connect.facebook.net">
+    <link rel="dns-prefetch" href="//www.facebook.com">
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//monorail-edge.shopifysvc.com">
+
+    {%- comment -%} Perf: preload LCP image on product pages (first product media) {%- endcomment -%}
+    {%- if template contains 'product' and product and product.media.size > 0 -%}
+      {%- assign lcp_media = product.media[0] -%}
+      {%- if lcp_media.media_type != 'video' and lcp_media.media_type != 'external_video' -%}
+        <link rel="preload" as="image" href="{{ lcp_media | image_url: width: 1200 }}" fetchpriority="high">
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- comment -%}
+      SEO override block — rev 2026-05-20
+      Per-page-handle optimized titles + meta descriptions for US market.
+      Falls back to Shopify default when no override defined.
+    {%- endcomment -%}
+    {%- liquid
+      assign seo_title = ''
+      assign seo_desc = ''
+      assign h = ''
+      if template == 'index'
+        assign h = 'homepage'
+      elsif template == 'product' and product
+        assign h = 'product-' | append: product.handle
+      elsif template contains 'page'
+        assign h = 'page-' | append: page.handle
+      elsif template contains 'collection' and collection
+        assign h = 'collection-' | append: collection.handle
+      elsif template contains 'article' and article
+        assign h = 'article-' | append: article.handle
+      endif
+
+      case h
+      when 'homepage'
+        assign seo_title = 'UBurn — Plant-Based Satiety Drink | Caffeine-Free Afternoon Ritual'
+        assign seo_desc = 'UBurn is a plant-based purple drink made with EFSA-recognized konjac fiber. 30 calories, 0% caffeine, 6 natural actives. The afternoon ritual designed to help you manage cravings naturally.* Free U.S. shipping on orders $40+.'
+      when 'product-ube-poudre'
+        assign seo_title = 'UBurn — Plant-Based Satiety Drink | Konjac Fiber | 30 cal'
+        assign seo_desc = 'Plant-based purple drink with research-backed konjac glucomannan. 6 natural actives, 30 kcal per serving, 0% caffeine. Supports satiety up to 4 hours.* Free U.S. shipping on orders $40+.'
+      when 'page-the-science'
+        assign seo_title = 'The Science of Konjac Glucomannan | UBurn'
+        assign seo_desc = 'Glucomannan is the only soluble fiber the European Food Safety Authority recognizes for satiety support. Learn how the EFSA-backed mechanism works inside UBurn — a plant-based, caffeine-free afternoon ritual.*'
+      when 'page-our-story'
+        assign seo_title = 'Our Story — The French Origin of UBurn'
+        assign seo_desc = 'UBurn was born in France from one question: why is 4 PM so hard? Discover how founder Mariana built a plant-based satiety ritual without caffeine, fillers, or compromises.'
+      when 'page-about-us-en'
+        assign seo_title = 'About UBurn — Made in France for U.S. Afternoons'
+        assign seo_desc = 'UBurn is a plant-based satiety drink built around konjac glucomannan. Crafted in France for U.S. women managing afternoon cravings naturally — 30 calories, zero caffeine, 100% plant-based.*'
+      when 'page-reviews'
+        assign seo_title = 'UBurn Reviews — 2,847+ Verified Customers'
+        assign seo_desc = 'Real customers share why UBurn became their afternoon ritual. 4.7/5 across 2,847+ verified buyers. No more 4 PM crash, calmer afternoons, stable energy — in their own words.*'
+      when 'page-ingredients'
+        assign seo_title = 'Ingredients — 6 Plant Actives Inside UBurn'
+        assign seo_desc = 'Konjac glucomannan (EFSA-recognized soluble fiber), ube purple yam, ginger, MCT, acacia fiber, L-carnitine. Six plant actives. Zero caffeine. 100% plant-based. Made in France.'
+      when 'page-faq-us-en', 'page-faq'
+        assign seo_title = 'UBurn FAQ — Common Questions Answered'
+        assign seo_desc = 'How UBurn supports satiety, when to take it, taste, results timeline, subscription details, and shipping. Honest answers to the most common questions about the plant-based afternoon ritual.*'
+      when 'page-shipping-us-en', 'page-shipping'
+        assign seo_title = 'Shipping & Delivery — U.S. Orders | UBurn'
+        assign seo_desc = '2-4 business day delivery in the U.S. via DHL Express from France. Free shipping on orders $40+ and on every subscription. Track every order via email.'
+      when 'page-returns-us-en', 'page-returns'
+        assign seo_title = 'Returns & Refunds | UBurn'
+        assign seo_desc = 'Need help with an order? Email hello@uburn.co with your order number for personalized support. We handle every case individually within 5-7 business days.'
+      when 'page-contact'
+        assign seo_title = 'Contact UBurn — Customer Support'
+        assign seo_desc = 'Questions about your UBurn order, subscription, or the science? Email hello@uburn.co. Our team replies within 24 business hours.'
+      when 'collection-best-seller'
+        assign seo_title = 'Best-Seller — UBurn Plant-Based Satiety Drink'
+        assign seo_desc = 'The UBurn original. Plant-based purple drink with EFSA-backed konjac fiber. 30 calories, 0% caffeine. The afternoon ritual loved by 2,847+ U.S. customers.*'
+      when 'page-lp-violet-matcha-us', 'page-lp-4pm-killer-us', 'page-lp-stress-eater-us', 'page-lp-clean-label-us'
+        assign seo_title = 'UBurn — The Violet Matcha for Your 4 PM Crash'
+        assign seo_desc = 'Plant-based satiety drink with EFSA-recognized konjac fiber. 30 calories, 0% caffeine. The afternoon ritual that handles cravings naturally.*'
+      endcase
+    -%}
+
     <title>
-      {{ page_title }}
-      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
-      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- if seo_title != blank -%}
+        {{ seo_title }}
+      {%- else -%}
+        {{ page_title }}
+        {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+        {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+        {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- endif -%}
     </title>
 
-    {% if page_description %}
+    {%- if seo_desc != blank -%}
+      <meta name="description" content="{{ seo_desc | escape }}">
+    {%- elsif page_description -%}
       <meta name="description" content="{{ page_description | escape }}">
-    {% endif %}
+    {%- endif -%}
 
-    {% render 'meta-tags' %}
+    {% render 'meta-tags', seo_title: seo_title, seo_desc: seo_desc %}
 
     <script src="{{ 'constants.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'pubsub.js' | asset_url }}" defer="defer"></script>
@@ -41,14 +141,80 @@
 
     {{ content_for_header }}
 
-    {%- comment -%} UBurn V2 design system — preload critical CSS for LCP {%- endcomment -%}
+    {%- comment -%} UBurn V2 design system — critical (render-blocking, needed above fold) {%- endcomment -%}
     <link rel="preload" as="style" href="{{ 'u2-base.css' | asset_url }}">
+    <link rel="preload" as="style" href="{{ 'u2-typography.css' | asset_url }}">
     <link rel="preload" as="style" href="{{ 'u2-components.css' | asset_url }}">
     {{ 'u2-base.css' | asset_url | stylesheet_tag }}
     {{ 'u2-typography.css' | asset_url | stylesheet_tag }}
-    {{ 'u2-animations.css' | asset_url | stylesheet_tag }}
     {{ 'u2-components.css' | asset_url | stylesheet_tag }}
+
+    {%- comment -%} UBurn V2 — non-critical CSS (animations + polish): async via media=print swap, no render block {%- endcomment -%}
+    <link rel="preload" as="style" href="{{ 'u2-animations.css' | asset_url }}" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ 'u2-animations.css' | asset_url }}"></noscript>
+    <link rel="preload" as="style" href="{{ 'u2-pdp-polish.css' | asset_url }}" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ 'u2-pdp-polish.css' | asset_url }}"></noscript>
+
     <script src="{{ 'u2-theme.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'u2-pdp-polish.js' | asset_url }}" defer="defer"></script>
+
+    {%- comment -%} Organization schema for AEO (brand knowledge graph for AI engines) {%- endcomment -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Organization",
+      "@id": "https://uburn.co/#organization",
+      "name": "UBurn",
+      "alternateName": "UBurn — The Violet Matcha",
+      "url": "https://uburn.co",
+      "logo": "https://uburn.co/cdn/shop/files/u2-logo-violet.png",
+      "description": "UBurn is a French plant-based satiety drink brand. The violet matcha. EFSA-recognized konjac fiber, 30 calories, 0% caffeine. Made in France for women managing afternoon cravings.",
+      "foundingDate": "2024",
+      "foundingLocation": { "@type": "Place", "address": { "@type": "PostalAddress", "addressCountry": "FR", "addressLocality": "Paris" } },
+      "founder": { "@type": "Person", "name": "Mariana", "jobTitle": "Founder" },
+      "sameAs": [
+        "https://www.instagram.com/uburn.eu",
+        "https://www.tiktok.com/@uburn.eu"
+      ],
+      "areaServed": [
+        { "@type": "Country", "name": "United States" },
+        { "@type": "Country", "name": "France" },
+        { "@type": "AdministrativeArea", "name": "European Union" }
+      ],
+      "knowsAbout": [
+        "Glucomannan",
+        "Konjac fiber",
+        "Plant-based nutrition",
+        "Satiety support",
+        "EFSA-recognized health claims",
+        "Caffeine-free wellness"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "hello@uburn.co",
+        "contactType": "customer service",
+        "availableLanguage": ["en", "fr"]
+      }
+    }
+    </script>
+
+    {%- comment -%} WebSite schema for AEO + SiteNavigationElement signals {%- endcomment -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "WebSite",
+      "@id": "https://uburn.co/#website",
+      "url": "https://uburn.co",
+      "name": "UBurn",
+      "publisher": { "@id": "https://uburn.co/#organization" },
+      "inLanguage": ["en-US", "fr-FR"],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://uburn.co/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
@@ -623,5 +789,8 @@
       document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
     })();
     </script>
+
+    {%- comment -%} Email capture popup — exit-intent + delay+scroll. localStorage-gated. {%- endcomment -%}
+    {% render 'u2-email-popup' %}
   </body>
 </html>

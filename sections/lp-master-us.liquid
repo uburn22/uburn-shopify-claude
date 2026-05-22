@@ -71,8 +71,10 @@
         <span class="lp4-hero__price-meta">· $31.05/mo with subscribe & save · free US shipping</span>
       </div>
 
-      {%- comment -%} Hero visual: Charles-provided image (Nano Banana 2) OR SVG bottle fallback {%- endcomment -%}
-      {%- if section.settings.hero_image != blank -%}
+      {%- comment -%} Hero visual: hero_image_filename (asset_url path) > image_picker > SVG fallback {%- endcomment -%}
+      {%- if section.settings.hero_image_filename != blank -%}
+        <img class="lp4-hero__photo" src="{{ section.settings.hero_image_filename | asset_url }}" alt="{{ section.settings.hero_image_alt | default: 'UBurn — the violet ritual' }}" width="880" height="1168" loading="eager" fetchpriority="high" decoding="async">
+      {%- elsif section.settings.hero_image != blank -%}
         {{ section.settings.hero_image | image_url: width: 1200 | image_tag:
             loading: 'eager',
             fetchpriority: 'high',
@@ -490,7 +492,8 @@
     { "type": "text", "id": "announce_text", "label": "Announce bar text", "default": "Made in France · Free US Shipping $40+" },
 
     { "type": "header", "content": "1 · Hero" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero image (Nano Banana 2 generated)" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image (Shopify Files)" },
+    { "type": "text", "id": "hero_image_filename", "label": "Hero image — /assets/ filename (overrides picker)", "info": "e.g. lp-hero-stress-eater.jpg" },
     { "type": "text", "id": "hero_image_alt", "label": "Hero image alt text", "default": "UBurn — the violet ritual" },
     { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "The 4pm Killer" },
     { "type": "text", "id": "hero_h1", "label": "Hero H1 (use <em>...</em> for italic accent)", "default": "4pm. Your snack drawer <em>stays closed.</em>" },

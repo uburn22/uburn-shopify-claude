@@ -268,38 +268,45 @@
 <section class="u2-root u2-herospl" aria-label="Hero — UBurn the violet matcha">
   <div class="u2-herospl__split" data-u2-sticky-trigger>
     <div class="u2-herospl__side u2-herospl__left u2-reveal">
-      <span class="u2-herospl__label">indulgent</span>
+      <span class="u2-herospl__label">{{ section.settings.label_left | default: 'indulgent' }}</span>
       <div class="u2-herospl__art">
-        {%- if section.settings.image_left != blank -%}
+        {%- if section.settings.image_left_filename != blank -%}
+          <img class="u2-herospl__photo" src="{{ section.settings.image_left_filename | asset_url }}" alt="{{ section.settings.image_left_alt | default: 'Hot violet ube latte in a white ceramic mug' }}" loading="eager" fetchpriority="high" width="880" height="1168" style="width:100%;height:100%;object-fit:cover;border-radius:24px;display:block;">
+        {%- elsif section.settings.image_left != blank -%}
           {{ section.settings.image_left | image_url: width: 800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: 'Hot violet ube latte in a white ceramic mug', width: section.settings.image_left.width, height: section.settings.image_left.height }}
         {%- else -%}
           <img class="u2-herospl__photo" src="{{ 'uburn-us-homepage-01-hot-latte-hero-a.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Latte ube violet servi dans une tasse en céramique blanche, lumière du matin{% else %}Hot violet ube latte in a white ceramic mug, morning light{% endif %}" loading="eager" fetchpriority="high" width="880" height="1168" style="width:100%;height:100%;object-fit:cover;border-radius:24px;display:block;">
         {%- endif -%}
       </div>
-      <span class="u2-herospl__tag">hot latte · vanilla–hazelnut</span>
+      <span class="u2-herospl__tag">{{ section.settings.tag_left | default: 'hot latte · vanilla–hazelnut' }}</span>
     </div>
 
     <div class="u2-herospl__or" aria-hidden="true"><em>or</em></div>
 
     <div class="u2-herospl__side u2-herospl__right u2-reveal delay-1">
-      <span class="u2-herospl__label">functional</span>
+      <span class="u2-herospl__label">{{ section.settings.label_right | default: 'functional' }}</span>
       <div class="u2-herospl__art">
-        {%- if section.settings.image_right != blank -%}
+        {%- if section.settings.image_right_filename != blank -%}
+          <img class="u2-herospl__photo" src="{{ section.settings.image_right_filename | asset_url }}" alt="{{ section.settings.image_right_alt | default: 'Violet shake in UB bottle' }}" loading="eager" fetchpriority="high" width="1400" height="1400" style="width:100%;height:100%;object-fit:cover;border-radius:24px;display:block;">
+        {%- elsif section.settings.image_right != blank -%}
           {{ section.settings.image_right | image_url: width: 800 | image_tag: loading: 'eager', fetchpriority: 'high', alt: 'Violet shake in UB bottle', width: section.settings.image_right.width, height: section.settings.image_right.height }}
         {%- else -%}
-          {%- comment -%} rev 2026-05-15-1331 hero-bottle swap {%- endcomment -%}
           <img class="u2-herospl__photo" src="{{ 'uburn-us-homepage-hero-bottle-500ml-b.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Bouteille violette UBurn 500 ml prête-à-boire, tenue à la main{% else %}UBurn 500 ml ready-to-drink violet bottle held in hand{% endif %}" loading="eager" fetchpriority="high" width="1400" height="1400" style="width:100%;height:100%;object-fit:cover;border-radius:24px;display:block;">
         {%- endif -%}
       </div>
-      <span class="u2-herospl__tag">with water · on-the-go</span>
+      <span class="u2-herospl__tag">{{ section.settings.tag_right | default: 'with water · on-the-go' }}</span>
     </div>
   </div>
 
   <div class="u2-herospl__copy">
-    <span class="u2-section-eyebrow" style="justify-content:center;">est. 2024 · the violet matcha</span>
-    <h1><strong>Functional</strong> like a shake. <em>Indulgent</em> like a latte.</h1>
-    <p>The violet matcha. Plant-based satiety. 30 calories. Mix with water, oat milk, or hot frothed milk — your moment, your way.</p>
-    <p class="u2-herospl__priceline">from <strong>{{ display_price }}</strong> · {{ sub_display }}/mo with subscribe &amp; save · free us shipping</p>
+    <span class="u2-section-eyebrow" style="justify-content:center;">{{ section.settings.eyebrow | default: 'the violet ritual' }}</span>
+    <h1>{{ section.settings.h1 | default: '<strong>Functional</strong> like a shake. <em>Indulgent</em> like a latte.' }}</h1>
+    <p>{{ section.settings.sub | default: 'Plant-based satiety. 30 calories. Your daily violet moment.' }}</p>
+    {%- if section.settings.priceline != blank -%}
+      <p class="u2-herospl__priceline">{{ section.settings.priceline }}</p>
+    {%- else -%}
+      <p class="u2-herospl__priceline">{{ sub_display }}/mo · subscribe &amp; save · free us shipping</p>
+    {%- endif -%}
 
     <span class="u2-herospl__rating" aria-label="Rated 4.7 out of 5 by 2,847 customers">
       <span class="u2-herospl__rating-stars" aria-hidden="true">★★★★★</span>
@@ -315,16 +322,15 @@
       <input type="hidden" name="selling_plan" value="{{ sub_plan.id }}">
       {%- endif -%}
       <button type="submit" class="u2-cta">
-        <span>start the ritual — {{ sub_display }}</span>
+        <span>{{ section.settings.cta_text | default: 'start the ritual' }} — {{ sub_display }}</span>
         <span class="u2-cta__arrow" aria-hidden="true">→</span>
       </button>
-      <span class="u2-herospl__buy-sub">1 click · checkout direct · subscribe · cancel anytime</span>
+      <span class="u2-herospl__buy-sub">{{ section.settings.cta_sub | default: 'subscribe · cancel anytime' }}</span>
     </form>
 
     <div class="u2-herospl__trust">
       {% render 'u2-trust-pill', icon: 'check', text: 'EFSA-backed' %}
       {% render 'u2-trust-pill', icon: 'leaf', text: 'Caffeine-free' %}
-      {% render 'u2-trust-pill', icon: 'flask', text: 'Third-party lab tested' %}
       {% render 'u2-trust-pill', icon: 'globe', text: 'French heritage' %}
     </div>
   </div>
@@ -338,10 +344,31 @@
   "tag": "section",
   "class": "shopify-section--u2-herospl",
   "settings": [
+    { "type": "header", "content": "Product binding (LOCKED)" },
     { "type": "product", "id": "product", "label": "Product" },
     { "type": "text", "id": "variant_id", "label": "Variant ID", "default": "51289200034111" },
-    { "type": "image_picker", "id": "image_left", "label": "Indulgent (hot mug)" },
-    { "type": "image_picker", "id": "image_right", "label": "Functional (shake bottle)" }
+
+    { "type": "header", "content": "Copy overrides (variant)" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "info": "Default: est. 2024 · the violet matcha" },
+    { "type": "textarea", "id": "h1", "label": "H1 (allow <strong>, <em>)", "info": "Default: Functional like a shake. Indulgent like a latte." },
+    { "type": "textarea", "id": "sub", "label": "Hero sub" },
+    { "type": "textarea", "id": "priceline", "label": "Priceline override (HTML allowed)", "info": "Leave blank for default price logic" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "start the ritual" },
+    { "type": "text", "id": "cta_sub", "label": "CTA sub line" },
+
+    { "type": "header", "content": "Left panel — image + label + tag" },
+    { "type": "image_picker", "id": "image_left", "label": "Image (picker)" },
+    { "type": "text", "id": "image_left_filename", "label": "Image — /assets/ filename (overrides picker)", "info": "e.g. lp-hero-stress-eater.jpg" },
+    { "type": "text", "id": "image_left_alt", "label": "Image alt text" },
+    { "type": "text", "id": "label_left", "label": "Label (top)", "default": "indulgent" },
+    { "type": "text", "id": "tag_left", "label": "Tag (bottom)", "default": "hot latte · vanilla–hazelnut" },
+
+    { "type": "header", "content": "Right panel — image + label + tag" },
+    { "type": "image_picker", "id": "image_right", "label": "Image (picker)" },
+    { "type": "text", "id": "image_right_filename", "label": "Image — /assets/ filename (overrides picker)" },
+    { "type": "text", "id": "image_right_alt", "label": "Image alt text" },
+    { "type": "text", "id": "label_right", "label": "Label (top)", "default": "functional" },
+    { "type": "text", "id": "tag_right", "label": "Tag (bottom)", "default": "with water · on-the-go" }
   ],
   "presets": [ { "name": "U2 Hero Split" } ]
 }

@@ -1,0 +1,7 @@
+{
+  "layout": "theme",
+  "sections": {
+    "llms": { "type": "u2-llms", "settings": {} }
+  },
+  "order": ["llms"]
+}

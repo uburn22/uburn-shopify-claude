@@ -1,0 +1,356 @@
+{%- comment -%}
+  UBurn V2 — Email capture popup (exit-intent desktop + delay+scroll mobile)
+  Lead magnet: 10% off first order via code WELCOME10
+  Rev 2026-05-20 — premium DA, mobile-first, dismissible (localStorage)
+  Trigger: first-touch 8s + scroll 50% on mobile · exit-intent on desktop
+{%- endcomment -%}
+<style>
+  .u2-eppl {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(26, 15, 46, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.4s var(--u2-ease-luxe, cubic-bezier(0.16,1,0.3,1));
+  }
+  .u2-eppl.is-open { display: flex; opacity: 1; }
+  .u2-eppl__card {
+    background: var(--u2-warm-white, #FDFAF5);
+    border-radius: 20px;
+    max-width: 440px;
+    width: 100%;
+    padding: 36px 28px 32px;
+    position: relative;
+    box-shadow: 0 30px 80px -20px rgba(26, 15, 46, 0.45);
+    transform: translateY(20px);
+    transition: transform 0.5s var(--u2-ease-luxe, cubic-bezier(0.16,1,0.3,1));
+    overflow: hidden;
+  }
+  .u2-eppl.is-open .u2-eppl__card { transform: translateY(0); }
+
+  .u2-eppl__card::before {
+    content: '';
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184, 157, 217, 0.30) 0%, transparent 70%);
+    filter: blur(40px);
+    top: -80px; right: -80px;
+    pointer-events: none;
+  }
+  .u2-eppl__close {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(26, 15, 46, 0.08);
+    border: 0;
+    cursor: pointer;
+    color: var(--u2-plum-black, #1A0F2E);
+    font-size: 18px;
+    line-height: 1;
+    transition: background 0.2s ease, transform 0.2s ease;
+    z-index: 2;
+  }
+  .u2-eppl__close:hover { background: rgba(26, 15, 46, 0.16); transform: scale(1.08); }
+
+  .u2-eppl__eyebrow {
+    display: inline-block;
+    font-family: var(--u2-sans, "Helvetica Neue");
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--u2-iris, #6B4E9E);
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .u2-eppl__h2 {
+    font-family: var(--u2-serif, "Times New Roman");
+    font-size: 32px;
+    line-height: 1.05;
+    font-weight: 400;
+    color: var(--u2-plum-black, #1A0F2E);
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+    position: relative;
+  }
+  .u2-eppl__h2 em { font-style: italic; color: var(--u2-iris, #6B4E9E); }
+  .u2-eppl__sub {
+    font-family: var(--u2-sans, "Helvetica Neue");
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--u2-text-body, #3A2E4A);
+    margin: 0 0 22px;
+    position: relative;
+  }
+
+  .u2-eppl__form { position: relative; }
+  .u2-eppl__input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid rgba(107, 78, 158, 0.20);
+    border-radius: 4px;
+    font-family: var(--u2-sans, "Helvetica Neue");
+    font-size: 15px;
+    color: var(--u2-plum-black, #1A0F2E);
+    background: #fff;
+    margin-bottom: 12px;
+    transition: border-color 0.25s ease;
+    -webkit-appearance: none;
+  }
+  .u2-eppl__input:focus {
+    outline: none;
+    border-color: var(--u2-iris, #6B4E9E);
+  }
+  .u2-eppl__btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--u2-plum-deep, #2A1B3D);
+    color: #fff;
+    border: 0;
+    border-radius: 4px;
+    font-family: var(--u2-sans, "Helvetica Neue");
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.15s ease;
+  }
+  .u2-eppl__btn:hover { background: var(--u2-iris, #6B4E9E); transform: translateY(-1px); }
+  .u2-eppl__btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .u2-eppl__legal {
+    font-size: 10.5px;
+    color: var(--u2-text-muted, #7a7585);
+    margin: 12px 0 0;
+    letter-spacing: 0.02em;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  .u2-eppl__success {
+    display: none;
+    text-align: center;
+    padding: 6px 0;
+  }
+  .u2-eppl.is-success .u2-eppl__form { display: none; }
+  .u2-eppl.is-success .u2-eppl__success { display: block; }
+  .u2-eppl__code {
+    display: inline-block;
+    margin: 14px 0 18px;
+    padding: 12px 22px;
+    background: var(--u2-lavender-soft, #E8DCEF);
+    border: 1.5px dashed var(--u2-iris, #6B4E9E);
+    border-radius: 4px;
+    font-family: var(--u2-sans, "Helvetica Neue");
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    color: var(--u2-plum-deep, #2A1B3D);
+    cursor: pointer;
+    user-select: all;
+    transition: background 0.2s ease;
+  }
+  .u2-eppl__code:hover { background: rgba(184, 157, 217, 0.30); }
+  .u2-eppl__copy-hint {
+    display: block;
+    font-size: 11px;
+    color: var(--u2-text-muted, #7a7585);
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .u2-eppl__success-cta {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 12px 24px;
+    background: var(--u2-plum-deep, #2A1B3D);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-family: var(--u2-sans, "Helvetica Neue");
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    transition: background 0.2s ease;
+  }
+  .u2-eppl__success-cta:hover { background: var(--u2-iris, #6B4E9E); }
+
+  @media (max-width: 480px) {
+    .u2-eppl__card { padding: 28px 22px 24px; }
+    .u2-eppl__h2 { font-size: 26px; }
+    .u2-eppl__sub { font-size: 13px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .u2-eppl, .u2-eppl__card { transition: none !important; }
+  }
+</style>
+
+<div class="u2-eppl u2-root" id="u2-eppl" role="dialog" aria-modal="true" aria-labelledby="u2-eppl-title" aria-hidden="true">
+  <div class="u2-eppl__card">
+    <button type="button" class="u2-eppl__close" data-eppl-close aria-label="Close">×</button>
+    <span class="u2-eppl__eyebrow">— first taste of the ritual</span>
+    <h2 class="u2-eppl__h2" id="u2-eppl-title">Get <em>10% off</em> your first UBurn.</h2>
+    <p class="u2-eppl__sub">Join 2,847+ U.S. women who started their afternoon ritual. Get your welcome code in 10 seconds.</p>
+
+    <form class="u2-eppl__form" data-eppl-form action="/contact#newsletter" method="post" accept-charset="UTF-8">
+      <input type="hidden" name="form_type" value="customer">
+      <input type="hidden" name="utf8" value="✓">
+      <input type="hidden" name="contact[tags]" value="newsletter-popup, us-launch">
+      <input type="email" name="contact[email]" class="u2-eppl__input" placeholder="your@email.com" required autocomplete="email" inputmode="email">
+      <button type="submit" class="u2-eppl__btn" data-eppl-submit>send me my 10% code →</button>
+      <p class="u2-eppl__legal">By signing up you agree to receive UBurn emails. Unsubscribe anytime. Code valid on first order.</p>
+    </form>
+
+    <div class="u2-eppl__success">
+      <span class="u2-eppl__eyebrow">— welcome to the ritual</span>
+      <h2 class="u2-eppl__h2">You're <em>in.</em></h2>
+      <p class="u2-eppl__sub">Use this code at checkout. It's saved to your inbox too.</p>
+      <button type="button" class="u2-eppl__code" data-eppl-code>WELCOME10</button>
+      <span class="u2-eppl__copy-hint">tap to copy</span>
+      <p style="margin-top: 14px;"><a href="/products/ube-poudre" class="u2-eppl__success-cta" data-eppl-shop>start shopping →</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var KEY = 'u2_eppl_state';
+  var COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+  var TRIGGER_DELAY_MS = 8000;
+  var SCROLL_TRIGGER_PCT = 50;
+  var modal = document.getElementById('u2-eppl');
+  if (!modal) return;
+  var form = modal.querySelector('[data-eppl-form]');
+  var submitBtn = modal.querySelector('[data-eppl-submit]');
+  var closeBtn = modal.querySelector('[data-eppl-close]');
+  var code = modal.querySelector('[data-eppl-code]');
+
+  function getState() {
+    try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) { return {}; }
+  }
+  function setState(s) {
+    try { localStorage.setItem(KEY, JSON.stringify(s)); } catch(e) {}
+  }
+  function shouldShow() {
+    var s = getState();
+    if (s.subscribed) return false;
+    if (s.dismissedAt && (Date.now() - s.dismissedAt) < COOLDOWN_MS) return false;
+    // skip on checkout/cart/account paths
+    var p = location.pathname;
+    if (p.indexOf('/checkout') === 0 || p.indexOf('/cart') === 0 || p.indexOf('/account') === 0 || p.indexOf('/policies') === 0) return false;
+    return true;
+  }
+  function openModal(trigger) {
+    if (!shouldShow()) return;
+    modal.classList.add('is-open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (window.fbq) window.fbq('trackCustom', 'EmailPopupView', { trigger: trigger });
+    if (window.gtag) window.gtag('event', 'email_popup_view', { trigger: trigger });
+    teardownTriggers();
+  }
+  function closeModal(reason) {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    var s = getState();
+    if (reason === 'subscribed') {
+      s.subscribed = true;
+    } else {
+      s.dismissedAt = Date.now();
+    }
+    setState(s);
+  }
+
+  closeBtn.addEventListener('click', function(){ closeModal('dismissed'); });
+  modal.addEventListener('click', function(e){
+    if (e.target === modal) closeModal('dismissed');
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal('dismissed');
+  });
+
+  // Form submit — POST to Shopify newsletter endpoint, then show success
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var emailField = form.querySelector('input[name="contact[email]"]');
+    var email = emailField.value.trim();
+    if (!email || email.indexOf('@') < 1) { emailField.focus(); return; }
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'sending…';
+
+    var fd = new FormData(form);
+    fetch('/contact#newsletter', { method: 'POST', body: fd, credentials: 'same-origin' })
+      .catch(function(){})
+      .finally(function(){
+        modal.classList.add('is-success');
+        if (window.fbq) window.fbq('track', 'Lead', { content_name: 'Email Popup', currency: 'USD', value: 0 });
+        if (window.gtag) window.gtag('event', 'generate_lead', { content_name: 'Email Popup' });
+        var s = getState();
+        s.subscribed = true;
+        setState(s);
+      });
+  });
+
+  // Copy code on click
+  code.addEventListener('click', function(){
+    try {
+      navigator.clipboard.writeText('WELCOME10');
+      var original = code.textContent;
+      code.textContent = 'COPIED ✓';
+      setTimeout(function(){ code.textContent = original; }, 1500);
+    } catch(e) {}
+  });
+
+  // Triggers
+  var triggered = false;
+  var timerId;
+  function fireOnce(trigger) {
+    if (triggered) return;
+    triggered = true;
+    openModal(trigger);
+  }
+  function setupTriggers() {
+    if (!shouldShow()) return;
+    // 1. Timer delay
+    timerId = setTimeout(function(){ fireOnce('timer'); }, TRIGGER_DELAY_MS);
+    // 2. Scroll 50% mobile
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+    // 3. Exit-intent desktop (mouse leave viewport top)
+    if (window.matchMedia('(min-width: 768px)').matches) {
+      document.addEventListener('mouseleave', onMouseLeave);
+    }
+  }
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = (window.scrollY / h) * 100;
+    if (pct >= SCROLL_TRIGGER_PCT) fireOnce('scroll');
+  }
+  function onMouseLeave(e) {
+    if (e.clientY < 5 && e.relatedTarget == null) fireOnce('exit-intent');
+  }
+  function teardownTriggers() {
+    if (timerId) clearTimeout(timerId);
+    window.removeEventListener('scroll', onScroll);
+    document.removeEventListener('mouseleave', onMouseLeave);
+  }
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setupTriggers();
+  } else {
+    document.addEventListener('DOMContentLoaded', setupTriggers);
+  }
+})();
+</script>

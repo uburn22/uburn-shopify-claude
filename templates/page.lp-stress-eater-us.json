@@ -1,0 +1,76 @@
+{
+  "layout": "theme",
+  "sections": {
+    "hero": {
+      "type": "u2-hero-split",
+      "settings": {
+        "product": "ube-poudre",
+        "variant_id": "51289200034111",
+        "eyebrow": "when stress eats you",
+        "h1": "Your fridge isn't the <em>enemy.</em>",
+        "sub": "Four hours of quiet. No 8pm fridge. No willpower required.",
+        "priceline": "from <strong>$36.99</strong> · $33.29/mo subscribe &amp; save · ships every 30 days · free us shipping",
+        "cta_text": "quiet my evening",
+        "cta_sub": "1 click · 4 hours quiet · subscribe · cancel anytime",
+        "image_left_filename": "lp-hero-stress-eater.jpg",
+        "image_left_alt": "Calm woman holding an iced violet ube latte in a warm-lit kitchen at dusk",
+        "label_left": "calm",
+        "tag_left": "iced latte · 4 hours of quiet",
+        "label_right": "functional",
+        "tag_right": "with water · on-the-go"
+      }
+    },
+    "trust-band": { "type": "u2-trust-band", "settings": {} },
+    "three-ways": { "type": "u2-three-ways", "settings": {} },
+    "marquee": { "type": "u2-marquee", "settings": {} },
+    "problem": {
+      "type": "u2-problem",
+      "settings": {
+        "banner_filename": "u2-problem-banner-lifestyle.jpg",
+        "banner_caption": "the fridge door isn't where the fight starts.",
+        "eyebrow": "it's biological",
+        "title_pre": "The wave you didn't",
+        "title_em": "cause.",
+        "card_1_num": "6 PM",
+        "card_1_title": "The stress arrives.",
+        "card_1_sub": "Adrenaline drops. Cortisol rises. Your body asks for sugar.",
+        "card_2_num": "8 PM",
+        "card_2_title": "The fridge calls.",
+        "card_2_sub": "Dinner is over. You're not hungry. But you're standing in front of the fridge anyway.",
+        "card_3_num": "→",
+        "card_3_title": "It's a stress response.",
+        "card_3_sub": "Not weakness. Not lack of discipline. A biological wave looking for calm."
+      }
+    },
+    "formula": { "type": "u2-formula-grid", "settings": {} },
+    "efsa": { "type": "u2-efsa-block", "settings": {} },
+    "stats": { "type": "u2-stats", "settings": {} },
+    "violet-bottle": { "type": "u2-violet-bottle", "settings": {} },
+    "pricing": { "type": "u2-pricing-cards", "settings": { "product": "ube-poudre", "show_bonus": true } },
+    "compare": { "type": "u2-comparison", "settings": {} },
+    "before-after": { "type": "u2-before-after", "settings": {} },
+    "craft": { "type": "u2-craft", "settings": {} },
+    "moodboard": { "type": "u2-moodboard", "settings": {} },
+    "guarantee": { "type": "u2-guarantee-bar", "settings": {} },
+    "final-cta": {
+      "type": "u2-final-cta",
+      "settings": {
+        "product": "ube-poudre",
+        "variant_id": "51289200034111",
+        "eyebrow": "— quieter evenings start tonight",
+        "title_pre": "Your evenings",
+        "title_em": "change tonight.",
+        "sub": "Cold water. One scoop. Four hours of calm.* No 8pm fridge. No willpower required.",
+        "cta": "quiet my evening — $33.29/mo"
+      }
+    },
+    "newsletter": { "type": "u2-newsletter", "settings": {} },
+    "live_proof": { "type": "u2-live-proof", "settings": {} }
+  },
+  "order": [
+    "hero", "trust-band", "three-ways", "marquee", "problem",
+    "formula", "efsa", "stats", "violet-bottle", "pricing",
+    "compare", "before-after", "craft", "moodboard",
+    "guarantee", "final-cta", "newsletter", "live_proof"
+  ]
+}

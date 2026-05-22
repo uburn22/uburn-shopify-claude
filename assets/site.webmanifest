@@ -1,0 +1,13 @@
+{
+  "name": "UBurn",
+  "short_name": "UBurn",
+  "description": "Plant-based satiety drink. The violet matcha. Made in France.",
+  "icons": [
+    { "src": "/cdn/shop/files/favicon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/cdn/shop/files/favicon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "theme_color": "#2A1B3D",
+  "background_color": "#FAF6F0",
+  "display": "standalone",
+  "start_url": "/"
+}

@@ -1,0 +1,312 @@
+/* ============================================================================
+   UBurn V2 — PDP Polish Layer (auto-applied, no Liquid changes)
+   Loaded after u2-animations.css to extend with:
+   • Section auto-fade on scroll (via JS data-u2-section)
+   • Card hover lift utilities (.u2-lift)
+   • Image hover zoom (.u2-img-zoom)
+   • Sticky ATC subtle pulse
+   • PDP-specific section refinements (reviews, founder, compare, FAQ)
+   • Subtle gradient transitions between sections
+   • prefers-reduced-motion compliant
+   2026-05-19
+   ============================================================================ */
+
+/* ────────── Auto-reveal: every PDP section fades+slides on scroll ────────── */
+.u2-root [data-u2-section] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.85s var(--u2-ease-luxe),
+    transform 0.85s var(--u2-ease-luxe);
+  will-change: opacity, transform;
+}
+.u2-root [data-u2-section].is-in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* First section (hero buybox) — no entry animation (already visible above fold) */
+.u2-root [data-u2-section][data-u2-first] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* ────────── Stagger utility for grids ────────── */
+.u2-root [data-u2-stagger] > * {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s var(--u2-ease-luxe),
+    transform 0.7s var(--u2-ease-luxe);
+  transition-delay: var(--u2-stagger-delay, 0s);
+  will-change: opacity, transform;
+}
+.u2-root [data-u2-stagger].is-in-view > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ────────── Hover lift utility (cards) ────────── */
+.u2-root .u2-lift {
+  transition:
+    transform var(--u2-duration-medium) var(--u2-ease-luxe),
+    box-shadow var(--u2-duration-medium) var(--u2-ease-luxe);
+}
+.u2-root .u2-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 44px -12px rgba(26, 15, 46, 0.18);
+}
+
+/* ────────── Image hover zoom (containers must overflow:hidden) ────────── */
+.u2-root .u2-img-zoom { overflow: hidden; }
+.u2-root .u2-img-zoom img {
+  transition: transform 0.9s var(--u2-ease-luxe);
+}
+.u2-root .u2-img-zoom:hover img {
+  transform: scale(1.04);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   PDP-section-specific polish
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ───── PDP hero / buybox enhancements ───── */
+.u2-root .u2-pdp-reassurance li {
+  transition: color 0.3s ease;
+}
+.u2-root .u2-pdp-reassurance li:hover {
+  color: var(--u2-iris);
+}
+.u2-root .u2-pdp-reassurance svg {
+  transition: transform 0.3s var(--u2-ease-luxe);
+}
+.u2-root .u2-pdp-reassurance li:hover svg {
+  transform: scale(1.1);
+}
+
+/* Sticky ATC — subtle pulse + smoother slide */
+.u2-root .u2-pdp-sticky-cta {
+  transition: transform 0.45s var(--u2-ease-luxe);
+}
+.u2-root .u2-pdp-sticky-cta__btn {
+  position: relative;
+  overflow: hidden;
+}
+.u2-root .u2-pdp-sticky-cta__btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%);
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+.u2-root .u2-pdp-sticky-cta.is-visible .u2-pdp-sticky-cta__btn::after {
+  animation: u2-shine 4s var(--u2-ease-luxe) infinite;
+  animation-delay: 1.5s;
+}
+
+@keyframes u2-shine {
+  0% { transform: translateX(-100%); }
+  35%, 100% { transform: translateX(100%); }
+}
+
+/* ───── Press / Stories ───── */
+.u2-root [class*="u2-pdp-press"] img,
+.u2-root [class*="u2-pdp-stories"] article,
+.u2-root [class*="u2-pdp-stories"] .u2-card {
+  transition: opacity 0.4s ease, transform 0.4s var(--u2-ease-luxe);
+}
+.u2-root [class*="u2-pdp-stories"] article:hover {
+  transform: translateY(-3px);
+}
+
+/* ───── Reviews ───── */
+.u2-root [class*="u2-pdp-reviews"] article,
+.u2-root [class*="u2-pdp-reviews"] .u2-review,
+.u2-root [class*="u2-pdp-reviews"] [class*="review"] {
+  transition:
+    transform var(--u2-duration-medium) var(--u2-ease-luxe),
+    box-shadow var(--u2-duration-medium) var(--u2-ease-luxe);
+}
+.u2-root [class*="u2-pdp-reviews"] article:hover,
+.u2-root [class*="u2-pdp-reviews"] .u2-review:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -10px rgba(26, 15, 46, 0.14);
+}
+
+/* ───── Founder portrait subtle zoom ───── */
+.u2-root [class*="u2-pdp-founder"] img {
+  transition: transform 1.2s var(--u2-ease-luxe);
+}
+.u2-root [class*="u2-pdp-founder"]:hover img {
+  transform: scale(1.02);
+}
+
+/* ───── Workday before/after grid ───── */
+.u2-root [class*="u2-pdp-before-after"] [class*="card"],
+.u2-root [class*="u2-pdp-before-after"] figure {
+  transition: transform var(--u2-duration-medium) var(--u2-ease-luxe), box-shadow var(--u2-duration-medium) var(--u2-ease-luxe);
+}
+.u2-root [class*="u2-pdp-before-after"] [class*="card"]:hover,
+.u2-root [class*="u2-pdp-before-after"] figure:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -12px rgba(26, 15, 46, 0.16);
+}
+
+/* ───── Comparison table ───── */
+.u2-root [class*="u2-comparison"] table tr,
+.u2-root [class*="shopify-section--u2"] .ublp2-compare__table tr {
+  transition: background-color 0.25s ease;
+}
+.u2-root [class*="u2-comparison"] tbody tr:hover {
+  background-color: rgba(107, 78, 158, 0.04);
+}
+
+/* ───── Formula / Ingredients cards ───── */
+.u2-root [class*="u2-pdp-formula"] [class*="ing"],
+.u2-root [class*="u2-pdp-formula"] [class*="card"],
+.u2-root [class*="u2-pdp-formula"] figure {
+  transition: transform var(--u2-duration-medium) var(--u2-ease-luxe), box-shadow var(--u2-duration-medium) var(--u2-ease-luxe);
+}
+.u2-root [class*="u2-pdp-formula"] [class*="ing"]:hover,
+.u2-root [class*="u2-pdp-formula"] [class*="card"]:hover,
+.u2-root [class*="u2-pdp-formula"] figure:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px -10px rgba(107, 78, 158, 0.18);
+}
+
+/* ───── Steps Mix/Sip/Stay ───── */
+.u2-root [class*="u2-pdp-steps"] [class*="step"],
+.u2-root [class*="u2-pdp-steps"] article {
+  transition: transform var(--u2-duration-medium) var(--u2-ease-luxe);
+}
+.u2-root [class*="u2-pdp-steps"] [class*="step"]:hover,
+.u2-root [class*="u2-pdp-steps"] article:hover {
+  transform: translateY(-3px);
+}
+
+/* ───── For-you / Diff / Howit / Foryou cards ───── */
+.u2-root [class*="u2-pdp-foryou"] [class*="card"],
+.u2-root [class*="u2-pdp-diff"] [class*="card"],
+.u2-root [class*="u2-pdp-howit"] [class*="card"],
+.u2-root [class*="u2-pdp-science-teaser"] [class*="card"] {
+  transition: transform var(--u2-duration-medium) var(--u2-ease-luxe), box-shadow var(--u2-duration-medium) var(--u2-ease-luxe);
+}
+.u2-root [class*="u2-pdp-foryou"] [class*="card"]:hover,
+.u2-root [class*="u2-pdp-diff"] [class*="card"]:hover,
+.u2-root [class*="u2-pdp-howit"] [class*="card"]:hover,
+.u2-root [class*="u2-pdp-science-teaser"] [class*="card"]:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px -10px rgba(26, 15, 46, 0.14);
+}
+
+/* ───── FAQ accordion polish ───── */
+.u2-root .u2-pdp-faq-item,
+.u2-root .u2-accordion__item {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.u2-root .u2-pdp-faq-item[open],
+.u2-root .u2-accordion__item.is-open {
+  background: rgba(107, 78, 158, 0.025);
+}
+.u2-root .u2-pdp-faq-item summary,
+.u2-root .u2-accordion__q {
+  transition: color 0.25s ease;
+}
+.u2-root .u2-pdp-faq-item summary:hover,
+.u2-root .u2-accordion__q:hover {
+  color: var(--u2-iris);
+}
+
+/* ───── Quiz section subtle interaction ───── */
+.u2-root [class*="u2-pdp-ritual-quiz"] button,
+.u2-root [class*="u2-pdp-ritual-quiz"] [class*="option"] {
+  transition: transform var(--u2-duration-fast) var(--u2-ease-luxe), border-color 0.3s ease;
+}
+.u2-root [class*="u2-pdp-ritual-quiz"] button:hover,
+.u2-root [class*="u2-pdp-ritual-quiz"] [class*="option"]:hover {
+  transform: translateY(-1px);
+}
+
+/* ───── Final CTA section emphasis ───── */
+.u2-root [class*="u2-pdp-final-cta"] {
+  position: relative;
+}
+
+/* ───── Taste section card hover ───── */
+.u2-root [class*="u2-pdp-taste"] [class*="card"],
+.u2-root [class*="u2-pdp-taste"] figure {
+  transition: transform var(--u2-duration-medium) var(--u2-ease-luxe), box-shadow var(--u2-duration-medium) var(--u2-ease-luxe);
+}
+.u2-root [class*="u2-pdp-taste"] [class*="card"]:hover,
+.u2-root [class*="u2-pdp-taste"] figure:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px -10px rgba(26, 15, 46, 0.14);
+}
+
+/* ───── Precision / Safety subtle hover ───── */
+.u2-root [class*="u2-pdp-precision"] [class*="card"],
+.u2-root [class*="u2-pdp-safety"] [class*="card"] {
+  transition: transform var(--u2-duration-medium) var(--u2-ease-luxe), box-shadow var(--u2-duration-medium) var(--u2-ease-luxe);
+}
+.u2-root [class*="u2-pdp-precision"] [class*="card"]:hover,
+.u2-root [class*="u2-pdp-safety"] [class*="card"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -10px rgba(26, 15, 46, 0.12);
+}
+
+/* ────────── Smooth scroll for anchor links ────────── */
+html { scroll-behavior: smooth; }
+
+/* ────────── Section separator gradient (subtle) ────────── */
+.u2-root [data-u2-section] {
+  position: relative;
+}
+
+/* ────────── Image lazy-load smooth ────────── */
+.u2-root img[loading="lazy"] {
+  transition: opacity 0.5s ease;
+}
+.u2-root img[loading="lazy"]:not([src]) {
+  opacity: 0;
+}
+
+/* ────────── Reduced motion compliance ────────── */
+@media (prefers-reduced-motion: reduce) {
+  .u2-root [data-u2-section],
+  .u2-root [data-u2-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .u2-root .u2-pdp-sticky-cta__btn::after {
+    animation: none !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* ────────── Mobile-specific tweaks ────────── */
+@media (max-width: 767px) {
+  /* Stronger reveal on mobile (less subtle) */
+  .u2-root [data-u2-section] {
+    transition-duration: 0.7s;
+  }
+  /* Disable hover effects on touch */
+  @media (hover: none) {
+    .u2-root .u2-lift:hover,
+    .u2-root [class*="u2-pdp-reviews"] article:hover,
+    .u2-root [class*="u2-pdp-founder"]:hover img,
+    .u2-root [class*="u2-pdp-before-after"] [class*="card"]:hover,
+    .u2-root [class*="u2-pdp-formula"] [class*="card"]:hover,
+    .u2-root [class*="u2-pdp-steps"] [class*="step"]:hover,
+    .u2-root [class*="u2-pdp-foryou"] [class*="card"]:hover,
+    .u2-root [class*="u2-pdp-diff"] [class*="card"]:hover,
+    .u2-root [class*="u2-pdp-howit"] [class*="card"]:hover,
+    .u2-root [class*="u2-pdp-taste"] [class*="card"]:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    .u2-root .u2-img-zoom:hover img { transform: none; }
+  }
+}

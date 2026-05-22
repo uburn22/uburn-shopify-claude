@@ -1,52 +1,79 @@
 {%- comment -%}
-  UBurn V2 — Stories mini (4 customer avatar cards with quotes)
+  UBurn V2 — Stories mini : 4 customer avatar cards
+  Rev 2026-05-19 — mobile carousel + desktop grid
 {%- endcomment -%}
 <style>
-  .u2-pdp-stories-mini { padding: 64px 20px; background: var(--u2-cream-deep); }
+  .u2-pdp-stories-mini { padding: 64px 0; background: var(--u2-cream-deep); position: relative; overflow: hidden; }
   .u2-pdp-stories-mini__inner { max-width: 1100px; margin: 0 auto; }
-  .u2-pdp-stories-mini__head { text-align: center; margin-bottom: 40px; }
+  .u2-pdp-stories-mini__head { text-align: center; margin-bottom: 32px; padding: 0 20px; }
   .u2-pdp-stories-mini__eyebrow {
     display: inline-block;
     font-family: var(--u2-sans);
     font-size: 11px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--u2-iris);
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   .u2-pdp-stories-mini__title {
     font-family: var(--u2-serif);
-    font-size: 36px;
-    line-height: 1.1;
+    font-size: clamp(28px, 6.2vw, 40px);
+    line-height: 1.08;
     font-weight: 400;
     color: var(--u2-plum-black);
-    margin: 0 0 8px;
+    margin: 0 0 10px;
     letter-spacing: -0.02em;
   }
   .u2-pdp-stories-mini__sub {
     font-family: var(--u2-sans);
     font-size: 14px;
-    color: var(--u2-plum);
+    color: var(--u2-text-muted);
     margin: 0 auto;
     max-width: 520px;
+    letter-spacing: 0.01em;
   }
+
+  /* MOBILE — carousel */
   .u2-pdp-stories-mini__row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 28px;
-    margin-top: 16px;
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 8px 20px 20px;
+    margin: 4px 0 0;
   }
+  .u2-pdp-stories-mini__row::-webkit-scrollbar { display: none; }
+
   .u2-pdp-stories-mini__card {
+    flex: 0 0 70%;
+    max-width: 260px;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    background: var(--u2-warm-white);
+    border: 1px solid rgba(107, 78, 158, 0.10);
+    border-radius: 20px;
+    padding: 22px 18px 22px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 14px;
+    gap: 12px;
+    box-shadow: 0 12px 28px -14px rgba(26, 15, 46, 0.16);
+    transition: transform var(--u2-duration-medium) var(--u2-ease-luxe), box-shadow var(--u2-duration-medium) var(--u2-ease-luxe), opacity var(--u2-duration-medium) ease;
+    transform: scale(0.96);
+    opacity: 0.82;
+  }
+  .u2-pdp-stories-mini__card.is-active {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 20px 40px -14px rgba(107, 78, 158, 0.28);
   }
   .u2-pdp-stories-mini__avatar {
-    width: 88px;
-    height: 88px;
+    width: 84px;
+    height: 84px;
     border-radius: 50%;
     overflow: hidden;
     background: rgba(107, 78, 158, 0.08);
@@ -58,6 +85,7 @@
     font-size: 28px;
     color: var(--u2-iris);
     font-weight: 400;
+    border: 2px solid #fff;
   }
   .u2-pdp-stories-mini__avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .u2-pdp-stories-mini__name {
@@ -70,26 +98,73 @@
   .u2-pdp-stories-mini__loc {
     display: block;
     font-size: 11px;
-    color: var(--u2-mauve);
+    color: var(--u2-text-muted);
     font-weight: 500;
     margin-top: 2px;
     letter-spacing: 0.04em;
   }
   .u2-pdp-stories-mini__quote {
     font-family: var(--u2-serif);
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.4;
-    color: var(--u2-plum);
+    color: var(--u2-plum-black);
     font-style: italic;
     margin: 0;
     max-width: 200px;
+    letter-spacing: -0.005em;
   }
-  @media (max-width: 768px) {
-    .u2-pdp-stories-mini { padding: 48px 16px; }
-    .u2-pdp-stories-mini__row { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
-    .u2-pdp-stories-mini__title { font-size: 28px; }
+  .u2-pdp-stories-mini__dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 20px 0;
+  }
+  .u2-pdp-stories-mini__dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(107, 78, 158, 0.25);
+    transition: background var(--u2-duration-fast) ease, width var(--u2-duration-fast) var(--u2-ease-luxe);
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+  }
+  .u2-pdp-stories-mini__dot.is-active {
+    background: var(--u2-iris);
+    width: 22px;
+    border-radius: 999px;
+  }
+
+  /* DESKTOP — 4-col grid */
+  @media (min-width: 768px) {
+    .u2-pdp-stories-mini { padding: 96px 20px; }
+    .u2-pdp-stories-mini__row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      overflow: visible;
+      padding: 0;
+      margin-top: 8px;
+    }
+    .u2-pdp-stories-mini__card {
+      flex: initial;
+      max-width: none;
+      transform: none;
+      opacity: 1;
+      scroll-snap-align: none;
+      padding: 28px 18px;
+    }
+    .u2-pdp-stories-mini__card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px -14px rgba(107, 78, 158, 0.24);
+    }
+    .u2-pdp-stories-mini__dots { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .u2-pdp-stories-mini__card,
+    .u2-pdp-stories-mini__dot { transition: none !important; }
   }
 </style>
+
 <section class="u2-root u2-pdp-stories-mini" aria-labelledby="u2-stories-mini-title">
   <div class="u2-pdp-stories-mini__inner">
     <div class="u2-pdp-stories-mini__head">
@@ -97,12 +172,12 @@
       <h2 class="u2-pdp-stories-mini__title" id="u2-stories-mini-title">{{ section.settings.title | default: 'The ritual, in real life.' }}</h2>
       <p class="u2-pdp-stories-mini__sub">{{ section.settings.subtitle | default: 'Real women. Real routines. Real moments.' }}</p>
     </div>
-    <div class="u2-pdp-stories-mini__row">
+    <div class="u2-pdp-stories-mini__row" id="u2-stories-rail" role="region" aria-label="Customer testimonials" tabindex="0">
       {% for block in section.blocks %}
-        <div class="u2-pdp-stories-mini__card" {{ block.shopify_attributes }}>
+        <div class="u2-pdp-stories-mini__card{% if forloop.first %} is-active{% endif %}" data-story-card data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
           <div class="u2-pdp-stories-mini__avatar">
             {% if block.settings.image %}
-              <img src="{{ block.settings.image | image_url: width: 200 }}" alt="{{ block.settings.name | escape }}" loading="lazy" decoding="async" width="88" height="88">
+              <img src="{{ block.settings.image | image_url: width: 200 }}" alt="{{ block.settings.name | escape }}" loading="lazy" decoding="async" width="84" height="84">
             {% else %}
               <span aria-hidden="true">{{ block.settings.name | slice: 0, 1 }}</span>
             {% endif %}
@@ -113,14 +188,82 @@
           <p class="u2-pdp-stories-mini__quote">"{{ block.settings.quote }}"</p>
         </div>
       {% else %}
-        <div class="u2-pdp-stories-mini__card"><div class="u2-pdp-stories-mini__avatar"><img src="{{ 'uburn-us-story-1-sarah-brooklyn.png' | asset_url }}" alt="Sarah J. — Brooklyn, NY" loading="lazy" decoding="async" width="200" height="200"></div><div class="u2-pdp-stories-mini__name">Sarah J., 32<span class="u2-pdp-stories-mini__loc">Brooklyn, NY</span></div><p class="u2-pdp-stories-mini__quote">"No more 4PM cravings."</p></div>
-        <div class="u2-pdp-stories-mini__card"><div class="u2-pdp-stories-mini__avatar"><img src="{{ 'uburn-us-story-2-jennifer-miami.png' | asset_url }}" alt="Jennifer M. — Miami, FL" loading="lazy" decoding="async" width="200" height="200"></div><div class="u2-pdp-stories-mini__name">Jennifer M., 38<span class="u2-pdp-stories-mini__loc">Miami, FL</span></div><p class="u2-pdp-stories-mini__quote">"Calmer afternoons. More stable energy."</p></div>
-        <div class="u2-pdp-stories-mini__card"><div class="u2-pdp-stories-mini__avatar"><img src="{{ 'uburn-us-story-3-rachel-denver.png' | asset_url }}" alt="Rachel B. — Denver, CO" loading="lazy" decoding="async" width="200" height="200"></div><div class="u2-pdp-stories-mini__name">Rachel B., 47<span class="u2-pdp-stories-mini__loc">Denver, CO</span></div><p class="u2-pdp-stories-mini__quote">"Vanilla taste. Nothing chemical."</p></div>
-        <div class="u2-pdp-stories-mini__card"><div class="u2-pdp-stories-mini__avatar"><img src="{{ 'uburn-us-story-4-megan-austin.png' | asset_url }}" alt="Megan T. — Austin, TX" loading="lazy" decoding="async" width="200" height="200"></div><div class="u2-pdp-stories-mini__name">Megan T., 39<span class="u2-pdp-stories-mini__loc">Austin, TX</span></div><p class="u2-pdp-stories-mini__quote">"Before workouts. Stim-free."</p></div>
+        <div class="u2-pdp-stories-mini__card is-active" data-story-card data-index="0"><div class="u2-pdp-stories-mini__avatar"><img src="{{ 'uburn-us-story-1-sarah-brooklyn.png' | asset_url }}" alt="Sarah J. — Brooklyn, NY" loading="lazy" decoding="async" width="200" height="200"></div><div class="u2-pdp-stories-mini__name">Sarah J., 32<span class="u2-pdp-stories-mini__loc">Brooklyn, NY</span></div><p class="u2-pdp-stories-mini__quote">"No more 4PM cravings."</p></div>
+        <div class="u2-pdp-stories-mini__card" data-story-card data-index="1"><div class="u2-pdp-stories-mini__avatar"><img src="{{ 'uburn-us-story-2-jennifer-miami.png' | asset_url }}" alt="Jennifer M. — Miami, FL" loading="lazy" decoding="async" width="200" height="200"></div><div class="u2-pdp-stories-mini__name">Jennifer M., 38<span class="u2-pdp-stories-mini__loc">Miami, FL</span></div><p class="u2-pdp-stories-mini__quote">"Calmer afternoons. More stable energy."</p></div>
+        <div class="u2-pdp-stories-mini__card" data-story-card data-index="2"><div class="u2-pdp-stories-mini__avatar"><img src="{{ 'uburn-us-story-3-rachel-denver.png' | asset_url }}" alt="Rachel B. — Denver, CO" loading="lazy" decoding="async" width="200" height="200"></div><div class="u2-pdp-stories-mini__name">Rachel B., 47<span class="u2-pdp-stories-mini__loc">Denver, CO</span></div><p class="u2-pdp-stories-mini__quote">"Vanilla taste. Nothing chemical."</p></div>
+        <div class="u2-pdp-stories-mini__card" data-story-card data-index="3"><div class="u2-pdp-stories-mini__avatar"><img src="{{ 'uburn-us-story-4-megan-austin.png' | asset_url }}" alt="Megan T. — Austin, TX" loading="lazy" decoding="async" width="200" height="200"></div><div class="u2-pdp-stories-mini__name">Megan T., 39<span class="u2-pdp-stories-mini__loc">Austin, TX</span></div><p class="u2-pdp-stories-mini__quote">"Before workouts. Stim-free."</p></div>
       {% endfor %}
+    </div>
+    <div class="u2-pdp-stories-mini__dots" aria-hidden="true">
+      {%- assign dot_count = section.blocks.size -%}
+      {%- if dot_count == 0 -%}{%- assign dot_count = 4 -%}{%- endif -%}
+      {%- for i in (1..dot_count) -%}
+        <button type="button" class="u2-pdp-stories-mini__dot{% if forloop.first %} is-active{% endif %}" data-story-dot data-index="{{ forloop.index0 }}" aria-label="Story {{ forloop.index }}"></button>
+      {%- endfor -%}
     </div>
   </div>
 </section>
+
+<script>
+(function(){
+  'use strict';
+  var rail = document.getElementById('u2-stories-rail');
+  if(!rail) return;
+  var cards = rail.querySelectorAll('[data-story-card]');
+  var dots = document.querySelectorAll('[data-story-dot]');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isMobile = function(){ return window.matchMedia('(max-width: 767px)').matches; };
+
+  function getActiveIndex(){
+    if(!isMobile()) return 0;
+    var center = rail.scrollLeft + (rail.clientWidth / 2);
+    var best = 0; var bestDist = Infinity;
+    cards.forEach(function(card, i){
+      var cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+      var dist = Math.abs(cardCenter - center);
+      if(dist < bestDist){ bestDist = dist; best = i; }
+    });
+    return best;
+  }
+
+  function syncActive(){
+    if(!isMobile()) {
+      cards.forEach(function(c){ c.classList.remove('is-active'); });
+      dots.forEach(function(d){ d.classList.remove('is-active'); });
+      return;
+    }
+    var idx = getActiveIndex();
+    dots.forEach(function(d, i){ d.classList.toggle('is-active', i === idx); });
+    cards.forEach(function(c, i){ c.classList.toggle('is-active', i === idx); });
+  }
+
+  var t;
+  rail.addEventListener('scroll', function(){
+    clearTimeout(t); t = setTimeout(syncActive, 80);
+  }, { passive: true });
+  window.addEventListener('resize', syncActive, { passive: true });
+
+  function scrollToIdx(i){
+    if(!isMobile()) return;
+    var card = cards[i];
+    if(!card) return;
+    var target = card.offsetLeft - (rail.clientWidth - card.offsetWidth) / 2;
+    rail.scrollTo({ left: target, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){ scrollToIdx(parseInt(d.dataset.index, 10)); });
+  });
+
+  rail.addEventListener('keydown', function(e){
+    if(!isMobile()) return;
+    if(e.key === 'ArrowRight'){ e.preventDefault(); scrollToIdx(Math.min(getActiveIndex() + 1, cards.length - 1)); }
+    else if(e.key === 'ArrowLeft'){ e.preventDefault(); scrollToIdx(Math.max(getActiveIndex() - 1, 0)); }
+  });
+
+  syncActive();
+})();
+</script>
+
 {% schema %}
 {
   "name": "U2 PDP Stories Mini",

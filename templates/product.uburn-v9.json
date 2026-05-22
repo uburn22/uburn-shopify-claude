@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "u2-pdp": { "type": "u2-pdp", "settings": {} },
@@ -18,27 +27,29 @@
     "u2-formula": { "type": "u2-pdp-formula-detail", "settings": {} },
     "u2-safety": { "type": "u2-pdp-safety", "settings": {} },
     "u2-faq": { "type": "u2-pdp-faq", "settings": {} },
-    "u2-finalcta": { "type": "u2-pdp-final-cta", "settings": {} }
+    "u2-finalcta": { "type": "u2-pdp-final-cta", "settings": {} },
+    "u2-live-proof": { "type": "u2-live-proof", "settings": {} }
   },
   "order": [
     "u2-pdp",
     "u2-press",
     "u2-stories",
-    "u2-precision",
-    "u2-founder",
-    "u2-reviews",
     "u2-workday",
-    "u2-taste",
-    "u2-steps",
-    "u2-quiz",
     "u2-foryou",
     "u2-howit",
-    "u2-diff",
-    "u2-scit",
+    "u2-founder",
+    "u2-reviews",
     "u2-compare",
+    "u2-diff",
+    "u2-taste",
+    "u2-steps",
     "u2-formula",
+    "u2-scit",
+    "u2-precision",
+    "u2-quiz",
     "u2-safety",
     "u2-faq",
-    "u2-finalcta"
+    "u2-finalcta",
+    "u2-live-proof"
   ]
 }

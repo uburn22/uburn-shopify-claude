@@ -17,6 +17,37 @@
   function priceFor(v){ return (PRICE_MAP[String(v)] || {}).usd || 36.99; }
   function nameFor(v){ return (PRICE_MAP[String(v)] || {}).name || 'UBurn product'; }
 
+  // 0. LP-specific PageView (custom events for Meta attribution per ad angle)
+  {%- liquid
+    assign lp_event = ''
+    if template contains 'page'
+      case page.handle
+        when 'lp-4pm-killer-us'
+          assign lp_event = 'LP_4PMKiller_View'
+        when 'lp-violet-matcha-us'
+          assign lp_event = 'LP_VioletMatcha_View'
+        when 'lp-stress-eater-us'
+          assign lp_event = 'LP_StressEater_View'
+        when 'lp-clean-label-us'
+          assign lp_event = 'LP_CleanLabel_View'
+      endcase
+    endif
+  -%}
+  {% if lp_event != blank %}
+    if (window.fbq) {
+      window.fbq('trackCustom', {{ lp_event | json }}, {
+        page_path: location.pathname,
+        page_handle: {{ page.handle | json }}
+      });
+    }
+    if (window.gtag) {
+      window.gtag('event', 'lp_view', {
+        lp_handle: {{ page.handle | json }},
+        lp_angle: {{ lp_event | replace: '_View', '' | json }}
+      });
+    }
+  {% endif %}
+
   // 1. ViewContent
   {% if template contains 'product' %}
     var pdpVariant = {{ product.selected_or_first_available_variant.id | json }};

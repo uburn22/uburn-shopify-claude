@@ -334,9 +334,9 @@
 <section class="u2-root u2-pricing" aria-label="Pricing" data-u2-pricing>
   <div class="u2-pricing__inner">
     <div class="u2-pricing__head u2-reveal">
-      <span class="u2-section-eyebrow">— your offer</span>
+      <span class="u2-section-eyebrow">— your ritual</span>
       <h2>One flavor. <em>Two packs.</em></h2>
-      <p>Subscribe &amp; save 10% · or one-time · free U.S. shipping on $40+</p>
+      <p>Subscribe &amp; save 10% · free U.S. shipping on $40+</p>
     </div>
 
     {%- if hp != blank -%}
@@ -350,7 +350,7 @@
       {%- comment -%} ============ STARTER ============ {%- endcomment -%}
       <article class="u2-pricing__card u2-reveal delay-2" data-u2-pack="starter">
         <h3 class="u2-pricing__name">Starter</h3>
-        <p class="u2-pricing__sub">Easy entry · slow path</p>
+        <p class="u2-pricing__sub">30 days · 1 scoop daily</p>
 
         {%- if sub_plan -%}
         <div class="u2-pricing__tabs" role="tablist" aria-label="Purchase type — Starter">
@@ -361,8 +361,7 @@
 
         <p class="u2-pricing__price" data-u2-price>$33.29<small data-u2-compare>$36.99</small></p>
         <p class="u2-pricing__per" data-u2-per>$1.11 / scoop · ships every 30 days</p>
-        <span class="u2-pricing__save" data-u2-save>Save 10% · cancel anytime</span>
-        <p class="u2-pricing__dur">90 g · 30 scoops · 1 scoop / day · 30 days</p>
+        <p class="u2-pricing__dur">90 g · 30 scoops</p>
 
         <form action="/cart/add" method="post" class="u2-pricing__form" data-u2-form>
           <input type="hidden" name="id" value="{{ v1.id }}">
@@ -378,9 +377,9 @@
 
       {%- comment -%} ============ MAXIMUM ============ {%- endcomment -%}
       <article class="u2-pricing__card u2-pricing__card--pop u2-reveal delay-3" data-u2-pack="maximum">
-        <span class="u2-pricing__badge">Faster results · −47% per scoop</span>
-        <h3 class="u2-pricing__name">Maximum Pack</h3>
-        <p class="u2-pricing__sub">3× daily · faster results · 4 bonuses included</p>
+        <span class="u2-pricing__badge">Best value · faster results</span>
+        <h3 class="u2-pricing__name">Maximum</h3>
+        <p class="u2-pricing__sub">30 days · 3 scoops daily · 4 free bonuses</p>
 
         {%- if sub_plan -%}
         <div class="u2-pricing__tabs" role="tablist" aria-label="Purchase type — Maximum">
@@ -391,8 +390,7 @@
 
         <p class="u2-pricing__price" data-u2-price>$53.09<small data-u2-compare>$110.97</small></p>
         <p class="u2-pricing__per" data-u2-per>$0.59 / scoop · ships every 30 days</p>
-        <span class="u2-pricing__save" data-u2-save>Save 10% · cancel anytime</span>
-        <p class="u2-pricing__dur">270 g · 90 scoops · 3 scoops / day · 30 days</p>
+        <p class="u2-pricing__dur">270 g · 90 scoops · save 47% vs. 3 Starters</p>
 
         <form action="/cart/add" method="post" class="u2-pricing__form" data-u2-form>
           <input type="hidden" name="id" value="{{ v2.id }}">
@@ -409,38 +407,38 @@
 
     {%- if section.settings.show_bonus -%}
     <div class="u2-pricing__bonus u2-reveal delay-3">
-      <h3>With your <em>Maximum Pack</em> · included</h3>
+      <h3>Included with <em>Maximum</em></h3>
       <div class="u2-pricing__bonus-grid">
         <div class="u2-pricing__bonus-item">
           <span class="u2-pricing__bonus-icon">E</span>
           <div class="u2-pricing__bonus-body">
-            <p class="u2-pricing__bonus-name">E-book "30 days to reset your 4 PM"</p>
-            <p class="u2-pricing__bonus-tag">Free · $50 value</p>
+            <p class="u2-pricing__bonus-name">30-day reset e-book</p>
+            <p class="u2-pricing__bonus-tag">$50 value</p>
           </div>
         </div>
         <div class="u2-pricing__bonus-item">
           <span class="u2-pricing__bonus-icon">C</span>
           <div class="u2-pricing__bonus-body">
-            <p class="u2-pricing__bonus-name">Private community · UBurn Collective</p>
-            <p class="u2-pricing__bonus-tag">Free · $43 value</p>
+            <p class="u2-pricing__bonus-name">UBurn Collective community</p>
+            <p class="u2-pricing__bonus-tag">$43 value</p>
           </div>
         </div>
         <div class="u2-pricing__bonus-item">
           <span class="u2-pricing__bonus-icon">N</span>
           <div class="u2-pricing__bonus-body">
-            <p class="u2-pricing__bonus-name">Nutrition support · WhatsApp 30 days</p>
-            <p class="u2-pricing__bonus-tag">Free · $50 value</p>
+            <p class="u2-pricing__bonus-name">WhatsApp nutrition coach</p>
+            <p class="u2-pricing__bonus-tag">$50 value</p>
           </div>
         </div>
         <div class="u2-pricing__bonus-item">
           <span class="u2-pricing__bonus-icon">S</span>
           <div class="u2-pricing__bonus-body">
             <p class="u2-pricing__bonus-name">Free U.S. shipping</p>
-            <p class="u2-pricing__bonus-tag">Free · $12 value</p>
+            <p class="u2-pricing__bonus-tag">$12 value</p>
           </div>
         </div>
       </div>
-      <p class="u2-pricing__total">Bundle value : <strong>$214</strong> · You pay only <strong data-u2-bundle-price>$53.09</strong></p>
+      <p class="u2-pricing__total"><strong>$214</strong> in extras · you pay <strong data-u2-bundle-price>$53.09</strong></p>
     </div>
     {%- endif -%}
 

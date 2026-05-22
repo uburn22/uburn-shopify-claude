@@ -1,0 +1,630 @@
+{%- comment -%}
+  UBurn V2 — UGC / Social proof carousel (TikTok / Reel native premium)
+  Inspired Arrae / Bloom / Rhode UGC sections — DA u2-* aligned.
+  Mobile-first horizontal snap carousel with 9:16 cards, side peek,
+  fake play/mute UI (real videos via block settings later).
+  Rev 2026-05-19 — Meta/TikTok native, DGCCRF + FTC safe (no weight claims).
+{%- endcomment -%}
+<style>
+  .u2-ugc {
+    background: linear-gradient(180deg, var(--u2-warm-white) 0%, var(--u2-bone) 100%);
+    padding: var(--u2-space-section) 0 calc(var(--u2-space-section) - 16px);
+    position: relative;
+    overflow: hidden;
+  }
+  .u2-ugc::before {
+    content: '';
+    position: absolute;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(184, 157, 217, 0.30) 0%, transparent 70%);
+    filter: blur(60px);
+    top: -100px; right: -180px;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .u2-ugc__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .u2-ugc__head {
+    padding: 0 20px;
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .u2-ugc__eyebrow {
+    display: inline-block;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--u2-iris);
+    margin-bottom: 14px;
+  }
+  .u2-ugc__h2 {
+    font-family: var(--u2-serif);
+    font-weight: 400;
+    font-size: clamp(28px, 6.2vw, 44px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--u2-plum-black);
+    margin: 0 auto;
+    max-width: 720px;
+  }
+  .u2-ugc__h2 em {
+    font-style: italic;
+    color: var(--u2-iris);
+  }
+  .u2-ugc__sub {
+    font-family: var(--u2-sans);
+    font-size: 14px;
+    color: var(--u2-text-muted);
+    margin: 10px 0 0;
+    letter-spacing: 0.01em;
+  }
+
+  /* ─── Rail / Carousel ─── */
+  .u2-ugc__rail {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 20px 16px;
+    scroll-padding-left: 20px;
+    scroll-padding-right: 20px;
+  }
+  .u2-ugc__rail::-webkit-scrollbar { display: none; }
+
+  .u2-ugc__card {
+    flex: 0 0 78%;
+    max-width: 320px;
+    scroll-snap-align: center;
+    background: var(--u2-warm-white);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 44px -16px rgba(26, 15, 46, 0.20), 0 2px 8px rgba(26, 15, 46, 0.04);
+    border: 1px solid rgba(107, 78, 158, 0.10);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--u2-duration-medium) var(--u2-ease-luxe), box-shadow var(--u2-duration-medium) var(--u2-ease-luxe);
+    position: relative;
+  }
+  .u2-ugc__card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 28px 56px -18px rgba(107, 78, 158, 0.30);
+  }
+
+  /* Side peek: smaller cards on left/right */
+  @media (max-width: 767px) {
+    .u2-ugc__card:not(.is-active) {
+      opacity: 0.85;
+    }
+  }
+
+  /* ─── Media (9:16) ─── */
+  .u2-ugc__media {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    background: var(--u2-lavender-soft);
+    overflow: hidden;
+  }
+  .u2-ugc__media img,
+  .u2-ugc__media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .u2-ugc__media video {
+    background: var(--u2-plum-black);
+  }
+
+  /* Gradient overlay (TikTok-style readability) */
+  .u2-ugc__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(26, 15, 46, 0.45) 100%);
+    pointer-events: none;
+  }
+
+  /* Play / mute controls */
+  .u2-ugc__play,
+  .u2-ugc__mute {
+    position: absolute;
+    border: 0;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--u2-plum-black);
+    border-radius: 999px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--u2-duration-fast) var(--u2-ease-luxe), background var(--u2-duration-fast) ease;
+    z-index: 2;
+  }
+  .u2-ugc__play {
+    width: 56px; height: 56px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    box-shadow: 0 6px 18px rgba(26, 15, 46, 0.35);
+  }
+  .u2-ugc__play:hover {
+    background: #fff;
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+  .u2-ugc__play.is-playing {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .u2-ugc__mute {
+    width: 36px; height: 36px;
+    top: 12px; right: 12px;
+    font-size: 12px;
+    box-shadow: 0 4px 12px rgba(26, 15, 46, 0.30);
+  }
+
+  /* Badge top-left (verified) */
+  .u2-ugc__verified {
+    position: absolute;
+    top: 12px; left: 12px;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--u2-plum-black);
+    font-family: var(--u2-sans);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .u2-ugc__verified::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--u2-iris);
+  }
+
+  /* Quote overlay bottom */
+  .u2-ugc__quote-overlay {
+    position: absolute;
+    bottom: 16px; left: 16px; right: 16px;
+    z-index: 2;
+    color: #fff;
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  /* ─── Body (CTA / price) ─── */
+  .u2-ugc__body {
+    padding: 14px 18px 18px;
+    background: var(--u2-warm-white);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .u2-ugc__author {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    color: var(--u2-plum-black);
+  }
+  .u2-ugc__author strong { font-weight: 700; }
+  .u2-ugc__author span { color: var(--u2-text-muted); }
+  .u2-ugc__author-dot {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--u2-text-faint);
+  }
+  .u2-ugc__price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    color: var(--u2-text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .u2-ugc__price strong {
+    font-family: var(--u2-serif);
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--u2-plum-black);
+    text-transform: none;
+    letter-spacing: -0.01em;
+  }
+  .u2-ugc__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: var(--u2-plum-black);
+    color: var(--u2-bone);
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+    text-decoration: none;
+    padding: 12px 14px;
+    border-radius: 4px;
+    border: 0;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background var(--u2-duration-fast) ease, transform var(--u2-duration-fast) var(--u2-ease-luxe);
+    overflow: hidden;
+    position: relative;
+  }
+  .u2-ugc__cta:hover {
+    background: var(--u2-iris);
+    transform: translateY(-1px);
+  }
+  .u2-ugc__cta-arrow {
+    transition: transform var(--u2-duration-fast) var(--u2-ease-luxe);
+  }
+  .u2-ugc__cta:hover .u2-ugc__cta-arrow { transform: translateX(4px); }
+
+  /* ─── Dots indicator ─── */
+  .u2-ugc__dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 20px 0;
+  }
+  .u2-ugc__dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(107, 78, 158, 0.25);
+    transition: background var(--u2-duration-fast) ease, width var(--u2-duration-fast) var(--u2-ease-luxe);
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+  }
+  .u2-ugc__dot.is-active {
+    background: var(--u2-iris);
+    width: 22px;
+    border-radius: 999px;
+  }
+
+  /* ─── Nav arrows (desktop only) ─── */
+  .u2-ugc__nav {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .u2-ugc { padding: var(--u2-space-section) 0; }
+    .u2-ugc__card { flex: 0 0 320px; }
+    .u2-ugc__rail { padding-left: 40px; padding-right: 40px; }
+    .u2-ugc__nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .u2-ugc__nav button {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--u2-warm-white);
+      border: 1px solid rgba(107, 78, 158, 0.20);
+      color: var(--u2-plum-black);
+      cursor: pointer;
+      transition: background var(--u2-duration-fast) ease, transform var(--u2-duration-fast) var(--u2-ease-luxe), border-color var(--u2-duration-fast) ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .u2-ugc__nav button:hover {
+      background: var(--u2-iris);
+      color: var(--u2-bone);
+      border-color: var(--u2-iris);
+      transform: translateY(-1px);
+    }
+    .u2-ugc__nav button:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+  }
+  @media (min-width: 1024px) {
+    .u2-ugc__card { flex: 0 0 340px; }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .u2-ugc__card,
+    .u2-ugc__cta,
+    .u2-ugc__play,
+    .u2-ugc__mute,
+    .u2-ugc__dot,
+    .u2-ugc__nav button { transition: none !important; }
+  }
+</style>
+
+<section class="u2-root u2-ugc" aria-label="Real users, real ritual">
+  <div class="u2-ugc__inner">
+
+    <div class="u2-ugc__head u2-reveal">
+      <span class="u2-ugc__eyebrow">{{ section.settings.eyebrow | default: '— real people, real ritual' }}</span>
+      <h2 class="u2-ugc__h2">{{ section.settings.title | default: 'They use it. <em>Every day.</em>' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+      <p class="u2-ugc__sub">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- liquid
+      assign fallback_quotes = 'My 4PM cravings disappeared|Actually keeps me full|No caffeine crash|The purple drink ritual|This replaced my afternoon snacks' | split: '|'
+      assign fallback_authors = '@sarah_b|@jen_m|@rachel_d|@amelia_k|@nora_c' | split: '|'
+      assign fallback_cities = 'Brooklyn, NY|Miami, FL|Denver, CO|Austin, TX|Chicago, IL' | split: '|'
+      assign fallback_imgs = 'uburn-us-story-1-sarah-brooklyn.png|uburn-us-story-2-jennifer-miami.png|uburn-us-story-3-rachel-denver.png|uburn-us-pdp-foryou-lifestyle-a.jpg|uburn-us-pdp-after-calm-desk.png' | split: '|'
+      assign cards_count = section.blocks.size
+      if cards_count == 0
+        assign cards_count = fallback_quotes.size
+      endif
+    -%}
+
+    <div class="u2-ugc__rail" id="u2-ugc-rail" role="region" aria-label="UGC video testimonials" tabindex="0">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign quote = block.settings.quote
+            assign author = block.settings.author
+            assign city = block.settings.city
+            assign price_label = block.settings.price_label | default: 'From $33.29/mo'
+            assign cta_text = block.settings.cta_text | default: 'Start my ritual'
+            assign cta_url = block.settings.cta_url | default: '#u2-pdp-form'
+            assign video_url = block.settings.video_url
+            assign poster_img = block.settings.poster_image
+          -%}
+          <article class="u2-ugc__card{% if forloop.first %} is-active{% endif %}" data-ugc-card data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            <div class="u2-ugc__media">
+              <span class="u2-ugc__verified" aria-hidden="true">Real user</span>
+              {%- if video_url != blank -%}
+                <video data-ugc-video muted loop playsinline preload="none"
+                       {% if poster_img %}poster="{{ poster_img | image_url: width: 720 }}"{% endif %}>
+                  <source data-src="{{ video_url }}" type="video/mp4">
+                </video>
+              {%- elsif poster_img -%}
+                <img src="{{ poster_img | image_url: width: 720 }}" alt="{{ author | escape }} — {{ quote | escape }}" loading="lazy" decoding="async" width="720" height="1280">
+              {%- else -%}
+                <img src="{{ 'u2-hero-lifestyle.jpg' | asset_url }}" alt="UBurn user testimonial" loading="lazy" decoding="async">
+              {%- endif -%}
+              <button type="button" class="u2-ugc__play" data-ugc-play aria-label="Play video">▶</button>
+              <p class="u2-ugc__quote-overlay">"{{ quote | default: 'My 4 PM ritual.' }}"</p>
+            </div>
+            <div class="u2-ugc__body">
+              <div class="u2-ugc__author">
+                <strong>{{ author | default: '@uburn_user' }}</strong>
+                {%- if city != blank -%}
+                  <span class="u2-ugc__author-dot" aria-hidden="true"></span>
+                  <span>{{ city }}</span>
+                {%- endif -%}
+              </div>
+              <div class="u2-ugc__price">
+                <strong>{{ price_label }}</strong>
+              </div>
+              <a href="{{ cta_url }}" class="u2-ugc__cta" data-ugc-cta>
+                <span>{{ cta_text | downcase }}</span>
+                <span class="u2-ugc__cta-arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for q in fallback_quotes -%}
+          {%- liquid
+            assign idx = forloop.index0
+            assign fimg = fallback_imgs[idx]
+          -%}
+          <article class="u2-ugc__card{% if forloop.first %} is-active{% endif %}" data-ugc-card data-index="{{ idx }}">
+            <div class="u2-ugc__media">
+              <span class="u2-ugc__verified" aria-hidden="true">Real user</span>
+              <img src="https://uburn.co/cdn/shop/t/50/assets/{{ fimg }}" alt="{{ fallback_authors[idx] }} — {{ q }}" loading="lazy" decoding="async" width="720" height="1280">
+              <button type="button" class="u2-ugc__play" data-ugc-play aria-label="Play video">▶</button>
+              <p class="u2-ugc__quote-overlay">"{{ q }}"</p>
+            </div>
+            <div class="u2-ugc__body">
+              <div class="u2-ugc__author">
+                <strong>{{ fallback_authors[idx] }}</strong>
+                <span class="u2-ugc__author-dot" aria-hidden="true"></span>
+                <span>{{ fallback_cities[idx] }}</span>
+              </div>
+              <div class="u2-ugc__price">
+                <strong>From $33.29/mo</strong>
+              </div>
+              <a href="#u2-pdp-form" class="u2-ugc__cta" data-ugc-cta>
+                <span>start my ritual</span>
+                <span class="u2-ugc__cta-arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    <div class="u2-ugc__dots" aria-hidden="true">
+      {%- for i in (1..cards_count) -%}
+        <button type="button" class="u2-ugc__dot{% if forloop.first %} is-active{% endif %}" data-ugc-dot data-index="{{ forloop.index0 }}" aria-label="Go to testimonial {{ forloop.index }}"></button>
+      {%- endfor -%}
+    </div>
+
+    <div class="u2-ugc__nav" aria-hidden="true">
+      <button type="button" data-ugc-nav="prev" aria-label="Previous">←</button>
+      <button type="button" data-ugc-nav="next" aria-label="Next">→</button>
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function(){
+  'use strict';
+  var rail = document.getElementById('u2-ugc-rail');
+  if(!rail) return;
+  var cards = rail.querySelectorAll('[data-ugc-card]');
+  var dots = document.querySelectorAll('[data-ugc-dot]');
+  var navBtns = document.querySelectorAll('[data-ugc-nav]');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Sync active dot/card on scroll
+  function getActiveIndex(){
+    var center = rail.scrollLeft + (rail.clientWidth / 2);
+    var best = 0; var bestDist = Infinity;
+    cards.forEach(function(card, i){
+      var cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+      var dist = Math.abs(cardCenter - center);
+      if(dist < bestDist){ bestDist = dist; best = i; }
+    });
+    return best;
+  }
+
+  function syncActive(){
+    var idx = getActiveIndex();
+    dots.forEach(function(d, i){ d.classList.toggle('is-active', i === idx); });
+    cards.forEach(function(c, i){ c.classList.toggle('is-active', i === idx); });
+    // Update nav button disabled state
+    var prevBtn = document.querySelector('[data-ugc-nav="prev"]');
+    var nextBtn = document.querySelector('[data-ugc-nav="next"]');
+    if(prevBtn) prevBtn.disabled = idx === 0;
+    if(nextBtn) nextBtn.disabled = idx === cards.length - 1;
+  }
+
+  var scrollT;
+  rail.addEventListener('scroll', function(){
+    clearTimeout(scrollT);
+    scrollT = setTimeout(syncActive, 80);
+  }, { passive: true });
+
+  function scrollToIdx(i){
+    var card = cards[i];
+    if(!card) return;
+    var target = card.offsetLeft - (rail.clientWidth - card.offsetWidth) / 2;
+    rail.scrollTo({ left: target, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+
+  // Dot click
+  dots.forEach(function(d){
+    d.addEventListener('click', function(){
+      scrollToIdx(parseInt(d.dataset.index, 10));
+    });
+  });
+
+  // Nav arrows
+  navBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var current = getActiveIndex();
+      var next = b.dataset.ugcNav === 'next' ? Math.min(current + 1, cards.length - 1) : Math.max(current - 1, 0);
+      scrollToIdx(next);
+    });
+  });
+
+  // Lazy load + autoplay-on-visible (muted, paused when out)
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        var video = e.target.querySelector('[data-ugc-video]');
+        if(!video) return;
+        var src = video.querySelector('source[data-src]');
+        if(src && !src.getAttribute('src')){
+          src.setAttribute('src', src.getAttribute('data-src'));
+          video.load();
+        }
+        var playBtn = e.target.querySelector('[data-ugc-play]');
+        if(e.isIntersecting && e.intersectionRatio > 0.5 && !reduceMotion){
+          var p = video.play();
+          if(p && p.catch) p.catch(function(){ /* autoplay blocked, leave play button */ });
+          if(playBtn) playBtn.classList.add('is-playing');
+        } else {
+          video.pause();
+          if(playBtn) playBtn.classList.remove('is-playing');
+        }
+      });
+    }, { threshold: [0, 0.5, 1] });
+    cards.forEach(function(c){ io.observe(c); });
+  }
+
+  // Manual play tap
+  cards.forEach(function(c){
+    var btn = c.querySelector('[data-ugc-play]');
+    var video = c.querySelector('[data-ugc-video]');
+    if(btn && video){
+      btn.addEventListener('click', function(){
+        if(video.paused){
+          var p = video.play();
+          if(p && p.then){ p.then(function(){ btn.classList.add('is-playing'); }).catch(function(){}); }
+        } else {
+          video.pause();
+          btn.classList.remove('is-playing');
+        }
+      });
+    }
+  });
+
+  // Init
+  syncActive();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "U2 UGC Carousel",
+  "tag": "section",
+  "class": "shopify-section--u2-ugc",
+  "settings": [
+    { "type": "header", "content": "Header" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "— real people, real ritual" },
+    { "type": "textarea", "id": "title", "label": "Title (em supported)", "default": "They use it. <em>Every day.</em>" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle (optional)" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "UGC card",
+      "settings": [
+        { "type": "text", "id": "quote", "label": "Quote (short, in card overlay)", "default": "My 4PM cravings disappeared" },
+        { "type": "text", "id": "author", "label": "Author handle (e.g. @sarah_b)", "default": "@sarah_b" },
+        { "type": "text", "id": "city", "label": "City (optional)", "default": "Brooklyn, NY" },
+        { "type": "image_picker", "id": "poster_image", "label": "Poster image (9:16 ideal)" },
+        { "type": "url", "id": "video_url", "label": "Video URL (mp4 hosted) — optional, leave blank to use poster only" },
+        { "type": "text", "id": "price_label", "label": "Price label", "default": "From $33.29/mo" },
+        { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Start my ritual" },
+        { "type": "url", "id": "cta_url", "label": "CTA URL (default: scroll to ATC)", "default": "/products/ube-poudre#u2-pdp-form" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "U2 UGC Carousel",
+      "blocks": [
+        { "type": "card", "settings": { "quote": "My 4PM cravings disappeared", "author": "@sarah_b", "city": "Brooklyn, NY" } },
+        { "type": "card", "settings": { "quote": "Actually keeps me full", "author": "@jen_m", "city": "Miami, FL" } },
+        { "type": "card", "settings": { "quote": "No caffeine crash", "author": "@rachel_d", "city": "Denver, CO" } },
+        { "type": "card", "settings": { "quote": "The purple drink ritual", "author": "@amelia_k", "city": "Austin, TX" } },
+        { "type": "card", "settings": { "quote": "This replaced my afternoon snacks", "author": "@nora_c", "city": "Chicago, IL" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
