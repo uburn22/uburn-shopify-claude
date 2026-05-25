@@ -345,7 +345,7 @@
             <div class="pdpv9-pdp__thumbs" role="tablist" aria-label="Vignettes">
               {%- for media in product.media -%}
                 <a href="#pdpv9-slide-{{ forloop.index }}" class="pdpv9-pdp__thumb" aria-label="Image {{ forloop.index }}">
-                  <img src="{{ media | image_url: width: 200 }}&format=webp" alt="" loading="lazy" decoding="async" width="200" height="200">
+                  <img src="{{ media | image_url: width: 200 }}&format=webp" alt="{{ product.title | escape }} — view {{ forloop.index }}" loading="lazy" decoding="async" width="200" height="200">
                 </a>
               {%- endfor -%}
             </div>

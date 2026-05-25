@@ -27,7 +27,12 @@
 {%- endif -%}
 
 {%- if request.page_type == 'product' -%}
-  <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
+  {%- comment -%}
+    og:price:amount must use a dot decimal separator (US locale standard) for Facebook / Google Shopping
+    parsing. Shopify's `money_without_currency` filter respects the store locale (FR = comma "34,50"),
+    which is invalid for OG protocol. We always emit dot-decimal via integer division.
+  {%- endcomment -%}
+  <meta property="og:price:amount" content="{{ product.price | divided_by: 100.0 | round: 2 }}">
   <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
 {%- endif -%}
 

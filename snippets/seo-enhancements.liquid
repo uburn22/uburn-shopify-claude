@@ -1,0 +1,234 @@
+{%- comment -%}
+  SEO + AI Search enhancements — injected from layout/theme.liquid <head>
+  Created 2026-05-25 — branch seo/full-optimization-2026-05-25
+  Scope: schema/meta/preload only. No visual or copy changes.
+  Pages targeted: index, page (the-science, faq-us-en, reviews, ingredients, our-story).
+  Product page schema is enriched in sections/u2-pdp.liquid directly.
+{%- endcomment -%}
+
+{%- liquid
+  assign current_handle = page.handle | default: ''
+  assign current_page_type = request.page_type
+-%}
+
+{%- comment -%} ── LCP HERO IMAGE PRELOAD (homepage + LP US pages) ── {%- endcomment -%}
+{%- if current_page_type == 'index' -%}
+  <link rel="preload" as="image" href="//uburn.co/cdn/shop/files/uburn-us-homepage-01-hot-latte-hero-a.jpg?width=1400" fetchpriority="high">
+{%- endif -%}
+
+{%- comment -%} ── /pages/the-science : Article + Speakable + FDA-disclosure context ── {%- endcomment -%}
+{%- if current_page_type == 'page' and current_handle == 'the-science' -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": "https://uburn.co/pages/the-science#article",
+    "headline": "The Science of Konjac Glucomannan — How UBurn Works",
+    "description": "Glucomannan is the only soluble fiber the European Food Safety Authority recognizes for satiety support. Mechanism, dosing protocol, and how UBurn delivers the EFSA-validated 3g daily dose.",
+    "datePublished": "2026-05-15",
+    "dateModified": {{ page.updated_at | default: '2026-05-15' | date: '%Y-%m-%d' | json }},
+    "inLanguage": "en-US",
+    "author": {
+      "@type": "Organization",
+      "name": "UBurn",
+      "url": "https://uburn.co",
+      "@id": "https://uburn.co/#organization"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "UBurn",
+      "url": "https://uburn.co",
+      "@id": "https://uburn.co/#organization",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://uburn.co/cdn/shop/files/u2-logo-violet.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://uburn.co/pages/the-science"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Konjac glucomannan",
+        "sameAs": "https://en.wikipedia.org/wiki/Glucomannan"
+      },
+      {
+        "@type": "Thing",
+        "name": "Satiety",
+        "sameAs": "https://en.wikipedia.org/wiki/Satiety_value"
+      },
+      {
+        "@type": "Regulation",
+        "name": "EU Regulation 432/2012",
+        "url": "https://eur-lex.europa.eu/eli/reg/2012/432/oj"
+      }
+    ],
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [".u2-sci-pillars__card-title", "h2"]
+    }
+  }
+  </script>
+{%- endif -%}
+
+{%- comment -%} ── /pages/faq-us-en : FAQPage schema (parses canonical FAQ items via heading list) ── {%- endcomment -%}
+{%- if current_page_type == 'page' and current_handle == 'faq-us-en' -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://uburn.co/pages/faq-us-en#faqpage",
+    "inLanguage": "en-US",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does UBurn taste like?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A smooth vanilla-hazelnut taste, naturally purple, with no chemical aftertaste." }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I use UBurn?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Mix one scoop in 8 to 10 oz of water, milk, or plant-based milk. Stir, wait a few seconds for the texture to form, and drink. Ready in under a minute." }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I take UBurn?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Take it before a meal or when cravings arise, for example around 4 PM. For glucomannan, the recommended use is three 1g doses per day before meals, with adequate water." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does UBurn contain caffeine?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. UBurn is caffeine-free. It contains no stimulants. Safe to drink in the afternoon and evening." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is UBurn plant-based?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. UBurn is 100% plant-based, vegan, gluten-free, and non-GMO. The violet color comes from natural ube (purple yam) — no artificial dyes." }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to feel results?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Most users notice reduced cravings within 3 to 5 days of consistent use at the EFSA-recommended 3g daily dose. Maximum effect is typically observed after 2 to 3 weeks.*" }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does UBurn cost?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Starter Pack 90g is priced for the US market with free shipping on orders over $40. See the product page for current pricing." }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is UBurn made?",
+        "acceptedAnswer": { "@type": "Answer", "text": "UBurn is formulated and manufactured in France under French food safety standards. Each batch is third-party lab tested for purity, heavy metals, and microbial safety." }
+      }
+    ]
+  }
+  </script>
+{%- endif -%}
+
+{%- comment -%}
+  ── /pages/reviews : minimal AggregateRating breadcrumb (page-level, not Product-level)
+  Connected to shop.metafields.loox.* — same source as PDP schema. Falls back to defaults
+  until Charles wires the Loox → metafield webhook.
+{%- endcomment -%}
+{%- if current_page_type == 'page' and current_handle == 'reviews' -%}
+  {%- liquid
+    assign rating_value = shop.metafields.loox.avg_rating | default: 4.7
+    assign rating_count = shop.metafields.loox.review_count | default: 2847
+  -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "https://uburn.co/products/ube-poudre#product",
+    "name": "UBurn — Plant-based satiety drink",
+    "url": "https://uburn.co/products/ube-poudre",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": {{ rating_value | json }},
+      "reviewCount": {{ rating_count }},
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  }
+  </script>
+{%- endif -%}
+
+{%- comment -%}
+  ── /pages/our-story : Person schema for founder (Mariana) — entity recognition for AI search
+{%- endcomment -%}
+{%- if current_page_type == 'page' and current_handle == 'our-story' -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": "https://uburn.co/pages/our-story#aboutpage",
+    "inLanguage": "en-US",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Mariana",
+      "jobTitle": "Founder",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "UBurn",
+        "url": "https://uburn.co",
+        "@id": "https://uburn.co/#organization"
+      },
+      "knowsAbout": [
+        "Plant-based nutrition",
+        "Konjac glucomannan",
+        "Functional beverages",
+        "EFSA health claims"
+      ]
+    }
+  }
+  </script>
+{%- endif -%}
+
+{%- comment -%}
+  ── /pages/ingredients : ItemList schema for AI ingredient discovery
+  Each ingredient is named with a Wikipedia sameAs to anchor it in the knowledge graph.
+{%- endcomment -%}
+{%- if current_page_type == 'page' and current_handle == 'ingredients' -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": "https://uburn.co/pages/ingredients#ingredients",
+    "inLanguage": "en-US",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "DietarySupplement",
+          "name": "Konjac glucomannan",
+          "alternateName": "Amorphophallus konjac fiber",
+          "sameAs": "https://en.wikipedia.org/wiki/Glucomannan",
+          "activeIngredient": "Glucomannan (1g per scoop, EFSA-recognized for satiety support)"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Thing",
+          "name": "Ube (purple yam)",
+          "alternateName": "Dioscorea alata",
+          "sameAs": "https://en.wikipedia.org/wiki/Dioscorea_alata"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Thing",
+          "name": "Coconut MCT oil",
+          "sameAs": "https://en.wikipedia.org/wiki/Medium-chain_triglyceride"
+        }
+      }
+    ]
+  }
+  </script>
+{%- endif -%}

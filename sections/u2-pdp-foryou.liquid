@@ -119,7 +119,7 @@
     </div>
     <div class="u2-pdp-foryou__media">
       {% if section.settings.image %}
-        <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="" loading="lazy" decoding="async" width="1000" height="1250">
+        <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="{{ section.settings.image.alt | default: 'UBurn plant-based satiety drink — lifestyle context' | escape }}" loading="lazy" decoding="async" width="1000" height="1250">
       {% else %}
         {%- comment -%} rev 2026-05-16 — lifestyle kitchen photo (glass + packshot + powder spoon) replaces "U" placeholder {%- endcomment -%}
         <img src="{{ 'uburn-us-pdp-foryou-lifestyle-a.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Femme tenant un verre de latte ube violet glacé à côté du sachet UBurn et d'une cuillère de poudre, lumière matinale chaude{% else %}Woman holding a glass of iced violet ube latte next to the UBurn pouch and a spoon of powder, warm morning light{% endif %}" loading="lazy" decoding="async" width="1127" height="1400">
