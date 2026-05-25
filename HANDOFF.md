@@ -7,15 +7,20 @@
 ## Active session
 
 - **Last machine** : Mac Studio (`MacStudio-de-charles.local`)
-- **Date / time** : 2026-05-18 (Phase Mac Studio stabilization)
-- **Branch** : `feat/lp-4pm-killer-us`
-- **HEAD** : `368babd feat(phase2/wave1): trust band V2 + design system bridge for monolith` (2026-05-14)
-- **State** : 4 uncommitted (not edited this session)
+- **Date / time** : 2026-05-25 19:56 (autonomous SEO optimization run by Claude)
+- **Branch** : `seo/full-optimization-2026-05-25` (pushed to origin)
+- **HEAD** : `bafdf69 feat(seo): full optimization pass — schema/meta/perf only, no design/copy`
+- **State** : clean (committed + pushed)
+- **Previous branch** : `restore-morning-state-3cb7d95-merged` (base of this work)
 
 ## In-progress work
 
-- (none — Charles paused here pre Phase 0+1 infra cleanup)
-- Phase 2 redesign work : trust band V2 + design system bridge for monolith (last commit context)
+- **SEO optimization branch ready for Charles validation + dev theme push**
+  - 9 files changed, 595 insertions
+  - Full deployment guide at `_audit/DEPLOY-SEO-2026-05-25.md`
+  - Audit context : `~/Library/CloudStorage/.../UBURN-SYNC/_logs/2026-05-25-seo-ai-readiness-audit.md`
+  - 6 Shopify Admin actions still required (Markets, noindex, IndexNow, GSC, og:image rename, metafield creation) — listed in deploy guide
+- Phase 2 redesign work (paused) : trust band V2 + design system bridge for monolith
 
 ## Pending decisions
 
@@ -32,9 +37,17 @@
 
 ## Next action when you resume
 
-1. Continue feat/lp-4pm-killer-us OR open `port/*-from-v2` branch
-2. If touching production theme : confirm A/B/C theme target (cf. memory `feedback_theme_publish`)
-3. Update this HANDOFF.md before stopping or switching machines
+1. **Review SEO branch** : `git diff main...seo/full-optimization-2026-05-25 --stat` + read `_audit/DEPLOY-SEO-2026-05-25.md`
+2. **Push to DEV theme only** (NOT live 186235420991) — validate schema on dev theme preview URL
+3. **Create the 4 metafields** (Settings → Custom data → Shop : loox.avg_rating, loox.review_count ; Product : product.gtin, product.mpn)
+4. **Create page handle `llms-txt`** in Shopify Admin Pages, assign template `llms-txt`
+5. **Add URL redirect** `/llms.txt → /pages/llms-txt`
+6. **Run schema validators** : validator.schema.org + Rich Results Test on PDP/the-science/faq-us-en
+7. **Only after 1-6 clean** : push to LIVE theme — confirm A/B/C per memory `feedback_theme_publish`
+8. **Then attaque les 6 Shopify Admin actions** restantes (Markets, noindex 10 pages, IndexNow, GSC sitemap, og:image rename, /collections/all meta) — détaillées dans DEPLOY guide
+
+If touching production theme : confirm A/B/C theme target (cf. memory `feedback_theme_publish`)
+Update this HANDOFF.md before stopping or switching machines
 
 ## Stashes (DO NOT lose)
 
