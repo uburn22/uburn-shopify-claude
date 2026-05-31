@@ -1,0 +1,52 @@
+<script>
+// Uburn Purchase Event — Meta Pixel + GA4
+// Ajouter ce snippet dans theme.liquid juste avant </body>
+// OU dans le template checkout/thank_you via l'app Shopify Meta
+(function(){
+  // Only fire on thank you page
+  var match = window.location.pathname.match(/checkouts\/(.+)\/(thank_you|post_purchase)/);
+  if (!match) return;
+  
+  // Wait for checkout data to load in DOM (compatible with Checkout Extensibility)
+  var checkTotal = setInterval(function(){
+    var totalEl = document.querySelector(
+      '[data-checkout-total], ' +
+      '.order-summary__total .total-recap__final-price, ' +
+      '.total-line-table .total-line--subtotal .payment-due__price, ' +
+      '[data-order-total], ' +
+      '.thank-you__title + p strong, ' +  // Shopify classic
+      '.os-order-number + .total-recap__total-line .payment-due__price'
+    );
+    if (!totalEl) return;
+    clearInterval(checkTotal);
+    
+    var totalText = totalEl.textContent.trim();
+    var value = parseFloat(totalText.replace(/[^0-9.]/g, '')) || 0;
+    var eventID = 'purchase_' + Date.now() + '_' + Math.random().toString(36).slice(2,9);
+    
+    // Meta Pixel Purchase
+    if (window.fbq) {
+      window.fbq('track', 'Purchase', {
+        value: value,
+        currency: 'USD',
+        content_type: 'product'
+      }, { eventID: eventID });
+    }
+    
+    // Google Analytics 4 Purchase
+    if (window.gtag) {
+      window.gtag('event', 'purchase', {
+        currency: 'USD',
+        value: value,
+        transaction_id: match[1]
+      });
+    }
+    
+    // Log for debugging
+    console.log('[UBURN] Purchase tracked:', value, 'USD', eventID);
+  }, 500);
+  
+  // Safety timeout — stop after 10s if element never appears
+  setTimeout(function(){ clearInterval(checkTotal); }, 10000);
+})();
+</script>
