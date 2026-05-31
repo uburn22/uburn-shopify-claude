@@ -1,0 +1,129 @@
+{
+  "layout": "theme",
+  "sections": {
+    "hero": {
+      "type": "u2-hero-split",
+      "settings": {
+        "product": "ube-poudre",
+        "variant_id": "51289200034111",
+        "eyebrow": "the violet ritual — for women who deserve a slow 4 PM",
+        "h1": "Romanticize your <em>4 PM.</em>",
+        "sub": "You're not hungry at 4 PM — you're tired. UBurn replaces the snack with one scoop of plant-based ube and konjac. Glucomannan plant fiber for up to 4 hours of fullness.",
+        "priceline": "from <strong>$0.66/day</strong> · subscribe &amp; save 10% · 4-hour plant-based fullness · 30 cal · free U.S. shipping",
+        "cta_text": "begin the ritual",
+        "cta_sub": "1 scoop · cold water · your moment · cancel anytime",
+        "image_left_filename": "lp-hero-ritual-real.png",
+        "image_left_alt": "UBurn lavender pouch beside violet ube latte swirl in tall glass with spoon of purple powder",
+        "label_left": "ritual",
+        "tag_left": "30 seconds · slow · yours",
+        "image_right_filename": "lp-hero-meno-real.jpg",
+        "image_right_alt": "Real customer holding UBurn pouch — the violet ritual in action",
+        "label_right": "functional",
+        "tag_right": "konjac fiber · 4h fullness"
+      }
+    },
+    "trust-band": { "type": "u2-trust-band", "settings": {} },
+    "marquee": { "type": "u2-marquee", "settings": {} },
+    "problem": {
+      "type": "u2-problem",
+      "settings": {
+        "banner_filename": "uburn-us-pdp-before-stressed-desk.png",
+        "banner_alt": "Woman stressed at 4 PM at desk — snack drawer open, brain confusing tired with hungry",
+        "banner_caption": "you're not hungry. you're tired. there's a difference.",
+        "eyebrow": "the 4 PM you keep losing",
+        "title_pre": "Stop eating",
+        "title_em": "your stress.",
+        "card_1_num": "3 pm",
+        "card_1_title": "Energy dips.",
+        "card_1_sub": "Your blood sugar drops. Your brain reads tired as hungry. The snack drawer opens before you decide.",
+        "card_2_num": "4 pm",
+        "card_2_title": "The cycle hits.",
+        "card_2_sub": "Quick sugar. Quick high. Quick crash. By 5 PM you've eaten what you didn't want and still feel empty.",
+        "card_3_num": "→",
+        "card_3_title": "A ritual instead.",
+        "card_3_sub": "One scoop, cold water, glucomannan from konjac plant fiber. Up to 4 hours of fullness. Calm, slow, yours."
+      }
+    },
+    "before-after": { "type": "u2-before-after", "settings": {} },
+    "week-changes": {
+      "type": "u2-week-changes",
+      "settings": {
+        "eyebrow": "— in her own words",
+        "title_pre": "What changes.",
+        "title_em": "After 4 weeks.",
+        "before_label": "Before UBurn",
+        "before_week": "Week 1",
+        "before_1": "Uncontrollable 4 PM cravings — pantry open daily",
+        "before_2": "Cookies, chocolate, sometimes worse",
+        "before_3": "Guilt after every slip-up, chronic frustration",
+        "before_4": "Dinner too heavy to make up for accumulated hunger",
+        "before_5": "Afternoon fatigue, difficult digestion",
+        "after_label": "After 4 weeks",
+        "after_week": "Week 4",
+        "after_1": "No more 4 PM cravings — she forgets the pantry exists",
+        "after_2": "Naturally lighter dinner, no willpower needed",
+        "after_3": "Calmer afternoons, smoother digestion from week 2*",
+        "after_4": "Mood feels calmer, no afternoon crash",
+        "after_5": "The ritual settled in naturally — feels like self-care",
+        "attr_name": "Ashley K.",
+        "attr_city": "Phoenix, AZ",
+        "attr_when": "After 28 days",
+        "avatar_filename": "uburn-us-story-1-sarah-brooklyn.png",
+        "disclaimer": "*Individual results may vary. Glucomannan — EFSA ID 3120. Use: 3g/day with water before meals. These statements have not been evaluated by the FDA."
+      }
+    },
+    "three-ways": { "type": "u2-three-ways", "settings": {} },
+    "craft": { "type": "u2-craft", "settings": {} },
+    "violet-bottle": { "type": "u2-violet-bottle", "settings": {} },
+    "moodboard": { "type": "u2-moodboard", "settings": {} },
+    "stats": { "type": "u2-stats", "settings": {} },
+    "video-reviews": {
+      "type": "u2-video-reviews",
+      "settings": {
+        "eyebrow": "— real users · real moments",
+        "title_pre": "In their",
+        "title_em": "own words.",
+        "sub": "Four women. Four cities. One ritual. Verified video reviews.",
+        "cta_text": "Try the ritual",
+        "cta_link": "#u2-pricing",
+        "card_1_quote": "\"No more 4 PM cravings.\"",
+        "card_1_name": "Sarah J., 32",
+        "card_1_city": "Brooklyn, NY",
+        "card_2_quote": "\"Calmer afternoons. More stable energy.\"",
+        "card_2_name": "Jennifer M., 38",
+        "card_2_city": "Miami, FL",
+        "card_3_quote": "\"Vanilla taste. Nothing chemical.\"",
+        "card_3_name": "Rachel B., 47",
+        "card_3_city": "Denver, CO",
+        "card_4_quote": "\"Before workouts. Stim-free.\"",
+        "card_4_name": "Megan T., 39",
+        "card_4_city": "Austin, TX"
+      }
+    },
+    "live_proof": { "type": "u2-live-proof", "settings": {} },
+    "efsa": { "type": "u2-efsa-block", "settings": {} },
+    "compare": { "type": "u2-comparison", "settings": {} },
+    "pricing": { "type": "u2-pricing-cards", "settings": { "product": "ube-poudre", "show_bonus": true } },
+    "guarantee": { "type": "u2-guarantee-bar", "settings": {} },
+    "final-cta": {
+      "type": "u2-final-cta",
+      "settings": {
+        "product": "ube-poudre",
+        "variant_id": "51289200034111",
+        "eyebrow": "— begin your ritual",
+        "title_pre": "The violet ritual",
+        "title_em": "starts today.",
+        "sub": "Less than <strong>$0.66 a day.</strong> One scoop. Cold water. Your moment. Up to 4 hours of plant-based fullness with glucomannan from konjac. No caffeine, no crash. Crafted in France.*",
+        "cta": "start my pack — $0.66/day"
+      }
+    },
+    "newsletter": { "type": "u2-newsletter", "settings": {} }
+  },
+  "order": [
+    "hero", "trust-band", "marquee",
+    "problem", "before-after", "week-changes", "three-ways",
+    "craft", "violet-bottle", "moodboard",
+    "stats", "video-reviews", "live_proof", "efsa", "compare",
+    "pricing", "guarantee", "final-cta", "newsletter"
+  ]
+}

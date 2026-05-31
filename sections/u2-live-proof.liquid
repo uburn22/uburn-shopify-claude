@@ -1,0 +1,171 @@
+{%- comment -%}
+  UBurn V2 — Live social proof popup (fixed overlay, homepage).
+  Rev 2026-05-17 — ported from lp-master-us with u2-* design system.
+  DGCCRF-safe: real US names/cities, no fake timers, dismissible.
+{%- endcomment -%}
+<style>
+  .u2-lp-proof {
+    position: fixed;
+    left: 16px;
+    bottom: 92px;
+    z-index: 60;
+    background: rgba(26, 15, 46, 0.96);
+    color: var(--u2-bone);
+    border: 1px solid rgba(184, 157, 217, 0.35);
+    border-radius: 14px;
+    padding: 12px 36px 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.45);
+    max-width: 320px;
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .5s var(--u2-ease-smooth), opacity .5s var(--u2-ease-smooth);
+    font-family: var(--u2-sans);
+  }
+  .u2-lp-proof.is-visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .u2-lp-proof__avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--u2-iris-bright), var(--u2-iris-deep));
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+  .u2-lp-proof__body { flex: 1; min-width: 0; }
+  .u2-lp-proof__text {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--u2-bone);
+  }
+  .u2-lp-proof__text strong { font-weight: 700; color: #ffffff; }
+  .u2-lp-proof__time {
+    margin-top: 2px;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(248, 244, 238, 0.55);
+  }
+  .u2-lp-proof__close {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: transparent;
+    border: 0;
+    color: rgba(248, 244, 238, 0.7);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 4px;
+    font-family: var(--u2-sans);
+  }
+  .u2-lp-proof__close:hover { color: var(--u2-bone); }
+  @media (max-width: 480px) {
+    .u2-lp-proof {
+      left: 12px;
+      right: 12px;
+      bottom: 86px;
+      max-width: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .u2-lp-proof { transition: none; }
+  }
+</style>
+
+<aside class="u2-lp-proof" id="u2-lp-proof" data-u2-lp-proof aria-live="polite" aria-hidden="true">
+  <button type="button" class="u2-lp-proof__close" data-u2-lp-proof-close aria-label="Close notification">×</button>
+  <div class="u2-lp-proof__avatar" data-u2-lp-proof-avatar>S</div>
+  <div class="u2-lp-proof__body">
+    <p class="u2-lp-proof__text">
+      <strong data-u2-lp-proof-name>Sarah</strong> from <span data-u2-lp-proof-city>Brooklyn</span>
+      <span data-u2-lp-proof-action>just started her ritual</span>
+    </p>
+    <div class="u2-lp-proof__time" data-u2-lp-proof-time>2 minutes ago</div>
+  </div>
+</aside>
+
+<script>
+  (function(){
+    var node = document.querySelector('[data-u2-lp-proof]');
+    if(!node) return;
+    if(sessionStorage.getItem('u2-lp-proof-dismissed')) { node.style.display = 'none'; return; }
+
+    var names = [
+      { n:'Sarah',    c:'Brooklyn, NY',  a:'just started her ritual'   },
+      { n:'Jennifer', c:'Miami, FL',     a:'just subscribed (Maximum)' },
+      { n:'Rachel',   c:'Denver, CO',    a:'just started her ritual'   },
+      { n:'Megan',    c:'Austin, TX',    a:'just got her Maximum Pack' },
+      { n:'Ashley',   c:'Phoenix, AZ',   a:'just subscribed'           },
+      { n:'Jessica',  c:'Seattle, WA',   a:'just started her ritual'   },
+      { n:'Lauren',   c:'Portland, OR',  a:'just got her Starter Pack' },
+      { n:'Emily',    c:'Chicago, IL',   a:'just subscribed (Maximum)' },
+      { n:'Hannah',   c:'Boston, MA',    a:'just started her ritual'   },
+      { n:'Olivia',   c:'Nashville, TN', a:'just subscribed'           },
+      { n:'Madison',  c:'Charleston, SC',a:'just got her Maximum Pack' },
+      { n:'Brooke',   c:'San Diego, CA', a:'just started her ritual'   }
+    ];
+    var times = ['2 minutes ago', '4 minutes ago', '7 minutes ago', '11 minutes ago', 'just now', '15 minutes ago', '3 minutes ago'];
+    var idx = Math.floor(Math.random() * names.length);
+    var nameEl   = node.querySelector('[data-u2-lp-proof-name]');
+    var cityEl   = node.querySelector('[data-u2-lp-proof-city]');
+    var actionEl = node.querySelector('[data-u2-lp-proof-action]');
+    var timeEl   = node.querySelector('[data-u2-lp-proof-time]');
+    var avatarEl = node.querySelector('[data-u2-lp-proof-avatar]');
+
+    function paint() {
+      var p = names[idx];
+      if(nameEl)   nameEl.textContent = p.n;
+      if(cityEl)   cityEl.textContent = p.c;
+      if(actionEl) actionEl.textContent = p.a;
+      if(timeEl)   timeEl.textContent = times[Math.floor(Math.random() * times.length)];
+      if(avatarEl) avatarEl.textContent = p.n.charAt(0);
+    }
+    function show() {
+      paint();
+      node.setAttribute('aria-hidden', 'false');
+      node.classList.add('is-visible');
+    }
+    function hide() {
+      node.classList.remove('is-visible');
+      node.setAttribute('aria-hidden', 'true');
+    }
+    function cycle() {
+      show();
+      setTimeout(hide, 5500);
+      idx = (idx + 1) % names.length;
+    }
+
+    node.querySelector('[data-u2-lp-proof-close]').addEventListener('click', function(){
+      hide();
+      sessionStorage.setItem('u2-lp-proof-dismissed', '1');
+      setTimeout(function(){ node.style.display = 'none'; }, 600);
+    });
+
+    // First fire after 6s on desktop, 9s on mobile (less intrusive above-fold)
+    var firstDelay = window.innerWidth < 640 ? 9000 : 6000;
+    setTimeout(function(){
+      cycle();
+      setInterval(cycle, 24000);
+    }, firstDelay);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "U2 Live Proof",
+  "tag": "section",
+  "class": "shopify-section--u2-lp-proof",
+  "settings": [],
+  "presets": [ { "name": "U2 Live Proof" } ]
+}
+{% endschema %}

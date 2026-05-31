@@ -1,0 +1,128 @@
+{%- comment -%}
+  ============================================================================
+  UBurn V2 — Trust Band
+  Slim horizontal band beneath the hero — visual bridge to the rest of the page.
+  ============================================================================
+{%- endcomment -%}
+
+{{- 'uburn-v2-tokens.css' | asset_url | stylesheet_tag -}}
+
+<style>
+  .u2-trustband {
+    background: {{ section.settings.bg_color | default: '#E8DCEF' }};
+    padding: 18px 16px;
+    overflow: hidden;
+  }
+  .u2-trustband__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px 28px;
+    align-items: center;
+  }
+  .u2-trustband__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Helvetica Neue", "Inter", system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--u2-plum, #3D2659);
+    white-space: nowrap;
+  }
+  .u2-trustband__item svg {
+    width: 14px;
+    height: 14px;
+    color: var(--u2-iris, #6B4E9E);
+    flex-shrink: 0;
+  }
+  .u2-trustband__sep {
+    width: 1px;
+    height: 12px;
+    background: rgba(107, 78, 158, 0.25);
+  }
+  @media (min-width: 768px) {
+    .u2-trustband { padding: 22px 24px; }
+    .u2-trustband__item { font-size: 12px; }
+  }
+  @media (max-width: 640px) {
+    .u2-trustband__sep { display: none; }
+  }
+</style>
+
+<section class="u2 u2-trustband" aria-label="Trust statements">
+  <div class="u2-trustband__inner">
+    {%- for block in section.blocks -%}
+      <span class="u2-trustband__item" {{ block.shopify_attributes }}>
+        {%- case block.settings.icon -%}
+          {%- when 'check' -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          {%- when 'leaf' -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-4 3-7 9-9 0 6-3 9-9 9"/><path d="M11 20c0-5 2-8 7-9"/></svg>
+          {%- when 'sparkle' -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>
+          {%- when 'truck' -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="13" height="11"/><path d="M14 9h4l3 4v4h-7"/><circle cx="6" cy="19" r="2"/><circle cx="17" cy="19" r="2"/></svg>
+          {%- when 'shield' -%}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        {%- endcase -%}
+        {{ block.settings.text }}
+      </span>
+      {%- unless forloop.last -%}<span class="u2-trustband__sep" aria-hidden="true"></span>{%- endunless -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust Band V2",
+  "tag": "section",
+  "class": "shopify-section--u2-trustband",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#E8DCEF"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust item",
+      "limit": 6,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Research-backed" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "check", "label": "Check" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "sparkle", "label": "Sparkle" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "shield", "label": "Shield" }
+          ],
+          "default": "check"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Band V2",
+      "blocks": [
+        { "type": "trust_item", "settings": { "text": "Research-backed", "icon": "check" } },
+        { "type": "trust_item", "settings": { "text": "100% plant-based", "icon": "leaf" } },
+        { "type": "trust_item", "settings": { "text": "Cancel anytime", "icon": "sparkle" } },
+        { "type": "trust_item", "settings": { "text": "Free U.S. shipping", "icon": "truck" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

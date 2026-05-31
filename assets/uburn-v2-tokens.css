@@ -1,0 +1,70 @@
+/* ============================================================================
+   UBurn US V2 Design Tokens — minimal scope for Phase 2 hero ship
+   Full design system rolls out in subsequent phases.
+   ============================================================================ */
+
+:root {
+  /* Palette — calibrated on UBurn packaging violet hue */
+  --u2-iris: #6B4E9E;
+  --u2-iris-bright: #8B6FBF;
+  --u2-iris-deep: #5A3D80;
+  --u2-lavender: #B89DD9;
+  --u2-lavender-soft: #E8DCEF;
+  --u2-plum: #3D2659;
+  --u2-plum-deep: #2A1B3D;
+  --u2-plum-black: #1A0F2E;
+  --u2-champagne: #F5E6D3;
+  --u2-bone: #F8F4EE;
+  --u2-cream: #FAF6F0;
+  --u2-warm-white: #FDFAF5;
+  --u2-silver: #C0BCB6;
+  --u2-soft-black: #1A1A1A;
+
+  /* Typography stack */
+  --u2-serif: "Times New Roman", "GT Sectra", Georgia, serif;
+  --u2-sans: "Helvetica Neue", "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Easing */
+  --u2-ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --u2-ease-liquid: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Spacing scale (mobile-first) */
+  --u2-space-xs: 8px;
+  --u2-space-sm: 12px;
+  --u2-space-md: 16px;
+  --u2-space-lg: 24px;
+  --u2-space-xl: 40px;
+  --u2-space-2xl: 60px;
+  --u2-space-3xl: 80px;
+}
+
+/* Reset for v2 sections only — scoped via .u2 */
+.u2,
+.u2 *,
+.u2 *::before,
+.u2 *::after {
+  box-sizing: border-box;
+}
+
+.u2 {
+  font-family: var(--u2-sans);
+  color: var(--u2-soft-black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.u2 img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u2 *,
+  .u2 *::before,
+  .u2 *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

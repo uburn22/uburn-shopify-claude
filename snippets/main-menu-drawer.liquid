@@ -54,11 +54,11 @@ Supported variables
 
             <li>
               {%- if link.levels == 0 and mega_menu_block == '' -%}
-                <a href="{{ link.url }}" class="h4 w-full">{{ link.title }}</a>
+                <a href="{{ link.url }}" class="h4 w-full">{% render 'translate-menu-link', title: link.title %}</a>
               {%- else -%}
                 <button type="button" class="h4 text-start w-full" data-panel-toggle aria-controls="menu-drawer-panel-{{ forloop.index }}">
                   <div class="h-stack gap-3 sm:gap-5">
-                    {{- link.title -}}
+                    {% render 'translate-menu-link', title: link.title %}
 
                     {%- if show_nested_menu_indicator -%}
                       {%- render 'icon' with 'big-arrow-right', class: 'shrink-0 capped-icon' -%}
@@ -79,7 +79,7 @@ Supported variables
         <ul class="v-stack gap-3 unstyled-list">
           {%- for link in secondary_menu.links -%}
             <li>
-              <a href="{{ link.url }}" class="subheading link-reversed">{{ link.title }}</a>
+              <a href="{{ link.url }}" class="subheading link-reversed">{% render 'translate-menu-link', title: link.title %}</a>
             </li>
           {%- endfor -%}
         </ul>
@@ -167,7 +167,7 @@ Supported variables
                   <ul class="v-stack gap-2.5 unstyled-list">
                     {%- for sub_link in link.links -%}
                       <li>
-                        <a href="{{ sub_link.url }}" class="link-reversed">{{ sub_link.title }}</a>
+                        <a href="{{ sub_link.url }}" class="link-reversed">{% render 'translate-menu-link', title: sub_link.title %}</a>
                       </li>
                     {%- endfor -%}
                   </ul>
@@ -175,13 +175,13 @@ Supported variables
                   <div class="v-stack gap-8">
                     {%- for sub_link in link.links -%}
                       <div class="v-stack justify-items-start gap-4">
-                        <a href="{{ sub_link.url }}" class="subheading text-subdued link-reversed">{{ sub_link.title }}</a>
+                        <a href="{{ sub_link.url }}" class="subheading text-subdued link-reversed">{% render 'translate-menu-link', title: sub_link.title %}</a>
 
                         {%- if sub_link.links.size > 0 -%}
                           <ul class="v-stack gap-2.5 unstyled-list">
                             {%- for sub_sub_link in sub_link.links -%}
                               <li>
-                                <a href="{{ sub_sub_link.url }}" class="link-reversed">{{ sub_sub_link.title }}</a>
+                                <a href="{{ sub_sub_link.url }}" class="link-reversed">{% render 'translate-menu-link', title: sub_sub_link.title %}</a>
                               </li>
                             {%- endfor -%}
                           </ul>

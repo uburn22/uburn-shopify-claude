@@ -32,9 +32,28 @@
 
         <div class="announcement-bar__message-list">
           {%- for block in section.blocks -%}
-            {%- if block.settings.text != blank -%}
+            {%- liquid
+              assign _ann_text = block.settings.text
+              if request.locale.iso_code == 'en'
+                case _ann_text
+                  when 'Livraison gratuite en France'
+                    assign _ann_text = 'Free U.S. shipping on orders $40+'
+                  when '-10% sur votre première commande'
+                    assign _ann_text = '10% off your first order — code UBE10'
+                  when 'Marque française · Made in France'
+                    assign _ann_text = 'Plant-based · Caffeine-free · 30 calories'
+                  when '4h de satiété naturelle'
+                    assign _ann_text = 'Up to 4 hours of fullness*'
+                  when '-10% SUR VOTRE PREMIERE COMMANDE'
+                    assign _ann_text = '10% off your first order — code UBE10'
+                  when 'DERNIERE CHANCE - STOCK LIMITE'
+                    assign _ann_text = 'NOW IN THE U.S. · LIMITED LAUNCH STOCK'
+                endcase
+              endif
+            -%}
+            {%- if _ann_text != blank -%}
               <div class="{% if forloop.first %}is-selected{% endif %} prose prose-justify-center" {{ block.shopify_attributes }}>
-                <p class="subheading subheading-xs">{{ block.settings.text }}</p>
+                <p class="subheading subheading-xs">{{ _ann_text }}</p>
               </div>
             {%- endif -%}
           {%- endfor -%}

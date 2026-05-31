@@ -1,0 +1,297 @@
+/* ============================================================================
+   UBurn V2 Bridge — visual unification between V2 hero and home-2026 monolith
+   Loads after uburn-home.css. Overrides typography, palette, and CTAs.
+   ============================================================================ */
+
+/* Inject V2 tokens at root so monolith inherits them */
+.uhome-root {
+  --u2-iris: #6B4E9E;
+  --u2-iris-bright: #8B6FBF;
+  --u2-iris-deep: #5A3D80;
+  --u2-lavender: #B89DD9;
+  --u2-lavender-soft: #E8DCEF;
+  --u2-plum: #3D2659;
+  --u2-plum-deep: #2A1B3D;
+  --u2-plum-black: #1A0F2E;
+  --u2-cream: #FAF6F0;
+  --u2-bone: #F8F4EE;
+  --u2-warm-white: #FDFAF5;
+  --u2-soft-black: #1A1A1A;
+
+  /* Override existing uhome variables to V2 palette */
+  --uhome-purple-main: var(--u2-iris);
+  --uhome-purple-deep: var(--u2-plum);
+  --uhome-purple-dark: var(--u2-plum-black);
+}
+
+/* ============================================
+   TYPOGRAPHY — add italic serif emphasis pattern
+   ============================================ */
+
+.uhome-section-title em,
+.uhome-hero-title em,
+.uhome-accent {
+  font-family: "Times New Roman", "GT Sectra", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--u2-iris);
+  letter-spacing: -0.01em;
+}
+
+.uhome-section-title {
+  letter-spacing: -0.025em;
+}
+
+/* Section labels — refine kerning + color */
+.uhome-section-label {
+  color: var(--u2-iris) !important;
+  letter-spacing: 0.28em !important;
+  font-weight: 500 !important;
+}
+
+/* ============================================
+   BUTTONS — V2 pill style
+   ============================================ */
+
+.uhome-btn,
+.uhome-btn-fill {
+  background: var(--u2-plum-black) !important;
+  color: var(--u2-warm-white) !important;
+  border: 1.5px solid var(--u2-plum-black) !important;
+  border-radius: 999px !important;
+  padding: 16px 30px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: lowercase !important;
+  box-shadow: 0 8px 24px -8px rgba(26, 15, 46, 0.4) !important;
+  transition: transform 0.25s cubic-bezier(0.25, 0.1, 0.25, 1),
+              background 0.25s cubic-bezier(0.25, 0.1, 0.25, 1),
+              box-shadow 0.25s cubic-bezier(0.25, 0.1, 0.25, 1) !important;
+}
+
+.uhome-btn:hover,
+.uhome-btn-fill:hover {
+  background: var(--u2-iris) !important;
+  border-color: var(--u2-iris) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px -8px rgba(107, 78, 158, 0.5) !important;
+}
+
+/* Cart checkout button — accent variant */
+.uhome-cart-cta {
+  background: var(--u2-iris) !important;
+  color: white !important;
+  border-radius: 999px !important;
+  padding: 18px 28px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+}
+
+.uhome-cart-cta:hover {
+  background: var(--u2-iris-deep) !important;
+}
+
+/* ============================================
+   PRICING CARDS — softer
+   ============================================ */
+
+.uhome-pricing-card {
+  border-radius: 20px !important;
+  border-color: rgba(107, 78, 158, 0.12) !important;
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+              box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.uhome-pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -16px rgba(58, 31, 89, 0.25);
+}
+
+.uhome-pricing-card.uhome-pop {
+  border-color: var(--u2-iris) !important;
+  box-shadow: 0 22px 50px -20px rgba(107, 78, 158, 0.35);
+}
+
+.uhome-pricing-price {
+  color: var(--u2-plum-black) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.uhome-pop-badge {
+  background: var(--u2-iris) !important;
+  color: white !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+/* ============================================
+   PILLS / TRUST CHIPS — glassy
+   ============================================ */
+
+.uhome-hero-pill {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(107, 78, 158, 0.18) !important;
+  color: var(--u2-plum) !important;
+  letter-spacing: 0.06em !important;
+}
+
+.uhome-benefit-badge,
+.uhome-cart-rating,
+.uhome-final-g {
+  color: var(--u2-iris) !important;
+}
+
+/* ============================================
+   PROBLEM CARDS — refined
+   ============================================ */
+
+.uhome-prob-card {
+  border-radius: 18px !important;
+  border-color: rgba(107, 78, 158, 0.1) !important;
+  background: var(--u2-warm-white);
+}
+
+.uhome-prob-num {
+  color: var(--u2-iris) !important;
+  font-family: "Times New Roman", Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+}
+
+/* ============================================
+   STATS — refined
+   ============================================ */
+
+.uhome-stat-big-val,
+.uhome-stat-row-val {
+  color: var(--u2-iris) !important;
+  font-family: "Times New Roman", Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+}
+
+/* ============================================
+   TESTIMONIAL / BEFORE-AFTER — softer
+   ============================================ */
+
+.uhome-testi-card,
+.uhome-ba-card,
+.uhome-ba-author {
+  border-radius: 20px !important;
+  border-color: rgba(107, 78, 158, 0.1) !important;
+}
+
+.uhome-testi-pull {
+  font-family: "Times New Roman", Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: var(--u2-plum-black) !important;
+}
+
+.uhome-ba-pill-before {
+  background: rgba(192, 188, 182, 0.2) !important;
+  color: #5A5A5A !important;
+}
+
+.uhome-ba-pill-after {
+  background: rgba(107, 78, 158, 0.15) !important;
+  color: var(--u2-iris) !important;
+}
+
+.uhome-ba-headline {
+  font-family: "Times New Roman", Georgia, serif !important;
+  font-style: italic !important;
+}
+
+/* ============================================
+   FAQ — refined accordion
+   ============================================ */
+
+.uhome-faq-item {
+  border-radius: 16px !important;
+  border-color: rgba(107, 78, 158, 0.1) !important;
+}
+
+.uhome-faq-q {
+  font-weight: 600 !important;
+  color: var(--u2-plum-black) !important;
+}
+
+.uhome-faq-item.open .uhome-faq-q {
+  color: var(--u2-iris) !important;
+}
+
+/* ============================================
+   FINAL CTA — refined
+   ============================================ */
+
+.uhome-final-content .uhome-btn {
+  background: var(--u2-iris) !important;
+  color: white !important;
+  border-color: var(--u2-iris) !important;
+}
+
+.uhome-final-content .uhome-btn:hover {
+  background: var(--u2-iris-deep) !important;
+}
+
+/* ============================================
+   STICKY MOBILE CTA — refined
+   ============================================ */
+
+.uhome-sticky a {
+  background: var(--u2-plum-black) !important;
+  color: var(--u2-warm-white) !important;
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: lowercase !important;
+}
+
+/* ============================================
+   HIDE redundant hero in monolith
+   (we have V2 hero above)
+   ============================================ */
+
+.uhome-root .uhome-hero {
+  display: none !important;
+}
+
+/* ============================================
+   GUARANTEES BAR — refined
+   ============================================ */
+
+.uhome-guar-item h4 {
+  color: var(--u2-plum-black) !important;
+}
+
+/* ============================================
+   ORIGINE — italic emphasis
+   ============================================ */
+
+.uhome-origine-point strong {
+  color: var(--u2-plum-black) !important;
+  display: block !important;
+  margin-bottom: 4px !important;
+}
+
+/* ============================================
+   EXPERT CARD — refined
+   ============================================ */
+
+.uhome-expert-card {
+  border-radius: 20px !important;
+}
+
+.uhome-expert-quote {
+  font-family: "Times New Roman", Georgia, serif !important;
+  font-style: italic !important;
+  color: var(--u2-plum-black) !important;
+}
+
+.uhome-expert-name {
+  color: var(--u2-iris) !important;
+  font-weight: 700 !important;
+}

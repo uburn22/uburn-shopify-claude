@@ -1,0 +1,159 @@
+{%- comment -%}
+  UBurn V2 — Problem section "It's biological" (3 cards emotional hook)
+  Migrated from live S6 PROBLÈME
+{%- endcomment -%}
+<style>
+  .u2-problem { background: var(--u2-bone); padding: var(--u2-space-section) 20px; }
+  .u2-problem__inner { max-width: 1180px; margin: 0 auto; }
+  .u2-problem__banner {
+    position: relative;
+    margin: 0 auto 56px;
+    max-width: 980px;
+    aspect-ratio: 21/9;
+    border-radius: 24px;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .u2-problem__banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s var(--u2-ease-smooth);
+  }
+  .u2-problem__banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(26,15,46,0) 40%, rgba(26,15,46,0.55) 100%);
+    z-index: 1;
+  }
+  .u2-problem__banner-cap {
+    position: absolute;
+    left: 28px;
+    bottom: 22px;
+    z-index: 2;
+    color: var(--u2-bone);
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  @media (max-width: 640px) {
+    .u2-problem__banner { aspect-ratio: 4/5; margin-bottom: 36px; border-radius: 18px; }
+    .u2-problem__banner-cap { font-size: 15px; left: 18px; bottom: 16px; }
+  }
+  .u2-problem__head { text-align: center; margin-bottom: 48px; }
+  .u2-problem__head h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(34px,5.5vw,52px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--u2-plum-black);
+    margin: 12px 0 0;
+  }
+  .u2-problem__head h2 em {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--u2-iris);
+  }
+  .u2-problem__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 768px) { .u2-problem__grid { grid-template-columns: repeat(3,1fr); gap: 24px; } }
+  .u2-problem__card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px 24px;
+    border: 1px solid rgba(107,78,158,0.08);
+    transition: transform 0.35s var(--u2-ease-smooth), border-color 0.35s var(--u2-ease-smooth);
+  }
+  .u2-problem__card:hover { transform: translateY(-4px); border-color: rgba(107,78,158,0.25); }
+  .u2-problem__num {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 48px;
+    color: var(--u2-iris);
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .u2-problem__title {
+    font-family: var(--u2-sans);
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.015em;
+    margin: 0 0 8px;
+  }
+  .u2-problem__sub {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--u2-text-body);
+    margin: 0;
+  }
+</style>
+<section class="u2-root u2-problem" aria-label="It's biological">
+  <div class="u2-problem__inner">
+    <div class="u2-problem__banner u2-reveal" aria-hidden="false">
+      <img src="{{ section.settings.banner_filename | default: 'u2-problem-banner-lifestyle.jpg' | asset_url }}" alt="{{ section.settings.banner_alt | default: 'A woman between two moments of the day — the craving arrives' }}" loading="lazy" decoding="async" width="1600" height="685" style="object-position:center 35%;">
+      <span class="u2-problem__banner-cap">{{ section.settings.banner_caption | default: "it's not in your head — it's in your blood." }}</span>
+    </div>
+    <div class="u2-problem__head u2-reveal">
+      <span class="u2-section-eyebrow">{{ section.settings.eyebrow | default: "— it's not a willpower problem" }}</span>
+      <h2>{{ section.settings.title_pre | default: "It's" }} <em>{{ section.settings.title_em | default: 'biological.' }}</em></h2>
+    </div>
+    <div class="u2-problem__grid">
+      <article class="u2-problem__card u2-reveal delay-1">
+        <div class="u2-problem__num">{{ section.settings.card_1_num | default: '4 PM' }}</div>
+        <h3 class="u2-problem__title">{{ section.settings.card_1_title | default: 'The pantry calls you' }}</h3>
+        <p class="u2-problem__sub">{{ section.settings.card_1_sub | default: "Blood sugar crashing. It's physiology — not a character flaw." }}</p>
+      </article>
+      <article class="u2-problem__card u2-reveal delay-2">
+        <div class="u2-problem__num">{{ section.settings.card_2_num | default: '8 PM' }}</div>
+        <h3 class="u2-problem__title">{{ section.settings.card_2_title | default: 'In front of the fridge' }}</h3>
+        <p class="u2-problem__sub">{{ section.settings.card_2_sub | default: 'Fatigue lowers your guard. Morning intentions fade one by one.' }}</p>
+      </article>
+      <article class="u2-problem__card u2-reveal delay-3">
+        <div class="u2-problem__num">{{ section.settings.card_3_num | default: '→' }}</div>
+        <h3 class="u2-problem__title">{{ section.settings.card_3_title | default: "Willpower isn't enough" }}</h3>
+        <p class="u2-problem__sub">{{ section.settings.card_3_sub | default: "It's a biological response. It calls for a biological answer." }}</p>
+      </article>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Problem (Biological)",
+  "tag": "section",
+  "class": "shopify-section--u2-problem",
+  "settings": [
+    { "type": "header", "content": "Banner image + caption" },
+    { "type": "text", "id": "banner_filename", "label": "Banner /assets/ filename" },
+    { "type": "text", "id": "banner_alt", "label": "Banner alt text" },
+    { "type": "text", "id": "banner_caption", "label": "Banner caption (italic overlay)" },
+    { "type": "header", "content": "Headline" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "title_pre", "label": "Title start", "default": "It's" },
+    { "type": "text", "id": "title_em", "label": "Title italic emphasis", "default": "biological." },
+    { "type": "header", "content": "Card 1" },
+    { "type": "text", "id": "card_1_num", "label": "Card 1 — number/time" },
+    { "type": "text", "id": "card_1_title", "label": "Card 1 — title" },
+    { "type": "textarea", "id": "card_1_sub", "label": "Card 1 — sub" },
+    { "type": "header", "content": "Card 2" },
+    { "type": "text", "id": "card_2_num", "label": "Card 2 — number/time" },
+    { "type": "text", "id": "card_2_title", "label": "Card 2 — title" },
+    { "type": "textarea", "id": "card_2_sub", "label": "Card 2 — sub" },
+    { "type": "header", "content": "Card 3" },
+    { "type": "text", "id": "card_3_num", "label": "Card 3 — number/time" },
+    { "type": "text", "id": "card_3_title", "label": "Card 3 — title" },
+    { "type": "textarea", "id": "card_3_sub", "label": "Card 3 — sub" }
+  ],
+  "presets": [ { "name": "U2 Problem" } ]
+}
+{% endschema %}

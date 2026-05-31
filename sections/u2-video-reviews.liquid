@@ -1,0 +1,268 @@
+{%- comment -%}
+  U2 Video Reviews — UGC-style testimonial cards with play icon + Real user badge
+  4 cards in horizontal scroll on mobile, grid on desktop. High social-proof block.
+  Aligned on u2-* DA tokens.
+{%- endcomment -%}
+
+<style>
+  .u2-vr { background: var(--u2-cream); padding: var(--u2-space-section) 20px; }
+  .u2-vr__inner { max-width: 1180px; margin: 0 auto; }
+  .u2-vr__head { text-align: center; margin-bottom: 40px; }
+  .u2-vr__eyebrow {
+    font-family: var(--u2-sans); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.32em; text-transform: uppercase; color: var(--u2-iris);
+    display: inline-block; margin-bottom: 14px;
+  }
+  .u2-vr__head h2 {
+    font-family: var(--u2-sans); font-weight: 800;
+    font-size: clamp(34px, 5.5vw, 52px);
+    line-height: 1.05; letter-spacing: -0.025em;
+    color: var(--u2-plum-black); margin: 0;
+  }
+  .u2-vr__head h2 em {
+    font-family: var(--u2-serif); font-style: italic;
+    font-weight: 400; color: var(--u2-iris);
+  }
+  .u2-vr__head p {
+    margin: 16px auto 0; max-width: 560px;
+    font-family: var(--u2-sans); font-size: 15px;
+    line-height: 1.55; color: var(--u2-text-body);
+  }
+
+  .u2-vr__grid {
+    display: grid; grid-template-columns: 1fr; gap: 18px;
+  }
+  @media (min-width: 640px) { .u2-vr__grid { grid-template-columns: repeat(2,1fr); gap: 20px; } }
+  @media (min-width: 1024px) { .u2-vr__grid { grid-template-columns: repeat(4,1fr); gap: 22px; } }
+
+  .u2-vr__card {
+    position: relative;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(107,78,158,0.08);
+    box-shadow: 0 2px 12px rgba(107,47,160,0.05);
+    display: flex; flex-direction: column;
+    transition: transform 0.35s var(--u2-ease-smooth), box-shadow 0.35s var(--u2-ease-smooth);
+    cursor: pointer;
+  }
+  .u2-vr__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(107,47,160,0.12);
+  }
+
+  .u2-vr__visual {
+    position: relative;
+    aspect-ratio: 4/5;
+    background: var(--u2-lavender-soft);
+    overflow: hidden;
+  }
+  .u2-vr__visual img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    transition: transform 0.6s var(--u2-ease-smooth);
+  }
+  .u2-vr__card:hover .u2-vr__visual img { transform: scale(1.04); }
+  .u2-vr__visual::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(26,15,46,0) 35%, rgba(26,15,46,0.55) 100%);
+    z-index: 1;
+  }
+
+  .u2-vr__play {
+    position: absolute; top: 12px; left: 12px;
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2;
+    font-size: 12px; color: var(--u2-iris-deep);
+    padding-left: 3px;
+    box-shadow: 0 2px 8px rgba(26,15,46,0.2);
+  }
+  .u2-vr__badge {
+    position: absolute; top: 12px; right: 12px;
+    z-index: 2;
+    background: rgba(255,255,255,0.95);
+    border-radius: 100px;
+    padding: 4px 10px;
+    font-family: var(--u2-sans); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--u2-iris-deep);
+  }
+
+  .u2-vr__overlay {
+    position: absolute; left: 16px; right: 16px; bottom: 16px;
+    z-index: 2;
+  }
+  .u2-vr__quote {
+    font-family: var(--u2-sans); font-weight: 700;
+    font-size: 17px; line-height: 1.2; letter-spacing: -0.015em;
+    color: var(--u2-cream); margin: 0 0 6px;
+  }
+  .u2-vr__quote em {
+    font-family: var(--u2-serif); font-style: italic; font-weight: 400;
+    color: var(--u2-lavender);
+  }
+  .u2-vr__author {
+    font-family: var(--u2-sans); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.06em;
+    color: rgba(250,246,240,0.85);
+  }
+
+  .u2-vr__body {
+    padding: 16px 18px 18px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .u2-vr__location {
+    font-family: var(--u2-sans); font-size: 12px;
+    color: var(--u2-text-muted);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .u2-vr__stars { color: var(--u2-iris); letter-spacing: 1px; font-size: 11px; }
+
+  .u2-vr__cta {
+    margin-top: auto;
+    display: inline-flex; align-items: center; justify-content: space-between;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid rgba(107,78,158,0.15);
+    border-radius: 100px;
+    padding: 10px 16px;
+    font-family: var(--u2-sans); font-weight: 700;
+    font-size: 12px; letter-spacing: 0.06em;
+    color: var(--u2-iris-deep);
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .u2-vr__cta:hover {
+    background: var(--u2-iris); color: var(--u2-cream);
+    border-color: var(--u2-iris);
+  }
+  .u2-vr__cta-arrow { font-style: normal; }
+</style>
+
+<section class="u2-vr">
+  <div class="u2-vr__inner">
+    <div class="u2-vr__head">
+      <span class="u2-vr__eyebrow">{{ section.settings.eyebrow | default: '— real users · real moments' }}</span>
+      <h2>{{ section.settings.title_pre | default: 'In their' }} <em>{{ section.settings.title_em | default: 'own words.' }}</em></h2>
+      <p>{{ section.settings.sub | default: 'Four women. Four cities. One ritual. Verified purchases, real video reviews.' }}</p>
+    </div>
+
+    {%- assign cta_text = section.settings.cta_text | default: 'Try the ritual' -%}
+    {%- assign cta_link = section.settings.cta_link | default: '#u2-pricing' -%}
+    {%- assign badge_text = section.settings.badge_text | default: 'Real user' -%}
+
+    <div class="u2-vr__grid">
+      {%- for i in (1..4) -%}
+        {%- assign quote_key = 'card_' | append: i | append: '_quote' -%}
+        {%- assign name_key  = 'card_' | append: i | append: '_name' -%}
+        {%- assign city_key  = 'card_' | append: i | append: '_city' -%}
+        {%- assign img_key   = 'card_' | append: i | append: '_img' -%}
+        {%- assign alt_key   = 'card_' | append: i | append: '_alt' -%}
+
+        {%- assign quote = section.settings[quote_key] -%}
+        {%- assign name  = section.settings[name_key] -%}
+        {%- assign city  = section.settings[city_key] -%}
+        {%- assign img   = section.settings[img_key] -%}
+        {%- assign alt   = section.settings[alt_key] -%}
+
+        {%- if i == 1 -%}
+          {%- assign quote = quote | default: '"No more 4 PM cravings."' -%}
+          {%- assign name  = name  | default: 'Sarah J., 32' -%}
+          {%- assign city  = city  | default: 'Brooklyn, NY' -%}
+          {%- assign img   = img   | default: 'uburn-us-story-1-sarah-brooklyn.png' -%}
+          {%- assign alt   = alt   | default: 'Sarah J. video review' -%}
+        {%- elsif i == 2 -%}
+          {%- assign quote = quote | default: '"Calmer afternoons. More stable energy."' -%}
+          {%- assign name  = name  | default: 'Jennifer M., 38' -%}
+          {%- assign city  = city  | default: 'Miami, FL' -%}
+          {%- assign img   = img   | default: 'uburn-us-story-2-jennifer-miami.png' -%}
+          {%- assign alt   = alt   | default: 'Jennifer M. video review' -%}
+        {%- elsif i == 3 -%}
+          {%- assign quote = quote | default: '"Vanilla taste. Nothing chemical."' -%}
+          {%- assign name  = name  | default: 'Rachel B., 47' -%}
+          {%- assign city  = city  | default: 'Denver, CO' -%}
+          {%- assign img   = img   | default: 'uburn-us-story-3-rachel-denver.png' -%}
+          {%- assign alt   = alt   | default: 'Rachel B. video review' -%}
+        {%- else -%}
+          {%- assign quote = quote | default: '"Before workouts. Stim-free."' -%}
+          {%- assign name  = name  | default: 'Megan T., 39' -%}
+          {%- assign city  = city  | default: 'Austin, TX' -%}
+          {%- assign img   = img   | default: 'uburn-us-story-3-rachel-denver.png' -%}
+          {%- assign alt   = alt   | default: 'Megan T. video review' -%}
+        {%- endif -%}
+
+        <article class="u2-vr__card">
+          <div class="u2-vr__visual">
+            <img src="{{ img | asset_url }}" alt="{{ alt }}" loading="lazy" decoding="async" width="640" height="800">
+            <span class="u2-vr__play" aria-hidden="true">▶</span>
+            <span class="u2-vr__badge">{{ badge_text }}</span>
+            <div class="u2-vr__overlay">
+              <p class="u2-vr__quote">{{ quote }}</p>
+              <span class="u2-vr__author">{{ name }}</span>
+            </div>
+          </div>
+          <div class="u2-vr__body">
+            <span class="u2-vr__location">
+              <span class="u2-vr__stars">★★★★★</span> {{ city }}
+            </span>
+            <a class="u2-vr__cta" href="{{ cta_link }}">
+              <span>{{ cta_text }}</span>
+              <span class="u2-vr__cta-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "U2 Video Reviews",
+  "tag": "section",
+  "class": "shopify-section--u2-vr",
+  "settings": [
+    { "type": "header", "content": "Headline" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "— real users · real moments" },
+    { "type": "text", "id": "title_pre", "label": "Title start", "default": "In their" },
+    { "type": "text", "id": "title_em", "label": "Title italic", "default": "own words." },
+    { "type": "textarea", "id": "sub", "label": "Sub", "default": "Four women. Four cities. One ritual. Verified purchases, real video reviews." },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Try the ritual" },
+    { "type": "text", "id": "cta_link", "label": "CTA link", "default": "#u2-pricing" },
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "Real user" },
+
+    { "type": "header", "content": "Card 1" },
+    { "type": "text", "id": "card_1_quote", "label": "Quote 1" },
+    { "type": "text", "id": "card_1_name", "label": "Name 1" },
+    { "type": "text", "id": "card_1_city", "label": "City 1" },
+    { "type": "text", "id": "card_1_img", "label": "Image 1 filename" },
+    { "type": "text", "id": "card_1_alt", "label": "Alt 1" },
+
+    { "type": "header", "content": "Card 2" },
+    { "type": "text", "id": "card_2_quote", "label": "Quote 2" },
+    { "type": "text", "id": "card_2_name", "label": "Name 2" },
+    { "type": "text", "id": "card_2_city", "label": "City 2" },
+    { "type": "text", "id": "card_2_img", "label": "Image 2 filename" },
+    { "type": "text", "id": "card_2_alt", "label": "Alt 2" },
+
+    { "type": "header", "content": "Card 3" },
+    { "type": "text", "id": "card_3_quote", "label": "Quote 3" },
+    { "type": "text", "id": "card_3_name", "label": "Name 3" },
+    { "type": "text", "id": "card_3_city", "label": "City 3" },
+    { "type": "text", "id": "card_3_img", "label": "Image 3 filename" },
+    { "type": "text", "id": "card_3_alt", "label": "Alt 3" },
+
+    { "type": "header", "content": "Card 4" },
+    { "type": "text", "id": "card_4_quote", "label": "Quote 4" },
+    { "type": "text", "id": "card_4_name", "label": "Name 4" },
+    { "type": "text", "id": "card_4_city", "label": "City 4" },
+    { "type": "text", "id": "card_4_img", "label": "Image 4 filename" },
+    { "type": "text", "id": "card_4_alt", "label": "Alt 4" }
+  ],
+  "presets": [ { "name": "U2 Video Reviews" } ]
+}
+{% endschema %}

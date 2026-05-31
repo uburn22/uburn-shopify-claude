@@ -1,0 +1,10 @@
+{%- comment -%}
+  Page heading fallback — used by layout/theme.liquid for FAQ + About pages
+  when the page template doesn't render its own h1.
+  Renders nothing if page has its own title section.
+{%- endcomment -%}
+{%- if page.title != blank and page.template_suffix == blank -%}
+  <header class="page-heading" style="text-align:center;padding:40px 20px 24px;background:#FAF9F7;">
+    <h1 style="font-family:'Montserrat',system-ui,sans-serif;font-size:32px;font-weight:900;color:#1a1a1a;margin:0;">{{ page.title }}</h1>
+  </header>
+{%- endif -%}
