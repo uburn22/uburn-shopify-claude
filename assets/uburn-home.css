@@ -718,3 +718,145 @@
   .uhome-btn { padding: 14px 22px; font-size: 14px; min-height: 48px; }
   .uhome-benefits-grid { grid-template-columns: 1fr; }
 }
+
+/* ── 17. PRESS ─────────────────────────────── */
+.uhome-press {
+  background: var(--uhome-warm);
+  padding: 28px 40px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 40px; flex-wrap: wrap;
+  border-bottom: 1px solid rgba(0,0,0,.05);
+}
+.uhome-press-label {
+  font-family: 'Red Hat Text', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.2px;
+  text-transform: uppercase; color: var(--uhome-muted); white-space: nowrap;
+}
+.uhome-press-logos {
+  display: flex; align-items: center; gap: 32px; flex-wrap: wrap; justify-content: center;
+}
+.uhome-press-logo img {
+  height: 20px; width: auto; opacity: 0.38; filter: grayscale(1);
+  transition: opacity 0.2s;
+}
+.uhome-press-logo img:hover { opacity: 0.65; }
+
+/* ── 18. RITUEL ────────────────────────────── */
+.uhome-rituel { background: #fdf8f5; padding: 100px 40px; }
+.uhome-rituel-inner { max-width: 1100px; margin: 0 auto; }
+.uhome-rituel-head { text-align: center; margin-bottom: 56px; }
+.uhome-rituel-desc {
+  font-size: 17px; line-height: 1.7; color: var(--uhome-body);
+  font-style: italic; max-width: 56ch; margin: 12px auto 0; text-align: center;
+}
+.uhome-rituel-steps {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
+}
+.uhome-rituel-step { text-align: center; }
+.uhome-rituel-step-img {
+  border-radius: 20px; overflow: hidden;
+  aspect-ratio: 3/4; margin-bottom: 20px; position: relative;
+  background: var(--uhome-purple-wash);
+}
+.uhome-rituel-step-img img {
+  width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease;
+}
+.uhome-rituel-step:hover .uhome-rituel-step-img img { transform: scale(1.04); }
+.uhome-rituel-step-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--uhome-purple-main); color: #fff;
+  font-family: 'Red Hat Display', sans-serif; font-weight: 800; font-size: 14px;
+  margin-bottom: 10px;
+}
+.uhome-rituel-step-title {
+  font-family: 'Red Hat Display', sans-serif; font-weight: 700; font-size: 17px;
+  color: var(--uhome-dark); margin-bottom: 6px;
+}
+.uhome-rituel-step-desc { font-size: 14px; color: var(--uhome-body); line-height: 1.6; }
+
+/* ── 19. STATS ─────────────────────────────── */
+.uhome-stats {
+  display: grid; grid-template-columns: 420px 1fr;
+  min-height: 480px; background: var(--uhome-purple-deep);
+}
+.uhome-stats-photo { position: relative; overflow: hidden; }
+.uhome-stats-photo img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  filter: brightness(.7);
+}
+.uhome-stats-photo-cap {
+  position: absolute; bottom: 24px; left: 20px; right: 20px;
+  color: rgba(255,255,255,.7); font-size: 13px; font-style: italic; font-weight: 500;
+}
+.uhome-stats-body {
+  padding: 72px 64px; display: flex; flex-direction: column; justify-content: center;
+}
+.uhome-stats-body .uhome-section-label { color: var(--uhome-purple-light); }
+.uhome-stats-body .uhome-section-title { color: #fff; margin-bottom: 40px; }
+.uhome-stats-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;
+}
+.uhome-stat-big-val {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: clamp(72px, 9vw, 108px); font-weight: 900; color: #fff; line-height: 1;
+  letter-spacing: -0.04em;
+}
+.uhome-stat-big-label {
+  font-size: 15px; color: rgba(255,255,255,.6); line-height: 1.5; margin-top: 10px; max-width: 22ch;
+}
+.uhome-stats-list { display: flex; flex-direction: column; gap: 20px; padding-top: 8px; }
+.uhome-stat-row { padding-bottom: 20px; }
+.uhome-stat-row:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,.1); }
+.uhome-stat-row-val {
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 30px; font-weight: 800; color: #fff; letter-spacing: -0.02em;
+}
+.uhome-stat-row-lbl { font-size: 13px; color: rgba(255,255,255,.5); margin-top: 2px; }
+.uhome-stats-disclaimer {
+  margin-top: 32px; font-size: 11px; color: rgba(255,255,255,.3); line-height: 1.6;
+}
+
+/* ── 20. ORIGINE ───────────────────────────── */
+.uhome-origine { background: var(--uhome-warm); padding: 100px 40px; }
+.uhome-origine-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.uhome-origine-photos {
+  display: grid; grid-template-columns: 3fr 2fr; gap: 12px; height: 520px;
+}
+.uhome-origine-ph-main { border-radius: 20px; overflow: hidden; }
+.uhome-origine-ph-main img { width: 100%; height: 100%; object-fit: cover; }
+.uhome-origine-ph-sec { display: flex; flex-direction: column; gap: 12px; }
+.uhome-origine-ph-sec img { width: 100%; flex: 1; object-fit: cover; border-radius: 14px; min-height: 0; }
+.uhome-origine-points { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+.uhome-origine-point {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: 14.5px; color: var(--uhome-body); line-height: 1.5;
+}
+.uhome-origine-point::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--uhome-purple-main); flex-shrink: 0; margin-top: 7px;
+}
+.uhome-origine-point strong { color: var(--uhome-dark); font-weight: 600; display: block; }
+
+/* responsive press / rituel / stats / origine */
+@media(max-width:900px) {
+  .uhome-press { padding: 20px; gap: 20px; }
+  .uhome-rituel { padding: 72px 24px; }
+  .uhome-rituel-steps { grid-template-columns: 1fr; gap: 24px; }
+  .uhome-rituel-step-img { aspect-ratio: 4/3; }
+  .uhome-stats { grid-template-columns: 1fr; }
+  .uhome-stats-photo { height: 260px; }
+  .uhome-stats-body { padding: 48px 24px; }
+  .uhome-stats-layout { grid-template-columns: 1fr; gap: 24px; }
+  .uhome-stat-big-val { font-size: 80px; }
+  .uhome-origine { padding: 72px 24px; }
+  .uhome-origine-inner { grid-template-columns: 1fr; gap: 40px; }
+  .uhome-origine-photos { height: 340px; }
+}
+@media(max-width:600px) {
+  .uhome-origine-photos { grid-template-columns: 1fr; height: 260px; }
+  .uhome-origine-ph-sec { display: none; }
+}

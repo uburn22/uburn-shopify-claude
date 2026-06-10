@@ -1,9 +1,9 @@
 {
   "sections": {
-    "ub-about-v2": {
-      "type": "ub-about-v2",
+    "uburn-histoire": {
+      "type": "uburn-histoire",
       "settings": {}
     }
   },
-  "order": ["ub-about-v2"]
+  "order": ["uburn-histoire"]
 }

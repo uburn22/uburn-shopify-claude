@@ -1,1 +1,9 @@
-{"sections":{"ub-ingredients-v2":{"type":"ub-ingredients-v2","settings":{}}},"order":["ub-ingredients-v2"]}
+{
+  "sections": {
+    "uburn-ingredients": {
+      "type": "uburn-ingredients",
+      "settings": {}
+    }
+  },
+  "order": ["uburn-ingredients"]
+}
