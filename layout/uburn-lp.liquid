@@ -64,8 +64,9 @@
 
   <body style="margin:0;padding:0;">
 
-    <!-- CNIL Banner -->
-    <div id="ub-consent-banner" style="{% if request.locale.iso_code == 'fr' or true %}display:flex{% else %}display:none{% endif %};position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#fff;border-top:2px solid #e8dcf5;padding:14px 24px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:-apple-system,sans-serif;box-shadow:0 -4px 24px rgba(0,0,0,.08);">
+    <!-- CNIL Banner — FR only (CNIL obligation) -->
+    {%- if request.locale.iso_code == 'fr' -%}
+    <div id="ub-consent-banner" style="display:flex;position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#fff;border-top:2px solid #e8dcf5;padding:14px 24px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:-apple-system,sans-serif;box-shadow:0 -4px 24px rgba(0,0,0,.08);">
       <p style="margin:0;font-size:13px;color:#333;max-width:640px;line-height:1.5;">
         🍪 Nous utilisons des cookies pour mesurer la performance de nos publicités et améliorer votre expérience. Vos données ne sont jamais revendues.
         <a href="/pages/confidentialite" style="color:#6b2fa0;text-decoration:underline;margin-left:4px;">En savoir plus</a>
@@ -76,16 +77,24 @@
       </div>
     </div>
     <script>
-      // Masquer la bannière si déjà décidé
       (function(){
         var b = document.getElementById('ub-consent-banner');
         if(!b) return;
         var s = localStorage.getItem('ub_consent_v1');
         if(s === 'granted' || s === 'denied') b.style.display = 'none';
-        // Si granted : activer le vrai Pixel
         if(s === 'granted' && typeof fbq !== 'undefined') fbq('consent','grant');
       })();
     </script>
+    {%- else -%}
+    <script>
+      // Non-FR visitor: auto-grant (no CNIL/GDPR requirement)
+      if (window._ubConsent && window._ubConsent.status !== 'denied') {
+        window._ubConsent.grant();
+      } else if (typeof fbq === 'function') {
+        fbq('consent', 'grant');
+      }
+    </script>
+    {%- endif -%}
 
     <main>
       {{ content_for_layout }}

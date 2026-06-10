@@ -1,0 +1,1205 @@
+{%- comment -%}
+  UBurn V2 — PDP HERO (split L/R, Subscribe&Save + One-time cards, $200 bonus stack inline)
+  Conversion-optimized purchase panel mirroring old main-uburn-pdp-v9.liquid pattern.
+{%- endcomment -%}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign featured = product.featured_image
+  for img in product.images
+    assign s = img.src | downcase
+    if s contains 'productpage_0000' or s contains 'uburn_listing'
+      assign featured = img
+      break
+    endif
+  endfor
+  assign rating = product.metafields.loox.avg_rating | default: product.metafields.reviews.rating.value.rating | default: 4.7 | round: 1
+
+  assign starter_variant = product.variants | first
+  assign max_variant = product.variants | last
+
+  assign sub_plan = null
+  assign sub_discount_pct = 10
+  for spg in product.selling_plan_groups
+    for sp in spg.selling_plans
+      assign sub_plan = sp
+      break
+    endfor
+    if sub_plan
+      break
+    endif
+  endfor
+  if sub_plan and sub_plan.price_adjustments.size > 0
+    assign first_adj = sub_plan.price_adjustments | first
+    if first_adj.value_type == 'percentage'
+      assign sub_discount_pct = first_adj.value
+    endif
+  endif
+
+  assign current_sub_disc = current_variant.price | times: sub_discount_pct | divided_by: 100
+  assign current_sub_price = current_variant.price | minus: current_sub_disc
+-%}
+
+<style>
+  .u2-pdp { background: var(--u2-cream); padding-bottom: 40px; }
+
+  /* TRUST BAND */
+  .u2-trustband { background: var(--u2-lavender-soft); padding: 14px 16px; }
+  .u2-trustband__inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 10px 28px; align-items: center;
+  }
+
+  /* MAIN SPLIT */
+  .u2-pdp-main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  @media (min-width: 1024px) {
+    .u2-pdp-main {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 56px;
+      padding: 40px 32px 60px;
+      align-items: start;
+    }
+  }
+
+  /* LEFT — Gallery */
+  .u2-pdp-gallery {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    max-width: 100%;
+  }
+  @media (min-width: 1024px) {
+    .u2-pdp-gallery { position: sticky; top: 96px; }
+  }
+    .u2-pdp-gallery__slides {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    border-radius: 24px;
+    aspect-ratio: 1 / 1;
+    background: var(--u2-lavender-soft);
+    box-shadow: 0 30px 60px -30px rgba(58,31,89,0.22);
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .u2-pdp-gallery__slides::-webkit-scrollbar { display: none; }
+  .u2-pdp-gallery__slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+  .u2-pdp-gallery__slide img,
+  .u2-pdp-gallery__slide video {
+    width: 100%; height: 100%; object-fit: contain; display: block;
+  }
+  .u2-pdp-gallery__thumbs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 2px 0;
+  }
+  .u2-pdp-gallery__thumbs::-webkit-scrollbar { display: none; }
+
+  /* Dot indicators (mobile, on top of slides) */
+  .u2-pdp-gallery__dots {
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .u2-pdp-gallery__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 0 0 1px rgba(26, 15, 46, 0.16);
+    transition: transform 0.3s var(--u2-ease-luxe), background 0.3s ease, width 0.3s var(--u2-ease-luxe);
+  }
+  .u2-pdp-gallery__dot.is-active {
+    background: var(--u2-iris);
+    width: 22px;
+    border-radius: 999px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.6);
+  }
+  @media (min-width: 1024px) {
+    /* On desktop the thumbs row is enough — hide dots */
+    .u2-pdp-gallery__dots { display: none; }
+  }
+  .u2-pdp-gallery__thumb {
+    flex: 0 0 72px;
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    cursor: pointer;
+    background: var(--u2-bone);
+    transition: border-color 0.2s var(--u2-ease-smooth);
+  }
+  .u2-pdp-gallery__thumb:hover,
+  .u2-pdp-gallery__thumb.is-active { border-color: var(--u2-iris); }
+  .u2-pdp-gallery__thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* RIGHT — Purchase panel */
+  .u2-pdp-info {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .u2-pdp-info__eyebrow-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .u2-pdp-info__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(107, 78, 158, 0.1);
+    color: var(--u2-iris-deep);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .u2-pdp-info__eyebrow::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--u2-iris);
+  }
+  .u2-pdp-info__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--u2-cream-deep);
+    color: var(--u2-plum);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(107, 78, 158, 0.12);
+  }
+  .u2-pdp-info__h1 {
+    font-family: var(--u2-serif);
+    font-size: clamp(38px, 6vw, 56px);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+    color: var(--u2-plum-black);
+    margin: 4px 0 0;
+  }
+  .u2-pdp-info__h1 em {
+    font-style: italic;
+    color: var(--u2-iris);
+  }
+  .u2-pdp-info__sub {
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--u2-plum);
+    margin: 0;
+  }
+  .u2-pdp-info__rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--u2-sans);
+    font-size: 14px;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-info__stars {
+    color: #f5a623;
+    letter-spacing: 1px;
+    font-size: 16px;
+  }
+  .u2-pdp-info__rating-num { font-weight: 700; }
+  .u2-pdp-info__rating-label { color: var(--u2-mauve); font-size: 13px; }
+
+  .u2-pdp-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .u2-pdp-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-bullets__check {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--u2-iris);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  /* Price */
+  .u2-pdp-price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .u2-pdp-price__prefix {
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    color: var(--u2-mauve);
+    font-weight: 500;
+  }
+  .u2-pdp-price__amount {
+    font-family: var(--u2-serif);
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.02em;
+  }
+  .u2-pdp-price__compare {
+    font-family: var(--u2-sans);
+    font-size: 16px;
+    color: var(--u2-mauve);
+    text-decoration: line-through;
+  }
+  .u2-pdp-price__currency-note {
+    font-size: 11px;
+    color: var(--u2-mauve);
+    margin: 2px 0 0;
+    line-height: 1.4;
+  }
+
+  /* Variant picker — 2 cards side by side */
+  .u2-pdp-variants {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 12px 0 0;
+  }
+  .u2-pdp-variant {
+    position: relative;
+    border: 2px solid rgba(107, 78, 158, 0.18);
+    border-radius: 16px;
+    padding: 16px 14px 14px;
+    background: var(--u2-cream);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: border-color 0.2s var(--u2-ease-smooth), box-shadow 0.2s var(--u2-ease-smooth);
+  }
+  .u2-pdp-variant input { position: absolute; opacity: 0; pointer-events: none; }
+  .u2-pdp-variant:hover { border-color: rgba(107, 78, 158, 0.4); }
+  .u2-pdp-variant--selected,
+  .u2-pdp-variant:has(input:checked) {
+    border-color: var(--u2-iris);
+    box-shadow: 0 0 0 4px rgba(107, 78, 158, 0.1);
+  }
+  .u2-pdp-variant__badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--u2-iris);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-family: var(--u2-sans);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .u2-pdp-variant__name {
+    font-family: var(--u2-serif);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.01em;
+  }
+  .u2-pdp-variant__tag {
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    color: var(--u2-iris-deep);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .u2-pdp-variant__meta {
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    color: var(--u2-mauve);
+  }
+  .u2-pdp-variant__price-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .u2-pdp-variant__price {
+    font-family: var(--u2-sans);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-variant__perday {
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    color: var(--u2-iris);
+    font-weight: 600;
+  }
+
+  /* Subscribe & Save / One-time cards */
+  .u2-pdp-purchase-mode {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 4px 0 0;
+  }
+  .u2-pdp-mode {
+    position: relative;
+    border: 2px solid rgba(107, 78, 158, 0.18);
+    border-radius: 16px;
+    padding: 18px 18px 16px;
+    background: var(--u2-cream);
+    cursor: pointer;
+    display: flex;
+    gap: 14px;
+    transition: border-color 0.2s var(--u2-ease-smooth), box-shadow 0.2s var(--u2-ease-smooth);
+  }
+  .u2-pdp-mode input { position: absolute; opacity: 0; pointer-events: none; }
+  .u2-pdp-mode__radio {
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(107, 78, 158, 0.4);
+    margin-top: 2px;
+    background: white;
+    position: relative;
+    transition: border-color 0.2s var(--u2-ease-smooth);
+  }
+  .u2-pdp-mode:has(input:checked) {
+    border-color: var(--u2-iris);
+    box-shadow: 0 0 0 4px rgba(107, 78, 158, 0.08);
+  }
+  .u2-pdp-mode:has(input:checked) .u2-pdp-mode__radio { border-color: var(--u2-iris); }
+  .u2-pdp-mode:has(input:checked) .u2-pdp-mode__radio::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: var(--u2-iris);
+  }
+  .u2-pdp-mode__body { flex: 1; min-width: 0; }
+  .u2-pdp-mode__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .u2-pdp-mode__title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .u2-pdp-mode__title {
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-mode__tag {
+    background: #1c8e6a;
+    color: #ffffff;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-family: var(--u2-sans);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    display: inline-block;
+  }
+  .u2-pdp-mode__price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .u2-pdp-mode__strike {
+    color: var(--u2-mauve);
+    font-size: 13px;
+    font-family: var(--u2-sans);
+    text-decoration: line-through;
+  }
+  .u2-pdp-mode__final {
+    font-family: var(--u2-sans);
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-mode__meta {
+    display: block;
+    margin-top: 4px;
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    color: var(--u2-plum);
+    line-height: 1.5;
+  }
+  .u2-pdp-mode__bonuses {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(107, 78, 158, 0.12);
+  }
+  .u2-pdp-mode__bonuses-title {
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--u2-iris-deep);
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
+  }
+  .u2-pdp-mode__bonuses-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .u2-pdp-mode__bonuses-list li {
+    font-family: var(--u2-sans);
+    font-size: 12.5px;
+    line-height: 1.45;
+    color: var(--u2-plum-black);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .u2-pdp-mode__bonus-icon { flex-shrink: 0; }
+  .u2-pdp-mode__bonuses-list em {
+    font-style: normal;
+    color: var(--u2-mauve);
+    font-size: 11.5px;
+  }
+
+  /* Quantity */
+  .u2-pdp-qty {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 4px 0 0;
+  }
+  .u2-pdp-qty__label {
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-qty__input {
+    width: 60px;
+    padding: 8px 10px;
+    border: 1px solid rgba(107, 78, 158, 0.2);
+    border-radius: 8px;
+    font-family: var(--u2-sans);
+    font-size: 14px;
+    text-align: center;
+    background: var(--u2-cream);
+  }
+
+  /* ATC button */
+  .u2-pdp-atc {
+    background: var(--u2-plum-black);
+    color: white;
+    padding: 18px 24px;
+    border-radius: 14px;
+    border: 0;
+    font-family: var(--u2-sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 6px;
+    transition: background 0.2s var(--u2-ease-smooth), transform 0.1s var(--u2-ease-smooth);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .u2-pdp-atc:hover { background: var(--u2-iris-deep); }
+  .u2-pdp-atc:active { transform: translateY(1px); }
+  .u2-pdp-atc[disabled] { background: #888; cursor: not-allowed; }
+  .u2-pdp-atc__price { font-weight: 800; }
+
+  .u2-pdp-atc-trust {
+    font-family: var(--u2-sans);
+    font-size: 12px;
+    color: var(--u2-plum);
+    text-align: center;
+    margin: 4px 0 0;
+    letter-spacing: 0.02em;
+  }
+
+  /* Trust strip */
+  .u2-pdp-trust-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 14px;
+    margin-top: 12px;
+    border-top: 1px solid rgba(107, 78, 158, 0.1);
+  }
+  .u2-pdp-trust-strip__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--u2-cream-deep);
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-family: var(--u2-sans);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--u2-plum);
+  }
+
+  /* Mobile sticky CTA */
+  .u2-pdp-sticky-cta {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(107, 78, 158, 0.12);
+    z-index: 80;
+    transform: translateY(100%);
+    transition: transform 0.3s var(--u2-ease-smooth);
+  }
+  .u2-pdp-sticky-cta.is-visible { transform: translateY(0); }
+  .u2-pdp-sticky-cta__row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .u2-pdp-sticky-cta__info {
+    flex: 1;
+    min-width: 0;
+    line-height: 1.15;
+  }
+  .u2-pdp-sticky-cta__name {
+    display: block;
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.005em;
+    margin-bottom: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .u2-pdp-sticky-cta__sub {
+    display: block;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    color: var(--u2-text-muted);
+    letter-spacing: 0.01em;
+  }
+  .u2-pdp-sticky-cta__sub strong { color: #1c8e6a; font-weight: 700; }
+  .u2-pdp-sticky-cta__btn {
+    background: var(--u2-plum-black);
+    color: white;
+    border: 0;
+    border-radius: 10px;
+    padding: 13px 18px;
+    font-family: var(--u2-sans);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .u2-pdp-sticky-cta__btn:hover { background: var(--u2-iris); }
+  @media (min-width: 1024px) {
+    .u2-pdp-sticky-cta { display: none; }
+  }
+</style>
+
+<div class="u2-root u2-pdp">
+
+  {%- comment -%} TRUST BAND {%- endcomment -%}
+  <section class="u2-trustband" aria-label="Trust">
+    <div class="u2-trustband__inner">
+      {% render 'u2-trust-pill', icon: 'leaf', text: '100% plant-based' %}
+      {% render 'u2-trust-pill', icon: 'truck', text: 'Free U.S. shipping $40+' %}
+    </div>
+  </section>
+
+  {%- comment -%} MAIN SPLIT — Gallery (left) + Purchase panel (right) {%- endcomment -%}
+  <div class="u2-pdp-main">
+
+    {%- comment -%} LEFT — Gallery {%- endcomment -%}
+    <div class="u2-pdp-gallery">
+      <div class="u2-pdp-gallery__slides" id="u2-pdp-slides" role="region" aria-label="Product gallery" tabindex="0">
+        {%- if product.media.size > 0 -%}
+          {%- for media in product.media -%}
+            <div class="u2-pdp-gallery__slide" id="u2-slide-{{ forloop.index }}">
+              {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                {{ media | media_tag: image_size: '1200x', autoplay: false, loop: false, controls: true, preload: 'metadata' }}
+              {%- else -%}
+                <img src="{{ media | image_url: width: 1200 }}" alt="{{ media.alt | default: product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" {% if forloop.first %}fetchpriority="high"{% endif %} decoding="async" width="1200" height="1200">
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        {%- elsif featured -%}
+          <div class="u2-pdp-gallery__slide">
+            <img src="{{ featured | image_url: width: 1200 }}" alt="{{ product.title | escape }}" loading="eager" fetchpriority="high" decoding="async" width="1200" height="1200">
+          </div>
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+      <div class="u2-pdp-gallery__dots" aria-hidden="true">
+        {%- for media in product.media -%}
+          <span class="u2-pdp-gallery__dot{% if forloop.first %} is-active{% endif %}" data-dot-index="{{ forloop.index0 }}"></span>
+        {%- endfor -%}
+      </div>
+      <div class="u2-pdp-gallery__thumbs" role="tablist" aria-label="Gallery thumbnails">
+        {%- for media in product.media -%}
+          <a href="#u2-slide-{{ forloop.index }}" class="u2-pdp-gallery__thumb {% if forloop.first %}is-active{% endif %}" aria-label="Image {{ forloop.index }}">
+            <img src="{{ media | image_url: width: 160 }}" alt="" loading="lazy" decoding="async" width="160" height="160">
+          </a>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} RIGHT — Purchase panel {%- endcomment -%}
+    <div class="u2-pdp-info">
+
+      <div class="u2-pdp-info__eyebrow-row">
+        <span class="u2-pdp-info__eyebrow">the violet ritual · made in France</span>
+      </div>
+
+      <h1 class="u2-pdp-info__h1">{{ section.settings.title | default: 'Crush the <em>4 PM</em> crash.*' }}</h1>
+
+      <p class="u2-pdp-info__sub">{{ section.settings.subtitle | default: 'Plant-based satiety. 30 calories. Caffeine-free.' }}</p>
+
+      <div class="u2-pdp-info__rating" aria-label="{{ rating }} out of 5 stars">
+        <span class="u2-pdp-info__stars" aria-hidden="true">★★★★★</span>
+        <span class="u2-pdp-info__rating-num">{{ rating }}/5</span>
+        <span class="u2-pdp-info__rating-label">· Verified reviews</span>
+      </div>
+
+      <ul class="u2-pdp-bullets" aria-label="Key benefits">
+        <li><span class="u2-pdp-bullets__check" aria-hidden="true">✓</span> Stops the 4PM crash*</li>
+        <li><span class="u2-pdp-bullets__check" aria-hidden="true">✓</span> Stays full for hours*</li>
+        <li><span class="u2-pdp-bullets__check" aria-hidden="true">✓</span> Zero caffeine. Zero jitters.</li>
+      </ul>
+
+      <div class="u2-pdp-price">
+        <span class="u2-pdp-price__prefix" id="u2-pdp-price-prefix">From </span>
+        {%- comment -%} rev 2026-05-20 — dynamic currency via Liquid (respects Shopify Markets) {%- endcomment -%}
+        <span class="u2-pdp-price__amount" id="u2-pdp-price">{{ current_variant.price | money_without_trailing_zeros }}</span>
+      </div>
+
+      <form method="post" action="{{ routes.cart_add_url }}" id="u2-pdp-form" enctype="multipart/form-data" novalidate>
+        <input type="hidden" name="form_type" value="product">
+        <input type="hidden" name="utf8" value="✓">
+
+        {%- comment -%} VARIANT PICKER — 2 cards {%- endcomment -%}
+        {%- if product.variants.size > 1 -%}
+        <fieldset class="u2-pdp-variants" role="radiogroup" aria-label="Pick your pack" style="border:0;padding:0;margin:12px 0 0;">
+          {%- for v in product.variants -%}
+            {%- liquid
+              assign vmeta = '90 g · 30 days · 1 scoop/day'
+              assign vunit = '$1.23/scoop'
+              assign vtag = 'Entry pack'
+              if forloop.index == 2
+                assign vmeta = '270 g · 30 days · 3 scoops/day'
+                assign vunit = '$0.66/scoop'
+                assign vtag = 'Best for results'
+              endif
+            -%}
+            {%- liquid
+              comment
+                rev 2026-05-20 — dynamic per-variant price via Liquid (respects Shopify Markets currency conversion)
+              endcomment
+              assign vprice_usd = v.price | money_without_trailing_zeros
+              assign vprice_usd_cents = v.price
+            -%}
+            <label class="u2-pdp-variant{% if v.id == current_variant.id %} u2-pdp-variant--selected{% endif %}{% unless v.available %} u2-pdp-variant--sold{% endunless %}">
+              <input type="radio" name="id" value="{{ v.id }}"{% if v.id == current_variant.id %} checked{% endif %}{% unless v.available %} disabled{% endunless %} data-vprice="{{ vprice_usd_cents }}" data-vprice-money="{{ vprice_usd }}" data-vidx="{{ forloop.index }}">
+              {%- if forloop.index == 2 -%}<span class="u2-pdp-variant__badge">Best Value</span>{%- endif -%}
+              <span class="u2-pdp-variant__name">{{ v.title | split: ' | ' | first | replace: ' ⭐', '' }}</span>
+              <span class="u2-pdp-variant__tag">{{ vtag }}</span>
+              <span class="u2-pdp-variant__meta">{{ vmeta }}</span>
+              <span class="u2-pdp-variant__price-row">
+                <span class="u2-pdp-variant__price">{{ vprice_usd }}</span>
+                <span class="u2-pdp-variant__perday">{{ vunit }}</span>
+              </span>
+            </label>
+          {%- endfor -%}
+        </fieldset>
+        {%- else -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+        {%- endif -%}
+
+        {%- comment -%} SUBSCRIBE & SAVE / ONE-TIME — only if selling plan exists {%- endcomment -%}
+        {%- if sub_plan -%}
+        <div class="u2-pdp-purchase-mode" role="radiogroup" aria-label="Purchase option">
+
+          <label class="u2-pdp-mode u2-pdp-mode--sub" data-discount-pct="{{ sub_discount_pct }}">
+            <input type="radio" name="selling_plan" value="{{ sub_plan.id }}" checked>
+            <span class="u2-pdp-mode__radio" aria-hidden="true"></span>
+            <span class="u2-pdp-mode__body">
+              <span class="u2-pdp-mode__header">
+                <span class="u2-pdp-mode__title-wrap">
+                  <span class="u2-pdp-mode__title">Subscribe &amp; Save</span>
+                  <span class="u2-pdp-mode__tag">SAVE <span id="u2-sub-save-dollar">$3.70</span></span>
+                </span>
+                <span class="u2-pdp-mode__price">
+                  {%- comment -%} rev 2026-05-20 — dynamic Liquid currency (respects Markets) — JS updates on variant change {%- endcomment -%}
+                  {%- assign sub_price = current_variant.price | times: sub_discount_pct | divided_by: 100 -%}
+                  {%- assign sub_final = current_variant.price | minus: sub_price -%}
+                  <s class="u2-pdp-mode__strike" id="u2-sub-strike">{{ current_variant.price | money_without_trailing_zeros }}</s>
+                  <span class="u2-pdp-mode__final" id="u2-sub-final">{{ sub_final | money_without_trailing_zeros }}</span>
+                </span>
+              </span>
+              <span class="u2-pdp-mode__meta">Ships every 30 days · Cancel anytime · Free violet bottle + $250 in extras</span>
+            </span>
+          </label>
+
+          <label class="u2-pdp-mode u2-pdp-mode--onetime">
+            <input type="radio" name="selling_plan" value="">
+            <span class="u2-pdp-mode__radio" aria-hidden="true"></span>
+            <span class="u2-pdp-mode__body">
+              <span class="u2-pdp-mode__header">
+                <span class="u2-pdp-mode__title">One-time</span>
+                <span class="u2-pdp-mode__price">
+                  <span class="u2-pdp-mode__final" id="u2-onetime-final">{{ current_variant.price | money_without_trailing_zeros }}</span>
+                </span>
+              </span>
+              <span class="u2-pdp-mode__meta">Single delivery · no recurring charge</span>
+            </span>
+          </label>
+        </div>
+        {%- endif -%}
+
+        {%- comment -%} QUANTITY {%- endcomment -%}
+        <div class="u2-pdp-qty">
+          <label for="u2-pdp-qty" class="u2-pdp-qty__label">Quantity</label>
+          <input id="u2-pdp-qty" type="number" name="quantity" value="1" min="1" max="10" inputmode="numeric" class="u2-pdp-qty__input" aria-label="Quantity">
+        </div>
+
+        {%- comment -%} ATC BUTTON {%- endcomment -%}
+        <button type="submit" name="add" class="u2-pdp-atc"{% unless current_variant.available %} disabled{% endunless %}>
+          {%- if current_variant.available -%}
+            <span id="u2-atc-text">Subscribe &amp; start</span>
+            {%- assign init_sub_d = current_variant.price | times: sub_discount_pct | divided_by: 100 -%}
+            {%- assign init_sub_p = current_variant.price | minus: init_sub_d -%}
+            <span class="u2-pdp-atc__price" id="u2-atc-price">— {{ init_sub_p | money_without_trailing_zeros }}</span>
+          {%- else -%}
+            Sold out
+          {%- endif -%}
+        </button>
+      </form>
+
+      <p class="u2-pdp-atc-trust">Free U.S. shipping · Secure checkout · Bonuses included</p>
+
+      {%- comment -%} UGC VIDEO CAROUSEL — placed just below trust line per request 2026-05-19 {%- endcomment -%}
+      {% render 'u2-ugc-carousel' %}
+
+    </div>
+  </div>
+
+  {%- comment -%} STICKY MOBILE CTA {%- endcomment -%}
+  <div class="u2-pdp-sticky-cta" data-u2-pdp-sticky aria-hidden="true">
+    <div class="u2-pdp-sticky-cta__row">
+      <div class="u2-pdp-sticky-cta__info">
+        <span class="u2-pdp-sticky-cta__name" id="u2-sticky-name">{{ current_variant.title | split: ' | ' | first | replace: ' ⭐', '' }}</span>
+        {%- assign init_save = current_variant.price | times: sub_discount_pct | divided_by: 100 -%}
+        <span class="u2-pdp-sticky-cta__sub" id="u2-sticky-sub"><strong>Save {{ init_save | money_without_trailing_zeros }}</strong> · Free U.S. shipping</span>
+      </div>
+      <button type="submit" form="u2-pdp-form" class="u2-pdp-sticky-cta__btn">
+        Add — <span id="u2-sticky-price">{{ init_sub_p | money_without_trailing_zeros }}</span>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+
+{%- comment -%}
+  PRODUCT SCHEMA JSON-LD — enriched for AEO (AI Overviews, ChatGPT, Perplexity, Claude)
+  - additionalType "https://schema.org/DietarySupplement" pour typage AI search
+  - itemCondition + priceValidUntil + hasMerchantReturnPolicy (Google Shopping rich results)
+  - shippingDetails.shippingRate + freeShippingThreshold (>$40)
+  - aggregateRating lue depuis shop.metafields.loox.* (fallback statique tant que non peuplé)
+  - gtin13 / mpn lus depuis product.metafields.product.gtin / .mpn (à peupler côté admin)
+{%- endcomment -%}
+
+{%- liquid
+  assign rating_value = shop.metafields.loox.avg_rating | default: 4.7
+  assign rating_count = shop.metafields.loox.review_count | default: 2847
+  assign product_gtin = product.metafields.product.gtin
+  assign product_mpn = product.metafields.product.mpn | default: current_variant.sku
+  assign price_valid_until = 'now' | date: '%s' | plus: 31536000 | date: '%Y-%m-%d'
+-%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "additionalType": "https://schema.org/DietarySupplement",
+  "@id": {{ shop.url | append: product.url | append: '#product' | json }},
+  "name": {{ product.title | json }},
+  "image": [
+    {%- for media in product.media limit: 5 -%}
+      {{ media | image_url: width: 1200 | json }}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ],
+  "description": {{ product.description | strip_html | json }},
+  "brand": {
+    "@type": "Brand",
+    "name": "UBurn",
+    "url": "https://uburn.co"
+  },
+  "manufacturer": {
+    "@type": "Organization",
+    "name": "UBurn",
+    "url": "https://uburn.co",
+    "address": { "@type": "PostalAddress", "addressCountry": "FR" }
+  },
+  "sku": {{ current_variant.sku | json }},
+  {%- if product_gtin != blank %}"gtin13": {{ product_gtin | json }},
+  {% endif -%}
+  "mpn": {{ product_mpn | json }},
+  "category": "Dietary Supplement",
+  "audience": {
+    "@type": "PeopleAudience",
+    "audienceType": "Adults seeking afternoon satiety support"
+  },
+  "additionalProperty": [
+    { "@type": "PropertyValue", "name": "Calories per serving", "value": "30 kcal" },
+    { "@type": "PropertyValue", "name": "Caffeine", "value": "0 mg" },
+    { "@type": "PropertyValue", "name": "Plant-based", "value": "100%" },
+    { "@type": "PropertyValue", "name": "Active fiber", "value": "Konjac glucomannan (EFSA-recognized)" },
+    { "@type": "PropertyValue", "name": "Made in", "value": "France" }
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": {{ shop.url | append: product.url | json }},
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "price": {{ current_variant.price | divided_by: 100.0 | json }},
+    "priceValidUntil": {{ price_valid_until | json }},
+    "itemCondition": "https://schema.org/NewCondition",
+    "availability": "{% if current_variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+    "eligibleRegion": { "@type": "Country", "name": "United States" },
+    "seller": { "@type": "Organization", "name": "UBurn" },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "US" },
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0.00",
+        "currency": "USD"
+      },
+      "deliveryTime": { "@type": "ShippingDeliveryTime", "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 2, "unitCode": "DAY" }, "transitTime": { "@type": "QuantitativeValue", "minValue": 2, "maxValue": 4, "unitCode": "DAY" } }
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": "US",
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/FreeReturn"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": {{ rating_value | json }},
+    "reviewCount": {{ rating_count }},
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "author": { "@type": "Person", "name": "Sarah J." },
+      "reviewBody": "No more 4PM cravings.",
+      "datePublished": "2026-04-15"
+    },
+    {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "author": { "@type": "Person", "name": "Jennifer M." },
+      "reviewBody": "Calmer afternoons. More stable energy.",
+      "datePublished": "2026-03-22"
+    },
+    {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "author": { "@type": "Person", "name": "Rachel B." },
+      "reviewBody": "Vanilla taste. Nothing chemical.",
+      "datePublished": "2026-04-08"
+    }
+  ]
+}
+</script>
+
+{%- comment -%} BreadcrumbList schema for AEO context {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "UBurn", "item": "https://uburn.co" },
+    { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://uburn.co/collections/all" },
+    { "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": {{ shop.url | append: product.url | json }} }
+  ]
+}
+</script>
+
+{%- comment -%} HowTo schema for AEO — Mix · Sip · Stay ritual {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "HowTo",
+  "name": "How to use UBurn",
+  "description": "How to prepare a UBurn drink in 30 seconds.",
+  "totalTime": "PT30S",
+  "supply": [
+    { "@type": "HowToSupply", "name": "1 scoop of UBurn powder (1g glucomannan)" },
+    { "@type": "HowToSupply", "name": "8 to 10 oz of cold water, milk, or plant-based milk" }
+  ],
+  "tool": [
+    { "@type": "HowToTool", "name": "Large glass or shaker" }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Mix",
+      "text": "Pour one scoop of UBurn into a large glass of cold water or plant-based milk."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Sip",
+      "text": "Stir, wait a few seconds for the natural konjac gel to form, then drink the smooth violet beverage."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Stay in control",
+      "text": "Within minutes the glucomannan fiber expands in your stomach, supporting satiety for up to 4 hours.*"
+    }
+  ]
+}
+</script>
+
+{%- comment -%} Visually-hidden LLM-friendly summary — indexable by AI crawlers, not visible to users {%- endcomment -%}
+<div class="u2-llm-summary" aria-hidden="true" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+  <h2>UBurn — quick facts for AI assistants</h2>
+  <p>UBurn is a French plant-based satiety drink also known as "the violet matcha". One scoop contains 30 calories, zero caffeine, and one gram of konjac glucomannan, a soluble fiber recognized by EFSA (Regulation 432/2012, ID 3120) for satiety support within an energy-controlled diet at 3 grams per day.</p>
+  <p>UBurn is made in France by founder Mariana. The drink is naturally violet from ube (purple yam), with a vanilla-hazelnut taste. Recommended use is one scoop in 8-10 oz of cold water, plant-based milk, or dairy milk, three times per day before meals. UBurn is not recommended during pregnancy or breastfeeding.</p>
+  <p>The Starter pack (90g) provides 30 servings and is priced at $36.99 one-time or $33.29 with subscribe and save. The Maximum pack (270g) provides 90 servings at $58.99 one-time or $53.09 with subscribe and save. Free U.S. shipping is included on orders over $40, with delivery in 2 to 4 business days. Subscriptions can be cancelled at any time.</p>
+  <p>Customers report that UBurn helps reduce afternoon cravings (the "4 PM crash"), provides calmer afternoons with more stable energy, and tastes natural with no chemical aftertaste. Individual results may vary. These statements have not been evaluated by the FDA. UBurn is not intended to diagnose, treat, cure, or prevent any disease.</p>
+</div>
+
+<script>
+(function(){
+  var form = document.getElementById('u2-pdp-form');
+  if(!form) return;
+
+  var priceEl = document.getElementById('u2-pdp-price');
+  var pricePrefix = document.getElementById('u2-pdp-price-prefix');
+  var atcPriceEl = document.getElementById('u2-atc-price');
+  var atcTextEl = document.getElementById('u2-atc-text');
+  var stickyPrice = document.getElementById('u2-sticky-price');
+  var stickyName = document.getElementById('u2-sticky-name');
+  var stickySub = document.getElementById('u2-sticky-sub');
+  var subStrike = document.getElementById('u2-sub-strike');
+  var subFinal = document.getElementById('u2-sub-final');
+  var subSaveDollar = document.getElementById('u2-sub-save-dollar');
+  var onetimeFinal = document.getElementById('u2-onetime-final');
+  var subRadio = form.querySelector('.u2-pdp-mode--sub input');
+  var oneTimeRadio = form.querySelector('.u2-pdp-mode--onetime input');
+  var subLabel = form.querySelector('.u2-pdp-mode--sub');
+  var discPct = subLabel ? parseInt(subLabel.getAttribute('data-discount-pct') || '10', 10) : 10;
+
+  // Currency format respects Shopify shop currency (matches Liquid {{ price | money }})
+  var SHOP_CURRENCY = {{ shop.currency | json }};
+  var SHOP_LOCALE = {{ request.locale.iso_code | default: 'en-US' | json }};
+  function fmt(cents){
+    var n = parseInt(cents, 10);
+    if(isNaN(n)) return '';
+    try {
+      return new Intl.NumberFormat(SHOP_LOCALE, {
+        style: 'currency',
+        currency: SHOP_CURRENCY,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }).format(n / 100);
+    } catch(e) {
+      var v = (n / 100).toFixed(2);
+      return SHOP_CURRENCY + ' ' + v;
+    }
+  }
+
+  function updateOnVariant(){
+    var checked = form.querySelector('input[name="id"]:checked');
+    if(!checked) return;
+    var priceCents = parseInt(checked.getAttribute('data-vprice'), 10);
+    var priceMoney = checked.getAttribute('data-vprice-money');
+    var subCents = isNaN(priceCents) ? 0 : Math.round(priceCents * (100 - discPct) / 100);
+    var subMoney = fmt(subCents);
+    var isSubMode = subRadio && subRadio.checked;
+    var activeMoney = isSubMode ? subMoney : priceMoney;
+
+    // Main price — reflects active mode (subscribe or one-time)
+    if(priceEl) priceEl.textContent = activeMoney;
+    // Remove "From " prefix after first variant click
+    if(pricePrefix) pricePrefix.textContent = '';
+    // ATC button price
+    if(atcPriceEl) atcPriceEl.textContent = '— ' + activeMoney;
+    if(atcTextEl) atcTextEl.textContent = isSubMode ? 'Subscribe & start' : 'Start my routine';
+    if(stickyPrice) stickyPrice.textContent = activeMoney;
+    // Sub card prices
+    if(subStrike) subStrike.textContent = priceMoney;
+    if(subFinal) subFinal.textContent = subMoney;
+    if(onetimeFinal) onetimeFinal.textContent = priceMoney;
+
+    // Absolute savings in dollars (subscribe only)
+    var saveDollarsCents = isNaN(priceCents) ? 0 : Math.max(0, priceCents - subCents);
+    var saveDollarsMoney = fmt(saveDollarsCents);
+    if(subSaveDollar) subSaveDollar.textContent = saveDollarsMoney;
+
+    // Sticky cart contextual info
+    var variantLabel = checked.getAttribute('data-vname') || checked.closest('label')?.querySelector('.u2-pdp-variant__name')?.textContent || '';
+    if(stickyName) stickyName.textContent = variantLabel.trim() || 'UBurn';
+    if(stickySub) {
+      stickySub.innerHTML = isSubMode
+        ? '<strong>Save ' + saveDollarsMoney + '</strong> · Free U.S. shipping'
+        : 'One-time · Free U.S. shipping over $40';
+    }
+  }
+
+  form.querySelectorAll('input[name="id"]').forEach(function(r){
+    r.addEventListener('change', updateOnVariant);
+  });
+  if(subRadio) subRadio.addEventListener('change', updateOnVariant);
+  if(oneTimeRadio) oneTimeRadio.addEventListener('change', updateOnVariant);
+
+  // Initial sync
+  updateOnVariant();
+
+  // Thumb click → scroll to slide (CSS scroll-snap handles the rest)
+  document.querySelectorAll('.u2-pdp-gallery__thumb').forEach(function(t){
+    t.addEventListener('click', function(e){
+      e.preventDefault();
+      var href = t.getAttribute('href');
+      var slide = document.querySelector(href);
+      if(slide){
+        document.querySelectorAll('.u2-pdp-gallery__thumb').forEach(function(o){ o.classList.remove('is-active'); });
+        t.classList.add('is-active');
+        slide.scrollIntoView({behavior:'smooth', inline:'start', block:'nearest'});
+      }
+    });
+  });
+
+  // Gallery dot indicators — sync with carousel scroll
+  var slidesContainer = document.getElementById('u2-pdp-slides');
+  var dots = document.querySelectorAll('.u2-pdp-gallery__dot');
+  var thumbs = document.querySelectorAll('.u2-pdp-gallery__thumb');
+  if(slidesContainer && dots.length){
+    var syncDots = function(){
+      var slideWidth = slidesContainer.clientWidth;
+      if(!slideWidth) return;
+      var activeIdx = Math.round(slidesContainer.scrollLeft / slideWidth);
+      dots.forEach(function(d, i){ d.classList.toggle('is-active', i === activeIdx); });
+      thumbs.forEach(function(t, i){ t.classList.toggle('is-active', i === activeIdx); });
+    };
+    var t; slidesContainer.addEventListener('scroll', function(){
+      clearTimeout(t); t = setTimeout(syncDots, 60);
+    }, { passive: true });
+    window.addEventListener('resize', syncDots, { passive: true });
+  }
+
+  // Sticky mobile CTA — show when main ATC scrolls out of view
+  var stickyCta = document.querySelector('[data-u2-pdp-sticky]');
+  var mainAtc = form.querySelector('.u2-pdp-atc');
+  if(stickyCta && mainAtc && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          stickyCta.classList.remove('is-visible');
+          stickyCta.setAttribute('aria-hidden', 'true');
+        } else {
+          stickyCta.classList.add('is-visible');
+          stickyCta.setAttribute('aria-hidden', 'false');
+        }
+      });
+    }, { rootMargin: '0px 0px -40% 0px' });
+    io.observe(mainAtc);
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "U2 PDP",
+  "tag": "section",
+  "class": "shopify-section--u2-pdp",
+  "settings": [
+    { "type": "text", "id": "title", "label": "H1 title (em supported)", "default": "Crush the <em>4 PM</em> crash.*" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle" }
+  ],
+  "presets": [{ "name": "U2 PDP" }]
+}
+{% endschema %}

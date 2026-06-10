@@ -1,0 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme",
+  "sections": {
+    "lp-v2": {
+      "type": "uburn-lp-v2",
+      "settings": {
+        "product": "ube-poudre",
+        "hero_h1": "The violet matcha. <em>Zero caffeine.</em> All ritual.",
+        "hero_sub": "Trade the 3 PM coffee for a plant-based purple drink. EFSA-backed konjac fiber. 30 calories. Made in France.",
+        "trust_1": "0% caffeine",
+        "trust_2": "EFSA-backed fiber",
+        "trust_3": "30 calories",
+        "trust_4": "Made in France"
+      }
+    }
+  },
+  "order": ["lp-v2"]
+}

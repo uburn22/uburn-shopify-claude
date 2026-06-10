@@ -1,0 +1,46 @@
+{%- comment -%}
+  Meta Pixel — Purchase event on order confirmation page.
+  Ce snippet est inclus dans theme.liquid MAIS le checkout Shopify
+  n'utilise pas theme.liquid. Ce script doit AUSSI être copié dans :
+  Shopify Admin > Settings > Checkout > Order status page additional scripts
+{%- endcomment -%}
+<script>
+(function () {
+  if (!/\/checkouts\/.+\/thank_you/.test(window.location.pathname)) return;
+
+  function getTotal() {
+    var selectors = [
+      '[data-checkout-total]',
+      '.payment-due__price',
+      '.order-summary__emphasis',
+      '[data-payment-due]'
+    ];
+    for (var i = 0; i < selectors.length; i++) {
+      var el = document.querySelector(selectors[i]);
+      if (el) {
+        var v = parseFloat(el.textContent.replace(/[^0-9.]/g, ''));
+        if (v > 0) return v;
+      }
+    }
+    return null;
+  }
+
+  var attempts = 0;
+  var timer = setInterval(function () {
+    attempts++;
+    var total = getTotal();
+    if (total || attempts >= 20) {
+      clearInterval(timer);
+      if (!total) return;
+      var eventID = 'PUR-' + Date.now() + '-' + Math.random().toString(36).substring(2, 9);
+      if (typeof window.fbq === 'function') {
+        fbq('track', 'Purchase', {
+          value: total,
+          currency: 'USD',
+          content_type: 'product'
+        }, { eventID: eventID });
+      }
+    }
+  }, 500);
+})();
+</script>

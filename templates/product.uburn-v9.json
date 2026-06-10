@@ -9,10 +9,47 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-uburn-pdp-v9",
-      "settings": {}
-    }
+    "u2-pdp": { "type": "u2-pdp", "settings": {} },
+    "u2-press": { "type": "u2-pdp-press", "settings": {} },
+    "u2-stories": { "type": "u2-pdp-stories-mini", "settings": {} },
+    "u2-precision": { "type": "u2-pdp-precision", "settings": {} },
+    "u2-founder": { "type": "u2-pdp-founder", "settings": {} },
+    "u2-reviews": { "type": "u2-pdp-reviews", "settings": {} },
+    "u2-workday": { "type": "u2-pdp-before-after-workday", "settings": {} },
+    "u2-taste": { "type": "u2-pdp-taste", "settings": {} },
+    "u2-steps": { "type": "u2-pdp-steps", "settings": {} },
+    "u2-quiz": { "type": "u2-pdp-ritual-quiz", "settings": {} },
+    "u2-foryou": { "type": "u2-pdp-foryou", "settings": {} },
+    "u2-howit": { "type": "u2-pdp-howit", "settings": {} },
+    "u2-diff": { "type": "u2-pdp-diff", "settings": {} },
+    "u2-scit": { "type": "u2-pdp-science-teaser", "settings": {} },
+    "u2-compare": { "type": "u2-comparison", "settings": {} },
+    "u2-formula": { "type": "u2-pdp-formula-detail", "settings": {} },
+    "u2-safety": { "type": "u2-pdp-safety", "settings": {} },
+    "u2-faq": { "type": "u2-pdp-faq", "settings": {} },
+    "u2-finalcta": { "type": "u2-pdp-final-cta", "settings": {} },
+    "u2-live-proof": { "type": "u2-live-proof", "settings": {} }
   },
-  "order": ["main"]
+  "order": [
+    "u2-pdp",
+    "u2-press",
+    "u2-stories",
+    "u2-workday",
+    "u2-foryou",
+    "u2-howit",
+    "u2-founder",
+    "u2-reviews",
+    "u2-compare",
+    "u2-diff",
+    "u2-taste",
+    "u2-steps",
+    "u2-formula",
+    "u2-scit",
+    "u2-precision",
+    "u2-quiz",
+    "u2-safety",
+    "u2-faq",
+    "u2-finalcta",
+    "u2-live-proof"
+  ]
 }
