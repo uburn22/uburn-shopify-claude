@@ -1,0 +1,49 @@
+{%- comment -%}
+  translate-menu-link.liquid - inline FR→EN translation for menu titles.
+  Used to translate Shopify-admin-set menu items without requiring Translations API.
+
+  Usage: {% render 'translate-menu-link', title: link.title %}
+{%- endcomment -%}
+{%- assign _ml_t = title -%}
+{%- if request.locale.iso_code == 'en' -%}
+  {%- case _ml_t -%}
+    {%- when 'Commander' -%}{%- assign _ml_t = 'Shop' -%}
+    {%- when 'Comment ça marche' -%}{%- assign _ml_t = 'How it works' -%}
+    {%- when 'Avis' -%}{%- assign _ml_t = 'Reviews' -%}
+    {%- when 'Notre histoire' -%}{%- assign _ml_t = 'Our story' -%}
+    {%- when 'Ingrédients' -%}{%- assign _ml_t = 'Ingredients' -%}
+    {%- when 'À propos' -%}{%- assign _ml_t = 'About' -%}
+    {%- when 'Accueil' -%}{%- assign _ml_t = 'Home' -%}
+    {%- when 'Boutique' -%}{%- assign _ml_t = 'Shop' -%}
+    {%- when 'Suivre ma commande' -%}{%- assign _ml_t = 'Track order' -%}
+    {%- when 'Mon compte' -%}{%- assign _ml_t = 'My account' -%}
+    {%- when 'Connexion' -%}{%- assign _ml_t = 'Login' -%}
+    {%- when 'Inscription' -%}{%- assign _ml_t = 'Sign up' -%}
+    {%- when 'Politique de confidentialité' -%}{%- assign _ml_t = 'Privacy policy' -%}
+    {%- when 'Politique de remboursement' -%}{%- assign _ml_t = 'Refund policy' -%}
+    {%- when 'Politique d''expédition' -%}{%- assign _ml_t = 'Shipping policy' -%}
+    {%- when 'Annulable à tout moment' -%}{%- assign _ml_t = 'Cancel anytime' -%}
+    {%- when 'Sans engagement' -%}{%- assign _ml_t = 'No commitment' -%}
+    {%- when 'Marque française' -%}{%- assign _ml_t = 'Plant-based brand' -%}
+    {%- when 'Marque Française' -%}{%- assign _ml_t = 'Plant-based brand' -%}
+    {%- when 'Conditions générales' -%}{%- assign _ml_t = 'Terms of service' -%}
+    {%- when 'CGV' -%}{%- assign _ml_t = 'Terms' -%}
+    {%- when 'CGU' -%}{%- assign _ml_t = 'Terms of use' -%}
+    {%- when 'Mentions légales' -%}{%- assign _ml_t = 'Legal notice' -%}
+    {%- when 'Livraison' -%}{%- assign _ml_t = 'Shipping' -%}
+    {%- when 'Retours' -%}{%- assign _ml_t = 'Returns' -%}
+    {%- when 'Nous contacter' -%}{%- assign _ml_t = 'Contact us' -%}
+    {%- when 'Rechercher' -%}{%- assign _ml_t = 'Search' -%}
+    {%- when 'Panier' -%}{%- assign _ml_t = 'Cart' -%}
+    {%- when 'Collections' -%}{%- assign _ml_t = 'Collections' -%}
+    {%- when 'Produits' -%}{%- assign _ml_t = 'Products' -%}
+    {%- when 'Tous les produits' -%}{%- assign _ml_t = 'All products' -%}
+    {%- when 'Catalogue' -%}{%- assign _ml_t = 'Catalog' -%}
+    {%- when 'Nouveautés' -%}{%- assign _ml_t = 'New arrivals' -%}
+    {%- when 'Meilleures ventes' -%}{%- assign _ml_t = 'Best sellers' -%}
+    {%- when 'Promotions' -%}{%- assign _ml_t = 'Sale' -%}
+    {%- when 'Blog' -%}{%- assign _ml_t = 'Blog' -%}
+    {%- when 'Articles' -%}{%- assign _ml_t = 'Articles' -%}
+  {%- endcase -%}
+{%- endif -%}
+{{- _ml_t -}}

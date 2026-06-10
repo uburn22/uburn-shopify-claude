@@ -2,6 +2,8 @@
 
 <html lang="{{ request.locale.iso_code }}" dir="{% render 'direction' %}">
   <head>
+    <!-- uburn-cache-bust-1778582000 -->
+    <meta name="x-uburn-cache-rev" content="1778582000">
     <meta name="facebook-domain-verification" content="6da9xvsflev0jx0grs4xok5k6fvd06" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=5.0">
@@ -30,6 +32,7 @@
 
     {%- render 'social-meta-tags' -%}
     {%- render 'microdata-schema' -%}
+    {%- render 'seo-enhancements' -%}
     {%- render 'css-variables' -%}
     {%- render 'js-variables' -%}
 
@@ -49,6 +52,7 @@
     </script>
 
     {{- 'theme.css' | asset_url | stylesheet_tag -}}
+    {{- 'uburn-design-tokens.css' | asset_url | stylesheet_tag -}}
 
     <script type="module" src="{{ 'vendor.min.js' | asset_url }}"></script>
     <script type="module" src="{{ 'theme.js' | asset_url }}"></script>
@@ -173,6 +177,11 @@
     {%- endif -%}
 
     <main id="main" class="anchor">
+      {%- if request.page_type == 'page' and page.handle != blank -%}
+        {%- if page.handle == 'faq' or page.handle == 'about' -%}
+          {%- render 'uburn-page-heading-fallback' -%}
+        {%- endif -%}
+      {%- endif -%}
       {{ content_for_layout }}
     </main>
 
@@ -183,14 +192,42 @@
     <x-toast class="toast">
       {% comment %}Container for notification messages; DO NOT DELETE{% endcomment %}
     </x-toast>
-    <!-- FIX checkout-5: hide chat notification badge "1" sitewide -->
+    <!-- HIDE Shopify Chat widget sitewide (per Charles request 2026-05-12) -->
   <style>
+    #ShopifyChat,
+    inbox-online-store-chat,
+    .shopify-chat-button,
     .shopify-chat-badge,
-    [class*="shopify-chat"] [class*="badge"],
-    [class*="shopify-chat"] [class*="unread"],
-    [class*="shopify-messaging"] [class*="badge"],
-    #ShopifyChat [class*="badge"] { display: none !important; }
+    iframe[title*="chat" i],
+    iframe[title*="Shopify" i],
+    #tidio-chat,
+    .gorgias-chat-container,
+    [class*="shopify-messaging"],
+    [class*="shopify-chat"],
+    .shopify-block[data-app-block-type*="chat"],
+    #shopify-chat { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; }
   </style>
+  <script>
+    // Aggressive removal of Shopify Inbox chat element (in case CSS overridden by inline style injection)
+    (function removeChat() {
+      var killChat = function() {
+        var ids = ['ShopifyChat', 'shopify-chat'];
+        var selectors = ['inbox-online-store-chat', '.shopify-chat-button', '[class*="shopify-chat"]', '[class*="shopify-messaging"]'];
+        ids.forEach(function(id) { var el = document.getElementById(id); if (el) el.remove(); });
+        selectors.forEach(function(s) {
+          document.querySelectorAll(s).forEach(function(el) { el.remove(); });
+        });
+      };
+      // Run on DOM ready + every 500ms for 10s (in case Shopify Inbox re-injects)
+      if (document.readyState !== 'loading') killChat();
+      else document.addEventListener('DOMContentLoaded', killChat);
+      var attempts = 0;
+      var interval = setInterval(function() {
+        killChat();
+        if (++attempts > 20) clearInterval(interval);
+      }, 500);
+    })();
+  </script>
 
   {%- if template.name == 'product' -%}
   <style>
@@ -241,10 +278,19 @@
 <script>
 (function() {
 
+  // UBURN locale-aware copy
+  var __UB_ISEN = {% if request.locale.iso_code == 'en' %}true{% else %}false{% endif %};
+  var __UB_CTA_TEXT      = __UB_ISEN ? 'Start my journey — Free shipping' : 'Je commence ma cure — Livraison offerte';
+  var __UB_MICRO_TEXT    = __UB_ISEN ? 'Ships within 24h • French brand' : 'Expédié sous 24h • Marque française';
+
   // ===================================================================
   // UBURN — Consolidated product page scripts
   // Single MutationObserver + single entry point = lower TBT
   // ===================================================================
+
+  // EN locale: skip all FR-only legacy injections — V9 section handles EN UI
+  var __isEn = document.documentElement.lang === 'en' || location.pathname.indexOf('/en/') === 0;
+  if (__isEn) return;
 
   // --- GIFT BLOCK ---
   function addGiftBlock() {
@@ -313,7 +359,7 @@
     if (addBtn.getAttribute('data-ub-singlecta') === 'done') return;
     addBtn.setAttribute('data-ub-singlecta', 'done');
     var textEl = addBtn.querySelector('span') || addBtn;
-    textEl.textContent = 'Je commence ma cure \u2014 Livraison offerte';
+    textEl.textContent = __UB_CTA_TEXT;
     addBtn.style.cssText = 'background:#7C3AED !important;color:#fff !important;border:none !important;border-radius:12px !important;font-weight:800 !important;font-size:15px !important;width:100% !important;padding:16px !important;cursor:pointer !important;transition:background 0.2s !important;letter-spacing:0.3px !important;';
     addBtn.addEventListener('mouseenter', function() { addBtn.style.background = '#6D28D9'; });
     addBtn.addEventListener('mouseleave', function() { addBtn.style.background = '#7C3AED'; });
@@ -321,7 +367,7 @@
     if (!document.querySelector('.ub-microcopy')) {
       var micro = document.createElement('p');
       micro.className = 'ub-microcopy';
-      micro.textContent = 'Exp\u00e9di\u00e9 sous 24h \u2022 Marque française';
+      micro.textContent = __UB_MICRO_TEXT;
       micro.style.cssText = 'text-align:center;font-size:11px;color:#6B7280;margin-top:6px;margin-bottom:0;';
       var parent = addBtn.closest('.product-form') || addBtn.parentElement;
       parent.appendChild(micro);
@@ -388,8 +434,8 @@
       var div = document.createElement('div');
       div.className = 'ub-repeat-cta';
       div.style.cssText = 'text-align:center;padding:32px 16px;';
-      div.innerHTML = '<button style="background:#7C3AED;color:#fff;border:none;border-radius:12px;padding:16px 40px;font-size:15px;font-weight:800;cursor:pointer;transition:background 0.2s;letter-spacing:0.3px;max-width:420px;width:100%;" onmouseenter="this.style.background=\'#6D28D9\'" onmouseleave="this.style.background=\'#7C3AED\'" onclick="var t=document.querySelector(\'.product-form__submit\');if(t){t.scrollIntoView({behavior:\'smooth\',block:\'center\'});setTimeout(function(){t.click()},600);}">Je commence ma cure \u2014 Livraison offerte</button>'
-        + '<p style="text-align:center;font-size:11px;color:#6B7280;margin-top:8px;margin-bottom:0;">Exp\u00e9di\u00e9 sous 24h \u2022 Marque française</p>';
+      div.innerHTML = '<button style="background:#7C3AED;color:#fff;border:none;border-radius:12px;padding:16px 40px;font-size:15px;font-weight:800;cursor:pointer;transition:background 0.2s;letter-spacing:0.3px;max-width:420px;width:100%;" onmouseenter="this.style.background=\'#6D28D9\'" onmouseleave="this.style.background=\'#7C3AED\'" onclick="var t=document.querySelector(\'.product-form__submit\');if(t){t.scrollIntoView({behavior:\'smooth\',block:\'center\'});setTimeout(function(){t.click()},600);}">' + __UB_CTA_TEXT + '</button>'
+        + '<p style="text-align:center;font-size:11px;color:#6B7280;margin-top:8px;margin-bottom:0;">' + __UB_MICRO_TEXT + '</p>';
       return div;
     };
     document.querySelectorAll('.shopify-section').forEach(function(sec) {
@@ -548,41 +594,8 @@
   window.addEventListener('load', runAll);
   document.addEventListener('variant:changed', function() { setTimeout(runAll, 150); });
 
-  // --- STICKY BAR MOBILE (mobile-only, skipped on desktop) ---
-  if (window.innerWidth <= 749) {
-    function createStickyBar() {
-      if (document.querySelector('.ub-sticky-bar')) return;
-      var bar = document.createElement('div');
-      bar.className = 'ub-sticky-bar';
-      bar.style.cssText = 'position:fixed;bottom:0;left:0;width:100%;background:#fff;box-shadow:0 -2px 10px rgba(0,0,0,0.08);padding:10px 16px;z-index:9999;display:flex;align-items:center;justify-content:space-between;transform:translateY(100%);transition:transform 0.3s ease;';
-      var priceDiv = document.createElement('div');
-      priceDiv.className = 'ub-sticky-price';
-      priceDiv.style.cssText = 'font-size:18px;font-weight:700;color:#1A1A1A;';
-      var stickyBtn = document.createElement('button');
-      stickyBtn.textContent = 'Commander';
-      stickyBtn.style.cssText = 'background:#7C3AED;color:#fff;border:none;border-radius:10px;padding:12px 28px;font-weight:700;font-size:14px;cursor:pointer;white-space:nowrap;';
-      stickyBtn.addEventListener('click', function() {
-        var mainBtn = document.querySelector('.product-form__submit') || document.querySelector('button[name="add"]');
-        if (mainBtn) mainBtn.click();
-      });
-      bar.appendChild(priceDiv);
-      bar.appendChild(stickyBtn);
-      document.body.appendChild(bar);
-      function updatePrice() {
-        var p = document.querySelector('.price .money, sale-price .money, .price-item--regular .money');
-        if (p) priceDiv.textContent = p.textContent.trim();
-      }
-      updatePrice();
-      document.addEventListener('variant:changed', updatePrice);
-      document.documentElement.addEventListener('cart:change', updatePrice);
-      var mainBtn = document.querySelector('.product-form__submit') || document.querySelector('button[name="add"]');
-      if (!mainBtn) return;
-      new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) { bar.style.transform = e.isIntersecting ? 'translateY(100%)' : 'translateY(0)'; });
-      }, { threshold: 0 }).observe(mainBtn);
-    }
-    setTimeout(createStickyBar, 800);
-  }
+  // --- STICKY BAR MOBILE: disabled — replaced by .pdpv9-sticky-cta inside main-uburn-pdp-v9
+  //     (legacy "Commander" button left an empty white half on initial load — removed 2026-05-04)
 
   // --- GIFT BLOCK STYLES ---
   var style = document.createElement('style');
@@ -593,5 +606,6 @@
 </script>
 {%- endif -%}
 
+  {%- render 'uburn-purchase-event' -%}
   </body>
 </html>

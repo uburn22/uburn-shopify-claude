@@ -1,0 +1,212 @@
+{%- comment -%}
+  UBurn V2 — PDP Formula detail — 4 ingredient pillars + EFSA accordion + ingredients CTA
+{%- endcomment -%}
+<style>
+  .u2-pdp-formula { padding: 88px 20px; background: var(--u2-cream); }
+  .u2-pdp-formula__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .u2-pdp-formula__copy { max-width: 560px; }
+  .u2-pdp-formula__eyebrow {
+    display: inline-block;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--u2-iris);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .u2-pdp-formula__title {
+    font-family: var(--u2-serif);
+    font-size: 40px;
+    line-height: 1.08;
+    font-weight: 400;
+    color: var(--u2-plum-black);
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+  .u2-pdp-formula__title em { font-style: italic; color: var(--u2-iris); }
+  .u2-pdp-formula__lead {
+    font-family: var(--u2-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--u2-plum);
+    margin: 0 0 28px;
+  }
+  .u2-pdp-formula__pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .u2-pdp-formula-pill {
+    background: rgba(107, 78, 158, 0.06);
+    border-radius: 14px;
+    padding: 18px 18px;
+  }
+  .u2-pdp-formula-pill__name {
+    font-family: var(--u2-serif);
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--u2-iris-deep);
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+  .u2-pdp-formula-pill__role {
+    font-family: var(--u2-sans);
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--u2-plum);
+  }
+  .u2-pdp-formula__efsa {
+    margin-top: 16px;
+    background: rgba(5, 150, 105, 0.06);
+    border-left: 3px solid var(--u2-green);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .u2-pdp-formula__efsa summary {
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--u2-green);
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    list-style: none;
+  }
+  .u2-pdp-formula__efsa summary::after { content: '+'; float: right; }
+  .u2-pdp-formula__efsa[open] summary::after { content: '−'; }
+  .u2-pdp-formula__efsa p {
+    margin: 10px 0 0;
+    font-family: var(--u2-sans);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--u2-plum);
+  }
+  .u2-pdp-formula__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+    font-family: var(--u2-sans);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--u2-iris-deep);
+    text-decoration: none;
+    border-bottom: 2px solid var(--u2-iris);
+    padding-bottom: 2px;
+    transition: gap 0.2s var(--u2-ease-smooth);
+  }
+  .u2-pdp-formula__cta:hover { gap: 12px; }
+  .u2-pdp-formula__media {
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: linear-gradient(180deg, var(--u2-cream) 0%, var(--u2-warm-beige) 100%);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 20px 60px rgba(42, 16, 84, 0.18);
+  }
+  .u2-pdp-formula__media img { width: 100%; height: 100%; object-fit: cover; }
+  /* rev 2026-05-16 — cream petri dish photo (object-fit cover, fills 4:5 container) */
+  .u2-pdp-formula__media img.u2-pdp-formula__photo { object-fit: cover; }
+  .u2-pdp-formula__placeholder {
+    font-family: var(--u2-serif);
+    font-size: 96px;
+    color: var(--u2-cream);
+    font-style: italic;
+    opacity: 0.35;
+  }
+  @media (max-width: 900px) {
+    .u2-pdp-formula { padding: 60px 20px; }
+    .u2-pdp-formula__inner { grid-template-columns: 1fr; gap: 32px; }
+    .u2-pdp-formula__title { font-size: 30px; }
+    .u2-pdp-formula__media { max-width: 380px; margin: 0 auto; }
+  }
+  @media (max-width: 480px) {
+    .u2-pdp-formula__pillars { grid-template-columns: 1fr; }
+  }
+</style>
+<section class="u2-root u2-pdp-formula" aria-labelledby="u2-pdp-formula-title">
+  <div class="u2-pdp-formula__inner">
+    <div class="u2-pdp-formula__copy">
+      <span class="u2-pdp-formula__eyebrow">{{ section.settings.eyebrow | default: 'The formula' }}</span>
+      <h2 class="u2-pdp-formula__title" id="u2-pdp-formula-title">{{ section.settings.title | default: 'A simple, indulgent formula <em>designed for satiety.*</em>' }}</h2>
+      <p class="u2-pdp-formula__lead">{{ section.settings.lead | default: 'Purple ube. Konjac. Vanilla-hazelnut notes. A simple, indulgent formula.' }}</p>
+      <div class="u2-pdp-formula__pillars">
+        {% for block in section.blocks %}
+          <div class="u2-pdp-formula-pill" {{ block.shopify_attributes }}>
+            <div class="u2-pdp-formula-pill__name">{{ block.settings.name }}</div>
+            <div class="u2-pdp-formula-pill__role">{{ block.settings.role }}</div>
+          </div>
+        {% else %}
+          <div class="u2-pdp-formula-pill"><div class="u2-pdp-formula-pill__name">Purple ube</div><div class="u2-pdp-formula-pill__role">Color · pleasure · natural antioxidants</div></div>
+          <div class="u2-pdp-formula-pill"><div class="u2-pdp-formula-pill__name">Konjac (glucomannan)</div><div class="u2-pdp-formula-pill__role">3g per scoop · natural gel · helps with cravings*</div></div>
+          <div class="u2-pdp-formula-pill"><div class="u2-pdp-formula-pill__name">L-Carnitine + coconut MCT</div><div class="u2-pdp-formula-pill__role">Helps with cravings as part of a balanced diet*</div></div>
+          <div class="u2-pdp-formula-pill"><div class="u2-pdp-formula-pill__name">Vanilla &amp; hazelnut</div><div class="u2-pdp-formula-pill__role">Natural notes · smooth texture · ritual you enjoy</div></div>
+        {% endfor %}
+      </div>
+      <details class="u2-pdp-formula__efsa">
+        <summary>{{ section.settings.efsa_summary | default: 'Research-backed dietary fiber*' }}</summary>
+        <p>{{ section.settings.efsa_body | default: 'Glucomannan is recognized by the European Food Safety Authority (EFSA ID 3120) for supporting satiety when taken with adequate water before meals. Recommended use: 3g/day in 3 doses of 1g with 1-2 large glasses of water before meals.' }}</p>
+      </details>
+      <a href="{{ section.settings.cta_link | default: '/pages/ingredients' }}" class="u2-pdp-formula__cta">
+        {{ section.settings.cta_text | default: 'Discover the ingredients' }}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="u2-pdp-formula__media">
+      {% if section.settings.image %}
+        <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="UBurn formula" loading="lazy" decoding="async" width="1000" height="1250">
+      {% else %}
+        {%- comment -%} rev 2026-05-16 — hand-held petri dish with violet ube powder, editorial minimalist {%- endcomment -%}
+        <img class="u2-pdp-formula__photo" src="{{ 'uburn-us-pdp-formula-petri-a.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Main tenant une lame de laboratoire en verre contenant un petit tas de poudre d'ubé violette, fond crème éditorial{% else %}Hand holding a glass petri dish with a small mound of violet ube powder, cream editorial background{% endif %}" loading="lazy" decoding="async" width="1093" height="1400">
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 PDP Formula Detail",
+  "tag": "section",
+  "class": "shopify-section--u2",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The formula" },
+    { "type": "text", "id": "title", "label": "Title (em supported)", "default": "A simple, indulgent formula <em>designed for satiety.*</em>" },
+    { "type": "textarea", "id": "lead", "label": "Lead" },
+    { "type": "image_picker", "id": "image", "label": "Image (optional)" },
+    { "type": "text", "id": "efsa_summary", "label": "EFSA accordion title", "default": "Research-backed dietary fiber*" },
+    { "type": "textarea", "id": "efsa_body", "label": "EFSA body" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Discover the ingredients" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Ingredient pillar",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "role", "label": "Role / function" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "U2 PDP Formula Detail",
+      "blocks": [
+        { "type": "pillar", "settings": { "name": "Purple ube", "role": "Color · pleasure · natural antioxidants" } },
+        { "type": "pillar", "settings": { "name": "Konjac (glucomannan)", "role": "3g per scoop · natural gel · helps with cravings*" } },
+        { "type": "pillar", "settings": { "name": "L-Carnitine + coconut MCT", "role": "Helps with cravings as part of a balanced diet*" } },
+        { "type": "pillar", "settings": { "name": "Vanilla & hazelnut", "role": "Natural notes · smooth texture · ritual you enjoy" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

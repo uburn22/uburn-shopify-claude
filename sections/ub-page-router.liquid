@@ -196,36 +196,36 @@ main#main{padding:0 !important}
 {%- if page.handle == 'faq' -%}
 
 <section class="faq-hero">
-  <div class="section-label reveal" style="justify-content:center">Questions fréquentes</div>
-  <h1 class="reveal rd1">Toutes vos questions.<br><em>Vraiment.</em></h1>
-  <p class="reveal rd2">Des réponses claires, sans jargon. Si votre question n'est pas ici, écrivez-nous.</p>
+  <div class="section-label reveal" style="justify-content:center">{% if request.locale.iso_code == 'en' %}Frequently asked questions{% else %}Questions fréquentes{% endif %}</div>
+  <h1 class="reveal rd1">{% if request.locale.iso_code == 'en' %}All your questions.<br><em>Really.</em>{% else %}Toutes vos questions.<br><em>Vraiment.</em>{% endif %}</h1>
+  <p class="reveal rd2">{% if request.locale.iso_code == 'en' %}Clear answers, no jargon. If your question isn't here, write to us.{% else %}Des réponses claires, sans jargon. Si votre question n'est pas ici, écrivez-nous.{% endif %}</p>
 </section>
 
 <div class="faq-body">
   <div class="faq-group reveal">
-    <div class="faq-group-title">Le produit</div>
-    <div class="faq-item"><div class="faq-q">C'est quoi exactement Uburn ?</div><div class="faq-a"><div class="faq-a-inner">Uburn est un complément alimentaire en poudre à base de <strong>glucomannane de konjac</strong>, d'ubé violet, de MCT de coco, de L-Carnitine, de gingembre et de fibre d'acacia. Il contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120).</div></div></div>
-    <div class="faq-item"><div class="faq-q">Y a-t-il de la caféine dans Uburn ?</div><div class="faq-a"><div class="faq-a-inner">Non, <strong>zéro caféine</strong>. Uburn peut être pris à n'importe quelle heure, y compris le soir, sans perturber le sommeil.</div></div></div>
-    <div class="faq-item"><div class="faq-q">Combien de calories par dose ?</div><div class="faq-a"><div class="faq-a-inner"><strong>30 kcal</strong> par dose. Aucun sucre ajouté, aucun édulcorant artificiel. Compatible avec tous les régimes alimentaires.</div></div></div>
-    <div class="faq-item"><div class="faq-q">Uburn est-il adapté aux végans ?</div><div class="faq-a"><div class="faq-a-inner">Oui, Uburn est <strong>100% vegan</strong>. Tous les ingrédients sont d'origine végétale.</div></div></div>
-    <div class="faq-item"><div class="faq-q">Est-ce qu'il y a des allergènes ?</div><div class="faq-a"><div class="faq-a-inner">Uburn est fabriqué dans un atelier manipulant des produits à base de <strong>lait, gluten, soja et fruits à coque</strong>. Consultez votre médecin en cas d'allergie connue.</div></div></div>
+    <div class="faq-group-title">{% if request.locale.iso_code == 'en' %}The product{% else %}Le produit{% endif %}</div>
+    <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}What exactly is UBurn?{% else %}C'est quoi exactement Uburn ?{% endif %}</div><div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}UBurn is a powdered dietary supplement made with <strong>konjac glucomannan</strong>, purple ube, coconut MCT, L-Carnitine, ginger and acacia fiber. It supports appetite control as part of a reduced-calorie diet (FDA dietary fiber*).{% else %}Uburn est un complément alimentaire en poudre à base de <strong>glucomannane de konjac</strong>, d'ubé violet, de MCT de coco, de L-Carnitine, de gingembre et de fibre d'acacia. Il contribue au contrôle de l'appétit dans le cadre d'un régime hypocalorique (EFSA ID 3120).{% endif %}</div></div></div>
+    <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}Is there caffeine in UBurn?{% else %}Y a-t-il de la caféine dans Uburn ?{% endif %}</div><div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}No, <strong>zero caffeine</strong>. UBurn can be taken at any time of day, including in the evening, without disrupting sleep.{% else %}Non, <strong>zéro caféine</strong>. Uburn peut être pris à n'importe quelle heure, y compris le soir, sans perturber le sommeil.{% endif %}</div></div></div>
+    <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}How many calories per serving?{% else %}Combien de calories par dose ?{% endif %}</div><div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}<strong>30 kcal</strong> per serving. No added sugar, no artificial sweeteners. Compatible with all diets.{% else %}<strong>30 kcal</strong> par dose. Aucun sucre ajouté, aucun édulcorant artificiel. Compatible avec tous les régimes alimentaires.{% endif %}</div></div></div>
+    <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}Is UBurn vegan-friendly?{% else %}Uburn est-il adapté aux végans ?{% endif %}</div><div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}Yes, UBurn is <strong>100% vegan</strong>. Every ingredient is plant-based.{% else %}Oui, Uburn est <strong>100% vegan</strong>. Tous les ingrédients sont d'origine végétale.{% endif %}</div></div></div>
+    <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}Are there any allergens?{% else %}Est-ce qu'il y a des allergènes ?{% endif %}</div><div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}UBurn is manufactured in a facility that handles products containing <strong>milk, gluten, soy and tree nuts</strong>. Consult your doctor if you have a known allergy.{% else %}Uburn est fabriqué dans un atelier manipulant des produits à base de <strong>lait, gluten, soja et fruits à coque</strong>. Consultez votre médecin en cas d'allergie connue.{% endif %}</div></div></div>
   </div>
   <div class="faq-group reveal rd1">
-    <div class="faq-group-title">Utilisation</div>
-    <div class="faq-item"><div class="faq-q">Comment prendre Uburn ?</div><div class="faq-a"><div class="faq-a-inner">Mélangez <strong>1 dose (8g) dans 200-300 ml d'eau</strong>, 30 minutes avant un repas ou à l'heure de vos fringales habituelles. L'allégation EFSA nécessite 3g de glucomannane avec 1-2 verres d'eau.</div></div></div>
-    <div class="faq-item"><div class="faq-q">Peut-on le prendre le soir ?</div><div class="faq-a"><div class="faq-a-inner">Oui — <strong>sans aucun problème</strong>. L'absence de caféine permet une prise à toute heure, y compris le soir avant le dîner.</div></div></div>
-    <div class="faq-item"><div class="faq-q">Combien de temps avant de voir des résultats ?</div><div class="faq-a"><div class="faq-a-inner">L'effet sur la satiété est <strong>immédiat dès la première prise</strong>. Les effets globaux se font généralement sentir après <strong>7 à 14 jours</strong> d'utilisation régulière.</div></div></div>
-    <div class="faq-item"><div class="faq-q">Peut-on le mélanger avec autre chose qu'eau ?</div><div class="faq-a"><div class="faq-a-inner">Oui, avec du lait végétal ou un smoothie. Évitez les jus sucrés. L'eau reste la meilleure option pour activer le glucomannane.</div></div></div>
+    <div class="faq-group-title">{% if request.locale.iso_code == 'en' %}How to use{% else %}Utilisation{% endif %}</div>
+    <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}How do I take UBurn?{% else %}Comment prendre Uburn ?{% endif %}</div><div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}Mix <strong>1 serving (8g) in 200-300 ml of water</strong>, 30 minutes before a meal or whenever your usual cravings hit. The recommended use is 3g of glucomannan with 1-2 glasses of water.{% else %}Mélangez <strong>1 dose (8g) dans 200-300 ml d'eau</strong>, 30 minutes avant un repas ou à l'heure de vos fringales habituelles. L'allégation EFSA nécessite 3g de glucomannane avec 1-2 verres d'eau.{% endif %}</div></div></div>
+    <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}Can I take it in the evening?{% else %}Peut-on le prendre le soir ?{% endif %}</div><div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}Yes — <strong>no problem at all</strong>. The absence of caffeine allows you to take it at any time, including in the evening before dinner.{% else %}Oui — <strong>sans aucun problème</strong>. L'absence de caféine permet une prise à toute heure, y compris le soir avant le dîner.{% endif %}</div></div></div>
+    <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}How long until I see results?{% else %}Combien de temps avant de voir des résultats ?{% endif %}</div><div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}The satiety effect is <strong>immediate from the first serving</strong>. Overall effects are typically felt after <strong>7 to 14 days</strong> of regular use.{% else %}L'effet sur la satiété est <strong>immédiat dès la première prise</strong>. Les effets globaux se font généralement sentir après <strong>7 à 14 jours</strong> d'utilisation régulière.{% endif %}</div></div></div>
+    <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}Can I mix it with something other than water?{% else %}Peut-on le mélanger avec autre chose qu'eau ?{% endif %}</div><div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}Yes, with plant-based milk or a smoothie. Avoid sugary juices. Water remains the best option to activate glucomannan.{% else %}Oui, avec du lait végétal ou un smoothie. Évitez les jus sucrés. L'eau reste la meilleure option pour activer le glucomannane.{% endif %}</div></div></div>
   </div>
   <div class="faq-group reveal rd2">
-    <div class="faq-group-title">Commande &amp; livraison</div>
-    <div class="faq-item"><div class="faq-q">La livraison est-elle vraiment offerte ?</div><div class="faq-a"><div class="faq-a-inner">Oui, <strong>livraison offerte</strong> en France métropolitaine sans minimum d'achat. Délai : 2 à 4 jours ouvrés.</div></div></div>
-    <div class="faq-item"><div class="faq-q">Y a-t-il un abonnement caché ?</div><div class="faq-a"><div class="faq-a-inner"><strong>Non.</strong> Uburn se commande à l'unité, sans abonnement, sans engagement.</div></div></div>
-    <div class="faq-item"><div class="faq-q">Quelle est la politique de remboursement ?</div><div class="faq-a"><div class="faq-a-inner">Nous proposons une garantie <strong>satisfait ou remboursé 30 jours</strong> sur votre première commande. Contactez-nous à hello@uburn.co.</div></div></div>
+    <div class="faq-group-title">{% if request.locale.iso_code == 'en' %}Orders &amp; shipping{% else %}Commande &amp; livraison{% endif %}</div>
+    <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}Is shipping really free?{% else %}La livraison est-elle vraiment offerte ?{% endif %}</div><div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}Yes, <strong>free U.S. shipping</strong> on orders $40+. Delivery in 3 to 5 business days.{% else %}Oui, <strong>livraison offerte</strong> en France métropolitaine sans minimum d'achat. Délai : 2 à 4 jours ouvrés.{% endif %}</div></div></div>
+    <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}Is there a flexible subscription?{% else %}Y a-t-il un abonnement flexible ?{% endif %}</div><div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}<strong>No.</strong> UBurn is ordered as a one-time purchase, no subscription, no commitment.{% else %}<strong>Non.</strong> Uburn se commande à l'unité, sans abonnement, sans engagement.{% endif %}</div></div></div>
+    <div class="faq-item"><div class="faq-q">{% if request.locale.iso_code == 'en' %}What is the refund policy?{% else %}Quelle est la politique de remboursement ?{% endif %}</div><div class="faq-a"><div class="faq-a-inner">{% if request.locale.iso_code == 'en' %}We offer a <strong>30-day money-back guarantee</strong> on your first order. Contact us at hello@uburn.co.{% else %}Nous proposons une garantie <strong>satisfait ou remboursé 30 jours</strong> sur votre première commande. Contactez-nous à hello@uburn.co.{% endif %}</div></div></div>
   </div>
   <div style="text-align:center;padding:40px 0 20px">
-    <p style="font-size:16px;color:var(--body);margin-bottom:24px">Votre question n'est pas ici ?</p>
-    <a href="/pages/contact" class="btn-main">Nous contacter</a>
+    <p style="font-size:16px;color:var(--body);margin-bottom:24px">{% if request.locale.iso_code == 'en' %}Your question isn't here?{% else %}Votre question n'est pas ici ?{% endif %}</p>
+    <a href="/pages/contact" class="btn-main">{% if request.locale.iso_code == 'en' %}Contact us{% else %}Nous contacter{% endif %}</a>
   </div>
 </div>
 
@@ -233,9 +233,9 @@ main#main{padding:0 !important}
 
 <section class="ing-hero">
   <div style="position:relative;z-index:1;max-width:700px">
-    <div class="section-label reveal">La formule</div>
-    <h1 class="reveal rd1">6 actifs.<br><em>Un seul objectif.</em></h1>
-    <p class="reveal rd2">Chaque ingrédient est sélectionné pour sa complémentarité. Ensemble, ils agissent sur la faim, l'énergie et la digestion — simultanément.</p>
+    <div class="section-label reveal">{% if request.locale.iso_code == 'en' %}The formula{% else %}La formule{% endif %}</div>
+    <h1 class="reveal rd1">{% if request.locale.iso_code == 'en' %}6 actives.<br><em>One goal.</em>{% else %}6 actifs.<br><em>Un seul objectif.</em>{% endif %}</h1>
+    <p class="reveal rd2">{% if request.locale.iso_code == 'en' %}Each ingredient is selected for its complementarity. Together, they act on hunger, energy and digestion — simultaneously.{% else %}Chaque ingrédient est sélectionné pour sa complémentarité. Ensemble, ils agissent sur la faim, l'énergie et la digestion — simultanément.{% endif %}</p>
   </div>
 </section>
 
@@ -244,45 +244,45 @@ main#main{padding:0 !important}
     <div class="ing-grid">
       <div class="ing-card featured reveal">
         <div class="ing-icon">🟣</div>
-        <div class="ing-name">Konjac · Glucomannane</div>
+        <div class="ing-name">{% if request.locale.iso_code == 'en' %}Konjac · Glucomannan{% else %}Konjac · Glucomannane{% endif %}</div>
         <div class="ing-latin">Amorphophallus konjac</div>
-        <div class="ing-desc">L'actif principal. 3g par dose — la dose exacte validée par l'EFSA pour contribuer au contrôle de l'appétit dans le cadre d'un régime hypocalorique. Le seul ingrédient de cette catégorie officiellement reconnu en Europe.</div>
-        <span class="ing-tag">EFSA ID 3120 · Dose validée 3g</span>
+        <div class="ing-desc">{% if request.locale.iso_code == 'en' %}The main active. 3g per serving — the exact dose researched to support appetite control as part of a reduced-calorie diet. A widely studied dietary fiber.{% else %}L'actif principal. 3g par dose — la dose exacte validée par l'EFSA pour contribuer au contrôle de l'appétit dans le cadre d'un régime hypocalorique. Le seul ingrédient de cette catégorie officiellement reconnu en Europe.{% endif %}</div>
+        <span class="ing-tag">{% if request.locale.iso_code == 'en' %}FDA dietary fiber* · Researched dose 3g{% else %}EFSA ID 3120 · Dose validée 3g{% endif %}</span>
       </div>
       <div class="ing-card reveal rd1">
         <div class="ing-icon">🌿</div>
-        <div class="ing-name">Ubé · Igname violet</div>
-        <div class="ing-latin">Dioscorea alata · Asie du Sud-Est</div>
-        <div class="ing-desc">L'ingrédient signature. Riche en anthocyanes, des antioxydants puissants qui protègent les cellules. Responsable de la couleur violette naturelle — aucun colorant artificiel.</div>
-        <span class="ing-tag">Antioxydants naturels</span>
+        <div class="ing-name">{% if request.locale.iso_code == 'en' %}Ube · Purple yam{% else %}Ubé · Igname violet{% endif %}</div>
+        <div class="ing-latin">{% if request.locale.iso_code == 'en' %}Dioscorea alata · Southeast Asia{% else %}Dioscorea alata · Asie du Sud-Est{% endif %}</div>
+        <div class="ing-desc">{% if request.locale.iso_code == 'en' %}The signature ingredient. Rich in anthocyanins — powerful antioxidants that help protect cells. Responsible for the natural purple color — no artificial colorants.{% else %}L'ingrédient signature. Riche en anthocyanes, des antioxydants puissants qui protègent les cellules. Responsable de la couleur violette naturelle — aucun colorant artificiel.{% endif %}</div>
+        <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Natural antioxidants{% else %}Antioxydants naturels{% endif %}</span>
       </div>
       <div class="ing-card reveal rd2">
         <div class="ing-icon">🥥</div>
-        <div class="ing-name">MCT · Coco</div>
-        <div class="ing-latin">Acides gras à chaîne moyenne</div>
-        <div class="ing-desc">Énergie rapide et stable dès 15 minutes après la prise. Les MCT sont métabolisés directement par le foie — sans pic d'insuline, sans crash de l'après-midi.</div>
-        <span class="ing-tag">Énergie stable</span>
+        <div class="ing-name">{% if request.locale.iso_code == 'en' %}MCT · Coconut{% else %}MCT · Coco{% endif %}</div>
+        <div class="ing-latin">{% if request.locale.iso_code == 'en' %}Medium-chain fatty acids{% else %}Acides gras à chaîne moyenne{% endif %}</div>
+        <div class="ing-desc">{% if request.locale.iso_code == 'en' %}Fast, stable energy starting 15 minutes after taking it. MCTs are metabolized directly by the liver — no insulin spike, no afternoon crash.{% else %}Énergie rapide et stable dès 15 minutes après la prise. Les MCT sont métabolisés directement par le foie — sans pic d'insuline, sans crash de l'après-midi.{% endif %}</div>
+        <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Stable energy{% else %}Énergie stable{% endif %}</span>
       </div>
       <div class="ing-card reveal">
         <div class="ing-icon">⚡</div>
         <div class="ing-name">L-Carnitine</div>
-        <div class="ing-latin">Acide aminé · Naturel</div>
-        <div class="ing-desc">Contribue à l'utilisation des acides gras comme source d'énergie. Favorise le métabolisme lipidique — complémentaire au glucomannane pour une action complète.</div>
-        <span class="ing-tag">Métabolisme actif</span>
+        <div class="ing-latin">{% if request.locale.iso_code == 'en' %}Amino acid · Natural{% else %}Acide aminé · Naturel{% endif %}</div>
+        <div class="ing-desc">{% if request.locale.iso_code == 'en' %}Supports the use of fatty acids as an energy source. Helps with fat metabolism — complementary to glucomannan for a complete action.{% else %}Contribue à l'utilisation des acides gras comme source d'énergie. Favorise le métabolisme lipidique — complémentaire au glucomannane pour une action complète.{% endif %}</div>
+        <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Active metabolism{% else %}Métabolisme actif{% endif %}</span>
       </div>
       <div class="ing-card reveal rd1">
         <div class="ing-icon">🫚</div>
-        <div class="ing-name">Gingembre violet</div>
+        <div class="ing-name">{% if request.locale.iso_code == 'en' %}Purple ginger{% else %}Gingembre violet{% endif %}</div>
         <div class="ing-latin">Zingiber zerumbet</div>
-        <div class="ing-desc">Soutient la digestion et réduit l'inconfort digestif. Propriétés anti-inflammatoires naturelles. Renforce l'action du glucomannane sur le transit.</div>
-        <span class="ing-tag">Confort digestif</span>
+        <div class="ing-desc">{% if request.locale.iso_code == 'en' %}Supports digestion and helps reduce digestive discomfort. Natural anti-inflammatory properties. Reinforces glucomannan's action on transit.{% else %}Soutient la digestion et réduit l'inconfort digestif. Propriétés anti-inflammatoires naturelles. Renforce l'action du glucomannane sur le transit.{% endif %}</div>
+        <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Digestive comfort{% else %}Confort digestif{% endif %}</span>
       </div>
       <div class="ing-card reveal rd2">
         <div class="ing-icon">🌾</div>
-        <div class="ing-name">Fibre d'acacia</div>
-        <div class="ing-latin">Acacia senegal · Prébiotique</div>
-        <div class="ing-desc">Prébiotique naturel qui nourrit les bonnes bactéries du microbiote intestinal. Contribue à une digestion équilibrée et à la santé intestinale sur le long terme.</div>
-        <span class="ing-tag">Microbiote équilibré</span>
+        <div class="ing-name">{% if request.locale.iso_code == 'en' %}Acacia fiber{% else %}Fibre d'acacia{% endif %}</div>
+        <div class="ing-latin">{% if request.locale.iso_code == 'en' %}Acacia senegal · Prebiotic{% else %}Acacia senegal · Prébiotique{% endif %}</div>
+        <div class="ing-desc">{% if request.locale.iso_code == 'en' %}A natural prebiotic that feeds the good bacteria of the gut microbiota. Supports balanced digestion and long-term gut health.{% else %}Prébiotique naturel qui nourrit les bonnes bactéries du microbiote intestinal. Contribue à une digestion équilibrée et à la santé intestinale sur le long terme.{% endif %}</div>
+        <span class="ing-tag">{% if request.locale.iso_code == 'en' %}Balanced microbiota{% else %}Microbiote équilibré{% endif %}</span>
       </div>
     </div>
   </div>
@@ -293,131 +293,131 @@ main#main{padding:0 !important}
     <div class="efsa-badge reveal">
       <div class="efsa-badge-icon">🏛️</div>
       <div>
-        <div class="efsa-badge-text">Allégation officielle EFSA</div>
-        <div class="efsa-badge-sub">Règlement CE 432/2012 · ID 3120</div>
+        <div class="efsa-badge-text">{% if request.locale.iso_code == 'en' %}Research-backed dietary fiber*{% else %}Allégation officielle EFSA{% endif %}</div>
+        <div class="efsa-badge-sub">{% if request.locale.iso_code == 'en' %}FDA-recognized fiber · 3g per serving{% else %}Règlement CE 432/2012 · ID 3120{% endif %}</div>
       </div>
     </div>
-    <p class="efsa-desc reveal rd1">Le glucomannane est l'unique ingrédient dont l'allégation "contrôle de l'appétit" est officiellement validée par l'Autorité Européenne de Sécurité des Aliments. Conditions : 3g en 3 doses avec 1-2 verres d'eau avant les repas, dans le cadre d'un régime hypocalorique.</p>
+    <p class="efsa-desc reveal rd1">{% if request.locale.iso_code == 'en' %}Glucomannan is a widely studied dietary fiber researched for appetite control as part of a reduced-calorie diet. Recommended use: 3g in 3 servings with 1-2 glasses of water before meals.{% else %}Le glucomannane est l'unique ingrédient dont l'allégation "contrôle de l'appétit" est officiellement validée par l'Autorité Européenne de Sécurité des Aliments. Conditions : 3g en 3 doses avec 1-2 verres d'eau avant les repas, dans le cadre d'un régime hypocalorique.{% endif %}</p>
   </div>
 </div>
 
 {%- elsif page.handle == 'comment-ca-marche' -%}
 
 <div class="ccm-hero">
-  <div class="ccm-hero-label">Science & Formule</div>
-  <h1 class="ccm-hero-title">Comment ça marche,<br><em>vraiment.</em></h1>
-  <p class="ccm-hero-sub">6 actifs naturels. Un mécanisme précis. 4 heures sans fringales.</p>
+  <div class="ccm-hero-label">{% if request.locale.iso_code == 'en' %}Science & Formula{% else %}Science & Formule{% endif %}</div>
+  <h1 class="ccm-hero-title">{% if request.locale.iso_code == 'en' %}How it works,<br><em>really.</em>{% else %}Comment ça marche,<br><em>vraiment.</em>{% endif %}</h1>
+  <p class="ccm-hero-sub">{% if request.locale.iso_code == 'en' %}6 natural actives. A precise mechanism. Up to 4 hours without cravings.*{% else %}6 actifs naturels. Un mécanisme précis. 4 heures sans fringales.{% endif %}</p>
 </div>
 
 <div class="ccm-steps">
   <div class="ccm-step reveal">
     <div class="ccm-step-num">1</div>
     <div>
-      <div class="ccm-step-title">Le glucomannane gonfle dans l'estomac</div>
-      <p class="ccm-step-body">Le konjac (glucomannane) absorbe jusqu'à 100 fois son poids en eau. En 20 minutes, il crée une sensation de satiété durable en occupant physiquement l'espace dans l'estomac. C'est le seul coupe-faim validé par l'EFSA pour les études cliniques.</p>
-      <span class="ccm-step-badge">EFSA ID 3120 · Validé scientifiquement</span>
+      <div class="ccm-step-title">{% if request.locale.iso_code == 'en' %}Glucomannan expands in the stomach{% else %}Le glucomannane gonfle dans l'estomac{% endif %}</div>
+      <p class="ccm-step-body">{% if request.locale.iso_code == 'en' %}Konjac (glucomannan) absorbs up to 100 times its weight in water. Within 20 minutes, it creates a lasting feeling of satiety by physically occupying space in the stomach. It is a widely studied dietary fiber researched in clinical trials.{% else %}Le konjac (glucomannane) absorbe jusqu'à 100 fois son poids en eau. En 20 minutes, il crée une sensation de satiété durable en occupant physiquement l'espace dans l'estomac. C'est le seul coupe-faim validé par l'EFSA pour les études cliniques.{% endif %}</p>
+      <span class="ccm-step-badge">{% if request.locale.iso_code == 'en' %}FDA dietary fiber* · Research-backed{% else %}EFSA ID 3120 · Validé scientifiquement{% endif %}</span>
     </div>
   </div>
   <div class="ccm-step reveal">
     <div class="ccm-step-num">2</div>
     <div>
-      <div class="ccm-step-title">Le MCT de coco stabilise l'énergie</div>
-      <p class="ccm-step-body">Les triglycérides à chaîne moyenne (MCT) sont convertis directement en énergie par le foie, sans passer par le circuit de stockage des graisses. Résultat : énergie rapide et stable, sans pic d'insuline ni coup de fatigue à 15h.</p>
-      <span class="ccm-step-badge">Énergie sans crash · 0g de sucre</span>
+      <div class="ccm-step-title">{% if request.locale.iso_code == 'en' %}Coconut MCT stabilizes energy{% else %}Le MCT de coco stabilise l'énergie{% endif %}</div>
+      <p class="ccm-step-body">{% if request.locale.iso_code == 'en' %}Medium-chain triglycerides (MCT) are converted directly into energy by the liver, bypassing the fat-storage pathway. Result: fast, stable energy with no insulin spike or 3 p.m. slump.{% else %}Les triglycérides à chaîne moyenne (MCT) sont convertis directement en énergie par le foie, sans passer par le circuit de stockage des graisses. Résultat : énergie rapide et stable, sans pic d'insuline ni coup de fatigue à 15h.{% endif %}</p>
+      <span class="ccm-step-badge">{% if request.locale.iso_code == 'en' %}No-crash energy · 0g sugar{% else %}Énergie sans crash · 0g de sucre{% endif %}</span>
     </div>
   </div>
   <div class="ccm-step reveal">
     <div class="ccm-step-num">3</div>
     <div>
-      <div class="ccm-step-title">La L-Carnitine soutient le métabolisme</div>
-      <p class="ccm-step-body">La L-Carnitine est l'acide aminé qui transporte les acides gras dans les mitochondries pour les brûler comme carburant. Elle soutient naturellement le métabolisme lipidique dans le cadre d'une alimentation équilibrée.</p>
-      <span class="ccm-step-badge">Métabolisme lipidique · Acide aminé naturel</span>
+      <div class="ccm-step-title">{% if request.locale.iso_code == 'en' %}L-Carnitine supports metabolism{% else %}La L-Carnitine soutient le métabolisme{% endif %}</div>
+      <p class="ccm-step-body">{% if request.locale.iso_code == 'en' %}L-Carnitine is the amino acid that transports fatty acids into the mitochondria to be used as fuel. It naturally supports fat metabolism as part of a balanced diet.{% else %}La L-Carnitine est l'acide aminé qui transporte les acides gras dans les mitochondries pour les brûler comme carburant. Elle soutient naturellement le métabolisme lipidique dans le cadre d'une alimentation équilibrée.{% endif %}</p>
+      <span class="ccm-step-badge">{% if request.locale.iso_code == 'en' %}Fat metabolism · Natural amino acid{% else %}Métabolisme lipidique · Acide aminé naturel{% endif %}</span>
     </div>
   </div>
   <div class="ccm-step reveal">
     <div class="ccm-step-num">4</div>
     <div>
-      <div class="ccm-step-title">L'ubé + le gingembre complètent la synergie</div>
-      <p class="ccm-step-body">L'ubé (igname violet) apporte des anthocyanes — des antioxydants puissants qui luttent contre le stress oxydatif. Le gingembre favorise la digestion et réduit les ballonnements. La fibre d'acacia nourrit le microbiote intestinal (prébiotique).</p>
-      <span class="ccm-step-badge">6 actifs · Formule synergique</span>
+      <div class="ccm-step-title">{% if request.locale.iso_code == 'en' %}Ube + ginger complete the synergy{% else %}L'ubé + le gingembre complètent la synergie{% endif %}</div>
+      <p class="ccm-step-body">{% if request.locale.iso_code == 'en' %}Ube (purple yam) provides anthocyanins — powerful antioxidants that fight oxidative stress. Ginger supports digestion and helps reduce bloating. Acacia fiber feeds the gut microbiota (prebiotic).{% else %}L'ubé (igname violet) apporte des anthocyanes — des antioxydants puissants qui luttent contre le stress oxydatif. Le gingembre favorise la digestion et réduit les ballonnements. La fibre d'acacia nourrit le microbiote intestinal (prébiotique).{% endif %}</p>
+      <span class="ccm-step-badge">{% if request.locale.iso_code == 'en' %}6 actives · Synergistic formula{% else %}6 actifs · Formule synergique{% endif %}</span>
     </div>
   </div>
 </div>
 
 <div class="ccm-science">
   <div class="ccm-science-inner">
-    <h2 class="ccm-science-title">La base scientifique</h2>
-    <p class="ccm-science-body">Le glucomannane est reconnu par l'Autorité européenne de sécurité des aliments (EFSA) pour contribuer à la réduction de l'appétit dans le cadre d'un régime hypocalorique. Uburn utilise 3 g par dose — la quantité exacte recommandée par l'EFSA pour un effet optimal.</p>
-    <span class="ccm-science-badge">EFSA · European Food Safety Authority · ID 3120</span>
+    <h2 class="ccm-science-title">{% if request.locale.iso_code == 'en' %}The scientific basis{% else %}La base scientifique{% endif %}</h2>
+    <p class="ccm-science-body">{% if request.locale.iso_code == 'en' %}Glucomannan is a widely studied dietary fiber researched for its role in supporting appetite control as part of a reduced-calorie diet. UBurn uses 3 g per serving — the exact amount researched for optimal effect.{% else %}Le glucomannane est reconnu par l'Autorité européenne de sécurité des aliments (EFSA) pour contribuer à la réduction de l'appétit dans le cadre d'un régime hypocalorique. Uburn utilise 3 g par dose — la quantité exacte recommandée par l'EFSA pour un effet optimal.{% endif %}</p>
+    <span class="ccm-science-badge">{% if request.locale.iso_code == 'en' %}FDA dietary fiber* · Research-backed{% else %}EFSA · European Food Safety Authority · ID 3120{% endif %}</span>
   </div>
 </div>
 
 <div class="ccm-cta">
-  <h2 class="ccm-cta-title">Commencez votre rituel.</h2>
-  <p class="ccm-cta-sub">1 dose le matin. 4h sans fringales. Dès 34,50 €.</p>
-  <a href="/products/ube-poudre?variant=51289200066879" class="ccm-cta-btn">Découvrir Uburn →</a>
+  <h2 class="ccm-cta-title">{% if request.locale.iso_code == 'en' %}Start your ritual.{% else %}Commencez votre rituel.{% endif %}</h2>
+  <p class="ccm-cta-sub">{% if request.locale.iso_code == 'en' %}1 serving in the morning. Up to 4h without cravings.* From $39.{% else %}1 dose le matin. 4h sans fringales. Dès 34,50 €.{% endif %}</p>
+  <a href="/products/ube-poudre?variant=51289200066879" class="ccm-cta-btn">{% if request.locale.iso_code == 'en' %}Discover UBurn →{% else %}Découvrir Uburn →{% endif %}</a>
 </div>
 
 {%- elsif page.handle == 'avis' -%}
 
 <div class="avis-hero">
-  <div class="section-label" style="justify-content:center;color:rgba(255,255,255,.6)">Avis vérifiés · 1 500+ clientes</div>
-  <h1 class="avis-hero-title">Leurs mots.<br><em>Pas les nôtres.</em></h1>
-  <p class="avis-hero-sub">Des vraies clientes, des vrais résultats. Aucun filtre.</p>
+  <div class="section-label" style="justify-content:center;color:rgba(255,255,255,.6)">{% if request.locale.iso_code == 'en' %}Verified reviews · 1,500+ customers{% else %}Avis vérifiés · 1 500+ clientes{% endif %}</div>
+  <h1 class="avis-hero-title">{% if request.locale.iso_code == 'en' %}Their words.<br><em>Not ours.</em>{% else %}Leurs mots.<br><em>Pas les nôtres.</em>{% endif %}</h1>
+  <p class="avis-hero-sub">{% if request.locale.iso_code == 'en' %}Real customers, real results. No filter.{% else %}Des vraies clientes, des vrais résultats. Aucun filtre.{% endif %}</p>
 </div>
 
 <div class="avis-stats">
   <div class="avis-stat reveal">
     <div class="avis-stat-num">4.8<span style="font-size:24px">/5</span></div>
-    <div class="avis-stat-label">Note moyenne<br>sur 1 500+ avis</div>
+    <div class="avis-stat-label">{% if request.locale.iso_code == 'en' %}Average rating<br>on 1,500+ reviews{% else %}Note moyenne<br>sur 1 500+ avis{% endif %}</div>
   </div>
   <div class="avis-stat reveal rd1">
     <div class="avis-stat-num">92<span style="font-size:24px">%</span></div>
-    <div class="avis-stat-label">Des clientes<br>repassent commande</div>
+    <div class="avis-stat-label">{% if request.locale.iso_code == 'en' %}Of customers<br>reorder{% else %}Des clientes<br>repassent commande{% endif %}</div>
   </div>
   <div class="avis-stat reveal rd2">
     <div class="avis-stat-num">4h</div>
-    <div class="avis-stat-label">De satiété durable<br>par dose</div>
+    <div class="avis-stat-label">{% if request.locale.iso_code == 'en' %}Of lasting satiety*<br>per serving{% else %}De satiété durable<br>par dose{% endif %}</div>
   </div>
 </div>
 
 <div class="avis-grid">
   <div class="avis-card reveal">
     <div class="avis-stars">★★★★★</div>
-    <p class="avis-text">"J'ai essayé beaucoup de compléments anti-fringales. Uburn est le premier qui marche vraiment. Après 2 semaines, je ne craque plus à 16h — et le goût est délicieux, pas chimique du tout."</p>
-    <div class="avis-author"><div class="avis-author-init">M</div><div><div class="avis-author-name">Marie-Claire D.</div><div class="avis-author-meta">Lyon · Acheteuse vérifiée</div><span class="avis-badge">Achat vérifié</span></div></div>
+    <p class="avis-text">{% if request.locale.iso_code == 'en' %}"I've tried many cravings supplements. UBurn is the first one that really works. After 2 weeks, I no longer crack at 4 p.m. — and the taste is delicious, not chemical at all."{% else %}"J'ai essayé beaucoup de compléments anti-fringales. Uburn est le premier qui marche vraiment. Après 2 semaines, je ne craque plus à 16h — et le goût est délicieux, pas chimique du tout."{% endif %}</p>
+    <div class="avis-author"><div class="avis-author-init">M</div><div><div class="avis-author-name">Marie-Claire D.</div><div class="avis-author-meta">{% if request.locale.iso_code == 'en' %}Lyon · Verified buyer{% else %}Lyon · Acheteuse vérifiée{% endif %}</div><span class="avis-badge">{% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</span></div></div>
   </div>
   <div class="avis-card reveal rd1">
     <div class="avis-stars">★★★★★</div>
-    <p class="avis-text">"Le latte violet, le matin avec du lait de coco — c'est devenu mon rituel préféré. Et ça tient vraiment 4 heures comme promis. J'ai perdu 3 kg en 6 semaines sans me priver."</p>
-    <div class="avis-author"><div class="avis-author-init">S</div><div><div class="avis-author-name">Sophie R.</div><div class="avis-author-meta">Paris · Acheteuse vérifiée</div><span class="avis-badge">Achat vérifié</span></div></div>
+    <p class="avis-text">{% if request.locale.iso_code == 'en' %}"The purple latte in the morning with coconut milk — it's become my favorite ritual. And it really lasts 4 hours as promised. I lost 6 lbs in 6 weeks without depriving myself."{% else %}"Le latte violet, le matin avec du lait de coco — c'est devenu mon rituel préféré. Et ça tient vraiment 4 heures comme promis. J'ai perdu 3 kg en 6 semaines sans me priver."{% endif %}</p>
+    <div class="avis-author"><div class="avis-author-init">S</div><div><div class="avis-author-name">Sophie R.</div><div class="avis-author-meta">{% if request.locale.iso_code == 'en' %}Paris · Verified buyer{% else %}Paris · Acheteuse vérifiée{% endif %}</div><span class="avis-badge">{% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</span></div></div>
   </div>
   <div class="avis-card reveal">
     <div class="avis-stars">★★★★★</div>
-    <p class="avis-text">"Sceptique au départ mais convaincue après une semaine. Les fringales du soir ont disparu. Je ne mange plus devant la télé. Ma relation à la nourriture a changé."</p>
-    <div class="avis-author"><div class="avis-author-init">A</div><div><div class="avis-author-name">Amélie T.</div><div class="avis-author-meta">Bordeaux · Acheteuse vérifiée</div><span class="avis-badge">Achat vérifié</span></div></div>
+    <p class="avis-text">{% if request.locale.iso_code == 'en' %}"Skeptical at first but convinced after a week. The evening cravings have disappeared. I no longer eat in front of the TV. My relationship with food has changed."{% else %}"Sceptique au départ mais convaincue après une semaine. Les fringales du soir ont disparu. Je ne mange plus devant la télé. Ma relation à la nourriture a changé."{% endif %}</p>
+    <div class="avis-author"><div class="avis-author-init">A</div><div><div class="avis-author-name">Amélie T.</div><div class="avis-author-meta">{% if request.locale.iso_code == 'en' %}Bordeaux · Verified buyer{% else %}Bordeaux · Acheteuse vérifiée{% endif %}</div><span class="avis-badge">{% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</span></div></div>
   </div>
   <div class="avis-card reveal rd1">
     <div class="avis-stars">★★★★★</div>
-    <p class="avis-text">"En ménopause, les fringales étaient incontrôlables. Uburn a changé la donne. 0% caféine, je peux le prendre le soir. L'équipe répond super vite aussi."</p>
-    <div class="avis-author"><div class="avis-author-init">C</div><div><div class="avis-author-name">Christine M.</div><div class="avis-author-meta">Toulouse · Acheteuse vérifiée</div><span class="avis-badge">Achat vérifié</span></div></div>
+    <p class="avis-text">{% if request.locale.iso_code == 'en' %}"In menopause, the cravings were uncontrollable. UBurn changed the game. Caffeine-free, I can take it in the evening. The team replies super fast too."{% else %}"En ménopause, les fringales étaient incontrôlables. Uburn a changé la donne. 0% caféine, je peux le prendre le soir. L'équipe répond super vite aussi."{% endif %}</p>
+    <div class="avis-author"><div class="avis-author-init">C</div><div><div class="avis-author-name">Christine M.</div><div class="avis-author-meta">{% if request.locale.iso_code == 'en' %}Toulouse · Verified buyer{% else %}Toulouse · Acheteuse vérifiée{% endif %}</div><span class="avis-badge">{% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</span></div></div>
   </div>
   <div class="avis-card reveal">
     <div class="avis-stars">★★★★★</div>
-    <p class="avis-text">"La livraison rapide, l'emballage soigné, le goût surprenant. Mais surtout : ça marche. Fini le grignotage entre les repas. Je recommande à toutes mes amies."</p>
-    <div class="avis-author"><div class="avis-author-init">N</div><div><div class="avis-author-name">Nadia L.</div><div class="avis-author-meta">Marseille · Acheteuse vérifiée</div><span class="avis-badge">Achat vérifié</span></div></div>
+    <p class="avis-text">{% if request.locale.iso_code == 'en' %}"Fast shipping, careful packaging, surprising taste. But above all: it works. No more snacking between meals. I recommend to all my friends."{% else %}"La livraison rapide, l'emballage soigné, le goût surprenant. Mais surtout : ça marche. Fini le grignotage entre les repas. Je recommande à toutes mes amies."{% endif %}</p>
+    <div class="avis-author"><div class="avis-author-init">N</div><div><div class="avis-author-name">Nadia L.</div><div class="avis-author-meta">{% if request.locale.iso_code == 'en' %}Marseille · Verified buyer{% else %}Marseille · Acheteuse vérifiée{% endif %}</div><span class="avis-badge">{% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</span></div></div>
   </div>
   <div class="avis-card reveal rd1">
     <div class="avis-stars">★★★★★</div>
-    <p class="avis-text">"J'ai recommandé Uburn à ma mère et ma sœur. On a toutes les trois remarqué la même chose : les fringales de 16h ont disparu. Produit sérieux, marque sérieuse."</p>
-    <div class="avis-author"><div class="avis-author-init">I</div><div><div class="avis-author-name">Isabelle K.</div><div class="avis-author-meta">Nantes · Acheteuse vérifiée</div><span class="avis-badge">Achat vérifié</span></div></div>
+    <p class="avis-text">{% if request.locale.iso_code == 'en' %}"I recommended UBurn to my mom and my sister. The three of us noticed the same thing: the 4 p.m. cravings have disappeared. Serious product, serious brand."{% else %}"J'ai recommandé Uburn à ma mère et ma sœur. On a toutes les trois remarqué la même chose : les fringales de 16h ont disparu. Produit sérieux, marque sérieuse."{% endif %}</p>
+    <div class="avis-author"><div class="avis-author-init">I</div><div><div class="avis-author-name">Isabelle K.</div><div class="avis-author-meta">{% if request.locale.iso_code == 'en' %}Nantes · Verified buyer{% else %}Nantes · Acheteuse vérifiée{% endif %}</div><span class="avis-badge">{% if request.locale.iso_code == 'en' %}Verified purchase{% else %}Achat vérifié{% endif %}</span></div></div>
   </div>
 </div>
 
 <div class="avis-cta">
-  <h2 class="avis-cta-title">Rejoignez 1 500+ clientes.</h2>
-  <p class="avis-cta-sub">Essayez Uburn — satisfaction garantie ou remboursée.</p>
-  <a href="/products/ube-poudre?variant=51289200066879" class="btn-main" style="display:inline-block">Commencer ma cure →</a>
+  <h2 class="avis-cta-title">{% if request.locale.iso_code == 'en' %}Join 1,500+ customers.{% else %}Rejoignez 1 500+ clientes.{% endif %}</h2>
+  <p class="avis-cta-sub">{% if request.locale.iso_code == 'en' %}Try UBurn — satisfaction guaranteed or your money back.{% else %}Essayez Uburn — satisfaction garantie ou remboursée.{% endif %}</p>
+  <a href="/products/ube-poudre?variant=51289200066879" class="btn-main" style="display:inline-block">{% if request.locale.iso_code == 'en' %}Start my pack →{% else %}Commencer ma cure →{% endif %}</a>
 </div>
 
 {%- elsif page.handle == 'contact' -%}
@@ -425,33 +425,33 @@ main#main{padding:0 !important}
 <div class="contact-wrap">
   <div class="contact-left">
     <div style="position:relative;z-index:1">
-      <div class="section-label">Contact</div>
-      <h1>On vous répond.<br><em>Vraiment.</em></h1>
-      <p>Une question sur le produit, une commande, un retour — notre équipe répond sous 24h ouvrées. Pas de chatbot, une vraie personne.</p>
+      <div class="section-label">{% if request.locale.iso_code == 'en' %}Contact{% else %}Contact{% endif %}</div>
+      <h1>{% if request.locale.iso_code == 'en' %}We reply.<br><em>Really.</em>{% else %}On vous répond.<br><em>Vraiment.</em>{% endif %}</h1>
+      <p>{% if request.locale.iso_code == 'en' %}A question about the product, an order, a return — our team replies within 24 business hours. No chatbot, a real person.{% else %}Une question sur le produit, une commande, un retour — notre équipe répond sous 24h ouvrées. Pas de chatbot, une vraie personne.{% endif %}</p>
       <div class="contact-info">
-        <div class="contact-info-item"><div class="contact-info-icon">✉️</div><div class="contact-info-text"><strong>Email</strong><span>hello@uburn.co</span></div></div>
-        <div class="contact-info-item"><div class="contact-info-icon">⏱️</div><div class="contact-info-text"><strong>Temps de réponse</strong><span>Sous 24h ouvrées</span></div></div>
-        <div class="contact-info-item"><div class="contact-info-icon">📦</div><div class="contact-info-text"><strong>Remboursements</strong><span>Traités sous 5 jours ouvrés</span></div></div>
-        <div class="contact-info-item"><div class="contact-info-icon">🇫🇷</div><div class="contact-info-text"><strong>Marque française</strong><span>R Glow F.Z.E. — Uburn</span></div></div>
+        <div class="contact-info-item"><div class="contact-info-icon">✉️</div><div class="contact-info-text"><strong>{% if request.locale.iso_code == 'en' %}Email{% else %}Email{% endif %}</strong><span>hello@uburn.co</span></div></div>
+        <div class="contact-info-item"><div class="contact-info-icon">⏱️</div><div class="contact-info-text"><strong>{% if request.locale.iso_code == 'en' %}Response time{% else %}Temps de réponse{% endif %}</strong><span>{% if request.locale.iso_code == 'en' %}Within 24 business hours{% else %}Sous 24h ouvrées{% endif %}</span></div></div>
+        <div class="contact-info-item"><div class="contact-info-icon">📦</div><div class="contact-info-text"><strong>{% if request.locale.iso_code == 'en' %}Refunds{% else %}Remboursements{% endif %}</strong><span>{% if request.locale.iso_code == 'en' %}Processed within 5 business days{% else %}Traités sous 5 jours ouvrés{% endif %}</span></div></div>
+        <div class="contact-info-item"><div class="contact-info-icon">🇫🇷</div><div class="contact-info-text"><strong>{% if request.locale.iso_code == 'en' %}French brand{% else %}Marque française{% endif %}</strong><span>R Glow F.Z.E. — Uburn</span></div></div>
       </div>
     </div>
   </div>
   <div class="contact-right">
-    <h2>Écrivez-nous</h2>
+    <h2>{% if request.locale.iso_code == 'en' %}Write to us{% else %}Écrivez-nous{% endif %}</h2>
     {% form 'contact' %}
       {% if form.posted_successfully? %}
         <div style="background:var(--purple-wash);border-radius:16px;padding:24px;text-align:center;margin-bottom:24px">
           <div style="font-size:28px;margin-bottom:8px">✅</div>
-          <p style="font-family:'Red Hat Display',sans-serif;font-weight:800;color:var(--dark);margin-bottom:4px">Message envoyé !</p>
-          <p style="font-size:14px;color:var(--body)">On vous répond sous 24h ouvrées.</p>
+          <p style="font-family:'Red Hat Display',sans-serif;font-weight:800;color:var(--dark);margin-bottom:4px">{% if request.locale.iso_code == 'en' %}Message sent!{% else %}Message envoyé !{% endif %}</p>
+          <p style="font-size:14px;color:var(--body)">{% if request.locale.iso_code == 'en' %}We'll reply within 24 business hours.{% else %}On vous répond sous 24h ouvrées.{% endif %}</p>
         </div>
       {% endif %}
-      <div class="form-group"><label class="form-label" for="ContactFormName">Votre nom</label><input type="text" id="ContactFormName" class="form-input" name="contact[name]" value="{{ form.name }}" placeholder="Marie Dupont" autocomplete="name"></div>
-      <div class="form-group"><label class="form-label" for="ContactFormEmail">Email</label><input type="email" id="ContactFormEmail" class="form-input" name="contact[email]" value="{{ form.email }}" placeholder="marie@email.com" required autocomplete="email"></div>
-      <div class="form-group"><label class="form-label" for="ContactFormSubject">Sujet</label><input type="text" id="ContactFormSubject" class="form-input" name="contact[subject]" placeholder="Ma commande / Question produit / Autre"></div>
-      <div class="form-group"><label class="form-label" for="ContactFormMessage">Message</label><textarea id="ContactFormMessage" class="form-textarea" name="contact[body]" placeholder="Décrivez votre question ou situation...">{{ form.body }}</textarea></div>
-      <button type="submit" class="form-submit">Envoyer le message →</button>
-      <p class="form-note">Réponse garantie sous 24h ouvrées · hello@uburn.co</p>
+      <div class="form-group"><label class="form-label" for="ContactFormName">{% if request.locale.iso_code == 'en' %}Your name{% else %}Votre nom{% endif %}</label><input type="text" id="ContactFormName" class="form-input" name="contact[name]" value="{{ form.name }}" placeholder="{% if request.locale.iso_code == 'en' %}Jane Doe{% else %}Marie Dupont{% endif %}" autocomplete="name"></div>
+      <div class="form-group"><label class="form-label" for="ContactFormEmail">{% if request.locale.iso_code == 'en' %}Email{% else %}Email{% endif %}</label><input type="email" id="ContactFormEmail" class="form-input" name="contact[email]" value="{{ form.email }}" placeholder="{% if request.locale.iso_code == 'en' %}jane@email.com{% else %}marie@email.com{% endif %}" required autocomplete="email"></div>
+      <div class="form-group"><label class="form-label" for="ContactFormSubject">{% if request.locale.iso_code == 'en' %}Subject{% else %}Sujet{% endif %}</label><input type="text" id="ContactFormSubject" class="form-input" name="contact[subject]" placeholder="{% if request.locale.iso_code == 'en' %}My order / Product question / Other{% else %}Ma commande / Question produit / Autre{% endif %}"></div>
+      <div class="form-group"><label class="form-label" for="ContactFormMessage">{% if request.locale.iso_code == 'en' %}Message{% else %}Message{% endif %}</label><textarea id="ContactFormMessage" class="form-textarea" name="contact[body]" placeholder="{% if request.locale.iso_code == 'en' %}Describe your question or situation...{% else %}Décrivez votre question ou situation...{% endif %}">{{ form.body }}</textarea></div>
+      <button type="submit" class="form-submit">{% if request.locale.iso_code == 'en' %}Send message →{% else %}Envoyer le message →{% endif %}</button>
+      <p class="form-note">{% if request.locale.iso_code == 'en' %}Guaranteed reply within 24 business hours · hello@uburn.co{% else %}Réponse garantie sous 24h ouvrées · hello@uburn.co{% endif %}</p>
     {% endform %}
   </div>
 </div>
@@ -460,47 +460,47 @@ main#main{padding:0 !important}
 <div style="padding:160px 80px 120px;text-align:center;background:var(--cream)">
   <div class="section-label" style="justify-content:center">{{ page.title }}</div>
   <div style="font-size:17px;color:var(--body);max-width:50ch;margin:24px auto 40px;line-height:1.7">{{ page.content }}</div>
-  <a href="/products/ube-poudre" class="btn-main">Découvrir Uburn →</a>
+  <a href="/products/ube-poudre" class="btn-main">{% if request.locale.iso_code == 'en' %}Discover UBurn →{% else %}Découvrir Uburn →{% endif %}</a>
 </div>
 {%- endif -%}
 
 {%- if page.handle == 'faq' or page.handle == 'ingredients' -%}
 <section class="ba-section">
   <div class="ba-inner">
-    <div class="section-label reveal">Résultat réel</div>
-    <h2 class="section-title reveal rd1">Ce qui change.<br><em>Pas les nôtres.</em></h2>
+    <div class="section-label reveal">{% if request.locale.iso_code == 'en' %}Real result{% else %}Résultat réel{% endif %}</div>
+    <h2 class="section-title reveal rd1">{% if request.locale.iso_code == 'en' %}What changes.<br><em>Not ours.</em>{% else %}Ce qui change.<br><em>Pas les nôtres.</em>{% endif %}</h2>
     <div class="ba-card reveal rd2">
       <div class="ba-col ba-before">
-        <div class="ba-label">Avant Uburn</div>
-        <div class="ba-week">Semaine 1</div>
+        <div class="ba-label">{% if request.locale.iso_code == 'en' %}Before UBurn{% else %}Avant Uburn{% endif %}</div>
+        <div class="ba-week">{% if request.locale.iso_code == 'en' %}Week 1{% else %}Semaine 1{% endif %}</div>
         <div class="ba-items">
-          <div class="ba-item">Fringales incontrôlables à 16h — placard ouvert quotidiennement</div>
-          <div class="ba-item">Culpabilité après chaque craquage, frustration chronique</div>
-          <div class="ba-item">Dîner trop copieux pour compenser la faim accumulée</div>
-          <div class="ba-item">Fatigue l'après-midi, digestion difficile</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Uncontrollable cravings at 4 p.m. — pantry open daily{% else %}Fringales incontrôlables à 16h — placard ouvert quotidiennement{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Guilt after every slip-up, chronic frustration{% else %}Culpabilité après chaque craquage, frustration chronique{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Dinner too heavy to make up for the day's hunger{% else %}Dîner trop copieux pour compenser la faim accumulée{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Afternoon fatigue, difficult digestion{% else %}Fatigue l'après-midi, digestion difficile{% endif %}</div>
         </div>
         <div class="ba-profile">
           <div class="ba-avatar">M</div>
-          <div><div class="ba-name">Marie D.</div><div class="ba-meta">42 ans · Paris 11e</div></div>
+          <div><div class="ba-name">Marie D.</div><div class="ba-meta">{% if request.locale.iso_code == 'en' %}42 years old · Paris{% else %}42 ans · Paris 11e{% endif %}</div></div>
         </div>
       </div>
       <div class="ba-divider"><div class="ba-divider-arrow">→</div></div>
       <div class="ba-col ba-after">
-        <div class="ba-label">Après 4 semaines</div>
-        <div class="ba-week">Semaine 4</div>
+        <div class="ba-label">{% if request.locale.iso_code == 'en' %}After 4 weeks{% else %}Après 4 semaines{% endif %}</div>
+        <div class="ba-week">{% if request.locale.iso_code == 'en' %}Week 4{% else %}Semaine 4{% endif %}</div>
         <div class="ba-items">
-          <div class="ba-item">Plus de fringale à 16h — elle oublie même d'ouvrir le placard</div>
-          <div class="ba-item">Dîner naturellement plus léger, sans effort de volonté</div>
-          <div class="ba-item">Digestion fluide, ventre moins gonflé dès la 2e semaine</div>
-          <div class="ba-item">Perte de 2,8 kg sur 4 semaines sans régime particulier</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}No more 4 p.m. cravings — she even forgets to open the pantry{% else %}Plus de fringale à 16h — elle oublie même d'ouvrir le placard{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Naturally lighter dinner, no willpower effort{% else %}Dîner naturellement plus léger, sans effort de volonté{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Smooth digestion, less bloating from week 2{% else %}Digestion fluide, ventre moins gonflé dès la 2e semaine{% endif %}</div>
+          <div class="ba-item">{% if request.locale.iso_code == 'en' %}Down 6 lbs in 4 weeks with no special diet{% else %}Perte de 2,8 kg sur 4 semaines sans régime particulier{% endif %}</div>
         </div>
         <div class="ba-profile">
           <div class="ba-avatar" style="background:var(--purple-wash)">M</div>
-          <div><div class="ba-name">Marie D. — Cliente vérifiée</div><div class="ba-meta">Après 28 jours · Résultats individuels</div><div class="ba-stars">★★★★★</div></div>
+          <div><div class="ba-name">{% if request.locale.iso_code == 'en' %}Marie D. — Verified customer{% else %}Marie D. — Cliente vérifiée{% endif %}</div><div class="ba-meta">{% if request.locale.iso_code == 'en' %}After 28 days · Individual results{% else %}Après 28 jours · Résultats individuels{% endif %}</div><div class="ba-stars">★★★★★</div></div>
         </div>
       </div>
     </div>
-    <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6">Les résultats varient selon les individus. Glucomannane — EFSA ID 3120. Conditions : 3g/jour avec eau avant les repas.</p>
+    <p style="text-align:center;font-size:11.5px;color:var(--muted);margin-top:18px;line-height:1.6">{% if request.locale.iso_code == 'en' %}Results vary by individual. Glucomannan — FDA dietary fiber*. Use: 3g/day with water before meals.{% else %}Les résultats varient selon les individus. Glucomannane — EFSA ID 3120. Conditions : 3g/jour avec eau avant les repas.{% endif %}</p>
   </div>
 </section>
 {%- endif -%}

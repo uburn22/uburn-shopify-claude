@@ -101,9 +101,9 @@ main#main{padding:0 !important}
 <div class="contact-wrap">
   <div class="contact-left">
     <div style="position:relative;z-index:1">
-      <div class="section-label">Contact</div>
-      <h1>On vous répond.<br><em>Vraiment.</em></h1>
-      <p>Une question sur le produit, une commande, un retour — notre équipe répond sous 24h ouvrées. Pas de chatbot, une vraie personne.</p>
+      <div class="section-label">{% if request.locale.iso_code == 'en' %}Contact{% else %}Contact{% endif %}</div>
+      <h1>{% if request.locale.iso_code == 'en' %}We respond.<br><em>For real.</em>{% else %}On vous répond.<br><em>Vraiment.</em>{% endif %}</h1>
+      <p>{% if request.locale.iso_code == 'en' %}A question about the product, an order, a return — our team replies within 24 business hours. No chatbot, a real person.{% else %}Une question sur le produit, une commande, un retour — notre équipe répond sous 24h ouvrées. Pas de chatbot, une vraie personne.{% endif %}</p>
       <div class="contact-info">
         <div class="contact-info-item">
           <div class="contact-info-icon">✉️</div>
@@ -115,21 +115,21 @@ main#main{padding:0 !important}
         <div class="contact-info-item">
           <div class="contact-info-icon">⏱️</div>
           <div class="contact-info-text">
-            <strong>Temps de réponse</strong>
-            <span>Sous 24h ouvrées</span>
+            <strong>{% if request.locale.iso_code == 'en' %}Response time{% else %}Temps de réponse{% endif %}</strong>
+            <span>{% if request.locale.iso_code == 'en' %}Within 24 business hours{% else %}Sous 24h ouvrées{% endif %}</span>
           </div>
         </div>
         <div class="contact-info-item">
           <div class="contact-info-icon">📦</div>
           <div class="contact-info-text">
-            <strong>Remboursements</strong>
-            <span>Traités sous 5 jours ouvrés</span>
+            <strong>{% if request.locale.iso_code == 'en' %}Refunds{% else %}Remboursements{% endif %}</strong>
+            <span>{% if request.locale.iso_code == 'en' %}Processed within 5 business days{% else %}Traités sous 5 jours ouvrés{% endif %}</span>
           </div>
         </div>
         <div class="contact-info-item">
           <div class="contact-info-icon">🇫🇷</div>
           <div class="contact-info-text">
-            <strong>Marque française</strong>
+            <strong>{% if request.locale.iso_code == 'en' %}French brand{% else %}Marque française{% endif %}</strong>
             <span>R Glow F.Z.E. — Uburn</span>
           </div>
         </div>
@@ -137,33 +137,33 @@ main#main{padding:0 !important}
     </div>
   </div>
   <div class="contact-right">
-    <h2>Écrivez-nous</h2>
+    <h2>{% if request.locale.iso_code == 'en' %}Write to us{% else %}Écrivez-nous{% endif %}</h2>
     {% form 'contact' %}
       {% if form.posted_successfully? %}
         <div style="background:var(--purple-wash);border-radius:16px;padding:24px;text-align:center;margin-bottom:24px">
           <div style="font-size:28px;margin-bottom:8px">✅</div>
-          <p style="font-family:'Red Hat Display',sans-serif;font-weight:800;color:var(--dark);margin-bottom:4px">Message envoyé !</p>
-          <p style="font-size:14px;color:var(--body)">On vous répond sous 24h ouvrées.</p>
+          <p style="font-family:'Red Hat Display',sans-serif;font-weight:800;color:var(--dark);margin-bottom:4px">{% if request.locale.iso_code == 'en' %}Message sent!{% else %}Message envoyé !{% endif %}</p>
+          <p style="font-size:14px;color:var(--body)">{% if request.locale.iso_code == 'en' %}We respond within 24 business hours.{% else %}On vous répond sous 24h ouvrées.{% endif %}</p>
         </div>
       {% endif %}
       <div class="form-group">
-        <label class="form-label" for="ContactFormName">Votre nom</label>
-        <input type="text" id="ContactFormName" class="form-input" name="contact[name]" value="{{ form.name }}" placeholder="Marie Dupont" autocomplete="name">
+        <label class="form-label" for="ContactFormName">{% if request.locale.iso_code == 'en' %}Your name{% else %}Votre nom{% endif %}</label>
+        <input type="text" id="ContactFormName" class="form-input" name="contact[name]" value="{{ form.name }}" placeholder="{% if request.locale.iso_code == 'en' %}Sarah Johnson{% else %}Marie Dupont{% endif %}" autocomplete="name">
       </div>
       <div class="form-group">
         <label class="form-label" for="ContactFormEmail">Email</label>
-        <input type="email" id="ContactFormEmail" class="form-input" name="contact[email]" value="{{ form.email }}" placeholder="marie@email.com" required autocomplete="email">
+        <input type="email" id="ContactFormEmail" class="form-input" name="contact[email]" value="{{ form.email }}" placeholder="{% if request.locale.iso_code == 'en' %}sarah@email.com{% else %}marie@email.com{% endif %}" required autocomplete="email">
       </div>
       <div class="form-group">
-        <label class="form-label" for="ContactFormSubject">Sujet</label>
-        <input type="text" id="ContactFormSubject" class="form-input" name="contact[subject]" placeholder="Ma commande / Question produit / Autre">
+        <label class="form-label" for="ContactFormSubject">{% if request.locale.iso_code == 'en' %}Subject{% else %}Sujet{% endif %}</label>
+        <input type="text" id="ContactFormSubject" class="form-input" name="contact[subject]" placeholder="{% if request.locale.iso_code == 'en' %}My order / Product question / Other{% else %}Ma commande / Question produit / Autre{% endif %}">
       </div>
       <div class="form-group">
         <label class="form-label" for="ContactFormMessage">Message</label>
-        <textarea id="ContactFormMessage" class="form-textarea" name="contact[body]" placeholder="Décrivez votre question ou situation...">{{ form.body }}</textarea>
+        <textarea id="ContactFormMessage" class="form-textarea" name="contact[body]" placeholder="{% if request.locale.iso_code == 'en' %}Describe your question or situation...{% else %}Décrivez votre question ou situation...{% endif %}">{{ form.body }}</textarea>
       </div>
-      <button type="submit" class="form-submit">Envoyer le message →</button>
-      <p class="form-note">Réponse garantie sous 24h ouvrées · hello@uburn.co</p>
+      <button type="submit" class="form-submit">{% if request.locale.iso_code == 'en' %}Send message →{% else %}Envoyer le message →{% endif %}</button>
+      <p class="form-note">{% if request.locale.iso_code == 'en' %}Guaranteed response within 24 business hours · hello@uburn.co{% else %}Réponse garantie sous 24h ouvrées · hello@uburn.co{% endif %}</p>
     {% endform %}
   </div>
 </div>

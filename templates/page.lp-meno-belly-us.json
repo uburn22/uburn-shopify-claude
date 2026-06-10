@@ -1,0 +1,129 @@
+{
+  "layout": "theme",
+  "sections": {
+    "hero": {
+      "type": "u2-hero-split",
+      "settings": {
+        "product": "ube-poudre",
+        "variant_id": "51289200034111",
+        "eyebrow": "peri / menopause support — for women 40+",
+        "h1": "Same diet. <em>New belly.</em>",
+        "sub": "Estrogen drops in your 40s. Your body stores sugar differently — the cravings are real, and they're hormonal. UBurn supports up to 4 hours of fullness with glucomannan (konjac plant fiber).",
+        "priceline": "from <strong>$0.66/day</strong> · subscribe &amp; save 10% · plant-based fullness · 30 cal · free U.S. shipping",
+        "cta_text": "start my ritual",
+        "cta_sub": "subscribe · cancel anytime · free U.S. shipping on $40+",
+        "image_left_filename": "lp-hero-meno-real.jpg",
+        "image_left_alt": "Woman with UBurn lavender pouch — real customer photo, peri/menopause satiety ritual",
+        "label_left": "hormonal",
+        "tag_left": "not willpower · biology",
+        "image_right_filename": "lp-hero-ritual-real.png",
+        "image_right_alt": "UBurn pouch beside violet ube latte swirl",
+        "label_right": "functional",
+        "tag_right": "konjac fiber · 4h fullness"
+      }
+    },
+    "trust-band": { "type": "u2-trust-band", "settings": {} },
+    "marquee": { "type": "u2-marquee", "settings": {} },
+    "problem": {
+      "type": "u2-problem",
+      "settings": {
+        "banner_filename": "uburn-us-pdp-before-stressed-desk.png",
+        "banner_alt": "Woman 48 stressed at desk, snack drawer open — perimenopause sugar cravings",
+        "banner_caption": "your willpower didn't break. your hormones changed.",
+        "eyebrow": "the 40s shift no one named",
+        "title_pre": "Same diet.",
+        "title_em": "New body.",
+        "card_1_num": "40s",
+        "card_1_title": "The shift starts.",
+        "card_1_sub": "Estrogen drops. Your insulin response changes. The cravings feel completely new — because they are.",
+        "card_2_num": "3 pm",
+        "card_2_title": "The signal lands.",
+        "card_2_sub": "Sugar craving hits harder, lasts longer, ignores discipline. It's your blood sugar — not your character.",
+        "card_3_num": "→",
+        "card_3_title": "A tool for now.",
+        "card_3_sub": "Glucomannan (konjac plant fiber) forms a gel in your stomach for up to 4 hours of fullness. No caffeine. 30 cal."
+      }
+    },
+    "before-after": { "type": "u2-before-after", "settings": {} },
+    "week-changes": {
+      "type": "u2-week-changes",
+      "settings": {
+        "eyebrow": "— in her own words",
+        "title_pre": "What changes.",
+        "title_em": "After 4 weeks.",
+        "before_label": "Before UBurn",
+        "before_week": "Week 1",
+        "before_1": "Sugar cravings hit harder every afternoon — willpower felt useless",
+        "before_2": "Same diet as 5 years ago, but the belly stayed and grew",
+        "before_3": "Chronic 4 PM fatigue, mood swings, frustration",
+        "before_4": "Overeating dinner to compensate, nighttime snacking",
+        "before_5": "Heaviness, bloating, sleep felt restless",
+        "after_label": "After 4 weeks",
+        "after_week": "Week 4",
+        "after_1": "Afternoons feel calm — sugar cravings softened naturally",
+        "after_2": "Lighter dinners feel automatic, no white-knuckling",
+        "after_3": "Smoother digestion from week 2*, gentler bloat",
+        "after_4": "Mood feels more even, no afternoon crash",
+        "after_5": "The violet ritual settled in — feels like self-care, not effort",
+        "attr_name": "Linda R.",
+        "attr_city": "Westchester, NY · age 52",
+        "attr_when": "After 28 days",
+        "avatar_filename": "uburn-us-story-1-sarah-brooklyn.png",
+        "disclaimer": "*Individual results may vary. Glucomannan — EFSA ID 3120. Use: 3g/day with water before meals. UBurn supports satiety — it does not treat menopause. These statements have not been evaluated by the FDA."
+      }
+    },
+    "three-ways": { "type": "u2-three-ways", "settings": {} },
+    "craft": { "type": "u2-craft", "settings": {} },
+    "violet-bottle": { "type": "u2-violet-bottle", "settings": {} },
+    "moodboard": { "type": "u2-moodboard", "settings": {} },
+    "stats": { "type": "u2-stats", "settings": {} },
+    "video-reviews": {
+      "type": "u2-video-reviews",
+      "settings": {
+        "eyebrow": "— real users · women 40+",
+        "title_pre": "In their",
+        "title_em": "own words.",
+        "sub": "Four women navigating the same 40s shift. Verified video reviews, real moments.",
+        "cta_text": "Try the ritual",
+        "cta_link": "#u2-pricing",
+        "card_1_quote": "\"My belly didn't disappear. My evenings did calm down.\"",
+        "card_1_name": "Linda R., 52",
+        "card_1_city": "Westchester, NY",
+        "card_2_quote": "\"Finally — something that respects what's happening.\"",
+        "card_2_name": "Karen B., 49",
+        "card_2_city": "Naples, FL",
+        "card_3_quote": "\"The sugar craving stopped controlling me.\"",
+        "card_3_name": "Patricia M., 54",
+        "card_3_city": "Boulder, CO",
+        "card_4_quote": "\"Sleep is calmer. Mornings feel mine again.\"",
+        "card_4_name": "Susan T., 47",
+        "card_4_city": "Austin, TX"
+      }
+    },
+    "live_proof": { "type": "u2-live-proof", "settings": {} },
+    "efsa": { "type": "u2-efsa-block", "settings": {} },
+    "compare": { "type": "u2-comparison", "settings": {} },
+    "pricing": { "type": "u2-pricing-cards", "settings": { "product": "ube-poudre", "show_bonus": true } },
+    "guarantee": { "type": "u2-guarantee-bar", "settings": {} },
+    "final-cta": {
+      "type": "u2-final-cta",
+      "settings": {
+        "product": "ube-poudre",
+        "variant_id": "51289200034111",
+        "eyebrow": "— now you have a tool",
+        "title_pre": "Your 4 PM cravings are hormonal.",
+        "title_em": "Now you have a tool.",
+        "sub": "Less than <strong>$0.66 a day.</strong> One scoop of glucomannan (konjac plant fiber). Cold water or oat milk. Up to 4 hours of fullness.* 30 calories. Caffeine-free. Crafted in France.",
+        "cta": "start my pack — $0.66/day"
+      }
+    },
+    "newsletter": { "type": "u2-newsletter", "settings": {} }
+  },
+  "order": [
+    "hero", "trust-band", "marquee",
+    "problem", "before-after", "week-changes", "three-ways",
+    "craft", "violet-bottle", "moodboard",
+    "stats", "video-reviews", "live_proof", "efsa", "compare",
+    "pricing", "guarantee", "final-cta", "newsletter"
+  ]
+}

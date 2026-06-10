@@ -44,34 +44,34 @@
 </style>
 
 <!-- ANNOUNCE BAR -->
-<div class="ub-announce">LIVRAISON GRATUITE EN FRANCE — Sans abonnement · Sans engagement</div>
+<div class="ub-announce">{% if request.locale.iso_code == 'en' %}FREE U.S. SHIPPING ON ORDERS $40+ — Flexible subscription · Cancel anytime{% else %}LIVRAISON GRATUITE EN FRANCE — Abonnement flexible · Annulable à tout moment{% endif %}</div>
 
 <!-- NAV -->
 <nav class="ub-nav">
-  <a href="/" class="ub-nav-logo" aria-label="Uburn — Accueil">
+  <a href="/" class="ub-nav-logo" aria-label="{% if request.locale.iso_code == 'en' %}UBurn — Home{% else %}Uburn — Accueil{% endif %}">
     <img src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn" width="110" height="26">
   </a>
 
   <div class="ub-nav-center">
-    <a href="/products/ube-poudre?variant=51289200066879" class="ub-nav-cta-link">Commander</a>
-    <a href="/pages/faq" class="ub-nav-link">Comment ça marche</a>
-    <a href="/pages/ingredients" class="ub-nav-link">Ingrédients</a>
-    <a href="/#testi" class="ub-nav-link">Avis</a>
-    <a href="/pages/about" class="ub-nav-link">Notre histoire</a>
-    <a href="/pages/contact" class="ub-nav-link">Contact</a>
+    <a href="/products/ube-poudre?variant=51289200066879" class="ub-nav-cta-link">{% if request.locale.iso_code == 'en' %}Order{% else %}Commander{% endif %}</a>
+    <a href="/pages/faq" class="ub-nav-link">{% if request.locale.iso_code == 'en' %}How it works{% else %}Comment ça marche{% endif %}</a>
+    <a href="/pages/ingredients" class="ub-nav-link">{% if request.locale.iso_code == 'en' %}Ingredients{% else %}Ingrédients{% endif %}</a>
+    <a href="/#testi" class="ub-nav-link">{% if request.locale.iso_code == 'en' %}Reviews{% else %}Avis{% endif %}</a>
+    <a href="/pages/about" class="ub-nav-link">{% if request.locale.iso_code == 'en' %}Our story{% else %}Notre histoire{% endif %}</a>
+    <a href="/pages/contact" class="ub-nav-link">{% if request.locale.iso_code == 'en' %}Contact{% else %}Contact{% endif %}</a>
   </div>
 
   <div class="ub-nav-right">
-    <a href="/search" class="ub-nav-icon" aria-label="Rechercher">
+    <a href="/search" class="ub-nav-icon" aria-label="{% if request.locale.iso_code == 'en' %}Search{% else %}Rechercher{% endif %}">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     </a>
-    <a href="/cart" class="ub-nav-icon" aria-label="Panier">
+    <a href="/cart" class="ub-nav-icon" aria-label="{% if request.locale.iso_code == 'en' %}Cart{% else %}Panier{% endif %}">
       <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       {%- if cart.item_count > 0 -%}
       <span class="ub-cart-badge">{{ cart.item_count }}</span>
       {%- endif -%}
     </a>
-    <button class="ub-nav-burger" aria-label="Ouvrir le menu" aria-expanded="false" id="ub-burger-btn">
+    <button class="ub-nav-burger" aria-label="{% if request.locale.iso_code == 'en' %}Open menu{% else %}Ouvrir le menu{% endif %}" aria-expanded="false" id="ub-burger-btn">
       <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
   </div>
@@ -79,31 +79,31 @@
 
 <!-- TRUST RIBBON -->
 <div class="ub-ribbon">
-  <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Ingrédients validés EFSA</span>
-  <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>100% Végétal</span>
-  <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sans abonnement</span>
-  <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Livraison offerte</span>
+  <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>{% if request.locale.iso_code == 'en' %}Research-backed* ingredients{% else %}Ingrédients validés EFSA{% endif %}</span>
+  <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>{% if request.locale.iso_code == 'en' %}100% Plant-based{% else %}100% Végétal{% endif %}</span>
+  <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>{% if request.locale.iso_code == 'en' %}Cancel anytime{% else %}Annulable à tout moment{% endif %}</span>
+  <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>{% if request.locale.iso_code == 'en' %}Free shipping{% else %}Livraison offerte{% endif %}</span>
 </div>
 
 <!-- MOBILE MENU OVERLAY -->
-<div class="ub-nav-mobile" id="ub-nav-mobile" role="dialog" aria-modal="true" aria-label="Menu principal">
+<div class="ub-nav-mobile" id="ub-nav-mobile" role="dialog" aria-modal="true" aria-label="{% if request.locale.iso_code == 'en' %}Main menu{% else %}Menu principal{% endif %}">
   <div class="ub-mobile-header">
-    <a href="/" aria-label="Uburn">
+    <a href="/" aria-label="{% if request.locale.iso_code == 'en' %}UBurn{% else %}Uburn{% endif %}">
       <img src="https://uburn.co/cdn/shop/files/LOGO_Violet.png?v=1741876498&width=200" alt="UBurn" height="24" style="height:24px;width:auto">
     </a>
-    <button class="ub-mobile-close" aria-label="Fermer le menu" id="ub-mobile-close">
+    <button class="ub-mobile-close" aria-label="{% if request.locale.iso_code == 'en' %}Close menu{% else %}Fermer le menu{% endif %}" id="ub-mobile-close">
       <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
   </div>
   <div class="ub-mobile-links">
-    <a href="/pages/faq" class="ub-mobile-link">Comment ça marche</a>
-    <a href="/pages/ingredients" class="ub-mobile-link">Ingrédients</a>
-    <a href="/#testi" class="ub-mobile-link">Avis</a>
-    <a href="/pages/about" class="ub-mobile-link">Notre histoire</a>
-    <a href="/pages/contact" class="ub-mobile-link">Contact</a>
-    <a href="/pages/faq" class="ub-mobile-link">FAQ</a>
+    <a href="/pages/faq" class="ub-mobile-link">{% if request.locale.iso_code == 'en' %}How it works{% else %}Comment ça marche{% endif %}</a>
+    <a href="/pages/ingredients" class="ub-mobile-link">{% if request.locale.iso_code == 'en' %}Ingredients{% else %}Ingrédients{% endif %}</a>
+    <a href="/#testi" class="ub-mobile-link">{% if request.locale.iso_code == 'en' %}Reviews{% else %}Avis{% endif %}</a>
+    <a href="/pages/about" class="ub-mobile-link">{% if request.locale.iso_code == 'en' %}Our story{% else %}Notre histoire{% endif %}</a>
+    <a href="/pages/contact" class="ub-mobile-link">{% if request.locale.iso_code == 'en' %}Contact{% else %}Contact{% endif %}</a>
+    <a href="/pages/faq" class="ub-mobile-link">{% if request.locale.iso_code == 'en' %}FAQ{% else %}FAQ{% endif %}</a>
   </div>
-  <a href="/products/ube-poudre?variant=51289200066879" class="ub-mobile-cta">Commander maintenant →</a>
+  <a href="/products/ube-poudre?variant=51289200066879" class="ub-mobile-cta">{% if request.locale.iso_code == 'en' %}Order now →{% else %}Commander maintenant →{% endif %}</a>
 </div>
 
 <script>

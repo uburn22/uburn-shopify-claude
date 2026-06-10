@@ -68,12 +68,12 @@
     {%- if request.locale.iso_code == 'fr' -%}
     <div id="ub-consent-banner" style="display:flex;position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#fff;border-top:2px solid #e8dcf5;padding:14px 24px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:-apple-system,sans-serif;box-shadow:0 -4px 24px rgba(0,0,0,.08);">
       <p style="margin:0;font-size:13px;color:#333;max-width:640px;line-height:1.5;">
-        🍪 Nous utilisons des cookies pour mesurer la performance de nos publicités et améliorer votre expérience. Vos données ne sont jamais revendues.
-        <a href="/pages/confidentialite" style="color:#6b2fa0;text-decoration:underline;margin-left:4px;">En savoir plus</a>
+        🍪 {% if request.locale.iso_code == 'en' %}We use cookies to measure ad performance and improve your experience. We never sell your data.{% else %}Nous utilisons des cookies pour mesurer la performance de nos publicités et améliorer votre expérience. Vos données ne sont jamais revendues.{% endif %}
+        <a href="{% if request.locale.iso_code == 'en' %}/policies/privacy-policy{% else %}/pages/confidentialite{% endif %}" style="color:#6b2fa0;text-decoration:underline;margin-left:4px;">{% if request.locale.iso_code == 'en' %}Learn more{% else %}En savoir plus{% endif %}</a>
       </p>
       <div style="display:flex;gap:10px;flex-shrink:0;">
-        <button onclick="window._ubConsent.deny()" style="padding:9px 18px;border-radius:100px;border:1.5px solid #e8dcf5;background:#fff;font-size:13px;font-weight:600;color:#5a5654;cursor:pointer;">Refuser</button>
-        <button onclick="window._ubConsent.grant()" style="padding:9px 20px;border-radius:100px;border:none;background:#6b2fa0;color:#fff;font-size:13px;font-weight:600;cursor:pointer;">Accepter</button>
+        <button onclick="window._ubConsent.deny()" style="padding:9px 18px;border-radius:100px;border:1.5px solid #e8dcf5;background:#fff;font-size:13px;font-weight:600;color:#5a5654;cursor:pointer;">{% if request.locale.iso_code == 'en' %}Decline{% else %}Refuser{% endif %}</button>
+        <button onclick="window._ubConsent.grant()" style="padding:9px 20px;border-radius:100px;border:none;background:#6b2fa0;color:#fff;font-size:13px;font-weight:600;cursor:pointer;">{% if request.locale.iso_code == 'en' %}Accept{% else %}Accepter{% endif %}</button>
       </div>
     </div>
     <script>

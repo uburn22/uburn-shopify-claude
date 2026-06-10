@@ -1,0 +1,177 @@
+{%- comment -%}
+  ============================================================================
+  UBurn V2 — Hero Product Section
+  Phase 2 first ship. Mobile-first. Replaces top of homepage above home-uburn-2026.
+  Pulls live product data (price, variant) from Shopify so no hardcoded $.
+  ============================================================================
+{%- endcomment -%}
+
+{{- 'uburn-v2-tokens.css' | asset_url | stylesheet_tag -}}
+{{- 'uburn-v2-hero.css' | asset_url | stylesheet_tag -}}
+
+{%- liquid
+  assign hero_product = section.settings.product
+  if hero_product == blank
+    assign hero_product = all_products['ube-poudre']
+  endif
+
+  assign cta_link = section.settings.cta_link
+  if cta_link == blank and hero_product != blank
+    assign cta_link = hero_product.url
+  endif
+
+  assign min_price = hero_product.price_min
+  if min_price == blank
+    assign min_price = hero_product.price
+  endif
+  assign display_price = min_price | money_without_trailing_zeros
+
+  assign hero_image = section.settings.hero_image
+-%}
+
+<section class="u2 u2-hero" aria-label="UBurn — Crush the 4PM crash">
+  <div class="u2-hero__grid">
+
+    <div class="u2-hero__copy">
+      {%- if section.settings.eyebrow_text != blank -%}
+        <p class="u2-hero__eyebrow">{{ section.settings.eyebrow_text }}</p>
+      {%- endif -%}
+
+      <h1 class="u2-hero__headline">
+        {{ section.settings.headline_pre }} <em>{{ section.settings.headline_emphasis }}</em> {{ section.settings.headline_post }}
+      </h1>
+
+      {%- if section.settings.sub_headline != blank -%}
+        <p class="u2-hero__sub">{{ section.settings.sub_headline }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.show_price and hero_product != blank -%}
+        <p class="u2-hero__priceline">
+          <span class="u2-hero__price-prefix">{{ section.settings.price_prefix }}</span>
+          <span class="u2-hero__price">{{ display_price }}</span>
+          {%- if section.settings.price_suffix != blank -%}
+            <span class="u2-hero__price-divider">·</span>
+            <span>{{ section.settings.price_suffix }}</span>
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+
+      <a href="{{ cta_link }}" class="u2-hero__cta" aria-label="{{ section.settings.cta_text | escape }}">
+        <span>{{ section.settings.cta_text }}</span>
+        <span class="u2-hero__cta-arrow" aria-hidden="true">→</span>
+      </a>
+
+      {%- if section.blocks.size > 0 -%}
+        <ul class="u2-hero__trust">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'trust_pill' -%}
+              <li class="u2-hero__pill" {{ block.shopify_attributes }}>
+                {%- case block.settings.icon -%}
+                  {%- when 'check' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  {%- when 'leaf' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-4 3-7 9-9 0 6-3 9-9 9"/><path d="M11 20c0-5 2-8 7-9"/></svg>
+                  {%- when 'flask' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v6.5L4.5 19a2 2 0 0 0 1.7 3h11.6a2 2 0 0 0 1.7-3L14 9.5V3"/></svg>
+                  {%- when 'shield' -%}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                {%- endcase -%}
+                <span>{{ block.settings.text }}</span>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    <div class="u2-hero__media">
+      <div class="u2-hero__image-wrap">
+        {%- if hero_image != blank -%}
+          {{ hero_image | image_url: width: 1200 | image_tag:
+            loading: 'eager',
+            fetchpriority: 'high',
+            decoding: 'async',
+            width: hero_image.width,
+            height: hero_image.height,
+            alt: hero_image.alt | default: 'UBurn — violet wellness ritual',
+            sizes: '(min-width: 1024px) 560px, 92vw',
+            widths: '480,640,800,1024,1200,1400'
+          }}
+        {%- else -%}
+          {%- assign fallback = 'uburn-hero-product.jpg' -%}
+          <img
+            src="{{ fallback | asset_url }}"
+            srcset="{{ fallback | asset_url }} 1024w"
+            sizes="(min-width: 1024px) 560px, 92vw"
+            width="1024"
+            height="1024"
+            alt="UBurn — woman holding a purple wellness drink, 4 PM ritual"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          >
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero · Product V2",
+  "tag": "section",
+  "class": "shopify-section--u2-hero",
+  "settings": [
+    { "type": "header", "content": "Product" },
+    { "type": "product", "id": "product", "label": "Hero product", "info": "Defaults to ube-poudre if empty." },
+    { "type": "header", "content": "Copy" },
+    { "type": "text", "id": "eyebrow_text", "label": "Eyebrow", "default": "the violet hour · est. 2024" },
+    { "type": "text", "id": "headline_pre", "label": "Headline — start", "default": "Crush the" },
+    { "type": "text", "id": "headline_emphasis", "label": "Headline — italic emphasis", "default": "4 PM", "info": "Renders in italic serif violet." },
+    { "type": "text", "id": "headline_post", "label": "Headline — end", "default": "crash." },
+    { "type": "textarea", "id": "sub_headline", "label": "Sub-headline", "default": "a violet wellness ritual. plant-based satiety. 30 calories. crafted in france." },
+    { "type": "header", "content": "Price" },
+    { "type": "checkbox", "id": "show_price", "label": "Show price line", "default": true },
+    { "type": "text", "id": "price_prefix", "label": "Price prefix", "default": "from" },
+    { "type": "text", "id": "price_suffix", "label": "Price suffix", "default": "free us shipping" },
+    { "type": "header", "content": "Call to action" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "start my pack" },
+    { "type": "url", "id": "cta_link", "label": "CTA link", "info": "Defaults to hero product URL if empty." },
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Defaults to /assets/uburn-hero-product.jpg if empty." }
+  ],
+  "blocks": [
+    {
+      "type": "trust_pill",
+      "name": "Trust pill",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "text", "label": "Label", "default": "EFSA-backed" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "check", "label": "Check" },
+            { "value": "leaf", "label": "Leaf" },
+            { "value": "flask", "label": "Flask" },
+            { "value": "shield", "label": "Shield" }
+          ],
+          "default": "check"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero · Product V2",
+      "blocks": [
+        { "type": "trust_pill", "settings": { "text": "EFSA-backed", "icon": "check" } },
+        { "type": "trust_pill", "settings": { "text": "Caffeine-free", "icon": "leaf" } },
+        { "type": "trust_pill", "settings": { "text": "Third-party lab tested", "icon": "flask" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

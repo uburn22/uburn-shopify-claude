@@ -1,0 +1,416 @@
+{%- comment -%}
+  UBurn LP Meno Belly — Violet Matcha · aligned on PDP DA (u2-* tokens)
+  Rev 2026-05-19 v3 — drop Bloom Fraunces, adopt Times serif + Helvetica Neue from u2-base.css
+{%- endcomment -%}
+{%- liquid
+  assign hp = section.settings.product
+  if hp == blank
+    assign hp = all_products['ube-poudre']
+  endif
+  assign v_starter = hp.variants[0]
+  assign v_maximum = hp.variants[1] | default: hp.variants[0]
+  assign sub_plan = null
+  for spg in hp.selling_plan_groups
+    for sp in spg.selling_plans
+      assign sub_plan = sp
+      break
+    endfor
+    if sub_plan != null
+      break
+    endif
+  endfor
+-%}
+
+<meta name="robots" content="noindex,nofollow">
+{{ 'uburn-lp-meno-belly.css' | asset_url | stylesheet_tag }}
+
+<script id="uburn-lp-meno-belly-data">
+  window.__UBLP2 = {
+    product_id: {{ hp.id }},
+    starter: { id: {{ v_starter.id }}, price_one: 3699, price_sub: 3329, label: 'Starter — 90g · 30 servings' },
+    maximum: { id: {{ v_maximum.id }}, price_one: 5899, price_sub: 5309, label: 'Maximum — 270g · 90 servings' },
+    {%- if sub_plan -%}
+    selling_plan_id: {{ sub_plan.id }},
+    {%- else -%}
+    selling_plan_id: null,
+    {%- endif -%}
+    currency: 'USD',
+    cart_add_url: '/cart/add.js'
+  };
+</script>
+
+<div class="u2-root ublpmb">
+
+  {%- comment -%} ═════════ 01. HERO ═════════ {%- endcomment -%}
+  <section class="ublpmb-hero u2-section">
+    <div class="ublpmb-hero__inner">
+      <span class="ublpmb-hero__sticker">Peri / Menopause support · New in the U.S.</span>
+      <h1 class="ublpmb-hero__h1">{{ section.settings.hero_h1 | default: 'Same diet. <em>New belly.</em>' }}</h1>
+      <p class="ublpmb-hero__sub">{{ section.settings.hero_sub | default: 'Estrogen drops in your 40s. Your body stores sugar differently — the cravings are real, and they’re hormonal. UBurn supports up to 4 hours of fullness with glucomannan (konjac plant fiber). 30 calories. Caffeine-free. Crafted in France.' }}</p>
+
+      <div class="ublpmb-hero__rating">
+        <span class="ublpmb-hero__stars" aria-hidden="true">★★★★★</span>
+        <span class="ublpmb-hero__rating-num">4.7</span>
+        <span class="ublpmb-hero__rating-text">· 2,847+ customers</span>
+      </div>
+
+      <div class="ublpmb-hero__visual">
+        <span class="ublpmb-hero__badge">EFSA-backed konjac · for women 40+</span>
+        <img src="{{ 'lp-hero-meno-belly.jpg' | asset_url }}"
+             alt="Woman 48-54 holding violet UBurn ube latte beside lavender pouch"
+             loading="eager" fetchpriority="high" width="880" height="1168">
+      </div>
+
+      <button class="u2-cta u2-cta--full ublpmb-hero__cta" data-ublpmb-scroll="#ublpmb-offer" type="button">
+        <span>start the ritual — from $33.29/mo</span>
+        <span class="u2-cta__arrow" aria-hidden="true">→</span>
+      </button>
+      <p class="ublpmb-hero__cta-sub">subscribe · cancel anytime · free U.S. shipping</p>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 02. TRUST STRIP ═════════ {%- endcomment -%}
+  <section class="ublpmb-trust">
+    <div class="ublpmb-trust__inner">
+      <span class="ublpmb-trust__item">{{ section.settings.trust_1 | default: 'EFSA-backed fiber' }}</span>
+      <span class="ublpmb-trust__sep"></span>
+      <span class="ublpmb-trust__item">{{ section.settings.trust_2 | default: '0% caffeine' }}</span>
+      <span class="ublpmb-trust__sep"></span>
+      <span class="ublpmb-trust__item">{{ section.settings.trust_3 | default: '30 calories' }}</span>
+      <span class="ublpmb-trust__sep"></span>
+      <span class="ublpmb-trust__item">{{ section.settings.trust_4 | default: 'Made in France' }}</span>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 03. THE HORMONAL SCRIPT ═════════ {%- endcomment -%}
+  <section class="ublpmb-crash u2-section">
+    <div class="ublpmb-crash__inner">
+      <span class="ublpmb-eyebrow">— it’s not willpower, it’s biology</span>
+      <h2 class="ublpmb-h2">Same diet. <em>New body.</em></h2>
+
+      <div class="ublpmb-crash__grid">
+        <div class="ublpmb-crash__card ublpmb-crash__card--before">
+          <img src="{{ 'lp-hero-meno-belly.jpg' | asset_url }}"
+               alt="Woman 48-54 calm holding violet UBurn drink — peri/menopause support"
+               loading="lazy" decoding="async" width="880" height="1168">
+          <div class="ublpmb-crash__label">Before · 40s</div>
+          <p class="ublpmb-crash__text">Estrogen drops. Insulin response shifts. Sugar craving hits harder, lasts longer — and your willpower has nothing to do with it.</p>
+        </div>
+        <div class="ublpmb-crash__card ublpmb-crash__card--after">
+          <img src="{{ 'lp-hero-ritual-violet.jpg' | asset_url }}"
+               alt="UBurn pouch with violet ube latte — afternoon calm"
+               loading="lazy" decoding="async" width="880" height="1168">
+          <div class="ublpmb-crash__label">With UBurn</div>
+          <p class="ublpmb-crash__text">One scoop of glucomannan (konjac plant fiber) forms a gel in your stomach. Up to 4 hours of fullness.* No caffeine. Same calories as half an apple.</p>
+        </div>
+      </div>
+      <p class="ublpmb-disc">*Individual results may vary. UBurn supports satiety — it does not treat or prevent menopause symptoms.</p>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 03b. COMPARISON TABLE ═════════ {%- endcomment -%}
+  <section class="ublpmb-compare u2-section">
+    <div class="ublpmb-compare__inner">
+      <span class="ublpmb-eyebrow">— made for the 40s shift</span>
+      <h2 class="ublpmb-h2">UBurn vs other <em>solutions.</em></h2>
+
+      <div class="ublpmb-compare__table-wrap">
+        <table class="ublpmb-compare__table">
+          <thead>
+            <tr>
+              <th class="ublpmb-compare__th ublpmb-compare__th--row"></th>
+              <th class="ublpmb-compare__th ublpmb-compare__th--brand">UBurn</th>
+              <th class="ublpmb-compare__th">Diet snacks</th>
+              <th class="ublpmb-compare__th">HRT / Rx</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="ublpmb-compare__row-label">EFSA-recognized fiber</th>
+              <td class="ublpmb-compare__cell ublpmb-compare__cell--brand"><span class="ublpmb-compare__yes">✓</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__no">—</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__no">—</span></td>
+            </tr>
+            <tr>
+              <th class="ublpmb-compare__row-label">Caffeine-free</th>
+              <td class="ublpmb-compare__cell ublpmb-compare__cell--brand"><span class="ublpmb-compare__yes">✓</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__yes">✓</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__no">—</span></td>
+            </tr>
+            <tr>
+              <th class="ublpmb-compare__row-label">4-hour satiety*</th>
+              <td class="ublpmb-compare__cell ublpmb-compare__cell--brand"><span class="ublpmb-compare__yes">✓</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__no">—</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__no">—</span></td>
+            </tr>
+            <tr>
+              <th class="ublpmb-compare__row-label">Calories per serving</th>
+              <td class="ublpmb-compare__cell ublpmb-compare__cell--brand"><span class="ublpmb-compare__val">30 kcal</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__val">100–200 kcal</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__val">0–50 kcal</span></td>
+            </tr>
+            <tr>
+              <th class="ublpmb-compare__row-label">No spikes or crashes</th>
+              <td class="ublpmb-compare__cell ublpmb-compare__cell--brand"><span class="ublpmb-compare__yes">✓</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__no">—</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__no">—</span></td>
+            </tr>
+            <tr>
+              <th class="ublpmb-compare__row-label">100% plant-based</th>
+              <td class="ublpmb-compare__cell ublpmb-compare__cell--brand"><span class="ublpmb-compare__yes">✓</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__val">varies</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__val">varies</span></td>
+            </tr>
+            <tr>
+              <th class="ublpmb-compare__row-label">French heritage</th>
+              <td class="ublpmb-compare__cell ublpmb-compare__cell--brand"><span class="ublpmb-compare__yes">✓</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__no">—</span></td>
+              <td class="ublpmb-compare__cell"><span class="ublpmb-compare__no">—</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="ublpmb-disc">*EFSA Regulation 432/2012 · ID 3120 · 3g/day with water before meals. Comparison ranges based on category averages. Individual products may vary.</p>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 04. PRODUCT / OFFER (canonical block — same as reference LP) ═════════ {%- endcomment -%}
+  <section class="ublpmb-offer u2-section" id="ublpmb-offer">
+    <div class="ublpmb-offer__inner">
+      <span class="ublpmb-eyebrow">— your ritual</span>
+      <h2 class="ublpmb-h2">One flavor. <em>Two packs.</em></h2>
+      <p class="ublpmb-offer__lede">Subscribe &amp; save 10% · free U.S. shipping on $40+</p>
+
+      <div class="ublpmb-offer__product">
+        <img src="https://uburn.co/cdn/shop/files/magnific_i-want-img1-to-be-in-4k-f_3001183035.png"
+             alt="UBurn — Plant-based satiety drink"
+             loading="lazy" decoding="async" width="900" height="1170">
+        <p class="ublpmb-offer__product-label">UBurn — Plant-based satiety drink</p>
+      </div>
+
+      <div class="ublpmb-offer__packs" role="radiogroup" aria-label="Pack size">
+        {%- comment -%} ──── STARTER ──── {%- endcomment -%}
+        <label class="ublpmb-pack" data-ublpmb-pack="starter">
+          <input type="radio" name="ublpmb-pack" value="starter" data-ublpmb-input="pack">
+          <span class="ublpmb-pack__inner">
+            <span class="ublpmb-pack__title">Starter</span>
+            <span class="ublpmb-pack__meta">30 days · 1 scoop daily</span>
+
+            <span class="ublpmb-pack__mode" role="radiogroup" aria-label="Starter — purchase type">
+              <button type="button" class="ublpmb-mode" data-ublpmb-mode="subscribe" data-ublpmb-pack-mode="starter" aria-pressed="true">subscribe<span class="ublpmb-mode__tag">−10%</span></button>
+              <button type="button" class="ublpmb-mode" data-ublpmb-mode="onetime" data-ublpmb-pack-mode="starter" aria-pressed="false">one-time</button>
+            </span>
+
+            <span class="ublpmb-pack__price-row">
+              <span class="ublpmb-pack__price-final" data-ublpmb-pack-price="starter">$33.29</span>
+              <span class="ublpmb-pack__price-strike">$36.99</span>
+            </span>
+
+            <span class="ublpmb-pack__per">$1.11 / scoop · ships every 30 days</span>
+            <span class="ublpmb-pack__quantity">90 g · 30 scoops</span>
+
+            <button class="u2-cta u2-cta--full ublpmb-pack__cta" data-ublpmb-atc-pack="starter" type="button">
+              <span>checkout — Starter</span>
+              <span class="u2-cta__arrow" aria-hidden="true">→</span>
+            </button>
+            <span class="ublpmb-pack__assurance">free shipping $40+ · cancel anytime</span>
+          </span>
+        </label>
+
+        {%- comment -%} ──── MAXIMUM ──── {%- endcomment -%}
+        <label class="ublpmb-pack ublpmb-pack--pop" data-ublpmb-pack="maximum">
+          <input type="radio" name="ublpmb-pack" value="maximum" data-ublpmb-input="pack" checked>
+          <span class="ublpmb-pack__badge">Best value · faster results</span>
+          <span class="ublpmb-pack__inner">
+            <span class="ublpmb-pack__title">Maximum</span>
+            <span class="ublpmb-pack__meta">30 days · 3 scoops daily · 4 free bonuses</span>
+
+            <span class="ublpmb-pack__mode" role="radiogroup" aria-label="Maximum — purchase type">
+              <button type="button" class="ublpmb-mode" data-ublpmb-mode="subscribe" data-ublpmb-pack-mode="maximum" aria-pressed="true">subscribe<span class="ublpmb-mode__tag">−10%</span></button>
+              <button type="button" class="ublpmb-mode" data-ublpmb-mode="onetime" data-ublpmb-pack-mode="maximum" aria-pressed="false">one-time</button>
+            </span>
+
+            <span class="ublpmb-pack__price-row">
+              <span class="ublpmb-pack__price-final" data-ublpmb-pack-price="maximum">$58.99</span>
+              <span class="ublpmb-pack__price-strike">$110.97</span>
+            </span>
+
+            <span class="ublpmb-pack__per">$0.66 / scoop · one-time purchase</span>
+            <span class="ublpmb-pack__quantity">270 g · 90 scoops · save 47% vs. 3 Starters</span>
+
+            <button class="u2-cta u2-cta--full ublpmb-pack__cta" data-ublpmb-atc-pack="maximum" type="button">
+              <span>checkout — Maximum</span>
+              <span class="u2-cta__arrow" aria-hidden="true">→</span>
+            </button>
+            <span class="ublpmb-pack__assurance">free shipping $40+ · cancel anytime</span>
+          </span>
+        </label>
+      </div>
+
+      <div class="ublpmb-offer__bonus">
+        <div class="ublpmb-offer__bonus-title">Included with <em>Maximum</em></div>
+        <ul class="ublpmb-offer__bonus-list">
+          <li><span class="ublpmb-offer__bonus-icon" aria-hidden="true">E</span> 30-day reset e-book <em>$50 value</em></li>
+          <li><span class="ublpmb-offer__bonus-icon" aria-hidden="true">C</span> UBurn Collective community <em>$43 value</em></li>
+          <li><span class="ublpmb-offer__bonus-icon" aria-hidden="true">N</span> WhatsApp nutrition coach <em>$50 value</em></li>
+          <li><span class="ublpmb-offer__bonus-icon" aria-hidden="true">S</span> Free U.S. shipping <em>$12 value</em></li>
+        </ul>
+        <p class="ublpmb-offer__bonus-total"><strong>$214</strong> in extras · you pay <strong data-ublpmb-bundle>$58.99</strong></p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 05. REVIEWS ═════════ {%- endcomment -%}
+  <section class="ublpmb-reviews u2-section">
+    <div class="ublpmb-reviews__inner">
+      <span class="ublpmb-eyebrow">— women 45+ in their own words</span>
+      <h2 class="ublpmb-h2">Verified <em>buyers.</em></h2>
+      <div class="ublpmb-reviews__grid">
+        <article class="ublpmb-review">
+          <div class="ublpmb-review__stars">★★★★★</div>
+          <h3 class="ublpmb-review__title">"The sugar craving stopped controlling me."</h3>
+          <p class="ublpmb-review__body">52. Same workouts, same plate, totally different body since perimeno. Two weeks on UBurn and the 4 PM raid finally went quiet. First thing that actually held.*</p>
+          <div class="ublpmb-review__meta">
+            <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-story-1-sarah-brooklyn.png" alt="Linda R. — Westchester, NY" loading="lazy" width="120" height="120">
+            <div>
+              <div class="ublpmb-review__name">Linda R. <span class="ublpmb-review__verified">✓ verified</span></div>
+              <div class="ublpmb-review__city">Westchester, NY · 28 days · age 52</div>
+            </div>
+          </div>
+        </article>
+        <article class="ublpmb-review">
+          <div class="ublpmb-review__stars">★★★★★</div>
+          <h3 class="ublpmb-review__title">"Finally — something that respects what's actually happening."</h3>
+          <p class="ublpmb-review__body">I tried diet cookies, I tried "menopause" pills with 14 ingredients. UBurn is the first one that didn't talk down to me. Plant fiber. Real mechanism. Calm afternoons.*</p>
+          <div class="ublpmb-review__meta">
+            <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-story-2-jennifer-miami.png" alt="Karen B. — Naples, FL" loading="lazy" width="120" height="120">
+            <div>
+              <div class="ublpmb-review__name">Karen B. <span class="ublpmb-review__verified">✓ verified</span></div>
+              <div class="ublpmb-review__city">Naples, FL · 42 days · age 49</div>
+            </div>
+          </div>
+        </article>
+        <article class="ublpmb-review">
+          <div class="ublpmb-review__stars">★★★★★</div>
+          <h3 class="ublpmb-review__title">"My belly didn't disappear. My evenings did calm down."</h3>
+          <p class="ublpmb-review__body">I'm not promising miracles — but I'm not over-eating dinner anymore, and the 9 PM cookie habit is finally broken. Subtle, real, sustainable. Recommending it to my book club.*</p>
+          <div class="ublpmb-review__meta">
+            <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-story-3-rachel-denver.png" alt="Patricia M. — Boulder, CO" loading="lazy" width="120" height="120">
+            <div>
+              <div class="ublpmb-review__name">Patricia M. <span class="ublpmb-review__verified">✓ verified</span></div>
+              <div class="ublpmb-review__city">Boulder, CO · 35 days · age 54</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 06. FOUNDER ═════════ {%- endcomment -%}
+  <section class="ublpmb-founder u2-section">
+    <div class="ublpmb-founder__inner">
+      <img src="https://uburn.co/cdn/shop/t/50/assets/uburn-us-about-10-brand-story-portrait-a.png"
+           alt="Mariana — UBurn founder portrait"
+           loading="lazy" decoding="async" width="900" height="1125">
+      <div class="ublpmb-founder__copy">
+        <span class="ublpmb-eyebrow">— founder note</span>
+        <h2 class="ublpmb-h2">Built for the <em>shift</em> no one warned us about.</h2>
+        <p class="ublpmb-founder__quote">"Perimenopause hit me at 47. My diet didn't change. My body did. I needed something honest — not a 'miracle' pill, not a 14-ingredient menopause stack. Just a plant fiber that actually holds you for 4 hours. This is the satiety ritual I wish I'd had a decade earlier."</p>
+        <div class="ublpmb-founder__sig">Mariana · Founder · UBurn · Paris</div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 07. FAQ ═════════ {%- endcomment -%}
+  <section class="ublpmb-faq u2-section">
+    <div class="ublpmb-faq__inner">
+      <span class="ublpmb-eyebrow">— FAQ</span>
+      <h2 class="ublpmb-h2">Common <em>questions.</em></h2>
+      <details class="ublpmb-faq__item">
+        <summary>Will UBurn treat my menopause symptoms?<span class="ublpmb-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublpmb-faq__body">No — and no honest brand should claim that. UBurn is a dietary supplement that supports <strong>satiety</strong>. The glucomannan (konjac plant fiber) forms a gel in your stomach for up to 4 hours of fullness, which helps with the hormonal sugar cravings that intensify in your 40s and 50s. It does not treat, prevent or cure menopause.*</div>
+      </details>
+      <details class="ublpmb-faq__item">
+        <summary>How is this different from a "menopause" supplement?<span class="ublpmb-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublpmb-faq__body">Most menopause stacks pack 10-14 actives at low doses. UBurn does one thing: a clinically dosed glucomannan-based satiety drink, EFSA-recognized for the satiety claim within a calorie-controlled diet. Caffeine-free, 30 calories, plant-based.*</div>
+      </details>
+      <details class="ublpmb-faq__item">
+        <summary>I'm on HRT / metformin / Ozempic — is it safe?<span class="ublpmb-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublpmb-faq__body">UBurn is a food-based dietary supplement (plant fiber + minor actives, no hormones, no stimulants). Glucomannan can affect the absorption of oral medications — always take it at least 1 hour before or after any prescription. Ask your doctor if you have specific concerns.</div>
+      </details>
+      <details class="ublpmb-faq__item">
+        <summary>When will I notice a difference?<span class="ublpmb-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublpmb-faq__body">Satiety: from the first scoop. The afternoon sugar craving usually feels noticeably softer within 7-14 days of daily use. Effects on weight are individual and depend on overall calories and movement.*</div>
+      </details>
+      <details class="ublpmb-faq__item">
+        <summary>Subscribe or one-time?<span class="ublpmb-faq__icon" aria-hidden="true">+</span></summary>
+        <div class="ublpmb-faq__body">Both. Subscribe &amp; save gives −10% + free bonuses (e-book, Collective, WhatsApp coach, free U.S. shipping). Pause, skip or cancel anytime from your account. No lock-in.</div>
+      </details>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ 08. FINAL CTA ═════════ {%- endcomment -%}
+  <section class="ublpmb-final u2-section">
+    <div class="ublpmb-final__inner">
+      <img src="{{ 'lp-hero-meno-belly.jpg' | asset_url }}"
+           alt="UBurn — for women navigating the 40s body shift"
+           loading="lazy" decoding="async" width="880" height="1168">
+      <div class="ublpmb-final__copy">
+        <span class="ublpmb-eyebrow">— now you have a tool</span>
+        <h2 class="ublpmb-h2">Your 4 PM cravings are hormonal. <em>Now you have a tool.</em></h2>
+        <p>One scoop of glucomannan (konjac plant fiber). Cold water or oat milk. Up to 4 hours of fullness.* No caffeine. 30 calories. Crafted in France.</p>
+        <button class="u2-cta u2-cta--full ublpmb-final__cta" data-ublpmb-scroll="#ublpmb-offer" type="button">
+          <span>start my pack — from $33.29/mo</span>
+          <span class="u2-cta__arrow" aria-hidden="true">→</span>
+        </button>
+        <p class="ublpmb-final__pay">Pay with Shop Pay · Klarna · PayPal · Visa</p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ═════════ FOOTER MINI ═════════ {%- endcomment -%}
+  <footer class="ublpmb-footer">
+    <div class="ublpmb-footer__inner">
+      <p>Dietary supplement containing konjac glucomannan. Glucomannan supports satiety as part of a balanced lifestyle.* Recommended use: 3g/day in 3 doses of 1g with 1–2 large glasses of water before meals. Not a substitute for a balanced diet. Not recommended during pregnancy or breastfeeding.</p>
+      <p>*These statements have not been evaluated by the FDA. This product is not intended to diagnose, treat, cure, or prevent any disease.</p>
+      <p class="ublpmb-footer__copy">© {{ 'now' | date: '%Y' }} UBurn · Crafted in France · Made for the U.S.</p>
+    </div>
+  </footer>
+
+  {%- comment -%} ═════════ STICKY MOBILE CART ═════════ {%- endcomment -%}
+  <div class="ublpmb-sticky" id="ublpmb-sticky" aria-hidden="true">
+    <div class="ublpmb-sticky__inner">
+      <div class="ublpmb-sticky__info">
+        <div class="ublpmb-sticky__name" data-ublpmb-sticky-name>Maximum</div>
+        <div class="ublpmb-sticky__price" data-ublpmb-sticky-price>$53.09/mo · save 10%</div>
+      </div>
+      <button class="u2-cta ublpmb-sticky__cta" data-ublpmb-atc type="button">
+        add to cart →
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script src="{{ 'uburn-lp-meno-belly.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "UBurn LP Meno Belly",
+  "tag": "section",
+  "class": "shopify-section--uburn-lp-meno-belly",
+  "settings": [
+    { "type": "header", "content": "Product binding" },
+    { "type": "product", "id": "product", "label": "Product (default ube-poudre)" },
+    { "type": "header", "content": "Hero" },
+    { "type": "textarea", "id": "hero_h1", "label": "Hero H1 (use <em>...</em>)", "default": "End your 4 PM crash." },
+    { "type": "textarea", "id": "hero_sub", "label": "Hero sub", "default": "The violet matcha. Plant-based satiety. 30 calories. Caffeine-free. Crafted in France." },
+    { "type": "header", "content": "Trust strip (4 items)" },
+    { "type": "text", "id": "trust_1", "label": "Trust 1", "default": "EFSA-backed fiber" },
+    { "type": "text", "id": "trust_2", "label": "Trust 2", "default": "0% caffeine" },
+    { "type": "text", "id": "trust_3", "label": "Trust 3", "default": "30 calories" },
+    { "type": "text", "id": "trust_4", "label": "Trust 4", "default": "Made in France" }
+  ],
+  "presets": [ { "name": "UBurn LP Meno Belly" } ]
+}
+{% endschema %}

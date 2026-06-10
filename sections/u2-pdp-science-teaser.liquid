@@ -1,0 +1,75 @@
+{%- comment -%}
+  UBurn V2 — PDP Science teaser (hook to /pages/the-science)
+{%- endcomment -%}
+<style>
+  .u2-scit {
+    background: linear-gradient(135deg, var(--u2-plum-deep) 0%, var(--u2-iris-deep) 100%);
+    color: var(--u2-warm-white);
+    padding: var(--u2-space-section) 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .u2-scit::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(40% 35% at 12% 18%, rgba(184,157,217,0.35), transparent 70%),
+      radial-gradient(45% 40% at 88% 82%, rgba(139,111,191,0.35), transparent 70%);
+    pointer-events: none;
+  }
+  .u2-scit__inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
+  .u2-scit .u2-section-eyebrow { color: var(--u2-lavender); }
+  .u2-scit .u2-section-eyebrow::before { background: var(--u2-lavender); }
+  .u2-scit h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(32px,5vw,46px);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.025em;
+    color: var(--u2-warm-white);
+    margin: 12px 0 18px;
+  }
+  .u2-scit h2 em { font-family: var(--u2-serif); font-style: italic; font-weight: 400; color: var(--u2-lavender); }
+  .u2-scit p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.85);
+    max-width: 56ch;
+    margin: 0 auto 28px;
+  }
+  .u2-scit__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(248,244,238,0.12);
+    border: 1px solid rgba(184,157,217,0.3);
+    color: var(--u2-bone);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+</style>
+<section class="u2-root u2-scit" aria-label="The science behind UBurn">
+  <div class="u2-scit__inner u2-reveal">
+    <span class="u2-scit__badge">{% render 'u2-icon', name: 'flask', size: 12 %} EU Regulation 432/2012 · ID 3120</span>
+    <span class="u2-section-eyebrow">— the science</span>
+    <h2>Backed by one of <em>Europe's most studied fibers.</em></h2>
+    <p>Konjac glucomannan is the only soluble fiber the European Food Safety Authority recognized for satiety support. Five additional plant actives round out the formula. Caffeine-free. 30 calories. French heritage.</p>
+    {% render 'u2-cta-primary', text: 'discover the full science', link: '/pages/the-science', on_dark: true %}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 PDP Science teaser",
+  "tag": "section",
+  "class": "shopify-section--u2-scit",
+  "settings": [],
+  "presets": [ { "name": "U2 PDP Science teaser" } ]
+}
+{% endschema %}

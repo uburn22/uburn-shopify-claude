@@ -1,0 +1,524 @@
+{%- comment -%}
+  UBurn V2 — Pricing cards on homepage (Starter / Maximum)
+  Critical CRO section — migrated from live S7 OFFER block.
+  Includes Subscribe vs One-time toggle (10% off subscribe) + direct-checkout
+  (POST /cart/add with return_to=/checkout) + bonus stack with dynamic total.
+  Redesign 2026-05-17 — consolidated single conversion moment.
+{%- endcomment -%}
+{%- liquid
+  assign hp = section.settings.product
+  if hp == blank
+    assign hp = all_products['ube-poudre']
+  endif
+  assign v1 = hp.variants[0]
+  assign v2 = hp.variants[1] | default: v1
+  assign sub_plan = null
+  for spg in hp.selling_plan_groups
+    for sp in spg.selling_plans
+      assign sub_plan = sp
+      break
+    endfor
+    if sub_plan != null
+      break
+    endif
+  endfor
+-%}
+<style>
+  .u2-pricing { background: var(--u2-cream); padding: var(--u2-space-section) 20px; }
+  .u2-pricing__inner { max-width: 1180px; margin: 0 auto; }
+  .u2-pricing__head { text-align: center; margin-bottom: 40px; }
+  .u2-pricing__head h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(34px,5.5vw,48px);
+    font-weight: 800;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.025em;
+    margin: 12px 0 8px;
+  }
+  .u2-pricing__head h2 em {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--u2-iris);
+  }
+  .u2-pricing__head p {
+    font-size: 14px;
+    color: #5a5a5a;
+    margin: 0;
+  }
+  .u2-pricing__product {
+    aspect-ratio: 1/1;
+    max-width: 280px;
+    margin: 0 auto 32px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--u2-lavender-soft);
+  }
+  .u2-pricing__product img { width:100%; height:100%; object-fit: cover; }
+  .u2-pricing__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  @media (min-width: 768px) { .u2-pricing__grid { grid-template-columns: 1fr 1fr; gap: 20px; } }
+  .u2-pricing__card {
+    background: white;
+    border: 2px solid rgba(107,78,158,0.12);
+    border-radius: 20px;
+    padding: 28px 24px;
+    position: relative;
+    transition: transform 0.3s var(--u2-ease-smooth), box-shadow 0.3s var(--u2-ease-smooth), border-color 0.3s var(--u2-ease-smooth);
+  }
+  .u2-pricing__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 50px -20px rgba(58,31,89,0.22);
+  }
+  .u2-pricing__card--pop {
+    border-color: var(--u2-iris);
+    background: linear-gradient(135deg, rgba(232,220,239,0.45) 0%, white 50%);
+    box-shadow: 0 22px 50px -20px rgba(107,78,158,0.3);
+  }
+  .u2-pricing__badge {
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    background: var(--u2-iris);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+  }
+  .u2-pricing__name {
+    font-family: var(--u2-sans);
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+  }
+  .u2-pricing__sub {
+    font-size: 12px;
+    color: var(--u2-text-muted);
+    letter-spacing: 0.02em;
+    margin: 0 0 14px;
+  }
+
+  /* Subscribe / One-time tabs */
+  .u2-pricing__tabs {
+    display: flex; gap: 6px; padding: 4px;
+    background: rgba(107,78,158,0.08);
+    border-radius: 12px;
+    margin: 0 0 16px;
+  }
+  .u2-pricing__tab {
+    flex: 1;
+    border: 0; cursor: pointer;
+    background: transparent;
+    padding: 9px 8px;
+    border-radius: 9px;
+    font-family: var(--u2-sans);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--u2-plum);
+    transition: background .2s, color .2s, box-shadow .2s;
+  }
+  .u2-pricing__tab[aria-selected="true"] {
+    background: #ffffff;
+    color: var(--u2-plum-black);
+    box-shadow: 0 2px 6px -2px rgba(0,0,0,0.12);
+  }
+  .u2-pricing__tab-tag {
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #1c8e6a;
+  }
+
+  .u2-pricing__price {
+    font-family: var(--u2-sans);
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--u2-plum-black);
+    letter-spacing: -0.025em;
+    line-height: 1;
+    margin: 0 0 6px;
+  }
+  .u2-pricing__price small {
+    display: inline-block;
+    font-size: 18px;
+    color: #b7b3bd;
+    text-decoration: line-through;
+    font-weight: 500;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  .u2-pricing__per {
+    font-size: 13px;
+    color: var(--u2-iris);
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+  .u2-pricing__save {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #1c8e6a;
+    background: #e6f4ef;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin: 0 0 10px;
+  }
+  .u2-pricing__dur {
+    font-size: 13px;
+    color: #5a5a5a;
+    margin: 0 0 22px;
+  }
+  .u2-pricing__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--u2-plum-deep);
+    color: var(--u2-bone) !important;
+    width: 100%;
+    padding: 18px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: lowercase;
+    transition: background var(--u2-duration-medium) var(--u2-ease-luxe),
+                transform var(--u2-duration-medium) var(--u2-ease-luxe),
+                box-shadow var(--u2-duration-medium) var(--u2-ease-luxe);
+    border: 1px solid var(--u2-plum-deep);
+    box-shadow: 0 8px 24px -10px rgba(26, 15, 46, 0.45);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    font-family: var(--u2-sans);
+  }
+  .u2-pricing__cta::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%);
+    pointer-events: none;
+  }
+  .u2-pricing__card--pop .u2-pricing__cta {
+    background: var(--u2-plum-black);
+    border-color: var(--u2-plum-black);
+    box-shadow: 0 10px 28px -10px rgba(26, 15, 46, 0.6);
+  }
+  /* CTA color override defense */
+  .u2-pricing__card .u2-pricing__cta,
+  .u2-pricing__card .u2-pricing__cta:hover,
+  .u2-pricing__card .u2-pricing__cta:visited {
+    color: var(--u2-bone);
+  }
+  .u2-pricing__cta:hover {
+    background: var(--u2-iris);
+    border-color: var(--u2-iris);
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 14px 32px -10px rgba(107, 78, 158, 0.55);
+  }
+  .u2-pricing__card--pop .u2-pricing__cta:hover {
+    background: var(--u2-iris);
+    border-color: var(--u2-iris);
+  }
+  .u2-pricing__form { margin: 0; }
+  .u2-pricing__shipline {
+    font-size: 11px;
+    color: var(--u2-plum);
+    margin: 10px 0 0;
+    text-align: center;
+    opacity: 0.7;
+  }
+
+  /* Bonus stack */
+  .u2-pricing__bonus {
+    max-width: 880px;
+    margin: 32px auto 0;
+    background: linear-gradient(135deg, var(--u2-lavender-soft), white);
+    border-radius: 20px;
+    padding: 28px 24px;
+    border: 1px solid rgba(107,78,158,0.15);
+  }
+  .u2-pricing__bonus h3 {
+    font-family: var(--u2-sans);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--u2-iris);
+    text-align: center;
+    margin: 0 0 18px;
+  }
+  .u2-pricing__bonus h3 em {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--u2-iris-deep);
+    font-size: 18px;
+  }
+  .u2-pricing__bonus-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  @media (min-width: 600px) { .u2-pricing__bonus-grid { grid-template-columns: repeat(2,1fr); } }
+  .u2-pricing__bonus-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    border-radius: 12px;
+    padding: 14px 16px;
+    border: 1px solid rgba(107,78,158,0.08);
+  }
+  .u2-pricing__bonus-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--u2-iris);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-size: 17px;
+    flex-shrink: 0;
+  }
+  .u2-pricing__bonus-body { flex: 1; min-width: 0; }
+  .u2-pricing__bonus-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--u2-plum-black);
+    margin: 0;
+  }
+  .u2-pricing__bonus-tag {
+    font-size: 11px;
+    color: var(--u2-iris);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 2px 0 0;
+  }
+  .u2-pricing__total {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px dashed rgba(107,78,158,0.2);
+    font-size: 13px;
+    color: var(--u2-plum-black);
+  }
+  .u2-pricing__total strong {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--u2-iris);
+    font-size: 18px;
+  }
+</style>
+<section class="u2-root u2-pricing" aria-label="Pricing" data-u2-pricing>
+  <div class="u2-pricing__inner">
+    <div class="u2-pricing__head u2-reveal">
+      <span class="u2-section-eyebrow">— your ritual</span>
+      <h2>One flavor. <em>Two packs.</em></h2>
+      <p>Subscribe &amp; save 10% · free U.S. shipping on $40+</p>
+    </div>
+
+    {%- if hp != blank -%}
+      <div class="u2-pricing__product u2-reveal delay-1">
+        {%- assign first_img = hp.featured_image -%}
+        {{ first_img | image_url: width: 600 | image_tag: loading: 'lazy', alt: hp.title, width: 600, height: 600 }}
+      </div>
+    {%- endif -%}
+
+    <div class="u2-pricing__grid">
+      {%- comment -%} ============ STARTER ============ {%- endcomment -%}
+      <article class="u2-pricing__card u2-reveal delay-2" data-u2-pack="starter">
+        <h3 class="u2-pricing__name">Starter</h3>
+        <p class="u2-pricing__sub">30 days · 1 scoop daily</p>
+
+        {%- if sub_plan -%}
+        <div class="u2-pricing__tabs" role="tablist" aria-label="Purchase type — Starter">
+          <button type="button" class="u2-pricing__tab" role="tab" aria-selected="true" data-u2-mode="subscribe">subscribe<span class="u2-pricing__tab-tag">−10%</span></button>
+          <button type="button" class="u2-pricing__tab" role="tab" aria-selected="false" data-u2-mode="onetime">one-time</button>
+        </div>
+        {%- endif -%}
+
+        <p class="u2-pricing__price" data-u2-price>$33.29<small data-u2-compare>$36.99</small></p>
+        <p class="u2-pricing__per" data-u2-per>$1.11 / scoop · ships every 30 days</p>
+        <p class="u2-pricing__dur">90 g · 30 scoops</p>
+
+        <form action="/cart/add" method="post" class="u2-pricing__form" data-u2-form>
+          <input type="hidden" name="id" value="{{ v1.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="return_to" value="/checkout">
+          {%- if sub_plan -%}
+          <input type="hidden" name="selling_plan" value="{{ sub_plan.id }}" data-u2-plan-input>
+          {%- endif -%}
+          <button type="submit" class="u2-pricing__cta">checkout — Starter →</button>
+        </form>
+        <p class="u2-pricing__shipline">free shipping $40+ · cancel anytime</p>
+      </article>
+
+      {%- comment -%} ============ MAXIMUM ============ {%- endcomment -%}
+      <article class="u2-pricing__card u2-pricing__card--pop u2-reveal delay-3" data-u2-pack="maximum">
+        <span class="u2-pricing__badge">Best value · faster results</span>
+        <h3 class="u2-pricing__name">Maximum</h3>
+        <p class="u2-pricing__sub">30 days · 3 scoops daily · 4 free bonuses</p>
+
+        {%- if sub_plan -%}
+        <div class="u2-pricing__tabs" role="tablist" aria-label="Purchase type — Maximum">
+          <button type="button" class="u2-pricing__tab" role="tab" aria-selected="true" data-u2-mode="subscribe">subscribe<span class="u2-pricing__tab-tag">−10%</span></button>
+          <button type="button" class="u2-pricing__tab" role="tab" aria-selected="false" data-u2-mode="onetime">one-time</button>
+        </div>
+        {%- endif -%}
+
+        <p class="u2-pricing__price" data-u2-price>$53.09<small data-u2-compare>$110.97</small></p>
+        <p class="u2-pricing__per" data-u2-per>$0.59 / scoop · ships every 30 days</p>
+        <p class="u2-pricing__dur">270 g · 90 scoops · save 47% vs. 3 Starters</p>
+
+        <form action="/cart/add" method="post" class="u2-pricing__form" data-u2-form>
+          <input type="hidden" name="id" value="{{ v2.id }}">
+          <input type="hidden" name="quantity" value="1">
+          <input type="hidden" name="return_to" value="/checkout">
+          {%- if sub_plan -%}
+          <input type="hidden" name="selling_plan" value="{{ sub_plan.id }}" data-u2-plan-input>
+          {%- endif -%}
+          <button type="submit" class="u2-pricing__cta">checkout — Maximum →</button>
+        </form>
+        <p class="u2-pricing__shipline">free shipping $40+ · cancel anytime</p>
+      </article>
+    </div>
+
+    {%- if section.settings.show_bonus -%}
+    <div class="u2-pricing__bonus u2-reveal delay-3">
+      <h3>Included with <em>Maximum</em></h3>
+      <div class="u2-pricing__bonus-grid">
+        <div class="u2-pricing__bonus-item">
+          <span class="u2-pricing__bonus-icon">E</span>
+          <div class="u2-pricing__bonus-body">
+            <p class="u2-pricing__bonus-name">30-day reset e-book</p>
+            <p class="u2-pricing__bonus-tag">$50 value</p>
+          </div>
+        </div>
+        <div class="u2-pricing__bonus-item">
+          <span class="u2-pricing__bonus-icon">C</span>
+          <div class="u2-pricing__bonus-body">
+            <p class="u2-pricing__bonus-name">UBurn Collective community</p>
+            <p class="u2-pricing__bonus-tag">$43 value</p>
+          </div>
+        </div>
+        <div class="u2-pricing__bonus-item">
+          <span class="u2-pricing__bonus-icon">N</span>
+          <div class="u2-pricing__bonus-body">
+            <p class="u2-pricing__bonus-name">WhatsApp nutrition coach</p>
+            <p class="u2-pricing__bonus-tag">$50 value</p>
+          </div>
+        </div>
+        <div class="u2-pricing__bonus-item">
+          <span class="u2-pricing__bonus-icon">S</span>
+          <div class="u2-pricing__bonus-body">
+            <p class="u2-pricing__bonus-name">Free U.S. shipping</p>
+            <p class="u2-pricing__bonus-tag">$12 value</p>
+          </div>
+        </div>
+      </div>
+      <p class="u2-pricing__total"><strong>$214</strong> in extras · you pay <strong data-u2-bundle-price>$53.09</strong></p>
+    </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{%- if sub_plan -%}
+<script>
+  (function(){
+    var root = document.querySelector('[data-u2-pricing]');
+    if(!root) return;
+
+    var prices = {
+      starter: {
+        subscribe: { price:'$33.29', compare:'$36.99', per:'$1.11 / scoop · ships every 30 days', save:'Save 10% · cancel anytime', showCompare:true, showSave:true },
+        onetime:  { price:'$36.99', compare:'',        per:'$1.23 / scoop · one-time purchase',     save:'',                          showCompare:false, showSave:false }
+      },
+      maximum: {
+        subscribe: { price:'$53.09', compare:'$110.97', per:'$0.59 / scoop · ships every 30 days', save:'Save 10% · cancel anytime', showCompare:true, showSave:true,  bundle:'$53.09' },
+        onetime:  { price:'$58.99', compare:'$110.97', per:'$0.66 / scoop · one-time purchase',     save:'',                          showCompare:true, showSave:false, bundle:'$58.99' }
+      }
+    };
+
+    function applyPack(pack){
+      var key = pack.getAttribute('data-u2-pack');
+      var tabs = pack.querySelectorAll('[data-u2-mode]');
+      var priceEl = pack.querySelector('[data-u2-price]');
+      var perEl   = pack.querySelector('[data-u2-per]');
+      var saveEl  = pack.querySelector('[data-u2-save]');
+      var planInput = pack.querySelector('[data-u2-plan-input]');
+
+      function apply(mode){
+        var d = prices[key][mode];
+        if(priceEl){
+          if(d.showCompare && d.compare){
+            priceEl.innerHTML = d.price + '<small data-u2-compare>' + d.compare + '</small>';
+          } else {
+            priceEl.textContent = d.price;
+          }
+        }
+        if(perEl) perEl.textContent = d.per;
+        if(saveEl){
+          saveEl.style.display = d.showSave ? '' : 'none';
+          if(d.showSave) saveEl.textContent = d.save;
+        }
+        if(planInput){
+          if(mode === 'subscribe'){
+            planInput.value = '{{ sub_plan.id }}';
+            planInput.disabled = false;
+          } else {
+            planInput.value = '';
+            planInput.disabled = true;
+          }
+        }
+        tabs.forEach(function(t){ t.setAttribute('aria-selected', t.getAttribute('data-u2-mode') === mode ? 'true' : 'false'); });
+        if(key === 'maximum' && d.bundle){
+          var bundleEl = root.querySelector('[data-u2-bundle-price]');
+          if(bundleEl) bundleEl.textContent = d.bundle;
+        }
+      }
+
+      tabs.forEach(function(t){
+        t.addEventListener('click', function(){ apply(t.getAttribute('data-u2-mode')); });
+      });
+    }
+
+    root.querySelectorAll('[data-u2-pack]').forEach(applyPack);
+  })();
+</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "U2 Pricing cards",
+  "tag": "section",
+  "class": "shopify-section--u2-pricing",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "checkbox", "id": "show_bonus", "label": "Show bonus stack with Maximum", "default": true }
+  ],
+  "presets": [ { "name": "U2 Pricing cards" } ]
+}
+{% endschema %}

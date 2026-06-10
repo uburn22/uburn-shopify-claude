@@ -710,7 +710,7 @@
       <div class="u2-pdp-gallery__thumbs" role="tablist" aria-label="Gallery thumbnails">
         {%- for media in product.media -%}
           <a href="#u2-slide-{{ forloop.index }}" class="u2-pdp-gallery__thumb {% if forloop.first %}is-active{% endif %}" aria-label="Image {{ forloop.index }}">
-            <img src="{{ media | image_url: width: 160 }}" alt="" loading="lazy" decoding="async" width="160" height="160">
+            <img src="{{ media | image_url: width: 160 }}" alt="{{ product.title | escape }} — view {{ forloop.index }}" loading="lazy" decoding="async" width="160" height="160">
           </a>
         {%- endfor -%}
       </div>
@@ -875,10 +875,14 @@
 
 {%- comment -%}
   PRODUCT SCHEMA JSON-LD — enriched for AEO (AI Overviews, ChatGPT, Perplexity, Claude)
+
+  Edits 2026-05-25 (seo/full-optimization-2026-05-25):
   - additionalType "https://schema.org/DietarySupplement" pour typage AI search
   - itemCondition + priceValidUntil + hasMerchantReturnPolicy (Google Shopping rich results)
   - shippingDetails.shippingRate + freeShippingThreshold (>$40)
-  - aggregateRating lue depuis shop.metafields.loox.* (fallback statique tant que non peuplé)
+  - aggregateRating maintenant lue depuis shop.metafields.loox.*
+    (fallback statique conservé tant que les metafields ne sont pas peuplés — voir
+    DEPLOY-NOTES.md, étape Loox webhook → metafield)
   - gtin13 / mpn lus depuis product.metafields.product.gtin / .mpn (à peupler côté admin)
 {%- endcomment -%}
 

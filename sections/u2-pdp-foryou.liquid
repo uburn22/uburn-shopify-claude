@@ -1,0 +1,162 @@
+{%- comment -%}
+  UBurn V2 — PDP "UBurn is for you if…" qualifying checklist
+{%- endcomment -%}
+<style>
+  .u2-pdp-foryou { padding: 80px 20px; background: var(--u2-cream-deep); }
+  .u2-pdp-foryou__inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .u2-pdp-foryou__copy { max-width: 540px; }
+  .u2-pdp-foryou__eyebrow {
+    display: inline-block;
+    font-family: var(--u2-sans);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--u2-iris);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .u2-pdp-foryou__title {
+    font-family: var(--u2-serif);
+    font-size: 44px;
+    line-height: 1.05;
+    font-weight: 400;
+    color: var(--u2-plum-black);
+    margin: 0 0 28px;
+    letter-spacing: -0.025em;
+  }
+  .u2-pdp-foryou__title em { font-style: italic; color: var(--u2-iris); }
+  .u2-pdp-foryou__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .u2-pdp-foryou__list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-family: var(--u2-sans);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--u2-plum-black);
+  }
+  .u2-pdp-foryou__check {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--u2-iris);
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .u2-pdp-foryou__trust {
+    font-family: var(--u2-serif);
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--u2-plum);
+    border-left: 2px solid var(--u2-iris);
+    padding-left: 16px;
+    margin-top: 24px;
+  }
+  .u2-pdp-foryou__media {
+    border-radius: 24px;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: linear-gradient(135deg, var(--u2-lavender-soft), var(--u2-cream));
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 16px 48px rgba(42, 16, 84, 0.14);
+  }
+  .u2-pdp-foryou__media img { width: 100%; height: 100%; object-fit: cover; }
+  .u2-pdp-foryou__placeholder {
+    font-family: var(--u2-serif);
+    font-size: 100px;
+    color: var(--u2-iris);
+    font-style: italic;
+    opacity: 0.4;
+  }
+  @media (max-width: 900px) {
+    .u2-pdp-foryou { padding: 60px 20px; }
+    .u2-pdp-foryou__inner { grid-template-columns: 1fr; gap: 32px; }
+    .u2-pdp-foryou__title { font-size: 32px; }
+    .u2-pdp-foryou__media { max-width: 380px; margin: 0 auto; }
+  }
+</style>
+<section class="u2-root u2-pdp-foryou" aria-labelledby="u2-pdp-foryou-title">
+  <div class="u2-pdp-foryou__inner">
+    <div class="u2-pdp-foryou__copy">
+      <span class="u2-pdp-foryou__eyebrow">{{ section.settings.eyebrow | default: 'Is it for you?' }}</span>
+      <h2 class="u2-pdp-foryou__title" id="u2-pdp-foryou-title">{{ section.settings.title | default: 'UBurn <em>is for you if…</em>' }}</h2>
+      <ul class="u2-pdp-foryou__list">
+        {% for block in section.blocks %}
+          <li {{ block.shopify_attributes }}>
+            <span class="u2-pdp-foryou__check" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <span>{{ block.settings.text }}</span>
+          </li>
+        {% else %}
+          <li><span class="u2-pdp-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>You often snack between meals.</span></li>
+          <li><span class="u2-pdp-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>You get sugar cravings around 4PM or in the evening.</span></li>
+          <li><span class="u2-pdp-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>You want to skip caffeinated drinks.</span></li>
+          <li><span class="u2-pdp-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>You want a simple routine, not a complicated diet.</span></li>
+          <li><span class="u2-pdp-foryou__check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><span>You want an enjoyable drink — smooth, purple, and indulgent.</span></li>
+        {% endfor %}
+      </ul>
+      <p class="u2-pdp-foryou__trust">{{ section.settings.trust | default: 'UBurn is not a miracle solution. It is a satiety routine designed to help you handle the critical moments of your day.' }}</p>
+    </div>
+    <div class="u2-pdp-foryou__media">
+      {% if section.settings.image %}
+        <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="{{ section.settings.image.alt | default: 'UBurn plant-based satiety drink — lifestyle context' | escape }}" loading="lazy" decoding="async" width="1000" height="1250">
+      {% else %}
+        {%- comment -%} rev 2026-05-16 — lifestyle kitchen photo (glass + packshot + powder spoon) replaces "U" placeholder {%- endcomment -%}
+        <img src="{{ 'uburn-us-pdp-foryou-lifestyle-a.jpg' | asset_url }}" alt="{% if request.locale.iso_code == 'fr' %}Femme tenant un verre de latte ube violet glacé à côté du sachet UBurn et d'une cuillère de poudre, lumière matinale chaude{% else %}Woman holding a glass of iced violet ube latte next to the UBurn pouch and a spoon of powder, warm morning light{% endif %}" loading="lazy" decoding="async" width="1127" height="1400">
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 PDP For You",
+  "tag": "section",
+  "class": "shopify-section--u2",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Is it for you?" },
+    { "type": "text", "id": "title", "label": "Title (em supported)", "default": "UBurn <em>is for you if…</em>" },
+    { "type": "textarea", "id": "trust", "label": "Trust paragraph" },
+    { "type": "image_picker", "id": "image", "label": "Image (optional)" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Checklist item",
+      "settings": [{ "type": "text", "id": "text", "label": "Text" }]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "U2 PDP For You",
+      "blocks": [
+        { "type": "item", "settings": { "text": "You often snack between meals." } },
+        { "type": "item", "settings": { "text": "You get sugar cravings around 4PM or in the evening." } },
+        { "type": "item", "settings": { "text": "You want to skip caffeinated drinks." } },
+        { "type": "item", "settings": { "text": "You want a simple routine, not a complicated diet." } },
+        { "type": "item", "settings": { "text": "You want an enjoyable drink — smooth, purple, and indulgent." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

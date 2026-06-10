@@ -1,0 +1,162 @@
+{%- comment -%}
+  UBurn V2 — Comparison table (UBurn vs traditional solutions)
+  FTC-compliant : structural/functional comparisons only, no weight loss
+{%- endcomment -%}
+<style>
+  .u2-compare { background: var(--u2-cream); padding: var(--u2-space-section) 20px; }
+  .u2-compare__inner { max-width: 1080px; margin: 0 auto; }
+  .u2-compare__head { text-align: center; margin-bottom: 40px; }
+  .u2-compare__head h2 {
+    font-family: var(--u2-sans);
+    font-size: clamp(32px,5vw,46px);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--u2-plum-black);
+    margin: 12px 0 0;
+  }
+  .u2-compare__head h2 em {
+    font-family: var(--u2-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--u2-iris);
+  }
+  .u2-compare__table {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 22px 50px -20px rgba(58,31,89,0.15);
+    border: 1px solid rgba(107,78,158,0.08);
+  }
+  .u2-compare__row {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    border-bottom: 1px solid rgba(107,78,158,0.08);
+    align-items: center;
+  }
+  .u2-compare__row:last-child { border-bottom: 0; }
+  .u2-compare__cell {
+    padding: 16px 12px;
+    font-size: 12px;
+    color: var(--u2-text-body);
+    line-height: 1.4;
+  }
+  @media (min-width: 768px) {
+    .u2-compare__cell { padding: 22px 18px; font-size: 14px; }
+  }
+  .u2-compare__cell--label {
+    font-weight: 600;
+    color: var(--u2-plum-black);
+    background: var(--u2-bone);
+    text-align: left;
+  }
+  .u2-compare__cell--uburn {
+    background: linear-gradient(180deg, rgba(232,220,239,0.5), rgba(232,220,239,0.2));
+    text-align: center;
+    font-weight: 600;
+    color: var(--u2-iris-deep);
+  }
+  .u2-compare__cell--other {
+    text-align: center;
+    color: var(--u2-text-muted);
+  }
+  .u2-compare__head-row {
+    background: var(--u2-plum-black);
+    color: var(--u2-bone);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+  .u2-compare__head-row .u2-compare__cell { color: var(--u2-bone); padding-block: 18px; }
+  .u2-compare__head-row .u2-compare__cell--uburn {
+    background: var(--u2-iris);
+    color: white;
+  }
+  .u2-compare__check {
+    color: var(--u2-iris);
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .u2-compare__cross { color: #C9C5CC; font-weight: 700; }
+  .u2-compare__foot {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 11px;
+    color: var(--u2-text-muted);
+    line-height: 1.6;
+  }
+</style>
+<section class="u2-root u2-compare" aria-label="UBurn vs traditional solutions">
+  <div class="u2-compare__inner">
+    <div class="u2-compare__head u2-reveal">
+      <span class="u2-section-eyebrow">— what makes us different</span>
+      <h2>UBurn vs <em>traditional solutions.</em></h2>
+    </div>
+    <div class="u2-compare__table u2-reveal delay-1" role="table">
+      <div class="u2-compare__row u2-compare__head-row" role="row">
+        <div class="u2-compare__cell">&nbsp;</div>
+        <div class="u2-compare__cell u2-compare__cell--uburn">UBurn</div>
+        <div class="u2-compare__cell u2-compare__cell--other">Diet snacks</div>
+        <div class="u2-compare__cell u2-compare__cell--other">Caffeine drinks</div>
+      </div>
+      <div class="u2-compare__row" role="row">
+        <div class="u2-compare__cell u2-compare__cell--label">EFSA-recognized fiber</div>
+        <div class="u2-compare__cell u2-compare__cell--uburn"><span class="u2-compare__check">✓</span></div>
+        <div class="u2-compare__cell u2-compare__cell--other"><span class="u2-compare__cross">—</span></div>
+        <div class="u2-compare__cell u2-compare__cell--other"><span class="u2-compare__cross">—</span></div>
+      </div>
+      <div class="u2-compare__row">
+        <div class="u2-compare__cell u2-compare__cell--label">Caffeine-free</div>
+        <div class="u2-compare__cell u2-compare__cell--uburn"><span class="u2-compare__check">✓</span></div>
+        <div class="u2-compare__cell u2-compare__cell--other"><span class="u2-compare__check">✓</span></div>
+        <div class="u2-compare__cell u2-compare__cell--other"><span class="u2-compare__cross">—</span></div>
+      </div>
+      <div class="u2-compare__row">
+        <div class="u2-compare__cell u2-compare__cell--label">4-hour satiety*</div>
+        <div class="u2-compare__cell u2-compare__cell--uburn"><span class="u2-compare__check">✓</span></div>
+        <div class="u2-compare__cell u2-compare__cell--other"><span class="u2-compare__cross">—</span></div>
+        <div class="u2-compare__cell u2-compare__cell--other"><span class="u2-compare__cross">—</span></div>
+      </div>
+      <div class="u2-compare__row">
+        <div class="u2-compare__cell u2-compare__cell--label">Calories per serving</div>
+        <div class="u2-compare__cell u2-compare__cell--uburn">30 kcal</div>
+        <div class="u2-compare__cell u2-compare__cell--other">100–200 kcal</div>
+        <div class="u2-compare__cell u2-compare__cell--other">0–50 kcal</div>
+      </div>
+      <div class="u2-compare__row">
+        <div class="u2-compare__cell u2-compare__cell--label">No spikes or crashes</div>
+        <div class="u2-compare__cell u2-compare__cell--uburn"><span class="u2-compare__check">✓</span></div>
+        <div class="u2-compare__cell u2-compare__cell--other"><span class="u2-compare__cross">—</span></div>
+        <div class="u2-compare__cell u2-compare__cell--other"><span class="u2-compare__cross">—</span></div>
+      </div>
+      <div class="u2-compare__row">
+        <div class="u2-compare__cell u2-compare__cell--label">100% plant-based</div>
+        <div class="u2-compare__cell u2-compare__cell--uburn"><span class="u2-compare__check">✓</span></div>
+        <div class="u2-compare__cell u2-compare__cell--other">varies</div>
+        <div class="u2-compare__cell u2-compare__cell--other">varies</div>
+      </div>
+      <div class="u2-compare__row">
+        <div class="u2-compare__cell u2-compare__cell--label">French heritage</div>
+        <div class="u2-compare__cell u2-compare__cell--uburn"><span class="u2-compare__check">✓</span></div>
+        <div class="u2-compare__cell u2-compare__cell--other"><span class="u2-compare__cross">—</span></div>
+        <div class="u2-compare__cell u2-compare__cell--other"><span class="u2-compare__cross">—</span></div>
+      </div>
+      <div class="u2-compare__row">
+        <div class="u2-compare__cell u2-compare__cell--label">Price per serving</div>
+        <div class="u2-compare__cell u2-compare__cell--uburn"><strong>$1.11</strong></div>
+        <div class="u2-compare__cell u2-compare__cell--other">$2–$4</div>
+        <div class="u2-compare__cell u2-compare__cell--other">$1.50–$3</div>
+      </div>
+    </div>
+    <p class="u2-compare__foot">*EFSA Regulation 432/2012 · ID 3120 · 3g/day with water before meals. Comparison ranges based on category averages. Price per serving based on Maximum 270g pack subscribe price. Individual products may vary.</p>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "U2 Comparison",
+  "tag": "section",
+  "class": "shopify-section--u2-compare",
+  "settings": [],
+  "presets": [ { "name": "U2 Comparison" } ]
+}
+{% endschema %}
