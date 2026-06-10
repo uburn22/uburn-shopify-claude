@@ -1,8 +1,19 @@
 name: Deploy to Shopify
 
+# AUTO-DEPLOY DISABLED 2026-06-10 — re-enable only with explicit GO from Charles
+# Reason: all deploys must be manual during Phase-1 US ads test (budget €1250).
+# To re-enable: uncomment the on/push block below and remove the on/workflow_dispatch fallback.
+#
+# on:
+#   push:
+#     branches: [main]
+
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type 'deploy' to confirm manual deploy"
+        required: true
 
 jobs:
   deploy:
