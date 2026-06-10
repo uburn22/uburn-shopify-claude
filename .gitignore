@@ -1,0 +1,27 @@
+# Secrets — never commit
+.env
+.env.*
+*.env
+secrets.json
+ga4-credentials.json
+service-account*.json
+
+# Shopify CLI
+node_modules/
+.shopify/
+shopify.app.toml.local
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Backup files
+*.bak
+*.backup
+*.broken
+
+# Logs
+*.log
