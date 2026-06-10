@@ -43,7 +43,7 @@
     <div class="uhome-hero-trust">
       <div class="uhome-hero-pill">★★★★★ 4,7/5 · {% if request.locale.iso_code == 'en' %}1,500+ customers{% else %}1&nbsp;500+ clientes{% endif %}</div>
       <div class="uhome-hero-pill">{% if request.locale.iso_code == 'en' %}Research-backed* FDA dietary fiber*{% else %}Allégation EFSA validée{% endif %}</div>
-      <div class="uhome-hero-pill">{% if request.locale.iso_code == 'en' %}Free U.S. shipping on orders $40+{% else %}Livraison offerte en France{% endif %}</div>
+      <div class="uhome-hero-pill">{% if request.locale.iso_code == 'en' %}Free U.S. shipping · all orders{% else %}Livraison offerte en France{% endif %}</div>
     </div>
   </section>
 
@@ -178,7 +178,7 @@
         <span class="uhome-section-label">{% if request.locale.iso_code == 'en' %}Your offer{% else %}Votre offre{% endif %}</span>
         <h2 class="uhome-section-title">{% if request.locale.iso_code == 'en' %}One flavor. <span class="uhome-accent">Six actives.</span>{% else %}Une saveur. <span class="uhome-accent">Six actifs.</span>{% endif %}</h2>
         <p style="max-width:400px;margin:10px auto 0;color:var(--uhome-body);font-size:14px;text-align:center;font-family:'Red Hat Text',sans-serif">
-          {% if request.locale.iso_code == 'en' %}One-time payment · Free U.S. shipping on $40+{% else %}Paiement unique · Livraison offerte en France{% endif %}
+          {% if request.locale.iso_code == 'en' %}One-time payment · Free U.S. shipping{% else %}Paiement unique · Livraison offerte en France{% endif %}
         </p>
       </div>
       <div class="uhome-offer-img uhome-reveal uhome-rd1">
@@ -498,7 +498,7 @@
         <a href="/products/ube-poudre?variant=51289200066879" class="uhome-btn" style="justify-content:center;font-family:'Red Hat Display',sans-serif;font-weight:800;font-size:16px;padding:18px 32px;background:#6B2FA0;color:#fff;border-radius:999px;text-decoration:none;display:inline-flex;align-items:center;box-shadow:0 8px 24px rgba(107,47,160,.35)">
           {% if request.locale.iso_code == 'en' %}Order → from $36.99{% else %}Commander → dès 34,50&nbsp;€{% endif %}
         </a>
-        <div class="uhome-final-sub">{% if request.locale.iso_code == 'en' %}Free shipping · Ships in 24-48h{% else %}Livraison offerte · Expédition 24-48h{% endif %}</div>
+        <div class="uhome-final-sub">{% if request.locale.iso_code == 'en' %}Free shipping · arrives in 7–10 business days{% else %}Livraison offerte · Expédition 24-48h{% endif %}</div>
       </div>
       <div class="uhome-final-guarantees">
         <div class="uhome-final-g">{% if request.locale.iso_code == 'en' %}FDA dietary fiber*{% else %}EFSA ID 3120{% endif %}</div>
@@ -524,7 +524,7 @@
           <img src="https://uburn.co/cdn/shop/files/Picto_Fast_shipping.svg" alt="" aria-hidden="true">
         </div>
         <h4>{% if request.locale.iso_code == 'en' %}Free shipping{% else %}Livraison gratuite{% endif %}</h4>
-        <p>{% if request.locale.iso_code == 'en' %}On orders $40+{% else %}En France{% endif %}</p>
+        <p>{% if request.locale.iso_code == 'en' %}All U.S. orders{% else %}En France{% endif %}</p>
       </div>
       <div class="uhome-guar-item">
         <div class="uhome-guar-icon">

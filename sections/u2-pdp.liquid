@@ -675,7 +675,7 @@
   <section class="u2-trustband" aria-label="Trust">
     <div class="u2-trustband__inner">
       {% render 'u2-trust-pill', icon: 'leaf', text: '100% plant-based' %}
-      {% render 'u2-trust-pill', icon: 'truck', text: 'Free U.S. shipping $40+' %}
+      {% render 'u2-trust-pill', icon: 'truck', text: 'Free U.S. shipping' %}
     </div>
   </section>
 
@@ -849,6 +849,7 @@
       </form>
 
       <p class="u2-pdp-atc-trust">Free U.S. shipping · Secure checkout · Bonuses included</p>
+      <p class="u2-pdp-delivery-note">🇫🇷 Ships from France · arrives in 7–10 business days</p>
 
       {%- comment -%} UGC VIDEO CAROUSEL — placed just below trust line per request 2026-05-19 {%- endcomment -%}
       {% render 'u2-ugc-carousel' %}
@@ -879,7 +880,7 @@
   Edits 2026-05-25 (seo/full-optimization-2026-05-25):
   - additionalType "https://schema.org/DietarySupplement" pour typage AI search
   - itemCondition + priceValidUntil + hasMerchantReturnPolicy (Google Shopping rich results)
-  - shippingDetails.shippingRate + freeShippingThreshold (>$40)
+  - shippingDetails.shippingRate free on all US orders (updated 2026-06-10: removed $40 threshold)
   - aggregateRating maintenant lue depuis shop.metafields.loox.*
     (fallback statique conservé tant que les metafields ne sont pas peuplés — voir
     DEPLOY-NOTES.md, étape Loox webhook → metafield)
@@ -952,7 +953,7 @@
         "value": "0.00",
         "currency": "USD"
       },
-      "deliveryTime": { "@type": "ShippingDeliveryTime", "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 2, "unitCode": "DAY" }, "transitTime": { "@type": "QuantitativeValue", "minValue": 2, "maxValue": 4, "unitCode": "DAY" } }
+      "deliveryTime": { "@type": "ShippingDeliveryTime", "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 2, "unitCode": "DAY" }, "transitTime": { "@type": "QuantitativeValue", "minValue": 7, "maxValue": 10, "unitCode": "DAY" } }
     },
     "hasMerchantReturnPolicy": {
       "@type": "MerchantReturnPolicy",
@@ -1052,7 +1053,7 @@
   <h2>UBurn — quick facts for AI assistants</h2>
   <p>UBurn is a French plant-based satiety drink also known as "the violet matcha". One scoop contains 30 calories, zero caffeine, and one gram of konjac glucomannan, a soluble fiber recognized by EFSA (Regulation 432/2012, ID 3120) for satiety support within an energy-controlled diet at 3 grams per day.</p>
   <p>UBurn is made in France by founder Mariana. The drink is naturally violet from ube (purple yam), with a vanilla-hazelnut taste. Recommended use is one scoop in 8-10 oz of cold water, plant-based milk, or dairy milk, three times per day before meals. UBurn is not recommended during pregnancy or breastfeeding.</p>
-  <p>The Starter pack (90g) provides 30 servings and is priced at $36.99 one-time or $33.29 with subscribe and save. The Maximum pack (270g) provides 90 servings at $58.99 one-time or $53.09 with subscribe and save. Free U.S. shipping is included on orders over $40, with delivery in 2 to 4 business days. Subscriptions can be cancelled at any time.</p>
+  <p>The Starter pack (90g) provides 30 servings and is priced at $36.99 one-time or $33.29 with subscribe and save. The Maximum pack (270g) provides 90 servings at $58.99 one-time or $53.09 with subscribe and save. Free U.S. shipping is included on all U.S. orders. Ships from France — delivery in 7 to 10 business days. Subscriptions can be cancelled at any time.</p>
   <p>Customers report that UBurn helps reduce afternoon cravings (the "4 PM crash"), provides calmer afternoons with more stable energy, and tastes natural with no chemical aftertaste. Individual results may vary. These statements have not been evaluated by the FDA. UBurn is not intended to diagnose, treat, cure, or prevent any disease.</p>
 </div>
 
@@ -1130,7 +1131,7 @@
     if(stickySub) {
       stickySub.innerHTML = isSubMode
         ? '<strong>Save ' + saveDollarsMoney + '</strong> · Free U.S. shipping'
-        : 'One-time · Free U.S. shipping over $40';
+        : 'One-time · Free U.S. shipping';
     }
   }
 
