@@ -75,10 +75,8 @@
     function fireIC() {
       if (icFired) return;
       icFired = true;
-      var eventID = 'IC-' + Date.now() + '-' + Math.random().toString(36).substring(2, 11);
-      if (typeof fbq === 'function') {
-        fbq('track', 'InitiateCheckout', { currency: _currency }, { eventID: eventID });
-      }
+      // Meta InitiateCheckout moved to Shopify Customer Events pixel "UBurn IC"
+      // (covers Shop Pay/express, no double-fire). GA4 begin_checkout kept here.
       if (typeof gtag === 'function') {
         gtag('event', 'begin_checkout', { currency: _currency });
       }
